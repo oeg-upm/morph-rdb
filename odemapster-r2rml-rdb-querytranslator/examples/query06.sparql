@@ -1,0 +1,22 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT *
+WHERE { 
+	?student <http://mappingpedia.linkeddata.es/vocabulary/hasSport> ?sport .
+	OPTIONAL { ?sport <http://mappingpedia.linkeddata.es/vocabulary/id> ?sportId . }
+	OPTIONAL { ?sport <http://mappingpedia.linkeddata.es/vocabulary/name> ?sportName . }
+}
+
+#(leftjoin
+#  (leftjoin
+#    (bgp (triple ?student <http://mappingpedia.linkeddata.es/vocabulary/hasSport> ?sport))
+#    (bgp (triple ?sport <http://mappingpedia.linkeddata.es/vocabulary/id> ?sportId)))
+#  (bgp (triple ?sport <http://mappingpedia.linkeddata.es/vocabulary/name> ?sportName)))
+
+#SELECT v_7345.id AS "student",v_6991.id AS "sportId",v_7338.name AS "sportName",v_3472.id AS "sport"
+#,13794396 AS "mappingid_sportId",9655301 AS "mappingid_student"
+#,32433176 AS "mappingid_sportName",7425536 AS "mappingid_sport"
+#FROM Student  v_7345 INNER JOIN Sport  v_3472 ON (v_7345.sport = v_3472.id)
+# LEFT JOIN Sport  v_6991 ON (v_3472.id = v_6991.id)
+# LEFT JOIN Sport  v_7338 ON ((v_7338.name IS NOT NULL) AND (v_3472.id = v_7338.id))

@@ -1,0 +1,3 @@
+# Morph
+
+Morph (formerly called ODEMapster) is an RDB2RDF engine developed by the Ontology Engineering Group, that follows R2RML specifications (http://www.w3.org/TR/r2rml/). Morph supports data upgrade (RDB to RDF instances) and query translation (SPARQL to SQL). Morph employs various techniques in order to generate efficient SQL queries, such as self-join elimination and subquery elimination. Morph has been tested with real queries from various Spanish/EU projects and has proven work faster than the state-of-the-art tool available. At the moment, Morph works with MySQL, PostgreSQL, and MonetDB.
