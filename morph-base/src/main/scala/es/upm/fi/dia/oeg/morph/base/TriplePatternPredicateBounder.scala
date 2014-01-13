@@ -69,7 +69,7 @@ class TriplePatternPredicateBounder(mappingFile : String
 				}
 				
 				objectMapTermMapType match {
-					case mappingDocument.TermMapType.ColumnTermMap => {
+					case Constants.MorphTermMapType.ColumnTermMap => {
 						val rrDatatypeResource = mappingDocument.getDatatypeResource(objectMapResource);
 						val objectMapDatatype = {
 							if(rrDatatypeResource == null) {
@@ -153,7 +153,7 @@ class TriplePatternPredicateBounder(mappingFile : String
 
 				val objectMapTermMapType = mappingDocument.getTermMapType(objectMapResource); 
 				objectMapTermMapType match {
-					case mappingDocument.TermMapType.ColumnTermMap => {
+					case Constants.MorphTermMapType.ColumnTermMap => {
 						val rrDatatypeResource = mappingDocument.getDatatypeResource(objectMapResource);
 						val objectMapDatatype = {
 							if(rrDatatypeResource == null) {
@@ -193,7 +193,7 @@ class TriplePatternPredicateBounder(mappingFile : String
 							}						  
 						}
 					}
-					case mappingDocument.TermMapType.TemplateTermMap => {
+					case Constants.MorphTermMapType.TemplateTermMap => {
 						val templateValues = mappingDocument.getTemplateValues(objectMapResource, tpObjectURI);
 						if(templateValues.isEmpty) {
 							val errorMessage = "tp object " + tpObjectURI + " doesn't match the template : " + objectMapResource;

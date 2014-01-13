@@ -126,7 +126,7 @@ public abstract class AbstractRunner {
 	}
 
 	private void buildQueryResultWriter() throws Exception {
-		String queryResultWriterClassName;
+		final String queryResultWriterClassName;
 		if(this.queryResultWriterClassName == null || this.queryResultWriterClassName.equals("")) {
 			queryResultWriterClassName = Constants.QUERY_RESULT_WRITER_CLASSNAME_DEFAULT(); 
 		} else {
@@ -162,12 +162,12 @@ public abstract class AbstractRunner {
 	}
 
 	protected IQueryTranslationOptimizer buildQueryTranslationOptimizer() {
-		String defaultQueryTranslatorClassName = Constants.QUERY_OPTIMIZER_CLASSNAME_DEFAULT();
-
+		final String queryTranslatorClassName = Constants.QUERY_OPTIMIZER_CLASSNAME_DEFAULT();;
+		
 		try {
-			return (IQueryTranslationOptimizer) Class.forName(defaultQueryTranslatorClassName).newInstance();
+			return (IQueryTranslationOptimizer) Class.forName(queryTranslatorClassName).newInstance();
 		} catch (Exception e) {
-			String errorMessage = "error while building query optimizer instance!";
+			String errorMessage = "error while building query optimizer instance:" + e.getMessage();
 			logger.warn(errorMessage);
 		}
 		return null;
@@ -578,8 +578,7 @@ public abstract class AbstractRunner {
 		Collection<IQuery> sqlQueries = new Vector<IQuery>();
 		for(Query sparqlQuery : sparqlQueries) {
 			logger.debug("SPARQL Query = \n" + sparqlQuery);
-			IQuery sqlQuery = 
-					this.queryTranslator.translate(sparqlQuery);
+			IQuery sqlQuery = this.queryTranslator.translate(sparqlQuery);
 			logger.debug("SQL Query = \n" + sqlQuery);
 			sqlQueries.add(sqlQuery);
 		}

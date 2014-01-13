@@ -29,7 +29,7 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.shared.CannotEncodeCharacterException;
 
 import es.upm.fi.dia.oeg.morph.base.Constants;
-import es.upm.fi.dia.oeg.upm.morph.sql.MorphSQLConstant;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant;
 
 public class ODEMapsterUtility {
 	private static Logger logger = Logger.getLogger(ODEMapsterUtility.class);

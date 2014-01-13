@@ -4,13 +4,11 @@ import Zql.ZExpression
 import Zql.ZConstant
 import Zql.ZSelectItem
 import scala.collection.JavaConversions._
-import java.util.Collection
 import Zql.ZExp
 import com.hp.hpl.jena.graph.Node
-import es.upm.fi.dia.oeg.morph.querytranslator.NameGenerator
 import org.apache.log4j.Logger
-import es.upm.fi.dia.oeg.upm.morph.sql.MorphSQLConstant
-import es.upm.fi.dia.oeg.upm.morph.sql.MorphSQLSelectItem
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
 import Zql.ZOrderBy
 import scala.collection.mutable.LinkedHashMap
 
@@ -36,7 +34,7 @@ object MorphSQLUtility {
 	  result
 	}
 	
-	def getSelectItemByAlias(alias:String , selectItems:Collection[ZSelectItem] , prefix:String ) 
+	def getSelectItemByAlias(alias:String , selectItems:Iterable[ZSelectItem] , prefix:String ) 
 	: Option[ZSelectItem] = {
 		var result : Option[ZSelectItem] = None;
 		
@@ -54,7 +52,7 @@ object MorphSQLUtility {
 		return result;
 	}
 	
-	def addSelectItem(selectItems:Collection[ZSelectItem] , newSelectItem:ZSelectItem) = {
+	def addSelectItem(selectItems:Iterable[ZSelectItem] , newSelectItem:ZSelectItem) = {
 		val newSelectItemAlias = newSelectItem.getAlias();
 		val oldSelectItem = this.getSelectItemByAlias(newSelectItemAlias, selectItems, null);
 		if (!oldSelectItem.isDefined) {
@@ -62,13 +60,13 @@ object MorphSQLUtility {
 		}
 	}
 
-	def addSelectItems(selectItems:Collection[ZSelectItem] , newSelectItems:Collection[ZSelectItem]) = {
+	def addSelectItems(selectItems:Iterable[ZSelectItem] , newSelectItems:Iterable[ZSelectItem]) = {
 		for(newSelectItem <- newSelectItems) {
 			this.addSelectItem(selectItems, newSelectItem);
 		}
 	}
 	
-	def setTableName(selectItems:Collection[MorphSQLSelectItem] , tableName:String) = {
+	def setTableName(selectItems:Iterable[MorphSQLSelectItem] , tableName:String) = {
 	  for(oldSelectItem <- selectItems) {
 		  val dbType = oldSelectItem.dbType;
 	      val columnType = oldSelectItem.columnType;
@@ -105,13 +103,18 @@ object MorphSQLUtility {
 //		result;
 //	}
 	
-	def  combineExpresions(exps:Collection[_ <: ZExp] , logicalOperator:String ) : ZExpression = {
-		val it = exps.iterator();
+	def  combineExpresionsJava(exps:java.util.Collection[_ <: ZExp] , logicalOperator:String ) : ZExpression = {
+	  val result = this.combineExpresions(exps.toList, logicalOperator);
+	  result
+	}
+	
+	def  combineExpresions(exps:Iterable[_ <: ZExp] , logicalOperator:String ) : ZExpression = {
+		val it = exps.iterator;
 		
 		val result = {
-			if(exps.size() == 0) {
+			if(exps.size == 0) {
 			  null
-			} else if(exps.size() == 1) {
+			} else if(exps.size == 1) {
 				val exp = it.next();
 				val resultAux = {
 					exp match {
@@ -208,8 +211,12 @@ object MorphSQLUtility {
 	}
 	  
 	
-
-	def printSelectItems(selectItems : Collection[ZSelectItem] , distinct : Boolean ) = {
+	def printSelectItemsJava(selectItems : java.util.Collection[ZSelectItem] , distinct : Boolean ) : String = {
+		val result = this.printSelectItems(selectItems, distinct);
+		result
+	}
+	
+	def printSelectItems(selectItems : Iterable[ZSelectItem] , distinct : Boolean ) : String = {
 		var selectSQL = "SELECT ";
 		
 		if(distinct) {
@@ -253,7 +260,7 @@ object MorphSQLUtility {
 		selectSQL;		
 	}
 
-	def areAllConstants(exps:List[ZExp] ) = {
+	def areAllConstants(exps:Iterable[ZExp] ) = {
 		var result:Boolean = false;
 		
 		if(exps == null) {
@@ -270,13 +277,21 @@ object MorphSQLUtility {
 		result;
 	}
 
-	def containedInPrefix(exp:ZExp, prefix:String) : Collection[ZExpression] = {
+	def containedInPrefixAsJava(exp:ZExp, prefix:String) : java.util.Collection[ZExpression] = {
+	  this.containedInPrefix(exp, prefix);
+	}
+	
+	def containedInPrefix(exp:ZExp, prefix:String) : Iterable[ZExpression] = {
 		val prefixes = List(prefix);
 		val result = MorphSQLUtility.containedInPrefixes(exp, prefixes, true);
 		result;
 	}
 		
-	def containedInPrefixes(exp:ZExp , prefixes:Collection[String] , allPrefixes:Boolean ) : Collection[ZExpression] = {
+	def containedInPrefixesJava(exp:ZExp , prefixes:java.util.Collection[String] , allPrefixes:Boolean ) : java.util.Collection[ZExpression] = {
+	  this.containedInPrefixes(exp, prefixes, allPrefixes)
+	}
+	
+	def containedInPrefixes(exp:ZExp , prefixes:Iterable[String] , allPrefixes:Boolean ) : Iterable[ZExpression] = {
 		var result : Set[ZExpression]= Set.empty;
 		
 		exp match {
@@ -323,8 +338,13 @@ object MorphSQLUtility {
 		result;
 	}
 	
-	def getSelectItemsByAlias(selectItems:Collection[ZSelectItem] , alias:String ) 
-	: Collection[ZSelectItem] = {
+	def getSelectItemsByAliasJava(selectItems:java.util.Collection[ZSelectItem] , alias:String ) 
+	: java.util.Collection[ZSelectItem] = {
+		this.getSelectItemsByAlias(selectItems.toList, alias);
+	}
+	
+	def getSelectItemsByAlias(selectItems:Iterable[ZSelectItem] , alias:String ) 
+	: List[ZSelectItem] = {
 		val result : List[ZSelectItem]= {
 			val resultAux = selectItems.flatMap(selectItem => {
 				val selectItemAlias = selectItem.getAlias();
@@ -340,8 +360,13 @@ object MorphSQLUtility {
 		result;
 	}
 
-	def  getSelectItemsMapPrefix(selectItems:Collection[ZSelectItem], node:Node , pPrefix:String 
-	    , dbType:String ) : Collection[ZSelectItem] = {
+	def  getSelectItemsMapPrefixJava(selectItems:java.util.Collection[ZSelectItem], node:Node , pPrefix:String 
+	    , dbType:String ) : java.util.Collection[ZSelectItem] = {
+	  this.getSelectItemsMapPrefix(selectItems, node, pPrefix, dbType);
+	}
+	
+	def  getSelectItemsMapPrefix(selectItems:Iterable[ZSelectItem], node:Node , pPrefix:String 
+	    , dbType:String ) : Iterable[ZSelectItem] = {
 		val varNamePrefixed = Constants.PREFIX_MAPPING_ID + node.getName();
 		val prefix = {
 			if(!pPrefix.endsWith(".")) {
@@ -416,12 +441,17 @@ object MorphSQLUtility {
 		return result;
 	}
 
-	def pushOrderByDown(oldOrderByCollection:Collection[ZOrderBy]
-	, mapInnerAliasSelectItem:java.util.Map[String, ZSelectItem]) : java.util.Vector[ZOrderBy] = {
+	def pushOrderByDownJava(oldOrderByCollection:java.util.List[ZOrderBy]
+	, mapInnerAliasSelectItem:java.util.Map[String, ZSelectItem]) : java.util.List[ZOrderBy] = {
+	  this.pushOrderByDown(oldOrderByCollection.toList, mapInnerAliasSelectItem.toMap);
+	}
+	
+	def pushOrderByDown(oldOrderByCollection:List[ZOrderBy]
+	, mapInnerAliasSelectItem:Map[String, ZSelectItem]) : List[ZOrderBy] = {
 		val whereReplacement : LinkedHashMap[ZConstant, ZConstant] = LinkedHashMap.empty;
 		
-		for(alias <- mapInnerAliasSelectItem.keySet()) {
-			val selectItem = mapInnerAliasSelectItem.get(alias);
+		for(alias <- mapInnerAliasSelectItem.keySet) {
+			val selectItem = mapInnerAliasSelectItem(alias);
 			
 			val aliasColumn = new ZConstant(alias, ZConstant.COLUMNNAME);
 			
@@ -463,8 +493,7 @@ object MorphSQLUtility {
 			whereReplacement += (aliasColumn -> zConstant);
 		}
 
-		val newOrderByCollection : java.util.Vector[ZOrderBy] = {
-		  val newOrderByCollectionAux = {
+		val newOrderByCollection = {
 		    oldOrderByCollection.map(oldOrderBy => {
 			val orderByExp = oldOrderBy.getExpression();
 			val newOrderByExp = MorphSQLUtility.replaceExp(orderByExp, whereReplacement);
@@ -472,15 +501,17 @@ object MorphSQLUtility {
 			newOrderBy.setAscOrder(oldOrderBy.getAscOrder());
 			newOrderBy;		    
 		  })
-		  }
-		  new java.util.Vector(newOrderByCollectionAux);
 		}
 		
 		newOrderByCollection
 		//this.setOrderBy(newOrderByCollection);
 	}
 	
-	def setDefaultAlias(selectItems:Collection[ZSelectItem] ) = {
+	def setDefaultAliasJava(selectItems:java.util.Collection[ZSelectItem] ) = {
+	  this.setDefaultAlias(selectItems.toList);
+	}
+	
+	def setDefaultAlias(selectItems:Iterable[ZSelectItem] ) = {
 		for(selectItem <- selectItems) {
 			val selectItemAlias = selectItem.getAlias();
 			val alias = {

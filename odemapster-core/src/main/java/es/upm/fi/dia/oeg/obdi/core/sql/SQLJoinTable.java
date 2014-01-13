@@ -36,7 +36,7 @@ public class SQLJoinTable extends ZFromItem {
 		Collection<ZExp> expressionsList = new Vector<ZExp>();
 		if(this.onExpression != null) {expressionsList.add(this.onExpression);}
 		if(onExp2 != null) {expressionsList.add(onExp2);}
-		this.onExpression = MorphSQLUtility.combineExpresions(expressionsList
+		this.onExpression = MorphSQLUtility.combineExpresionsJava(expressionsList
 				, Constants.SQL_LOGICAL_OPERATOR_AND());
 	}
 	

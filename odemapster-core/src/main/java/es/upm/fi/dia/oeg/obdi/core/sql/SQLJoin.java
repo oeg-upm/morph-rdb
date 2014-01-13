@@ -2,15 +2,16 @@ package es.upm.fi.dia.oeg.obdi.core.sql;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
 import Zql.ZExp;
 import Zql.ZExpression;
 import Zql.ZGroupBy;
 import Zql.ZOrderBy;
 import Zql.ZSelectItem;
-import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
 
 public class SQLJoin implements IQuery {
 	private SQLLogicalTable leftTable;
@@ -50,11 +51,11 @@ public class SQLJoin implements IQuery {
 		// TODO Auto-generated method stub
 		
 	}
-	public void setOrderBy(Vector<ZOrderBy> orderByConditions) {
+	public void setOrderBy(List<ZOrderBy> orderByConditions) {
 		// TODO Auto-generated method stub
 		
 	}
-	public Vector<ZOrderBy> getOrderBy() {
+	public List<ZOrderBy> getOrderBy() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -119,7 +120,7 @@ public class SQLJoin implements IQuery {
 	public String toString() {
 		String result = "";
 		
-		String selectItemsString = MorphSQLUtility.printSelectItems(this.getSelectItems(), this.distinct);
+		String selectItemsString = MorphSQLUtility.printSelectItemsJava(this.getSelectItems(), this.distinct);
 		selectItemsString += selectItemsString; 
 
 		return result;

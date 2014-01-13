@@ -1,0 +1,32 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT *
+WHERE { 
+   ?student <http://mappingpedia.linkeddata.es/vocabulary/name> ?studentName .   
+   ?student <http://mappingpedia.linkeddata.es/vocabulary/hasSport> ?sport .
+   ?sport a rdfs:Class .
+   OPTIONAL { ?sport <http://mappingpedia.linkeddata.es/vocabulary/name> ?sportName . }
+   OPTIONAL { ?sport <http://mappingpedia.linkeddata.es/vocabulary/code> ?sportCode . }
+   OPTIONAL { ?sport <http://mappingpedia.linkeddata.es/vocabulary/type> ?sportType . }
+}
+
+# (leftjoin
+#   (leftjoin
+#     (leftjoin
+#       (bgp
+#         (triple ?student <http://mappingpedia.linkeddata.es/vocabulary/name> ?studentName)
+#         (triple ?student <http://mappingpedia.linkeddata.es/vocabulary/hasSport> ?sport)
+#         (triple ?sport <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Sport>)
+#       )
+#       (bgp (triple ?sport <http://mappingpedia.linkeddata.es/vocabulary/name> ?sportName)))
+#     (bgp (triple ?sport <http://mappingpedia.linkeddata.es/vocabulary/code> ?sportCode)))
+#   (bgp (triple ?sport <http://mappingpedia.linkeddata.es/vocabulary/type> ?sportType)))
+
+
+# SELECT v_1183.code AS "sportCode",v_4836.id AS "student",v_4836.name AS "studentName",v_1183.name AS "sportName"
+# ,v_1183.type AS "sportType",v_972.id AS "sport",27741364 AS "mappingid_student",23962465 AS "mappingid_studentName"
+# ,31095231 AS "mappingid_sportType",5921341 AS "mappingid_sportCode",20136605 AS "mappingid_sportName",16863931 AS "mappingid_sport"
+# FROM Student  v_4836 INNER JOIN Sport  v_972 ON (v_4836.sport = v_972.id)
+#  INNER JOIN Sport  v_1183 ON (v_972.id = v_1183.id)
+# WHERE v_4836.name IS NOT NULL

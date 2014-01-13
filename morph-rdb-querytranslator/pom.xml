@@ -51,7 +51,7 @@
 			<artifactId>zql</artifactId>
 			<version>0.1</version>
 		</dependency>
-<!-- 		<dependency>
+		<dependency>
 			<groupId>es.upm.fi.dia.oeg.morph</groupId>
 			<artifactId>odemapster-core-querytranslator</artifactId>
 			<version>1.0-SNAPSHOT</version>
@@ -60,13 +60,13 @@
 			<groupId>es.upm.fi.dia.oeg.morph</groupId>
 			<artifactId>odemapster-r2rml</artifactId>
 			<version>1.0-SNAPSHOT</version>
-		</dependency> -->
+		</dependency>
 	</dependencies>
 
 
 	
 	<distributionManagement>
-		<repository>
+<!-- 		<repository>
 			<uniqueVersion>false</uniqueVersion>
 			<id>aldebaran-releases</id>
 			<name>Aldebaran Releases</name>
@@ -77,7 +77,12 @@
 			<id>aldebaran-snapshots</id>
 			<name>Aldebaran Snapshots</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
-		</snapshotRepository>
+		</snapshotRepository> -->
+		
+			<repository>
+				<id>fpriyatna.dropbox.repo</id>
+				<url>file:////home/fpriyatna/Dropbox/Public/repository</url>
+			</repository>
 	</distributionManagement>
 
 	<repositories>
@@ -86,5 +91,11 @@
 			<name>Aldebaran External Libraries</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-external-libs-local</url>
 		</repository>
-	</repositories>  
+		
+		<repository>
+			<id>fpriyatna-dropbox</id>
+			<name>Dropbox Account of fpriyatna</name>
+			<url>https://dl.dropboxusercontent.com/u/4959627/repository</url>
+		</repository>		
+	</repositories>
 </project>

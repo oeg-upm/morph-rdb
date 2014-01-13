@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="student"/>
+        <variable name="sport"/>
+        <variable name="sportId"/>
+        <variable name="sportName"/>
+    </head>
+    <results>
+        <result>
+            <binding name="student"/>
+            <binding name="sport"/>
+            <binding name="sportId">100</binding>
+            <binding name="sportName">Tennis</binding>
+        </result>
+        <result>
+            <binding name="student"/>
+            <binding name="sport"/>
+            <binding name="sportId">200</binding>
+            <binding name="sportName">Chess</binding>
+        </result>
+        <result>
+            <binding name="student"/>
+            <binding name="sport"/>
+            <binding name="sportId">300</binding>
+            <binding name="sportName">Soccer</binding>
+        </result>
+    </results>
+</sparql>

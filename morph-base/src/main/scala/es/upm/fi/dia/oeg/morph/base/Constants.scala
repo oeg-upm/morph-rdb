@@ -6,11 +6,20 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory
 
 class Constants {
 
-	
-	
 }
 
 object Constants {
+	object MorphTermMapType extends Enumeration {
+		type MorphTermMapType = Value
+		val ConstantTermMap, ColumnTermMap, TemplateTermMap, InvalidTermMapType = Value
+	}
+
+	object MorphPOS extends Enumeration {
+		type MorphPOS = Value
+		val sub, pre, obj = Value
+	}
+
+	
 	val JOINS_TYPE_INNER = "INNER";
 	val JOINS_TYPE_LEFT = "LEFT";
 	
@@ -96,14 +105,14 @@ object Constants {
 //	val  QUERY_TRANSLATOR_CLASSNAME_DEFAULT = 
 //			"es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.querytranslator.R2RMLQueryTranslator";
 	val  QUERY_TRANSLATOR_CLASSNAME_DEFAULT = 
-			"es.upm.fi.dia.oeg.morph.rdb.querytranslator.MorphQueryTranslator";
+			"es.upm.fi.dia.oeg.morph.rdb.querytranslator.MorphRDBQueryTranslator";
 	
 	val DATASOURCE_READER_CLASSNAME = "datasourcereader.class.name";
 	val QUERY_EVALUATOR_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.obdi.core.engine.RDBReader";
 	val QUERY_RESULT_WRITER_CLASSNAME = "queryresult.writer.class.name";
 	val QUERY_RESULT_WRITER_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.obdi.core.engine.XMLWriter";
 	val QUERY_RESULT_XMLWRITER_OUTPUT_DEFAULT = "output.rdf.xml";
-	val QUERY_OPTIMIZER_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.obdi.core.querytranslator.QueryTranslationOptimizer";
+	val QUERY_OPTIMIZER_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.obdi.core.engine.QueryTranslationOptimizer";
 
 	val  REMOVE_STRANGE_CHARS_FROM_LITERAL = "literal.removestrangechars";
 	val  ENCODE_UNSAFE_CHARS_IN_URI_COLUMN = "uricolumn.encodeunsafecharacters";

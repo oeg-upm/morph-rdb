@@ -11,10 +11,10 @@ import org.apache.log4j.Logger
 class R2RMLMappingDocument(mappingFile : String) {
 	val logger = Logger.getLogger("R2RMLMappingDocument");
 	
-	object TermMapType extends Enumeration {
-		type TermMapType = Value
-				val ConstantTermMap, ColumnTermMap, TemplateTermMap, InvalidTermMapType = Value
-	}
+//	object MorphTermMapType extends Enumeration {
+//		type MorphTermMapType = Value
+//				val ConstantTermMap, ColumnTermMap, TemplateTermMap, InvalidTermMapType = Value
+//	}
 
 	
 
@@ -178,17 +178,17 @@ class R2RMLMappingDocument(mappingFile : String) {
 		val termMapType = {
 			val constantResource = termMapResource.getProperty(Constants.R2RML_CONSTANT_PROPERTY);
 			if(constantResource != null) {
-				TermMapType.ConstantTermMap;
+				Constants.MorphTermMapType.ConstantTermMap;
 			} else {
 				val columnResource = termMapResource.getProperty(Constants.R2RML_COLUMN_PROPERTY);
 				if(columnResource != null) {
-				  TermMapType.ColumnTermMap;
+					Constants.MorphTermMapType.ColumnTermMap;
 				} else {
 					val templateResource = termMapResource.getProperty(Constants.R2RML_TEMPLATE_PROPERTY);
 					if(templateResource != null) {
-					  TermMapType.TemplateTermMap;
+						Constants.MorphTermMapType.TemplateTermMap;
 					} else {
-					  TermMapType.InvalidTermMapType;
+						Constants.MorphTermMapType.InvalidTermMapType;
 					}
 				}
 			}
@@ -200,7 +200,7 @@ class R2RMLMappingDocument(mappingFile : String) {
 		val termMapValueType = this.getTermMapType(termMapResource);
 
 		val result : Map[String, String] = {
-			if(termMapValueType == TermMapType.TemplateTermMap) {
+			if(termMapValueType == Constants.MorphTermMapType.TemplateTermMap) {
 				val templateString = this.getRRTemplateResource(termMapResource).asLiteral().getValue().toString();
 				val matchedTemplate = RegexUtility.getTemplateMatching(templateString, uri);
 				matchedTemplate.toMap;

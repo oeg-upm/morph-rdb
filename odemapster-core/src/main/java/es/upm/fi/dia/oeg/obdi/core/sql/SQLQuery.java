@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
@@ -23,10 +24,10 @@ import Zql.ZSelectItem;
 import Zql.ZUtils;
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem;
 import es.upm.fi.dia.oeg.obdi.core.DBUtility;
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType;
-import es.upm.fi.dia.oeg.upm.morph.sql.MorphSQLConstant;
-import es.upm.fi.dia.oeg.upm.morph.sql.MorphSQLSelectItem;
 
 public class SQLQuery extends ZQuery implements IQuery {
 	/**
@@ -728,14 +729,16 @@ public class SQLQuery extends ZQuery implements IQuery {
 		this.offset = offset;
 	}
 
-	public void setOrderBy(Vector<ZOrderBy> orderByConditions) {
+	public void setOrderBy(List<ZOrderBy> orderByConditions) {
 		if(this.getOrderBy() != null) {
 			this.getOrderBy().removeAllElements();	
 		}
 
-		this.addOrderBy(orderByConditions);
+		Vector<ZOrderBy> newOrderByConditions = new Vector<ZOrderBy>(orderByConditions);
+		this.addOrderBy(newOrderByConditions);
 	}
 
+	
 	public void setSelectItems(Collection<ZSelectItem> newSelectItems) {
 		this.clearSelectItems();
 
@@ -766,7 +769,7 @@ public class SQLQuery extends ZQuery implements IQuery {
 
 		//print select
 		Collection<ZSelectItem> thisSelectItems = this.getSelectItems();
-		String selectSQL = MorphSQLUtility.printSelectItems(thisSelectItems, this.getDistinct());
+		String selectSQL = MorphSQLUtility.printSelectItemsJava(thisSelectItems, this.getDistinct());
 
 		result += selectSQL + "\n";
 
@@ -1325,7 +1328,7 @@ public class SQLQuery extends ZQuery implements IQuery {
 		Vector<ZOrderBy> orderBy = this.getOrderBy();
 		if(orderBy != null) {
 			Map<String, ZSelectItem> mapInnerAliasSelectItem = this.buildMapAliasSelectItem();
-			Vector<ZOrderBy> newOrderByCollection = MorphSQLUtility.pushOrderByDown(orderBy, mapInnerAliasSelectItem);
+			List<ZOrderBy> newOrderByCollection = MorphSQLUtility.pushOrderByDownJava(orderBy, mapInnerAliasSelectItem);
 			this.setOrderBy(newOrderByCollection);			
 		}
 	}
@@ -1364,15 +1367,15 @@ public class SQLQuery extends ZQuery implements IQuery {
 					
 					//be careful so that we don't return those join expressions that is not in rightTableAlias
 					Collection<ZExpression> relevantJoinExpression1 = 
-							MorphSQLUtility.containedInPrefixes(joinExpression, addedTableAlias, true);
+							MorphSQLUtility.containedInPrefixesJava(joinExpression, addedTableAlias, true);
 					addedTableAlias.add(rightTableAlias);
 					Collection<ZExpression> relevantJoinExpression2 = 
-							MorphSQLUtility.containedInPrefixes(joinExpression, addedTableAlias, true);
+							MorphSQLUtility.containedInPrefixesJava(joinExpression, addedTableAlias, true);
 					Collection<ZExpression> relevantJoinExpressions = 
 							new Vector<ZExpression>(relevantJoinExpression2);
 					relevantJoinExpressions.removeAll(relevantJoinExpression1);
 					
-					Collection<ZExpression> relevantWhereExpression = MorphSQLUtility.containedInPrefix(whereExpression, rightTableAlias);
+					Collection<ZExpression> relevantWhereExpression = MorphSQLUtility.containedInPrefixAsJava(whereExpression, rightTableAlias);
 					if(relevantJoinExpressions.isEmpty() && relevantWhereExpression.isEmpty()) {
 						joinTable = new SQLJoinTable(rightTableLogicalTable, joinType
 								, Constants.SQL_EXPRESSION_TRUE());
@@ -1391,7 +1394,7 @@ public class SQLQuery extends ZQuery implements IQuery {
 						
 						combinedExpressionCollection.addAll(relevantWhereExpression);
 						
-						ZExpression combinedExpressions = MorphSQLUtility.combineExpresions(
+						ZExpression combinedExpressions = MorphSQLUtility.combineExpresionsJava(
 								combinedExpressionCollection, Constants.SQL_LOGICAL_OPERATOR_AND());
 						joinTable = new SQLJoinTable(rightTableLogicalTable, joinType, combinedExpressions);	
 					}
@@ -1411,18 +1414,18 @@ public class SQLQuery extends ZQuery implements IQuery {
 				String rightTableAlias = joinTable.getJoinSource().getAlias();
 				
 
-				Collection<ZExpression> relevantJoinExpression1 = MorphSQLUtility.containedInPrefixes(joinExpression, addedTableAlias, true);
+				Collection<ZExpression> relevantJoinExpression1 = MorphSQLUtility.containedInPrefixesJava(joinExpression, addedTableAlias, true);
 				addedTableAlias.add(rightTableAlias);
-				Collection<ZExpression> relevantJoinExpression2 = MorphSQLUtility.containedInPrefixes(joinExpression, addedTableAlias, true);
+				Collection<ZExpression> relevantJoinExpression2 = MorphSQLUtility.containedInPrefixesJava(joinExpression, addedTableAlias, true);
 				//so that we don't return those join expressions that is not in rightTableAlias 
 				Collection<ZExpression> relevantJoinExpression = new Vector<ZExpression>(relevantJoinExpression2);
 				relevantJoinExpression.removeAll(relevantJoinExpression1);
 
-				Collection<ZExpression> relevantWhereExpression = MorphSQLUtility.containedInPrefix(whereExpression, rightTableAlias);
+				Collection<ZExpression> relevantWhereExpression = MorphSQLUtility.containedInPrefixAsJava(whereExpression, rightTableAlias);
 				Collection<ZExpression> combinedExpressionCollection = new HashSet<ZExpression>();
 				combinedExpressionCollection.addAll(relevantJoinExpression);
 				combinedExpressionCollection.addAll(relevantWhereExpression);
-				ZExpression combinedExpressions = MorphSQLUtility.combineExpresions(
+				ZExpression combinedExpressions = MorphSQLUtility.combineExpresionsJava(
 						combinedExpressionCollection, Constants.SQL_LOGICAL_OPERATOR_AND());
 				joinTable.addOnExpression(combinedExpressions);	
 			}
@@ -1497,7 +1500,7 @@ public class SQLQuery extends ZQuery implements IQuery {
 			Collection<ZExp> expressionsList = new Vector<ZExp>();
 			expressionsList.add(whereCondition);
 			expressionsList.addAll(joinExpressions);
-			ZExpression newWhere = MorphSQLUtility.combineExpresions(expressionsList
+			ZExpression newWhere = MorphSQLUtility.combineExpresionsJava(expressionsList
 					, Constants.SQL_LOGICAL_OPERATOR_AND());
 			ZExpression pushedNewWhere = (ZExpression) resultAux.pushExpDown(newWhere);
 			resultAux.addWhere(pushedNewWhere);
@@ -1539,12 +1542,16 @@ public class SQLQuery extends ZQuery implements IQuery {
 			Collection<ZExp> expressionsList = new Vector<ZExp>();
 			expressionsList.add(whereCondition);
 			expressionsList.addAll(joinExpressions);
-			ZExpression newWhere = MorphSQLUtility.combineExpresions(expressionsList
+			ZExpression newWhere = MorphSQLUtility.combineExpresionsJava(expressionsList
 					, Constants.SQL_LOGICAL_OPERATOR_AND());
 			resultAux = SQLQuery.create(selectItems, logicalTables, newWhere, databaseType);
 		}
 		
 		return resultAux;
 	}
+
+
+
+	
 
 }

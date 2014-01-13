@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import Zql.ZSelectItem;
 import es.upm.fi.dia.oeg.morph.base.Constants;
-import es.upm.fi.dia.oeg.upm.morph.sql.MorphSQLSelectItem;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem;
 
 
 public class DBUtility {

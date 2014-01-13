@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
@@ -15,7 +16,7 @@ import Zql.ZSelectItem;
 import es.upm.fi.dia.oeg.morph.base.CollectionUtility;
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
-import es.upm.fi.dia.oeg.upm.morph.sql.MorphSQLSelectItem;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem;
 
 public class SQLUnion implements IQuery {
 	String alias;
@@ -122,8 +123,9 @@ public class SQLUnion implements IQuery {
 		
 	}
 
-	public void setOrderBy(Vector<ZOrderBy> orderByConditions) {
-		this.orderByConditions = orderByConditions;
+	public void setOrderBy(List<ZOrderBy> orderByConditions) {
+		Vector<ZOrderBy> newOrderByConditions = new Vector<ZOrderBy>(orderByConditions); 
+		this.orderByConditions = newOrderByConditions;
 	}
 
 	public void setAlias(String alias) {
@@ -333,7 +335,7 @@ public class SQLUnion implements IQuery {
 //				newOrderByCollection.add(newOrderBy);
 //			}
 			
-			Vector<ZOrderBy> newOrderByCollection = MorphSQLUtility.pushOrderByDown(this.orderByConditions
+			List<ZOrderBy> newOrderByCollection = MorphSQLUtility.pushOrderByDownJava(this.orderByConditions
 					, mapInnerAliasSelectItem);
 			this.setOrderBy(newOrderByCollection);			
 		}

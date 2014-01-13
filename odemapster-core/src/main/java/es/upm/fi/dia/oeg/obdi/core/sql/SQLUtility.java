@@ -18,8 +18,8 @@ import com.hp.hpl.jena.graph.Node;
 
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
-import es.upm.fi.dia.oeg.upm.morph.sql.MorphSQLConstant;
-import es.upm.fi.dia.oeg.upm.morph.sql.MorphSQLSelectItem;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem;
 
 public class SQLUtility {
 

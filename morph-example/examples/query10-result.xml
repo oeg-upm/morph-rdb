@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="a"/>
+        <variable name="fn"/>
+        <variable name="e"/>
+        <variable name="w"/>
+    </head>
+    <results>
+        <result>
+            <binding name="a"/>
+            <binding name="fn">John Sr.</binding>
+            <binding name="e">john@acd.edu</binding>
+            <binding name="w"/>
+        </result>
+        <result>
+            <binding name="a"/>
+            <binding name="fn">Ringo Jr. </binding>
+            <binding name="e">ringo@acd.edu</binding>
+            <binding name="w">www.starr.edu</binding>
+        </result>
+    </results>
+</sparql>

@@ -2,6 +2,8 @@ package es.upm.fi.dia.oeg.obdi.core.engine;
 
 import java.sql.Connection;
 
+import com.hp.hpl.jena.graph.Node;
+import com.hp.hpl.jena.graph.Triple;
 import com.hp.hpl.jena.query.Query;
 
 import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
@@ -20,6 +22,8 @@ public interface IQueryTranslator {
 	void setSPARQLQueryByString(String queryString);
 	
 	void setSPARQLQueryByFile(String queryFilePath);
+	
+	IQuery getTranslationResult();
 	
 	IQuery translate(Query query) throws Exception;
 
@@ -44,6 +48,17 @@ public interface IQueryTranslator {
 	void setConfigurationProperties(ConfigurationProperties configurationProperties);
 
 	void setDatabaseType(String databaseType);
+	
+	String getDatabaseType();
 
 	void setConnection(Connection conn);
+	
+	String getTripleAlias(Triple triple);
+	
+	public abstract AbstractUnfolder getUnfolder();
+	
+	public abstract void putMappedMapping(Integer key, Object value);
+	
+	public abstract void putTripleAlias(Triple tp, String alias);
+
 }
