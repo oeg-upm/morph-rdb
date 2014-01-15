@@ -28,7 +28,6 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
-	@Test
 	public void testBatchPostgreSQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "batch-postgresql.r2rml.properties";
@@ -60,7 +59,6 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
-	@Test
 	public void testSparql01PostgreSQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "query01postgresql.r2rml.properties";

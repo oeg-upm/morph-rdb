@@ -13,9 +13,6 @@
             <binding name="e">
                 <literal>john@acd.edu</literal>
             </binding>
-            <binding name="w">
-                <literal/>
-            </binding>
         </result>
         <result>
             <binding name="a">

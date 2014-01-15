@@ -48,11 +48,11 @@
 			<version>0.1</version>
 		</dependency>
 
-<!-- 		<dependency>
+		<dependency>
 			<groupId>es.upm.fi.dia.oeg.morph</groupId>
-			<artifactId>odemapster-r2rml-querytranslator</artifactId>
+			<artifactId>morph-rdb-querytranslator</artifactId>
 			<version>1.0-SNAPSHOT</version>
-		</dependency>     -->
+		</dependency>
 
 		<dependency>
 			<groupId>es.upm.fi.oeg.morph</groupId>
@@ -82,5 +82,11 @@
       <name>your custom repo</name>
       <url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-external-libs-local</url>
     </repository>
+    
+		<repository>
+			<id>fpriyatna-dropbox</id>
+			<name>Dropbox Account of fpriyatna</name>
+			<url>https://dl.dropboxusercontent.com/u/4959627/repository</url>
+		</repository>    
   </repositories>  
 </project>

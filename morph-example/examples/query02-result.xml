@@ -14,12 +14,6 @@
             <binding name="n">
                 <literal>Paul</literal>
             </binding>
-            <binding name="e">
-                <literal/>
-            </binding>
-            <binding name="w">
-                <literal/>
-            </binding>
         </result>
         <result>
             <binding name="a">
@@ -31,9 +25,6 @@
             <binding name="e">
                 <literal>john@acd.edu</literal>
             </binding>
-            <binding name="w">
-                <literal/>
-            </binding>
         </result>
         <result>
             <binding name="a">
@@ -41,9 +32,6 @@
             </binding>
             <binding name="n">
                 <literal>George</literal>
-            </binding>
-            <binding name="e">
-                <literal/>
             </binding>
             <binding name="w">
                 <literal>www.george.edu</literal>
