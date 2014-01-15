@@ -1274,20 +1274,20 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 			    termsC.toList, gp1SelectItems, transGP1Alias, this.databaseType);
 			
 			val mappingsSelectItems = mappingsSelectItemA ::: mappingsSelectItemB ::: mappingsSelectItemC;
-			
+			MorphSQLUtility.setDefaultAlias(mappingsSelectItems);
 			
 			val selectItemsA = selectItemGenerator.generateSelectItems(
 					termsA, transGP1Alias, gp1SelectItems, false).toList;
-			MorphSQLUtility.setDefaultAlias(selectItemsA);
+			//MorphSQLUtility.setDefaultAlias(selectItemsA);
 			val selectItemsB = selectItemGenerator.generateSelectItems(
 					termsB, transGP2Alias, gp2SelectItems, false).toList;			
-			MorphSQLUtility.setDefaultAlias(selectItemsB);
+			//MorphSQLUtility.setDefaultAlias(selectItemsB);
 			val selectItemsC = selectItemGenerator.generateSelectItems(
 					termsC, transGP1Alias, gp1SelectItems, false).toList;			
-			MorphSQLUtility.setDefaultAlias(selectItemsC);
+			//MorphSQLUtility.setDefaultAlias(selectItemsC);
 
 			val selectItems = selectItemsA ::: selectItemsB ::: selectItemsC;  
-
+			MorphSQLUtility.setDefaultAlias(selectItems);
 
 			//.... JOIN ... ON <joinOnExpression>
 			val joinOnExps = termsC.flatMap(termC => {

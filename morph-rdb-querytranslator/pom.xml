@@ -4,7 +4,7 @@
   <artifactId>morph-rdb-querytranslator</artifactId>
   <version>1.0-SNAPSHOT</version>
   
-  <build>
+<!--   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
@@ -16,7 +16,7 @@
         </configuration>
       </plugin>
     </plugins>
-  </build>
+  </build> -->
 
 	<dependencies>
 		<dependency>
@@ -59,7 +59,7 @@
 		</dependency>
 		<dependency>
 			<groupId>es.upm.fi.dia.oeg.morph</groupId>
-			<artifactId>odemapster-r2rml</artifactId>
+			<artifactId>odemapster-r2rml-rdb</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
@@ -97,6 +97,6 @@
 			<id>fpriyatna-dropbox</id>
 			<name>Dropbox Account of fpriyatna</name>
 			<url>https://dl.dropboxusercontent.com/u/4959627/repository</url>
-		</repository>		
+		</repository>
 	</repositories>
 </project>
