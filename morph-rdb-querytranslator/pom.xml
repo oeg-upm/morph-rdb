@@ -51,9 +51,10 @@
 			<artifactId>zql</artifactId>
 			<version>0.1</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>es.upm.fi.dia.oeg.morph</groupId>
-			<artifactId>odemapster-core-querytranslator</artifactId>
+			<artifactId>morph-base-querytranslator</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>

@@ -17,7 +17,6 @@ import es.upm.fi.dia.oeg.obdi.core.exception.InsatisfiableSQLExpression
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractLogicalTable
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
-import es.upm.fi.dia.oeg.obdi.core.querytranslator.AbstractQueryTranslator
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLDataType
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLUtility
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLLogicalTable
@@ -35,8 +34,12 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseCondSQLGenerator
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
 
-class MorphRDBCondSQLGenerator(owner: IQueryTranslator) 
-extends MorphBaseCondSQLGenerator(owner: IQueryTranslator) {
+class MorphRDBCondSQLGenerator(
+    owner: IQueryTranslator
+    ) 
+extends MorphBaseCondSQLGenerator(
+    owner: IQueryTranslator
+    ) {
   	override val logger = Logger.getLogger("MorphCondSQLGenerator");
 
 	override def genCondSQLPredicateObject(tp:Triple, alphaResult:MorphAlphaResult 
@@ -167,7 +170,6 @@ extends MorphBaseCondSQLGenerator(owner: IQueryTranslator) {
 	def generateCondForWellDefinedURI(termMap:R2RMLTermMap, uri:String , alias:String 
 	    , columnsMetaData:Map[String, ColumnMetaData] ) : ZExpression = {
 		
-		val dbType = this.owner.getDatabaseType();
 		
 		val result:ZExpression = {
 			if(termMap.getTermMapType() == TermMapType.TEMPLATE) {
@@ -197,7 +199,7 @@ extends MorphBaseCondSQLGenerator(owner: IQueryTranslator) {
 		
 		
 							val pkColumnConstant = MorphSQLConstant.apply(
-									alias + "." + pkColumnString, ZConstant.COLUMNNAME, dbType);
+									alias + "." + pkColumnString, ZConstant.COLUMNNAME, databaseType);
 							
 							val pkValueConstant = {
 								if(columnTypeName != null) {

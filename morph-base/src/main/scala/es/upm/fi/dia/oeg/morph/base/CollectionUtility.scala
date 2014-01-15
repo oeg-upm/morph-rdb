@@ -8,15 +8,15 @@ object CollectionUtility {
 	}
 
 	def getElementsStartWith(theCollection : Collection[String], prefix:String) : Collection[String] = {
-	  val result = theCollection.map(collectionElement => {
+	  val result = theCollection.flatMap(collectionElement => {
 	    if(collectionElement.startsWith(prefix)) {
-	      collectionElement;
+	      Some(collectionElement);
 	    } else {
-	      null
+	      None;
 	    }
 	  })
 	  
-	  result.toList;
+	  result;
 	} 
 
 }

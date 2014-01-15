@@ -15,9 +15,17 @@ import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 
-abstract class MorphBaseAlphaGenerator(val owner:IQueryTranslator ) {
-	def logger = Logger.getLogger("MorphBaseAlphaGenerator");
-  
+abstract class MorphBaseAlphaGenerator(
+    val owner:IQueryTranslator 
+    ) {
+
+  def logger = Logger.getLogger("MorphBaseAlphaGenerator");
+
+	val databaseType = {
+		if(this.owner == null) {null}
+		else {this.owner.getDatabaseType();}
+	}
+	
 	def calculateAlpha(tp:Triple, cm:AbstractConceptMapping, predicateURI:String) : MorphAlphaResult;
 
 	def calculateAlpha(tp:Triple, cm:AbstractConceptMapping , predicateURI:String , pm:AbstractPropertyMapping ) 

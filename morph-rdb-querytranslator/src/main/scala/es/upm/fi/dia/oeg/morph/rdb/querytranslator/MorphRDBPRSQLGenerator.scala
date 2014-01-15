@@ -13,7 +13,6 @@ import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
-import es.upm.fi.dia.oeg.obdi.core.querytranslator.AbstractQueryTranslator
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLObjectMap
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLRefObjectMap
@@ -26,7 +25,11 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBasePRSQLGenerator
 
-class MorphRDBPRSQLGenerator(owner: IQueryTranslator) extends MorphBasePRSQLGenerator(owner: IQueryTranslator) {
+class MorphRDBPRSQLGenerator(
+    owner: IQueryTranslator
+    ) extends MorphBasePRSQLGenerator(
+        owner: IQueryTranslator
+        ) {
 	override val logger = Logger.getLogger("MorphPRSQLGenerator");
 
 		
@@ -107,9 +110,8 @@ class MorphRDBPRSQLGenerator(owner: IQueryTranslator) extends MorphBasePRSQLGene
 						if(mappingHashCode != -1) {
 							val mappingHashCodeConstant = new ZConstant(
 									mappingHashCode + "", ZConstant.NUMBER);
-							val dbType = this.owner.getDatabaseType();
 							val mappingSelectItem = MorphSQLSelectItem.apply(
-									mappingHashCodeConstant, dbType, Constants.POSTGRESQL_COLUMN_TYPE_INTEGER);
+									mappingHashCodeConstant, databaseType, Constants.POSTGRESQL_COLUMN_TYPE_INTEGER);
 							val mappingSelectItemAlias = Constants.PREFIX_MAPPING_ID + tpObject.getName();
 							mappingSelectItem.setAlias(mappingSelectItemAlias);
 	
@@ -162,7 +164,6 @@ class MorphRDBPRSQLGenerator(owner: IQueryTranslator) extends MorphBasePRSQLGene
 				val triplesMap = cmSubject.asInstanceOf[R2RMLTriplesMap];
 				val subjectMap = triplesMap.getSubjectMap();
 				val mappingHashCodeConstant = new ZConstant(subjectMap.hashCode() + "", ZConstant.NUMBER);
-				val databaseType = this.owner.getDatabaseType();
 				val mappingSelectItem = MorphSQLSelectItem.apply(
 						mappingHashCodeConstant, databaseType, Constants.POSTGRESQL_COLUMN_TYPE_INTEGER);
 				val mappingSelectItemAlias = Constants.PREFIX_MAPPING_ID + subject.getName();

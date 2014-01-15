@@ -8,25 +8,25 @@
     </head>
     <results>
         <result>
-            <binding name="a"/>
+            <binding name="a">B2</binding>
             <binding name="n">John</binding>
             <binding name="e">john@acd.edu</binding>
             <binding name="w"/>
         </result>
         <result>
-            <binding name="a"/>
+            <binding name="a">B3</binding>
             <binding name="n">George</binding>
             <binding name="e"/>
             <binding name="w">www.george.edu</binding>
         </result>
         <result>
-            <binding name="a"/>
+            <binding name="a">B4</binding>
             <binding name="n">Ringo</binding>
             <binding name="e"/>
             <binding name="w">www.starr.edu</binding>
         </result>
         <result>
-            <binding name="a"/>
+            <binding name="a">B4</binding>
             <binding name="n">Ringo</binding>
             <binding name="e">ringo@acd.edu</binding>
             <binding name="w"/>

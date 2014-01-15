@@ -8,11 +8,13 @@ import org.w3c.dom.Element;
 
 import com.hp.hpl.jena.query.Query;
 
+import es.upm.fi.dia.oeg.morph.base.Constants;
+import es.upm.fi.dia.oeg.morph.base.TermMapResult;
 import es.upm.fi.dia.oeg.obdi.core.XMLUtility;
 
-public class XMLWriter extends AbstractQueryResultWriter {
+public class XMLQueryResultWriter extends AbstractQueryResultWriter {
 
-	private static Logger logger = Logger.getLogger(XMLWriter.class);
+	private static Logger logger = Logger.getLogger(XMLQueryResultWriter.class);
 	private Document xmlDoc;
 	private Element resultsElement;
 	private String outputFileName;
@@ -58,9 +60,24 @@ public class XMLWriter extends AbstractQueryResultWriter {
 				Element bindingElement = xmlDoc.createElement("binding");
 				bindingElement.setAttribute("name", varName);
 				IQueryTranslator queryTranslator = super.getQueryTranslator();
-				String translatedColumnValue = queryTranslator.translateResultSet(varName, rs);
-				bindingElement.setTextContent(translatedColumnValue);
+				TermMapResult translatedColumnValue = queryTranslator.translateResultSet(varName, rs);
+				String translatedValue = translatedColumnValue.translatedValue();
 				resultElement.appendChild(bindingElement);
+
+				String termType = translatedColumnValue.termType();
+				if(termType != null) {
+					String termTypeElementName = null;
+					if(termType.equalsIgnoreCase(Constants.R2RML_IRI_URI())) {
+						termTypeElementName = "uri";
+					} else if(termType.equalsIgnoreCase(Constants.R2RML_LITERAL_URI())) {
+						termTypeElementName = "literal";
+					}
+					Element termTypeElement = xmlDoc.createElement(termTypeElementName);
+					bindingElement.appendChild(termTypeElement);
+					termTypeElement.setTextContent(translatedValue);
+				} else {
+					bindingElement.setTextContent(translatedValue);	
+				}
 			}
 			i++;
 		}

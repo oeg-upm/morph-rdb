@@ -15,9 +15,16 @@ import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping;
 import es.upm.fi.dia.oeg.morph.base.Constants
 
-abstract class MorphBaseBetaGenerator(owner:IQueryTranslator ) {
+abstract class MorphBaseBetaGenerator(
+    owner:IQueryTranslator 
+    ) {
+  
 	val logger = Logger.getLogger("MorphBaseBetaGenerator");
 	val alphaGenerator:MorphBaseAlphaGenerator=null;
+	val databaseType = {
+		if(this.owner == null) {null}
+		else {this.owner.getDatabaseType();}
+	}
 	
 	def  calculateBeta(tp:Triple , pos:Constants.MorphPOS.Value, cm:AbstractConceptMapping , predicateURI:String 
 			, alphaResult:MorphAlphaResult ) : java.util.List[ZSelectItem] = {

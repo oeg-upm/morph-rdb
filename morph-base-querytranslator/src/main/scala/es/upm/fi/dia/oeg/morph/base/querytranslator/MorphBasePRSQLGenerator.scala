@@ -13,8 +13,11 @@ import scala.collection.mutable.LinkedHashSet
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 
-class MorphBasePRSQLGenerator(val owner:IQueryTranslator ) {
-	val logger = Logger.getLogger("MorphBasePRSQLGenerator");
+class MorphBasePRSQLGenerator(
+    val owner:IQueryTranslator 
+    ) {
+
+  val logger = Logger.getLogger("MorphBasePRSQLGenerator");
 	val databaseType = {
 		if(this.owner == null) {null}
 		else {this.owner.getDatabaseType();}
@@ -71,12 +74,11 @@ class MorphBasePRSQLGenerator(val owner:IQueryTranslator ) {
 	def genPRSQLObject(tp:Triple, alphaResult:MorphAlphaResult, betaGenerator:MorphBaseBetaGenerator 
 	    , nameGenerator:NameGenerator , cmSubject:AbstractConceptMapping , predicateURI:String , columnType:String) 
 	: Collection[ZSelectItem] = {
-		val dbType = owner.getDatabaseType();
 		
 		def betaObjSelectItems = betaGenerator.calculateBetaObject(tp, cmSubject, predicateURI, alphaResult);
 		val selectItems = for(i <- 0 until betaObjSelectItems.size()) yield {
 			val betaObjSelectItem = betaObjSelectItems.get(i);
-			val selectItem = MorphSQLSelectItem.apply(betaObjSelectItem, dbType, columnType);
+			val selectItem = MorphSQLSelectItem.apply(betaObjSelectItem, databaseType, columnType);
 			
 			val selectItemAliasAux = nameGenerator.generateName(tp.getObject());
 			val selectItemAlias = {

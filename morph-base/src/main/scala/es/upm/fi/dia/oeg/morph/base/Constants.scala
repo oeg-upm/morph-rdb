@@ -110,7 +110,7 @@ object Constants {
 	val DATASOURCE_READER_CLASSNAME = "datasourcereader.class.name";
 	val QUERY_EVALUATOR_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.obdi.core.engine.RDBReader";
 	val QUERY_RESULT_WRITER_CLASSNAME = "queryresult.writer.class.name";
-	val QUERY_RESULT_WRITER_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.obdi.core.engine.XMLWriter";
+	val QUERY_RESULT_WRITER_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.obdi.core.engine.XMLQueryResultWriter";
 	val QUERY_RESULT_XMLWRITER_OUTPUT_DEFAULT = "output.rdf.xml";
 	val QUERY_OPTIMIZER_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.obdi.core.engine.QueryTranslationOptimizer";
 

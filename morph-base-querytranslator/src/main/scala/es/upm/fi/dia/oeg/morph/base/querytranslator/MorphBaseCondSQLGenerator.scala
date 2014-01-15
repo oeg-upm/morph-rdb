@@ -29,9 +29,16 @@ import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslationException;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping;
 
-abstract class MorphBaseCondSQLGenerator(owner:IQueryTranslator ) {
-	val logger = Logger.getLogger("MorphBaseCondSQLGenerator");
-
+abstract class MorphBaseCondSQLGenerator(
+    owner:IQueryTranslator 
+    ) {
+	
+  val logger = Logger.getLogger("MorphBaseCondSQLGenerator");
+	val databaseType = {
+		if(this.owner == null) {null}
+		else {this.owner.getDatabaseType();}
+	}
+	
 	def  genCondSQL(tp:Triple, alphaResult:MorphAlphaResult, betaGenerator:MorphBaseBetaGenerator
 	    , cm:AbstractConceptMapping,  predicateURI:String) : MorphCondSQLResult =  {
 

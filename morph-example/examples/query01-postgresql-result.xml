@@ -7,14 +7,26 @@
     </head>
     <results>
         <result>
-            <binding name="a"/>
-            <binding name="e">john@acd.edu</binding>
-            <binding name="w"/>
+            <binding name="a">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B2</uri>
+            </binding>
+            <binding name="e">
+                <literal>john@acd.edu</literal>
+            </binding>
+            <binding name="w">
+                <literal/>
+            </binding>
         </result>
         <result>
-            <binding name="a"/>
-            <binding name="e">ringo@acd.edu</binding>
-            <binding name="w">www.starr.edu</binding>
+            <binding name="a">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B4</uri>
+            </binding>
+            <binding name="e">
+                <literal>ringo@acd.edu</literal>
+            </binding>
+            <binding name="w">
+                <literal>www.starr.edu</literal>
+            </binding>
         </result>
     </results>
 </sparql>

@@ -14,7 +14,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/morph-base"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/morph-rdb-querytranslator"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/odemapster-core"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/odemapster-core-querytranslator"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/odemapster-r2rml-rdb"/>
 	<classpathentry kind="src" output="target/classes" path="src/main/java">
 		<attributes>

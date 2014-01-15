@@ -204,8 +204,9 @@ object MorphQueryTranslatorUtility {
 				val mappingsSelectItemsAux = MorphSQLUtility.getSelectItemsMapPrefix(
 				    selectItems, term, prefix, dbType);
 				mappingsSelectItemsAux.map(mappingsSelectItemAux => {
+					val mappingSelectItemAuxAlias = mappingsSelectItemAux.getAlias();
 					val newSelectItem = MorphSQLSelectItem.apply(
-							mappingsSelectItemAux.getAlias(), prefix, dbType, null);
+							mappingSelectItemAuxAlias, prefix, dbType, null);
 					newSelectItem;				  
 				})
 			} else {

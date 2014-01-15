@@ -7,9 +7,15 @@
     </head>
     <results>
         <result>
-            <binding name="a"/>
-            <binding name="n">Paul</binding>
-            <binding name="p">777-3426</binding>
+            <binding name="a">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B1</uri>
+            </binding>
+            <binding name="n">
+                <literal>Paul</literal>
+            </binding>
+            <binding name="p">
+                <literal>777-3426</literal>
+            </binding>
         </result>
     </results>
 </sparql>

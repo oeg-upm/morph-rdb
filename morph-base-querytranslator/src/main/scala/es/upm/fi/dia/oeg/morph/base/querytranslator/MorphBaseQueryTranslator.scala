@@ -1,108 +1,104 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator
 
 import scala.collection.JavaConversions._
-//import scala.collection.JavaConverters._
-import scala.collection.mutable.LinkedHashSet;
-
-import org.apache.log4j.Logger;
-
-import java.sql.Connection;
-
-import Zql.ZConstant;
-import Zql.ZExp;
-import Zql.ZExpression;
-import Zql.ZGroupBy;
-import Zql.ZOrderBy;
-import Zql.ZSelectItem;
-
-import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
-import com.hp.hpl.jena.graph.Node;
-import com.hp.hpl.jena.graph.Triple;
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.query.SortCondition;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.sparql.algebra.Algebra;
-import com.hp.hpl.jena.sparql.algebra.Op;
-import com.hp.hpl.jena.sparql.algebra.op.OpBGP;
-import com.hp.hpl.jena.sparql.algebra.op.OpDistinct;
-import com.hp.hpl.jena.sparql.algebra.op.OpExtend;
-import com.hp.hpl.jena.sparql.algebra.op.OpFilter;
-import com.hp.hpl.jena.sparql.algebra.op.OpGroup;
-import com.hp.hpl.jena.sparql.algebra.op.OpJoin;
-import com.hp.hpl.jena.sparql.algebra.op.OpLeftJoin;
-import com.hp.hpl.jena.sparql.algebra.op.OpOrder;
-import com.hp.hpl.jena.sparql.algebra.op.OpProject;
-import com.hp.hpl.jena.sparql.algebra.op.OpSlice;
-import com.hp.hpl.jena.sparql.algebra.op.OpUnion;
-import com.hp.hpl.jena.sparql.algebra.optimize.Optimize;
-import com.hp.hpl.jena.sparql.core.BasicPattern;
-import com.hp.hpl.jena.sparql.core.Var;
-import com.hp.hpl.jena.sparql.core.VarExprList;
-import com.hp.hpl.jena.sparql.expr.E_Bound;
-import com.hp.hpl.jena.sparql.expr.E_Function;
-import com.hp.hpl.jena.sparql.expr.E_LogicalAnd;
-import com.hp.hpl.jena.sparql.expr.E_LogicalNot;
-import com.hp.hpl.jena.sparql.expr.E_LogicalOr;
-import com.hp.hpl.jena.sparql.expr.E_NotEquals;
-import com.hp.hpl.jena.sparql.expr.E_OneOf;
-import com.hp.hpl.jena.sparql.expr.E_Regex;
-import com.hp.hpl.jena.sparql.expr.Expr;
-import com.hp.hpl.jena.sparql.expr.ExprAggregator;
-import com.hp.hpl.jena.sparql.expr.ExprFunction;
-import com.hp.hpl.jena.sparql.expr.ExprFunction1;
-import com.hp.hpl.jena.sparql.expr.ExprFunction2;
-import com.hp.hpl.jena.sparql.expr.ExprList;
-import com.hp.hpl.jena.sparql.expr.NodeValue;
-import com.hp.hpl.jena.sparql.expr.aggregate.AggAvg;
-import com.hp.hpl.jena.sparql.expr.aggregate.AggCount;
-import com.hp.hpl.jena.sparql.expr.aggregate.AggMax;
-import com.hp.hpl.jena.sparql.expr.aggregate.AggMin;
-import com.hp.hpl.jena.sparql.expr.aggregate.AggSum;
-import com.hp.hpl.jena.sparql.expr.aggregate.Aggregator;
-import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.XSD;
-
-import es.upm.fi.dia.oeg.morph.base.ColumnMetaData;
-import es.upm.fi.dia.oeg.morph.base.Constants;
-import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
-import es.upm.fi.dia.oeg.morph.base.SPARQLUtility;
-import es.upm.fi.dia.oeg.morph.base.TriplePatternPredicateBounder;
-import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant;
-import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem;
-import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
-import es.upm.fi.dia.oeg.obdi.core.DBUtility;
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractResultSet;
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder;
-import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslationOptimizer;
-import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator;
-import es.upm.fi.dia.oeg.obdi.core.exception.InsatisfiableSQLExpression;
-import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslationException;
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping;
-import es.upm.fi.dia.oeg.obdi.core.sql.IQuery;
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem;
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType;
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLJoinTable;
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLLogicalTable;
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery;
+import scala.collection.mutable.LinkedHashSet
+import org.apache.log4j.Logger
+import java.sql.Connection
+import Zql.ZConstant
+import Zql.ZExp
+import Zql.ZExpression
+import Zql.ZGroupBy
+import Zql.ZOrderBy
+import Zql.ZSelectItem
+import com.hp.hpl.jena.datatypes.xsd.XSDDatatype
+import com.hp.hpl.jena.graph.Node
+import com.hp.hpl.jena.graph.Triple
+import com.hp.hpl.jena.query.Query
+import com.hp.hpl.jena.query.QueryFactory
+import com.hp.hpl.jena.query.SortCondition
+import com.hp.hpl.jena.rdf.model.Resource
+import com.hp.hpl.jena.sparql.algebra.Algebra
+import com.hp.hpl.jena.sparql.algebra.Op
+import com.hp.hpl.jena.sparql.algebra.op.OpBGP
+import com.hp.hpl.jena.sparql.algebra.op.OpDistinct
+import com.hp.hpl.jena.sparql.algebra.op.OpExtend
+import com.hp.hpl.jena.sparql.algebra.op.OpFilter
+import com.hp.hpl.jena.sparql.algebra.op.OpGroup
+import com.hp.hpl.jena.sparql.algebra.op.OpJoin
+import com.hp.hpl.jena.sparql.algebra.op.OpLeftJoin
+import com.hp.hpl.jena.sparql.algebra.op.OpOrder
+import com.hp.hpl.jena.sparql.algebra.op.OpProject
+import com.hp.hpl.jena.sparql.algebra.op.OpSlice
+import com.hp.hpl.jena.sparql.algebra.op.OpUnion
+import com.hp.hpl.jena.sparql.algebra.optimize.Optimize
+import com.hp.hpl.jena.sparql.core.BasicPattern
+import com.hp.hpl.jena.sparql.core.Var
+import com.hp.hpl.jena.sparql.core.VarExprList
+import com.hp.hpl.jena.sparql.expr.E_Bound
+import com.hp.hpl.jena.sparql.expr.E_Function
+import com.hp.hpl.jena.sparql.expr.E_LogicalAnd
+import com.hp.hpl.jena.sparql.expr.E_LogicalNot
+import com.hp.hpl.jena.sparql.expr.E_LogicalOr
+import com.hp.hpl.jena.sparql.expr.E_NotEquals
+import com.hp.hpl.jena.sparql.expr.E_OneOf
+import com.hp.hpl.jena.sparql.expr.E_Regex
+import com.hp.hpl.jena.sparql.expr.Expr
+import com.hp.hpl.jena.sparql.expr.ExprAggregator
+import com.hp.hpl.jena.sparql.expr.ExprFunction
+import com.hp.hpl.jena.sparql.expr.ExprFunction1
+import com.hp.hpl.jena.sparql.expr.ExprFunction2
+import com.hp.hpl.jena.sparql.expr.ExprList
+import com.hp.hpl.jena.sparql.expr.NodeValue
+import com.hp.hpl.jena.sparql.expr.aggregate.AggAvg
+import com.hp.hpl.jena.sparql.expr.aggregate.AggCount
+import com.hp.hpl.jena.sparql.expr.aggregate.AggMax
+import com.hp.hpl.jena.sparql.expr.aggregate.AggMin
+import com.hp.hpl.jena.sparql.expr.aggregate.AggSum
+import com.hp.hpl.jena.sparql.expr.aggregate.Aggregator
+import com.hp.hpl.jena.vocabulary.RDF
+import com.hp.hpl.jena.vocabulary.XSD
+import es.upm.fi.dia.oeg.morph.base.ColumnMetaData
+import es.upm.fi.dia.oeg.morph.base.Constants
+import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility
+import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
+import es.upm.fi.dia.oeg.morph.base.TriplePatternPredicateBounder
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
+import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties
+import es.upm.fi.dia.oeg.obdi.core.DBUtility
+import es.upm.fi.dia.oeg.obdi.core.engine.AbstractResultSet
+import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
+import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslationOptimizer
+import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
+import es.upm.fi.dia.oeg.obdi.core.exception.InsatisfiableSQLExpression
+import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslationException
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
+import es.upm.fi.dia.oeg.obdi.core.sql.IQuery
+import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem
+import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType
+import es.upm.fi.dia.oeg.obdi.core.sql.SQLJoinTable
+import es.upm.fi.dia.oeg.obdi.core.sql.SQLLogicalTable
+import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLUnion;
+import es.upm.fi.dia.oeg.obdi.core.engine.AbstractResultSet
 //import es.upm.fi.dia.oeg.obdi.core.sql.SQLUtility;
 
-abstract class MorphBaseQueryTranslator extends IQueryTranslator {
+abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 	val logger = Logger.getLogger("MorphBaseQueryTranslator");
 	var sparqQuery :Query = null;
+	var currentTranslationResult:IQuery = null;
 	
 	val connection:Connection = null;
-	val mappingDocument:AbstractMappingDocument = null;
-	val unfolder:AbstractUnfolder  = null;
-	val configurationProperties:ConfigurationProperties =null;
-	val databaseType:String =null;
+	var mappingDocument:AbstractMappingDocument = null;
+	val unfolder:AbstractUnfolder;
+	var configurationProperties:ConfigurationProperties =null;
+	var databaseType:String =null;
 	
 	//query translator
 	var mapInferredTypes:Map[Node, Set[AbstractConceptMapping]] = Map.empty ;
-	val optimizer:IQueryTranslationOptimizer  = null;
+	var optimizer:IQueryTranslationOptimizer  = null;
 	val mapTermsC : Map[Op, Set[Node]] = Map.empty;
 	var mapHashCodeMapping : Map[Integer, Object] = Map.empty
 	var mapAggreatorAlias:Map[String, ZSelectItem] = Map.empty;//varname - selectitem
@@ -110,10 +106,10 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 
 	//chebotko functions
 	val nameGenerator:NameGenerator = new NameGenerator();
-	val alphaGenerator:MorphBaseAlphaGenerator =null;
-	val betaGenerator:MorphBaseBetaGenerator =null;
-	val condSQLGenerator:MorphBaseCondSQLGenerator =null;
-	val prSQLGenerator:MorphBasePRSQLGenerator =null;
+	val alphaGenerator:MorphBaseAlphaGenerator;
+	val betaGenerator:MorphBaseBetaGenerator;
+	val condSQLGenerator:MorphBaseCondSQLGenerator;
+	val prSQLGenerator:MorphBasePRSQLGenerator;
 	
 	Optimize.setFactory(new MorphQueryRewritterFactory());
 	val functionsMap:Map[String, String] = Map(
@@ -124,22 +120,19 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 	    , "E_Regex" -> "LIKE"
 	    , "E_OneOf" -> "IN")
 
-	def buildAlphaGenerator();
-
-	def buildBetaGenerator();
-
-	def buildCondSQLGenerator();
-
-	def buildPRSQLGenerator();
+//	def buildAlphaGenerator();
+//
+//	def buildBetaGenerator();
+//
+//	def buildCondSQLGenerator();
+//
+//	def buildPRSQLGenerator();
 
 	def generateTermCName(termC:Node ) : String  = {
 		this.nameGenerator.generateName(termC);
 	}
-
-
-
 	
-	def getMappedMapping(hashCode:Integer ) : Object = {
+	def getMappedMapping(hashCode:Integer ) = {
 		this.mapHashCodeMapping.get(hashCode);
 	}
 	
@@ -180,7 +173,9 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 				}			  
 			}
 			
-			result += resultAux; 
+			if(resultAux != null) {
+			  	result += resultAux; 
+			}
 		}
 
 		result;
@@ -230,13 +225,13 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 				}			    
 			  }
 			  case opJoin:OpJoin => {
-			    this.trans(opJoin);
+			    this.transInnerJoin(opJoin);
 			  }
 			  case opLeftJoin:OpLeftJoin => {
-			    this.trans(opLeftJoin);
+			    this.transLeftJoin(opLeftJoin);
 			  }
 			  case opUnion:OpUnion => {
-			    this.trans(opUnion);
+			    this.transUnion(opUnion);
 			  }
 			  case opFilter:OpFilter => {
 			    this.transFilter(opFilter);
@@ -759,7 +754,7 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 				}
 	
 				val unionOfSQLQueries = cms.flatMap(cm => {
-					val resultAux = this.trans(tp, cm);
+					val resultAux = this.transTP(tp, cm);
 					if(resultAux != null) {
 						Some(resultAux);	
 					} else {
@@ -782,14 +777,14 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 		result;
 	}
 
-	def trans(tp:Triple , cm:AbstractConceptMapping ) : IQuery = {
+	def transTP(tp:Triple , cm:AbstractConceptMapping ) : IQuery = {
 		val tpPredicate = tp.getPredicate();
 		
 		val result : IQuery = {
 			if(tpPredicate.isURI()) {
 				val predicateURI = tpPredicate.getURI();
 				try {
-					this.trans(tp, cm, predicateURI, false);	
+					this.transTP(tp, cm, predicateURI, false);	
 				} catch {
 				  case e:InsatisfiableSQLExpression => {
 					logger.debug("InsatisfiableSQLExpression for tp: " + tp);
@@ -816,7 +811,7 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 						val predicateURI = pm.getMappedPredicateName();
 						if(boundedTriplePatternErrorMessages == null || boundedTriplePatternErrorMessages.isEmpty()) {
 							try {
-								val sqlQuery : IQuery = this.trans(tp, cm, predicateURI, true);
+								val sqlQuery : IQuery = this.transTP(tp, cm, predicateURI, true);
 								Some(sqlQuery);							
 							} catch{
 							  case e:InsatisfiableSQLExpression => {
@@ -851,9 +846,9 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 		result;
 	}
 
-	def trans(tp:Triple , cm:AbstractConceptMapping , predicateURI:String , pm:AbstractPropertyMapping ) : IQuery;
+	def transTP(tp:Triple , cm:AbstractConceptMapping , predicateURI:String , pm:AbstractPropertyMapping ) : IQuery;
 
-	def trans(tp:Triple , cm:AbstractConceptMapping , predicateURI:String , unboundedPredicate:Boolean ) : IQuery = {
+	def transTP(tp:Triple , cm:AbstractConceptMapping , predicateURI:String , unboundedPredicate:Boolean ) : IQuery = {
 		val pms = cm.getPropertyMappings(predicateURI);
 		
 		val transTP : IQuery = {
@@ -1224,7 +1219,10 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 			transGP2SQL;
 		} else {
 			val gp1SelectItems = transGP1SQL.getSelectItems().toList;
+			MorphSQLUtility.setDefaultAlias(gp1SelectItems);
+			
 			val gp2SelectItems = transGP2SQL.getSelectItems().toList;
+			MorphSQLUtility.setDefaultAlias(gp2SelectItems);
 
 			val transGP1Alias = transGP1SQL.generateAlias();
 			val transGP1FromItem = {
@@ -1376,7 +1374,7 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 					if(isTransJoinSubQueryElimination) {
 						try {
 							if(transGP1SQL.isInstanceOf[SQLQuery] && transGP2SQL.isInstanceOf[SQLQuery]) {
-								SQLQuery.create(selectItems, transGP1SQL, transGP2SQL, joinType, joinOnExpression, this.databaseType);
+								SQLQuery.create(selectItems ::: mappingsSelectItems, transGP1SQL, transGP2SQL, joinType, joinOnExpression, this.databaseType);
 							}else {
 							  null
 							}					
@@ -1400,6 +1398,7 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 	
 					val transJoinAux = new SQLQuery();
 					transJoinAux.setSelectItems(selectItems);
+					transJoinAux.addSelectItems(mappingsSelectItems);
 					transJoinAux.addFromItem(table1);
 					transJoinAux.addFromItem(table2);
 					transJoinAux;
@@ -1408,8 +1407,8 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 				}
 			}
 
-			result.addSelectItems(mappingsSelectItems);
-			transJoin;
+			
+			result;
 		}
 	}
 
@@ -1421,10 +1420,10 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 		this.mapInferredTypes = typeInferrer.infer(sparqlQuery);
 		logger.info("Inferred Types : \n" + typeInferrer.printInferredTypes());
 
-		this.buildAlphaGenerator();
-		this.buildBetaGenerator();
-		this.buildPRSQLGenerator();
-		this.buildCondSQLGenerator();
+//		this.buildAlphaGenerator();
+//		this.buildBetaGenerator();
+//		this.buildPRSQLGenerator();
+//		this.buildCondSQLGenerator();
 		
 		val start = System.currentTimeMillis();
 		val result = {
@@ -1473,7 +1472,8 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 		val end = System.currentTimeMillis();
 		logger.debug("Query translation time = "+ (end-start)+" ms.");
 		logger.debug("sql = \n" + result + "\n");
-		result;
+		this.currentTranslationResult = result;
+		this.currentTranslationResult;
 	}
 
 	def translateFromQueryFile(queryFilePath:String ) : IQuery  = {
@@ -1493,7 +1493,7 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 	}
 
 
-	def translateResultSet(varName:String , rs:AbstractResultSet ) : String ;
+	//def translateResultSet(varName:String , rs:AbstractResultSet ) : TermMapResult ;
 
 
 	def transLiteral(nodeValue:NodeValue ) : ZExp  = {
@@ -1512,7 +1512,7 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 				val literalLexicalForm = node.getLiteralLexicalForm();
 				val literalDatatypeURI = node.getLiteralDatatypeURI();
 				if(XSD.date.toString().equals(literalDatatypeURI) || XSD.dateTime.equals(literalDatatypeURI)) {
-					val literalValueString = literalLexicalForm.replaceAll("T", " ");
+					val literalValueString = literalLexicalForm.trim().replaceAll("T", " ");
 					new ZConstant(literalValueString, ZConstant.STRING);
 				} else {
 					new ZConstant(literalLexicalForm.toString(), ZConstant.STRING);
@@ -1679,6 +1679,20 @@ abstract class MorphBaseQueryTranslator extends IQueryTranslator {
 		}
 	}
 	
+	def setConfigurationProperties(x$1: ConfigurationProperties): Unit = this.configurationProperties = x$1;
+	
 
+	def setDatabaseType(x$1: String): Unit = {this.databaseType = x$1;}
 
+	def setMappingDocument(x$1: AbstractMappingDocument): Unit = this.mappingDocument = x$1;
+	
+	def setOptimizer(x$1: IQueryTranslationOptimizer): Unit = this.optimizer = x$1;
+	
+	def getConnection(): java.sql.Connection = { this.connection ; }
+	
+	def getDatabaseType(): String = { this.databaseType; }
+	
+	def getUnfolder(): AbstractUnfolder = { this.unfolder; }
+	
+	def getTranslationResult(): IQuery = this.currentTranslationResult;
 }

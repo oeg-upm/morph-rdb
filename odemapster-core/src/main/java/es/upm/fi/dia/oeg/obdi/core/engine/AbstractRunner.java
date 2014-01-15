@@ -145,7 +145,7 @@ public abstract class AbstractRunner {
 //			this.queryResultWriter.setSparqQuery(sparqQuery);
 //		}
 
-		if(queryResultWriter instanceof XMLWriter && this.queryResultWriterOutput == null) {
+		if(queryResultWriter instanceof XMLQueryResultWriter && this.queryResultWriterOutput == null) {
 			//set output file
 			String outputFileName = null;
 			if(this.configurationProperties != null) {

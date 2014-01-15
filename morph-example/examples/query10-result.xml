@@ -8,16 +8,32 @@
     </head>
     <results>
         <result>
-            <binding name="a"/>
-            <binding name="fn">John Sr.</binding>
-            <binding name="e">john@acd.edu</binding>
-            <binding name="w"/>
+            <binding name="a">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B2</uri>
+            </binding>
+            <binding name="fn">
+                <literal>John Sr.</literal>
+            </binding>
+            <binding name="e">
+                <literal>john@acd.edu</literal>
+            </binding>
+            <binding name="w">
+                <literal/>
+            </binding>
         </result>
         <result>
-            <binding name="a"/>
-            <binding name="fn">Ringo Jr. </binding>
-            <binding name="e">ringo@acd.edu</binding>
-            <binding name="w">www.starr.edu</binding>
+            <binding name="a">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B4</uri>
+            </binding>
+            <binding name="fn">
+                <literal>Ringo Jr. </literal>
+            </binding>
+            <binding name="e">
+                <literal>ringo@acd.edu</literal>
+            </binding>
+            <binding name="w">
+                <literal>www.starr.edu</literal>
+            </binding>
         </result>
     </results>
 </sparql>

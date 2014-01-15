@@ -1,7 +1,6 @@
 package es.upm.fi.dia.oeg.morph.rdb.querytranslator
 
 import scala.collection.JavaConversions._
-import es.upm.fi.dia.oeg.obdi.core.querytranslator.AbstractQueryTranslator
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
 import com.hp.hpl.jena.graph.Triple
@@ -13,9 +12,14 @@ import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTriplesMap
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap.TermMapType
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator;
+import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 
 
-class MorphRDBBetaGenerator(owner: AbstractQueryTranslator) extends MorphBaseBetaGenerator(owner) {
+class MorphRDBBetaGenerator(
+    owner: IQueryTranslator
+    ) extends MorphBaseBetaGenerator(
+        owner: IQueryTranslator
+        ) {
 
 	override def calculateBetaObject(tp:Triple , cm:AbstractConceptMapping , predicateURI:String 
 	    , alphaResult:MorphAlphaResult , pm:AbstractPropertyMapping ) : java.util.List[ZSelectItem] = {
@@ -64,7 +68,6 @@ class MorphRDBBetaGenerator(owner: AbstractQueryTranslator) extends MorphBaseBet
 		
 		val triplesMap = cm.asInstanceOf[R2RMLTriplesMap];
 		val subjectMap = triplesMap.getSubjectMap();
-		val dbType = this.owner.getDatabaseType();
 		val logicalTableAlias = alphaResult.alphaSubject.getAlias();
 		
 		val databaseColumnsString = 
@@ -73,7 +76,7 @@ class MorphRDBBetaGenerator(owner: AbstractQueryTranslator) extends MorphBaseBet
 		val result:List[ZSelectItem] = {
 			if(databaseColumnsString != null) {
 				val resultAux = databaseColumnsString.map(databaseColumnString => 
-				  MorphSQLSelectItem.apply(databaseColumnString, logicalTableAlias, dbType, null));
+				  MorphSQLSelectItem.apply(databaseColumnString, logicalTableAlias, databaseType:String, null));
 				resultAux.toList;
 			} else {
 			  Nil;

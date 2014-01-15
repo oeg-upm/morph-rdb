@@ -1,7 +1,6 @@
 package es.upm.fi.dia.oeg.morph.rdb.querytranslator
 
 import scala.collection.JavaConversions._
-import es.upm.fi.dia.oeg.obdi.core.querytranslator.AbstractQueryTranslator
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLLogicalTable
@@ -26,8 +25,12 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
 
-class MorphRDBAlphaGenerator(owner:IQueryTranslator) 
-extends MorphBaseAlphaGenerator(owner:IQueryTranslator) {
+class MorphRDBAlphaGenerator(
+    owner:IQueryTranslator
+    ) 
+extends MorphBaseAlphaGenerator(
+    owner:IQueryTranslator
+    ) {
 	override val logger = Logger.getLogger("MorphQueryTranslator");
 
 	
@@ -119,7 +122,6 @@ extends MorphBaseAlphaGenerator(owner:IQueryTranslator) {
 				sqlParentLogicalTableAux.setAlias(joinQueryAlias);
 	
 				val joinConditions = refObjectMap.getJoinConditions();
-				val databaseType = this.owner.getDatabaseType();
 				val onExpression = R2RMLUtility.generateJoinCondition(
 						joinConditions, logicalTableAlias, joinQueryAlias
 						, databaseType);
