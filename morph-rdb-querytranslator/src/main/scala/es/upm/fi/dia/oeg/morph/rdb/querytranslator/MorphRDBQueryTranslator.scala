@@ -126,7 +126,7 @@ class MorphRDBQueryTranslator()
 				
 				if(!mapValue.isDefined) {
 					val originalValue = rs.getString(varName);
-					new TermMapResult(originalValue, null)
+					new TermMapResult(originalValue, null, null)
 				} else {
 					val termMap : R2RMLTermMap = {
 						mapValue.get match {
@@ -205,6 +205,7 @@ class MorphRDBQueryTranslator()
 					}
 					
 					val termMapType = termMap.getTermType();
+					val xsdDatatype = termMap.getDatatype();
 					val resultAuxString = {
 						if(resultAux != null) {
 							if(termMapType != null) {
@@ -222,7 +223,7 @@ class MorphRDBQueryTranslator()
 						  null
 						}					  
 					}
-					new TermMapResult(resultAuxString, termMapType);
+					new TermMapResult(resultAuxString, termMapType, xsdDatatype);
 					//resultAuxString;
 				}
 			} else {

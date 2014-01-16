@@ -1,17 +1,15 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator
 
 import scala.collection.JavaConversions._
-
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractQueryResultWriter
-import org.apache.log4j.Logger;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
-import com.hp.hpl.jena.query.Query;
-
-import es.upm.fi.dia.oeg.morph.base.Constants;
-import es.upm.fi.dia.oeg.morph.base.TermMapResult;
+import org.apache.log4j.Logger
+import org.w3c.dom.Document
+import org.w3c.dom.Element
+import com.hp.hpl.jena.query.Query
+import es.upm.fi.dia.oeg.morph.base.Constants
+import es.upm.fi.dia.oeg.morph.base.TermMapResult
 import es.upm.fi.dia.oeg.obdi.core.XMLUtility;
+import es.upm.fi.dia.oeg.morph.base.ValueTransformator
 
 
 class MorphXMLQueryResultWriter extends AbstractQueryResultWriter {
@@ -60,8 +58,10 @@ class MorphXMLQueryResultWriter extends AbstractQueryResultWriter {
 			
 			for(varName <- varNames) {
 				val translatedColumnValue = queryTranslator.translateResultSet(varName, rs);
-				val translatedValue = translatedColumnValue.translatedValue;
-				if(translatedValue != null) {
+				val translatedDBValue = translatedColumnValue.translatedValue;
+				val xsdDataType = translatedColumnValue.xsdDatatype;
+				val lexicalValue = ValueTransformator.transformToLexical(translatedDBValue, xsdDataType)
+				if(lexicalValue != null) {
 					val bindingElement = xmlDoc.createElement("binding");
 					bindingElement.setAttribute("name", varName);
 					resultElement.appendChild(bindingElement);
@@ -80,12 +80,11 @@ class MorphXMLQueryResultWriter extends AbstractQueryResultWriter {
 						
 						val termTypeElement = xmlDoc.createElement(termTypeElementName);
 						bindingElement.appendChild(termTypeElement);
-						termTypeElement.setTextContent(translatedValue);
+						termTypeElement.setTextContent(lexicalValue);
 					} else {
-						bindingElement.setTextContent(translatedValue);	
+						bindingElement.setTextContent(lexicalValue);	
 					}				  
 				}
-
 			}
 			i = i+1;
 		}
