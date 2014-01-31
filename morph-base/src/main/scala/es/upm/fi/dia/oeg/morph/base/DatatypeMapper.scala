@@ -11,9 +11,21 @@ class DatatypeMapper {
 	var mapXMLDatatype = Map[String, String]();
 	var mapDBDatatype = Map[String, Integer]();
 	val mapDatatype = Map(
-	    new Integer(Types.INTEGER) -> XSDDatatype.XSDinteger.getURI()
+	    new Integer(Types.BINARY) -> XSDDatatype.XSDhexBinary.getURI()
+	    
+	    , new Integer(Types.NUMERIC) -> XSDDatatype.XSDdecimal.getURI()
+	    , new Integer(Types.DECIMAL) -> XSDDatatype.XSDdecimal.getURI()
+	    	    
+	    , new Integer(Types.SMALLINT) -> XSDDatatype.XSDinteger.getURI()
+	    , new Integer(Types.INTEGER) -> XSDDatatype.XSDinteger.getURI()
+	    , new Integer(Types.BIGINT) -> XSDDatatype.XSDinteger.getURI()
+	    
 	    , new Integer(Types.FLOAT) -> XSDDatatype.XSDdouble.getURI()
 		, new Integer(Types.REAL) -> XSDDatatype.XSDdouble.getURI()
+		, new Integer(Types.DOUBLE) -> XSDDatatype.XSDdouble.getURI()
+		
+		, new Integer(Types.BOOLEAN) -> XSDDatatype.XSDboolean.getURI()
+		
 		, new Integer(Types.DATE) -> XSDDatatype.XSDdate.getURI()
 		, new Integer(Types.TIME) -> XSDDatatype.XSDtime.getURI()
 		, new Integer(Types.TIMESTAMP) -> XSDDatatype.XSDdateTime.getURI()	    

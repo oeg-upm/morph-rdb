@@ -21,7 +21,7 @@ public class ExampleWithPropertiesFile {
 			runner.run();
 			logger.info("Batch process DONE------\n\n");
 		} catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			logger.error("Error : " + e.getMessage());
 			logger.info("Batch process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);

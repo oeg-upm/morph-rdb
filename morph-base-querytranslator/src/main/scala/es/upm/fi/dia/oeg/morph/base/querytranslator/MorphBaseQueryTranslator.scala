@@ -1361,12 +1361,17 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 				} else { None }
 			}) 
 
-
-			if(joinOnExps == null || joinOnExps.size() == 0) {
-				joinOnExps.add(Constants.SQL_EXPRESSION_TRUE);
+//			if(joinOnExps == null || joinOnExps.size() == 0) {
+//				joinOnExps.add(Constants.SQL_EXPRESSION_TRUE);
+//			}
+			val joinOnExpression = {
+			  if(joinOnExps == null || joinOnExps.size() == 0) {
+			    Constants.SQL_EXPRESSION_TRUE;
+			  } else {
+			  MorphSQLUtility.combineExpresions(joinOnExps.toList
+					, Constants.SQL_LOGICAL_OPERATOR_AND);			    
+			  }
 			}
-			val joinOnExpression = MorphSQLUtility.combineExpresions(joinOnExps.toList
-					, Constants.SQL_LOGICAL_OPERATOR_AND);
 
 			val transJoin : IQuery = {
 				if(this.optimizer != null) {
