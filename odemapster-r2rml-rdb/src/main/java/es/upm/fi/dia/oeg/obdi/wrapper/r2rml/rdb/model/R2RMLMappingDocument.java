@@ -24,6 +24,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 import es.upm.fi.dia.oeg.morph.base.ColumnMetaDataFactory;
 import es.upm.fi.dia.oeg.morph.base.Constants;
+import es.upm.fi.dia.oeg.morph.base.DBMetaData;
 import es.upm.fi.dia.oeg.morph.base.TableMetaData;
 import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.core.exception.ParseException;
@@ -61,7 +62,7 @@ public class R2RMLMappingDocument extends AbstractMappingDocument implements R2R
 						configurationProperties.getDatabaseType();
 				if(databaseName != null) {
 					logger.debug("building metadata.");
-					super.tablesMetaData = TableMetaData.buildTablesMetaData(conn, databaseName, databaseType);
+					super.dbMetaData = DBMetaData.buildTablesMetaData(conn, databaseName, databaseType);
 					//super.columnsMetaData = ColumnMetaData.buildColumnsMetaData(conn, databaseName, databaseType);
 					super.columnsMetaData = ColumnMetaDataFactory.buildColumnsMetaData(conn, databaseName, databaseType);
 				}

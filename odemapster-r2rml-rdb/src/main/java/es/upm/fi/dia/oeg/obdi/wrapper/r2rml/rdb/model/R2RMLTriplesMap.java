@@ -148,9 +148,11 @@ implements R2RMLElement, IConceptMapping {
 		String result = null;
 		
 		Collection<String> classURIs = this.subjectMap.getClassURIs();
-		if(classURIs != null) {
+		if(classURIs == null || classURIs.size() == 0) {
+			logger.warn("No class URI defined for TriplesMap: " + this);
+		} else {
 			if(classURIs.size() > 1) {
-				logger.warn("only one class URI is returned!");
+				logger.warn("Multiple classURIs defined, only one is returned!");
 			}
 			result = classURIs.iterator().next();
 		}
