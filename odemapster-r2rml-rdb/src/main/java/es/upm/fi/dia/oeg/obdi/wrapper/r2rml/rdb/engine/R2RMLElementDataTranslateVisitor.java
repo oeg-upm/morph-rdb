@@ -128,7 +128,7 @@ implements R2RMLElementVisitor {
 				
 				if(datatype != null) {
 					if(XSDDatatype.XSDdateTime.getURI().toString().equals(datatype)) {
-						objectMapUnfoldedValue = objectMapUnfoldedValue.replaceAll(" ", "T");
+						objectMapUnfoldedValue = objectMapUnfoldedValue.trim().replaceAll(" ", "T");
 					} else if(XSDDatatype.XSDboolean.getURI().toString().equals(datatype)) {
 						if(objectMapUnfoldedValue.equalsIgnoreCase("T") 
 								|| objectMapUnfoldedValue.equalsIgnoreCase("True") ) {
@@ -166,7 +166,6 @@ implements R2RMLElementVisitor {
 									predicateMapUnfoldedValue, objectMapUnfoldedValue
 									, datatype, language, predicateobjectGraphName);							
 						}
-
 					}
 				}
 			} else if(Constants.R2RML_IRI_URI().equalsIgnoreCase(objectMapTermType)) {
@@ -243,24 +242,24 @@ implements R2RMLElementVisitor {
 		return null;
 	}
 
-	public void translateData(R2RMLTriplesMap triplesMap, String sqlQuery) throws Exception {
+	public void generateRDFTriples(R2RMLTriplesMap triplesMap, String sqlQuery) throws Exception {
 		Connection conn = this.properties.openConnection();
 		int timeout = this.properties.getDatabaseTimeout();
 		ResultSet rs = RDBReader.evaluateQuery(sqlQuery, conn, timeout);
 		logger.info("Translating RDB data into RDF instances...");
-		this.translateData(triplesMap, rs);
+		this.generateRDFTriples(triplesMap, rs);
 		rs.close();
 		//conn.close();		
 	}
 
-	public void translateData(R2RMLTriplesMap triplesMap, ResultSet rs) throws SQLException {
+	public void generateRDFTriples(R2RMLTriplesMap triplesMap, ResultSet rows) throws SQLException {
 		Map<String, String> mapXMLDatatype = new HashMap<String, String>();
 		Map<String, Integer> mapDBDatatype = new HashMap<String, Integer>();
 		ResultSetMetaData rsmd = null;
 		DatatypeMapper datatypeMapper = new DatatypeMapper();
 		
 		try {
-			rsmd = rs.getMetaData();
+			rsmd = rows.getMetaData();
 			int columnCount = rsmd.getColumnCount();
 			for (int i=0; i<columnCount; i++) {
 				String columnName = rsmd.getColumnName(i+1);
@@ -275,17 +274,17 @@ implements R2RMLElementVisitor {
 		}
 
 		int i=0;
-		while(rs.next()) {
+		while(rows.next()) {
 			i++;
 			//translate subject map
-			R2RMLSubjectMap subjectMap = triplesMap.getSubjectMap();
+			R2RMLSubjectMap sm = triplesMap.getSubjectMap();
 			String subjectGraphName = null;
-			if(subjectMap != null) {
-				R2RMLGraphMap subjectGraph = subjectMap.getGraphMap();
-				if(subjectGraph != null) {
+			if(sm != null) {
+				R2RMLGraphMap sgm = sm.getGraphMap();
+				if(sgm != null) {
 					//String subjectGraphAlias = subjectGraph.getAlias();
-					subjectGraphName = subjectGraph.getUnfoldedValue(rs, null);
-					if(Constants.R2RML_IRI_URI().equalsIgnoreCase(subjectGraph.getTermType())) {
+					subjectGraphName = sgm.getUnfoldedValue(rows, null);
+					if(Constants.R2RML_IRI_URI().equalsIgnoreCase(sgm.getTermType())) {
 						try {
 							subjectGraphName = ODEMapsterUtility.encodeURI(subjectGraphName);
 						} catch(Exception e) {
@@ -297,11 +296,11 @@ implements R2RMLElementVisitor {
 				//String logicalTableAlias = subjectMap.getAlias();
 				String logicalTableAlias = triplesMap.getLogicalTable().getAlias();
 				
-				String subjectValue = subjectMap.getUnfoldedValue(rs, logicalTableAlias);
+				String subjectValue = sm.getUnfoldedValue(rows, logicalTableAlias);
 				if(subjectValue == null) {
 					logger.debug("null value in the subject triple!");
 				} else {
-					if(Constants.R2RML_IRI_URI().equalsIgnoreCase(subjectMap.getTermType())) {
+					if(Constants.R2RML_IRI_URI().equalsIgnoreCase(sm.getTermType())) {
 						try {
 							subjectValue = ODEMapsterUtility.encodeURI(subjectValue);
 						} catch(Exception e) {
@@ -309,13 +308,13 @@ implements R2RMLElementVisitor {
 						}
 					}
 
-					this.materializer.createSubject(subjectMap.isBlankNode(), subjectValue);
+					this.materializer.createSubject(sm.isBlankNode(), subjectValue);
 
 					//rdf:type
-					Collection<String> classURIs = subjectMap.getClassURIs();
+					Collection<String> classURIs = sm.getClassURIs();
 					if(classURIs != null) {
 						for(String classURI : classURIs) {
-							this.materializer.materializeRDFTypeTriple(subjectValue, classURI, subjectMap.isBlankNode(), subjectGraphName );
+							this.materializer.materializeRDFTypeTriple(subjectValue, classURI, sm.isBlankNode(), subjectGraphName );
 						}				
 					}
 					
@@ -326,13 +325,13 @@ implements R2RMLElementVisitor {
 					for(R2RMLPredicateObjectMap predicateObjectMap : predicateObjectMaps){
 						R2RMLPredicateMap predicateMap = predicateObjectMap.getPredicateMap();
 						String predicateMapUnfoldedValue = 
-								predicateMap.getUnfoldedValue(rs, null);
+								predicateMap.getUnfoldedValue(rows, null);
 
 						R2RMLGraphMap predicateobjectGraph = predicateObjectMap.getGraphMap();
 						String predicateobjectGraphName = null;
 						if(predicateobjectGraph != null ) {
 							predicateobjectGraphName = 
-									predicateobjectGraph.getUnfoldedValue(rs, null);
+									predicateobjectGraph.getUnfoldedValue(rows, null);
 							if(Constants.R2RML_IRI_URI().equalsIgnoreCase(predicateobjectGraph.getTermType())) {
 								try {
 									predicateobjectGraphName = ODEMapsterUtility.encodeURI(predicateobjectGraphName);
@@ -353,14 +352,12 @@ implements R2RMLElementVisitor {
 							//String alias = triplesMap.getLogicalTable().getAlias();
 							
 							String objectMapUnfoldedValue = 
-									objectMap.getUnfoldedValue(rs, alias);
-							this.translateObjectMap(objectMap, rs, mapXMLDatatype
+									objectMap.getUnfoldedValue(rows, alias);
+							this.translateObjectMap(objectMap, rows, mapXMLDatatype
 									, subjectGraphName, predicateobjectGraphName
 									, predicateMapUnfoldedValue, objectMapUnfoldedValue
 									);
-
 						}
-
 
 						//translate refobject map
 						R2RMLRefObjectMap refObjectMap = predicateObjectMap.getRefObjectMap();
@@ -374,10 +371,10 @@ implements R2RMLElementVisitor {
 							R2RMLSubjectMap parentSubjectMap = 
 									refObjectMap.getParentTriplesMap().getSubjectMap();
 							//String parentSubjectValue = parentSubjectMap.getUnfoldedValue(rs, refObjectMap.getAlias());
-							String parentSubjectValue = parentSubjectMap.getUnfoldedValue(rs, joinQueryAlias2);
+							String parentSubjectValue = parentSubjectMap.getUnfoldedValue(rows, joinQueryAlias2);
 
 							if(parentSubjectValue != null) {
-								this.translateObjectMap(parentSubjectMap, rs, mapXMLDatatype, subjectGraphName
+								this.translateObjectMap(parentSubjectMap, rows, mapXMLDatatype, subjectGraphName
 										, predicateobjectGraphName, predicateMapUnfoldedValue, parentSubjectValue
 										);
 							}
@@ -386,7 +383,14 @@ implements R2RMLElementVisitor {
 				}
 			}
 		}
-		logger.info(i + " instances of " + triplesMap.getConceptName() + " retrieved.");
+		
+		String conceptName = triplesMap.getConceptName();
+		if(conceptName == null) {
+			logger.info(i + " instances retrieved.");
+		} else {
+			logger.info(i + " instances of " + triplesMap.getConceptName() + " retrieved.");	
+		}
+		
 
 	}
 	
@@ -395,7 +399,7 @@ implements R2RMLElementVisitor {
 //				new R2RMLElementUnfoldVisitor()).toString();
 		R2RMLElementUnfoldVisitor r2rmlUnfolder = (R2RMLElementUnfoldVisitor) this.unfolder;
 		String sqlQuery = triplesMap.accept(r2rmlUnfolder).toString();
-		this.translateData(triplesMap, sqlQuery);
+		this.generateRDFTriples(triplesMap, sqlQuery);
 		return null;
 	}
 
