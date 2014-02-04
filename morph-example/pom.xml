@@ -86,13 +86,19 @@
 <!-- 		<repository>
 			<id>fpriyatna-dropbox</id>
 			<name>Dropbox Account of fpriyatna</name>
-			<url>https://www.dropbox.com/sh/gqmig405w8a12zd/d3yctUFMyC/repository</url>
+			<url>https://www.dropbox.com/sh/9urddohopn5izkw/injtfdr_si</url>
 		</repository> -->
 
-		<repository>
+<!-- 		<repository>
 			<id>fpriyatna-gdrive</id>
 			<name>GDrive Account of fpriyatna</name>
 			<url>https://drive.google.com/folderview?id=0B2mQi1xrpbmfX054ZlpqSDZCVlE</url>
+		</repository> -->
+
+		<repository>
+			<id>denebola</id>
+			<name>Denebola Repository</name>
+			<url>http://denebola.dia.fi.upm.es/repository/</url>
 		</repository>
 		
   </repositories>  
