@@ -15,6 +15,7 @@ import org.w3c.dom.Element;
 import com.hp.hpl.jena.graph.Node;
 
 import es.upm.fi.dia.oeg.morph.base.ColumnMetaData;
+import es.upm.fi.dia.oeg.morph.base.DBMetaData;
 import es.upm.fi.dia.oeg.morph.base.TableMetaData;
 import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.core.IParseable;
@@ -28,7 +29,8 @@ public abstract class AbstractMappingDocument implements IParseable {
 	private String purpose;
 	protected ConfigurationProperties configurationProperties;
 	private Connection conn;
-	protected Map<String, TableMetaData> tablesMetaData = new HashMap<String, TableMetaData>(); // <tableName, TableMetaData>
+	//protected Map<String, TableMetaData> tablesMetaData = new HashMap<String, TableMetaData>(); // <tableName, TableMetaData>
+	protected DBMetaData dbMetaData = new DBMetaData();
 	protected Map<String, Map<String, ColumnMetaData>> columnsMetaData = new HashMap<String, Map<String,ColumnMetaData>>();//<tableName, <columnName, ColumnMetaData>> 
 	protected String mappingDocumentPath;
 
@@ -334,8 +336,8 @@ public abstract class AbstractMappingDocument implements IParseable {
 		this.conn = conn;
 	}
 
-	public Map<String, TableMetaData> getTablesMetaData() {
-		return tablesMetaData;
+	public DBMetaData getDBMetaData() {
+		return dbMetaData;
 	}
 
 	public Map<String, Map<String, ColumnMetaData>> getColumnsMetaData() {

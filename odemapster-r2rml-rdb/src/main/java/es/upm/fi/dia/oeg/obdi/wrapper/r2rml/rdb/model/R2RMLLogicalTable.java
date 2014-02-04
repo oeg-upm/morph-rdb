@@ -8,11 +8,14 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import scala.Option;
+
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 
 import es.upm.fi.dia.oeg.morph.base.ColumnMetaData;
 import es.upm.fi.dia.oeg.morph.base.Constants;
+import es.upm.fi.dia.oeg.morph.base.DBMetaData;
 import es.upm.fi.dia.oeg.morph.base.TableMetaData;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractLogicalTable;
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType;
@@ -32,8 +35,8 @@ public abstract class R2RMLLogicalTable extends AbstractLogicalTable implements 
 	public void buildMetaData(Connection conn) throws Exception {
 		if(conn != null) {
 			try {
-				Map<String, TableMetaData> tablesMetaData = 
-						owner.getOwner().getTablesMetaData();
+				//Map<String, TableMetaData> tablesMetaData = owner.getOwner().getTablesMetaData();
+				DBMetaData dbMetaData = owner.getOwner().getDBMetaData();
 
 				String tableName = null; 
 				if(this instanceof R2RMLTable) {
@@ -44,8 +47,8 @@ public abstract class R2RMLLogicalTable extends AbstractLogicalTable implements 
 					tableName = "(" + r2rmlSQLQuery.getValue() + ")";
 				}
 				
-				TableMetaData tableMetaData = tablesMetaData.get(tableName);
-				if(tableMetaData == null) {
+				//TableMetaData tableMetaData = tablesMetaData.get(tableName);
+/*				if(tableMetaData == null) {
 					logger.info("building table metadata for " + tableName);
 
 					java.sql.Statement stmt = conn.createStatement();
@@ -55,6 +58,22 @@ public abstract class R2RMLLogicalTable extends AbstractLogicalTable implements 
 					long tableRows = rs.getLong(1);
 					tableMetaData = new TableMetaData(tableName, tableRows);
 					tablesMetaData.put(tableName, tableMetaData);					
+				}
+*/				
+				Option<TableMetaData> optionTableMetaData = dbMetaData.getTableMetaData(tableName);
+				TableMetaData tableMetaData;
+				if(optionTableMetaData.isDefined()) {
+					tableMetaData = optionTableMetaData.get();
+				} else {
+					logger.info("building table metadata for " + tableName);
+
+					java.sql.Statement stmt = conn.createStatement();
+					String query = "SELECT COUNT(*) FROM " + tableName + " T";
+					ResultSet rs = stmt.executeQuery(query);
+					rs.next();
+					long tableRows = rs.getLong(1);
+					tableMetaData = new TableMetaData(tableName, tableRows);
+					dbMetaData.putTableMetaData(tableName, tableMetaData);					
 				}
 				super.tableMetaData = tableMetaData;
 			} catch(Exception e) {
