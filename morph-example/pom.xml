@@ -83,10 +83,17 @@
       <url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-external-libs-local</url>
     </repository>
     
-		<repository>
+<!-- 		<repository>
 			<id>fpriyatna-dropbox</id>
 			<name>Dropbox Account of fpriyatna</name>
 			<url>https://www.dropbox.com/sh/gqmig405w8a12zd/d3yctUFMyC/repository</url>
-		</repository>    
+		</repository> -->
+
+		<repository>
+			<id>fpriyatna-gdrive</id>
+			<name>GDrive Account of fpriyatna</name>
+			<url>https://drive.google.com/folderview?id=0B2mQi1xrpbmfX054ZlpqSDZCVlE</url>
+		</repository>
+		
   </repositories>  
 </project>
