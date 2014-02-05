@@ -14,7 +14,6 @@ import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.exception.R2RMLInvalidTermMapExc
 
 public class R2RMLSubjectMap extends R2RMLTermMap {
 	private static Logger logger = Logger.getLogger(R2RMLSubjectMap.class);
-	
 	private Collection<String> classURIs;
 	private R2RMLGraphMap graphMap;
 

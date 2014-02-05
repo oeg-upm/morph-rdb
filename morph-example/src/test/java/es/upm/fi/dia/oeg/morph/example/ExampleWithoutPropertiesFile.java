@@ -44,11 +44,11 @@ public class ExampleWithoutPropertiesFile {
 		properties.setDatabaseType(databaseType);
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
-		assertTrue("sparql01 done", true);
 		try {
 			R2RMLRunner runner = new R2RMLRunner(properties);
 			runner.readSPARQLFile(queryFile);
 			runner.run();
+			assertTrue("sparql01 done", true);
 		} catch(Exception e) {
 			e.printStackTrace();
 			String errorMessage = "Error occured: " + e.getMessage();

@@ -51,6 +51,9 @@ public class R2RMLRunner extends AbstractRunner {
 			ConfigurationProperties configurationProperties) {
 		super.dataTranslator = new R2RMLElementDataTranslateVisitor(
 				configurationProperties);
+		if(super.unfolder != null) {
+			super.dataTranslator.setUnfolder(unfolder);
+		}
 	}
 
 	@Override

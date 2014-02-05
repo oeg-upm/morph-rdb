@@ -1,0 +1,7 @@
+<http://mappingpedia.linkeddata.es/resources/Person/B1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Person> .
+<http://mappingpedia.linkeddata.es/resources/Person/B2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Person> .
+<http://mappingpedia.linkeddata.es/resources/Person/B3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Person> .
+<http://mappingpedia.linkeddata.es/resources/Person/B4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Person> .
+<http://mappingpedia.linkeddata.es/resources/Sport/100> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Sport> .
+<http://mappingpedia.linkeddata.es/resources/Sport/200> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Sport> .
+<http://mappingpedia.linkeddata.es/resources/Sport/300> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Sport> .

@@ -28,7 +28,9 @@ public abstract class AbstractUnfolder {
 	
 	protected abstract Collection<String> unfold(Set<ILogicalQuery> logicalQueries, AbstractMappingDocument mapping) throws Exception;
 
-	public abstract String unfoldConceptMapping(AbstractConceptMapping mapping) throws Exception;
+	public abstract String unfold(AbstractConceptMapping cm) throws Exception;
+	
+	public abstract String unfoldSubject(AbstractConceptMapping cm) throws Exception;
 	
 	protected abstract Collection<String> unfold(AbstractMappingDocument mappingDocument) throws Exception;
 

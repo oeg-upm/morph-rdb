@@ -1,7 +1,9 @@
 package es.upm.fi.dia.oeg.obdi.core.engine;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 
 import org.apache.log4j.Logger;
 
@@ -9,6 +11,7 @@ import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.core.exception.InvalidConfigurationPropertiesException;
 import es.upm.fi.dia.oeg.obdi.core.exception.PostProcessorException;
 import es.upm.fi.dia.oeg.obdi.core.materializer.AbstractMaterializer;
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
 
 public abstract class AbstractDataTranslator {
@@ -55,9 +58,18 @@ public abstract class AbstractDataTranslator {
 			throws PostProcessorException;
 	public abstract void setMaterializer(AbstractMaterializer materializer);
 	public abstract void translateData(AbstractMappingDocument mappingDocument) throws Exception;
-
+	public abstract void generateRDFTriples(AbstractConceptMapping cm, String sqlQuery) throws Exception;
+	public abstract void generateSubjects(AbstractConceptMapping cm, String sqlQuery) throws Exception;
+	
 	public void setUnfolder(AbstractUnfolder unfolder) {
 		this.unfolder = unfolder;
 	}
+
+	public abstract void translateData(Collection<AbstractConceptMapping> triplesMaps)
+			throws Exception;
+	
+//	public void setUnfolder(AbstractUnfolder unfolder) {
+//		this.unfolder = unfolder;
+//	}
 	
 }

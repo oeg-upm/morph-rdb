@@ -37,7 +37,7 @@ public class R2RMLTermMap implements R2RMLElement
 	private String languageTag;
 	private String datatype;
 
-	R2RMLTriplesMap owner;
+	private R2RMLTriplesMap owner;
 
 	private ConfigurationProperties configurationProperties;
 
@@ -480,6 +480,10 @@ public class R2RMLTermMap implements R2RMLElement
 
 	public String getColumnTypeName() {
 		return columnTypeName;
+	}
+
+	public R2RMLTriplesMap getOwner() {
+		return owner;
 	}
 
 

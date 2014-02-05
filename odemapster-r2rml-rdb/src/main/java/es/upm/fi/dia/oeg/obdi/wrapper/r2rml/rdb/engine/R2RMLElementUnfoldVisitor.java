@@ -39,14 +39,13 @@ import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTriplesMap;
 
 public class R2RMLElementUnfoldVisitor extends AbstractUnfolder implements R2RMLElementVisitor {
 	private Map<Object, Collection<String>> mapTermMapColumnsAliases = new HashMap<Object, Collection<String>>();
+	private static Logger logger = Logger.getLogger(R2RMLElementUnfoldVisitor.class);
+	private Map<R2RMLRefObjectMap, String> mapRefObjectMapAlias = new HashMap<R2RMLRefObjectMap, String>();
+	//private ConfigurationProperties configurationProperties;
 	
 	public R2RMLElementUnfoldVisitor() {
 		super();
 	}
-
-	private static Logger logger = Logger.getLogger(R2RMLElementUnfoldVisitor.class);
-	private Map<R2RMLRefObjectMap, String> mapRefObjectMapAlias = new HashMap<R2RMLRefObjectMap, String>();
-	//private ConfigurationProperties configurationProperties;
 	
 	public Map<R2RMLRefObjectMap, String> getMapRefObjectMapAlias() {
 		return mapRefObjectMapAlias;
@@ -70,9 +69,11 @@ public class R2RMLElementUnfoldVisitor extends AbstractUnfolder implements R2RML
 		return result;
 	}
 
-	private SQLQuery unfoldSubjectMap(R2RMLTriplesMap triplesMap) {
-		R2RMLLogicalTable logicalTable = triplesMap.getLogicalTable();
-		R2RMLSubjectMap subjectMap = triplesMap.getSubjectMap();
+	private SQLQuery unfoldSubjectMap(R2RMLSubjectMap subjectMap
+			, R2RMLLogicalTable logicalTable) {
+//		R2RMLLogicalTable logicalTable = triplesMap.getLogicalTable();
+//		R2RMLSubjectMap subjectMap = triplesMap.getSubjectMap();
+		
 		SQLQuery result = new SQLQuery();
 		Collection<ZSelectItem> resultSelectItems = new HashSet<ZSelectItem>();
 		
@@ -124,30 +125,27 @@ public class R2RMLElementUnfoldVisitor extends AbstractUnfolder implements R2RML
 		return result;
 	}
 
-	public SQLQuery visit(R2RMLTriplesMap triplesMap) throws Exception {
+	public SQLQuery unfold(R2RMLLogicalTable logicalTable, R2RMLSubjectMap subjectMap
+			, Collection<R2RMLPredicateObjectMap> poms) throws Exception {
+		R2RMLTriplesMap triplesMap = subjectMap.getOwner();
 		logger.info("unfolding triplesMap : " + triplesMap);
 
-		R2RMLSubjectMap subjectMap = triplesMap.getSubjectMap();
 		//SQLQuery result = new SQLQuery();
 		
 		//Collection<ZSelectItem> resultSelectItems = new HashSet<ZSelectItem>();
 
-		//unfold logical table
-		R2RMLLogicalTable logicalTable = triplesMap.getLogicalTable();
-		String logicalTableAlias = null;
-
 		//unfold subjectMap
-		SQLQuery result = this.unfoldSubjectMap(triplesMap);
+		//R2RMLLogicalTable logicalTable = triplesMap.getLogicalTable();
+		SQLQuery result = this.unfoldSubjectMap(subjectMap, logicalTable);
 		String databaseType = triplesMap.getOwner().getConfigurationProperties().getDatabaseType();
 		result.setDatabaseType(databaseType);
 		
 		//logicalTableAlias = subjectMap.getAlias();
-		logicalTableAlias = triplesMap.getLogicalTable().getAlias();
-
-		Collection<R2RMLPredicateObjectMap> predicateObjectMaps = 
-				triplesMap.getPredicateObjectMaps();
-		if(predicateObjectMaps != null) {
-			for(R2RMLPredicateObjectMap predicateObjectMap : predicateObjectMaps) {
+		//String logicalTableAlias = triplesMap.getLogicalTable().getAlias();
+		String logicalTableAlias = logicalTable.getAlias();
+		
+		if(poms != null) {
+			for(R2RMLPredicateObjectMap predicateObjectMap : poms) {
 				//unfold predicateMap
 				R2RMLPredicateMap predicateMap = predicateObjectMap.getPredicateMap();
 				Collection<String> predicateMapColumnsString = predicateMap.getDatabaseColumnsString();
@@ -270,6 +268,16 @@ public class R2RMLElementUnfoldVisitor extends AbstractUnfolder implements R2RML
 //		}
 		logger.info(triplesMap + " unfolded = \n" + result);
 
+		return result;		
+	}
+	
+	public SQLQuery visit(R2RMLTriplesMap triplesMap) throws Exception {
+		R2RMLLogicalTable logicalTable = triplesMap.getLogicalTable();
+		R2RMLSubjectMap subjectMap = triplesMap.getSubjectMap();
+		Collection<R2RMLPredicateObjectMap> predicateObjectMaps = 
+				triplesMap.getPredicateObjectMaps();
+		
+		SQLQuery result = this.unfold(logicalTable, subjectMap, predicateObjectMaps);
 		return result;
 	}
 
@@ -316,7 +324,7 @@ public class R2RMLElementUnfoldVisitor extends AbstractUnfolder implements R2RML
 	}
 
 	@Override
-	public String unfoldConceptMapping(AbstractConceptMapping triplesMap)
+	public String unfold(AbstractConceptMapping triplesMap)
 			throws Exception {
 		return this.visit((R2RMLTriplesMap) triplesMap).toString();
 	}
@@ -338,6 +346,19 @@ public class R2RMLElementUnfoldVisitor extends AbstractUnfolder implements R2RML
 
 	public Collection<String> getAliases(Object termMapOrRefObjectMap) {
 		return this.mapTermMapColumnsAliases.get(termMapOrRefObjectMap);
+	}
+
+	@Override
+	public String unfoldSubject(AbstractConceptMapping cm)
+			throws Exception {
+		R2RMLTriplesMap triplesMap = (R2RMLTriplesMap) cm;
+		R2RMLLogicalTable logicalTable = triplesMap.getLogicalTable();
+		R2RMLSubjectMap subjectMap = triplesMap.getSubjectMap();
+		Collection<R2RMLPredicateObjectMap> predicateObjectMaps = 
+				triplesMap.getPredicateObjectMaps();
+		
+		SQLQuery result = this.unfold(logicalTable, subjectMap, null);
+		return result.toString();
 	}
 
 }

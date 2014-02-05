@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-import com.hp.hpl.jena.graph.query.Expression.Constant;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryFactory;
 
@@ -19,6 +19,7 @@ import es.upm.fi.dia.oeg.newrqr.RewriterWrapper;
 import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.core.DBUtility;
 import es.upm.fi.dia.oeg.obdi.core.materializer.AbstractMaterializer;
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
 import es.upm.fi.dia.oeg.obdi.core.sql.IQuery;
 
@@ -30,6 +31,7 @@ public abstract class AbstractRunner {
 	//protected AbstractParser parser;
 
 	//protected Query sparqQuery = null;
+	protected AbstractUnfolder unfolder = null;
 	protected AbstractDataTranslator dataTranslator;
 	private String queryTranslatorClassName = null;
 	private IQueryTranslator queryTranslator;
@@ -63,6 +65,9 @@ public abstract class AbstractRunner {
 //			sparqQuery = QueryFactory.read(queryFilePath);
 //		}
 
+		//unfolder
+		this.unfolder = this.createUnfolder();
+		
 		//data translator
 		this.createDataTranslator(this.configurationProperties);
 
@@ -375,15 +380,15 @@ public abstract class AbstractRunner {
 	}
 
 	private void materializeMappingDocuments(String outputFileName
-			, AbstractMappingDocument translationResultMappingDocument) throws Exception {
+			, AbstractMappingDocument md) throws Exception {
 		long start = System.currentTimeMillis();
 
 		String rdfLanguage = this.configurationProperties.getRdfLanguage();
 		if(rdfLanguage == null) {
 			rdfLanguage = Constants.OUTPUT_FORMAT_RDFXML();
 		}
-
-		//preparing output file
+		
+		//PREPARING OUTPUT FILE
 		//OutputStream fileOut = new FileOutputStream (outputFileName);
 		//Writer out = new OutputStreamWriter (fileOut, "UTF-8");
 		String jenaMode = configurationProperties.getJenaMode();
@@ -394,9 +399,17 @@ public abstract class AbstractRunner {
 		}
 		this.dataTranslator.setMaterializer(materializer);
 
-		//materializing model
+		//MATERIALIZING MODEL
 		long startGeneratingModel = System.currentTimeMillis();
-		this.dataTranslator.translateData(translationResultMappingDocument);
+//		this.dataTranslator.translateData(md);
+		Collection<AbstractConceptMapping> cms = md.getConceptMappings();
+		//this.dataTranslator.translateData(cms);
+		for(AbstractConceptMapping cm:cms) {
+			String sqlQuery = this.unfolder.unfold(cm);
+			//this.dataTranslator.generateSubjects(cm, sqlQuery);
+			this.dataTranslator.generateRDFTriples(cm, sqlQuery);
+			
+		}
 		this.dataTranslator.materializer.materialize();
 
 		//		if(rdfLanguage.equalsIgnoreCase(R2OConstants.OUTPUT_FORMAT_RDFXML)) {
@@ -440,6 +453,12 @@ public abstract class AbstractRunner {
 
 	//	public abstract String getQueryTranslatorClassName();
 
+	public Map<AbstractConceptMapping, Collection<String>> getSubjects(String classURI) {
+		Map<AbstractConceptMapping, Collection<String>> result = new HashMap<AbstractConceptMapping, Collection<String>>();
+		
+		return result;
+	}
+	
 	public String run()
 			throws Exception {
 		String status = null;
