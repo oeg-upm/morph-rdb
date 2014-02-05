@@ -2,10 +2,10 @@
 -- version 4.0.4.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Nov 13, 2013 at 04:18 
--- Server version: 5.6.12
--- PHP Version: 5.5.3
+-- Servidor: localhost
+-- Tiempo de generación: 05-02-2014 a las 11:24:56
+-- Versión del servidor: 5.6.12
+-- Versión de PHP: 5.5.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `morph_example`
+-- Base de datos: `morph_example`
 --
 CREATE DATABASE IF NOT EXISTS `morph_example` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `morph_example`;
@@ -25,7 +25,7 @@ USE `morph_example`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Sport`
+-- Estructura de tabla para la tabla `Sport`
 --
 
 CREATE TABLE IF NOT EXISTS `Sport` (
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `Sport` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Sport`
+-- Volcado de datos para la tabla `Sport`
 --
 
 INSERT INTO `Sport` (`id`, `name`, `code`, `type`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `Sport` (`id`, `name`, `code`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Student`
+-- Estructura de tabla para la tabla `Student`
 --
 
 CREATE TABLE IF NOT EXISTS `Student` (
@@ -59,26 +59,27 @@ CREATE TABLE IF NOT EXISTS `Student` (
   `webpage` varchar(100) DEFAULT NULL,
   `phone` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `suffix` varchar(8) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Sport` (`sport`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Student`
+-- Volcado de datos para la tabla `Student`
 --
 
-INSERT INTO `Student` (`id`, `name`, `sport`, `status`, `webpage`, `phone`, `email`) VALUES
-('B1', 'Paul', 100, 'active', NULL, '777-3426', NULL),
-('B2', 'John', 200, 'active', NULL, NULL, 'john@acd.edu'),
-('B3', 'George', 300, 'active', 'www.george.edu', NULL, NULL),
-('B4', 'Ringo', NULL, 'active', 'www.starr.edu', '888-4537', 'ringo@acd.edu');
+INSERT INTO `Student` (`id`, `name`, `sport`, `status`, `webpage`, `phone`, `email`, `suffix`) VALUES
+('B1', 'Paul', 100, 'active', NULL, '777-3426', NULL, 'Jr.'),
+('B2', 'John', 200, 'active', NULL, NULL, 'john@acd.edu', 'Sr.'),
+('B3', 'George', 300, 'active', 'www.george.edu', NULL, NULL, 'Sr. '),
+('B4', 'Ringo', NULL, 'active', 'www.starr.edu', '888-4537', 'ringo@acd.edu', 'Jr. ');
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `Student`
+-- Filtros para la tabla `Student`
 --
 ALTER TABLE `Student`
   ADD CONSTRAINT `Student_ibfk_1` FOREIGN KEY (`sport`) REFERENCES `Sport` (`id`);
