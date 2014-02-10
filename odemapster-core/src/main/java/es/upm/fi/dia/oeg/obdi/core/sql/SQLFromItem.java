@@ -52,14 +52,16 @@ public class SQLFromItem extends ZFromItem implements SQLLogicalTable {
 		if(alias != null) {
 			this.setAlias("");
 			if(this.form == LogicalTableType.TABLE_NAME) {
-				String enclosedCharacter = Constants.getEnclosedCharacter(dbType);
-				String tableName;
-				if(enclosedCharacter == null || enclosedCharacter.equals("")) {
-					tableName = super.toString().trim();
-				} else {
-					tableName = enclosedCharacter + super.toString().trim() + enclosedCharacter;
-				}
+//				String enclosedCharacter = Constants.getEnclosedCharacter(dbType);
+//				String tableName;
+//				if(enclosedCharacter == null || enclosedCharacter.equals("")) {
+//					tableName = super.toString().trim();
+//				} else {
+//					tableName = enclosedCharacter + super.toString().trim() + enclosedCharacter;
+//				}
 				//tableName = R2RMLUtility.replaceNameWithSpaceChars(tableName);
+				
+				String tableName = super.toString().trim();
 				result = tableName + " " + alias;
 			} else {
 				result = "(" + super.toString() + ") " + alias;

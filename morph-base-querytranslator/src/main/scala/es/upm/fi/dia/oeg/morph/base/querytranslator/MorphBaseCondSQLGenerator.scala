@@ -84,7 +84,9 @@ abstract class MorphBaseCondSQLGenerator(
 		
 		var exps : Set[ZExpression] = Set.empty;
 		
-		val mapColumnMetaData = cm.getLogicalTable().getColumnsMetaData();
+		//val mapColumnMetaData = cm.getLogicalTable().getColumnsMetaData();
+		val tableMetaData = cm.getLogicalTable().getTableMetaData();
+		
 		val isRDFTypeStatement = RDF.`type`.getURI().equals(predicateURI);
 
 		val pms = cm.getPropertyMappings(predicateURI);
@@ -209,8 +211,12 @@ abstract class MorphBaseCondSQLGenerator(
 									val betaColumn = betaColumnConstant.column;
 	
 									val cmd = {
-										if(mapColumnMetaData != null) {
-											mapColumnMetaData.get(betaColumn);	
+										if(tableMetaData != null ) {
+										  if(tableMetaData.getColumnMetaData(betaColumn).isDefined) {
+										    tableMetaData.getColumnMetaData(betaColumn).get
+										  } else {
+										    null
+										  }
 										} else {
 										  null
 										}

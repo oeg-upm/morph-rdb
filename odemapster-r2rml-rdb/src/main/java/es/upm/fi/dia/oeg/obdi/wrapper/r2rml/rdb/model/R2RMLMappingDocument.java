@@ -62,9 +62,9 @@ public class R2RMLMappingDocument extends AbstractMappingDocument implements R2R
 						configurationProperties.getDatabaseType();
 				if(databaseName != null) {
 					logger.debug("building metadata.");
-					super.dbMetaData = DBMetaData.buildTablesMetaData(conn, databaseName, databaseType);
+					super.dbMetaData = DBMetaData.buildDBMetaData(conn, databaseName, databaseType);
 					//super.columnsMetaData = ColumnMetaData.buildColumnsMetaData(conn, databaseName, databaseType);
-					super.columnsMetaData = ColumnMetaDataFactory.buildColumnsMetaData(conn, databaseName, databaseType);
+					//super.columnsMetaData = ColumnMetaDataFactory.buildColumnsMetaData(conn, databaseName, databaseType);
 				}
 			}
 		}

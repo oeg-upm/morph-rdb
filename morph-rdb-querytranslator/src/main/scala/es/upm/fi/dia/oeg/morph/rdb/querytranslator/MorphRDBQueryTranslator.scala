@@ -22,7 +22,7 @@ import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
 import es.upm.fi.dia.oeg.obdi.core.sql.IQuery
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.R2RMLUtility
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElementUnfoldVisitor
+import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLUnfolder
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLRefObjectMap
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap
@@ -50,7 +50,7 @@ class MorphRDBQueryTranslator()
 	var mapTripleAlias:Map[Triple, String] = Map.empty;
 	var mapTemplateMatcher:Map[String, Matcher] = Map.empty;
 	var mapTemplateAttributes:Map[String, java.util.List[String]] = Map.empty;
-	val unfolder = new R2RMLElementUnfoldVisitor();
+	val unfolder = new R2RMLUnfolder();
 
 	override def transIRI(node:Node) : List[ZExp] = {
 		val cms = mapInferredTypes(node);

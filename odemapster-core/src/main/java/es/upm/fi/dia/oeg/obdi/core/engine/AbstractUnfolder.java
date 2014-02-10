@@ -8,6 +8,7 @@ import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.obdi.core.ILogicalQuery;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
+import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery;
 
 public abstract class AbstractUnfolder {
 	//protected ConfigurationProperties properties;
@@ -26,13 +27,15 @@ public abstract class AbstractUnfolder {
 //		this.owner = owner;
 	}
 	
-	protected abstract Collection<String> unfold(Set<ILogicalQuery> logicalQueries, AbstractMappingDocument mapping) throws Exception;
+	protected abstract Collection<SQLQuery> unfold(Set<ILogicalQuery> logicalQueries, AbstractMappingDocument mapping) throws Exception;
 
-	public abstract String unfold(AbstractConceptMapping cm) throws Exception;
+	public abstract SQLQuery unfoldConceptMapping(AbstractConceptMapping cm) throws Exception;
 	
-	public abstract String unfoldSubject(AbstractConceptMapping cm) throws Exception;
+	public abstract SQLQuery unfoldConceptMapping(AbstractConceptMapping cm, String subjectURI) throws Exception;
 	
-	protected abstract Collection<String> unfold(AbstractMappingDocument mappingDocument) throws Exception;
+	public abstract SQLQuery unfoldSubject(AbstractConceptMapping cm) throws Exception;
+	
+	protected abstract Collection<SQLQuery> unfoldMappingDocument(AbstractMappingDocument mappingDocument);
 
 	public void setDbType(String dbType) {
 		this.dbType = dbType;

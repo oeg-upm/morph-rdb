@@ -24,8 +24,12 @@ public abstract class AbstractMaterializer {
 	public abstract void materializeRDFTypeTriple(String subjectURI, String conceptName, boolean isBlankNodeSubject, String graph);
 	public abstract void materialize() throws IOException;
 	
-	public static AbstractMaterializer create(
-			String rdfLanguage, String outputFileName, String jenaMode) throws IOException {
+	public static AbstractMaterializer create(String rdfLanguage, String outputFileName
+			, String jenaMode) throws IOException {
+		
+		if(rdfLanguage == null) {
+			rdfLanguage = Constants.OUTPUT_FORMAT_NTRIPLE();
+		}
 		
 		if(rdfLanguage.equalsIgnoreCase(Constants.OUTPUT_FORMAT_NTRIPLE())) {
 			Model model = null;

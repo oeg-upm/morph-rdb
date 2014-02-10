@@ -30,8 +30,8 @@ public abstract class AbstractMappingDocument implements IParseable {
 	protected ConfigurationProperties configurationProperties;
 	private Connection conn;
 	//protected Map<String, TableMetaData> tablesMetaData = new HashMap<String, TableMetaData>(); // <tableName, TableMetaData>
-	protected DBMetaData dbMetaData = new DBMetaData();
-	protected Map<String, Map<String, ColumnMetaData>> columnsMetaData = new HashMap<String, Map<String,ColumnMetaData>>();//<tableName, <columnName, ColumnMetaData>> 
+	protected DBMetaData dbMetaData = null;
+	//protected Map<String, Map<String, ColumnMetaData>> columnsMetaData = new HashMap<String, Map<String,ColumnMetaData>>();//<tableName, <columnName, ColumnMetaData>> 
 	protected String mappingDocumentPath;
 
 	protected Collection<AbstractConceptMapping> classMappings;
@@ -340,9 +340,9 @@ public abstract class AbstractMappingDocument implements IParseable {
 		return dbMetaData;
 	}
 
-	public Map<String, Map<String, ColumnMetaData>> getColumnsMetaData() {
-		return columnsMetaData;
-	}
+//	public Map<String, Map<String, ColumnMetaData>> getColumnsMetaData() {
+//		return columnsMetaData;
+//	}
 
 	protected void setMappingDocumentPrefixMap(
 			Map<String, String> mappingDocumentPrefixMap) {

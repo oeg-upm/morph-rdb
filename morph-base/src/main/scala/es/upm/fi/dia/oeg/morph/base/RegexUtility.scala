@@ -5,7 +5,7 @@ import scala.collection.JavaConversions._
 import java.util.HashMap
 
 object RegexUtility {
-	val patternString1 = "\\{\\w+\\}";
+	val patternString1 = "\\{\"*\\w+\\\"*}";
 	val TemplatePattern1 = patternString1.r;
   
 	def getTemplateMatching(inputTemplateString: String, inputURIString : String) : HashMap[String, String] = {

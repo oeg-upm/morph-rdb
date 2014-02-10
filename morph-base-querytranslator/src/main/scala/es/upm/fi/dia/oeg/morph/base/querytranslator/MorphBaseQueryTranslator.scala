@@ -219,7 +219,7 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 			  case bgp:OpBGP => {
 				if(bgp.getPattern().size() == 1) {
 					val tp = bgp.getPattern().get(0);
-					this.transTp(tp);
+					this.transTP(tp);
 				} else {
 					this.transBGP(bgp);	
 				}			    
@@ -274,7 +274,7 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 		val transBGPSQL = {
 			if(MorphQueryTranslatorUtility.isTriplePattern(bgp)) { //triple pattern
 				val tp = bgp.getPattern().getList().get(0);
-				this.transTp(tp);
+				this.transTP(tp);
 			} else { //bgp pattern
 				val triples = bgp.getPattern().getList().toList;
 				val isSTG = MorphQueryTranslatorUtility.isSTG(bgp);
@@ -726,12 +726,14 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 		transUnion;
 	}
 
-	def transTp(tp:Triple ) : IQuery  = {
+	def transTP(tp:Triple ) : IQuery  = {
 		val tpSubject = tp.getSubject();
 		val tpPredicate = tp.getPredicate();
 		val tpObject = tp.getObject();
+		val skipRDFTypeStatement = false;
 		val result = {
-			if(tpPredicate.isURI() && RDF.`type`.getURI().equals(tpPredicate.getURI()) && tpObject.isURI()) {
+			if(tpPredicate.isURI() && RDF.`type`.getURI().equals(tpPredicate.getURI()) 
+			    && tpObject.isURI() && skipRDFTypeStatement) {
 				null;
 			} else {
 				val cmsOption = this.mapInferredTypes.get(tpSubject);
@@ -794,8 +796,9 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 			} else if(tpPredicate.isVariable()) {
 				val mappingDocumentURL = this.getMappingDocumentURL();
 				val triplesMapResource = cm.getResource();
-				val columnsMetaData = cm.getLogicalTable().getColumnsMetaData();
-				val tpBounder = new TriplePatternPredicateBounder(mappingDocumentURL, columnsMetaData);
+				//val columnsMetaData = cm.getLogicalTable().getColumnsMetaData();
+				val tableMetaData = cm.getLogicalTable().getTableMetaData();
+				val tpBounder = new TriplePatternPredicateBounder(mappingDocumentURL, tableMetaData);
 				val boundedTriplePatterns = tpBounder.expandUnboundedPredicateTriplePattern(tp, triplesMapResource);
 				logger.debug("boundedTriplePatterns = " + boundedTriplePatterns);
 				

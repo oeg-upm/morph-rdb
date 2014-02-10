@@ -22,6 +22,7 @@ import es.upm.fi.dia.oeg.obdi.core.materializer.AbstractMaterializer;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
 import es.upm.fi.dia.oeg.obdi.core.sql.IQuery;
+import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery;
 
 public abstract class AbstractRunner {
 	private static Logger logger = Logger.getLogger(AbstractRunner.class);
@@ -379,39 +380,22 @@ public abstract class AbstractRunner {
 		}
 	}
 
-	private void materializeMappingDocuments(String outputFileName
-			, AbstractMappingDocument md) throws Exception {
-		long start = System.currentTimeMillis();
-
-		String rdfLanguage = this.configurationProperties.getRdfLanguage();
-		if(rdfLanguage == null) {
-			rdfLanguage = Constants.OUTPUT_FORMAT_RDFXML();
-		}
-		
+	private void preMaterializeProcess(String outputFileName) throws Exception {
 		//PREPARING OUTPUT FILE
 		//OutputStream fileOut = new FileOutputStream (outputFileName);
 		//Writer out = new OutputStreamWriter (fileOut, "UTF-8");
+		String rdfLanguage = this.configurationProperties.getRdfLanguage();
 		String jenaMode = configurationProperties.getJenaMode();
-		AbstractMaterializer materializer = AbstractMaterializer.create(rdfLanguage, outputFileName, jenaMode);
+		AbstractMaterializer materializer = AbstractMaterializer.create(
+				rdfLanguage, outputFileName, jenaMode);
 		Map<String, String> mappingDocumentPrefixMap = this.mappingDocument.getMappingDocumentPrefixMap(); 
 		if(mappingDocumentPrefixMap != null) {
 			materializer.setModelPrefixMap(mappingDocumentPrefixMap);
 		}
 		this.dataTranslator.setMaterializer(materializer);
-
-		//MATERIALIZING MODEL
-		long startGeneratingModel = System.currentTimeMillis();
-//		this.dataTranslator.translateData(md);
-		Collection<AbstractConceptMapping> cms = md.getConceptMappings();
-		//this.dataTranslator.translateData(cms);
-		for(AbstractConceptMapping cm:cms) {
-			String sqlQuery = this.unfolder.unfold(cm);
-			//this.dataTranslator.generateSubjects(cm, sqlQuery);
-			this.dataTranslator.generateRDFTriples(cm, sqlQuery);
-			
-		}
-		this.dataTranslator.materializer.materialize();
-
+	}
+	
+	private void postMaterialize() {
 		//		if(rdfLanguage.equalsIgnoreCase(R2OConstants.OUTPUT_FORMAT_RDFXML)) {
 		//			if(model == null) {
 		//				logger.warn("Model was empty!");
@@ -420,25 +404,45 @@ public abstract class AbstractRunner {
 		//				model.close();				
 		//			}
 		//		}
-
-		long endGeneratingModel = System.currentTimeMillis();
-		long durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
-		logger.info("Materializing Mapping Document time was "+(durationGeneratingModel)+" s.");
-
+		
 		//cleaning up
 		try {
 			//out.flush(); out.close();
 			//fileOut.flush(); fileOut.close();
+			DBUtility.closeConnection(this.conn, this.getClass().getName());
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 
 		}
+	}
+	
+	private void materializeMappingDocuments(String outputFileName, AbstractMappingDocument md) 
+			throws Exception {
+		long start = System.currentTimeMillis();
+		
+		//PREMATERIALIZE PROCESS
+		this.preMaterializeProcess(outputFileName);
 
-		DBUtility.closeConnection(this.conn, this.getClass().getName());
-		long end = System.currentTimeMillis();
-		long duration = (end-start) / 1000;
-		logger.info("Execution time was "+(duration)+" s.");
+		//MATERIALIZING MODEL
+		long startGeneratingModel = System.currentTimeMillis();
+//		this.dataTranslator.translateData(md);
+		Collection<AbstractConceptMapping> cms = md.getConceptMappings();
+		//this.dataTranslator.translateData(cms);
+		for(AbstractConceptMapping cm:cms) {
+			SQLQuery sqlQuery = this.unfolder.unfoldConceptMapping(cm);
+			//this.dataTranslator.generateSubjects(cm, sqlQuery);
+			this.dataTranslator.generateRDFTriples(cm, sqlQuery.toString());
+			
+		}
+		this.dataTranslator.materializer.materialize();
+
+		//POSTMATERIALIZE PROCESS
+		this.postMaterialize();
+
+		long endGeneratingModel = System.currentTimeMillis();
+		long durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
+		logger.info("Materializing Mapping Document time was "+(durationGeneratingModel)+" s.");
 	}
 
 
@@ -453,12 +457,62 @@ public abstract class AbstractRunner {
 
 	//	public abstract String getQueryTranslatorClassName();
 
-	public Map<AbstractConceptMapping, Collection<String>> getSubjects(String classURI) {
-		Map<AbstractConceptMapping, Collection<String>> result = new HashMap<AbstractConceptMapping, Collection<String>>();
-		
-		return result;
-	}
 	
+	public void materializeSubjects(
+			String classURI, String outputFileName) throws Exception {
+		//Map<AbstractConceptMapping, Collection<String>> result = new HashMap<AbstractConceptMapping, Collection<String>>();
+		long startGeneratingModel = System.currentTimeMillis();
+		
+		//PREMATERIALIZE PROCESS
+		this.preMaterializeProcess(outputFileName);
+
+		//MATERIALIZING MODEL
+		
+		Collection<AbstractConceptMapping> cms = 
+				this.mappingDocument.getConceptMappingsByConceptName(classURI);
+		for(AbstractConceptMapping cm:cms) {
+			SQLQuery sqlQuery = this.unfolder.unfoldConceptMapping(cm);
+			this.dataTranslator.generateSubjects(cm, sqlQuery.toString());
+		}
+		this.dataTranslator.materializer.materialize();
+
+		//POSTMATERIALIZE PROCESS
+		this.postMaterialize();
+
+		long endGeneratingModel = System.currentTimeMillis();
+		long durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
+		logger.info("Materializing Subjects time was "+(durationGeneratingModel)+" s.");
+		
+		//return result;
+	}
+
+	public void materializeSubjectDetails(
+			String subjectURI, String classURI, String outputFileName) throws Exception {
+		//Map<AbstractConceptMapping, Collection<String>> result = new HashMap<AbstractConceptMapping, Collection<String>>();
+		long startGeneratingModel = System.currentTimeMillis();
+		
+		//PREMATERIALIZE PROCESS
+		this.preMaterializeProcess(outputFileName);
+
+		//MATERIALIZING MODEL
+		Collection<AbstractConceptMapping> cms = 
+				this.mappingDocument.getConceptMappingsByConceptName(classURI);
+		for(AbstractConceptMapping cm:cms) {
+			SQLQuery sqlQuery = this.unfolder.unfoldConceptMapping(cm);
+			this.dataTranslator.generateSubjects(cm, sqlQuery.toString());
+		}
+		this.dataTranslator.materializer.materialize();
+
+		//POSTMATERIALIZE PROCESS
+		this.postMaterialize();
+
+		long endGeneratingModel = System.currentTimeMillis();
+		long durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
+		logger.info("Materializing Subjects time was "+(durationGeneratingModel)+" s.");
+		
+		//return result;
+	}
+
 	public String run()
 			throws Exception {
 		String status = null;

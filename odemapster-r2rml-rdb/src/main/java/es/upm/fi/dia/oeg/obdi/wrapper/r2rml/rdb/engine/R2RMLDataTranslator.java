@@ -14,6 +14,7 @@ import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.DatatypeMapper;
+import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
 import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.core.DBUtility;
 import es.upm.fi.dia.oeg.obdi.core.ODEMapsterUtility;
@@ -25,6 +26,7 @@ import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslatorException;
 import es.upm.fi.dia.oeg.obdi.core.materializer.AbstractMaterializer;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
+import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLGraphMap;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLLogicalTable;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLMappingDocument;
@@ -37,11 +39,11 @@ import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap.TermMapType;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTriplesMap;
 
-public class R2RMLElementDataTranslateVisitor extends AbstractDataTranslator 
+public class R2RMLDataTranslator extends AbstractDataTranslator 
 implements R2RMLElementVisitor {
-	private static Logger logger = Logger.getLogger(R2RMLElementUnfoldVisitor.class);
+	private static Logger logger = Logger.getLogger(R2RMLUnfolder.class);
 	
-	public R2RMLElementDataTranslateVisitor(
+	public R2RMLDataTranslator(
 			ConfigurationProperties properties) {
 		super(properties);
 /*		AbstractUnfolder unfolder = new R2RMLElementUnfoldVisitor();
@@ -50,7 +52,7 @@ implements R2RMLElementVisitor {
 		this.setUnfolder(unfolder);*/
 	}
 	
-	public R2RMLElementDataTranslateVisitor(String configurationDirectory
+	public R2RMLDataTranslator(String configurationDirectory
 			, String configurationFile) {
 		super(configurationDirectory, configurationFile);
 /*		AbstractUnfolder unfolder = new R2RMLElementUnfoldVisitor();
@@ -97,7 +99,7 @@ implements R2RMLElementVisitor {
 				mappingDocument.getConceptMappings();
 		if(triplesMaps != null) {
 			this.translateData(triplesMaps);
-			DBUtility.closeConnection(conn, R2RMLElementDataTranslateVisitor.class.getName());
+			DBUtility.closeConnection(conn, R2RMLDataTranslator.class.getName());
 		}
 		//this.materializer.materialize();
 	}
@@ -127,7 +129,8 @@ implements R2RMLElementVisitor {
 				if(objectMap.getTermMapType() == TermMapType.COLUMN) {
 					if(datatype == null) {
 						String columnName = objectMap.getColumnName();
-						datatype = mapColumnType.get(columnName);
+						//datatype = mapColumnType.get(columnName);
+						datatype = this.getXMLDatatype(columnName, mapColumnType);
 					}
 				}
 				
@@ -225,6 +228,7 @@ implements R2RMLElementVisitor {
 		try {
 			this.translateData(mappingDocument);
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error("error during data translation process : " + e.getMessage());
 			throw new QueryTranslatorException(e.getMessage());
 		}
@@ -247,6 +251,18 @@ implements R2RMLElementVisitor {
 		return null;
 	}
 
+	public String getXMLDatatype(String columnName, Map<String, String> mapXMLDatatype) {
+		String dbType = this.properties.getDatabaseType();
+		columnName = MorphSQLUtility.printWithoutEnclosedCharacters(columnName, dbType);
+		String result = null;
+		for(String key:mapXMLDatatype.keySet()) {
+			if(key.equalsIgnoreCase(columnName)) {
+				result = mapXMLDatatype.get(key);
+			}
+		}
+		return result;
+	}
+	
 	public void generateRDFTriples(R2RMLLogicalTable logicalTable, R2RMLSubjectMap sm
 			, Collection<R2RMLPredicateObjectMap> poms, String sqlQuery) 
 			throws Exception {
@@ -267,6 +283,9 @@ implements R2RMLElementVisitor {
 				String columnName = rsmd.getColumnName(i+1);
 				int columnType= rsmd.getColumnType(i+1);
 				String mappedDatatype = datatypeMapper.getMappedType(columnType);
+//				if(mappedDatatype == null) {
+//					mappedDatatype = XSDDatatype.XSDstring.getURI();
+//				}
 				mapXMLDatatype.put(columnName, mappedDatatype);
 				mapDBDatatype.put(columnName, new Integer(columnType));
 			}
@@ -362,8 +381,8 @@ implements R2RMLElementVisitor {
 							//translate refobject map
 							R2RMLRefObjectMap refObjectMap = predicateObjectMap.getRefObjectMap();
 							if(refObjectMap != null) {
-								R2RMLElementUnfoldVisitor r2rmlUnfolder = 
-										(R2RMLElementUnfoldVisitor) this.unfolder;
+								R2RMLUnfolder r2rmlUnfolder = 
+										(R2RMLUnfolder) this.unfolder;
 //								String joinQueryAlias = refObjectMap.getAlias();
 								String joinQueryAlias2 = 
 										r2rmlUnfolder.getMapRefObjectMapAlias().get(refObjectMap);
@@ -399,7 +418,7 @@ implements R2RMLElementVisitor {
 	public Object visit(R2RMLTriplesMap triplesMap) throws Exception {
 //		String sqlQuery = triplesMap.accept(
 //				new R2RMLElementUnfoldVisitor()).toString();
-		R2RMLElementUnfoldVisitor r2rmlUnfolder = (R2RMLElementUnfoldVisitor) this.unfolder;
+		R2RMLUnfolder r2rmlUnfolder = (R2RMLUnfolder) this.unfolder;
 		String sqlQuery = triplesMap.accept(r2rmlUnfolder).toString();
 		this.generateRDFTriples(triplesMap, sqlQuery);
 		return null;

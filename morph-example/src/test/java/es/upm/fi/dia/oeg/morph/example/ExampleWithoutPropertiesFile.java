@@ -26,6 +26,35 @@ public class ExampleWithoutPropertiesFile {
 	}
 
 	@Test
+	public void testBatch() {
+		String resultFile = System.getProperty("user.dir") 
+				+ File.separator + "examples" + File.separator + "batch-result.nt";
+		String mappingDocumentFile = System.getProperty("user.dir") 
+				+ File.separator + "examples" + File.separator + "example.ttl";
+		
+		ConfigurationProperties properties = new ConfigurationProperties();
+		properties.setNoOfDatabase(1);
+		properties.setDatabaseUser(dbUserName);
+		properties.setDatabasePassword(dbPassword);
+		properties.setDatabaseName(dbName);
+		properties.setDatabaseURL(jdbc_url);
+		properties.setDatabaseDriver(databaseDriver);
+		properties.setDatabaseType(databaseType);
+		properties.setMappingDocumentFilePath(mappingDocumentFile);
+		properties.setOutputFilePath(resultFile);
+		try {
+			R2RMLRunner runner = new R2RMLRunner(properties);
+			runner.run();
+			assertTrue("testBatch done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			logger.warn(errorMessage);
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
 	public void sparql01FromCode() {
 		String queryFile = System.getProperty("user.dir") 
 				+ File.separator + "examples" + File.separator + "query01.sparql";
@@ -56,4 +85,99 @@ public class ExampleWithoutPropertiesFile {
 			assertTrue(e.getMessage(), false);
 		}
 	}
+	
+	@Test
+	public void testMaterializeSubjects() {
+		String resultFile = System.getProperty("user.dir") 
+				+ File.separator + "examples" + File.separator + "subjects-result.nt";
+		String mappingDocumentFile = System.getProperty("user.dir") 
+				+ File.separator + "examples" + File.separator + "example.ttl";
+		String classURI = "http://mappingpedia.linkeddata.es/vocabulary/Person";
+		
+		ConfigurationProperties properties = new ConfigurationProperties();
+		properties.setNoOfDatabase(1);
+		properties.setDatabaseUser(dbUserName);
+		properties.setDatabasePassword(dbPassword);
+		properties.setDatabaseName(dbName);
+		properties.setDatabaseURL(jdbc_url);
+		properties.setDatabaseDriver(databaseDriver);
+		properties.setDatabaseType(databaseType);
+		properties.setMappingDocumentFilePath(mappingDocumentFile);
+		properties.setOutputFilePath(resultFile);
+		try {
+			R2RMLRunner runner = new R2RMLRunner(properties);
+			runner.materializeSubjects(classURI,resultFile);
+			assertTrue("testBatch done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			logger.warn(errorMessage);
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
+	public void testQueryGetSubjects() {
+		String queryFile = System.getProperty("user.dir") 
+				+ File.separator + "examples" + File.separator + "query11.sparql";
+		String resultFile = System.getProperty("user.dir") 
+				+ File.separator + "examples" + File.separator + "query11FromCode-result.xml";
+		String mappingDocumentFile = System.getProperty("user.dir") 
+				+ File.separator + "examples" + File.separator + "example.ttl";
+		
+		ConfigurationProperties properties = new ConfigurationProperties();
+		properties.setNoOfDatabase(1);
+		properties.setDatabaseUser(dbUserName);
+		properties.setDatabasePassword(dbPassword);
+		properties.setDatabaseName(dbName);
+		properties.setDatabaseURL(jdbc_url);
+		properties.setDatabaseDriver(databaseDriver);
+		properties.setDatabaseType(databaseType);
+		properties.setMappingDocumentFilePath(mappingDocumentFile);
+		properties.setOutputFilePath(resultFile);
+		try {
+			R2RMLRunner runner = new R2RMLRunner(properties);
+			runner.readSPARQLFile(queryFile);
+			runner.run();
+			assertTrue("sparql01 done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			logger.warn(errorMessage);
+			assertTrue(e.getMessage(), false);
+		}
+	}
+
+	@Test
+	public void testQueryGetSubjectDetails() {
+		String queryFile = System.getProperty("user.dir") 
+				+ File.separator + "examples" + File.separator + "query12.sparql";
+		String resultFile = System.getProperty("user.dir") 
+				+ File.separator + "examples" + File.separator + "query12FromCode-result.xml";
+		String mappingDocumentFile = System.getProperty("user.dir") 
+				+ File.separator + "examples" + File.separator + "example.ttl";
+		
+		ConfigurationProperties properties = new ConfigurationProperties();
+		properties.setNoOfDatabase(1);
+		properties.setDatabaseUser(dbUserName);
+		properties.setDatabasePassword(dbPassword);
+		properties.setDatabaseName(dbName);
+		properties.setDatabaseURL(jdbc_url);
+		properties.setDatabaseDriver(databaseDriver);
+		properties.setDatabaseType(databaseType);
+		properties.setMappingDocumentFilePath(mappingDocumentFile);
+		properties.setOutputFilePath(resultFile);
+		try {
+			R2RMLRunner runner = new R2RMLRunner(properties);
+			runner.readSPARQLFile(queryFile);
+			runner.run();
+			assertTrue("sparql01 done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			logger.warn(errorMessage);
+			assertTrue(e.getMessage(), false);
+		}
+	}
+
 }

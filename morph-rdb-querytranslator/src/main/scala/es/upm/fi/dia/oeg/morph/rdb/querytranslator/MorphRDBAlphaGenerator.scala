@@ -10,7 +10,6 @@ import com.hp.hpl.jena.graph.Triple
 import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElementUnfoldVisitor
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.R2RMLUtility
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTriplesMap
@@ -24,6 +23,7 @@ import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
+import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLUnfolder
 
 class MorphRDBAlphaGenerator(
     owner:IQueryTranslator
@@ -102,7 +102,7 @@ extends MorphBaseAlphaGenerator(
 					logger.error(errorMessage);
 				}
 				
-				val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLElementUnfoldVisitor];
+				val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
 				val sqlParentLogicalTableAux = unfolder.visit(parentLogicalTable);
 				val sqlParentLogicalTable = new SQLJoinTable(sqlParentLogicalTableAux
 				    , Constants.JOINS_TYPE_INNER, null);
@@ -142,7 +142,7 @@ extends MorphBaseAlphaGenerator(
 		: SQLLogicalTable = {
 		val cm = abstractConceptMapping.asInstanceOf[R2RMLTriplesMap];
 		val r2rmlLogicalTable = cm.getLogicalTable();
-		val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLElementUnfoldVisitor];
+		val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
 		val sqlLogicalTable = unfolder.visit(r2rmlLogicalTable);
 
 		
@@ -161,7 +161,7 @@ extends MorphBaseAlphaGenerator(
 	}
 	
 	override def calculateAlphaPredicateObjectSTG(tp:Triple ,cm:AbstractConceptMapping 
-	    , tpPredicateURI:String , logicalTableAlias:String ) : java.util.List[SQLJoinTable] = {
+	    , tpPredicateURI:String , logicalTableAlias:String ) : List[SQLJoinTable] = {
 		
 		
 		val isRDFTypeStatement = RDF.`type`.getURI().equals(tpPredicateURI);
@@ -196,7 +196,7 @@ extends MorphBaseAlphaGenerator(
 	}
 
 	override def calculateAlphaPredicateObjectSTG2(tp:Triple , cm:AbstractConceptMapping 
-	    , tpPredicateURI:String , logicalTableAlias:String ) : java.util.List[SQLLogicalTable] = {
+	    , tpPredicateURI:String , logicalTableAlias:String ) : List[SQLLogicalTable] = {
 		
 		val isRDFTypeStatement = RDF.`type`.getURI().equals(tpPredicateURI);
 		
@@ -246,7 +246,7 @@ extends MorphBaseAlphaGenerator(
 					val errorMessage = "Parent logical table is not found for RefObjectMap : " + refObjectMap;
 					logger.error(errorMessage);
 				}
-				val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLElementUnfoldVisitor];
+				val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
 				val sqlParentLogicalTableAux = unfolder.visit(parentLogicalTable);
 				sqlParentLogicalTableAux;
 			} else {

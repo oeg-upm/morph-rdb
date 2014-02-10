@@ -7,7 +7,7 @@ import es.upm.fi.dia.oeg.morph.base.ColumnMetaData;
 import es.upm.fi.dia.oeg.morph.base.TableMetaData;
 
 public abstract class AbstractLogicalTable {
-	protected Map<String, ColumnMetaData> columnsMetaData;
+	//protected Map<String, ColumnMetaData> columnsMetaData;
 	protected TableMetaData tableMetaData;
 
 	public abstract void buildMetaData(Connection conn) throws Exception;
@@ -25,7 +25,7 @@ public abstract class AbstractLogicalTable {
 		
 	}
 
-	public Map<String, ColumnMetaData> getColumnsMetaData() {
-		return columnsMetaData;
-	}
+//	public Map<String, ColumnMetaData> getColumnsMetaData() {
+//		return columnsMetaData;
+//	}
 }

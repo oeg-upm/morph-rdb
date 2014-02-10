@@ -37,91 +37,47 @@ import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTable;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTriplesMap;
 
-public class R2RMLElementUnfoldVisitor extends AbstractUnfolder implements R2RMLElementVisitor {
+public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisitor {
 	private Map<Object, Collection<String>> mapTermMapColumnsAliases = new HashMap<Object, Collection<String>>();
-	private static Logger logger = Logger.getLogger(R2RMLElementUnfoldVisitor.class);
+	private static Logger logger = Logger.getLogger(R2RMLUnfolder.class);
 	private Map<R2RMLRefObjectMap, String> mapRefObjectMapAlias = new HashMap<R2RMLRefObjectMap, String>();
 	//private ConfigurationProperties configurationProperties;
 	
-	public R2RMLElementUnfoldVisitor() {
+	public R2RMLUnfolder() {
 		super();
 	}
 	
+	public Collection<String> getAliases(Object termMapOrRefObjectMap) {
+		return this.mapTermMapColumnsAliases.get(termMapOrRefObjectMap);
+	}
+
 	public Map<R2RMLRefObjectMap, String> getMapRefObjectMapAlias() {
 		return mapRefObjectMapAlias;
 	}
 
-	public Collection<SQLQuery> visit(R2RMLMappingDocument mappingDocument) {
-		Collection<SQLQuery> result = new HashSet<SQLQuery>();
-
-		Collection<AbstractConceptMapping> triplesMaps = mappingDocument.getConceptMappings();
-		if(triplesMaps != null) {
-			for(AbstractConceptMapping triplesMap : triplesMaps) {
-				try {
-					SQLQuery triplesMapUnfolded = (SQLQuery) ((R2RMLTriplesMap) triplesMap).accept(this);
-					result.add(triplesMapUnfolded);
-				} catch(Exception e) {
-					logger.error("error while unfolding triplesMap : " + triplesMap);
-					logger.error("error message = " + e.getMessage());
+	public SQLLogicalTable unfold(R2RMLLogicalTable logicalTable) {
+		SQLLogicalTable result;
+		
+		Enum<LogicalTableType> logicalTableType = logicalTable.getLogicalTableType();
+		if(logicalTableType == LogicalTableType.TABLE_NAME) {
+			result = new SQLFromItem(logicalTable.getValue(), LogicalTableType.TABLE_NAME, this.dbType);
+		} else if(logicalTableType == LogicalTableType.QUERY_STRING) {
+			String sqlString = logicalTable.getValue();
+			try {
+				String sqlString2 = sqlString;
+				if(!sqlString2.endsWith(";")) {
+					sqlString2 += ";";
 				}
+				result = R2RMLUtility.toSQLQuery(sqlString2);
+			} catch(Exception e) {
+				logger.warn("Not able to parse the query, string will be used.");
+				result = new SQLFromItem(sqlString, LogicalTableType.QUERY_STRING, this.dbType);
 			}
+		} else {
+			result = null;
+			logger.warn("Invalid logical table type");
 		}
-		return result;
-	}
 
-	private SQLQuery unfoldSubjectMap(R2RMLSubjectMap subjectMap
-			, R2RMLLogicalTable logicalTable) {
-//		R2RMLLogicalTable logicalTable = triplesMap.getLogicalTable();
-//		R2RMLSubjectMap subjectMap = triplesMap.getSubjectMap();
-		
-		SQLQuery result = new SQLQuery();
-		Collection<ZSelectItem> resultSelectItems = new HashSet<ZSelectItem>();
-		
-		SQLFromItem logicalTableUnfolded = null;
-		String logicalTableAlias = null;
-
-		if(logicalTable instanceof R2RMLTable) {
-			logicalTableUnfolded = (SQLFromItem) logicalTable.accept(this);
-		} else if(logicalTable instanceof R2RMLSQLQuery) {
-			Object logicalTableAux = logicalTable.accept(this);
-			if(logicalTableAux instanceof SQLQuery) {
-				ZQuery zQuery = (ZQuery) logicalTable.accept(this);
-				logicalTableUnfolded = new SQLFromItem(zQuery.toString(), LogicalTableType.QUERY_STRING, this.dbType);
-			} else if(logicalTableAux instanceof SQLFromItem) {
-				logicalTableUnfolded = (SQLFromItem) logicalTableAux;
-			}
-		}
-		logicalTableAlias = logicalTableUnfolded.generateAlias();
-		logicalTable.setAlias(logicalTableAlias);
-		//result.addFrom(logicalTableUnfolded);
-		result.addFromItem(new SQLJoinTable(logicalTableUnfolded, null, null));
-
-		Collection<String> subjectMapColumnsString = subjectMap.getDatabaseColumnsString();
-		if(subjectMapColumnsString != null) {
-			new R2RMLUtility();
-			
-			for(String subjectMapColumnString : subjectMapColumnsString) {
-				ZSelectItem selectItem = MorphSQLSelectItem.apply(subjectMapColumnString, logicalTableAlias, this.dbType);
-				
-				if(selectItem != null) {
-					if(selectItem.getAlias() == null) {
-						String alias = selectItem.getTable() + "_" + selectItem.getColumn();
-						if(this.mapTermMapColumnsAliases.containsKey(subjectMap)) {
-							this.mapTermMapColumnsAliases.get(subjectMap).add(alias);
-						} else {
-							Collection<String> aliases = new Vector<String>();
-							aliases.add(alias);
-							this.mapTermMapColumnsAliases.put(subjectMap, aliases);
-						}
-						
-						selectItem.setAlias(alias);						
-					}
-					resultSelectItems.add(selectItem);
-				}
-			}
-		}
-		
-		result.setSelectItems(resultSelectItems);
 		return result;
 	}
 
@@ -266,12 +222,12 @@ public class R2RMLElementUnfoldVisitor extends AbstractUnfolder implements R2RML
 //				result.addSelect(selectItem);
 //			}
 //		}
-		logger.info(triplesMap + " unfolded = \n" + result);
+		//logger.info(triplesMap + " unfolded = \n" + result);
 
 		return result;		
 	}
 	
-	public SQLQuery visit(R2RMLTriplesMap triplesMap) throws Exception {
+	public SQLQuery unfold(R2RMLTriplesMap triplesMap) throws Exception {
 		R2RMLLogicalTable logicalTable = triplesMap.getLogicalTable();
 		R2RMLSubjectMap subjectMap = triplesMap.getSubjectMap();
 		Collection<R2RMLPredicateObjectMap> predicateObjectMaps = 
@@ -280,76 +236,48 @@ public class R2RMLElementUnfoldVisitor extends AbstractUnfolder implements R2RML
 		SQLQuery result = this.unfold(logicalTable, subjectMap, predicateObjectMaps);
 		return result;
 	}
-
-	public SQLLogicalTable visit(R2RMLLogicalTable logicalTable) {
-		SQLLogicalTable result;
-		
-		Enum<LogicalTableType> logicalTableType = logicalTable.getLogicalTableType();
-		if(logicalTableType == LogicalTableType.TABLE_NAME) {
-			result = new SQLFromItem(logicalTable.getValue(), LogicalTableType.TABLE_NAME, this.dbType);
-		} else if(logicalTableType == LogicalTableType.QUERY_STRING) {
-			String sqlString = logicalTable.getValue();
-			try {
-				String sqlString2 = sqlString;
-				if(!sqlString2.endsWith(";")) {
-					sqlString2 += ";";
-				}
-				result = R2RMLUtility.toSQLQuery(sqlString2);
-			} catch(Exception e) {
-				logger.warn("Not able to parse the query, string will be used.");
-				result = new SQLFromItem(sqlString, LogicalTableType.QUERY_STRING, this.dbType);
-			}
-		} else {
-			result = null;
-			logger.warn("Invalid logical table type");
-		}
-
-		return result;
-	}
-
-	public Object visit(R2RMLRefObjectMap refObjectMap) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object visit(R2RMLObjectMap objectMap) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	protected Set<String> unfold(Set<ILogicalQuery> logicalQueries,
+	
+	protected Set<SQLQuery> unfold(Set<ILogicalQuery> logicalQueries,
 			AbstractMappingDocument mapping) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String unfold(AbstractConceptMapping triplesMap)
+	public SQLQuery unfoldConceptMapping(AbstractConceptMapping triplesMap)
 			throws Exception {
-		return this.visit((R2RMLTriplesMap) triplesMap).toString();
+		return this.unfold((R2RMLTriplesMap) triplesMap);
 	}
-
+	
 	@Override
-	protected Collection<String> unfold(AbstractMappingDocument mappingDocument) throws Exception {
-		Collection<String> result = new HashSet<String>();
-		Collection<SQLQuery> queries = this.visit((R2RMLMappingDocument) mappingDocument);
-		for(SQLQuery query : queries) {
-			result.add(query.toString());
-		}
-		return result;
-	}
-
-	public Object visit(R2RMLTermMap r2rmlTermMap) {
+	public SQLQuery unfoldConceptMapping(AbstractConceptMapping cm,
+			String subjectURI) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Collection<String> getAliases(Object termMapOrRefObjectMap) {
-		return this.mapTermMapColumnsAliases.get(termMapOrRefObjectMap);
+	@Override
+	protected Collection<SQLQuery> unfoldMappingDocument(AbstractMappingDocument mappingDocument) {
+		Collection<SQLQuery> result = new HashSet<SQLQuery>();
+
+		Collection<AbstractConceptMapping> triplesMaps = mappingDocument.getConceptMappings();
+		if(triplesMaps != null) {
+			for(AbstractConceptMapping triplesMap : triplesMaps) {
+				try {
+					SQLQuery triplesMapUnfolded = this.unfoldConceptMapping(triplesMap);
+					result.add(triplesMapUnfolded);
+				} catch(Exception e) {
+					logger.error("error while unfolding triplesMap : " + triplesMap);
+					logger.error("error message = " + e.getMessage());
+				}
+			}
+		}
+		return result;
+
 	}
 
 	@Override
-	public String unfoldSubject(AbstractConceptMapping cm)
+	public SQLQuery unfoldSubject(AbstractConceptMapping cm)
 			throws Exception {
 		R2RMLTriplesMap triplesMap = (R2RMLTriplesMap) cm;
 		R2RMLLogicalTable logicalTable = triplesMap.getLogicalTable();
@@ -358,7 +286,94 @@ public class R2RMLElementUnfoldVisitor extends AbstractUnfolder implements R2RML
 				triplesMap.getPredicateObjectMaps();
 		
 		SQLQuery result = this.unfold(logicalTable, subjectMap, null);
-		return result.toString();
+		return result;
+	}
+
+	private SQLQuery unfoldSubjectMap(R2RMLSubjectMap subjectMap
+			, R2RMLLogicalTable logicalTable) {
+//		R2RMLLogicalTable logicalTable = triplesMap.getLogicalTable();
+//		R2RMLSubjectMap subjectMap = triplesMap.getSubjectMap();
+		
+		SQLQuery result = new SQLQuery();
+		Collection<ZSelectItem> resultSelectItems = new HashSet<ZSelectItem>();
+		
+		SQLFromItem logicalTableUnfolded = null;
+		String logicalTableAlias = null;
+
+		if(logicalTable instanceof R2RMLTable) {
+			logicalTableUnfolded = (SQLFromItem) logicalTable.accept(this);
+		} else if(logicalTable instanceof R2RMLSQLQuery) {
+			Object logicalTableAux = logicalTable.accept(this);
+			if(logicalTableAux instanceof SQLQuery) {
+				ZQuery zQuery = (ZQuery) logicalTable.accept(this);
+				logicalTableUnfolded = new SQLFromItem(zQuery.toString(), LogicalTableType.QUERY_STRING, this.dbType);
+			} else if(logicalTableAux instanceof SQLFromItem) {
+				logicalTableUnfolded = (SQLFromItem) logicalTableAux;
+			}
+		}
+		logicalTableAlias = logicalTableUnfolded.generateAlias();
+		logicalTable.setAlias(logicalTableAlias);
+		//result.addFrom(logicalTableUnfolded);
+		SQLJoinTable logicalTableUnfoldedJoinTable = new SQLJoinTable(logicalTableUnfolded, null, null); 
+		result.addFromItem(logicalTableUnfoldedJoinTable);
+
+		Collection<String> subjectMapColumnsString = subjectMap.getDatabaseColumnsString();
+		if(subjectMapColumnsString != null) {
+			new R2RMLUtility();
+			
+			for(String subjectMapColumnString : subjectMapColumnsString) {
+				ZSelectItem selectItem = MorphSQLSelectItem.apply(subjectMapColumnString, logicalTableAlias, this.dbType);
+				
+				if(selectItem != null) {
+					if(selectItem.getAlias() == null) {
+						String alias = selectItem.getTable() + "_" + selectItem.getColumn();
+						if(this.mapTermMapColumnsAliases.containsKey(subjectMap)) {
+							this.mapTermMapColumnsAliases.get(subjectMap).add(alias);
+						} else {
+							Collection<String> aliases = new Vector<String>();
+							aliases.add(alias);
+							this.mapTermMapColumnsAliases.put(subjectMap, aliases);
+						}
+						
+						selectItem.setAlias(alias);						
+					}
+					resultSelectItems.add(selectItem);
+				}
+			}
+		}
+		
+		result.setSelectItems(resultSelectItems);
+		return result;
+	}
+
+	public SQLLogicalTable visit(R2RMLLogicalTable logicalTable) {
+		SQLLogicalTable result = this.unfold(logicalTable);
+		return result;
+	}
+
+	public Collection<SQLQuery> visit(R2RMLMappingDocument mappingDocument) {
+		Collection<SQLQuery> result = this.unfoldMappingDocument(mappingDocument);
+		return result;
+	}
+
+	public Object visit(R2RMLObjectMap objectMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(R2RMLRefObjectMap refObjectMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(R2RMLTermMap r2rmlTermMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SQLQuery visit(R2RMLTriplesMap triplesMap) throws Exception {
+		SQLQuery result = this.unfold(triplesMap);
+		return result;
 	}
 
 }

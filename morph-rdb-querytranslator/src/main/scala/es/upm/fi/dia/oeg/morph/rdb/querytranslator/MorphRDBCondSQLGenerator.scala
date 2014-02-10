@@ -33,6 +33,7 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseCondSQLGenerator
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
+import es.upm.fi.dia.oeg.morph.base.TableMetaData
 
 class MorphRDBCondSQLGenerator(
     owner: IQueryTranslator
@@ -51,13 +52,13 @@ extends MorphBaseCondSQLGenerator(
 		val poMap = pm.asInstanceOf[R2RMLPredicateObjectMap];
 
 		val logicalTable = cm.getLogicalTable();
-		val logicalTableColumnsMetaData = logicalTable.getColumnsMetaData();
+		val logicalTableMetaData = logicalTable.getTableMetaData();
 		val conn = this.owner.getConnection();
-		val columnsMetaData = {
-			if(logicalTableColumnsMetaData == null && conn != null) {
+		val tableMetaData = {
+			if(logicalTableMetaData == null && conn != null) {
 				try {
 					logicalTable.buildMetaData(conn);
-					logicalTable.getColumnsMetaData();
+					logicalTable.getTableMetaData();
 				} catch {
 				  case e:Exception => {
 				    logger.error(e.getMessage());
@@ -65,7 +66,7 @@ extends MorphBaseCondSQLGenerator(
 				  }
 				}
 			} else {
-			  logicalTableColumnsMetaData
+			  logicalTableMetaData
 			}		  
 		}
 		
@@ -119,7 +120,7 @@ extends MorphBaseCondSQLGenerator(
 					val termMapType = objectMap.getTermMapType();
 					if(termMapType == TermMapType.TEMPLATE) {
 						this.generateCondForWellDefinedURI(objectMap
-								, uri, logicalTableAlias, columnsMetaData);
+								, uri, logicalTableAlias, tableMetaData);
 					} else if(termMapType == TermMapType.COLUMN) {
 						val columnName = objectMap.getColumnName();
 						val columnNameWithAlias = {
@@ -150,7 +151,7 @@ extends MorphBaseCondSQLGenerator(
 							refObjectMap.getParentTriplesMap();
 					val uriCondition = this.generateCondForWellDefinedURI(
 							parentTriplesMap.getSubjectMap(), tpObject.getURI(),
-							refObjectMapAlias, columnsMetaData);
+							refObjectMapAlias, tableMetaData);
 	
 					val expressionsList = List(uriCondition);
 					MorphSQLUtility.combineExpresions(expressionsList, Constants.SQL_LOGICAL_OPERATOR_AND);				
@@ -168,7 +169,9 @@ extends MorphBaseCondSQLGenerator(
 	}
 
 	def generateCondForWellDefinedURI(termMap:R2RMLTermMap, uri:String , alias:String 
-	    , columnsMetaData:Map[String, ColumnMetaData] ) : ZExpression = {
+	    //, columnsMetaData:Map[String, ColumnMetaData] 
+	    , tableMetaData:TableMetaData
+	) : ZExpression = {
 		
 		
 		val result:ZExpression = {
@@ -186,16 +189,19 @@ extends MorphBaseCondSQLGenerator(
 							
 							val termMapColumnTypeName = termMap.getColumnTypeName();
 							val columnTypeName = {
-								if(termMapColumnTypeName == null && columnsMetaData != null) {
-									if(columnsMetaData.get(pkColumnString) != null) {
-										val columnTypeNameAux = columnsMetaData.get(pkColumnString).dataType;
-										termMap.setColumnTypeName(columnTypeNameAux);
-										columnTypeNameAux
-									}
-								} else {
-								  termMapColumnTypeName;
-								}					  
+							  if(termMapColumnTypeName != null) {
+							    termMapColumnTypeName
+							  } else {
+							    if(tableMetaData != null && tableMetaData.getColumnMetaData(pkColumnString).isDefined) {
+									val columnTypeNameAux = tableMetaData.getColumnMetaData(pkColumnString).get.dataType;
+									termMap.setColumnTypeName(columnTypeNameAux);
+									columnTypeNameAux
+							    } else {
+							      null
+							    }
+							  }
 							}
+
 		
 		
 							val pkColumnConstant = MorphSQLConstant.apply(
@@ -245,19 +251,20 @@ extends MorphBaseCondSQLGenerator(
 			if(subjectTermMapType == TermMapType.TEMPLATE) {
 				try {
 					val logicalTable = cm.asInstanceOf[R2RMLTriplesMap].getLogicalTable();
-					val logicalTableColumnsMetaData = logicalTable.getColumnsMetaData();;
-					val columnsMetaData = {
-						if(logicalTableColumnsMetaData == null) {
+					val logicalTableMetaData = logicalTable.getTableMetaData();
+					//val logicalTableColumnsMetaData = logicalTable.getColumnsMetaData();;
+					val tableMetaData = {
+						if(logicalTableMetaData == null) {
 							val conn = this.owner.getConnection();
 							logicalTable.buildMetaData(conn);
-							logicalTable.getColumnsMetaData();
+							logicalTable.getTableMetaData();
 						} else {
-						  logicalTableColumnsMetaData
+						  logicalTableMetaData
 						}				  
 					}
 	
 					this.generateCondForWellDefinedURI(tm.getSubjectMap(), 
-							tpSubject.getURI(), logicalTableAlias, columnsMetaData);					
+							tpSubject.getURI(), logicalTableAlias, tableMetaData);					
 				} catch {
 				  case e:Exception => {
 					logger.error(e.getMessage());

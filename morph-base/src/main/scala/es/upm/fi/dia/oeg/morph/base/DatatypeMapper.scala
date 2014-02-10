@@ -28,7 +28,8 @@ class DatatypeMapper {
 		
 		, new Integer(Types.DATE) -> XSDDatatype.XSDdate.getURI()
 		, new Integer(Types.TIME) -> XSDDatatype.XSDtime.getURI()
-		, new Integer(Types.TIMESTAMP) -> XSDDatatype.XSDdateTime.getURI()	    
+		, new Integer(Types.TIMESTAMP) -> XSDDatatype.XSDdateTime.getURI()
+		//, new Integer(Types.CHAR) -> XSDDatatype.XSDstring.getURI()
 	);
 
 	def getMapXMLDatatype() : Map[String, String] = {

@@ -3,7 +3,7 @@ package es.upm.fi.dia.oeg.morph.base.querytranslator
 import scala.collection.JavaConversions._
 
 import java.util.Collection
-import java.util.Vector
+//import java.util.Vector
 import com.hp.hpl.jena.graph.Node
 import com.hp.hpl.jena.graph.Triple
 import com.hp.hpl.jena.vocabulary.RDF
@@ -94,7 +94,7 @@ abstract class MorphBaseAlphaGenerator(
 					val alphaPredicateObjectAux = calculateAlphaPredicateObjectSTG(
 							tp, cm, tpPredicateURI,logicalTableAlias);
 					if(alphaPredicateObjectAux != null) {
-						alphaPredicateObjects.addAll(alphaPredicateObjectAux);	
+						alphaPredicateObjects = alphaPredicateObjects ::: alphaPredicateObjectAux;	
 					}
 					
 					val alphaPredicateObjectAux2 = calculateAlphaPredicateObjectSTG2(
@@ -124,10 +124,10 @@ abstract class MorphBaseAlphaGenerator(
 	}
 	
 	def calculateAlphaPredicateObjectSTG(tp:Triple , cm:AbstractConceptMapping , tpPredicateURI:String 
-	    , logicalTableAlias:String ) : java.util.List[SQLJoinTable];
+	    , logicalTableAlias:String ) : List[SQLJoinTable];
 
 	def calculateAlphaPredicateObjectSTG2(tp:Triple , cm:AbstractConceptMapping , tpPredicateURI:String 
-	    ,  logicalTableAlias:String) : java.util.List[SQLLogicalTable] ;
+	    ,  logicalTableAlias:String) : List[SQLLogicalTable] ;
 
 
 	def  calculateAlphaPredicateObject2(triple:Triple , cm:AbstractConceptMapping , pm:AbstractPropertyMapping

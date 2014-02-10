@@ -75,14 +75,14 @@ public class R2RMLUtility {
 		return R2RMLUtility.replaceTokens(matcher, text, replacements);
 	}
 	
-	public static SQLQuery toSQLQuery(String sqlString) {
+	public static SQLQuery toSQLQuery(String sqlString) throws Exception {
 		ZQuery zQuery = R2RMLUtility.toZQuery(sqlString);
 		SQLQuery sqlQuery = new SQLQuery(zQuery);
 		return sqlQuery;
 	}
 	
 	
-	public static ZQuery toZQuery(String sqlString) {
+	public static ZQuery toZQuery(String sqlString) throws Exception {
 		try {
 			//sqlString = sqlString.replaceAll(".date ", ".date2");
 			ByteArrayInputStream bs = new ByteArrayInputStream(sqlString.getBytes());
@@ -92,10 +92,15 @@ public class R2RMLUtility {
 			
 			return zQuery;
 		} catch(Exception e) {
+			String errorMessage = "error parsing query string : \n" + sqlString; 
 			//e.printStackTrace();
-			logger.error("error parsing query string : \n" + sqlString);
+			logger.error(errorMessage);
 			logger.error("error message = " + e.getMessage());
-			return null;
+			throw e;
+		} catch(Error e) {
+			String errorMessage = "error parsing query string : \n" + sqlString;
+			logger.error(errorMessage);
+			throw new Exception(errorMessage);
 		}
 	}
 

@@ -37,7 +37,22 @@ extends ZSelectItem {
 		if(this.isExpression()) {
 			result = this.getExpression().toString();
 		} else {
-			result = this.getFullyQualifiedName(enclosedCharacter);
+			//result = this.getFullyQualifiedName(enclosedCharacter);
+		  
+//			var resultList:List[String] = Nil;
+//			if(this.schema != null) {
+//				resultList = resultList ::: List(this.schema);
+//			}
+//			if(this.table != null) {
+//				resultList = resultList ::: List(this.table);
+//			}
+//			if(this.column != null) {
+//				resultList = resultList ::: List(this.column);
+//			}
+			
+			var resultList2 = List(this.schema, this.table, this.column).filter(x => x != null);
+			result = resultList2.map(x => x.replaceAll("\"", enclosedCharacter)).mkString(".");
+
 		}
 
 		if(this.columnType != null) {

@@ -49,7 +49,7 @@ public class R2RMLRunner extends AbstractRunner {
 	@Override
 	protected void createDataTranslator(
 			ConfigurationProperties configurationProperties) {
-		super.dataTranslator = new R2RMLElementDataTranslateVisitor(
+		super.dataTranslator = new R2RMLDataTranslator(
 				configurationProperties);
 		if(super.unfolder != null) {
 			super.dataTranslator.setUnfolder(unfolder);
@@ -58,7 +58,7 @@ public class R2RMLRunner extends AbstractRunner {
 
 	@Override
 	protected AbstractUnfolder createUnfolder() {
-		AbstractUnfolder unfolder = new R2RMLElementUnfoldVisitor();
+		AbstractUnfolder unfolder = new R2RMLUnfolder();
 		unfolder.setDbType(this.configurationProperties.getDatabaseType());
 		return unfolder;
 	}

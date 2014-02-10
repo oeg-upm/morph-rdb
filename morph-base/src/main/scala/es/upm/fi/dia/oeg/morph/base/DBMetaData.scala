@@ -2,62 +2,55 @@ package es.upm.fi.dia.oeg.morph.base
 
 import org.apache.log4j.Logger
 import java.sql.Connection
+import es.upm.fi.dia.oeg.morph.base.sql.MorphInformationSchema
 
-class DBMetaData(var mapTableMetaData : Map[String, TableMetaData]) {
-	def this() = {
-	  this(Map.empty)
+class DBMetaData(val dbName:String, val dbType:String, var tablesMetaData : List[TableMetaData]) {
+	def this(dbName:String, dbType:String) = {
+	  this(dbName, dbType, Nil)
 	}
 
 	def getTableMetaData(tableName:String) : Option[TableMetaData] = {
-	  this.mapTableMetaData.get(tableName);
+	  val result = this.tablesMetaData.find(x => {
+	    val xTableName = MorphSQLUtility.printWithoutEnclosedCharacters(x.tableName, dbType);
+	    val inputTableName = MorphSQLUtility.printWithoutEnclosedCharacters(tableName, dbType);
+	    xTableName.equalsIgnoreCase(inputTableName)
+	 });
+	  
+	  result
 	}
 	
-	def putTableMetaData(tableName:String, tableMetaData:TableMetaData) = {
-	  this.mapTableMetaData += (tableName -> tableMetaData);
+	def addTableMetaData(tableName:String, tableMetaData:TableMetaData) = {
+	  this.tablesMetaData = this.tablesMetaData ::: List(tableMetaData);
 	}
 }
 
 object DBMetaData {
 	val logger = Logger.getLogger("TableMetaData");
 	
- 	def buildTablesMetaData(conn:Connection , databaseName:String , databaseType:String ) 
+ 	def buildDBMetaData(conn:Connection , dbName:String , dbType:String ) 
  	: DBMetaData = {
-		var mapTableMetaData:Map[String, TableMetaData] = Map.empty;
-		
-		if(conn != null) {
-			try {
-				val stmt = conn.createStatement();
-				
-				var query:String = null;
-				var tableNameColumn :String = null;
-				var tableRowsColumn : String = null;
-				if(databaseType.equalsIgnoreCase(Constants.DATABASE_MYSQL)) {
-					query = "SELECT * FROM information_schema.tables WHERE TABLE_SCHEMA = '" + databaseName + "'";
-					tableNameColumn = "TABLE_NAME";
-					tableRowsColumn = "TABLE_ROWS";
-				} else if(databaseType.equalsIgnoreCase(Constants.DATABASE_POSTGRESQL)) {
-					query = "SELECT * FROM pg_stat_user_tables ";
-					tableNameColumn = "relname";
-					tableRowsColumn = "seq_tup_read";					
+		val dbMetaData : DBMetaData = {
+	 		if(conn != null) {
+				try {
+					var listTableMetaData = TableMetaData.buildTablesMetaData(conn, dbName, dbType);
+					val mapColumnsMetaData = ColumnMetaDataFactory.buildMapColumnsMetaData(conn, dbName, dbType);
+					val commonTableNames = listTableMetaData.map(x => x.tableName).toSet.intersect(mapColumnsMetaData.keySet);
+					for(tableName <- commonTableNames) {
+						val tableMetaData = listTableMetaData.find(p => p.tableName.equals(tableName)).get;
+						val columnsMetaData = mapColumnsMetaData(tableName);
+						tableMetaData.columnsMetaData = columnsMetaData;
+					}
+					new DBMetaData(dbName, dbType, listTableMetaData);
+				} catch {
+				  case e:Exception => {
+				    logger.error("Error while getting table meta data");
+				    null
+				  }
 				}
-
-				if(query != null) {
-					val rs = stmt.executeQuery(query);
-					while(rs.next()) {
-						val tableName = rs.getString(tableNameColumn);
-						val tableRows = rs.getLong(tableRowsColumn);
-						val tableMetaData = new TableMetaData(tableName, tableRows);
-						mapTableMetaData += (tableMetaData.tableName -> tableMetaData);
-					}					
-				}
-			} catch {
-			  case e:Exception => {
-			    logger.error("Error while getting table meta data");
-			  }
-			}
+	 		} else {
+	 		  null
+	 		}
 		}
-		
-		val dbMetaData = new DBMetaData(mapTableMetaData);
 		dbMetaData;
 	}  
 }

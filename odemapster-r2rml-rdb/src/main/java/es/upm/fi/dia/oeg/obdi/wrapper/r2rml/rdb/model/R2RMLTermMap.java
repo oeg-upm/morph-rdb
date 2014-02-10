@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+
+
 import org.apache.log4j.Logger;
 
+import scala.Option;
 import Zql.ZConstant;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
@@ -20,6 +23,7 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import es.upm.fi.dia.oeg.morph.base.ColumnMetaData;
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.RegexUtility;
+import es.upm.fi.dia.oeg.morph.base.TableMetaData;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant;
 import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.core.ODEMapsterUtility;
@@ -60,22 +64,17 @@ public class R2RMLTermMap implements R2RMLElement
 	R2RMLTermMap(Resource resource, TermMapPosition termMapPosition, R2RMLTriplesMap owner) 
 			throws R2RMLInvalidTermMapException {
 		this.configurationProperties = owner.getOwner().getConfigurationProperties();
+		String dbType = this.configurationProperties.getDatabaseType();
+		String dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
 
 		this.owner = owner;
 
 		R2RMLLogicalTable logicalTable = this.owner.getLogicalTable();
 		//		ResultSetMetaData rsmd = logicalTable.getRsmd();
-		Map<String, ColumnMetaData> columnsMetaData = logicalTable.getColumnsMetaData();
+		//Map<String, ColumnMetaData> columnsMetaData = logicalTable.getColumnsMetaData();
+		TableMetaData tableMetaData = logicalTable.getTableMetaData();
 
-		if(columnsMetaData == null) {
-			Connection conn = this.owner.getOwner().getConn();
-			try {
-				logicalTable.buildMetaData(conn);
-				columnsMetaData = logicalTable.getColumnsMetaData();				
-			} catch(Exception e) {
-				logger.error(e.getMessage());
-			}
-		}
+
 
 		Statement constantStatement = resource.getProperty(Constants.R2RML_CONSTANT_PROPERTY());
 		if(constantStatement != null) {
@@ -86,12 +85,20 @@ public class R2RMLTermMap implements R2RMLElement
 			if(columnStatement != null) {
 				this.termMapType = TermMapType.COLUMN;
 				this.columnName = columnStatement.getObject().toString();
-				if(columnsMetaData != null) {
-					ColumnMetaData cmd = columnsMetaData.get(this.columnName);
+				this.columnName = this.columnName.replaceAll("\"", dbEnclosedCharacter);
+
+				if(tableMetaData != null) {
+					ColumnMetaData cmd;
+					if(tableMetaData.getColumnMetaData(this.columnName).isDefined()) {
+						cmd = tableMetaData.getColumnMetaData(this.columnName).get();
+					} else {
+						cmd = null;
+					}
+					
 					if(cmd != null) {
 						this.columnTypeName = cmd.dataType();
 //						this.isNullable = cmd.isNullable();
-					}
+					}					
 				}
 			} else {
 				Statement templateStatement = resource.getProperty(Constants.R2RML_TEMPLATE_PROPERTY());
@@ -102,15 +109,26 @@ public class R2RMLTermMap implements R2RMLElement
 					Collection<String> pkColumnStrings = this.getTemplateColumns();
 					
 					for(String pkColumnString : pkColumnStrings) {
-						if(columnsMetaData != null) {
-							ColumnMetaData cmd = columnsMetaData.get(pkColumnString);
-							if(cmd != null) {
-								this.columnTypeName = cmd.dataType();
-								if(cmd.isNullable()) {
-								}
+						//pkColumnString = pkColumnString.replaceAll("\"", dbEnclosedCharacter);
+
+						ColumnMetaData cmd;
+						if(tableMetaData != null) {
+							Option<ColumnMetaData> optionColumnMetaData = tableMetaData.getColumnMetaData(pkColumnString);
+							if(optionColumnMetaData.isDefined()) {
+								cmd = optionColumnMetaData.get();
 							} else {
-								logger.debug("metadata not found for: " + pkColumnString);
+								cmd = null;
 							}
+						} else {
+							cmd = null;							
+						}
+						
+						if(cmd != null) {
+							this.columnTypeName = cmd.dataType();
+							if(cmd.isNullable()) {
+							}
+						} else {
+							logger.debug("metadata not found for: " + pkColumnString);
 						}
 					}
 //					this.isNullable = isNullableAux;
@@ -250,6 +268,8 @@ public class R2RMLTermMap implements R2RMLElement
 			//SQLSelectItem selectItem = SQLSelectItem.createSQLItem(dbType, columnName, null);
 			MorphSQLConstant zConstant = MorphSQLConstant.apply(pColumnName, ZConstant.COLUMNNAME, dbType);
 			String columnName = zConstant.column();
+			columnName = columnName.replaceAll("\"", "");
+
 			String tableName = zConstant.table();
 			if(tableName != null) {
 				columnName = tableName + "." + columnName;
@@ -301,6 +321,7 @@ public class R2RMLTermMap implements R2RMLElement
 			this.getDatabaseColumnsString();
 			result = RegexUtility.getTemplateMatching(templateString, uri);
 		}
+
 
 		return result;
 	}

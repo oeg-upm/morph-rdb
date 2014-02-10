@@ -11,14 +11,19 @@ import java.text.SimpleDateFormat
 import org.apache.log4j.Logger
 
 class TriplePatternPredicateBounder(mappingFile : String
-    , mapColumnsMetaData : java.util.Map[String, ColumnMetaData]) {
+    //, mapColumnsMetaData : java.util.Map[String, ColumnMetaData]
+    , tableMetaData:TableMetaData
+) {
   
 	val logger = Logger.getLogger("TriplePatternPredicateBounder");
 	val mappingDocument = new R2RMLMappingDocument(mappingFile);
 	val constants = new Constants();
 	
 	def this(mappingFile : String) {
-		this(mappingFile, new java.util.HashMap[String, ColumnMetaData]());
+		this(mappingFile
+		    //, new java.util.HashMap[String, ColumnMetaData]()
+		    , null
+		    );
 	}
 	
 	def expandUnboundedPredicateTriplePattern(tp : Triple, triplesMapResource : Resource) 
@@ -73,7 +78,7 @@ class TriplePatternPredicateBounder(mappingFile : String
 						val rrDatatypeResource = mappingDocument.getDatatypeResource(objectMapResource);
 						val objectMapDatatype = {
 							if(rrDatatypeResource == null) {
-								if(this.mapColumnsMetaData == null) {
+								if(this.tableMetaData == null) {
 									null
 								} else {
 									val tableName = mappingDocument.getRRLogicalTableTableName(
@@ -81,12 +86,13 @@ class TriplePatternPredicateBounder(mappingFile : String
 									val rrColumnResource = 
 										mappingDocument.getRRColumnResource(objectMapResource);
 									val columnName = rrColumnResource.getLiteral().getValue().toString();
-									val columnMetaData = this.mapColumnsMetaData(columnName);
+									//val columnMetaData = this.mapColumnsMetaData(columnName);
+									val columnMetaData = this.tableMetaData.getColumnMetaData(columnName);
 									if(columnMetaData == null) {
 										null
 									} else {
 										val objectDatatypeFromFromMetaData = 
-										  columnMetaData.dataType;
+										  columnMetaData.get.dataType;
 										objectDatatypeFromFromMetaData									  
 									}
 								}
@@ -164,12 +170,13 @@ class TriplePatternPredicateBounder(mappingFile : String
 									val columnName = 
 										rrColumnResource.getLiteral().getValue().toString();
 									
-									if(this.mapColumnsMetaData != null 
-									    && this.mapColumnsMetaData.contains(columnName)) {
-										val columnMetaData = this.mapColumnsMetaData(columnName);
-										val objectDatatypeFromFromMetaData = 
-											columnMetaData.dataType;
-										objectDatatypeFromFromMetaData										
+									if(this.tableMetaData != null) { 
+										val columnMetaData = this.tableMetaData.getColumnMetaData(columnName);
+									    if(columnMetaData.isDefined) {
+									    	val objectDatatypeFromFromMetaData = 
+									    			columnMetaData.get.dataType;
+									    	objectDatatypeFromFromMetaData
+									    }
 									}
 								} else {
 								rrDatatypeResource.asLiteral().getValue().toString();

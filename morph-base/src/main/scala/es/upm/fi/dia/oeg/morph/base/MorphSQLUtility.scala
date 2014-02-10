@@ -528,12 +528,17 @@ object MorphSQLUtility {
 		}
 	}
 	
+	def printWithoutEnclosedCharacters(oldString:String, dbType:String) : String = {
+	  val enclosedCharacter = Constants.getEnclosedCharacter(dbType);
+	  val result = oldString.replaceAll(enclosedCharacter, "");
+	  result;
+	}
+	
 	def printWithoutEnclosedCharacters(oldString:String) : String = {
 	  var result = oldString; 
 	  for(enclosedCharacter <- Constants.DATABASE_ENCLOSED_CHARACTERS) {
 	    result = result.replaceAll(enclosedCharacter, "");
 	  }
 	  result;
-	  
 	}
 }
