@@ -296,112 +296,122 @@ implements R2RMLElementVisitor {
 
 		int i=0;
 		while(rs.next()) {
-			i++;
-			//translate subject map
-			String subjectGraphName = null;
-			if(sm != null) {
-				R2RMLGraphMap sgm = sm.getGraphMap();
-				if(sgm != null) {
-					//String subjectGraphAlias = subjectGraph.getAlias();
-					subjectGraphName = sgm.getUnfoldedValue(rs, null);
-					if(Constants.R2RML_IRI_URI().equalsIgnoreCase(sgm.getTermType())) {
-						try {
-							subjectGraphName = ODEMapsterUtility.encodeURI(subjectGraphName);
-						} catch(Exception e) {
-							logger.warn("Error encoding subject graph value : " + subjectGraphName);
-						}					
-					}
-				}
-				
-				//String logicalTableAlias = subjectMap.getAlias();
-				String logicalTableAlias = logicalTable.getAlias();
-				
-				String subjectValue = sm.getUnfoldedValue(rs, logicalTableAlias);
-				if(subjectValue == null) {
-					logger.debug("null value in the subject triple!");
-				} else {
-					if(Constants.R2RML_IRI_URI().equalsIgnoreCase(sm.getTermType())) {
-						try {
-							subjectValue = ODEMapsterUtility.encodeURI(subjectValue);
-						} catch(Exception e) {
-							logger.warn("Error encoding subject value : " + subjectValue);
+			try {
+				//translate subject map
+				String subjectGraphName = null;
+				if(sm != null) {
+					String logicalTableAlias = logicalTable.getAlias();
+
+					R2RMLGraphMap sgm = sm.getGraphMap();
+					if(sgm != null) {
+						//String subjectGraphAlias = subjectGraph.getAlias();
+						subjectGraphName = sgm.getUnfoldedValue(rs, logicalTableAlias);
+						if(Constants.R2RML_IRI_URI().equalsIgnoreCase(sgm.getTermType())) {
+							try {
+								subjectGraphName = ODEMapsterUtility.encodeURI(subjectGraphName);
+							} catch(Exception e) {
+								logger.warn("Error encoding subject graph value : " + subjectGraphName);
+							}					
+						} else if(Constants.R2RML_LITERAL_URI().equalsIgnoreCase(sgm.getTermType())) {
+							String errorMessage = "graph value is not a valid URI: " + subjectGraphName;
+							logger.warn(errorMessage);
+							throw new Exception(errorMessage);
 						}
 					}
-
-					this.materializer.createSubject(sm.isBlankNode(), subjectValue);
-
-					//rdf:type
-					Collection<String> classURIs = sm.getClassURIs();
-					if(classURIs != null) {
-						for(String classURI : classURIs) {
-							this.materializer.materializeRDFTypeTriple(subjectValue, classURI, sm.isBlankNode(), subjectGraphName );
-						}				
-					}
 					
-					//translate predicate object map
-					if(poms != null) {
-						logger.debug("predicateObjectMaps.size() = " + poms.size());
-						for(R2RMLPredicateObjectMap predicateObjectMap : poms){
-							R2RMLPredicateMap predicateMap = predicateObjectMap.getPredicateMap();
-							String predicateMapUnfoldedValue = 
-									predicateMap.getUnfoldedValue(rs, null);
-
-							R2RMLGraphMap predicateobjectGraph = predicateObjectMap.getGraphMap();
-							String predicateobjectGraphName = null;
-							if(predicateobjectGraph != null ) {
-								predicateobjectGraphName = 
-										predicateobjectGraph.getUnfoldedValue(rs, null);
-								if(Constants.R2RML_IRI_URI().equalsIgnoreCase(predicateobjectGraph.getTermType())) {
-									try {
-										predicateobjectGraphName = ODEMapsterUtility.encodeURI(predicateobjectGraphName);
-									} catch(Exception e) {
-										logger.warn("Error encoding object graph value : " + predicateobjectGraphName);
-									}					
-								}
+					//String logicalTableAlias = subjectMap.getAlias();
+					
+					String subjectValue = sm.getUnfoldedValue(rs, logicalTableAlias);
+					if(subjectValue == null) {
+						logger.debug("null value in the subject triple!");
+					} else {
+						if(Constants.R2RML_IRI_URI().equalsIgnoreCase(sm.getTermType())) {
+							try {
+								subjectValue = ODEMapsterUtility.encodeURI(subjectValue);
+							} catch(Exception e) {
+								logger.warn("Error encoding subject value : " + subjectValue);
 							}
+						}
 
-							//translate object map
-							R2RMLObjectMap objectMap = predicateObjectMap.getObjectMap();
-							if(objectMap != null) {
-								//retrieve the alias from predicateObjectMap, not triplesMap!
-								String alias = predicateObjectMap.getAlias();
-								if(alias == null) {
-									alias = logicalTableAlias;
+						this.materializer.createSubject(sm.isBlankNode(), subjectValue);
+
+						//rdf:type
+						Collection<String> classURIs = sm.getClassURIs();
+						if(classURIs != null) {
+							for(String classURI : classURIs) {
+								this.materializer.materializeRDFTypeTriple(subjectValue, classURI, sm.isBlankNode(), subjectGraphName );
+							}				
+						}
+						
+						//translate predicate object map
+						if(poms != null) {
+							logger.debug("predicateObjectMaps.size() = " + poms.size());
+							for(R2RMLPredicateObjectMap predicateObjectMap : poms){
+								R2RMLPredicateMap predicateMap = predicateObjectMap.getPredicateMap();
+								String predicateMapUnfoldedValue = 
+										predicateMap.getUnfoldedValue(rs, null);
+
+								R2RMLGraphMap predicateobjectGraph = predicateObjectMap.getGraphMap();
+								String predicateobjectGraphName = null;
+								if(predicateobjectGraph != null ) {
+									predicateobjectGraphName = 
+											predicateobjectGraph.getUnfoldedValue(rs, null);
+									if(Constants.R2RML_IRI_URI().equalsIgnoreCase(predicateobjectGraph.getTermType())) {
+										try {
+											predicateobjectGraphName = ODEMapsterUtility.encodeURI(predicateobjectGraphName);
+										} catch(Exception e) {
+											logger.warn("Error encoding object graph value : " + predicateobjectGraphName);
+										}					
+									}
 								}
-								//String alias = triplesMap.getLogicalTable().getAlias();
-								
-								String objectMapUnfoldedValue = 
-										objectMap.getUnfoldedValue(rs, alias);
-								this.translateObjectMap(objectMap, rs, mapXMLDatatype
-										, subjectGraphName, predicateobjectGraphName
-										, predicateMapUnfoldedValue, objectMapUnfoldedValue
-										);
-							}
 
-							//translate refobject map
-							R2RMLRefObjectMap refObjectMap = predicateObjectMap.getRefObjectMap();
-							if(refObjectMap != null) {
-								R2RMLUnfolder r2rmlUnfolder = 
-										(R2RMLUnfolder) this.unfolder;
-//								String joinQueryAlias = refObjectMap.getAlias();
-								String joinQueryAlias2 = 
-										r2rmlUnfolder.getMapRefObjectMapAlias().get(refObjectMap);
-								
-								R2RMLSubjectMap parentSubjectMap = 
-										refObjectMap.getParentTriplesMap().getSubjectMap();
-								//String parentSubjectValue = parentSubjectMap.getUnfoldedValue(rs, refObjectMap.getAlias());
-								String parentSubjectValue = parentSubjectMap.getUnfoldedValue(rs, joinQueryAlias2);
-
-								if(parentSubjectValue != null) {
-									this.translateObjectMap(parentSubjectMap, rs, mapXMLDatatype, subjectGraphName
-											, predicateobjectGraphName, predicateMapUnfoldedValue, parentSubjectValue
+								//translate object map
+								R2RMLObjectMap objectMap = predicateObjectMap.getObjectMap();
+								if(objectMap != null) {
+									//retrieve the alias from predicateObjectMap, not triplesMap!
+									String alias = predicateObjectMap.getAlias();
+									if(alias == null) {
+										alias = logicalTableAlias;
+									}
+									//String alias = triplesMap.getLogicalTable().getAlias();
+									
+									String objectMapUnfoldedValue = 
+											objectMap.getUnfoldedValue(rs, alias);
+									this.translateObjectMap(objectMap, rs, mapXMLDatatype
+											, subjectGraphName, predicateobjectGraphName
+											, predicateMapUnfoldedValue, objectMapUnfoldedValue
 											);
 								}
-							}
-						}							
+
+								//translate refobject map
+								R2RMLRefObjectMap refObjectMap = predicateObjectMap.getRefObjectMap();
+								if(refObjectMap != null) {
+									R2RMLUnfolder r2rmlUnfolder = 
+											(R2RMLUnfolder) this.unfolder;
+//									String joinQueryAlias = refObjectMap.getAlias();
+									String joinQueryAlias2 = 
+											r2rmlUnfolder.getMapRefObjectMapAlias().get(refObjectMap);
+									
+									R2RMLSubjectMap parentSubjectMap = 
+											refObjectMap.getParentTriplesMap().getSubjectMap();
+									//String parentSubjectValue = parentSubjectMap.getUnfoldedValue(rs, refObjectMap.getAlias());
+									String parentSubjectValue = parentSubjectMap.getUnfoldedValue(rs, joinQueryAlias2);
+
+									if(parentSubjectValue != null) {
+										this.translateObjectMap(parentSubjectMap, rs, mapXMLDatatype, subjectGraphName
+												, predicateobjectGraphName, predicateMapUnfoldedValue, parentSubjectValue
+												);
+									}
+								}
+							}							
+						}
 					}
 				}
+				i++;				
+			} catch(Exception e) {
+				logger.error(e.getMessage());
 			}
+
 		}
 		
 		
