@@ -170,7 +170,7 @@ public class R2RMLMappingDocument extends AbstractMappingDocument implements R2R
 			R2RMLTriplesMap tm = (R2RMLTriplesMap) cm;
 			Collection<AbstractPropertyMapping> pms = tm.getPropertyMappings();
 			for(AbstractPropertyMapping pm : pms) {
-				result.add(pm.getMappedPredicateName());
+				result.addAll(pm.getMappedPredicateNames());
 			}
 		}
 		return result ;
@@ -255,7 +255,7 @@ public class R2RMLMappingDocument extends AbstractMappingDocument implements R2R
 			for(AbstractPropertyMapping apm : apms) {
 				if(apm instanceof R2RMLPredicateObjectMap) {
 					R2RMLPredicateObjectMap pom = (R2RMLPredicateObjectMap) apm;
-					R2RMLObjectMap om = pom.getObjectMap();
+					R2RMLObjectMap om = pom.getObjectMap(0);
 					if(om.getTermMapType() == TermMapType.TEMPLATE) {
 						om.getTemplateString();
 					}
@@ -297,8 +297,8 @@ public class R2RMLMappingDocument extends AbstractMappingDocument implements R2R
 		Set<AbstractConceptMapping> result = new HashSet<AbstractConceptMapping>();
 		
 		R2RMLPredicateObjectMap pom = (R2RMLPredicateObjectMap) pm;
-		R2RMLObjectMap om = pom.getObjectMap();
-		R2RMLRefObjectMap rom = pom.getRefObjectMap();
+		R2RMLObjectMap om = pom.getObjectMap(0);
+		R2RMLRefObjectMap rom = pom.getRefObjectMap(0);
 		
 		if(om != null && rom == null) {
 			if(Constants.R2RML_IRI_URI().equals(om.getTermType())) {

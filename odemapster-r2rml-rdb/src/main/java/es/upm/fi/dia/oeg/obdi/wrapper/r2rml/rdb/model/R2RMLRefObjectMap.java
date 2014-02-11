@@ -120,7 +120,11 @@ public class R2RMLRefObjectMap {
 		return hasParentTriplesMap;
 	}
 
-	public String getMappedPredicateName() {
-		return this.parentPredicateObjectMap.getMappedPredicateName();
+	public Collection<String> getMappedPredicateNames() {
+		return this.parentPredicateObjectMap.getMappedPredicateNames();
+	}
+	
+	public String getMappedPredicateName(int index) {
+		return this.parentPredicateObjectMap.getMappedPredicateName(index);
 	}
 }

@@ -160,21 +160,21 @@ implements R2RMLElement, IConceptMapping {
 		return result;
 	}
 
-	public Collection<R2RMLRefObjectMap> getRefObjectMaps() {
-		Collection<R2RMLRefObjectMap> result = null;
-
-		if(this.predicateObjectMaps != null) {
-			for(R2RMLPredicateObjectMap predicateObjectMap : this.predicateObjectMaps) {
-				if(predicateObjectMap.getObjectMapType() == ObjectMapType.RefObjectMap) {
-					if(result == null) {
-						result = new HashSet<R2RMLRefObjectMap>();
-					}
-					result.add(predicateObjectMap.getRefObjectMap());
-				}
-			}
-		}
-		return result;
-	}
+//	public Collection<R2RMLRefObjectMap> getRefObjectMaps() {
+//		Collection<R2RMLRefObjectMap> result = null;
+//
+//		if(this.predicateObjectMaps != null) {
+//			for(R2RMLPredicateObjectMap predicateObjectMap : this.predicateObjectMaps) {
+//				if(predicateObjectMap.getObjectMapType() == ObjectMapType.RefObjectMap) {
+//					if(result == null) {
+//						result = new HashSet<R2RMLRefObjectMap>();
+//					}
+//					result.add(predicateObjectMap.getRefObjectMap(0));
+//				}
+//			}
+//		}
+//		return result;
+//	}
 
 	@Override
 	public Collection<AbstractPropertyMapping> getPropertyMappings(
@@ -184,7 +184,7 @@ implements R2RMLElement, IConceptMapping {
 				this.getPredicateObjectMaps();
 		if(predicateObjectMaps != null && predicateObjectMaps.size() > 0) {
 			for(R2RMLPredicateObjectMap predicateObjectMap : predicateObjectMaps) {
-				String predicateMapValue = predicateObjectMap.getPredicateMap().getOriginalValue();
+				String predicateMapValue = predicateObjectMap.getPredicateMap(0).getOriginalValue();
 				if(predicateMapValue.equals(propertyURI)) {
 					result.add(predicateObjectMap);
 				}
@@ -209,7 +209,7 @@ implements R2RMLElement, IConceptMapping {
 		Collection<IRelationMapping> result = new Vector<IRelationMapping>();
 		if(this.predicateObjectMaps != null) {
 			for(AbstractPropertyMapping pm : this.predicateObjectMaps) {
-				MappingType mappingType = pm.getPropertyMappingType();
+				MappingType mappingType = pm.getPropertyMappingType(0);
 				if(mappingType == MappingType.RELATION) {
 					result.add((R2RMLPredicateObjectMap) pm);
 				}

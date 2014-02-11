@@ -223,8 +223,8 @@ public class ODEMapsterUtility {
 		try {
 			uri = uri.trim();
 			
-			//uri = uri.replaceAll(" ", "%20");
-			uri = uri.replaceAll(" ", "_");
+			uri = uri.replaceAll(" ", "%20");
+			//uri = uri.replaceAll(" ", "_");
 			
 			//uri = ODEMapsterUtility.removeStrangeChars(uri);
 

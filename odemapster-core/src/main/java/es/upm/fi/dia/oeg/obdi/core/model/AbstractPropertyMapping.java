@@ -1,5 +1,7 @@
 package es.upm.fi.dia.oeg.obdi.core.model;
 
+import java.util.Collection;
+
 import com.hp.hpl.jena.rdf.model.Resource;
 
 
@@ -7,7 +9,8 @@ import com.hp.hpl.jena.rdf.model.Resource;
 
 
 public abstract class AbstractPropertyMapping extends AbstractRDB2RDFMapping implements IPropertyMapping{
-	public abstract String getMappedPredicateName();
+	public abstract String getMappedPredicateName(int index);
+	public abstract Collection<String> getMappedPredicateNames();
 	
 	protected AbstractConceptMapping parent;
 
@@ -17,14 +20,14 @@ public abstract class AbstractPropertyMapping extends AbstractRDB2RDFMapping imp
 		return parent;
 	}
 	
-	public abstract MappingType getPropertyMappingType();
+	public abstract MappingType getPropertyMappingType(int index);
 
-	public boolean isObjectPropertyMapping() {
-		return MappingType.RELATION == this.getPropertyMappingType();
+	public boolean isObjectPropertyMapping(int index) {
+		return MappingType.RELATION == this.getPropertyMappingType(index);
 	}
 
-	public boolean isDataPropertyMapping() {
-		return MappingType.ATTRIBUTE == this.getPropertyMappingType();
+	public boolean isDataPropertyMapping(int index) {
+		return MappingType.ATTRIBUTE == this.getPropertyMappingType(index);
 	}
 
 	public Resource getResource() {

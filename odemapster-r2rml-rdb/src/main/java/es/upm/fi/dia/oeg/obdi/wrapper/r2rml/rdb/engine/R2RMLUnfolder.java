@@ -103,116 +103,129 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 		if(poms != null) {
 			for(R2RMLPredicateObjectMap predicateObjectMap : poms) {
 				//unfold predicateMap
-				R2RMLPredicateMap predicateMap = predicateObjectMap.getPredicateMap();
-				Collection<String> predicateMapColumnsString = predicateMap.getDatabaseColumnsString();
-				//if(predicateMapColumnsString != null && logicalTable instanceof R2RMLTable) {
-				if(predicateMapColumnsString != null) {
-					
-					for(String predicateMapColumnString : predicateMapColumnsString) {
-						ZSelectItem selectItem = MorphSQLSelectItem.apply(predicateMapColumnString
-								, logicalTableAlias, dbType);
-						if(selectItem != null) {
-							if(selectItem.getAlias() == null) {
-								String alias = selectItem.getTable() + "_" + selectItem.getColumn();
-								selectItem.setAlias(alias);
-								if(this.mapTermMapColumnsAliases.containsKey(predicateMap)) {
-									this.mapTermMapColumnsAliases.get(predicateMap).add(alias);
-								} else {
-									Collection<String> aliases = new Vector<String>();
-									aliases.add(alias);
-									this.mapTermMapColumnsAliases.put(predicateMap, aliases);
-								}								
-							}
-							//resultSelectItems.add(selectItem);
-							result.addSelect(selectItem);
-						}
-					}
-				}
-
-				//unfold objectMap
-				R2RMLObjectMap objectMap = predicateObjectMap.getObjectMap();
-				if(objectMap != null) {
-					//objectMap.setAlias(logicalTableAlias);
-					Collection<String> objectMapColumnsString = objectMap.getDatabaseColumnsString();
-					//if(objectMapColumnsString != null && logicalTable instanceof R2RMLTable) {
-					if(objectMapColumnsString != null) {
-						for(String objectMapColumnString : objectMapColumnsString) {
-							ZSelectItem selectItem = MorphSQLSelectItem.apply(
-									objectMapColumnString, logicalTableAlias, this.dbType);
+				Collection<R2RMLPredicateMap> predicateMaps = predicateObjectMap.getPredicateMaps();
+				if(predicateMaps != null && !predicateMaps.isEmpty()) {
+					R2RMLPredicateMap predicateMap = predicateObjectMap.getPredicateMap(0);
+					Collection<String> predicateMapColumnsString = predicateMap.getDatabaseColumnsString();
+					//if(predicateMapColumnsString != null && logicalTable instanceof R2RMLTable) {
+					if(predicateMapColumnsString != null) {
+						
+						for(String predicateMapColumnString : predicateMapColumnsString) {
+							ZSelectItem selectItem = MorphSQLSelectItem.apply(predicateMapColumnString
+									, logicalTableAlias, dbType);
 							if(selectItem != null) {
 								if(selectItem.getAlias() == null) {
 									String alias = selectItem.getTable() + "_" + selectItem.getColumn();
 									selectItem.setAlias(alias);
-									if(this.mapTermMapColumnsAliases.containsKey(objectMap)) {
-										this.mapTermMapColumnsAliases.get(objectMap).add(alias);
+									if(this.mapTermMapColumnsAliases.containsKey(predicateMap)) {
+										this.mapTermMapColumnsAliases.get(predicateMap).add(alias);
 									} else {
 										Collection<String> aliases = new Vector<String>();
 										aliases.add(alias);
-										this.mapTermMapColumnsAliases.put(objectMap, aliases);
-									}
+										this.mapTermMapColumnsAliases.put(predicateMap, aliases);
+									}								
 								}
 								//resultSelectItems.add(selectItem);
 								result.addSelect(selectItem);
 							}
 						}
-					}
+					}					
 				}
+
+
+				//unfold objectMap
+				Collection<R2RMLObjectMap> objectMaps = predicateObjectMap.getObjectMaps();
+				if(objectMaps != null && !objectMaps.isEmpty()) {
+					R2RMLObjectMap objectMap = predicateObjectMap.getObjectMap(0);
+					if(objectMap != null) {
+						//objectMap.setAlias(logicalTableAlias);
+						Collection<String> objectMapColumnsString = objectMap.getDatabaseColumnsString();
+						//if(objectMapColumnsString != null && logicalTable instanceof R2RMLTable) {
+						if(objectMapColumnsString != null) {
+							for(String objectMapColumnString : objectMapColumnsString) {
+								ZSelectItem selectItem = MorphSQLSelectItem.apply(
+										objectMapColumnString, logicalTableAlias, this.dbType);
+								if(selectItem != null) {
+									if(selectItem.getAlias() == null) {
+										String alias = selectItem.getTable() + "_" + selectItem.getColumn();
+										selectItem.setAlias(alias);
+										if(this.mapTermMapColumnsAliases.containsKey(objectMap)) {
+											this.mapTermMapColumnsAliases.get(objectMap).add(alias);
+										} else {
+											Collection<String> aliases = new Vector<String>();
+											aliases.add(alias);
+											this.mapTermMapColumnsAliases.put(objectMap, aliases);
+										}
+									}
+									//resultSelectItems.add(selectItem);
+									result.addSelect(selectItem);
+								}
+							}
+						}
+					}					
+				}
+
 
 				//unfold refObjectMap
-				R2RMLRefObjectMap refObjectMap = predicateObjectMap.getRefObjectMap();
-				if(refObjectMap != null) {
-					R2RMLLogicalTable parentLogicalTable = refObjectMap.getParentLogicalTable();
-					if(parentLogicalTable == null) {
-						String errorMessage = "Parent logical table is not found for RefObjectMap : " + predicateObjectMap.getMappedPredicateName();
-						throw new Exception(errorMessage);
-					}
-					SQLLogicalTable sqlParentLogicalTable = 
-							(SQLLogicalTable) parentLogicalTable.accept(this);
-					
-					SQLJoinTable joinQuery = new SQLJoinTable(sqlParentLogicalTable);
-					joinQuery.setJoinType("LEFT");
-					String joinQueryAlias = sqlParentLogicalTable.generateAlias();
-					sqlParentLogicalTable.setAlias(joinQueryAlias);
-					//refObjectMap.setAlias(joinQueryAlias);
-					this.mapRefObjectMapAlias.put(refObjectMap, joinQueryAlias);
-					predicateObjectMap.setAlias(joinQueryAlias);
-					
-					Collection<String> refObjectMapColumnsString = 
-							refObjectMap.getParentDatabaseColumnsString();
-					if(refObjectMapColumnsString != null ) {
-						for(String refObjectMapColumnString : refObjectMapColumnsString) {
-							ZSelectItem selectItem = MorphSQLSelectItem.apply(
-									refObjectMapColumnString, joinQueryAlias, dbType, null);
-							if(selectItem.getAlias() == null) {
-								String alias = selectItem.getTable() + "_" + selectItem.getColumn();
-								selectItem.setAlias(alias);
-								if(this.mapTermMapColumnsAliases.containsKey(refObjectMap)) {
-									this.mapTermMapColumnsAliases.get(refObjectMap).add(alias);
-								} else {
-									Collection<String> aliases = new Vector<String>();
-									aliases.add(alias);
-									this.mapTermMapColumnsAliases.put(refObjectMap, aliases);
-								}
-							}							
-							//resultSelectItems.add(selectItem);
-							result.addSelect(selectItem);
+				Collection<R2RMLRefObjectMap> refObjectMaps = predicateObjectMap.getRefObjectMaps();
+				if(refObjectMaps != null && !refObjectMaps.isEmpty()) {
+					R2RMLRefObjectMap refObjectMap = predicateObjectMap.getRefObjectMap(0);
+					if(refObjectMap != null) {
+						R2RMLLogicalTable parentLogicalTable = refObjectMap.getParentLogicalTable();
+						if(parentLogicalTable == null) {
+							String errorMessage = "Parent logical table is not found for RefObjectMap : " 
+						+ predicateObjectMap.getMappedPredicateName(0);
+							throw new Exception(errorMessage);
 						}
-					}
+						SQLLogicalTable sqlParentLogicalTable = 
+								(SQLLogicalTable) parentLogicalTable.accept(this);
+						
+						SQLJoinTable joinQuery = new SQLJoinTable(sqlParentLogicalTable);
+						joinQuery.setJoinType("LEFT");
+						String joinQueryAlias = sqlParentLogicalTable.generateAlias();
+						sqlParentLogicalTable.setAlias(joinQueryAlias);
+						//refObjectMap.setAlias(joinQueryAlias);
+						this.mapRefObjectMapAlias.put(refObjectMap, joinQueryAlias);
+						predicateObjectMap.setAlias(joinQueryAlias);
+						
+						Collection<String> refObjectMapColumnsString = 
+								refObjectMap.getParentDatabaseColumnsString();
+						if(refObjectMapColumnsString != null ) {
+							for(String refObjectMapColumnString : refObjectMapColumnsString) {
+								ZSelectItem selectItem = MorphSQLSelectItem.apply(
+										refObjectMapColumnString, joinQueryAlias, dbType, null);
+								if(selectItem.getAlias() == null) {
+									String alias = selectItem.getTable() + "_" + selectItem.getColumn();
+									selectItem.setAlias(alias);
+									if(this.mapTermMapColumnsAliases.containsKey(refObjectMap)) {
+										this.mapTermMapColumnsAliases.get(refObjectMap).add(alias);
+									} else {
+										Collection<String> aliases = new Vector<String>();
+										aliases.add(alias);
+										this.mapTermMapColumnsAliases.put(refObjectMap, aliases);
+									}
+								}							
+								//resultSelectItems.add(selectItem);
+								result.addSelect(selectItem);
+							}
+						}
 
 
-					ZExpression onExpression;
-					Collection<R2RMLJoinCondition> joinConditions = 
-							refObjectMap.getJoinConditions();
-					if(joinConditions != null && joinConditions.size() > 0) {
-						onExpression = R2RMLUtility.generateJoinCondition(joinConditions
-								, logicalTableAlias, joinQueryAlias, dbType);
-					} else {
-						onExpression = Constants.SQL_EXPRESSION_TRUE();
-					}
-					joinQuery.setOnExpression(onExpression);
-					//result.addJoinQuery(joinQuery);		
-					result.addFromItem(joinQuery);
+						ZExpression onExpression;
+						Collection<R2RMLJoinCondition> joinConditions = 
+								refObjectMap.getJoinConditions();
+						if(joinConditions != null && joinConditions.size() > 0) {
+							onExpression = R2RMLUtility.generateJoinCondition(joinConditions
+									, logicalTableAlias, joinQueryAlias, dbType);
+						} else {
+							onExpression = Constants.SQL_EXPRESSION_TRUE();
+						}
+						joinQuery.setOnExpression(onExpression);
+						//result.addJoinQuery(joinQuery);		
+						result.addFromItem(joinQuery);
+					}					
 				}
+
 
 			}
 		}

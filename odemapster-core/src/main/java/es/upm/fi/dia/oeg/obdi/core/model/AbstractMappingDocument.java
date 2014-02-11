@@ -111,7 +111,7 @@ public abstract class AbstractMappingDocument implements IParseable {
 			Collection<String> pmsString = new Vector<String>();
 			
 			for(AbstractPropertyMapping pm : pms ) {
-				pmsString.add(pm.getMappedPredicateName());
+				pmsString.addAll(pm.getMappedPredicateNames());
 			}
 			
 			if(pmsString.containsAll(propertyURIs)) {
@@ -218,9 +218,11 @@ public abstract class AbstractMappingDocument implements IParseable {
 		for(AbstractConceptMapping conceptmapDef : this.classMappings) {
 			Collection<AbstractPropertyMapping> pms = conceptmapDef.getPropertyMappings();
 			for(AbstractPropertyMapping pm : pms) {
-				String predicateName = pm.getMappedPredicateName(); 
-				if(predicateName.equals(propertyURI) && pm.isObjectPropertyMapping()) {
-					result.add((IRelationMapping) pm);
+				Collection<String> predicateNames = pm.getMappedPredicateNames();
+				for(String predicateName : predicateNames) {
+					if(predicateName.equals(propertyURI) && pm.isObjectPropertyMapping(0)) {
+						result.add((IRelationMapping) pm);
+					}
 				}
 			}
 		}
