@@ -42,7 +42,11 @@ public abstract class R2RMLLogicalTable extends AbstractLogicalTable implements 
 					tableName = r2rmlTable.getValue();
 				} else if (this instanceof R2RMLSQLQuery){
 					R2RMLSQLQuery r2rmlSQLQuery = (R2RMLSQLQuery) this;
-					tableName = "(" + r2rmlSQLQuery.getValue() + ")";
+					String queryString = r2rmlSQLQuery.getValue().trim();
+					if(queryString.endsWith(";")) {
+						queryString = queryString.substring(0, queryString.length()-1);
+					}
+					tableName = "(" + queryString + ")";
 				}
 				
 				Option<TableMetaData> optionTableMetaData = dbMetaData.getTableMetaData(tableName);
@@ -122,6 +126,10 @@ public abstract class R2RMLLogicalTable extends AbstractLogicalTable implements 
 			}
 			String sqlQueryString = sqlQueryStatement.getObject().toString().trim();
 			sqlQueryString = sqlQueryString.replaceAll("\"", dbEnclosedCharacter);
+			if(sqlQueryString.endsWith(";")) {
+				sqlQueryString = sqlQueryString.substring(0, sqlQueryString.length()-1);
+			}
+			
 			logicalTable = new R2RMLSQLQuery(sqlQueryString, owner);
 		}
 

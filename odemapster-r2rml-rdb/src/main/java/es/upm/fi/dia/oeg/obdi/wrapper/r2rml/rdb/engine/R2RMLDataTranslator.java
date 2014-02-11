@@ -139,10 +139,12 @@ implements R2RMLElementVisitor {
 						objectMapUnfoldedValue = objectMapUnfoldedValue.trim().replaceAll(" ", "T");
 					} else if(XSDDatatype.XSDboolean.getURI().toString().equals(datatype)) {
 						if(objectMapUnfoldedValue.equalsIgnoreCase("T") 
-								|| objectMapUnfoldedValue.equalsIgnoreCase("True") ) {
+								|| objectMapUnfoldedValue.equalsIgnoreCase("True")
+								|| objectMapUnfoldedValue.equalsIgnoreCase("1")) {
 							objectMapUnfoldedValue = "true";
 						} else if(objectMapUnfoldedValue.equalsIgnoreCase("F") 
-								|| objectMapUnfoldedValue.equalsIgnoreCase("Frue")) {
+								|| objectMapUnfoldedValue.equalsIgnoreCase("False")
+								|| objectMapUnfoldedValue.equalsIgnoreCase("0")) {
 							objectMapUnfoldedValue = "false";
 						} else {
 							objectMapUnfoldedValue = "false";

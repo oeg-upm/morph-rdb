@@ -168,6 +168,7 @@ public class R2RMLTermMap implements R2RMLElement
 		} else {
 			this.termType = termTypeStatement.getObject().toString();
 		}
+		
 	}
 
 	R2RMLTermMap(TermMapPosition termMapPosition, String constantValue) {

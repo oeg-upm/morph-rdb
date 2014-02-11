@@ -1,5 +1,6 @@
 package es.upm.fi.dia.oeg.obdi.core;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -73,8 +74,8 @@ public class ConfigurationProperties extends Properties {
 					{
 		String absoluteConfigurationFile = configurationFile;
 		if(configurationDirectory != null) {
-			if(!configurationDirectory.endsWith("/")) {
-				configurationDirectory = configurationDirectory + "/";
+			if(!configurationDirectory.endsWith(File.separator)) {
+				configurationDirectory = configurationDirectory + File.separator;
 			}
 			absoluteConfigurationFile = configurationDirectory + configurationFile; 
 		}
