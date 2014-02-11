@@ -9,7 +9,7 @@ public class R2RMLGraphMap extends R2RMLTermMap {
 	
 	public R2RMLGraphMap(String constantValue) {
 		super(TermMapPosition.GRAPH, constantValue);
-		super.setTermType(Constants.R2RML_LITERAL_URI());
+		super.setTermType(Constants.R2RML_IRI_URI());
 	}
 	
 	public R2RMLGraphMap(Resource resource, R2RMLTriplesMap owner) throws R2RMLInvalidTermMapException {

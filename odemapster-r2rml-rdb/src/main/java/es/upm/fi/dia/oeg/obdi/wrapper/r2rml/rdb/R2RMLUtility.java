@@ -15,6 +15,7 @@ import Zql.ZExpression;
 import Zql.ZQuery;
 import Zql.ZStatement;
 import Zql.ZqlParser;
+import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.RegexUtility;
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLJoinCondition;
@@ -171,29 +172,21 @@ public class R2RMLUtility {
 
 	
 	
-	public static ZExpression generateJoinCondition(Collection<R2RMLJoinCondition> joinConditions
-			, String parentTableAlias, String joinQueryAlias, String dbType) {
+	public static ZExpression generateJoinCondition(
+			Collection<R2RMLJoinCondition> joinConditions, String parentTableAlias
+			, String joinQueryAlias, String dbType) {
 		ZExpression onExpression = null;
-
+		String enclosedCharacter = Constants.getEnclosedCharacter(dbType);
 		
 		if(joinConditions != null) {
 			for(R2RMLJoinCondition joinCondition : joinConditions) {
-				//String childColumnName = logicalTableAlias + "." + joinCondition.getChildColumnName();
 				String childColumnName = joinCondition.getChildColumnName();
-				//SQLSelectItem childSelectItem = new SQLSelectItem(childColumnName);  
-//				SQLSelectItem childSelectItem = SQLSelectItem.createSQLItem(dbType, childColumnName, null);
-				
-//				String[] childColumnNameSplit = childColumnName.split("\\.");
-//				if(childColumnNameSplit.length == 1) {
-//					childColumnName = parentTableAlias + "." + childColumnName; 
-//				}
-				
+				childColumnName = childColumnName.replaceAll("\"", enclosedCharacter);
 				childColumnName = parentTableAlias + "." + childColumnName;
 				ZConstant childColumn = new ZConstant(childColumnName, ZConstant.COLUMNNAME);
 
-				 
 				String parentColumnName = joinCondition.getParentColumnName();
-//				SQLSelectItem parentSelectItem = SQLSelectItem.createSQLItem(dbType, parentColumnName, null);
+				parentColumnName = parentColumnName.replaceAll("\"", enclosedCharacter);
 				parentColumnName = joinQueryAlias + "." + parentColumnName;
 				ZConstant parentColumn = new ZConstant(parentColumnName, ZConstant.COLUMNNAME);
 				

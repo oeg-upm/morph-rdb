@@ -102,7 +102,7 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 		
 		if(poms != null) {
 			for(R2RMLPredicateObjectMap predicateObjectMap : poms) {
-				//unfold predicateMap
+				//UNFOLD PREDICATEMAP
 				Collection<R2RMLPredicateMap> predicateMaps = predicateObjectMap.getPredicateMaps();
 				if(predicateMaps != null && !predicateMaps.isEmpty()) {
 					R2RMLPredicateMap predicateMap = predicateObjectMap.getPredicateMap(0);
@@ -133,7 +133,7 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 				}
 
 
-				//unfold objectMap
+				//UNFOLD OBJECTMAP
 				Collection<R2RMLObjectMap> objectMaps = predicateObjectMap.getObjectMaps();
 				if(objectMaps != null && !objectMaps.isEmpty()) {
 					R2RMLObjectMap objectMap = predicateObjectMap.getObjectMap(0);
@@ -166,7 +166,7 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 				}
 
 
-				//unfold refObjectMap
+				//UNFOLD REFOBJECTMAP
 				Collection<R2RMLRefObjectMap> refObjectMaps = predicateObjectMap.getRefObjectMaps();
 				if(refObjectMaps != null && !refObjectMaps.isEmpty()) {
 					R2RMLRefObjectMap refObjectMap = predicateObjectMap.getRefObjectMap(0);
