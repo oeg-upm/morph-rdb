@@ -181,6 +181,8 @@ object Constants {
 	val R2RML_TEMPLATE_URI = R2RML_NS + "template";
 	val R2RML_TEMPLATE_PROPERTY = ResourceFactory.createProperty(R2RML_TEMPLATE_URI);
 	
+	val R2RML_TEMPLATE_PATTERN = "\\{\"*\\w+(\\s\\w+)*\\\"*}";
+	
 	//TriplesMap
 	val R2RML_LOGICALTABLE_URI = R2RML_NS + "logicalTable";
 	val R2RML_LOGICALTABLE_PROPERTY = ResourceFactory.createProperty(R2RML_LOGICALTABLE_URI);
@@ -228,7 +230,6 @@ object Constants {
 	val R2RML_DEFAULT_GRAPH_URI = R2RML_NS + "defaultGraph";
 	val R2RML_DEFAULT_GRAPH_CLASS = ResourceFactory.createResource(R2RML_DEFAULT_GRAPH_URI);
 
-	val R2RML_TEMPLATE_PATTERN = "\\{(.+?)\\}";	
  
 	def getEnclosedCharacter(dbType:String) : String = {
 	    if (Constants.DATABASE_GFT.equalsIgnoreCase(dbType)) {

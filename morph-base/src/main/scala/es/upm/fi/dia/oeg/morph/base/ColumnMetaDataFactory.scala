@@ -30,6 +30,7 @@ object ColumnMetaDataFactory {
 				val columnNameColumn = morphInformationSchema.columnNameColumn;
 				val datatypeColumn = morphInformationSchema.datatypeColumn;
 				val isNullableColumn = morphInformationSchema.isNullableColumn;
+				val characterMaximumLengthColumn = morphInformationSchema.characterMaximumLengthColumn;
 				
 				val query = {
 					if(databaseType.equalsIgnoreCase(Constants.DATABASE_MYSQL)) {
@@ -66,9 +67,9 @@ object ColumnMetaDataFactory {
 									}
 								}							
 							}
-							
+							val characterMaximumLength = rs.getInt(characterMaximumLengthColumn);
 							val newColumnMetaData = new ColumnMetaData(
-									tableName, columnName, dataType, isNullable);
+									tableName, columnName, dataType, isNullable, characterMaximumLength);
 							listColumnsMetaData = listColumnsMetaData ::: List(newColumnMetaData);
 							result += tableName -> listColumnsMetaData;
 						}

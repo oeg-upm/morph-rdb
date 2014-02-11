@@ -26,7 +26,7 @@ public class R2RMLUtility {
 	//private ConfigurationProperties configurationProperties;
 	
 	public static void main(String args[]) {
-		String template = "Hello {Name} Please find attached {Invoice Number} which is due on {Due Date}";
+		String template = "Hello \\{ {Name} \\} Please find attached {Invoice Number} which is due on {Due Date}";
 		
 		Map<String, String> replacements = new HashMap<String, String>();
 		replacements.put("Name", "Freddy");
@@ -70,10 +70,18 @@ public class R2RMLUtility {
 	
 	public static String replaceTokens(String text,
 			Map<String, String> replacements) {
+		text = text.replaceAll("\\\\\\{", "morphopencurly");
+		text = text.replaceAll("\\\\\\}", "morphclosecurly");
+		
 		Pattern pattern = Pattern.compile("\\{(.+?)\\}");
 		Matcher matcher = pattern.matcher(text);
 		
-		return R2RMLUtility.replaceTokens(matcher, text, replacements);
+		String replacedToken = R2RMLUtility.replaceTokens(matcher, text, replacements);;
+		
+		replacedToken = replacedToken.replaceAll("morphopencurly", "\\{");
+		replacedToken = replacedToken.replaceAll("morphclosecurly", "\\}");
+
+		return replacedToken;
 	}
 	
 	public static SQLQuery toSQLQuery(String sqlString) throws Exception {

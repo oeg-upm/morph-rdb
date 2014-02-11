@@ -25,14 +25,14 @@ class MorphRDBBetaGenerator(
 	    , alphaResult:MorphAlphaResult , pm:AbstractPropertyMapping ) : java.util.List[ZSelectItem] = {
 	  
 		val predicateObjectMap = pm.asInstanceOf[R2RMLPredicateObjectMap];
-		val refObjectMap = predicateObjectMap.getRefObjectMap(); 
+		val refObjectMap = predicateObjectMap.getRefObjectMap(0); 
 		
 		val logicalTableAlias = alphaResult.alphaSubject.getAlias();
 		val dbType = this.owner.getDatabaseType();
 
 		val betaObjects : List[MorphSQLSelectItem] = {
 			if(refObjectMap == null) {
-				val objectMap = predicateObjectMap.getObjectMap();
+				val objectMap = predicateObjectMap.getObjectMap(0);
 	
 				if(objectMap.getTermMapType() == TermMapType.CONSTANT) {
 					val constantValue = objectMap.getConstantValue();

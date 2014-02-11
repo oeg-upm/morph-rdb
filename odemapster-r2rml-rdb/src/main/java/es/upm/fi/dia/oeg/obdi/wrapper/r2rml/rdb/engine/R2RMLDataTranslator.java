@@ -150,6 +150,8 @@ implements R2RMLElementVisitor {
 							objectMapUnfoldedValue = "false";
 						}
 					}					
+				} else {
+					
 				}
 				
 				objectMapUnfoldedValue = ODEMapsterUtility.encodeLiteral(objectMapUnfoldedValue);

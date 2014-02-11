@@ -5,14 +5,14 @@ import java.sql.Connection
 import scala.collection.JavaConversions._
 
 class ColumnMetaData (val tableName : String, val columnName : String
-    , val dataType : String, val isNullable : Boolean) {
+    , val dataType : String, val isNullable : Boolean, val characterMaximumLength:Integer) {
 
 	val logger = Logger.getLogger("ColumnMetaData");
 
-	override def toString() = {
-		val result = "ColumnMetaData [tableName=" + tableName + ", columnName=" + columnName + ", dataType=" + dataType + ", isNullable=" + isNullable + "]";
-		result;
-	}
+//	override def toString() = {
+//		val result = "ColumnMetaData [tableName=" + tableName + ", columnName=" + columnName + ", dataType=" + dataType + ", isNullable=" + isNullable + "]";
+//		result;
+//	}
 	
 //	def getDataType() = {
 //	  this.dataType;

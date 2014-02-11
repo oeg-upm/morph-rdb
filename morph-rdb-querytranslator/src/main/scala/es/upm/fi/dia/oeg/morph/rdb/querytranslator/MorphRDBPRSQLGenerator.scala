@@ -87,14 +87,14 @@ class MorphRDBPRSQLGenerator(
 					val propertyMapping = propertyMappings.iterator().next();
 					if(propertyMapping.isInstanceOf[R2RMLPredicateObjectMap]) {
 						val pom = propertyMapping.asInstanceOf[R2RMLPredicateObjectMap];
-						val om = pom.getObjectMap();
+						val om = pom.getObjectMap(0);
 						val mappingHashCode = {
 							if(om != null) {
 								val omHashCode = om.hashCode();
 								this.owner.putMappedMapping(omHashCode, om);
 								omHashCode;
 							} else {
-								val rom = pom.getRefObjectMap();
+								val rom = pom.getRefObjectMap(0);
 								if(rom != null) {
 									//this.getOwner().getMapHashCodeMapping().put(mappingHashCode, rom);
 									val romHashCode = rom.hashCode();

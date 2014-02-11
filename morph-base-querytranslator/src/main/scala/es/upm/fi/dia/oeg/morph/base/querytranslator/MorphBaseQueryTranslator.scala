@@ -811,7 +811,7 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 					val sqlQueries = pms.flatMap(pm => {
 						val propertyMappingResource = pm.getResource();
 						val boundedTriplePatternErrorMessages = boundedTriplePatterns.get(propertyMappingResource);
-						val predicateURI = pm.getMappedPredicateName();
+						val predicateURI = pm.getMappedPredicateName(0);
 						if(boundedTriplePatternErrorMessages == null || boundedTriplePatternErrorMessages.isEmpty()) {
 							try {
 								val sqlQuery : IQuery = this.transTP(tp, cm, predicateURI, true);

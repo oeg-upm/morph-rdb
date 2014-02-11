@@ -70,8 +70,8 @@ extends MorphBaseCondSQLGenerator(
 			}		  
 		}
 		
-		val refObjectMap = poMap.getRefObjectMap();
-		val objectMap = poMap.getObjectMap();
+		val refObjectMap = poMap.getRefObjectMap(0);
+		val objectMap = poMap.getObjectMap(0);
 		if(refObjectMap == null && objectMap == null) {
 			val errorMessage = "no mappings is specified.";
 			logger.error(errorMessage);

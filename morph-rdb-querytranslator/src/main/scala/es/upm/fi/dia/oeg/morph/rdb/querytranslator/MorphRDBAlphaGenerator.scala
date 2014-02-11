@@ -58,7 +58,7 @@ extends MorphBaseAlphaGenerator(
 							}
 							
 							val pm = pms.iterator().next().asInstanceOf[R2RMLPredicateObjectMap];
-							val refObjectMap = pm.getRefObjectMap();
+							val refObjectMap = pm.getRefObjectMap(0);
 							if(refObjectMap != null) { 
 								val alphaPredicateObject = this.calculateAlphaPredicateObject(
 										tp, abstractConceptMapping, pm, logicalTableAlias);
@@ -92,7 +92,7 @@ extends MorphBaseAlphaGenerator(
 		
 		
 		val pm = abstractPropertyMapping.asInstanceOf[R2RMLPredicateObjectMap];  
-		val refObjectMap = pm.getRefObjectMap();
+		val refObjectMap = pm.getRefObjectMap(0);
 		
 		val result:SQLJoinTable  =  {
 			if(refObjectMap != null) { 
@@ -173,7 +173,7 @@ extends MorphBaseAlphaGenerator(
 				val pms = cm.getPropertyMappings(tpPredicateURI);
 				if(pms != null && !pms.isEmpty()) {
 					val pm = pms.iterator().next().asInstanceOf[R2RMLPredicateObjectMap];
-					val refObjectMap = pm.getRefObjectMap();
+					val refObjectMap = pm.getRefObjectMap(10);
 					if(refObjectMap != null) { 
 						val alphaPredicateObject = this.calculateAlphaPredicateObject(tp, cm, pm, logicalTableAlias);
 						List(alphaPredicateObject);
@@ -208,7 +208,7 @@ extends MorphBaseAlphaGenerator(
 				val pms = cm.getPropertyMappings(tpPredicateURI);
 				if(pms != null && !pms.isEmpty()) {
 					val pm = pms.iterator().next().asInstanceOf[R2RMLPredicateObjectMap];
-					val refObjectMap = pm.getRefObjectMap();
+					val refObjectMap = pm.getRefObjectMap(0);
 					if(refObjectMap != null) { 
 						val alphaPredicateObject = 
 								this.calculateAlphaPredicateObject2(tp, cm, pm, logicalTableAlias);
@@ -237,7 +237,7 @@ extends MorphBaseAlphaGenerator(
 		
 		
 		val pm = abstractPropertyMapping.asInstanceOf[R2RMLPredicateObjectMap];  
-		val refObjectMap = pm.getRefObjectMap();
+		val refObjectMap = pm.getRefObjectMap(0);
 		
 		val result:SQLLogicalTable  =  {
 			if(refObjectMap != null) { 

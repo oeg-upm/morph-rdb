@@ -90,7 +90,7 @@ abstract class MorphBaseAlphaGenerator(
 				val pms = cm.getPropertyMappings();
 				val alphaTP = new MorphAlphaResultUnion();
 				for(pm <- pms) {
-					val tpPredicateURI = pm.getMappedPredicateName();
+					val tpPredicateURI = pm.getMappedPredicateName(0);
 					val alphaPredicateObjectAux = calculateAlphaPredicateObjectSTG(
 							tp, cm, tpPredicateURI,logicalTableAlias);
 					if(alphaPredicateObjectAux != null) {
