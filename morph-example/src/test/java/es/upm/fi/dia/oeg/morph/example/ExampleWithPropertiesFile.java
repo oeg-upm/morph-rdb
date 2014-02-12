@@ -45,6 +45,7 @@ public class ExampleWithPropertiesFile {
 	
 	@Test
 	public void sparql01() {
+		//2 instances
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "query01.r2rml.properties";
 		try {
@@ -76,6 +77,7 @@ public class ExampleWithPropertiesFile {
 	
 	@Test
 	public void sparql02() {
+		//4 instances
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "query02.r2rml.properties";
 		try {
@@ -92,6 +94,7 @@ public class ExampleWithPropertiesFile {
 
 	@Test
 	public void sparql03() {
+		//4 instances
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "query03.r2rml.properties";
 		try {
@@ -108,6 +111,7 @@ public class ExampleWithPropertiesFile {
 	
 	@Test
 	public void sparql04() {
+		//4 instances
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "query04.r2rml.properties";
 		try {
@@ -124,6 +128,7 @@ public class ExampleWithPropertiesFile {
 	
 	@Test
 	public void sparql05() {
+		//1 instance
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "query05.r2rml.properties";
 		try {

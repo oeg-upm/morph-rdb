@@ -86,11 +86,15 @@ extends ZSelectItem {
 	
 	override def getColumn() = {
 		val result : String = {
-			if(this.column.startsWith("\"") && this.column.endsWith("\"")) {
-				this.column.substring(1, this.column.length()-1);
-			} else {
-				this.column;
-			}		  
+		  	if(this.isExpression()) {
+		  	  null
+		  	} else {
+				if(this.column.startsWith("\"") && this.column.endsWith("\"")) {
+					this.column.substring(1, this.column.length()-1);
+				} else {
+					this.column;
+				}		  	  
+		  	}
 		}
 		result
 	}

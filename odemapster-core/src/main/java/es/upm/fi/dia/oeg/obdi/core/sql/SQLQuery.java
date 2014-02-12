@@ -221,26 +221,31 @@ public class SQLQuery extends ZQuery implements IQuery {
 		if(selectItems != null) {
 			Vector<ZSelectItem> selectItems2 = new Vector<ZSelectItem>();
 			for(ZSelectItem selectItem : selectItems) {
-				String selectItemName;
-				String alias = selectItem.getAlias();
-				if(alias == null || alias.equals("")) {
-					selectItemName = selectItem.getColumn();
+				if(selectItem.isExpression()) {
+					selectItems2.add(selectItem);
 				} else {
-					selectItemName = selectItem.getAlias();
+					String selectItemName;
+					String alias = selectItem.getAlias();
+					if(alias == null || alias.equals("")) {
+						selectItemName = selectItem.getColumn();
+					} else {
+						selectItemName = selectItem.getAlias();
+					}
+
+					if(selectItemName.startsWith(Constants.PREFIX_VAR())) {
+						String newSelectItemAlias = 
+								selectItemName.substring(Constants.PREFIX_VAR().length(), selectItemName.length());
+						selectItem.setAlias(newSelectItemAlias);
+						selectItems2.add(selectItem);					
+					} else if(selectItemName.startsWith(Constants.PREFIX_LIT())) {
+						//do nothing
+					} else if(selectItemName.startsWith(Constants.PREFIX_URI())) {
+						//do nothing
+					} else {
+						selectItems2.add(selectItem);
+					}					
 				}
 
-				if(selectItemName.startsWith(Constants.PREFIX_VAR())) {
-					String newSelectItemAlias = 
-							selectItemName.substring(Constants.PREFIX_VAR().length(), selectItemName.length());
-					selectItem.setAlias(newSelectItemAlias);
-					selectItems2.add(selectItem);					
-				} else if(selectItemName.startsWith(Constants.PREFIX_LIT())) {
-					//do nothing
-				} else if(selectItemName.startsWith(Constants.PREFIX_URI())) {
-					//do nothing
-				} else {
-					selectItems2.add(selectItem);
-				}
 			}
 			this.setSelectItems(selectItems2);			
 		}

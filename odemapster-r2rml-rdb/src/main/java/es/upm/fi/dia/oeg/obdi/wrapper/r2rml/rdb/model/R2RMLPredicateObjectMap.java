@@ -146,11 +146,23 @@ public class R2RMLPredicateObjectMap extends AbstractPropertyMapping implements 
 
 	@Override
 	public String getMappedPredicateName(int index) {
-		return this.predicateMaps.get(index).getOriginalValue();
+		String result;
+		if(this.predicateMaps != null && !this.predicateMaps.isEmpty()) {
+			result = this.predicateMaps.get(index).getOriginalValue();
+		} else {
+			result = null;
+		}
+		return result;
 	}
 
 	public R2RMLObjectMap getObjectMap(int index) {
-		return objectMaps.get(index);
+		R2RMLObjectMap result;
+		if(this.objectMaps != null && !this.objectMaps.isEmpty()) {
+			result = this.objectMaps.get(index);
+		} else {
+			result = null;
+		}
+		return result;
 	}
 
 	public Collection<R2RMLObjectMap> getObjectMaps() {
@@ -162,11 +174,23 @@ public class R2RMLPredicateObjectMap extends AbstractPropertyMapping implements 
 	}
 
 	public ObjectMapType getObjectMapType(int index) {
-		return objectMapTypes.get(index);
+		ObjectMapType result;
+		if(this.objectMapTypes != null && !this.objectMapTypes.isEmpty()) {
+			result = this.objectMapTypes.get(index);
+		} else {
+			result = null;
+		}
+		return result;
 	}
 
 	public R2RMLPredicateMap getPredicateMap(int index) {
-		return predicateMaps.get(index);
+		R2RMLPredicateMap result;
+		if(this.predicateMaps != null && !this.predicateMaps.isEmpty()) {
+			result = predicateMaps.get(index);
+		} else {
+			result = null;
+		}
+		return result;
 	}
 
 	public Collection<R2RMLPredicateMap> getPredicateMaps() {
@@ -181,14 +205,16 @@ public class R2RMLPredicateObjectMap extends AbstractPropertyMapping implements 
 	@Override
 	public MappingType getPropertyMappingType(int index) {
 		MappingType result;
-		if(this.objectMaps.get(index) != null) {
+		if(this.objectMaps != null && !this.objectMaps.isEmpty() 
+				&& this.objectMaps.get(index) != null) {
 			String objectMapTermType = this.objectMaps.get(index).getTermType();
 			if(objectMapTermType.equals(Constants.R2RML_LITERAL_URI())) {
 				result = MappingType.ATTRIBUTE;
 			} else {
 				result = MappingType.RELATION;
 			}
-		} else if(this.refObjectMaps.get(index) != null) {
+		} else if(this.refObjectMaps != null && !this.refObjectMaps.isEmpty() 
+				&& this.refObjectMaps.get(index) != null) {
 			result = MappingType.RELATION;
 		} else {
 			result = null;
@@ -197,17 +223,25 @@ public class R2RMLPredicateObjectMap extends AbstractPropertyMapping implements 
 	}
 
 	public String getRangeClassMapping(int index) {
-		// TODO Auto-generated method stub
-		if(this.refObjectMaps.get(index) != null) {
-			return this.refObjectMaps.get(index).getParentTripleMapName();
+		String result;
+		if(this.refObjectMaps != null && !this.refObjectMaps.isEmpty() 
+				&& this.refObjectMaps.get(index) != null) {
+			result = this.refObjectMaps.get(index).getParentTripleMapName();
 		} else {
-			return null;
+			result = null;
 		}
+		return result;
 		
 	}
 
 	public R2RMLRefObjectMap getRefObjectMap(int index) {
-		return this.refObjectMaps.get(index);
+		R2RMLRefObjectMap result;
+		if(this.refObjectMaps != null && !this.refObjectMaps.isEmpty()) {
+			result = this.refObjectMaps.get(index);
+		} else {
+			result = null;
+		}
+		return result;
 	}
 
 	public Collection<R2RMLRefObjectMap> getRefObjectMaps() {

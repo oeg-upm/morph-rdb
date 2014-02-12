@@ -27,6 +27,7 @@ public class R2RMLRunner extends AbstractRunner {
 			AbstractRunner runner = new R2RMLRunner(configurationDirectory, configurationFile);
 			runner.run();
 		} catch(Exception e) {
+			//e.printStackTrace();
 			logger.error("Exception occured: " + e.getMessage());
 			throw e;
 		}
