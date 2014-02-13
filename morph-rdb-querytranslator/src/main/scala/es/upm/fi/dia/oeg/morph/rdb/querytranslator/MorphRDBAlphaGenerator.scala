@@ -173,7 +173,7 @@ extends MorphBaseAlphaGenerator(
 				val pms = cm.getPropertyMappings(tpPredicateURI);
 				if(pms != null && !pms.isEmpty()) {
 					val pm = pms.iterator().next().asInstanceOf[R2RMLPredicateObjectMap];
-					val refObjectMap = pm.getRefObjectMap(10);
+					val refObjectMap = pm.getRefObjectMap(0);
 					if(refObjectMap != null) { 
 						val alphaPredicateObject = this.calculateAlphaPredicateObject(tp, cm, pm, logicalTableAlias);
 						List(alphaPredicateObject);

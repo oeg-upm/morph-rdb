@@ -348,8 +348,13 @@ class MorphMappingInferrer(mappingDocument:AbstractMappingDocument ) {
 					if(!RDF.`type`.getURI().equalsIgnoreCase(predicateURI)) {
 						val nodeTypes = {
 							if(subjectTypes.isDefined) {
-								val cm = subjectTypes.get.iterator.next();
-								this.mappingDocument.getPossibleRange(predicateURI, cm);							  
+								val subjectTypesSet = subjectTypes.get;
+								if(subjectTypesSet != null && !subjectTypesSet.isEmpty) {
+									val cm = subjectTypes.get.iterator.next();
+									this.mappingDocument.getPossibleRange(predicateURI, cm);								  
+								} else {
+								  this.mappingDocument.getPossibleRange(predicateURI);
+								}
 							} else {
 							  this.mappingDocument.getPossibleRange(predicateURI);
 							}
