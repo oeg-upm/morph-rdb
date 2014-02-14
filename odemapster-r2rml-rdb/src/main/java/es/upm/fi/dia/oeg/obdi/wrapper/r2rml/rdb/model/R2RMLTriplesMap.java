@@ -32,14 +32,14 @@ public class R2RMLTriplesMap extends AbstractConceptMapping
 implements R2RMLElement, IConceptMapping {
 	private static Logger logger = Logger.getLogger(R2RMLTriplesMap.class);
 	private String triplesMapName;
-	private R2RMLMappingDocument owner;
+	
 	private R2RMLLogicalTable logicalTable;
 	private R2RMLSubjectMap subjectMap;
 	private Collection<R2RMLPredicateObjectMap> predicateObjectMaps;
 	
 	public R2RMLTriplesMap(Resource triplesMap, R2RMLMappingDocument owner) 
 			throws R2RMLInvalidTriplesMapException, R2RMLInvalidRefObjectMapException, R2RMLJoinConditionException, R2RMLInvalidTermMapException {
-		this.owner = owner;
+		super.owner = owner;
 		this.triplesMapName = triplesMap.getLocalName();
 		this.resource = triplesMap;
 		
@@ -218,10 +218,6 @@ implements R2RMLElement, IConceptMapping {
 		return result;
 	}
 
-
-	public R2RMLMappingDocument getOwner() {
-		return owner;
-	}
 
 	@Override
 	public boolean isPossibleInstance(String uri) {

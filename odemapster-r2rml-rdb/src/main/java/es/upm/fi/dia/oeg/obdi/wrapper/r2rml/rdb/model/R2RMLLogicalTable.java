@@ -28,7 +28,7 @@ public abstract class R2RMLLogicalTable extends AbstractLogicalTable implements 
 	
 	LogicalTableType logicalTableType;
 	private String alias;
-	private R2RMLTriplesMap owner;
+	
 	
 	R2RMLLogicalTable(R2RMLTriplesMap owner) {this.owner = owner;}
 

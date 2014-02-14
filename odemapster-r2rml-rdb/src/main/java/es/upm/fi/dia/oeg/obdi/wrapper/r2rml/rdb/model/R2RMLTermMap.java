@@ -2,6 +2,7 @@ package es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -9,12 +10,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-
-
 import org.apache.log4j.Logger;
 
 import scala.Option;
 import Zql.ZConstant;
+import Zql.ZExp;
+import Zql.ZExpression;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -22,11 +23,13 @@ import com.hp.hpl.jena.rdf.model.Statement;
 
 import es.upm.fi.dia.oeg.morph.base.ColumnMetaData;
 import es.upm.fi.dia.oeg.morph.base.Constants;
+import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
 import es.upm.fi.dia.oeg.morph.base.RegexUtility;
 import es.upm.fi.dia.oeg.morph.base.TableMetaData;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant;
 import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.core.ODEMapsterUtility;
+import es.upm.fi.dia.oeg.obdi.core.sql.SQLDataType;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.R2RMLUtility;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElement;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElementVisitor;
@@ -36,7 +39,7 @@ public class R2RMLTermMap implements R2RMLElement
 , IConstantTermMap, IColumnTermMap, ITemplateTermMap {
 	private static Logger logger = Logger.getLogger(R2RMLTermMap.class);
 	public enum TermMapPosition {SUBJECT, PREDICATE, OBJECT, GRAPH}
-	
+
 	private String termType;//IRI, BlankNode, or Literal
 	private String languageTag;
 	private String datatype;
@@ -59,7 +62,7 @@ public class R2RMLTermMap implements R2RMLElement
 	//for template type TermMap
 	private String templateString;
 
-//	private boolean isNullable = true;
+	//	private boolean isNullable = true;
 
 	R2RMLTermMap(Resource resource, TermMapPosition termMapPosition, R2RMLTriplesMap owner) 
 			throws R2RMLInvalidTermMapException {
@@ -94,10 +97,10 @@ public class R2RMLTermMap implements R2RMLElement
 					} else {
 						cmd = null;
 					}
-					
+
 					if(cmd != null) {
 						this.columnTypeName = cmd.dataType();
-//						this.isNullable = cmd.isNullable();
+						//						this.isNullable = cmd.isNullable();
 					}					
 				}
 			} else {
@@ -107,7 +110,7 @@ public class R2RMLTermMap implements R2RMLElement
 					this.templateString = templateStatement.getObject().toString();
 
 					Collection<String> pkColumnStrings = this.getTemplateColumns();
-					
+
 					for(String pkColumnString : pkColumnStrings) {
 						//pkColumnString = pkColumnString.replaceAll("\"", dbEnclosedCharacter);
 
@@ -122,7 +125,7 @@ public class R2RMLTermMap implements R2RMLElement
 						} else {
 							cmd = null;							
 						}
-						
+
 						if(cmd != null) {
 							this.columnTypeName = cmd.dataType();
 							if(cmd.isNullable()) {
@@ -131,7 +134,7 @@ public class R2RMLTermMap implements R2RMLElement
 							logger.debug("metadata not found for: " + pkColumnString);
 						}
 					}
-//					this.isNullable = isNullableAux;
+					//					this.isNullable = isNullableAux;
 				} else {
 					String termMapType;
 					if(this instanceof R2RMLSubjectMap) {
@@ -168,7 +171,7 @@ public class R2RMLTermMap implements R2RMLElement
 		} else {
 			this.termType = termTypeStatement.getObject().toString();
 		}
-		
+
 	}
 
 	R2RMLTermMap(TermMapPosition termMapPosition, String constantValue) {
@@ -345,7 +348,7 @@ public class R2RMLTermMap implements R2RMLElement
 			if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
 				String[] originalValueSplit = originalValue.split("\\.");
 				String columnName = originalValueSplit[originalValueSplit.length - 1];
-//				originalValue = logicalTableAlias + "." + columnName;
+				//				originalValue = logicalTableAlias + "." + columnName;
 				originalValue = logicalTableAlias + "_" + columnName;
 			}
 			result = this.getResultSetValue(rs, originalValue);
@@ -509,5 +512,79 @@ public class R2RMLTermMap implements R2RMLElement
 	}
 
 
+	public ZExpression generateCondForWellDefinedURI(String uri, String alias, String dbType) throws Exception {
+		R2RMLLogicalTable logicalTable = this.getOwner().getLogicalTable();
+		TableMetaData logicalTableMetaData = logicalTable.getTableMetaData();
+		Connection conn = logicalTable.getOwner().getOwner().getConn();
 
+		TableMetaData tableMetaData;
+		if(logicalTableMetaData == null && conn != null) {
+			try {
+				logicalTable.buildMetaData(conn);
+				tableMetaData = logicalTable.getTableMetaData();
+			} catch(Exception e) {
+				logger.error(e.getMessage());
+				throw new Exception(e.getMessage());
+			}
+		} else {
+			tableMetaData = logicalTableMetaData;
+		}		  
+
+		ZExpression result;
+		if(this.getTermMapType() == TermMapType.TEMPLATE) {
+			Map<String, String> matchedColValues = this.getTemplateValues(uri);
+			if(matchedColValues == null || matchedColValues.size() == 0) {
+				String errorMessage = "uri " + uri + " doesn't match the template : " + this.getTemplateString();
+				logger.debug(errorMessage);
+				result = null;
+			} else {
+				Collection<ZExp> exprs = new Vector<ZExp>();
+				for(String pkColumnString : matchedColValues.keySet()) {
+					String value = matchedColValues.get(pkColumnString);
+
+					String termMapColumnTypeName = this.getColumnTypeName();
+					String columnTypeName;
+					if(termMapColumnTypeName != null) {
+						columnTypeName = termMapColumnTypeName;
+					} else {
+						if(tableMetaData != null && tableMetaData.getColumnMetaData(pkColumnString).isDefined()) {
+							String columnTypeNameAux = tableMetaData.getColumnMetaData(pkColumnString).get().dataType();
+							this.setColumnTypeName(columnTypeNameAux);
+							columnTypeName = columnTypeNameAux;
+						} else {
+							columnTypeName = null;
+						}
+					}
+
+					ZConstant pkColumnConstant = MorphSQLConstant.apply(
+							alias + "." + pkColumnString, ZConstant.COLUMNNAME, dbType);
+
+					ZConstant pkValueConstant; 
+					if(columnTypeName != null) {
+						if(Arrays.asList(SQLDataType.datatypeNumber).contains(columnTypeName)) {
+							pkValueConstant = new ZConstant(value, ZConstant.NUMBER);
+						} else if(Arrays.asList(SQLDataType.datatypeString).contains(columnTypeName)) {
+							pkValueConstant = new ZConstant(value, ZConstant.STRING);
+						} else {
+							pkValueConstant = new ZConstant(value, ZConstant.STRING);
+						}					
+					} else {
+						pkValueConstant = new ZConstant(value, ZConstant.STRING);
+					}					  
+
+
+					ZExp expr = new ZExpression("=", pkColumnConstant, pkValueConstant);
+					exprs.add(expr);
+				}
+
+				result = MorphSQLUtility.combineExpresionsJava(
+						exprs, Constants.SQL_LOGICAL_OPERATOR_AND());				
+			}
+		} else {
+			result = null;
+		}
+
+		logger.debug("generateCondForWellDefinedURI = " + result);
+		return result;
+	}
 }

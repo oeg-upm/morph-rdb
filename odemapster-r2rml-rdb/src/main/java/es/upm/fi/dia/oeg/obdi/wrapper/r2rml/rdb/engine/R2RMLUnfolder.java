@@ -9,6 +9,7 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
+import Zql.ZExp;
 import Zql.ZExpression;
 import Zql.ZQuery;
 import Zql.ZSelectItem;
@@ -240,14 +241,26 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 		return result;		
 	}
 	
-	public SQLQuery unfold(R2RMLTriplesMap triplesMap) throws Exception {
+	public SQLQuery unfold(R2RMLTriplesMap triplesMap, String subjectURI) throws Exception {
 		R2RMLLogicalTable logicalTable = triplesMap.getLogicalTable();
 		R2RMLSubjectMap subjectMap = triplesMap.getSubjectMap();
 		Collection<R2RMLPredicateObjectMap> predicateObjectMaps = 
 				triplesMap.getPredicateObjectMaps();
 		
 		SQLQuery result = this.unfold(logicalTable, subjectMap, predicateObjectMaps);
-		return result;
+		if(subjectURI != null) {
+			ZExp whereExpression = subjectMap.generateCondForWellDefinedURI(subjectURI, logicalTable.getAlias(), this.dbType);
+			if(whereExpression != null) {
+				result.addWhere(whereExpression);
+			} else {
+				result = null;
+			}
+		}
+		return result;		
+	}
+	
+	public SQLQuery unfold(R2RMLTriplesMap triplesMap) throws Exception {
+		return this.unfold(triplesMap, null);
 	}
 	
 	protected Set<SQLQuery> unfold(Set<ILogicalQuery> logicalQueries,
@@ -257,16 +270,15 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 	}
 
 	@Override
-	public SQLQuery unfoldConceptMapping(AbstractConceptMapping triplesMap)
+	public SQLQuery unfoldConceptMapping(AbstractConceptMapping cm)
 			throws Exception {
-		return this.unfold((R2RMLTriplesMap) triplesMap);
+		return this.unfold((R2RMLTriplesMap) cm);
 	}
 	
 	@Override
 	public SQLQuery unfoldConceptMapping(AbstractConceptMapping cm,
 			String subjectURI) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return this.unfold((R2RMLTriplesMap) cm, subjectURI);
 	}
 
 	@Override

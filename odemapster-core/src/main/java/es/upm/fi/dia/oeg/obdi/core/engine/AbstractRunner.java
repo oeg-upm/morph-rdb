@@ -486,7 +486,7 @@ public abstract class AbstractRunner {
 		//return result;
 	}
 
-	public void materializeSubjectDetails(
+	public void materializeInstanceDetails(
 			String subjectURI, String classURI, String outputFileName) throws Exception {
 		//Map<AbstractConceptMapping, Collection<String>> result = new HashMap<AbstractConceptMapping, Collection<String>>();
 		long startGeneratingModel = System.currentTimeMillis();
@@ -498,8 +498,10 @@ public abstract class AbstractRunner {
 		Collection<AbstractConceptMapping> cms = 
 				this.mappingDocument.getConceptMappingsByConceptName(classURI);
 		for(AbstractConceptMapping cm:cms) {
-			SQLQuery sqlQuery = this.unfolder.unfoldConceptMapping(cm);
-			this.dataTranslator.generateSubjects(cm, sqlQuery.toString());
+			SQLQuery sqlQuery = this.unfolder.unfoldConceptMapping(cm, subjectURI);
+			if(sqlQuery != null) {
+				this.dataTranslator.generateRDFTriples(cm, sqlQuery.toString());	
+			}
 		}
 		this.dataTranslator.materializer.materialize();
 

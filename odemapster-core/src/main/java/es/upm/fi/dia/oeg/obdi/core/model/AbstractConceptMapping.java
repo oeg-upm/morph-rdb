@@ -19,7 +19,10 @@ public abstract class AbstractConceptMapping extends AbstractRDB2RDFMapping impl
 	public abstract TableMetaData getTableMetaData();
 	public abstract Collection<String> getMappedClassURIs();
 	public abstract AbstractLogicalTable getLogicalTable();
-	
+	protected AbstractMappingDocument owner;
+	public AbstractMappingDocument getOwner() {
+		return owner;
+	}
 	protected Resource resource;
 	
 	public Resource getResource() {

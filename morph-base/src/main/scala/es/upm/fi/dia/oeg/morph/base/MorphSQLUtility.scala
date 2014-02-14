@@ -541,4 +541,9 @@ object MorphSQLUtility {
 	  }
 	  result;
 	}
+
+	def buildEqualitySQLExpression() = {
+	  
+	}
+
 }
