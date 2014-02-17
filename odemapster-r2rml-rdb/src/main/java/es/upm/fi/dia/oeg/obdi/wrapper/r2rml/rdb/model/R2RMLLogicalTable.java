@@ -108,7 +108,7 @@ public abstract class R2RMLLogicalTable extends AbstractLogicalTable implements 
 	}
 
 	static R2RMLLogicalTable parse(Resource resource, R2RMLTriplesMap owner) throws Exception {
-		String dbType = owner.getOwner().getConfigurationProperties().getDatabaseType();
+		String dbType = owner.getOwner().getConfigurationProperties().databaseType();
 		String dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
 		
 		R2RMLLogicalTable logicalTable = null; 

@@ -22,18 +22,17 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 
 import es.upm.fi.dia.oeg.morph.base.ColumnMetaData;
+import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties;
 import es.upm.fi.dia.oeg.morph.base.Constants;
+import es.upm.fi.dia.oeg.morph.base.GeneralUtility;
 import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
 import es.upm.fi.dia.oeg.morph.base.RegexUtility;
 import es.upm.fi.dia.oeg.morph.base.TableMetaData;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant;
-import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
-import es.upm.fi.dia.oeg.obdi.core.ODEMapsterUtility;
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLDataType;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElement;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElementVisitor;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.exception.R2RMLInvalidTermMapException;
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap.TermMapType;
 
 public class R2RMLTermMap implements R2RMLElement
 , IConstantTermMap, IColumnTermMap, ITemplateTermMap {
@@ -67,7 +66,7 @@ public class R2RMLTermMap implements R2RMLElement
 	R2RMLTermMap(Resource resource, TermMapPosition termMapPosition, R2RMLTriplesMap owner) 
 			throws R2RMLInvalidTermMapException {
 		this.configurationProperties = owner.getOwner().getConfigurationProperties();
-		String dbType = this.configurationProperties.getDatabaseType();
+		String dbType = this.configurationProperties.databaseType();
 		String dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
 
 		this.owner = owner;
@@ -267,7 +266,7 @@ public class R2RMLTermMap implements R2RMLElement
 		String result = null;
 
 		try {
-			String dbType = this.configurationProperties.getDatabaseType();
+			String dbType = this.configurationProperties.databaseType();
 			//SQLSelectItem selectItem = new SQLSelectItem(columnName);
 			//SQLSelectItem selectItem = SQLSelectItem.createSQLItem(dbType, columnName, null);
 			MorphSQLConstant zConstant = MorphSQLConstant.apply(pColumnName, ZConstant.COLUMNNAME, dbType);
@@ -379,12 +378,12 @@ public class R2RMLTermMap implements R2RMLElement
 
 				if(databaseValue != null) {
 					if(Constants.R2RML_IRI_URI().equals(this.termType)) {
-						if(this.configurationProperties.isEncodeUnsafeChars()) {
-							databaseValue = ODEMapsterUtility.encodeUnsafeChars(databaseValue);
+						if(this.configurationProperties.encodeUnsafeChars()) {
+							databaseValue = GeneralUtility.encodeUnsafeChars(databaseValue);
 						}
 
-						if(this.configurationProperties.isEncodeReservedChars()) {
-							databaseValue = ODEMapsterUtility.encodeReservedChars(databaseValue);
+						if(this.configurationProperties.encodeReservedChars()) {
+							databaseValue = GeneralUtility.encodeReservedChars(databaseValue);
 						}							
 
 					}

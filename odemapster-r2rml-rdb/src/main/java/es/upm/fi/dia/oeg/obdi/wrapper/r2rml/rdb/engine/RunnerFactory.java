@@ -1,16 +1,15 @@
 package es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine;
 
-import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
+import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslationOptimizer;
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator;
 import es.upm.fi.dia.oeg.obdi.core.engine.QueryTranslationOptimizerFactory;
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLRunner;
 
 public class RunnerFactory {
 	private static R2RMLRunner createR2RMLRunnerC(String configurationDirectory, String configurationFile)
 			throws Exception {
 		ConfigurationProperties configurationProperties = 
-				new ConfigurationProperties(configurationDirectory, configurationFile);
+				ConfigurationProperties.apply(configurationDirectory, configurationFile);
 		R2RMLRunner r2rmlRunner = RunnerFactory.createR2RMLRunnerC(configurationProperties);
 		return r2rmlRunner;
 	}
@@ -29,7 +28,7 @@ public class RunnerFactory {
 	private static R2RMLRunner createR2RMLRunnerE(String configurationDirectory, String configurationFile)
 			throws Exception {
 		ConfigurationProperties configurationProperties = 
-				new ConfigurationProperties(configurationDirectory, configurationFile);
+				ConfigurationProperties.apply(configurationDirectory, configurationFile);
 		R2RMLRunner r2rmlRunner = RunnerFactory.createR2RMLRunnerE(configurationProperties);
 		return r2rmlRunner;
 	}
@@ -48,7 +47,7 @@ public class RunnerFactory {
 	private static R2RMLRunner createR2RMLRunnerFC(String configurationDirectory, String configurationFile)
 			throws Exception {
 		ConfigurationProperties configurationProperties = 
-				new ConfigurationProperties(configurationDirectory, configurationFile);
+				ConfigurationProperties.apply(configurationDirectory, configurationFile);
 		R2RMLRunner r2rmlRunner = RunnerFactory.createR2RMLRunnerFC(configurationProperties);
 		return r2rmlRunner;
 	}
@@ -67,7 +66,7 @@ public class RunnerFactory {
 	public static R2RMLRunner createR2RMLRunnerFE(String configurationDirectory, String configurationFile)
 			throws Exception {
 		ConfigurationProperties configurationProperties = 
-				new ConfigurationProperties(configurationDirectory, configurationFile);
+				ConfigurationProperties.apply(configurationDirectory, configurationFile);
 		R2RMLRunner r2rmlRunner = RunnerFactory.createR2RMLRunnerFE(configurationProperties);
 		return r2rmlRunner;
 	}

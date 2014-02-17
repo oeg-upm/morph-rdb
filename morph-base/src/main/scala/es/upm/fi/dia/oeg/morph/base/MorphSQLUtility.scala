@@ -427,7 +427,7 @@ object MorphSQLUtility {
 	
 	def getValueWithoutAlias(selectItem:ZSelectItem) : String = {
 		val selectItemAlias = selectItem.getAlias();
-		val result = {
+		val resultAux = {
 			if(selectItemAlias != null && !selectItemAlias.equals("")) {
 				selectItem.setAlias("");
 				val selectItemString = selectItem.toString();
@@ -438,7 +438,17 @@ object MorphSQLUtility {
 			}		  
 		}
 
-		return result;
+//		val result = selectItem match {
+//		  case sqlSelectItem:MorphSQLSelectItem => {
+//			val columnType = sqlSelectItem.columnType;
+//			resultAux.replaceAll("::" + columnType, "");
+//		  }
+//		  case _ => {
+//		    resultAux
+//		  }
+//		}
+		
+		resultAux;
 	}
 
 	def pushOrderByDownJava(oldOrderByCollection:java.util.List[ZOrderBy]

@@ -16,7 +16,7 @@ object Constants {
 
 	object MorphPOS extends Enumeration {
 		type MorphPOS = Value
-		val sub, pre, obj = Value
+		val sub, pre, obj, graph = Value
 	}
 
 	

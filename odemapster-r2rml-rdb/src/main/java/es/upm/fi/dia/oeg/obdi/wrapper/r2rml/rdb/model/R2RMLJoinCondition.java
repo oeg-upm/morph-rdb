@@ -1,6 +1,11 @@
 package es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model;
 
+import java.util.Collection;
+
 import org.apache.log4j.Logger;
+
+import Zql.ZConstant;
+import Zql.ZExpression;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
@@ -55,6 +60,34 @@ public class R2RMLJoinCondition {
 		return parentColumnName;
 	}
 	
-	
+	public static ZExpression generateJoinCondition(
+			Collection<R2RMLJoinCondition> joinConditions, String parentTableAlias
+			, String joinQueryAlias, String dbType) {
+		ZExpression onExpression = null;
+		String enclosedCharacter = Constants.getEnclosedCharacter(dbType);
+		
+		if(joinConditions != null) {
+			for(R2RMLJoinCondition joinCondition : joinConditions) {
+				String childColumnName = joinCondition.getChildColumnName();
+				childColumnName = childColumnName.replaceAll("\"", enclosedCharacter);
+				childColumnName = parentTableAlias + "." + childColumnName;
+				ZConstant childColumn = new ZConstant(childColumnName, ZConstant.COLUMNNAME);
+
+				String parentColumnName = joinCondition.getParentColumnName();
+				parentColumnName = parentColumnName.replaceAll("\"", enclosedCharacter);
+				parentColumnName = joinQueryAlias + "." + parentColumnName;
+				ZConstant parentColumn = new ZConstant(parentColumnName, ZConstant.COLUMNNAME);
+				
+				ZExpression joinConditionExpression = new ZExpression("=", childColumn, parentColumn);
+				if(onExpression == null) {
+					onExpression = joinConditionExpression;
+				} else {
+					onExpression = new ZExpression("AND", onExpression, joinConditionExpression);
+				}
+			}
+		}
+		
+		return onExpression;
+	}	
 	
 }	

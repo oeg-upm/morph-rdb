@@ -12,21 +12,19 @@ import org.apache.log4j.Logger;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 
+import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties;
 import es.upm.fi.dia.oeg.morph.base.Constants;
+import es.upm.fi.dia.oeg.morph.base.DBUtility;
 import es.upm.fi.dia.oeg.morph.base.DatatypeMapper;
+import es.upm.fi.dia.oeg.morph.base.GeneralUtility;
 import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
-import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
-import es.upm.fi.dia.oeg.obdi.core.DBUtility;
-import es.upm.fi.dia.oeg.obdi.core.ODEMapsterUtility;
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractDataTranslator;
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder;
 import es.upm.fi.dia.oeg.obdi.core.engine.RDBReader;
 import es.upm.fi.dia.oeg.obdi.core.exception.PostProcessorException;
 import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslatorException;
 import es.upm.fi.dia.oeg.obdi.core.materializer.AbstractMaterializer;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLGraphMap;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLLogicalTable;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLMappingDocument;
@@ -52,12 +50,12 @@ implements R2RMLElementVisitor {
 		this.setUnfolder(unfolder);*/
 	}
 	
-	public R2RMLDataTranslator(String configurationDirectory
-			, String configurationFile) {
-		super(configurationDirectory, configurationFile);
-/*		AbstractUnfolder unfolder = new R2RMLElementUnfoldVisitor();
-		this.setUnfolder(unfolder);*/
-	}
+//	public R2RMLDataTranslator(String configurationDirectory
+//			, String configurationFile) {
+//		super(configurationDirectory, configurationFile);
+///*		AbstractUnfolder unfolder = new R2RMLElementUnfoldVisitor();
+//		this.setUnfolder(unfolder);*/
+//	}
 
 	@Override
 	protected Object processCustomFunctionTransformationExpression(
@@ -93,7 +91,7 @@ implements R2RMLElementVisitor {
 	@Override
 	public void translateData(AbstractMappingDocument mappingDocument)
 			throws Exception {
-		Connection conn = this.properties.getConn();
+		Connection conn = this.properties.conn();
 		
 		Collection<AbstractConceptMapping> triplesMaps = 
 				mappingDocument.getConceptMappings();
@@ -115,7 +113,7 @@ implements R2RMLElementVisitor {
 
 			if(Constants.R2RML_IRI_URI().equalsIgnoreCase(objectMapTermType)) {
 				try {
-					objectMapUnfoldedValue = ODEMapsterUtility.encodeURI(objectMapUnfoldedValue);
+					objectMapUnfoldedValue = GeneralUtility.encodeURI(objectMapUnfoldedValue);
 				} catch(Exception e) {
 					logger.warn("Error encoding object value : " + objectMapUnfoldedValue);
 				}					
@@ -154,10 +152,10 @@ implements R2RMLElementVisitor {
 					
 				}
 				
-				objectMapUnfoldedValue = ODEMapsterUtility.encodeLiteral(objectMapUnfoldedValue);
+				objectMapUnfoldedValue = GeneralUtility.encodeLiteral(objectMapUnfoldedValue);
 				if(this.properties != null) {
-					if(this.properties.isLiteralRemoveStrangeChars()) {
-						objectMapUnfoldedValue = ODEMapsterUtility.removeStrangeChars(objectMapUnfoldedValue);
+					if(this.properties.literalRemoveStrangeChars()) {
+						objectMapUnfoldedValue = GeneralUtility.removeStrangeChars(objectMapUnfoldedValue);
 					}
 				}
 				
@@ -182,7 +180,7 @@ implements R2RMLElementVisitor {
 				}
 			} else if(Constants.R2RML_IRI_URI().equalsIgnoreCase(objectMapTermType)) {
 				try {
-					objectMapUnfoldedValue = ODEMapsterUtility.encodeURI(objectMapUnfoldedValue);
+					objectMapUnfoldedValue = GeneralUtility.encodeURI(objectMapUnfoldedValue);
 					if(subjectGraphName == null && predicateobjectGraphName == null) {
 						this.materializer.materializeObjectPropertyTriple(predicateMapUnfoldedValue, objectMapUnfoldedValue, false, null );
 					} else {
@@ -256,7 +254,7 @@ implements R2RMLElementVisitor {
 	}
 
 	public String getXMLDatatype(String columnName, Map<String, String> mapXMLDatatype) {
-		String dbType = this.properties.getDatabaseType();
+		String dbType = this.properties.databaseType();
 		columnName = MorphSQLUtility.printWithoutEnclosedCharacters(columnName, dbType);
 		String result = null;
 		for(String key:mapXMLDatatype.keySet()) {
@@ -271,8 +269,15 @@ implements R2RMLElementVisitor {
 			, Collection<R2RMLPredicateObjectMap> poms, String sqlQuery) 
 			throws Exception {
 		logger.info("Translating RDB data into RDF instances...");
-		Connection conn = this.properties.openConnection();
-		int timeout = this.properties.getDatabaseTimeout();
+		Connection conn = this.properties.conn();
+		if(conn == null) {
+			conn = DBUtility.getLocalConnection(this.properties.databaseUser()
+					, this.properties.databaseName(), this.properties.databasePassword()
+					, this.properties.databaseDriver(), this.properties.databaseURL(), 
+					"R2RMLDataTranslator");
+		}
+		
+		int timeout = this.properties.databaseTimeout();
 		ResultSet rs = RDBReader.evaluateQuery(sqlQuery, conn, timeout);
 		
 		Map<String, String> mapXMLDatatype = new HashMap<String, String>();
@@ -312,7 +317,7 @@ implements R2RMLElementVisitor {
 						subjectGraphName = sgm.getUnfoldedValue(rs, logicalTableAlias);
 						if(Constants.R2RML_IRI_URI().equalsIgnoreCase(sgm.getTermType())) {
 							try {
-								subjectGraphName = ODEMapsterUtility.encodeURI(subjectGraphName);
+								subjectGraphName = GeneralUtility.encodeURI(subjectGraphName);
 							} catch(Exception e) {
 								logger.warn("Error encoding subject graph value : " + subjectGraphName);
 							}					
@@ -331,7 +336,7 @@ implements R2RMLElementVisitor {
 					} else {
 						if(Constants.R2RML_IRI_URI().equalsIgnoreCase(sm.getTermType())) {
 							try {
-								subjectValue = ODEMapsterUtility.encodeURI(subjectValue);
+								subjectValue = GeneralUtility.encodeURI(subjectValue);
 							} catch(Exception e) {
 								logger.warn("Error encoding subject value : " + subjectValue);
 							}
@@ -366,7 +371,7 @@ implements R2RMLElementVisitor {
 													predicateobjectGraph.getUnfoldedValue(rs, null);
 											if(Constants.R2RML_IRI_URI().equalsIgnoreCase(predicateobjectGraph.getTermType())) {
 												try {
-													predicateobjectGraphName = ODEMapsterUtility.encodeURI(predicateobjectGraphName);
+													predicateobjectGraphName = GeneralUtility.encodeURI(predicateobjectGraphName);
 												} catch(Exception e) {
 													logger.warn("Error encoding object graph value : " + predicateobjectGraphName);
 												}					

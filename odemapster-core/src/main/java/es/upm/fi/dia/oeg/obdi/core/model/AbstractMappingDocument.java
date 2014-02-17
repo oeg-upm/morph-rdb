@@ -3,7 +3,6 @@ package es.upm.fi.dia.oeg.obdi.core.model;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +13,8 @@ import org.w3c.dom.Element;
 
 import com.hp.hpl.jena.graph.Node;
 
-import es.upm.fi.dia.oeg.morph.base.ColumnMetaData;
+import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties;
 import es.upm.fi.dia.oeg.morph.base.DBMetaData;
-import es.upm.fi.dia.oeg.morph.base.TableMetaData;
-import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.core.IParseable;
 import es.upm.fi.dia.oeg.obdi.core.exception.ParseException;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractRDB2RDFMapping.MappingType;

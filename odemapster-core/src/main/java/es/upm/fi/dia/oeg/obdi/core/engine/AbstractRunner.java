@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -14,10 +13,10 @@ import org.apache.log4j.Logger;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryFactory;
 
+import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties;
 import es.upm.fi.dia.oeg.morph.base.Constants;
+import es.upm.fi.dia.oeg.morph.base.DBUtility;
 import es.upm.fi.dia.oeg.newrqr.RewriterWrapper;
-import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
-import es.upm.fi.dia.oeg.obdi.core.DBUtility;
 import es.upm.fi.dia.oeg.obdi.core.materializer.AbstractMaterializer;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
@@ -53,7 +52,7 @@ public abstract class AbstractRunner {
 
 		//mapping document
 		String mappingDocumentFile = 
-				this.configurationProperties.getMappingDocumentFilePath();
+				this.configurationProperties.mappingDocumentFilePath();
 		if(mappingDocumentFile != null) {
 			this.readMappingDocumentFile(mappingDocumentFile);
 		}
@@ -74,21 +73,21 @@ public abstract class AbstractRunner {
 
 		//query translator
 		this.queryTranslatorClassName = 
-				this.configurationProperties.getQueryTranslatorClassName();
+				this.configurationProperties.queryTranslatorClassName();
 		//if(this.queryTranslatorClassName != null) {
 			this.buildQueryTranslator();	
 		//}
 
 		//query writer
 		this.queryResultWriterClassName = 
-				this.configurationProperties.getQueryResultWriterClassName();
+				this.configurationProperties.queryResultWriterClassName();
 		if(this.queryResultWriterClassName != null) {
 			this.buildQueryResultWriter();
 		}
 
 		//query evaluator
 		this.dataSourceReaderClassName = 
-				this.configurationProperties.getQueryEvaluatorClassName();
+				this.configurationProperties.queryEvaluatorClassName();
 		if(this.dataSourceReaderClassName != null) {
 			this.buildDataSourceReader();
 		}
@@ -101,7 +100,7 @@ public abstract class AbstractRunner {
 
 	public AbstractRunner(String configurationDirectory, String configurationFile) 
 			throws Exception {
-		this(new ConfigurationProperties(configurationDirectory, configurationFile));
+		this(ConfigurationProperties.apply(configurationDirectory, configurationFile));
 	}
 
 	private void buildDataSourceReader() throws Exception {
@@ -118,12 +117,12 @@ public abstract class AbstractRunner {
 		if(dataSourceReader instanceof RDBReader) {
 			//database connection
 			if(this.configurationProperties != null) {
-				if(this.configurationProperties.getNoOfDatabase() == 1) {
+				if(this.configurationProperties.noOfDatabase() == 1) {
 					try { conn = this.getConnection(); } 
 					catch(Exception e) { e.printStackTrace(); }				
 				}
 				((RDBReader) dataSourceReader).setConnection(conn);
-				int timeout = this.configurationProperties.getDatabaseTimeout();
+				int timeout = this.configurationProperties.databaseTimeout();
 				((RDBReader) dataSourceReader).setTimeout(timeout);
 			}
 		}
@@ -156,7 +155,7 @@ public abstract class AbstractRunner {
 			//set output file
 			String outputFileName = null;
 			if(this.configurationProperties != null) {
-				outputFileName = this.configurationProperties.getOutputFilePath();
+				outputFileName = this.configurationProperties.outputFilePath();
 			}
 			if(outputFileName == null) {
 				outputFileName = Constants.QUERY_RESULT_XMLWRITER_OUTPUT_DEFAULT(); 
@@ -192,7 +191,7 @@ public abstract class AbstractRunner {
 				Class.forName(queryTranslatorClassName).newInstance();		
 		if(configurationProperties != null) {
 			this.queryTranslator.setConfigurationProperties(configurationProperties);
-			String databaseType = configurationProperties.getDatabaseType();
+			String databaseType = configurationProperties.databaseType();
 			if(databaseType != null && !databaseType.equals("")) {
 				this.queryTranslator.setDatabaseType(databaseType);
 			}			
@@ -230,7 +229,7 @@ public abstract class AbstractRunner {
 		logger.debug("query translator = " + this.queryTranslator);
 		
 		//sparql query
-		String queryFilePath = this.configurationProperties.getQueryFilePath();
+		String queryFilePath = this.configurationProperties.queryFilePath();
 		this.queryTranslator.setSPARQLQueryByFile(queryFilePath);
 	}
 
@@ -251,25 +250,17 @@ public abstract class AbstractRunner {
 	}
 
 	public Connection getConnection() throws SQLException {
-		if(this.configurationProperties.getNoOfDatabase() > 0 && 
+		if(this.configurationProperties.noOfDatabase() > 0 && 
 				this.conn == null) {
-			String databaseUser = this.configurationProperties.getDatabaseUser();
-			String databaseName = this.configurationProperties.getDatabaseName();
-			String databasePassword = this.configurationProperties.getDatabasePassword();
-			String databaseDriver = this.configurationProperties.getDatabaseDriver();
-			String databaseURL = this.configurationProperties.getDatabaseURL();
-
-			try {
-				this.conn = DBUtility.getLocalConnection(
-						databaseUser, databaseName, databasePassword, 
-						databaseDriver, 
-						databaseURL, "Runner");
-			} catch (SQLException e) {
-				String errorMessage = "Error loading database, error message = " + e.getMessage();
-				logger.error(errorMessage);
-				//e.printStackTrace();
-				throw e;
-			}			
+			String databaseUser = this.configurationProperties.databaseUser();
+			String databaseName = this.configurationProperties.databaseName();
+			String databasePassword = this.configurationProperties.databasePassword();
+			String databaseDriver = this.configurationProperties.databaseDriver();
+			String databaseURL = this.configurationProperties.databaseURL();
+			this.conn = DBUtility.getLocalConnection(
+					databaseUser, databaseName, databasePassword, 
+					databaseDriver, 
+					databaseURL, "Runner");
 		}
 
 		return this.conn;
@@ -284,11 +275,11 @@ public abstract class AbstractRunner {
 	}
 
 	public String getMappingDocumentPath() {
-		return this.configurationProperties.getMappingDocumentFilePath();
+		return this.configurationProperties.mappingDocumentFilePath();
 	}
 
 	public String getOutputFilePath() {
-		return this.configurationProperties.getOutputFilePath();
+		return this.configurationProperties.outputFilePath();
 	}
 
 	public AbstractQueryResultWriter getQueryResultWriter() {
@@ -317,7 +308,7 @@ public abstract class AbstractRunner {
 	private boolean isSelfJoinElimination() {
 		boolean result = true;
 		if(this.configurationProperties != null) {
-			result = this.configurationProperties.isSelfJoinElimination();
+			result = this.configurationProperties.selfJoinElimination();
 		}
 		return result;
 	}
@@ -325,7 +316,7 @@ public abstract class AbstractRunner {
 	private boolean isSubQueryAsView() {
 		boolean result = false;
 		if(this.configurationProperties != null) {
-			result = this.configurationProperties.isSubQueryAsView();
+			result = this.configurationProperties.subQueryAsView();
 		}
 		return result;
 	}
@@ -334,7 +325,7 @@ public abstract class AbstractRunner {
 	private boolean isSubQueryElimination() {
 		boolean result = true;
 		if(this.configurationProperties != null) {
-			result = this.configurationProperties.isSubQueryElimination();
+			result = this.configurationProperties.subQueryElimination();
 		}
 		return result;
 	}
@@ -351,7 +342,7 @@ public abstract class AbstractRunner {
 	private boolean isTransJoinSubQueryElimination() {
 		boolean result = false;
 		if(this.configurationProperties != null) {
-			result = this.configurationProperties.isTransJoinSubQueryElimination();
+			result = this.configurationProperties.transJoinSubQueryElimination();
 		}
 		return result;
 	}
@@ -359,7 +350,7 @@ public abstract class AbstractRunner {
 	private boolean isTransSTGSubQueryElimination() {
 		boolean result = false;
 		if(this.configurationProperties != null) {
-			result = this.configurationProperties.isTransSTGSubQueryElimination();
+			result = this.configurationProperties.transSTGSubQueryElimination();
 		}
 		return result;
 	}
@@ -371,8 +362,7 @@ public abstract class AbstractRunner {
 		logger.debug("Loading configuration file : " + configurationFile);
 
 		try {
-			ConfigurationProperties configurationProperties = 
-					new ConfigurationProperties(mappingDirectory, configurationFile);
+			ConfigurationProperties configurationProperties = ConfigurationProperties.apply(mappingDirectory, configurationFile);
 			return configurationProperties;
 		} catch(Exception e) {
 			logger.error("Error while loding properties file : " + configurationFile);
@@ -384,8 +374,8 @@ public abstract class AbstractRunner {
 		//PREPARING OUTPUT FILE
 		//OutputStream fileOut = new FileOutputStream (outputFileName);
 		//Writer out = new OutputStreamWriter (fileOut, "UTF-8");
-		String rdfLanguage = this.configurationProperties.getRdfLanguage();
-		String jenaMode = configurationProperties.getJenaMode();
+		String rdfLanguage = this.configurationProperties.rdfLanguage();
+		String jenaMode = configurationProperties.jenaMode();
 		AbstractMaterializer materializer = AbstractMaterializer.create(
 				rdfLanguage, outputFileName, jenaMode);
 		Map<String, String> mappingDocumentPrefixMap = this.mappingDocument.getMappingDocumentPrefixMap(); 
@@ -522,7 +512,7 @@ public abstract class AbstractRunner {
 		//mapping document
 		if(this.mappingDocument == null) {
 			String mappingDocumentFile = 
-					this.configurationProperties.getMappingDocumentFilePath();
+					this.configurationProperties.mappingDocumentFilePath();
 			if(mappingDocumentFile != null) {
 				this.readMappingDocumentFile(mappingDocumentFile);
 			}			
@@ -531,7 +521,7 @@ public abstract class AbstractRunner {
 		Query sparqlQuery = this.queryTranslator.getSPARQLQuery();
 		if(sparqlQuery == null) {
 			//set output file
-			String outputFileName = configurationProperties.getOutputFilePath();
+			String outputFileName = configurationProperties.outputFilePath();
 			this.materializeMappingDocuments(outputFileName, mappingDocument);
 		} else {
 			logger.debug("sparql query = " + sparqlQuery);
@@ -567,7 +557,7 @@ public abstract class AbstractRunner {
 			//loading ontology file
 			String ontologyFilePath = null;
 			if(this.configurationProperties != null) {
-				ontologyFilePath = this.configurationProperties.getOntologyFilePath();
+				ontologyFilePath = this.configurationProperties.ontologyFilePath();
 			}
 
 
@@ -578,7 +568,7 @@ public abstract class AbstractRunner {
 			} else {
 				//rewrite the query based on the mappings and ontology
 				logger.info("Rewriting query...");
-				this.configurationProperties.getMappingDocumentFilePath();
+				this.configurationProperties.mappingDocumentFilePath();
 				//				Collection <String> mappedOntologyElements = MappingsExtractor.getMappedPredcatesFromR2O(mappingDocumentFile);
 				Collection <String> mappedOntologyElements = this.mappingDocument.getMappedConcepts();
 				Collection <String> mappedOntologyElements2 = this.mappingDocument.getMappedProperties();

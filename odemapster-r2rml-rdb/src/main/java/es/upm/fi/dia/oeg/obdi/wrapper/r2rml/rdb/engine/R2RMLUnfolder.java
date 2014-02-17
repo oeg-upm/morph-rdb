@@ -97,7 +97,7 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 		//unfold subjectMap
 		//R2RMLLogicalTable logicalTable = triplesMap.getLogicalTable();
 		SQLQuery result = this.unfoldSubjectMap(subjectMap, logicalTable);
-		String databaseType = triplesMap.getOwner().getConfigurationProperties().getDatabaseType();
+		String databaseType = triplesMap.getOwner().getConfigurationProperties().databaseType();
 		result.setDatabaseType(databaseType);
 		
 		//logicalTableAlias = subjectMap.getAlias();
@@ -219,7 +219,7 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 						Collection<R2RMLJoinCondition> joinConditions = 
 								refObjectMap.getJoinConditions();
 						if(joinConditions != null && joinConditions.size() > 0) {
-							onExpression = R2RMLUnfolder.generateJoinCondition(joinConditions
+							onExpression = R2RMLJoinCondition.generateJoinCondition(joinConditions
 									, logicalTableAlias, joinQueryAlias, dbType);
 						} else {
 							onExpression = Constants.SQL_EXPRESSION_TRUE();
@@ -403,35 +403,7 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 		return result;
 	}
 
-	public static ZExpression generateJoinCondition(
-			Collection<R2RMLJoinCondition> joinConditions, String parentTableAlias
-			, String joinQueryAlias, String dbType) {
-		ZExpression onExpression = null;
-		String enclosedCharacter = Constants.getEnclosedCharacter(dbType);
-		
-		if(joinConditions != null) {
-			for(R2RMLJoinCondition joinCondition : joinConditions) {
-				String childColumnName = joinCondition.getChildColumnName();
-				childColumnName = childColumnName.replaceAll("\"", enclosedCharacter);
-				childColumnName = parentTableAlias + "." + childColumnName;
-				ZConstant childColumn = new ZConstant(childColumnName, ZConstant.COLUMNNAME);
 
-				String parentColumnName = joinCondition.getParentColumnName();
-				parentColumnName = parentColumnName.replaceAll("\"", enclosedCharacter);
-				parentColumnName = joinQueryAlias + "." + parentColumnName;
-				ZConstant parentColumn = new ZConstant(parentColumnName, ZConstant.COLUMNNAME);
-				
-				ZExpression joinConditionExpression = new ZExpression("=", childColumn, parentColumn);
-				if(onExpression == null) {
-					onExpression = joinConditionExpression;
-				} else {
-					onExpression = new ZExpression("AND", onExpression, joinConditionExpression);
-				}
-			}
-		}
-		
-		return onExpression;
-	}
 	
 	public static SQLQuery toSQLQuery(String sqlString) throws Exception {
 		ZQuery zQuery = R2RMLUnfolder.toZQuery(sqlString);

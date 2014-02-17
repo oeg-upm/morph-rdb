@@ -64,8 +64,6 @@ import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
 import es.upm.fi.dia.oeg.morph.base.TriplePatternPredicateBounder
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
-import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties
-import es.upm.fi.dia.oeg.obdi.core.DBUtility
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractResultSet
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslationOptimizer
@@ -81,8 +79,10 @@ import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLJoinTable
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLLogicalTable
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLUnion;
+import es.upm.fi.dia.oeg.obdi.core.sql.SQLUnion
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractResultSet
+import es.upm.fi.dia.oeg.morph.base.DBUtility
+import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
 //import es.upm.fi.dia.oeg.obdi.core.sql.SQLUtility;
 
 abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
@@ -1445,7 +1445,7 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 				
 				val reorderSTG = {
 					if(this.configurationProperties != null) {
-						this.configurationProperties.isReorderSTG();
+						this.configurationProperties.reorderSTG;
 					} else {
 					  true
 					}				  
@@ -1688,7 +1688,6 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 	}
 	
 	def setConfigurationProperties(x$1: ConfigurationProperties): Unit = this.configurationProperties = x$1;
-	
 
 	def setDatabaseType(x$1: String): Unit = {this.databaseType = x$1;}
 

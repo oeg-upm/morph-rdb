@@ -22,11 +22,9 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-import es.upm.fi.dia.oeg.morph.base.ColumnMetaDataFactory;
+import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties;
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.DBMetaData;
-import es.upm.fi.dia.oeg.morph.base.TableMetaData;
-import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.core.exception.ParseException;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
@@ -53,13 +51,13 @@ public class R2RMLMappingDocument extends AbstractMappingDocument implements R2R
 		super.configurationProperties = configurationProperties;
 
 		if(configurationProperties != null) {
-			Connection conn = configurationProperties.getConn();
+			Connection conn = configurationProperties.conn();
 			if(conn != null) {
 				super.setConn(conn);
 				String databaseName = 
-						configurationProperties.getDatabaseName();
+						configurationProperties.databaseName();
 				String databaseType = 
-						configurationProperties.getDatabaseType();
+						configurationProperties.databaseType();
 				if(databaseName != null) {
 					logger.debug("building metadata.");
 					super.dbMetaData = DBMetaData.buildDBMetaData(conn, databaseName, databaseType);

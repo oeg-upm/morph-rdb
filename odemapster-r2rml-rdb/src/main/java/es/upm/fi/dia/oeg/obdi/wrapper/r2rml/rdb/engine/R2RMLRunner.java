@@ -2,7 +2,7 @@ package es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine;
 
 import org.apache.log4j.Logger;
 
-import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
+import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractRunner;
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLMappingDocument;
@@ -60,7 +60,7 @@ public class R2RMLRunner extends AbstractRunner {
 	@Override
 	protected AbstractUnfolder createUnfolder() {
 		AbstractUnfolder unfolder = new R2RMLUnfolder();
-		unfolder.setDbType(this.configurationProperties.getDatabaseType());
+		unfolder.setDbType(this.configurationProperties.databaseType());
 		return unfolder;
 	}
 

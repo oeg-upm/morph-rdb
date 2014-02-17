@@ -8,8 +8,8 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
+import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties;
 import es.upm.fi.dia.oeg.morph.base.Constants;
-import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLRunner;
 
 public class ExampleWithoutPropertiesFile {
@@ -41,7 +41,7 @@ public class ExampleWithoutPropertiesFile {
 		properties.setDatabaseDriver(databaseDriver);
 		properties.setDatabaseType(databaseType);
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
-		properties.setOutputFilePath(resultFile);
+		properties.outputFilePath_$eq(resultFile);
 		try {
 			R2RMLRunner runner = new R2RMLRunner(properties);
 			runner.run();

@@ -3,7 +3,8 @@ package es.upm.fi.dia.oeg.obdi.core.engine;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
-import es.upm.fi.dia.oeg.obdi.core.DBUtility;
+import es.upm.fi.dia.oeg.morph.base.DBUtility;
+
 
 public class RDBReader extends AbstractDataSourceReader {
 	private Connection conn;

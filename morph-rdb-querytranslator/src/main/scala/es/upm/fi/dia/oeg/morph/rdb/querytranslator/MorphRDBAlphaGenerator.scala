@@ -11,7 +11,6 @@ import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.R2RMLUtility
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTriplesMap
 import es.upm.fi.dia.oeg.morph.base.DBUtility
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem
@@ -24,6 +23,7 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLUnfolder
+import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLJoinCondition
 
 class MorphRDBAlphaGenerator(
     owner:IQueryTranslator
@@ -122,7 +122,7 @@ extends MorphBaseAlphaGenerator(
 				sqlParentLogicalTableAux.setAlias(joinQueryAlias);
 	
 				val joinConditions = refObjectMap.getJoinConditions();
-				val onExpression = R2RMLUtility.generateJoinCondition(
+				val onExpression = R2RMLJoinCondition.generateJoinCondition(
 						joinConditions, logicalTableAlias, joinQueryAlias
 						, databaseType);
 				if(onExpression != null) {

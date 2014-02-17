@@ -12,8 +12,6 @@ import com.hp.hpl.jena.graph.Triple
 import es.upm.fi.dia.oeg.morph.base.CollectionUtility
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.RegexUtility
-import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties
-import es.upm.fi.dia.oeg.obdi.core.ODEMapsterUtility
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractResultSet
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
 import es.upm.fi.dia.oeg.obdi.core.exception.InsatisfiableSQLExpression
@@ -21,7 +19,6 @@ import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
 import es.upm.fi.dia.oeg.obdi.core.sql.IQuery
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.R2RMLUtility
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLUnfolder
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLRefObjectMap
@@ -36,6 +33,7 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBasePRSQLGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.NameGenerator
 import es.upm.fi.dia.oeg.morph.base.TermMapResult
+import es.upm.fi.dia.oeg.morph.base.GeneralUtility
 
 class MorphRDBQueryTranslator() 
     extends MorphBaseQueryTranslator() {
@@ -210,9 +208,9 @@ class MorphRDBQueryTranslator()
 						if(resultAux != null) {
 							if(termMapType != null) {
 								if(termMapType.equals(Constants.R2RML_IRI_URI)) {
-									ODEMapsterUtility.encodeURI(resultAux);
+									GeneralUtility.encodeURI(resultAux);
 								} else if(termMapType.equals(Constants.R2RML_LITERAL_URI)) {
-									ODEMapsterUtility.encodeLiteral(resultAux);
+									GeneralUtility.encodeLiteral(resultAux);
 								} else {
 								  resultAux
 								}

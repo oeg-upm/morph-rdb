@@ -23,10 +23,10 @@ import Zql.ZQuery;
 import Zql.ZSelectItem;
 import Zql.ZUtils;
 import es.upm.fi.dia.oeg.morph.base.Constants;
+import es.upm.fi.dia.oeg.morph.base.DBUtility;
 import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem;
-import es.upm.fi.dia.oeg.obdi.core.DBUtility;
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType;
 
 public class SQLQuery extends ZQuery implements IQuery {
@@ -585,42 +585,42 @@ public class SQLQuery extends ZQuery implements IQuery {
 		return result;
 	}
 
-	public ZSelectItem getSelectItemByAlias(String alias) {
-		Iterator selectItems = this.getSelect().iterator();
-		while(selectItems.hasNext()) {
-			ZSelectItem selectItem = (ZSelectItem) selectItems.next();
-			String selectItemAlias = selectItem.getAlias();
-			if(alias.equals(selectItemAlias)) {
-				return selectItem;
-			}
-		}
-		return null;
-	}
+//	public ZSelectItem getSelectItemByAlias2(String alias) {
+//		Iterator selectItems = this.getSelect().iterator();
+//		while(selectItems.hasNext()) {
+//			ZSelectItem selectItem = (ZSelectItem) selectItems.next();
+//			String selectItemAlias = selectItem.getAlias();
+//			if(alias.equals(selectItemAlias)) {
+//				return selectItem;
+//			}
+//		}
+//		return null;
+//	}
 
-	public ZSelectItem getSelectItemByColumnValue(String value) {
-		Iterator selectItems = this.getSelect().iterator();
-		while(selectItems.hasNext()) {
-			ZSelectItem selectItem = (ZSelectItem) selectItems.next();
-			String selectItemFullValue = DBUtility.getValueWithoutAlias(selectItem);
-			String splitValues[] = selectItemFullValue.split("\\.");
-			String columnValue = splitValues[splitValues.length-1];
-			if(value.equals(columnValue)) {
-				return selectItem;
-			}
-		}
-		return null;
-	}
-
-	public ZSelectItem getSelectItemByValue(String value) {
-		Iterator selectItems = this.getSelect().iterator();
-		while(selectItems.hasNext()) {
-			ZSelectItem selectItem = (ZSelectItem) selectItems.next();
-			if(value.equals(DBUtility.getValueWithoutAlias(selectItem))) {
-				return selectItem;
-			}
-		}
-		return null;
-	}
+//	public ZSelectItem getSelectItemByColumnValue2(String value) {
+//		Iterator selectItems = this.getSelect().iterator();
+//		while(selectItems.hasNext()) {
+//			ZSelectItem selectItem = (ZSelectItem) selectItems.next();
+//			String selectItemFullValue = MorphSQLUtility.getValueWithoutAlias(selectItem);
+//			String splitValues[] = selectItemFullValue.split("\\.");
+//			String columnValue = splitValues[splitValues.length-1];
+//			if(value.equals(columnValue)) {
+//				return selectItem;
+//			}
+//		}
+//		return null;
+//	}
+//
+//	public ZSelectItem getSelectItemByValue2(String value) {
+//		Iterator selectItems = this.getSelect().iterator();
+//		while(selectItems.hasNext()) {
+//			ZSelectItem selectItem = (ZSelectItem) selectItems.next();
+//			if(value.equals(MorphSQLUtility.getValueWithoutAlias(selectItem))) {
+//				return selectItem;
+//			}
+//		}
+//		return null;
+//	}
 
 	public Collection<ZSelectItem> getSelectItems() {
 		return this.getSelect();
