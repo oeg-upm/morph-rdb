@@ -30,10 +30,10 @@ import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant;
 import es.upm.fi.dia.oeg.obdi.core.ConfigurationProperties;
 import es.upm.fi.dia.oeg.obdi.core.ODEMapsterUtility;
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLDataType;
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.R2RMLUtility;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElement;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElementVisitor;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.exception.R2RMLInvalidTermMapException;
+import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap.TermMapType;
 
 public class R2RMLTermMap implements R2RMLElement
 , IConstantTermMap, IColumnTermMap, ITemplateTermMap {
@@ -389,7 +389,7 @@ public class R2RMLTermMap implements R2RMLElement
 
 					}
 					replacements.put(attribute, databaseValue);
-					result = R2RMLUtility.replaceTokens(originalValue, replacements);
+					result = RegexUtility.replaceTokens(originalValue, replacements);
 				}
 
 				//				if(databaseValue == null) {

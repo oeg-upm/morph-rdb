@@ -1,5 +1,6 @@
 package es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine;
 
+import java.io.ByteArrayInputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,10 +10,13 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
+import Zql.ZConstant;
 import Zql.ZExp;
 import Zql.ZExpression;
 import Zql.ZQuery;
 import Zql.ZSelectItem;
+import Zql.ZStatement;
+import Zql.ZqlParser;
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem;
 import es.upm.fi.dia.oeg.obdi.core.ILogicalQuery;
@@ -24,7 +28,6 @@ import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType;
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLJoinTable;
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLLogicalTable;
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery;
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.R2RMLUtility;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLJoinCondition;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLLogicalTable;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLMappingDocument;
@@ -69,7 +72,7 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 				if(!sqlString2.endsWith(";")) {
 					sqlString2 += ";";
 				}
-				result = R2RMLUtility.toSQLQuery(sqlString2);
+				result = R2RMLUnfolder.toSQLQuery(sqlString2);
 			} catch(Exception e) {
 				logger.warn("Not able to parse the query, string will be used.");
 				result = new SQLFromItem(sqlString, LogicalTableType.QUERY_STRING, this.dbType);
@@ -216,7 +219,7 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 						Collection<R2RMLJoinCondition> joinConditions = 
 								refObjectMap.getJoinConditions();
 						if(joinConditions != null && joinConditions.size() > 0) {
-							onExpression = R2RMLUtility.generateJoinCondition(joinConditions
+							onExpression = R2RMLUnfolder.generateJoinCondition(joinConditions
 									, logicalTableAlias, joinQueryAlias, dbType);
 						} else {
 							onExpression = Constants.SQL_EXPRESSION_TRUE();
@@ -344,7 +347,6 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 
 		Collection<String> subjectMapColumnsString = subjectMap.getDatabaseColumnsString();
 		if(subjectMapColumnsString != null) {
-			new R2RMLUtility();
 			
 			for(String subjectMapColumnString : subjectMapColumnsString) {
 				ZSelectItem selectItem = MorphSQLSelectItem.apply(subjectMapColumnString, logicalTableAlias, this.dbType);
@@ -401,4 +403,62 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 		return result;
 	}
 
+	public static ZExpression generateJoinCondition(
+			Collection<R2RMLJoinCondition> joinConditions, String parentTableAlias
+			, String joinQueryAlias, String dbType) {
+		ZExpression onExpression = null;
+		String enclosedCharacter = Constants.getEnclosedCharacter(dbType);
+		
+		if(joinConditions != null) {
+			for(R2RMLJoinCondition joinCondition : joinConditions) {
+				String childColumnName = joinCondition.getChildColumnName();
+				childColumnName = childColumnName.replaceAll("\"", enclosedCharacter);
+				childColumnName = parentTableAlias + "." + childColumnName;
+				ZConstant childColumn = new ZConstant(childColumnName, ZConstant.COLUMNNAME);
+
+				String parentColumnName = joinCondition.getParentColumnName();
+				parentColumnName = parentColumnName.replaceAll("\"", enclosedCharacter);
+				parentColumnName = joinQueryAlias + "." + parentColumnName;
+				ZConstant parentColumn = new ZConstant(parentColumnName, ZConstant.COLUMNNAME);
+				
+				ZExpression joinConditionExpression = new ZExpression("=", childColumn, parentColumn);
+				if(onExpression == null) {
+					onExpression = joinConditionExpression;
+				} else {
+					onExpression = new ZExpression("AND", onExpression, joinConditionExpression);
+				}
+			}
+		}
+		
+		return onExpression;
+	}
+	
+	public static SQLQuery toSQLQuery(String sqlString) throws Exception {
+		ZQuery zQuery = R2RMLUnfolder.toZQuery(sqlString);
+		SQLQuery sqlQuery = new SQLQuery(zQuery);
+		return sqlQuery;
+	}
+	
+	
+	public static ZQuery toZQuery(String sqlString) throws Exception {
+		try {
+			//sqlString = sqlString.replaceAll(".date ", ".date2");
+			ByteArrayInputStream bs = new ByteArrayInputStream(sqlString.getBytes());
+			ZqlParser parser = new ZqlParser(bs);
+			ZStatement statement = parser.readStatement();
+			ZQuery zQuery = (ZQuery) statement;
+			
+			return zQuery;
+		} catch(Exception e) {
+			String errorMessage = "error parsing query string : \n" + sqlString; 
+			//e.printStackTrace();
+			logger.error(errorMessage);
+			logger.error("error message = " + e.getMessage());
+			throw e;
+		} catch(Error e) {
+			String errorMessage = "error parsing query string : \n" + sqlString;
+			logger.error(errorMessage);
+			throw new Exception(errorMessage);
+		}
+	}	
 }
