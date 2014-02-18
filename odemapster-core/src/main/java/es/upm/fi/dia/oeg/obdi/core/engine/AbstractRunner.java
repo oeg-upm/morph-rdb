@@ -47,7 +47,7 @@ public abstract class AbstractRunner {
 
 	}
 
-	public AbstractRunner(ConfigurationProperties configurationProperties) throws Exception {
+	public void loadConfigurationProperties(ConfigurationProperties configurationProperties) throws Exception {
 		this.configurationProperties = configurationProperties;
 
 		//mapping document
@@ -98,9 +98,10 @@ public abstract class AbstractRunner {
 
 	}
 
-	public AbstractRunner(String configurationDirectory, String configurationFile) 
+	public void loadConfigurationfile(String configurationDirectory, String configurationFile) 
 			throws Exception {
-		this(ConfigurationProperties.apply(configurationDirectory, configurationFile));
+		ConfigurationProperties configurationProperties = ConfigurationProperties.apply(configurationDirectory, configurationFile);
+		this.loadConfigurationProperties(configurationProperties);
 	}
 
 	private void buildDataSourceReader() throws Exception {

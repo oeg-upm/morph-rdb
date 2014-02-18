@@ -65,7 +65,7 @@
 		</dependency>
 		<dependency>
 			<groupId>es.upm.fi.dia.oeg.morph</groupId>
-			<artifactId>odemapster-r2rml-rdb</artifactId>
+			<artifactId>morph-r2rml-rdb</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

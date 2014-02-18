@@ -29,17 +29,17 @@ import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
 import es.upm.fi.dia.oeg.morph.base.RegexUtility;
 import es.upm.fi.dia.oeg.morph.base.TableMetaData;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant;
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLDataType;
+import es.upm.fi.dia.oeg.morph.base.sql.SQLDataType;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElement;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElementVisitor;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.exception.R2RMLInvalidTermMapException;
 
-public class R2RMLTermMap implements R2RMLElement
+public abstract class R2RMLTermMap implements R2RMLElement
 , IConstantTermMap, IColumnTermMap, ITemplateTermMap {
 	private static Logger logger = Logger.getLogger(R2RMLTermMap.class);
 	public enum TermMapPosition {SUBJECT, PREDICATE, OBJECT, GRAPH}
 
-	private String termType;//IRI, BlankNode, or Literal
+	String termType;//IRI, BlankNode, or Literal
 	private String languageTag;
 	private String datatype;
 
@@ -49,10 +49,10 @@ public class R2RMLTermMap implements R2RMLElement
 
 	//public enum TermType {IRI, BLANK_NODE, LITERAL};
 	public enum TermMapType {CONSTANT, COLUMN, TEMPLATE};
-	private TermMapType termMapType;
+	TermMapType termMapType;
 
 	//for constant type TermMap
-	private String constantValue;
+	String constantValue;
 
 	//for column type TermMap
 	private String columnName;
@@ -63,7 +63,8 @@ public class R2RMLTermMap implements R2RMLElement
 
 	//	private boolean isNullable = true;
 
-	R2RMLTermMap(Resource resource, TermMapPosition termMapPosition, R2RMLTriplesMap owner) 
+	
+	protected void parse(Resource resource, R2RMLTriplesMap owner) 
 			throws R2RMLInvalidTermMapException {
 		this.configurationProperties = owner.getOwner().getConfigurationProperties();
 		String dbType = this.configurationProperties.databaseType();
@@ -173,11 +174,12 @@ public class R2RMLTermMap implements R2RMLElement
 
 	}
 
-	R2RMLTermMap(TermMapPosition termMapPosition, String constantValue) {
-		this.termMapType = TermMapType.CONSTANT;
-		this.constantValue = constantValue;
-		this.termType = this.getDefaultTermType();
-	}
+//	R2RMLTermMap(TermMapPosition termMapPosition, String constantValue) {
+//		this.termMapType = TermMapType.CONSTANT;
+//		this.constantValue = constantValue;
+//		this.termType = this.getDefaultTermType();
+//	}
+
 
 	public Object accept(R2RMLElementVisitor visitor) throws Exception {
 		Object result = visitor.visit(this);
@@ -447,7 +449,7 @@ public class R2RMLTermMap implements R2RMLElement
 		this.constantValue = constantValue;
 	}
 
-	void setTermType(String termType) {
+	protected void setTermType(String termType) {
 		this.termType = termType;
 	}
 
@@ -560,9 +562,10 @@ public class R2RMLTermMap implements R2RMLElement
 
 					ZConstant pkValueConstant; 
 					if(columnTypeName != null) {
-						if(Arrays.asList(SQLDataType.datatypeNumber).contains(columnTypeName)) {
+						
+						if(SQLDataType.isDatatypeNumber(columnTypeName)) {
 							pkValueConstant = new ZConstant(value, ZConstant.NUMBER);
-						} else if(Arrays.asList(SQLDataType.datatypeString).contains(columnTypeName)) {
+						} else if(SQLDataType.isDatatypeString(columnTypeName)) {
 							pkValueConstant = new ZConstant(value, ZConstant.STRING);
 						} else {
 							pkValueConstant = new ZConstant(value, ZConstant.STRING);
@@ -585,5 +588,9 @@ public class R2RMLTermMap implements R2RMLElement
 
 		logger.debug("generateCondForWellDefinedURI = " + result);
 		return result;
+	}
+
+	protected void setTermMapType(TermMapType termMapType) {
+		this.termMapType = termMapType;
 	}
 }

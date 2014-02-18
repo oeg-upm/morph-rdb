@@ -5,12 +5,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-import Zql.ZConstant;
 import Zql.ZExp;
 import Zql.ZExpression;
 import Zql.ZQuery;
@@ -19,7 +17,6 @@ import Zql.ZStatement;
 import Zql.ZqlParser;
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem;
-import es.upm.fi.dia.oeg.obdi.core.ILogicalQuery;
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
@@ -266,11 +263,7 @@ public class R2RMLUnfolder extends AbstractUnfolder implements R2RMLElementVisit
 		return this.unfold(triplesMap, null);
 	}
 	
-	protected Set<SQLQuery> unfold(Set<ILogicalQuery> logicalQueries,
-			AbstractMappingDocument mapping) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public SQLQuery unfoldConceptMapping(AbstractConceptMapping cm)

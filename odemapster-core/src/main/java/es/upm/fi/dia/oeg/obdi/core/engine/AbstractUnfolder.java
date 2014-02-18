@@ -1,11 +1,9 @@
 package es.upm.fi.dia.oeg.obdi.core.engine;
 
 import java.util.Collection;
-import java.util.Set;
 
 import Zql.ZUtils;
 import es.upm.fi.dia.oeg.morph.base.Constants;
-import es.upm.fi.dia.oeg.obdi.core.ILogicalQuery;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery;
@@ -27,7 +25,6 @@ public abstract class AbstractUnfolder {
 //		this.owner = owner;
 	}
 	
-	protected abstract Collection<SQLQuery> unfold(Set<ILogicalQuery> logicalQueries, AbstractMappingDocument mapping) throws Exception;
 
 	public abstract SQLQuery unfoldConceptMapping(AbstractConceptMapping cm) throws Exception;
 	

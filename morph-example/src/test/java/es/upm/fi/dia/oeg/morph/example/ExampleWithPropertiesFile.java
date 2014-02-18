@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLRunner;
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLRunner;
 
 public class ExampleWithPropertiesFile {
 	private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
@@ -17,7 +17,8 @@ public class ExampleWithPropertiesFile {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "batch.r2rml.properties";
 		try {
-			R2RMLRunner runner = new R2RMLRunner(configurationDirectory, configurationFile);
+			R2RMLRunner runner = new R2RMLRunner();
+			runner.loadConfigurationfile(configurationDirectory, configurationFile);
 			runner.run();
 			logger.info("Batch process DONE------\n\n");
 		} catch (Exception e) {
@@ -32,7 +33,8 @@ public class ExampleWithPropertiesFile {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "batch-postgresql.r2rml.properties";
 		try {
-			R2RMLRunner runner = new R2RMLRunner(configurationDirectory, configurationFile);
+			R2RMLRunner runner = new R2RMLRunner();
+			runner.loadConfigurationfile(configurationDirectory, configurationFile);
 			runner.run();
 			logger.info("Batch process DONE------\n\n");
 		} catch (Exception e) {

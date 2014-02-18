@@ -140,11 +140,6 @@ public class R2RMLMappingDocument extends AbstractMappingDocument implements R2R
 	}
 
 
-	@Override
-	public void parse(Element xmlElement) throws ParseException {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public String getMappingDocumentID() {

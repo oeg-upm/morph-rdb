@@ -93,7 +93,7 @@ implements R2RMLElement, IConceptMapping {
 				Constants.R2RML_SUBJECTMAP_PROPERTY());
 		if(subjectMapStatement != null) {
 			Resource subjectMapStatementObjectResource = (Resource) subjectMapStatement.getObject();
-			this.subjectMap = new R2RMLSubjectMap(subjectMapStatementObjectResource, this);
+			this.subjectMap = R2RMLSubjectMap.create(subjectMapStatementObjectResource, this);
 		} else {
 			String errorMessage = "Missing rr:subjectMap";
 			logger.error(errorMessage);
@@ -105,7 +105,7 @@ implements R2RMLElement, IConceptMapping {
 				Constants.R2RML_SUBJECT_PROPERTY());
 		if(subjectStatement != null) {
 			String constantValueObject = subjectStatement.getObject().toString();
-			this.subjectMap = new R2RMLSubjectMap(constantValueObject);
+			this.subjectMap = R2RMLSubjectMap.create(constantValueObject);
 		}
 
 		//rr:predicateObjectMap

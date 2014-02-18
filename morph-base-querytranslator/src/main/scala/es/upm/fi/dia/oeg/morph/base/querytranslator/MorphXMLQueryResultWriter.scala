@@ -8,8 +8,8 @@ import org.w3c.dom.Element
 import com.hp.hpl.jena.query.Query
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.TermMapResult
-import es.upm.fi.dia.oeg.obdi.core.XMLUtility;
 import es.upm.fi.dia.oeg.morph.base.ValueTransformator
+import es.upm.fi.dia.oeg.morph.base.XMLUtility
 
 
 class MorphXMLQueryResultWriter extends AbstractQueryResultWriter {

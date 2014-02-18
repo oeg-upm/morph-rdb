@@ -17,7 +17,6 @@ import es.upm.fi.dia.oeg.obdi.core.exception.InsatisfiableSQLExpression
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractLogicalTable
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLDataType
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLUtility
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLLogicalTable
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLObjectMap
@@ -34,6 +33,7 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseCondSQLGenerator
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.morph.base.TableMetaData
+import es.upm.fi.dia.oeg.morph.base.sql.SQLDataType
 
 class MorphRDBCondSQLGenerator(
 		owner: IQueryTranslator
@@ -224,9 +224,9 @@ class MorphRDBCondSQLGenerator(
 
 									val pkValueConstant = {
 											if(columnTypeName != null) {
-												if(Arrays.asList(SQLDataType.datatypeNumber).contains(columnTypeName)) {
+												if(SQLDataType.isDatatypeNumber(columnTypeName)) {
 													new ZConstant(value, ZConstant.NUMBER);
-												} else if(Arrays.asList(SQLDataType.datatypeString).contains(columnTypeName)) {
+												} else if(SQLDataType.isDatatypeString(columnTypeName)) {
 													new ZConstant(value, ZConstant.STRING);
 												} else {
 													new ZConstant(value, ZConstant.STRING);

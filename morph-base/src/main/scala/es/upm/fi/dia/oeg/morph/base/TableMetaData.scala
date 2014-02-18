@@ -7,7 +7,7 @@ import es.upm.fi.dia.oeg.morph.base.sql.MorphInformationSchema
 
 
 class TableMetaData(val tableName:String , val tableRows:Long
-    , var columnsMetaData : List[ColumnMetaData], dbType:String) {
+    , var columnsMetaData : List[ColumnMetaData], val dbType:String) {
 	val logger = Logger.getLogger("TableMetaData");
 	
 	def putColumnMetaData(columnMetaData:ColumnMetaData) = {

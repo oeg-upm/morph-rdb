@@ -15,12 +15,11 @@ import com.hp.hpl.jena.graph.Node;
 
 import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties;
 import es.upm.fi.dia.oeg.morph.base.DBMetaData;
-import es.upm.fi.dia.oeg.obdi.core.IParseable;
 import es.upm.fi.dia.oeg.obdi.core.exception.ParseException;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractRDB2RDFMapping.MappingType;
 
 
-public abstract class AbstractMappingDocument implements IParseable {
+public abstract class AbstractMappingDocument {
 	private Map<String, String> mappingDocumentPrefixMap;
 	private String id;
 	private String purpose;
@@ -33,7 +32,6 @@ public abstract class AbstractMappingDocument implements IParseable {
 
 	protected Collection<AbstractConceptMapping> classMappings;
 	
-	public abstract void parse(Element xmlElement) throws ParseException;
 	public abstract String getMappingDocumentID();
 	
 	public List<String> getMappedConcepts() {

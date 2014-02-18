@@ -7,14 +7,21 @@ import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.exception.R2RMLInvalidTermMapExc
 
 public class R2RMLGraphMap extends R2RMLTermMap {
 	
-	public R2RMLGraphMap(String constantValue) {
-		super(TermMapPosition.GRAPH, constantValue);
-		super.setTermType(Constants.R2RML_IRI_URI());
+	public static R2RMLGraphMap create(Resource resource, R2RMLTriplesMap owner) throws R2RMLInvalidTermMapException {
+		R2RMLGraphMap gm = new R2RMLGraphMap();
+		gm.parse(resource, owner);
+		return gm;
 	}
 	
-	public R2RMLGraphMap(Resource resource, R2RMLTriplesMap owner) throws R2RMLInvalidTermMapException {
-		super(resource, TermMapPosition.GRAPH, owner);
+	public static R2RMLGraphMap create(String constantValue) {
+		R2RMLGraphMap gm = new R2RMLGraphMap();
+		gm.termMapType = TermMapType.CONSTANT;
+		gm.constantValue = constantValue;
+		gm.termType = Constants.R2RML_LITERAL_URI();
+		return gm;
 	}
+	
+	
 
 
 }

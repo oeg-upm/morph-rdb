@@ -10,7 +10,7 @@ import com.hp.hpl.jena.query.Query;
 
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.TermMapResult;
-import es.upm.fi.dia.oeg.obdi.core.XMLUtility;
+import es.upm.fi.dia.oeg.morph.base.XMLUtility;
 
 public class XMLQueryResultWriter extends AbstractQueryResultWriter {
 

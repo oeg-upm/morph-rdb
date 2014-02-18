@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties;
 import es.upm.fi.dia.oeg.morph.base.Constants;
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLRunner;
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLRunner;
 
 public class ExampleWithoutPropertiesFile {
 	private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
@@ -43,7 +43,8 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.outputFilePath_$eq(resultFile);
 		try {
-			R2RMLRunner runner = new R2RMLRunner(properties);
+			R2RMLRunner runner = new R2RMLRunner();
+			runner.loadConfigurationProperties(properties);
 			runner.run();
 			assertTrue("testBatch done", true);
 		} catch(Exception e) {
@@ -74,7 +75,8 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRunner runner = new R2RMLRunner(properties);
+			R2RMLRunner runner = new R2RMLRunner();
+			runner.loadConfigurationProperties(properties);
 			runner.readSPARQLFile(queryFile);
 			runner.run();
 			assertTrue("sparql01 done", true);
@@ -105,7 +107,8 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRunner runner = new R2RMLRunner(properties);
+			R2RMLRunner runner = new R2RMLRunner();
+			runner.loadConfigurationProperties(properties);
 			runner.materializeSubjects(classURI,resultFile);
 			assertTrue("testBatch done", true);
 		} catch(Exception e) {
@@ -136,7 +139,8 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRunner runner = new R2RMLRunner(properties);
+			R2RMLRunner runner = new R2RMLRunner();
+			runner.loadConfigurationProperties(properties);
 			runner.materializeInstanceDetails(subjectURI, classURI, resultFile);
 			assertTrue("testBatch done", true);
 		} catch(Exception e) {
@@ -167,7 +171,8 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRunner runner = new R2RMLRunner(properties);
+			R2RMLRunner runner = new R2RMLRunner();
+			runner.loadConfigurationProperties(properties);
 			runner.readSPARQLFile(queryFile);
 			runner.run();
 			assertTrue("sparql01 done", true);
@@ -199,7 +204,8 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRunner runner = new R2RMLRunner(properties);
+			R2RMLRunner runner = new R2RMLRunner();
+			runner.loadConfigurationProperties(properties);
 			runner.readSPARQLFile(queryFile);
 			runner.run();
 			assertTrue("sparql01 done", true);

@@ -45,7 +45,7 @@ public class R2RMLPredicateObjectMap extends AbstractPropertyMapping implements 
 				//Statement predicateMapStatement = resource.getProperty(Constants.R2RML_PREDICATEMAP_PROPERTY());
 				if(pmStatement != null) {
 					Resource predicateMapResource = (Resource) pmStatement.getObject();
-					R2RMLPredicateMap pm = new R2RMLPredicateMap(predicateMapResource, parent);
+					R2RMLPredicateMap pm = R2RMLPredicateMap.create(predicateMapResource, parent);
 					this.predicateMaps.add(pm);
 				}
 			}
@@ -59,7 +59,8 @@ public class R2RMLPredicateObjectMap extends AbstractPropertyMapping implements 
 				Statement predicateStatement = pStatements.next();
 				if(predicateStatement != null) {
 					String constantValueObject = predicateStatement.getObject().toString();
-					R2RMLPredicateMap predicateMap = new R2RMLPredicateMap(constantValueObject);
+					//R2RMLPredicateMap predicateMap = new R2RMLPredicateMap(constantValueObject);
+					R2RMLPredicateMap predicateMap = R2RMLPredicateMap.create(constantValueObject);
 					this.predicateMaps.add(predicateMap);
 				}
 			}
@@ -79,7 +80,7 @@ public class R2RMLPredicateObjectMap extends AbstractPropertyMapping implements 
 						this.refObjectMaps.add(rom);
 					} else {
 						this.objectMapTypes.add(ObjectMapType.ObjectMap);
-						R2RMLObjectMap objectMap = new R2RMLObjectMap(omStatementObject, parent);
+						R2RMLObjectMap objectMap = R2RMLObjectMap.create(omStatementObject, parent);
 						this.objectMaps.add(objectMap);
 					}
 				}
@@ -95,7 +96,7 @@ public class R2RMLPredicateObjectMap extends AbstractPropertyMapping implements 
 				if(objectStatement != null) {
 					this.objectMapTypes.add(ObjectMapType.ObjectMap);
 					String constantValueObject = objectStatement.getObject().toString();
-					R2RMLObjectMap objectMap = new R2RMLObjectMap(constantValueObject);
+					R2RMLObjectMap objectMap = R2RMLObjectMap.create(constantValueObject);
 					this.objectMaps.add(objectMap);
 				}
 			}
@@ -115,7 +116,7 @@ public class R2RMLPredicateObjectMap extends AbstractPropertyMapping implements 
 				Statement graphMapStatement = graphMapStatements.next(); 
 				if(graphMapStatement != null) {
 					Resource graphMapResource = (Resource) graphMapStatement.getObject();
-					this.graphMap = new R2RMLGraphMap(graphMapResource, parent);
+					this.graphMap = R2RMLGraphMap.create(graphMapResource, parent);
 				}
 			}
 		}
@@ -127,7 +128,7 @@ public class R2RMLPredicateObjectMap extends AbstractPropertyMapping implements 
 				if(graphStatement != null) {
 					String graphStatementObjectValue = graphStatement.getObject().toString();
 					if(!Constants.R2RML_DEFAULT_GRAPH_URI().equals(graphStatementObjectValue)) {
-						this.graphMap = new R2RMLGraphMap(graphStatementObjectValue);
+						this.graphMap = R2RMLGraphMap.create(graphStatementObjectValue);
 					}
 				}
 			}
