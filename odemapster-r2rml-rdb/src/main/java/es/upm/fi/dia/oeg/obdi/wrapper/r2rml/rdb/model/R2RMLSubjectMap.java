@@ -28,7 +28,7 @@ public class R2RMLSubjectMap extends R2RMLTermMap {
 		R2RMLSubjectMap sm = new R2RMLSubjectMap();
 		sm.termMapType = TermMapType.CONSTANT;
 		sm.constantValue = constantValue;
-		sm.termType = Constants.R2RML_LITERAL_URI();
+		sm.termType = Constants.R2RML_IRI_URI();
 		return sm;
 	}
 	

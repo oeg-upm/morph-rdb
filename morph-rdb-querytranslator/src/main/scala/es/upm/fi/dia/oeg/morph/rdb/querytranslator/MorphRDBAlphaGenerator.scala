@@ -22,8 +22,8 @@ import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLUnfolder
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLJoinCondition
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
 
 class MorphRDBAlphaGenerator(
     owner:IQueryTranslator

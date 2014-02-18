@@ -27,11 +27,10 @@ import es.upm.fi.dia.oeg.obdi.core.engine.RDBReader
 import es.upm.fi.dia.oeg.morph.base.DatatypeMapper
 import java.sql.ResultSetMetaData
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLRefObjectMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLUnfolder
 
 class R2RMLDataTranslator(properties:ConfigurationProperties) 
 extends AbstractDataTranslator(properties:ConfigurationProperties ){
-	val logger = Logger.getLogger("R2RMLDataTranslator");
+	val logger = Logger.getLogger(this.getClass().getName());
 
 	override def processCustomFunctionTransformationExpression(
 			argument:Object ) : Object = {
@@ -413,8 +412,11 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 												if(refObjectMap != null) {
 													val r2rmlUnfolder = this.unfolder.asInstanceOf[R2RMLUnfolder];
 //													String joinQueryAlias = refObjectMap.getAlias();
-													val joinQueryAlias2 = 
-															r2rmlUnfolder.getMapRefObjectMapAlias().get(refObjectMap);
+													val joinQueryAlias2 = if(r2rmlUnfolder.getMapRefObjectMapAlias().get(refObjectMap).isDefined) {
+													  r2rmlUnfolder.getMapRefObjectMapAlias().get(refObjectMap).get;
+													} else {
+													  null
+													}
 													
 													val parentSubjectMap = 
 															refObjectMap.getParentTriplesMap().getSubjectMap();

@@ -3,7 +3,6 @@ package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractRunner
 import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLUnfolder
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLMappingDocument
 

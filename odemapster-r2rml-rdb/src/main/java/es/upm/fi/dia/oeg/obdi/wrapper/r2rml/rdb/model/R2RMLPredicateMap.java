@@ -24,7 +24,7 @@ public class R2RMLPredicateMap extends R2RMLTermMap {
 		R2RMLPredicateMap pm = new R2RMLPredicateMap();
 		pm.termMapType = TermMapType.CONSTANT;
 		pm.constantValue = constantValue;
-		pm.termType = Constants.R2RML_LITERAL_URI();
+		pm.termType = Constants.R2RML_IRI_URI();
 		return pm;
 	}	
 }

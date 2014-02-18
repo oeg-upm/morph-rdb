@@ -6,12 +6,19 @@ import Zql.ZExpression
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLJoinCondition
 import scala.collection.JavaConversions._
 import Zql.ZConstant
+import Zql.ZQuery
+import java.io.ByteArrayInputStream
+import Zql.ZqlParser
+import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery
+import org.apache.log4j.Logger
 
 class MorphRDBUtility {
 
 }
 
 object MorphRDBUtility {
+	val logger = Logger.getLogger(this.getClass().getName());
+	
 	def generateJoinCondition(joinConditions:Collection[R2RMLJoinCondition] 
 	, parentTableAlias:String, joinQueryAlias:String , dbType:String ) : ZExpression = {
 		var onExpression:ZExpression = null;
@@ -39,5 +46,34 @@ object MorphRDBUtility {
 		}
 		
 		return onExpression;
-	}  
+	}
+	
+	def toZQuery(sqlString:String ) : ZQuery = {
+		try {
+			//sqlString = sqlString.replaceAll(".date ", ".date2");
+			val bs = new ByteArrayInputStream(sqlString.getBytes());
+			val parser = new ZqlParser(bs);
+			val statement = parser.readStatement();
+			val zQuery = statement.asInstanceOf[ZQuery];
+			zQuery;
+		} catch {
+		  case e:Exception => {
+			val errorMessage = "error parsing query string : \n" + sqlString; 
+			logger.error(errorMessage);
+			logger.error("error message = " + e.getMessage());
+			throw e;		    
+		  }
+		  case e:Error => {
+			val errorMessage = "error parsing query string : \n" + sqlString;
+			logger.error(errorMessage);
+			throw new Exception(errorMessage);
+		}		  
+		} 
+	}
+
+	def toSQLQuery(sqlString:String ) : SQLQuery = {
+		val zQuery = this.toZQuery(sqlString);
+		val sqlQuery = new SQLQuery(zQuery);
+		sqlQuery;
+	}	
 }

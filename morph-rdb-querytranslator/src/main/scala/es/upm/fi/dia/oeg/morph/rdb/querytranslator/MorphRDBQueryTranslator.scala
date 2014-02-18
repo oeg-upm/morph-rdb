@@ -19,7 +19,6 @@ import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
 import es.upm.fi.dia.oeg.obdi.core.sql.IQuery
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLUnfolder
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLRefObjectMap
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap
@@ -34,6 +33,7 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBasePRSQLGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.NameGenerator
 import es.upm.fi.dia.oeg.morph.base.TermMapResult
 import es.upm.fi.dia.oeg.morph.base.GeneralUtility
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
 
 class MorphRDBQueryTranslator() 
     extends MorphBaseQueryTranslator() {

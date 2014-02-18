@@ -187,7 +187,7 @@ public abstract class R2RMLTermMap implements R2RMLElement
 	}
 
 
-	private String getDefaultTermType() {
+	protected String getDefaultTermType() {
 		//		if(this.termMapPosition == TermMapPosition.OBJECT && this.termMapType == TermMapType.COLUMN) {
 		//			return constants.R2RML_LITERAL_URI;
 		//		} else {

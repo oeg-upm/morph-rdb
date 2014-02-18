@@ -22,6 +22,7 @@ public class R2RMLObjectMap extends R2RMLTermMap {
 		R2RMLObjectMap om = new R2RMLObjectMap();
 		om.termMapType = TermMapType.CONSTANT;
 		om.constantValue = constantValue;
+		om.termType = om.getDefaultTermType();
 		return om;
 	}	
 }

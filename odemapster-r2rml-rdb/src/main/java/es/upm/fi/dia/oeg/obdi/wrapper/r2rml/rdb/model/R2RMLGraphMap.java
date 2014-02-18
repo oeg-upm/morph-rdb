@@ -17,7 +17,7 @@ public class R2RMLGraphMap extends R2RMLTermMap {
 		R2RMLGraphMap gm = new R2RMLGraphMap();
 		gm.termMapType = TermMapType.CONSTANT;
 		gm.constantValue = constantValue;
-		gm.termType = Constants.R2RML_LITERAL_URI();
+		gm.termType = Constants.R2RML_IRI_URI();
 		return gm;
 	}
 	
