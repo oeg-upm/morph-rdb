@@ -12,11 +12,12 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 
 import es.upm.fi.dia.oeg.morph.base.Constants;
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.exception.R2RMLInvalidRefObjectMapException;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.exception.R2RMLJoinConditionException;
 
 public class R2RMLRefObjectMap {
-	private R2RMLMappingDocument owner;
+	private AbstractMappingDocument owner;
 	private static Logger logger = Logger.getLogger(R2RMLObjectMap.class);
 	private RDFNode parentTriplesMap;
 	private R2RMLPredicateObjectMap parentPredicateObjectMap;
@@ -25,7 +26,7 @@ public class R2RMLRefObjectMap {
 	//private String alias;
 	
 	
-	public R2RMLRefObjectMap(Resource resource, R2RMLMappingDocument owner, R2RMLPredicateObjectMap parentPredicateObjectMap) 
+	public R2RMLRefObjectMap(Resource resource, AbstractMappingDocument owner, R2RMLPredicateObjectMap parentPredicateObjectMap) 
 			throws R2RMLInvalidRefObjectMapException, R2RMLJoinConditionException {
 		this.owner = owner;
 		this.parentPredicateObjectMap = parentPredicateObjectMap;

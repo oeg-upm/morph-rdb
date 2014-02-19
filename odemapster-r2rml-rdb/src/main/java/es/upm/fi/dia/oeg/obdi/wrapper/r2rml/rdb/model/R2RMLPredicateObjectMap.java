@@ -11,6 +11,7 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 
 import es.upm.fi.dia.oeg.morph.base.Constants;
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.IAttributeMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.IRelationMapping;
@@ -18,7 +19,8 @@ import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.exception.R2RMLInvalidRefObjectM
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.exception.R2RMLInvalidTermMapException;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.exception.R2RMLJoinConditionException;
 
-public class R2RMLPredicateObjectMap extends AbstractPropertyMapping implements IRelationMapping, IAttributeMapping{
+public class R2RMLPredicateObjectMap extends AbstractPropertyMapping 
+implements IRelationMapping, IAttributeMapping{
 	public enum ObjectMapType {ObjectMap, RefObjectMap}
 	private static Logger logger = Logger.getLogger(R2RMLPredicateObjectMap.class);
 	private List<R2RMLPredicateMap> predicateMaps = new Vector<R2RMLPredicateMap>();
@@ -28,7 +30,7 @@ public class R2RMLPredicateObjectMap extends AbstractPropertyMapping implements 
 	private List<ObjectMapType> objectMapTypes = new Vector<R2RMLPredicateObjectMap.ObjectMapType>();
 	private String alias;
 	
-	public R2RMLPredicateObjectMap(Resource resource, R2RMLMappingDocument mappingDocument
+	public R2RMLPredicateObjectMap(Resource resource, AbstractMappingDocument mappingDocument
 			, R2RMLTriplesMap parent) 
 			throws R2RMLInvalidRefObjectMapException, R2RMLJoinConditionException, R2RMLInvalidTermMapException {
 		this.parent = parent;

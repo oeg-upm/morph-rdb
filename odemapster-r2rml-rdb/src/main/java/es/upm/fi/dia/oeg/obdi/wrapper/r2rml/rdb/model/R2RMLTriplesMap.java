@@ -16,6 +16,7 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.TableMetaData;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.IConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.IRelationMapping;
@@ -37,7 +38,7 @@ implements R2RMLElement, IConceptMapping {
 	private R2RMLSubjectMap subjectMap;
 	private Collection<R2RMLPredicateObjectMap> predicateObjectMaps;
 	
-	public R2RMLTriplesMap(Resource triplesMap, R2RMLMappingDocument owner) 
+	public R2RMLTriplesMap(Resource triplesMap, AbstractMappingDocument owner) 
 			throws R2RMLInvalidTriplesMapException, R2RMLInvalidRefObjectMapException, R2RMLJoinConditionException, R2RMLInvalidTermMapException {
 		super.owner = owner;
 		this.triplesMapName = triplesMap.getLocalName();
@@ -115,8 +116,8 @@ implements R2RMLElement, IConceptMapping {
 			this.predicateObjectMaps = new HashSet<R2RMLPredicateObjectMap>();
 			while(predicateObjectMapStatements.hasNext()) {
 				Resource predicateObjectMapStatementObjectResource = (Resource) predicateObjectMapStatements.nextStatement().getObject();
-				R2RMLPredicateObjectMap predicateObjectMap = 
-						new R2RMLPredicateObjectMap(predicateObjectMapStatementObjectResource, owner, this); 
+				R2RMLPredicateObjectMap predicateObjectMap = new R2RMLPredicateObjectMap(
+						predicateObjectMapStatementObjectResource, owner, this); 
 				this.predicateObjectMaps.add(predicateObjectMap);
 			}
 		}

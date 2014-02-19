@@ -354,12 +354,16 @@ public abstract class AbstractMappingDocument {
 		return mappingDocumentPath;
 	}
 
-	public abstract Map<Node, Set<AbstractConceptMapping>> inferByObject(
-			AbstractConceptMapping cm, String predicateURI, Node object);
+//	public abstract Map<Node, Set<AbstractConceptMapping>> inferByObject2(
+//			AbstractConceptMapping cm, String predicateURI, Node object);
 	
 	public abstract Set<AbstractConceptMapping> getPossibleRange(String predicateURI, AbstractConceptMapping cm);
 	
 	public abstract Set<AbstractConceptMapping> getPossibleRange(String predicateURI);
 	
 	public abstract Set<AbstractConceptMapping> getPossibleRange(AbstractPropertyMapping pm);
+
+	public void setDbMetaData(DBMetaData dbMetaData) {
+		this.dbMetaData = dbMetaData;
+	}
 }

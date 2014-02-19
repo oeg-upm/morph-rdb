@@ -18,7 +18,6 @@ import es.upm.fi.dia.oeg.morph.base.GeneralUtility
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap.TermMapType
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLLogicalTable
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLObjectMap
 import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLSubjectMap
@@ -212,7 +211,7 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 		null;
 	}
 
-	def visit(mappingDocument:R2RMLMappingDocument) : Object = {
+	def visit(mappingDocument:AbstractMappingDocument) : Object = {
 		try {
 			this.translateData(mappingDocument);
 		} catch {

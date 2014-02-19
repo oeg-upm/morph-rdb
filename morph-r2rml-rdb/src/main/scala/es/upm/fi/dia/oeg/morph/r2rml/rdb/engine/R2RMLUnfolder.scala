@@ -25,9 +25,9 @@ import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTable
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLSQLQuery
 import Zql.ZQuery
 import Zql.ZSelectItem
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLObjectMap
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 
 class R2RMLUnfolder extends AbstractUnfolder with R2RMLElementVisitor {
 	var mapTermMapColumnsAliases:Map[Object, List[String]] = Map.empty;
@@ -355,7 +355,7 @@ class R2RMLUnfolder extends AbstractUnfolder with R2RMLElementVisitor {
 		result;
 	}
 
-	def visit( mappingDocument:R2RMLMappingDocument) : Collection[SQLQuery] = {
+	def visit( mappingDocument:AbstractMappingDocument) : Collection[SQLQuery] = {
 		val  result = this.unfoldMappingDocument(mappingDocument);
 		result;
 	}

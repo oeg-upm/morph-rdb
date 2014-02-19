@@ -4,7 +4,7 @@ import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractRunner
 import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLMappingDocument
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
 
 class R2RMLRunner extends AbstractRunner {
 	val logger = Logger.getLogger("R2RMLRunner");
