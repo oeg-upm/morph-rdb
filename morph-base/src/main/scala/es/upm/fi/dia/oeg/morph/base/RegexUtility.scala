@@ -13,7 +13,7 @@ object RegexUtility {
 	def main(args:Array[String]) = {
 		val template = "Hello \\{ {Name} \\} Please find attached {Invoice Number} which is due on {Due Date}";
 		
-		var replacements = new HashMap[String, String]();
+		var replacements = new HashMap[String, Object]();
 		replacements.put("Name", "Freddy");
 		replacements.put("Invoice Number", "INV0001");
 		
@@ -84,7 +84,7 @@ object RegexUtility {
 		result;
 	}
 	
-	def replaceTokens(matcher:Matcher, text: String, replacements:java.util.Map[String, String] ) 
+	def replaceTokens(matcher:Matcher, text: String, replacements:java.util.Map[String, Object] ) 
 	: String = {
 		var buffer:StringBuffer = new StringBuffer();
 		while (matcher.find()) {
@@ -99,7 +99,7 @@ object RegexUtility {
 		return buffer.toString();		
 	}
 	
-	def replaceTokens(pText:String, replacements:java.util.Map[String, String] ) : String  = {
+	def replaceTokens(pText:String, replacements:java.util.Map[String, Object] ) : String  = {
 		val text = pText.replaceAll("\\\\\\{", "morphopencurly")
 				.replaceAll("\\\\\\}", "morphclosecurly");
 		

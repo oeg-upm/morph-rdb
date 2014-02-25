@@ -24,9 +24,9 @@ import Zql.ZSelectItem;
 import Zql.ZUtils;
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.DBUtility;
-import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility;
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType;
 
 public class SQLQuery extends ZQuery implements IQuery {

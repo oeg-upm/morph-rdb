@@ -1,46 +1,37 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator
 
 import scala.collection.JavaConversions._
-
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import org.apache.log4j.Logger
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import org.apache.log4j.Logger;
-import Zql.ZConstant;
-import Zql.ZExp;
-import Zql.ZExpression;
-import Zql.ZSelectItem;
-import com.hp.hpl.jena.graph.Node;
-import com.hp.hpl.jena.graph.Triple;
-import com.hp.hpl.jena.vocabulary.RDF;
-import es.upm.fi.dia.oeg.morph.base.ColumnMetaData;
-import es.upm.fi.dia.oeg.morph.base.Constants;
-import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
-import es.upm.fi.dia.oeg.morph.base.MorphTriple;
-import es.upm.fi.dia.oeg.morph.base.SPARQLUtility;
-import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant;
-import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator;
-import es.upm.fi.dia.oeg.obdi.core.exception.InsatisfiableSQLExpression;
-import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslationException;
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping;
+import java.util.Collection
+import org.apache.log4j.Logger
+import Zql.ZConstant
+import Zql.ZExp
+import Zql.ZExpression
+import Zql.ZSelectItem
+import com.hp.hpl.jena.graph.Node
+import com.hp.hpl.jena.graph.Triple
+import com.hp.hpl.jena.vocabulary.RDF
+import es.upm.fi.dia.oeg.morph.base.Constants
+import es.upm.fi.dia.oeg.morph.base.MorphTriple
+import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
+import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
+import es.upm.fi.dia.oeg.obdi.core.exception.InsatisfiableSQLExpression
+import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslationException
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
+import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
 
-abstract class MorphBaseCondSQLGenerator(
-    owner:IQueryTranslator 
-    ) {
-	
-  val logger = Logger.getLogger("MorphBaseCondSQLGenerator");
-	val databaseType = {
-		if(this.owner == null) {null}
-		else {this.owner.getDatabaseType();}
-	}
-	
-	def  genCondSQL(tp:Triple, alphaResult:MorphAlphaResult, betaGenerator:MorphBaseBetaGenerator
-	    , cm:AbstractConceptMapping,  predicateURI:String) : MorphCondSQLResult =  {
+abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:AbstractUnfolder) {
+	val logger = Logger.getLogger(this.getClass().getName());
+	val dbType = md.getConfigurationProperties().databaseType;
+		
+	def  genCondSQL(tp:Triple, alphaResult:MorphAlphaResult
+	    , betaGenerator:MorphBaseBetaGenerator, cm:AbstractConceptMapping
+	    ,  predicateURI:String) : MorphCondSQLResult =  {
 
 		val condSQLSubject = this.genCondSQLSubject(tp, alphaResult, betaGenerator, cm);
 
@@ -55,17 +46,8 @@ abstract class MorphBaseCondSQLGenerator(
 			}		  
 		}
 
-		val condSQL = {
-			if(condSQLSubject == null && condSQLPredicateObject==null) {
-				null;
-			} else if(condSQLSubject != null && condSQLPredicateObject==null) {
-				condSQLSubject;
-			} else if(condSQLSubject == null && condSQLPredicateObject!=null) {
-				condSQLPredicateObject;
-			} else {
-				new ZExpression("AND", condSQLSubject, condSQLPredicateObject);
-			}		  
-		}
+		val condSQLTP = List(condSQLSubject, condSQLPredicateObject);
+		val condSQL = MorphSQLUtility.combineExpresions(condSQLTP, Constants.SQL_LOGICAL_OPERATOR_AND);
 
 		logger.debug("genCondSQL = " + condSQL);
 		new MorphCondSQLResult(condSQL);
@@ -79,10 +61,11 @@ abstract class MorphBaseCondSQLGenerator(
 		return exp;
 	}
 
-	def genCondSQLPredicateObject(tp:Triple, alphaResult:MorphAlphaResult , betaGenerator:MorphBaseBetaGenerator
-			, cm:AbstractConceptMapping, predicateURI:String) : ZExpression = {
+	def genCondSQLPredicateObject(tp:Triple, alphaResult:MorphAlphaResult 
+	    , betaGenerator:MorphBaseBetaGenerator, cm:AbstractConceptMapping
+	    , predicateURI:String) : ZExpression = {
 		
-		var exps : Set[ZExpression] = Set.empty;
+		//var exps : Set[ZExpression] = Set.empty;
 		
 		//val mapColumnMetaData = cm.getLogicalTable().getColumnsMetaData();
 		val tableMetaData = cm.getLogicalTable().getTableMetaData();
@@ -107,6 +90,8 @@ abstract class MorphBaseCondSQLGenerator(
 				throw new QueryTranslationException(errorMessage);
 				null
 			} else {//if(pms.size() == 1)
+				var exps : Set[ZExpression] = Set.empty;
+			  
 				val subject = tp.getSubject();
 				val predicate = tp.getPredicate();
 				val tpObject= tp.getObject();
@@ -126,7 +111,7 @@ abstract class MorphBaseCondSQLGenerator(
 				
 				val betaObjectSelectItems = 
 						betaGenerator.calculateBetaObject(tp, cm, predicateURI, alphaResult);
-				val betaObjectExpressions : List[ZExp] = betaObjectSelectItems.map(betaObjectSelectItem => {
+				val betaObjectExpressions= betaObjectSelectItems.map(betaObjectSelectItem => {
 						val betaObjectExp = {
 							if(betaObjectSelectItem.isExpression()) {
 								betaObjectSelectItem.getExpression();
@@ -136,7 +121,7 @@ abstract class MorphBaseCondSQLGenerator(
 							}
 						}
 		
-						betaObjectExp;			  
+						betaObjectExp;
 				  })
 				
 				
@@ -278,7 +263,7 @@ abstract class MorphBaseCondSQLGenerator(
 		
 		val subject = tp.getSubject();
 		val betaSubjectSelectItems = betaGenerator.calculateBetaSubject(tp, cm, alphaResult);
-		val betaSubjectExpressions : List[ZExp] = betaSubjectSelectItems.map(
+		val betaSubjectExpressions = betaSubjectSelectItems.map(
 		    betaSubjectSelectItem => betaSubjectSelectItem.getExpression())
 
 		val result1 : ZExpression = {

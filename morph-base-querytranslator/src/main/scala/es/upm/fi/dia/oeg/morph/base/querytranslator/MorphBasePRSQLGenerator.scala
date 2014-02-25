@@ -5,23 +5,25 @@ import com.hp.hpl.jena.graph.Node
 import com.hp.hpl.jena.graph.Triple
 import com.hp.hpl.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
 import java.util.Collection
 import org.apache.log4j.Logger
 import scala.collection.mutable.LinkedHashSet
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
+import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 
-class MorphBasePRSQLGenerator(
-    val owner:IQueryTranslator 
-    ) {
+class MorphBasePRSQLGenerator(md:AbstractMappingDocument, unfolder:AbstractUnfolder) {
 
   val logger = Logger.getLogger("MorphBasePRSQLGenerator");
-	val databaseType = {
-		if(this.owner == null) {null}
-		else {this.owner.getDatabaseType();}
-	}
+//	val databaseType = {
+//		if(this.owner == null) {null}
+//		else {this.owner.getDatabaseType();}
+//	}
+	val dbType = md.getConfigurationProperties().databaseType;
+	var mapHashCodeMapping : Map[Integer, Object] = Map.empty
+
 	
 	def  genPRSQL(tp:Triple , alphaResult:MorphAlphaResult , betaGenerator:MorphBaseBetaGenerator
 	    , nameGenerator:NameGenerator, cmSubject:AbstractConceptMapping, predicateURI:String , unboundedPredicate:Boolean) 
@@ -49,9 +51,9 @@ class MorphBasePRSQLGenerator(
 		if(tpObject != tpSubject && tpObject != tpPredicate) {
 			val columnType = {
 				if(tpPredicate.isVariable()) {
-					if(Constants.DATABASE_POSTGRESQL.equalsIgnoreCase(databaseType)) {
+					if(Constants.DATABASE_POSTGRESQL.equalsIgnoreCase(dbType)) {
 						Constants.POSTGRESQL_COLUMN_TYPE_TEXT;	
-					} else if(Constants.DATABASE_MONETDB.equalsIgnoreCase(databaseType)) {
+					} else if(Constants.DATABASE_MONETDB.equalsIgnoreCase(dbType)) {
 						Constants.MONETDB_COLUMN_TYPE_TEXT;
 					} else {
 						Constants.MONETDB_COLUMN_TYPE_TEXT;
@@ -78,7 +80,7 @@ class MorphBasePRSQLGenerator(
 		def betaObjSelectItems = betaGenerator.calculateBetaObject(tp, cmSubject, predicateURI, alphaResult);
 		val selectItems = for(i <- 0 until betaObjSelectItems.size()) yield {
 			val betaObjSelectItem = betaObjSelectItems.get(i);
-			val selectItem = MorphSQLSelectItem.apply(betaObjSelectItem, databaseType, columnType);
+			val selectItem = MorphSQLSelectItem.apply(betaObjSelectItem, dbType, columnType);
 			
 			val selectItemAliasAux = nameGenerator.generateName(tp.getObject());
 			val selectItemAlias = {
@@ -105,7 +107,7 @@ class MorphBasePRSQLGenerator(
 	def  genPRSQLPredicate(tp:Triple, alphaResult:MorphAlphaResult , betaGenerator:MorphBaseBetaGenerator 
 	    , nameGenerator:NameGenerator , predicateURI:String ) : ZSelectItem = {
 			val betaPre = betaGenerator.calculateBetaPredicate(predicateURI);
-			val selectItem = MorphSQLSelectItem.apply(betaPre, this.databaseType, "text");
+			val selectItem = MorphSQLSelectItem.apply(betaPre, this.dbType, "text");
 
 			val alias = nameGenerator.generateName(tp.getPredicate());
 			selectItem.setAlias(alias);
@@ -123,7 +125,7 @@ class MorphBasePRSQLGenerator(
 				for(i <- 0 until betaSubSelectItems.size()) yield {
 					val betaSub = betaSubSelectItems.get(i);
 						
-					val selectItem = MorphSQLSelectItem.apply(betaSub, databaseType);
+					val selectItem = MorphSQLSelectItem.apply(betaSub, dbType);
 					val selectItemSubjectAliasAux = nameGenerator.generateName(tpSubject);
 					val selectItemSubjectAlias = {
 						if(betaSubSelectItems.size() > 1) {
@@ -186,5 +188,13 @@ class MorphBasePRSQLGenerator(
 		val prList = selectItemsSubjects.toList ::: selectItemsSTGObjects.toList;
 		prList;
 	}
+	
+	def getMappedMapping(hashCode:Integer ) = {
+		this.mapHashCodeMapping.get(hashCode);
+	}
+	
+	def putMappedMapping(key:Integer , value:Object ) {
+		this.mapHashCodeMapping += (key -> value);
+	}	
 
 }

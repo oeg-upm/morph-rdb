@@ -1,6 +1,6 @@
-_:Bob_Smith_30 <http://example.com/amount> "30"^^<http://www.w3.org/2001/XMLSchema#double> .
-_:Bob_Smith_30 <http://xmlns.com/foaf/0.1/name> "Bob Smith" .
-_:Sue_Jones_20 <http://example.com/amount> "20"^^<http://www.w3.org/2001/XMLSchema#double> .
-_:Sue_Jones_20 <http://xmlns.com/foaf/0.1/name> "Sue Jones" .
-_:Bob_Smith_30 <http://example.com/amount> "30"^^<http://www.w3.org/2001/XMLSchema#double> .
-_:Bob_Smith_30 <http://xmlns.com/foaf/0.1/name> "Bob Smith" .
+Bob_Smith_30 http%3A%2F%2Fexample.com%2Famount 30  .
+Bob_Smith_30 http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Bob Smith  .
+Sue_Jones_20 http%3A%2F%2Fexample.com%2Famount 20  .
+Sue_Jones_20 http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Sue Jones  .
+Bob_Smith_30 http%3A%2F%2Fexample.com%2Famount 30  .
+Bob_Smith_30 http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Bob Smith  .

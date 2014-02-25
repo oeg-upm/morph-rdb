@@ -6,6 +6,7 @@ import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
 
+
 class R2RMLRunner extends AbstractRunner {
 	val logger = Logger.getLogger("R2RMLRunner");
 	
@@ -17,7 +18,7 @@ class R2RMLRunner extends AbstractRunner {
 	}
 
 	override def createUnfolder() : AbstractUnfolder  = {
-		val unfolder = new R2RMLUnfolder();
+		val unfolder = new R2RMLUnfolder(this.mappingDocument.asInstanceOf[R2RMLMappingDocument]);
 		unfolder.setDbType(this.configurationProperties.databaseType);
 		return unfolder;
 	}
@@ -26,6 +27,45 @@ class R2RMLRunner extends AbstractRunner {
 		this.mappingDocument = new R2RMLMappingDocument(mappingDocumentFile, configurationProperties);
 	}
 
+//	override def buildQueryTranslator() = {
+//		val r2rmlMD = this.mappingDocument.asInstanceOf[R2RMLMappingDocument];
+//		val r2rmlUnfolder = this.unfolder.asInstanceOf[R2RMLUnfolder];
+//		
+//		this.queryTranslator = MorphRDBQueryTranslator(r2rmlMD, this.conn, r2rmlUnfolder);
+//		
+//		if(configurationProperties != null) {
+//			this.queryTranslator.setConfigurationProperties(configurationProperties);
+//			val databaseType = configurationProperties.databaseType;
+//			if(databaseType != null && !databaseType.equals("")) {
+//				this.queryTranslator.setDatabaseType(databaseType);
+//			}			
+//		}
+//
+//		//query translation optimizer
+//		val queryTranslationOptimizer = this.buildQueryTranslationOptimizer();
+//
+//		val eliminateSelfJoin = this.isSelfJoinElimination();
+//		queryTranslationOptimizer.setSelfJoinElimination(eliminateSelfJoin);
+//
+//		val eliminateSubQuery = this.isSubQueryElimination();
+//		queryTranslationOptimizer.setSubQueryElimination(eliminateSubQuery);
+//
+//		val transJoinEliminateSubQuery = this.isTransJoinSubQueryElimination();
+//		queryTranslationOptimizer.setTransJoinSubQueryElimination(transJoinEliminateSubQuery);
+//
+//		val transSTGEliminateSubQuery = this.isTransSTGSubQueryElimination();
+//		queryTranslationOptimizer.setTransSTGSubQueryElimination(transSTGEliminateSubQuery);
+//
+//		val subQueryAsView = this.isSubQueryAsView();
+//		queryTranslationOptimizer.setSubQueryAsView(subQueryAsView);
+//
+//		this.queryTranslator.setOptimizer(queryTranslationOptimizer);
+//		logger.debug("query translator = " + this.queryTranslator);
+//		
+//		//sparql query
+//		val queryFilePath = this.configurationProperties.queryFilePath;
+//		this.queryTranslator.setSPARQLQueryByFile(queryFilePath);
+//	}	
 }
 
 object R2RMLRunner {

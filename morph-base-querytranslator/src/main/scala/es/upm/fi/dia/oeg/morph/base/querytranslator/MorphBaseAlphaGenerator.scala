@@ -1,9 +1,7 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator
 
 import scala.collection.JavaConversions._
-
 import java.util.Collection
-//import java.util.Vector
 import com.hp.hpl.jena.graph.Node
 import com.hp.hpl.jena.graph.Triple
 import com.hp.hpl.jena.vocabulary.RDF
@@ -14,17 +12,20 @@ import es.upm.fi.dia.oeg.obdi.core.sql.SQLLogicalTable
 import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
+import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
 
-abstract class MorphBaseAlphaGenerator(
-    val owner:IQueryTranslator 
-    ) {
+abstract class MorphBaseAlphaGenerator(md:AbstractMappingDocument,unfolder:AbstractUnfolder)
+//(val owner:IQueryTranslator) 
+{
 
   def logger = Logger.getLogger("MorphBaseAlphaGenerator");
-
-	val databaseType = {
-		if(this.owner == null) {null}
-		else {this.owner.getDatabaseType();}
-	}
+  
+//	val databaseType = {
+//		if(this.owner == null) {null}
+//		else {this.owner.getDatabaseType();}
+//	}
+	val databaseType = md.getConfigurationProperties().databaseType;
 	
 	def calculateAlpha(tp:Triple, cm:AbstractConceptMapping, predicateURI:String) : MorphAlphaResult;
 

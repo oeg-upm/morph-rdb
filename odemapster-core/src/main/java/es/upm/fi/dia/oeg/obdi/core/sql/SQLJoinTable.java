@@ -7,7 +7,7 @@ import Zql.ZExp;
 import Zql.ZExpression;
 import Zql.ZFromItem;
 import es.upm.fi.dia.oeg.morph.base.Constants;
-import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility;
 
 @SuppressWarnings("serial")
 public class SQLJoinTable extends ZFromItem {

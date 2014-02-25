@@ -13,47 +13,47 @@ import es.upm.fi.dia.oeg.morph.base.CollectionUtility
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.RegexUtility
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractResultSet
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
-import es.upm.fi.dia.oeg.obdi.core.exception.InsatisfiableSQLExpression
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
 import es.upm.fi.dia.oeg.obdi.core.sql.IQuery
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLRefObjectMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap.TermMapType
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTriplesMap
-import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
-import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseQueryTranslator
-import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
-import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseCondSQLGenerator
-import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
-import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBasePRSQLGenerator
-import es.upm.fi.dia.oeg.morph.base.querytranslator.NameGenerator
 import es.upm.fi.dia.oeg.morph.base.TermMapResult
 import es.upm.fi.dia.oeg.morph.base.GeneralUtility
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTermMap
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLRefObjectMap
+import es.upm.fi.dia.oeg.morph.base.querytranslator.NameGenerator
+import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
+import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseCondSQLGenerator
+import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseQueryTranslator
+import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
+import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBasePRSQLGenerator
 
-class MorphRDBQueryTranslator() 
-    extends MorphBaseQueryTranslator() {
+class MorphRDBQueryTranslator(nameGenerator:NameGenerator
+    , alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
+    , condSQLGenerator:MorphBaseCondSQLGenerator, prSQLGenerator:MorphBasePRSQLGenerator) 
+    extends MorphBaseQueryTranslator(nameGenerator:NameGenerator
+    , alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
+    , condSQLGenerator:MorphBaseCondSQLGenerator, prSQLGenerator:MorphBasePRSQLGenerator) {
 	override val logger = Logger.getLogger("MorphQueryTranslator");
 	
+
 	//chebotko functions
-	val alphaGenerator:MorphBaseAlphaGenerator = new MorphRDBAlphaGenerator(this);
-	val betaGenerator:MorphBaseBetaGenerator = new MorphRDBBetaGenerator(this);
-	val condSQLGenerator:MorphBaseCondSQLGenerator = new MorphRDBCondSQLGenerator(this);
-	val prSQLGenerator:MorphBasePRSQLGenerator = new MorphRDBPRSQLGenerator(this);
+//	val alphaGenerator:MorphBaseAlphaGenerator = new MorphRDBAlphaGenerator(this);
+//	val betaGenerator:MorphBaseBetaGenerator = new MorphRDBBetaGenerator(this);
+//	val condSQLGenerator:MorphBaseCondSQLGenerator = new MorphRDBCondSQLGenerator(this);
+//	val prSQLGenerator:MorphBasePRSQLGenerator = new MorphRDBPRSQLGenerator(this);
 	
-	var mapTripleAlias:Map[Triple, String] = Map.empty;
+	//var mapTripleAlias:Map[Triple, String] = Map.empty;
 	var mapTemplateMatcher:Map[String, Matcher] = Map.empty;
 	var mapTemplateAttributes:Map[String, java.util.List[String]] = Map.empty;
-	val unfolder = new R2RMLUnfolder();
+	val unfolder = null;
 
 	override def transIRI(node:Node) : List[ZExp] = {
 		val cms = mapInferredTypes(node);
 		val cm = cms.iterator().next().asInstanceOf[R2RMLTriplesMap];
-		val mapColumnsValues = cm.getSubjectMap().getTemplateValues(node.getURI());
+		val mapColumnsValues = cm.subjectMap.getTemplateValues(node.getURI());
 		val result:List[ZExp] = {
 			if(mapColumnsValues == null || mapColumnsValues.size() == 0) {
 				//do nothing
@@ -98,9 +98,11 @@ class MorphRDBQueryTranslator()
 				val mappingHashCode = rs.getInt(Constants.PREFIX_MAPPING_ID + varName);
 				if(mappingHashCode == null) {
 					val varNameHashCode = varName.hashCode();
-					super.getMappedMapping(varNameHashCode);
+					//super.getMappedMapping(varNameHashCode);
+					this.prSQLGenerator.getMappedMapping(varNameHashCode)
 				} else {
-					super.getMappedMapping(mappingHashCode);
+					//super.getMappedMapping(mappingHashCode);
+					this.prSQLGenerator.getMappedMapping(mappingHashCode)
 				}
 			} catch {
 			  case e:Exception => {
@@ -132,7 +134,10 @@ class MorphRDBQueryTranslator()
 						    mappedValueTermMap;
 						  }
 						  case mappedValueRefObjectMap:R2RMLRefObjectMap => {
-							mappedValueRefObjectMap.getParentTriplesMap().getSubjectMap();
+//						    val parentTriplesMap = mappedValueRefObjectMap.getParentTriplesMap().asInstanceOf[R2RMLTriplesMap];
+							val md = this.getMappingDocument().asInstanceOf[R2RMLMappingDocument];
+							val parentTriplesMap = md.getParentTripleMap(mappedValueRefObjectMap);						    
+							parentTriplesMap.subjectMap;
 						  }
 						  case _ => {
 						    logger.debug("undefined type of mapping!");
@@ -144,66 +149,70 @@ class MorphRDBQueryTranslator()
 
 					val resultAux = {
 						if(termMap != null) {
-							val termMapType = termMap.getTermMapType();
-	
-							if(termMapType == TermMapType.TEMPLATE) {
-								val templateString = termMap.getTemplateString();
-								if(this.mapTemplateMatcher.contains(templateString)) {
-									val matcher = this.mapTemplateMatcher.get(templateString);  
-								} else {
-									val pattern = Pattern.compile(Constants.R2RML_TEMPLATE_PATTERN);
-									val matcher = pattern.matcher(templateString);
-									this.mapTemplateMatcher += (templateString -> matcher);							  
-								}
-								
-								val templateAttributes = {
-									if(this.mapTemplateAttributes.contains(templateString)) {
-										this.mapTemplateAttributes(templateString);  
+							val termMapType = termMap.termMapType;
+							termMap.termMapType match {
+							  case Constants.MorphTermMapType.TemplateTermMap => {
+									val templateString = termMap.getTemplateString();
+									if(this.mapTemplateMatcher.contains(templateString)) {
+										val matcher = this.mapTemplateMatcher.get(templateString);  
 									} else {
-										val templateAttributesAux = RegexUtility.getTemplateColumns(templateString, true);
-										this.mapTemplateAttributes += (templateString -> templateAttributesAux);
-										templateAttributesAux;
-									}							  
-								}
-	
-								var i = 0;
-								val replaceMentAux = templateAttributes.map(templateAttribute => {
-									val columnName = {
-										if(columnNames == null || columnNames.isEmpty()) {
-											varName;
-										} else {
-											varName + "_" + i;
-										}								  
+										val pattern = Pattern.compile(Constants.R2RML_TEMPLATE_PATTERN);
+										val matcher = pattern.matcher(templateString);
+										this.mapTemplateMatcher += (templateString -> matcher);							  
 									}
-									i = i + 1;
-	
-									val dbValue = rs.getString(columnName);
-									templateAttribute -> dbValue;
-								})
-								val replacements = replaceMentAux.toMap;
-								
-								if(replacements.size() > 0) {
-									RegexUtility.replaceTokens(templateString, replacements);	
-								} else {
-									logger.debug("no replacements found for the R2RML template!");
+									
+									val templateAttributes = {
+										if(this.mapTemplateAttributes.contains(templateString)) {
+											this.mapTemplateAttributes(templateString);  
+										} else {
+											val templateAttributesAux = RegexUtility.getTemplateColumns(templateString, true);
+											this.mapTemplateAttributes += (templateString -> templateAttributesAux);
+											templateAttributesAux;
+										}							  
+									}
+		
+									var i = 0;
+									val replaceMentAux = templateAttributes.map(templateAttribute => {
+										val columnName = {
+											if(columnNames == null || columnNames.isEmpty()) {
+												varName;
+											} else {
+												varName + "_" + i;
+											}								  
+										}
+										i = i + 1;
+		
+										val dbValue = rs.getString(columnName);
+										templateAttribute -> dbValue;
+									})
+									val replacements = replaceMentAux.toMap;
+									
+									if(replacements.size() > 0) {
+										RegexUtility.replaceTokens(templateString, replacements);	
+									} else {
+										logger.debug("no replacements found for the R2RML template!");
+										null;
+									}
+								} 
+							  case Constants.MorphTermMapType.ColumnTermMap => {
+									//String columnName = termMap.getColumnName();
+									rs.getString(varName);
+								} 
+							  case Constants.MorphTermMapType.ConstantTermMap => {
+									termMap.getConstantValue();
+								} 
+							  case _ => {
+									logger.debug("Unsupported term map type!");
 									null;
-								}
-							} else if(termMapType == TermMapType.COLUMN) {
-								//String columnName = termMap.getColumnName();
-								rs.getString(varName);
-							} else if (termMapType == TermMapType.CONSTANT) {
-								termMap.getConstantValue();
-							} else {
-								logger.debug("Unsupported term map type!");
-								null;
+								}							  
 							}
 						} else {
 						  null;
 						}				  
 					}
 					
-					val termMapType = termMap.getTermType();
-					val xsdDatatype = termMap.getDatatype();
+					val termMapType = termMap.termType;
+					val xsdDatatype = termMap.datatype;
 					val resultAuxString = {
 						if(resultAux != null) {
 							if(termMapType != null) {
@@ -244,17 +253,17 @@ class MorphRDBQueryTranslator()
 		null;
 	}
 
-	override def getTripleAlias(tp:Triple ) : String = {
-	  if(this.mapTripleAlias.contains(tp)) {
-	    this.mapTripleAlias(tp);
-	  } else {
-	    null
-	  }
-	}
-
-	override def putTripleAlias(tp:Triple , alias:String ) = {
-		this.mapTripleAlias += (tp -> alias);
-	}
+//	override def getTripleAlias(tp:Triple ) : String = {
+//	  if(this.mapTripleAlias.contains(tp)) {
+//	    this.mapTripleAlias(tp);
+//	  } else {
+//	    null
+//	  }
+//	}
+//
+//	override def putTripleAlias(tp:Triple , alias:String ) = {
+//		this.mapTripleAlias += (tp -> alias);
+//	}
 	
 	   
 	   
@@ -271,32 +280,37 @@ class MorphRDBQueryTranslator()
 	//def setUnfolder(x$1: es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder): Unit = ???	
 }
 
-object MorphRDBQueryTranslator {
-	val nameGenerator:NameGenerator = new NameGenerator();
-
-	def createQueryTranslator(mappingDocument:AbstractMappingDocument, conn:Connection ) 
-	: IQueryTranslator = {
-
-		val queryTranslator = new MorphRDBQueryTranslator();
-
-		if(conn != null) {
-			mappingDocument.setConn(conn)
-		}
-		queryTranslator.setMappingDocument(mappingDocument);
-		queryTranslator;
-	}
+//object MorphRDBQueryTranslator {
+	
+//	def createQueryTranslator(mappingDocument:AbstractMappingDocument, conn:Connection ) 
+//	: IQueryTranslator = {
+//		val nameGenerator = new NameGenerator();
+//		val alphaGenerator:MorphBaseAlphaGenerator = new MorphRDBAlphaGenerator(md
+//		val betaGenerator:MorphBaseBetaGenerator = new MorphRDBBetaGenerator(this);
+//		val condSQLGenerator:MorphBaseCondSQLGenerator = new MorphRDBCondSQLGenerator(this);
+//		val prSQLGenerator:MorphBasePRSQLGenerator = new MorphRDBPRSQLGenerator(this);
+//	  
+//	  
+//		val queryTranslator = new MorphRDBQueryTranslator(alphaGenerator, );
+//
+//		if(conn != null) {
+//			mappingDocument.setConn(conn)
+//		}
+//		queryTranslator.setMappingDocument(mappingDocument);
+//		queryTranslator;
+//	}
 		
-	def createQueryTranslator(mappingDocument:AbstractMappingDocument) 
-	: IQueryTranslator = {
-		MorphRDBQueryTranslator.createQueryTranslator(mappingDocument, null);
-	}
-
-	def createQueryTranslator(mappingDocumentPath:String) : IQueryTranslator = {
-		MorphRDBQueryTranslator.createQueryTranslator(mappingDocumentPath, null);
-	}
-
-	def createQueryTranslator(mappingDocumentPath:String , conn:Connection ) : IQueryTranslator = {
-		val mappingDocument = new R2RMLMappingDocument(mappingDocumentPath, null);
-		MorphRDBQueryTranslator.createQueryTranslator(mappingDocument, conn);
-	}
-}
+//	def createQueryTranslator(mappingDocument:AbstractMappingDocument) 
+//	: IQueryTranslator = {
+//		MorphRDBQueryTranslator.createQueryTranslator(mappingDocument, null);
+//	}
+//
+//	def createQueryTranslator(mappingDocumentPath:String) : IQueryTranslator = {
+//		MorphRDBQueryTranslator.createQueryTranslator(mappingDocumentPath, null);
+//	}
+//
+//	def createQueryTranslator(mappingDocumentPath:String , conn:Connection ) : IQueryTranslator = {
+//		val mappingDocument = new R2RMLMappingDocument(mappingDocumentPath, null);
+//		MorphRDBQueryTranslator.createQueryTranslator(mappingDocument, conn);
+//	}
+//}

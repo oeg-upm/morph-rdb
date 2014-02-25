@@ -12,8 +12,8 @@ import com.hp.hpl.jena.sparql.algebra.op.OpFilter
 import com.hp.hpl.jena.sparql.algebra.op.OpUnion
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import Zql.ZSelectItem
-import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
 
 
 class MorphQueryTranslatorUtility {

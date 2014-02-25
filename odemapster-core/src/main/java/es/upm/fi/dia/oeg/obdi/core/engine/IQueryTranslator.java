@@ -29,7 +29,7 @@ public interface IQueryTranslator {
 
 	void setMappingDocument(AbstractMappingDocument md);
 	
-	//AbstractMappingDocument getMappingDocument();
+	AbstractMappingDocument getMappingDocument();
 
 	//void setUnfolder(AbstractUnfolder unfolder);
 
@@ -53,12 +53,12 @@ public interface IQueryTranslator {
 
 	//void setConnection(Connection conn);
 	
-	String getTripleAlias(Triple triple);
+//	String getTripleAlias(Triple triple);
 	
 	public abstract AbstractUnfolder getUnfolder();
 	
-	public abstract void putMappedMapping(Integer key, Object value);
+//	public abstract void putMappedMapping(Integer key, Object value);
 	
-	public abstract void putTripleAlias(Triple tp, String alias);
+//	public abstract void putTripleAlias(Triple tp, String alias);
 
 }

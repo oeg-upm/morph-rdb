@@ -24,7 +24,8 @@ class ConfigurationProperties() extends java.util.Properties {
 	var databaseType:String =null;
 
 	//query translator
-	var queryTranslatorClassName:String =null;
+	//var queryTranslatorClassName:String =null;
+	var queryTranslatorFactoryClassName:String =null;
 	var queryEvaluatorClassName:String =null;
 	var queryResultWriterClassName:String =null;
 
@@ -78,9 +79,9 @@ class ConfigurationProperties() extends java.util.Properties {
 
 			val propertyDatabaseType = Constants.DATABASE_TYPE_PROP_NAME  + "[" + i + "]";
 			this.databaseType = this.getProperty(propertyDatabaseType);
-			if(this.databaseType == null) {
-				this.databaseType = Constants.DATABASE_MYSQL;
-			}
+//			if(this.databaseType == null) {
+//				this.databaseType = Constants.DATABASE_MYSQL;
+//			}
 			
 			val propertyDatabaseTimeout = Constants.DATABASE_TIMEOUT_PROP_NAME  + "[" + i + "]";
 			val timeoutPropertyString = this.getProperty(propertyDatabaseTimeout);
@@ -155,8 +156,8 @@ class ConfigurationProperties() extends java.util.Properties {
 		this.subQueryAsView = this.readBoolean(Constants.SUBQUERY_AS_VIEW, false);
 		logger.debug("Subquery as view = " + this.subQueryAsView);
 
-		this.queryTranslatorClassName = this.readString(
-				Constants.QUERY_TRANSLATOR_CLASSNAME, null);
+		this.queryTranslatorFactoryClassName = this.readString(
+				Constants.QUERY_TRANSLATOR_FACTORY_CLASSNAME, null);
 
 		this.queryEvaluatorClassName = this.readString(
 				Constants.DATASOURCE_READER_CLASSNAME, null);

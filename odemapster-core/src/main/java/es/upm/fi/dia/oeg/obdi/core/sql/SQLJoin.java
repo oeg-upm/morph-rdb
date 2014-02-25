@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility;
 import Zql.ZExp;
 import Zql.ZExpression;
 import Zql.ZGroupBy;

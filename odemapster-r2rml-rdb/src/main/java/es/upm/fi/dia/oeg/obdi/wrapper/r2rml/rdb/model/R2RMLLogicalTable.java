@@ -13,10 +13,10 @@ import scala.Option;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 
-import es.upm.fi.dia.oeg.morph.base.ColumnMetaData;
 import es.upm.fi.dia.oeg.morph.base.Constants;
-import es.upm.fi.dia.oeg.morph.base.DBMetaData;
-import es.upm.fi.dia.oeg.morph.base.TableMetaData;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphTableMetaData;
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractLogicalTable;
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType;
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElement;
@@ -28,14 +28,35 @@ public abstract class R2RMLLogicalTable extends AbstractLogicalTable implements 
 	
 	LogicalTableType logicalTableType;
 	private String alias;
-	
-	
-	R2RMLLogicalTable(R2RMLTriplesMap owner) {this.owner = owner;}
 
+	public void buildMetaData(MorphDatabaseMetaData dbMetaData) throws Exception {
+		String tableName = null; 
+		if(this instanceof R2RMLTable) {
+			R2RMLTable r2rmlTable = (R2RMLTable) this;
+			tableName = r2rmlTable.getValue();
+		} else if (this instanceof R2RMLSQLQuery){
+			R2RMLSQLQuery r2rmlSQLQuery = (R2RMLSQLQuery) this;
+			String queryString = r2rmlSQLQuery.getValue().trim();
+			if(queryString.endsWith(";")) {
+				queryString = queryString.substring(0, queryString.length()-1);
+			}
+			tableName = "(" + queryString + ")";
+		}
+		
+		Option<MorphTableMetaData> optionTableMetaData = dbMetaData.getTableMetaData(tableName);
+		MorphTableMetaData tableMetaData;
+		if(optionTableMetaData.isDefined()) {
+			tableMetaData = optionTableMetaData.get();
+		} else {
+			tableMetaData = MorphTableMetaData.buildTableMetaData(tableName, dbMetaData);
+		}
+		super.tableMetaData = tableMetaData;
+	}
+	
 	public void buildMetaData(Connection conn) throws Exception {
 		if(conn != null) {
 			try {//BUILDING TABLE METADATA
-				DBMetaData dbMetaData = owner.getOwner().getDBMetaData();
+				MorphDatabaseMetaData dbMetaData = owner.getOwner().getDBMetaData();
 				String tableName = null; 
 				if(this instanceof R2RMLTable) {
 					R2RMLTable r2rmlTable = (R2RMLTable) this;
@@ -49,13 +70,12 @@ public abstract class R2RMLLogicalTable extends AbstractLogicalTable implements 
 					tableName = "(" + queryString + ")";
 				}
 				
-				Option<TableMetaData> optionTableMetaData = dbMetaData.getTableMetaData(tableName);
-				TableMetaData tableMetaData;
+				Option<MorphTableMetaData> optionTableMetaData = dbMetaData.getTableMetaData(tableName);
+				MorphTableMetaData tableMetaData;
 				if(optionTableMetaData.isDefined()) {
 					tableMetaData = optionTableMetaData.get();
 				} else {
-					tableMetaData = TableMetaData.buildTableMetaData(
-							tableName, dbMetaData, conn, dbMetaData.dbName());
+					tableMetaData = MorphTableMetaData.buildTableMetaData(tableName, dbMetaData);
 				}
 				super.tableMetaData = tableMetaData;	
 				
@@ -107,17 +127,18 @@ public abstract class R2RMLLogicalTable extends AbstractLogicalTable implements 
 		}
 	}
 
-	static R2RMLLogicalTable parse(Resource resource, R2RMLTriplesMap owner) throws Exception {
-		String dbType = owner.getOwner().getConfigurationProperties().databaseType();
-		String dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
+	public static R2RMLLogicalTable parse(Resource resource) throws Exception {
+		//String dbType = owner.getOwner().getConfigurationProperties().databaseType();
+		//String dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
 		
 		R2RMLLogicalTable logicalTable = null; 
 		Statement tableNameStatement = resource.getProperty(
 				Constants.R2RML_TABLENAME_PROPERTY());
 		if(tableNameStatement != null) {
 			String tableName = tableNameStatement.getObject().toString();
-			tableName = tableName.replaceAll("\"", dbEnclosedCharacter);
-			logicalTable = new R2RMLTable(tableName, owner);
+//			tableName = tableName.replaceAll("\"", dbEnclosedCharacter);
+//			logicalTable = new R2RMLTable(tableName, owner);
+			logicalTable = new R2RMLTable(tableName);			
 		} else {
 			Statement sqlQueryStatement = resource.getProperty(
 					Constants.R2RML_SQLQUERY_PROPERTY());
@@ -125,12 +146,12 @@ public abstract class R2RMLLogicalTable extends AbstractLogicalTable implements 
 				logger.error("Invalid logical table defined : " + resource);
 			}
 			String sqlQueryString = sqlQueryStatement.getObject().toString().trim();
-			sqlQueryString = sqlQueryString.replaceAll("\"", dbEnclosedCharacter);
+			//sqlQueryString = sqlQueryString.replaceAll("\"", dbEnclosedCharacter);
 			if(sqlQueryString.endsWith(";")) {
 				sqlQueryString = sqlQueryString.substring(0, sqlQueryString.length()-1);
 			}
 			
-			logicalTable = new R2RMLSQLQuery(sqlQueryString, owner);
+			logicalTable = new R2RMLSQLQuery(sqlQueryString);
 		}
 
 		return logicalTable;

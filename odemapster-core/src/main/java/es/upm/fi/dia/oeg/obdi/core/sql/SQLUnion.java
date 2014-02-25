@@ -15,8 +15,8 @@ import Zql.ZOrderBy;
 import Zql.ZSelectItem;
 import es.upm.fi.dia.oeg.morph.base.CollectionUtility;
 import es.upm.fi.dia.oeg.morph.base.Constants;
-import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility;
 
 public class SQLUnion implements IQuery {
 	String alias;

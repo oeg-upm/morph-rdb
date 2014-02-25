@@ -9,30 +9,27 @@ import com.hp.hpl.jena.graph.Node
 import com.hp.hpl.jena.graph.Triple
 import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.log4j.Logger
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTriplesMap
-import es.upm.fi.dia.oeg.morph.base.DBUtility
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery
-import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
-import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
-import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLJoinCondition
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
+import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLLogicalTable
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
+import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
+import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
+import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
 
-class MorphRDBAlphaGenerator(
-    owner:IQueryTranslator
-    ) 
-extends MorphBaseAlphaGenerator(
-    owner:IQueryTranslator
-    ) {
+class MorphRDBAlphaGenerator(md:R2RMLMappingDocument,unfolder:R2RMLUnfolder)
+//(owner:IQueryTranslator) 
+extends 
+MorphBaseAlphaGenerator(md:AbstractMappingDocument,unfolder:AbstractUnfolder)
+//(owner:IQueryTranslator) 
+{
 	override val logger = Logger.getLogger("MorphQueryTranslator");
-
+	
+	
 	
 	override def calculateAlpha(tp:Triple, abstractConceptMapping:AbstractConceptMapping 
 	    , predicateURI:String ) : MorphAlphaResult = {
@@ -96,29 +93,34 @@ extends MorphBaseAlphaGenerator(
 		
 		val result:SQLJoinTable  =  {
 			if(refObjectMap != null) { 
-				val parentLogicalTable = refObjectMap.getParentLogicalTable();
+//				val parentLogicalTable = refObjectMap.getParentLogicalTable().asInstanceOf[R2RMLLogicalTable];
+				//val md = this.owner.getMappingDocument().asInstanceOf[R2RMLMappingDocument];
+				val parentTriplesMap = md.getParentTripleMap(refObjectMap);
+				val parentLogicalTable = parentTriplesMap.getLogicalTable.asInstanceOf[R2RMLLogicalTable];
+				
 				if(parentLogicalTable == null) {
 					val errorMessage = "Parent logical table is not found for RefObjectMap : " + refObjectMap;
 					logger.error(errorMessage);
 				}
 				
-				val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
+				//val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
 				val sqlParentLogicalTableAux = unfolder.visit(parentLogicalTable);
 				val sqlParentLogicalTable = new SQLJoinTable(sqlParentLogicalTableAux
 				    , Constants.JOINS_TYPE_INNER, null);
 				
-				val tripleAlias = this.owner.getTripleAlias(triple);
-				
-				val joinQueryAlias = {
-					if(tripleAlias == null) {
-						val sqlParentLogicalTableAuxAlias = sqlParentLogicalTableAux.generateAlias();
-						this.owner.putTripleAlias(triple, sqlParentLogicalTableAuxAlias);
-						sqlParentLogicalTableAuxAlias;
-					} else {
-					  tripleAlias
-					}				  
-				}
+				//val tripleAlias = this.owner.getTripleAlias(triple);
+				  
+//				val joinQueryAlias = {
+//					if(tripleAlias == null) {
+//						val sqlParentLogicalTableAuxAlias = sqlParentLogicalTableAux.generateAlias();
+//						this.owner.putTripleAlias(triple, sqlParentLogicalTableAuxAlias);
+//						sqlParentLogicalTableAuxAlias;
+//					} else {
+//					  tripleAlias
+//					}				  
+//				}
 
+				val joinQueryAlias = sqlParentLogicalTableAux.generateAlias();
 				sqlParentLogicalTableAux.setAlias(joinQueryAlias);
 	
 				val joinConditions = refObjectMap.getJoinConditions();
@@ -141,12 +143,12 @@ extends MorphBaseAlphaGenerator(
 	override def calculateAlphaSubject(subject:Node, abstractConceptMapping:AbstractConceptMapping ) 
 		: SQLLogicalTable = {
 		val cm = abstractConceptMapping.asInstanceOf[R2RMLTriplesMap];
-		val r2rmlLogicalTable = cm.getLogicalTable();
-		val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
+		val r2rmlLogicalTable = cm.getLogicalTable().asInstanceOf[R2RMLLogicalTable];
+		//val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
 		val sqlLogicalTable = unfolder.visit(r2rmlLogicalTable);
 
 		
-		val cmLogicalTableAlias = cm.getLogicalTable().getAlias();;
+		val cmLogicalTableAlias = r2rmlLogicalTable.getAlias();
 		val logicalTableAlias = {
 			if(cmLogicalTableAlias == null || cmLogicalTableAlias.equals("")) {
 				sqlLogicalTable.generateAlias();
@@ -156,7 +158,7 @@ extends MorphBaseAlphaGenerator(
 		}
 
 		sqlLogicalTable.setAlias(logicalTableAlias);
-		sqlLogicalTable.setDbType(this.owner.getDatabaseType());
+		sqlLogicalTable.setDbType(this.databaseType);
 		return sqlLogicalTable;
 	}
 	
@@ -240,13 +242,16 @@ extends MorphBaseAlphaGenerator(
 		val refObjectMap = pm.getRefObjectMap(0);
 		
 		val result:SQLLogicalTable  =  {
-			if(refObjectMap != null) { 
-				val parentLogicalTable = refObjectMap.getParentLogicalTable();
+			if(refObjectMap != null) {
+				//val parentLogicalTable = refObjectMap.getParentLogicalTable().asInstanceOf[R2RMLLogicalTable];
+				//val md = this.owner.getMappingDocument().asInstanceOf[R2RMLMappingDocument];
+				val parentTriplesMap = md.getParentTripleMap(refObjectMap);
+				val parentLogicalTable = parentTriplesMap.logicalTable.asInstanceOf[R2RMLLogicalTable];
 				if(parentLogicalTable == null) {
 					val errorMessage = "Parent logical table is not found for RefObjectMap : " + refObjectMap;
 					logger.error(errorMessage);
 				}
-				val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
+				//val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
 				val sqlParentLogicalTableAux = unfolder.visit(parentLogicalTable);
 				sqlParentLogicalTableAux;
 			} else {

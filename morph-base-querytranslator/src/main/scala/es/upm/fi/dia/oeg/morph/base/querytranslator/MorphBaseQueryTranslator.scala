@@ -57,9 +57,7 @@ import com.hp.hpl.jena.sparql.expr.aggregate.AggSum
 import com.hp.hpl.jena.sparql.expr.aggregate.Aggregator
 import com.hp.hpl.jena.vocabulary.RDF
 import com.hp.hpl.jena.vocabulary.XSD
-import es.upm.fi.dia.oeg.morph.base.ColumnMetaData
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.morph.base.MorphSQLUtility
 import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
 import es.upm.fi.dia.oeg.morph.base.TriplePatternPredicateBounder
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
@@ -83,14 +81,18 @@ import es.upm.fi.dia.oeg.obdi.core.sql.SQLUnion
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractResultSet
 import es.upm.fi.dia.oeg.morph.base.DBUtility
 import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
-//import es.upm.fi.dia.oeg.obdi.core.sql.SQLUtility;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility;
 
-abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
+abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
+    , alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
+    , condSQLGenerator:MorphBaseCondSQLGenerator, prSQLGenerator:MorphBasePRSQLGenerator) 
+    extends IQueryTranslator {
+  
 	val logger = Logger.getLogger("MorphBaseQueryTranslator");
 	var sparqQuery :Query = null;
 	var currentTranslationResult:IQuery = null;
 	
-	val connection:Connection = null;
+	var connection:Connection = null;
 	var mappingDocument:AbstractMappingDocument = null;
 	val unfolder:AbstractUnfolder;
 	var configurationProperties:ConfigurationProperties =null;
@@ -100,16 +102,15 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 	var mapInferredTypes:Map[Node, Set[AbstractConceptMapping]] = Map.empty ;
 	var optimizer:IQueryTranslationOptimizer  = null;
 	val mapTermsC : Map[Op, Set[Node]] = Map.empty;
-	var mapHashCodeMapping : Map[Integer, Object] = Map.empty
 	var mapAggreatorAlias:Map[String, ZSelectItem] = Map.empty;//varname - selectitem
 	val notNullColumns:List[String] = Nil;
 
-	//chebotko functions
-	val nameGenerator:NameGenerator = new NameGenerator();
-	val alphaGenerator:MorphBaseAlphaGenerator;
-	val betaGenerator:MorphBaseBetaGenerator;
-	val condSQLGenerator:MorphBaseCondSQLGenerator;
-	val prSQLGenerator:MorphBasePRSQLGenerator;
+	//CHEBOTKO FUNCTIONS
+//	val nameGenerator:NameGenerator = new NameGenerator();
+//	val alphaGenerator:MorphBaseAlphaGenerator;
+//	val betaGenerator:MorphBaseBetaGenerator;
+//	val condSQLGenerator:MorphBaseCondSQLGenerator;
+//	val prSQLGenerator:MorphBasePRSQLGenerator;
 	
 	Optimize.setFactory(new MorphQueryRewritterFactory());
 	val functionsMap:Map[String, String] = Map(
@@ -132,13 +133,7 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 		this.nameGenerator.generateName(termC);
 	}
 	
-	def getMappedMapping(hashCode:Integer ) = {
-		this.mapHashCodeMapping.get(hashCode);
-	}
-	
-	def putMappedMapping(key:Integer , value:Object ) {
-		this.mapHashCodeMapping += (key -> value);
-	}
+
 
 	def getMappingDocumentURL() : String = {
 		this.mappingDocument.getMappingDocumentPath();
@@ -1665,8 +1660,8 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 		result.toList;
 	}
 
-	def getTripleAlias(tp:Triple ) : String ;
-	def putTripleAlias(tp:Triple , alias:String );
+//	def getTripleAlias(tp:Triple ) : String ;
+//	def putTripleAlias(tp:Triple , alias:String );
 
 	override def getSPARQLQuery() :Query  = {this.sparqQuery;}
 	
@@ -1702,4 +1697,6 @@ abstract class MorphBaseQueryTranslator() extends IQueryTranslator {
 	def getUnfolder(): AbstractUnfolder = { this.unfolder; }
 	
 	def getTranslationResult(): IQuery = this.currentTranslationResult;
+	
+	def getMappingDocument() : AbstractMappingDocument = { this.mappingDocument }
 }

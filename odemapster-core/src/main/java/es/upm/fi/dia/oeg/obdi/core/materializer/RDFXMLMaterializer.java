@@ -108,4 +108,11 @@ public class RDFXMLMaterializer extends AbstractMaterializer {
 			throw fnfe;			
 		} 	
 	}
+
+	@Override
+	public void materializeQuad(String subject, String predicate,
+			String object, String graph) {
+		// TODO Auto-generated method stub
+		
+	}
 }

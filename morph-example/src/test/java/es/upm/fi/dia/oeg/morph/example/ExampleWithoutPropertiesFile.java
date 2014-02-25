@@ -41,7 +41,7 @@ public class ExampleWithoutPropertiesFile {
 		properties.setDatabaseDriver(databaseDriver);
 		properties.setDatabaseType(databaseType);
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
-		properties.outputFilePath_$eq(resultFile);
+		properties.setOutputFilePath(resultFile);
 		try {
 			R2RMLRunner runner = new R2RMLRunner();
 			runner.loadConfigurationProperties(properties);

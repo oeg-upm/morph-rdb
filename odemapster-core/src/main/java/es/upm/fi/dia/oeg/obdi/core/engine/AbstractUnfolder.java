@@ -12,8 +12,9 @@ public abstract class AbstractUnfolder {
 	//protected ConfigurationProperties properties;
 	protected String dbType = Constants.DATABASE_MYSQL();
 //	protected AbstractRunner owner;
+	protected AbstractMappingDocument md = null;
 	
-	protected AbstractUnfolder() {
+	protected AbstractUnfolder(AbstractMappingDocument md) {
 		ZUtils.addCustomFunction("concat", 2);
 		ZUtils.addCustomFunction("substring", 3);
 		ZUtils.addCustomFunction("convert", 2);
@@ -32,7 +33,7 @@ public abstract class AbstractUnfolder {
 	
 	public abstract SQLQuery unfoldSubject(AbstractConceptMapping cm) throws Exception;
 	
-	protected abstract Collection<SQLQuery> unfoldMappingDocument(AbstractMappingDocument mappingDocument);
+	protected abstract Collection<SQLQuery> unfoldMappingDocument();
 
 	public void setDbType(String dbType) {
 		this.dbType = dbType;

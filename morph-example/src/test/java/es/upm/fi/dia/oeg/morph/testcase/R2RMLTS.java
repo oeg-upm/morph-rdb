@@ -123,7 +123,7 @@ public class R2RMLTS {
 		PropertyConfigurator.configure("log4j.properties");
 	}
 	
-	public void run(String testName) {
+	public void run(String testName, boolean conformingMapping) {
 		try {
 			String directoryName = this.mapTestCaseName.get(testName);
 			String configurationDirectory = mappingDirectory + File.separator + directoryName + File.separator;
@@ -132,42 +132,43 @@ public class R2RMLTS {
 			runner.loadConfigurationfile(configurationDirectory, configurationFile);
 			runner.run();
 			logger.info("------" + testName + " DONE------\n\n");
+			assertTrue(conformingMapping);
 		} catch(Exception e) {
 			e.printStackTrace();
 			logger.error("Error : " + e.getMessage());
 			logger.info("------" + testName + " FAILED------\n\n");
-			assertTrue(e.getMessage(), false);
+			assertTrue(e.getMessage(), !conformingMapping);
 		}
 	}
 	
 	@Test
 	public void testR2RMLTC0000() throws Exception {
 		String testName = "R2RMLTC0000";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0001a() throws Exception {
 		String testName = "R2RMLTC0001a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0001b() throws Exception {
 		String testName = "R2RMLTC0001b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0002a() throws Exception {
 		String testName = "R2RMLTC0002a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0002b() throws Exception {
 		String testName = "R2RMLTC0002b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
@@ -176,13 +177,13 @@ public class R2RMLTS {
 		//Purpose: Tests the presence of an undefined SQL identifier 
 		//Expected result: non-conforming R2RML mapping 
 		String testName = "R2RMLTC0002c";
-		this.run(testName);
+		this.run(testName, false);
 	}
 	
 	@Test
 	public void testR2RMLTC0002d() throws Exception {
 		String testName = "R2RMLTC0002d";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
@@ -191,14 +192,14 @@ public class R2RMLTS {
 		//Purpose: Tests the presence of an undefined rr:tableName 
 		//Expected result: non-conforming R2RML mapping 
 		String testName = "R2RMLTC0002e";
-		this.run(testName);
+		this.run(testName, false);
 	}
 
 	@Test
 	public void testR2RMLTC0002f() throws Exception {
 		//Incorrect mappings : 
 		String testName = "R2RMLTC0002f";
-		this.run(testName);
+		this.run(testName, false);
 	}
 
 	@Test
@@ -207,7 +208,7 @@ public class R2RMLTS {
 		//Purpose: Tests the presence of an invalid SQL query
 		//Expected result: non-conforming R2RML mapping 
 		String testName = "R2RMLTC0002g";
-		this.run(testName);
+		this.run(testName, false);
 	}
 	
 	@Test
@@ -216,61 +217,64 @@ public class R2RMLTS {
 		//Purpose: Tests the presence of an invalid SQL query 
 		//Expected result: non-conforming R2RML mapping 
 		String testName = "R2RMLTC0002h";
-		this.run(testName);
+		this.run(testName, false);
 	}
 	
 	@Test
 	public void testR2RMLTC0002i() throws Exception {
 		String testName = "R2RMLTC0002i";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0002j() throws Exception {
 		String testName = "R2RMLTC0002j";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0003a() throws Exception {
+		//Title: Three columns mapping, undefined SQL Version identifier
+		//Purpose: Tests the presence of an undefined SQL Version identifier
+		//Expected result: non-conforming R2RML mapping 		
 		String testName = "R2RMLTC0003a";
-		this.run(testName);
+		this.run(testName, false);
 	}
 	
 	@Test
 	public void testR2RMLTC0003b() throws Exception {
 		String testName = "R2RMLTC0003b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0003c() throws Exception {
 		String testName = "R2RMLTC0003c";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0004a() throws Exception {
 		String testName = "R2RMLTC0004a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0004b() throws Exception {
 		String testName = "R2RMLTC0004b";
-		this.run(testName);
+		this.run(testName, false);
 	}
 	
 	@Test
 	public void testR2RMLTC0005a() throws Exception {
 		String testName = "R2RMLTC0005a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0005b() throws Exception {
 		String testName = "R2RMLTC0005b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
@@ -278,262 +282,265 @@ public class R2RMLTS {
 		//wrong result in the testcase document
 		//or mapping is missing termtype
 		String testName = "R2RMLTC0006a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0007a() throws Exception {
 		String testName = "R2RMLTC0007a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0007b() throws Exception {
 		String testName = "R2RMLTC0007b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0007c() throws Exception {
 		String testName = "R2RMLTC0007c";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0007d() throws Exception {
 		String testName = "R2RMLTC0007d";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0007e() throws Exception {
 		String testName = "R2RMLTC0007e";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0007f() throws Exception {
 		String testName = "R2RMLTC0007f";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0007g() throws Exception {
 		String testName = "R2RMLTC0007g";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0007h() throws Exception {
 		String testName = "R2RMLTC0007h";
-		this.run(testName);
+		this.run(testName, false);
 	}
 	
 	
 	@Test
 	public void testR2RMLTC0008a() throws Exception {
 		String testName = "R2RMLTC0008a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0008b() throws Exception {
 		String testName = "R2RMLTC0008b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0008c() throws Exception {
 		String testName = "R2RMLTC0008c";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0009a() throws Exception {
 		String testName = "R2RMLTC0009a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0009b() throws Exception {
 		String testName = "R2RMLTC0009b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0009c() throws Exception {
 		String testName = "R2RMLTC0009c";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0009d() throws Exception {
 		String testName = "R2RMLTC0009d";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0010a() throws Exception {
 		String testName = "R2RMLTC0010a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0010b() throws Exception {
 		String testName = "R2RMLTC0010b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0010c() throws Exception {
 		String testName = "R2RMLTC0010c";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0011a() throws Exception {
 		String testName = "R2RMLTC0011a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0011b() throws Exception {
 		String testName = "R2RMLTC0011b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0012a() throws Exception {
 		String testName = "R2RMLTC0012a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0012b() throws Exception {
 		String testName = "R2RMLTC0012b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0012c() throws Exception {
 		String testName = "R2RMLTC0012c";
-		this.run(testName);
+		this.run(testName, false);
 	}
 
 	@Test
 	public void testR2RMLTC0012d() throws Exception {
 		String testName = "R2RMLTC0012d";
-		this.run(testName);
+		this.run(testName, false);
 	}
 	
 	@Test
 	public void testR2RMLTC0012e() throws Exception {
 		String testName = "R2RMLTC0012e";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0013a() throws Exception {
 		String testName = "R2RMLTC0013a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0014a() throws Exception {
 		String testName = "R2RMLTC0014a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0014b() throws Exception {
 		String testName = "R2RMLTC0014b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0014c() throws Exception {
 		String testName = "R2RMLTC0014c";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0014d() throws Exception {
 		String testName = "R2RMLTC0014d";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0015a() throws Exception {
 		String testName = "R2RMLTC0015a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0015b() throws Exception {
+		//Title: Generation of language tags from a table with language information, and a term map with invalid rr:language value
+		//Purpose: Tests a term map with an invalid rr:language value, which is an error
+		//Expected result: non-conforming R2RML mapping 		
 		String testName = "R2RMLTC0015b";
-		this.run(testName);
+		this.run(testName, false);
 	}
 	
 	@Test
 	public void testR2RMLTC0016a() throws Exception {
 		String testName = "R2RMLTC0016a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0016b() throws Exception {
 		String testName = "R2RMLTC0016b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0016c() throws Exception {
 		String testName = "R2RMLTC0016c";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0016d() throws Exception {
 		//testcase mapping missing datatype tag
 		String testName = "R2RMLTC0016d";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0016e() throws Exception {
 		String testName = "R2RMLTC0016e";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0018a() throws Exception {
 		String testName = "R2RMLTC0018a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0019a() throws Exception {
 		String testName = "R2RMLTC0019a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0019b() throws Exception {
 		String testName = "R2RMLTC0019b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0020a() throws Exception {
 		//wrong mapping/result of TC
 		String testName = "R2RMLTC0020a";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0020b() throws Exception {
 		String testName = "R2RMLTC0020b";
-		this.run(testName);
+		this.run(testName, true);
 	}
 
 }

@@ -33,8 +33,8 @@ public abstract class AbstractRunner {
 	//protected Query sparqQuery = null;
 	protected AbstractUnfolder unfolder = null;
 	protected AbstractDataTranslator dataTranslator;
-	private String queryTranslatorClassName = null;
-	private IQueryTranslator queryTranslator;
+	private String queryTranslatorFactoryClassName = null;
+	protected IQueryTranslator queryTranslator;
 	protected DefaultResultProcessor resultProcessor;
 	//	private Collection<IQuery> sqlQueries;
 	private String queryResultWriterClassName = null;
@@ -72,8 +72,8 @@ public abstract class AbstractRunner {
 		this.createDataTranslator(this.configurationProperties);
 
 		//query translator
-		this.queryTranslatorClassName = 
-				this.configurationProperties.queryTranslatorClassName();
+		this.queryTranslatorFactoryClassName = 
+				this.configurationProperties.queryTranslatorFactoryClassName();
 		//if(this.queryTranslatorClassName != null) {
 			this.buildQueryTranslator();	
 		//}
@@ -104,6 +104,58 @@ public abstract class AbstractRunner {
 		this.loadConfigurationProperties(configurationProperties);
 	}
 
+	public void buildQueryTranslator() throws Exception {
+		if(this.mappingDocument == null) {
+			String mappingDocumentFilePath = this.getMappingDocumentPath();
+			if(mappingDocumentFilePath == null) {
+				throw new Exception("Mapping document is not set yet!");
+			}
+			this.readMappingDocumentFile(mappingDocumentFilePath);
+		}
+		
+		final String queryTranslatorFactoryClassName;
+		if(this.queryTranslatorFactoryClassName == null || this.queryTranslatorFactoryClassName.equals("")) {
+			queryTranslatorFactoryClassName = Constants.QUERY_TRANSLATOR_FACTORY_CLASSNAME_DEFAULT();
+		} else {
+			queryTranslatorFactoryClassName = this.queryTranslatorFactoryClassName; 
+		}
+
+//		this.queryTranslator = (IQueryTranslator) Class.forName(queryTranslatorClassName).newInstance();
+		IQueryTranslatorFactory queryTranslatorFactory = (IQueryTranslatorFactory) 
+				Class.forName(queryTranslatorFactoryClassName).newInstance(); 
+		this.queryTranslator = queryTranslatorFactory.createQueryTranslator(this.mappingDocument, this.conn, this.unfolder);
+				
+		if(configurationProperties != null) {
+			this.queryTranslator.setConfigurationProperties(configurationProperties);
+			String databaseType = configurationProperties.databaseType();
+			if(databaseType != null && !databaseType.equals("")) {
+				this.queryTranslator.setDatabaseType(databaseType);
+			}			
+		}
+
+
+
+
+		//query translation optimizer
+		IQueryTranslationOptimizer queryTranslationOptimizer = this.buildQueryTranslationOptimizer();
+		boolean eliminateSelfJoin = this.isSelfJoinElimination();
+		queryTranslationOptimizer.setSelfJoinElimination(eliminateSelfJoin);
+		boolean eliminateSubQuery = this.isSubQueryElimination();
+		queryTranslationOptimizer.setSubQueryElimination(eliminateSubQuery);
+		boolean transJoinEliminateSubQuery = this.isTransJoinSubQueryElimination();
+		queryTranslationOptimizer.setTransJoinSubQueryElimination(transJoinEliminateSubQuery);
+		boolean transSTGEliminateSubQuery = this.isTransSTGSubQueryElimination();
+		queryTranslationOptimizer.setTransSTGSubQueryElimination(transSTGEliminateSubQuery);
+		boolean subQueryAsView = this.isSubQueryAsView();
+		queryTranslationOptimizer.setSubQueryAsView(subQueryAsView);
+		this.queryTranslator.setOptimizer(queryTranslationOptimizer);
+		logger.debug("query translator = " + this.queryTranslator);
+		
+		//sparql query
+		String queryFilePath = this.configurationProperties.queryFilePath();
+		this.queryTranslator.setSPARQLQueryByFile(queryFilePath);
+	}
+	
 	private void buildDataSourceReader() throws Exception {
 		final String dataSourceReaderClassName;
 		
@@ -180,59 +232,7 @@ public abstract class AbstractRunner {
 		return null;
 	}
 
-	public void buildQueryTranslator() throws Exception {
-		final String queryTranslatorClassName;
-		if(this.queryTranslatorClassName == null || this.queryTranslatorClassName.equals("")) {
-			queryTranslatorClassName = Constants.QUERY_TRANSLATOR_CLASSNAME_DEFAULT();
-		} else {
-			queryTranslatorClassName = this.queryTranslatorClassName; 
-		}
 
-		this.queryTranslator = (IQueryTranslator) 
-				Class.forName(queryTranslatorClassName).newInstance();		
-		if(configurationProperties != null) {
-			this.queryTranslator.setConfigurationProperties(configurationProperties);
-			String databaseType = configurationProperties.databaseType();
-			if(databaseType != null && !databaseType.equals("")) {
-				this.queryTranslator.setDatabaseType(databaseType);
-			}			
-		}
-
-
-		if(this.mappingDocument == null) {
-			String mappingDocumentFilePath = this.getMappingDocumentPath();
-			if(mappingDocumentFilePath == null) {
-				throw new Exception("Mapping document is not set yet!");
-			}
-			this.readMappingDocumentFile(mappingDocumentFilePath);
-		}
-		this.queryTranslator.setMappingDocument(this.mappingDocument);
-
-		//query translation optimizer
-		IQueryTranslationOptimizer queryTranslationOptimizer = this.buildQueryTranslationOptimizer();
-
-		boolean eliminateSelfJoin = this.isSelfJoinElimination();
-		queryTranslationOptimizer.setSelfJoinElimination(eliminateSelfJoin);
-
-		boolean eliminateSubQuery = this.isSubQueryElimination();
-		queryTranslationOptimizer.setSubQueryElimination(eliminateSubQuery);
-
-		boolean transJoinEliminateSubQuery = this.isTransJoinSubQueryElimination();
-		queryTranslationOptimizer.setTransJoinSubQueryElimination(transJoinEliminateSubQuery);
-
-		boolean transSTGEliminateSubQuery = this.isTransSTGSubQueryElimination();
-		queryTranslationOptimizer.setTransSTGSubQueryElimination(transSTGEliminateSubQuery);
-
-		boolean subQueryAsView = this.isSubQueryAsView();
-		queryTranslationOptimizer.setSubQueryAsView(subQueryAsView);
-
-		this.queryTranslator.setOptimizer(queryTranslationOptimizer);
-		logger.debug("query translator = " + this.queryTranslator);
-		
-		//sparql query
-		String queryFilePath = this.configurationProperties.queryFilePath();
-		this.queryTranslator.setSPARQLQueryByFile(queryFilePath);
-	}
 
 	protected abstract void createDataTranslator(
 			ConfigurationProperties configurationProperties);
@@ -306,7 +306,7 @@ public abstract class AbstractRunner {
 	//	}
 
 
-	private boolean isSelfJoinElimination() {
+	protected boolean isSelfJoinElimination() {
 		boolean result = true;
 		if(this.configurationProperties != null) {
 			result = this.configurationProperties.selfJoinElimination();
@@ -314,7 +314,7 @@ public abstract class AbstractRunner {
 		return result;
 	}
 
-	private boolean isSubQueryAsView() {
+	protected boolean isSubQueryAsView() {
 		boolean result = false;
 		if(this.configurationProperties != null) {
 			result = this.configurationProperties.subQueryAsView();
@@ -323,7 +323,7 @@ public abstract class AbstractRunner {
 	}
 
 
-	private boolean isSubQueryElimination() {
+	protected boolean isSubQueryElimination() {
 		boolean result = true;
 		if(this.configurationProperties != null) {
 			result = this.configurationProperties.subQueryElimination();
@@ -340,7 +340,7 @@ public abstract class AbstractRunner {
 	//		this.parser = parser;
 	//	}
 
-	private boolean isTransJoinSubQueryElimination() {
+	protected boolean isTransJoinSubQueryElimination() {
 		boolean result = false;
 		if(this.configurationProperties != null) {
 			result = this.configurationProperties.transJoinSubQueryElimination();
@@ -348,7 +348,7 @@ public abstract class AbstractRunner {
 		return result;
 	}
 
-	private boolean isTransSTGSubQueryElimination() {
+	protected boolean isTransSTGSubQueryElimination() {
 		boolean result = false;
 		if(this.configurationProperties != null) {
 			result = this.configurationProperties.transSTGSubQueryElimination();
@@ -529,8 +529,8 @@ public abstract class AbstractRunner {
 
 			//query translator
 			if(this.queryTranslator == null) {
-				if(this.queryTranslatorClassName == null) {
-					this.queryTranslatorClassName = Constants.QUERY_TRANSLATOR_CLASSNAME_DEFAULT();					
+				if(this.queryTranslatorFactoryClassName == null) {
+					this.queryTranslatorFactoryClassName = Constants.QUERY_TRANSLATOR_FACTORY_CLASSNAME_DEFAULT();					
 				}
 				this.buildQueryTranslator();
 			}
@@ -618,8 +618,8 @@ public abstract class AbstractRunner {
 		this.queryTranslator = queryTranslator;
 	}
 
-	public void setQueryTranslatorClassName(String queryTranslatorClassName) throws Exception {
-		this.queryTranslatorClassName = queryTranslatorClassName;
+	public void setQueryTranslatorFactoryClassName(String queryTranslatorFactoryClassName) throws Exception {
+		this.queryTranslatorFactoryClassName = queryTranslatorFactoryClassName;
 		//this.buildQueryTranslator();
 	}
 

@@ -1,6 +1,6 @@
-_:Bob_Smith <http://xmlns.com/foaf/0.1/name> "Bob Smith" .
-_:Sue_Jones <http://xmlns.com/foaf/0.1/name> "Sue Jones" .
-_:Bob_Smith <http://xmlns.com/foaf/0.1/name> "Bob Smith" .
-_:Bob_Smith <http://example.com/city> "London" .
-_:Sue_Jones <http://example.com/city> "Madrid" .
-_:Bob_Smith <http://example.com/city> "London" .
+Bob_Smith http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Bob Smith  .
+Sue_Jones http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Sue Jones  .
+Bob_Smith http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Bob Smith  .
+Bob_Smith http%3A%2F%2Fexample.com%2Fcity London  .
+Sue_Jones http%3A%2F%2Fexample.com%2Fcity Madrid  .
+Bob_Smith http%3A%2F%2Fexample.com%2Fcity London  .

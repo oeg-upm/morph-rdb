@@ -9,10 +9,11 @@ import com.hp.hpl.jena.rdf.model.Resource
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype
 import java.text.SimpleDateFormat
 import org.apache.log4j.Logger
+import es.upm.fi.dia.oeg.morph.base.sql.MorphTableMetaData
 
 class TriplePatternPredicateBounder(mappingFile : String
     //, mapColumnsMetaData : java.util.Map[String, ColumnMetaData]
-    , tableMetaData:TableMetaData
+    , tableMetaData:MorphTableMetaData
 ) {
   
 	val logger = Logger.getLogger("TriplePatternPredicateBounder");

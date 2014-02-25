@@ -5,27 +5,24 @@ import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElement
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
 import org.apache.log4j.Logger
-import es.upm.fi.dia.oeg.morph.base.DBMetaData
 import com.hp.hpl.jena.rdf.model.ModelFactory
 import com.hp.hpl.jena.util.FileManager
 import com.hp.hpl.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTriplesMap
 import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElementVisitor
 import es.upm.fi.dia.oeg.obdi.core.model.IAttributeMapping
 import es.upm.fi.dia.oeg.obdi.core.model.IRelationMapping
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractRDB2RDFMapping.MappingType
 import java.util.Collection
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap.TermMapType
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
+import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
 
 class R2RMLMappingDocument(mdPath:String, props:ConfigurationProperties) 
 extends AbstractMappingDocument with R2RMLElement {
 	val logger = Logger.getLogger(this.getClass().getName());
-	this.mappingDocumentPath = mdPath;
-	this.configurationProperties = props;
+	super.setMappingDocumentPath(mdPath);
+	super.setConfigurationProperties(props);
 	
 	if(configurationProperties != null) {
 		val conn = configurationProperties.conn;
@@ -35,12 +32,20 @@ extends AbstractMappingDocument with R2RMLElement {
 			val databaseType = configurationProperties.databaseType;
 			if(databaseName != null) {
 				logger.debug("building metadata.");
-				super.setDbMetaData(DBMetaData.buildDBMetaData(conn, databaseName, databaseType));
+				super.setDbMetaData(MorphDatabaseMetaData(conn, configurationProperties));
 			}
 		}
 	}
 
    this.parse();
+   this.buildMetaData();
+   
+   def buildMetaData() = {
+     val dbName = this.configurationProperties.databaseName;
+     val dbType = this.configurationProperties.databaseType;
+     this.dbMetaData = MorphDatabaseMetaData(this.conn, configurationProperties);
+     this.getConceptMappings().foreach(cm => cm.buildMetaData(this.dbMetaData));
+   }
 	
 
 	def accept(visitor:R2RMLElementVisitor) : Object  = {
@@ -72,7 +77,7 @@ extends AbstractMappingDocument with R2RMLElement {
 			while(triplesMapResources.hasNext()) {
 				val triplesMapResource = triplesMapResources.nextResource();
 				val triplesMapKey = triplesMapResource.getLocalName();
-				val tm = new R2RMLTriplesMap(triplesMapResource, this);
+				val tm = R2RMLTriplesMap(triplesMapResource);
 				tm.setId(triplesMapKey);
 				this.classMappings.add(tm);
 			}
@@ -151,6 +156,31 @@ extends AbstractMappingDocument with R2RMLElement {
 	def setTriplesMaps(triplesMaps:Collection[AbstractConceptMapping] ) = {
 		this.classMappings = triplesMaps;
 	}	
+
+	def getParentTripleMap(pRom:R2RMLRefObjectMap) : R2RMLTriplesMap = {
+	  val parentTripleMapResources = this.classMappings.map(cm => {
+	    val tm = cm.asInstanceOf[R2RMLTriplesMap];
+	    val poms = tm.predicateObjectMaps;
+	    poms.map(pom => {
+	      val roms = pom.refObjectMaps;
+	      roms.flatMap(rom => {
+	    	  if(rom == pRom) {
+	    	    Some(rom.parentTriplesMapResource);
+	    	  } else {None}	        
+	      });
+	    }).flatten
+	  }).flatten;
+	  
+	  val parentTripleMaps = this.classMappings.filter(cm => {
+	    val tm = cm.asInstanceOf[R2RMLTriplesMap];
+	    parentTripleMapResources.exists(parentTripleMapResource => {
+	      tm.getResource ==parentTripleMapResource;
+	    })
+	  })
+
+	  val parentTripleMap = parentTripleMaps.iterator.next;
+	  parentTripleMap.asInstanceOf[R2RMLTriplesMap]
+	}
 	
 	override def getPossibleRange(predicateURI:String ) : java.util.Set[AbstractConceptMapping] = {
 		val pms = this.getPropertyMappingsByPropertyURI(predicateURI).toList;
@@ -196,13 +226,13 @@ extends AbstractMappingDocument with R2RMLElement {
 		val cms = this.getConceptMappings();
 		
 		val result:Iterable[AbstractConceptMapping] = if(om != null && rom == null) {
-			if(Constants.R2RML_IRI_URI.equals(om.getTermType())) {
+			if(Constants.R2RML_IRI_URI.equals(om.termType)) {
 				if(cms != null) {
 				  Nil
 				} else {
 					cms.toList.flatMap(cm => {
 						val tm = cm.asInstanceOf[R2RMLTriplesMap];
-						if(TermMapType.TEMPLATE == om.getTermMapType()) {
+						if(Constants.MorphTermMapType.TemplateTermMap == om.termMapType) {
 							val objectTemplateString = om.getTemplateString();
 							if(tm.isPossibleInstance(objectTemplateString)) {
 								Some(cm);
@@ -218,10 +248,11 @@ extends AbstractMappingDocument with R2RMLElement {
 			  Nil
 			}
 		} else if(rom != null && om == null) {
-			val parentTriplesMap = rom.getParentTriplesMap();
+			//val parentTriplesMap = rom.getParentTriplesMap().asInstanceOf[R2RMLTriplesMap];
+			val parentTriplesMap = this.getParentTripleMap(rom);
 			
-			val parentSubjectMap = parentTriplesMap.getSubjectMap();
-			if(parentSubjectMap.getTermMapType() == TermMapType.TEMPLATE) {
+			val parentSubjectMap = parentTriplesMap.subjectMap;
+			if(parentSubjectMap.termMapType == Constants.MorphTermMapType.TemplateTermMap) {
 				val templateString = parentSubjectMap.getTemplateString();
 				if(cms == null) {
 				  Nil
@@ -229,7 +260,7 @@ extends AbstractMappingDocument with R2RMLElement {
 					cms.flatMap(cm => {
 						if(cm.isPossibleInstance(templateString)) {
 							val tm2 = cm.asInstanceOf[R2RMLTriplesMap];
-							val classURIs = tm2.getSubjectMap().getClassURIs();
+							val classURIs = tm2.subjectMap.getClassURIs();
 							if(classURIs != null && !classURIs.isEmpty()) {
 								Some(cm);	
 							} else {
@@ -249,5 +280,5 @@ extends AbstractMappingDocument with R2RMLElement {
 
 		val resultInSet = result.toSet;
 		resultInSet
-	}	
+	}
 }

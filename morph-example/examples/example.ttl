@@ -51,6 +51,11 @@
     ];
 
    rr:predicateObjectMap [ 
+      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/birthdate> ]; 
+      rr:objectMap    [ rr:column "birthdate"; rr:termType rr:Literal; rr:datatype xsd:dateTime;];
+    ];
+
+   rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/hasSport> ]; 
       rr:objectMap    [ 
          rr:parentTriplesMap <TriplesMapSport>;

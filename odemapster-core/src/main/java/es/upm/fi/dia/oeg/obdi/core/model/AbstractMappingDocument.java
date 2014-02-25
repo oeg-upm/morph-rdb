@@ -14,7 +14,7 @@ import org.w3c.dom.Element;
 import com.hp.hpl.jena.graph.Node;
 
 import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties;
-import es.upm.fi.dia.oeg.morph.base.DBMetaData;
+import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData;
 import es.upm.fi.dia.oeg.obdi.core.exception.ParseException;
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractRDB2RDFMapping.MappingType;
 
@@ -24,15 +24,17 @@ public abstract class AbstractMappingDocument {
 	private String id;
 	private String purpose;
 	protected ConfigurationProperties configurationProperties;
-	private Connection conn;
+	protected Connection conn;
 	//protected Map<String, TableMetaData> tablesMetaData = new HashMap<String, TableMetaData>(); // <tableName, TableMetaData>
-	protected DBMetaData dbMetaData = null;
+	protected MorphDatabaseMetaData dbMetaData = null;
 	//protected Map<String, Map<String, ColumnMetaData>> columnsMetaData = new HashMap<String, Map<String,ColumnMetaData>>();//<tableName, <columnName, ColumnMetaData>> 
 	protected String mappingDocumentPath;
 
 	protected Collection<AbstractConceptMapping> classMappings;
 	
 	public abstract String getMappingDocumentID();
+	
+	public abstract void buildMetaData();
 	
 	public List<String> getMappedConcepts() {
 		List<String> result = new ArrayList<String>();
@@ -333,7 +335,7 @@ public abstract class AbstractMappingDocument {
 		this.conn = conn;
 	}
 
-	public DBMetaData getDBMetaData() {
+	public MorphDatabaseMetaData getDBMetaData() {
 		return dbMetaData;
 	}
 
@@ -357,13 +359,17 @@ public abstract class AbstractMappingDocument {
 //	public abstract Map<Node, Set<AbstractConceptMapping>> inferByObject2(
 //			AbstractConceptMapping cm, String predicateURI, Node object);
 	
-	public abstract Set<AbstractConceptMapping> getPossibleRange(String predicateURI, AbstractConceptMapping cm);
-	
-	public abstract Set<AbstractConceptMapping> getPossibleRange(String predicateURI);
-	
-	public abstract Set<AbstractConceptMapping> getPossibleRange(AbstractPropertyMapping pm);
 
-	public void setDbMetaData(DBMetaData dbMetaData) {
+	public void setDbMetaData(MorphDatabaseMetaData dbMetaData) {
 		this.dbMetaData = dbMetaData;
 	}
+
+	public void setMappingDocumentPath(String mappingDocumentPath) {
+		this.mappingDocumentPath = mappingDocumentPath;
+	}
+	
+	public abstract Set<AbstractConceptMapping> getPossibleRange(String predicateURI, AbstractConceptMapping cm);
+	public abstract Set<AbstractConceptMapping> getPossibleRange(String predicateURI);
+	public abstract Set<AbstractConceptMapping> getPossibleRange(AbstractPropertyMapping pm);
+	
 }

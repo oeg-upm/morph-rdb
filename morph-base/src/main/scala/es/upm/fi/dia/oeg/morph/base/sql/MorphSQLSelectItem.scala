@@ -163,9 +163,11 @@ object MorphSQLSelectItem {
 		this(pInputColumnName, null, null, null);
 	}
 
-	def apply(pInputColumnName:String, pPrefix:String, pDBType:String) 
+	def apply(pInputColumnName:String, pPrefix:String, dbType:String) 
 		: MorphSQLSelectItem = {
-		this(pInputColumnName, pPrefix, pDBType, null);
+		val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
+		val columnName = pInputColumnName.replaceAll("\"", dbEnclosedCharacter);
+		this(columnName, pPrefix, dbType, null);
 	}
 	
 	def apply(pInputColumnName:String, pPrefix:String, pDBType:String , pColumnType:String) 
@@ -300,7 +302,7 @@ object MorphSQLSelectItem {
 				Array.empty[String]
 			} else {
 				val enclosedCharacter = Constants.getEnclosedCharacter(dbType);
-				val str2 = str.replaceAll(enclosedCharacter, "");
+				//val str2 = str.replaceAll(enclosedCharacter, "");
 //				val str2 = dbType match {
 //				  case Constants.DATABASE_MYSQL => {
 //				    str.replaceAll(Constants.DATABASE_MYSQL_ENCLOSED_CHARACTER, "")
@@ -319,7 +321,7 @@ object MorphSQLSelectItem {
 //				  }
 //				} 
 				  
-				val splitColumns = str2.split("\\.");
+				val splitColumns = str.split("\\.");
 				splitColumns
 			}		  
 		}

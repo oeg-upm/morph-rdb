@@ -8,11 +8,11 @@ import org.junit.Test;
 
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLRunner;
 
+
 public class ExampleWithPropertiesFile {
 	private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
 	static { PropertyConfigurator.configure("log4j.properties"); }
 	
-	@Test
 	public void testBatchMySQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "batch.r2rml.properties";
@@ -53,11 +53,11 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			R2RMLRunner.main(args);
-			logger.info("Query process DONE------\n\n");
+			logger.info("Query process DONE------");
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("Error : " + e.getMessage());
-			logger.info("Query process FAILED------\n\n");
+			logger.info("Query process FAILED------");
 			assertTrue(e.getMessage(), false);
 		}
 	}
@@ -152,7 +152,7 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			R2RMLRunner.main(args);
-			logger.info("Query process DONE------\n\n");
+			logger.info("Query process DONE------");
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("Error : " + e.getMessage());
@@ -177,7 +177,6 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
-	@Test
 	public void sparql09() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "query09.r2rml.properties";
@@ -193,7 +192,6 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
-	@Test
 	public void sparql10() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "query10.r2rml.properties";

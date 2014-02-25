@@ -9,6 +9,7 @@ class Constants {
 }
 
 object Constants {
+
 	object MorphTermMapType extends Enumeration {
 		type MorphTermMapType = Value
 		val ConstantTermMap, ColumnTermMap, TemplateTermMap, InvalidTermMapType = Value
@@ -101,11 +102,14 @@ object Constants {
 	val  TRANSJOIN_SUBQUERY_ELIMINATION = "querytranslator.transjoin.subqueryelimination";
 	val  TRANSSTG_SUBQUERY_ELIMINATION = "querytranslator.transstg.subqueryelimination";
 	val  SUBQUERY_AS_VIEW = "querytranslator.subqueryasview";
-	val  QUERY_TRANSLATOR_CLASSNAME = "querytranslator.class.name";
+//	val  QUERY_TRANSLATOR_CLASSNAME = "querytranslator.class.name";
 //	val  QUERY_TRANSLATOR_CLASSNAME_DEFAULT = 
 //			"es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.querytranslator.R2RMLQueryTranslator";
-	val  QUERY_TRANSLATOR_CLASSNAME_DEFAULT = 
-			"es.upm.fi.dia.oeg.morph.rdb.querytranslator.MorphRDBQueryTranslator";
+//	val  QUERY_TRANSLATOR_CLASSNAME_DEFAULT = 
+//			"es.upm.fi.dia.oeg.morph.rdb.querytranslator.MorphRDBQueryTranslator";
+	val  QUERY_TRANSLATOR_FACTORY_CLASSNAME = "querytranslator.class.name";
+	val  QUERY_TRANSLATOR_FACTORY_CLASSNAME_DEFAULT = 
+			"es.upm.fi.dia.oeg.morph.rdb.querytranslator.MorphRDBQueryTranslatorFactory";
 	
 	val DATASOURCE_READER_CLASSNAME = "datasourcereader.class.name";
 	val QUERY_EVALUATOR_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.obdi.core.engine.RDBReader";

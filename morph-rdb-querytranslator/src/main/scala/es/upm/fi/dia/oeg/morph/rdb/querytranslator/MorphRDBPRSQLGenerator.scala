@@ -2,7 +2,6 @@ package es.upm.fi.dia.oeg.morph.rdb.querytranslator
 
 import scala.collection.JavaConversions._
 import java.util.Collection
-import java.util.Vector
 import org.apache.log4j.Logger
 import Zql.ZConstant
 import Zql.ZSelectItem
@@ -12,24 +11,20 @@ import com.hp.hpl.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLObjectMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLRefObjectMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLSubjectMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTriplesMap
-import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
-import es.upm.fi.dia.oeg.morph.base.querytranslator.NameGenerator
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
-import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
-import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
+import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBasePRSQLGenerator
+import es.upm.fi.dia.oeg.morph.base.querytranslator.NameGenerator
+import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
+import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
 
-class MorphRDBPRSQLGenerator(
-    owner: IQueryTranslator
-    ) extends MorphBasePRSQLGenerator(
-        owner: IQueryTranslator
-        ) {
+class MorphRDBPRSQLGenerator(md:R2RMLMappingDocument, unfolder:R2RMLUnfolder)
+extends MorphBasePRSQLGenerator(md:AbstractMappingDocument, unfolder:AbstractUnfolder) {
 	override val logger = Logger.getLogger("MorphPRSQLGenerator");
 
 		
@@ -42,7 +37,7 @@ class MorphRDBPRSQLGenerator(
 			if(!SPARQLUtility.isBlankNode(tpObject)) {
 				if(RDF.`type`.getURI().equalsIgnoreCase(predicateURI)) {
 					val tm = cmSubject.asInstanceOf[R2RMLTriplesMap];
-					val classURIs = tm.getSubjectMap().getClassURIs();
+					val classURIs = tm.subjectMap.getClassURIs();
 					val resultAux = classURIs.map(classURI => {
 						val zConstant = new ZConstant(classURI, ZConstant.STRING);
 						val selectItem:ZSelectItem = new ZSelectItem();
@@ -91,14 +86,14 @@ class MorphRDBPRSQLGenerator(
 						val mappingHashCode = {
 							if(om != null) {
 								val omHashCode = om.hashCode();
-								this.owner.putMappedMapping(omHashCode, om);
+								this.putMappedMapping(omHashCode, om);
 								omHashCode;
 							} else {
 								val rom = pom.getRefObjectMap(0);
 								if(rom != null) {
 									//this.getOwner().getMapHashCodeMapping().put(mappingHashCode, rom);
 									val romHashCode = rom.hashCode();
-									this.owner.putMappedMapping(romHashCode, rom);
+									this.putMappedMapping(romHashCode, rom);
 									romHashCode;
 								} else {
 								 -1; 
@@ -111,7 +106,7 @@ class MorphRDBPRSQLGenerator(
 							val mappingHashCodeConstant = new ZConstant(
 									mappingHashCode + "", ZConstant.NUMBER);
 							val mappingSelectItem = MorphSQLSelectItem.apply(
-									mappingHashCodeConstant, databaseType, Constants.POSTGRESQL_COLUMN_TYPE_INTEGER);
+									mappingHashCodeConstant, dbType, Constants.POSTGRESQL_COLUMN_TYPE_INTEGER);
 							val mappingSelectItemAlias = Constants.PREFIX_MAPPING_ID + tpObject.getName();
 							mappingSelectItem.setAlias(mappingSelectItemAlias);
 	
@@ -162,15 +157,15 @@ class MorphRDBPRSQLGenerator(
 		val result : List[ZSelectItem] = {
 			if(subject.isVariable()) {
 				val triplesMap = cmSubject.asInstanceOf[R2RMLTriplesMap];
-				val subjectMap = triplesMap.getSubjectMap();
+				val subjectMap = triplesMap.subjectMap;
 				val mappingHashCodeConstant = new ZConstant(subjectMap.hashCode() + "", ZConstant.NUMBER);
 				val mappingSelectItem = MorphSQLSelectItem.apply(
-						mappingHashCodeConstant, databaseType, Constants.POSTGRESQL_COLUMN_TYPE_INTEGER);
+						mappingHashCodeConstant, dbType, Constants.POSTGRESQL_COLUMN_TYPE_INTEGER);
 				val mappingSelectItemAlias = Constants.PREFIX_MAPPING_ID + subject.getName();
 				mappingSelectItem.setAlias(mappingSelectItemAlias);
 				val childResult = List(mappingSelectItem);
 				
-				this.owner.putMappedMapping(subjectMap.hashCode(), subjectMap);
+				this.putMappedMapping(subjectMap.hashCode(), subjectMap);
 				childResult;
 			} else {
 			  Nil;

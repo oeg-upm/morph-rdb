@@ -12,19 +12,20 @@ import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
 import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslationException
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping;
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
 import es.upm.fi.dia.oeg.morph.base.Constants
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
+import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
 
-abstract class MorphBaseBetaGenerator(
-    owner:IQueryTranslator 
-    ) {
+abstract class MorphBaseBetaGenerator(md:AbstractMappingDocument, unfolder:AbstractUnfolder) {
   
 	val logger = Logger.getLogger("MorphBaseBetaGenerator");
 	val alphaGenerator:MorphBaseAlphaGenerator=null;
-	val databaseType = {
-		if(this.owner == null) {null}
-		else {this.owner.getDatabaseType();}
-	}
+//	val databaseType = {
+//		if(this.owner == null) {null}
+//		else {this.owner.getDatabaseType();}
+//	}
+	val dbType = md.getConfigurationProperties().databaseType;
 	
 	def  calculateBeta(tp:Triple , pos:Constants.MorphPOS.Value, cm:AbstractConceptMapping , predicateURI:String 
 			, alphaResult:MorphAlphaResult ) : java.util.List[ZSelectItem] = {

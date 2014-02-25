@@ -148,4 +148,15 @@ public class NTripleMaterializer extends AbstractMaterializer {
 			this.writer.close();
 		}
 	}
+	
+	@Override
+	public void materializeQuad(String subject, String predicate, String object, String graph) {
+		String quad = GeneralUtility.createQuad(subject, predicate, object, graph);
+		try {
+			this.write(quad);
+		} catch(Exception e) {
+			logger.error("unable to serialize triple, subjectURI=" + quad);
+		}
+
+	}	
 }

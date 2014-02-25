@@ -8,7 +8,7 @@ class ValueTransformator {
 
 object ValueTransformator {
 	def transformToLexical(originalValue:String, datatype:String) : String = {
-	    if(datatype == null) {
+	    if(datatype == null || originalValue == null) {
 		    originalValue
 		  } else {
 		    val xsdDateTimeURI = XSDDatatype.XSDdateTime.getURI().toString();

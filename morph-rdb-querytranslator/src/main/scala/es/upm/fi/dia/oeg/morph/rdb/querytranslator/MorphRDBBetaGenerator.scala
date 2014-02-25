@@ -6,20 +6,20 @@ import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
 import com.hp.hpl.jena.graph.Triple
 import Zql.ZConstant
 import Zql.ZSelectItem
-import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLPredicateObjectMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTriplesMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTermMap.TermMapType
-import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator;
-import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
+import es.upm.fi.dia.oeg.morph.base.Constants
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
+import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
+import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
+import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
 
 
-class MorphRDBBetaGenerator(
-    owner: IQueryTranslator
-    ) extends MorphBaseBetaGenerator(
-        owner: IQueryTranslator
-        ) {
+class MorphRDBBetaGenerator(md:R2RMLMappingDocument, unfolder:R2RMLUnfolder)
+extends MorphBaseBetaGenerator(md:AbstractMappingDocument, unfolder:AbstractUnfolder) {
 
 	override def calculateBetaObject(tp:Triple , cm:AbstractConceptMapping , predicateURI:String 
 	    , alphaResult:MorphAlphaResult , pm:AbstractPropertyMapping ) : java.util.List[ZSelectItem] = {
@@ -28,30 +28,39 @@ class MorphRDBBetaGenerator(
 		val refObjectMap = predicateObjectMap.getRefObjectMap(0); 
 		
 		val logicalTableAlias = alphaResult.alphaSubject.getAlias();
-		val dbType = this.owner.getDatabaseType();
 
 		val betaObjects : List[MorphSQLSelectItem] = {
 			if(refObjectMap == null) {
 				val objectMap = predicateObjectMap.getObjectMap(0);
 	
-				if(objectMap.getTermMapType() == TermMapType.CONSTANT) {
+				objectMap.termMapType match {
+				  case Constants.MorphTermMapType.ConstantTermMap => {
 					val constantValue = objectMap.getConstantValue();
 					val zConstant = new ZConstant(constantValue, ZConstant.STRING);
 					val selectItem = MorphSQLSelectItem.apply(zConstant);
-					List(selectItem);
-				} else {
-					val databaseColumnsString = objectMap.getDatabaseColumnsString();
+					List(selectItem);				    
+				  }
+				  case _ => {
+					val databaseColumnsString = objectMap.getReferencedColumns();
 					val betaObjectsAux = databaseColumnsString.map(databaseColumnString => 
 					  MorphSQLSelectItem.apply(databaseColumnString,logicalTableAlias, dbType, null));
-					betaObjectsAux.toList;
+					betaObjectsAux.toList;				    
+				  }
 				}
 			} else {
-				val databaseColumnsString = refObjectMap.getParentDatabaseColumnsString();
-				val refObjectMapAlias = this.owner.getTripleAlias(tp);
+//				val databaseColumnsString = refObjectMap.getParentDatabaseColumnsString();
+				//val md = this.owner.getMappingDocument().asInstanceOf[R2RMLMappingDocument];
+				val parentTriplesMap = md.getParentTripleMap(refObjectMap);
+				val parentSubjectMap = parentTriplesMap.subjectMap;
+				val parentColumns = parentSubjectMap.getReferencedColumns;
 				
-				if(databaseColumnsString != null) {
-					val betaObjectsAux = databaseColumnsString.map(databaseColumnString => {
-						MorphSQLSelectItem.apply(databaseColumnString, refObjectMapAlias, dbType, null);
+				//val refObjectMapAlias = this.owner.getTripleAlias(tp);
+				val parentLogicalTable = parentTriplesMap.logicalTable;
+				val refObjectMapAlias = parentLogicalTable.getAlias();
+				
+				if(parentColumns != null) {
+					val betaObjectsAux = parentColumns.map(parentColumn => {
+						MorphSQLSelectItem.apply(parentColumn, refObjectMapAlias, dbType, null);
 					})
 					betaObjectsAux.toList;
 				} else {
@@ -67,16 +76,15 @@ class MorphRDBBetaGenerator(
 	: java.util.List[ZSelectItem] = {
 		
 		val triplesMap = cm.asInstanceOf[R2RMLTriplesMap];
-		val subjectMap = triplesMap.getSubjectMap();
+		val subjectMap = triplesMap.subjectMap;
 		val logicalTableAlias = alphaResult.alphaSubject.getAlias();
 		
-		val databaseColumnsString = 
-				subjectMap.getDatabaseColumnsString();
+		val databaseColumnsString = subjectMap.getReferencedColumns();
 		
 		val result:List[ZSelectItem] = {
 			if(databaseColumnsString != null) {
 				val resultAux = databaseColumnsString.map(databaseColumnString => 
-				  MorphSQLSelectItem.apply(databaseColumnString, logicalTableAlias, databaseType:String, null));
+				  MorphSQLSelectItem.apply(databaseColumnString, logicalTableAlias, dbType, null));
 				resultAux.toList;
 			} else {
 			  Nil;
