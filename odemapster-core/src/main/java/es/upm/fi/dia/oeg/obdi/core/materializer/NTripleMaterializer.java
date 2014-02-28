@@ -163,19 +163,20 @@ public class NTripleMaterializer extends AbstractMaterializer {
 	@Override
 	public void materializeQuad(RDFNode subject, RDFNode predicate,
 			RDFNode object, RDFNode graph) {
-		String triple = null;
-		try {
-			String subjectString = GeneralUtility.nodeToString(subject);
-			String predicateString = GeneralUtility.nodeToString(predicate);
-			String objectString = GeneralUtility.nodeToString(object);
-			String graphString = GeneralUtility.nodeToString(graph);
-			
-			triple = GeneralUtility.createQuad(subjectString, predicateString, objectString, graphString);
-			this.write(triple);
-		} catch(Exception e) {
-			logger.error("unable to serialize triple, subjectURI=" + subject);
+		if(subject != null && predicate != null && object != null) {
+			String triple = null;
+			try {
+				String subjectString = GeneralUtility.nodeToString(subject);
+				String predicateString = GeneralUtility.nodeToString(predicate);
+				String objectString = GeneralUtility.nodeToString(object);
+				String graphString = GeneralUtility.nodeToString(graph);
+				
+				triple = GeneralUtility.createQuad(subjectString, predicateString, objectString, graphString);
+				this.write(triple);
+			} catch(Exception e) {
+				logger.error("unable to serialize triple, subjectURI=" + subject);
+			}			
 		}
-		
 	}
 
 	@Override
