@@ -2,9 +2,9 @@
 -- version 4.0.4.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 05-02-2014 a las 11:24:56
--- Versión del servidor: 5.6.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 28-02-2014 a las 16:05:04
+-- Versión del servidor: 5.6.11
 -- Versión de PHP: 5.5.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,22 +25,22 @@ USE `morph_example`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Sport`
+-- Estructura de tabla para la tabla `sport`
 --
 
-CREATE TABLE IF NOT EXISTS `Sport` (
+CREATE TABLE IF NOT EXISTS `sport` (
   `id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(50) DEFAULT NULL,
-  `code` char(8) DEFAULT NULL,
+  `code` char(8) NOT NULL,
   `type` char(8) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `Sport`
+-- Volcado de datos para la tabla `sport`
 --
 
-INSERT INTO `Sport` (`id`, `name`, `code`, `type`) VALUES
+INSERT INTO `sport` (`id`, `name`, `code`, `type`) VALUES
 (100, 'Tennis', 'TNS', 'BOTH'),
 (200, 'Chess', 'CHS', 'INDOOR'),
 (300, 'Soccer', 'SCR', 'OUTDOOR');
@@ -48,10 +48,10 @@ INSERT INTO `Sport` (`id`, `name`, `code`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Student`
+-- Estructura de tabla para la tabla `student`
 --
 
-CREATE TABLE IF NOT EXISTS `Student` (
+CREATE TABLE IF NOT EXISTS `student` (
   `id` char(8) NOT NULL DEFAULT '0',
   `name` varchar(50) DEFAULT NULL,
   `sport` int(11) DEFAULT NULL,
@@ -60,29 +60,30 @@ CREATE TABLE IF NOT EXISTS `Student` (
   `phone` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `suffix` varchar(8) DEFAULT NULL,
+  `birthdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Sport` (`sport`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `Student`
+-- Volcado de datos para la tabla `student`
 --
 
-INSERT INTO `Student` (`id`, `name`, `sport`, `status`, `webpage`, `phone`, `email`, `suffix`) VALUES
-('B1', 'Paul', 100, 'active', NULL, '777-3426', NULL, 'Jr.'),
-('B2', 'John', 200, 'active', NULL, NULL, 'john@acd.edu', 'Sr.'),
-('B3', 'George', 300, 'active', 'www.george.edu', NULL, NULL, 'Sr. '),
-('B4', 'Ringo', NULL, 'active', 'www.starr.edu', '888-4537', 'ringo@acd.edu', 'Jr. ');
+INSERT INTO `student` (`id`, `name`, `sport`, `status`, `webpage`, `phone`, `email`, `suffix`, `birthdate`) VALUES
+('B1', 'Paul', 100, 'active', NULL, '777-3426', NULL, 'Jr.', '2000-12-31 00:00:00'),
+('B2', 'John', 200, 'active', NULL, NULL, 'john@acd.edu', 'Sr.', NULL),
+('B3', 'George', 300, 'active', 'www.george.edu', NULL, NULL, 'Sr. ', '1990-06-18 00:00:00'),
+('B4', 'Ringo', NULL, 'active', 'www.starr.edu', '888-4537', 'ringo@acd.edu', 'Jr. ', NULL);
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `Student`
+-- Filtros para la tabla `student`
 --
-ALTER TABLE `Student`
-  ADD CONSTRAINT `Student_ibfk_1` FOREIGN KEY (`sport`) REFERENCES `Sport` (`id`);
+ALTER TABLE `student`
+  ADD CONSTRAINT `Student_ibfk_1` FOREIGN KEY (`sport`) REFERENCES `sport` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
