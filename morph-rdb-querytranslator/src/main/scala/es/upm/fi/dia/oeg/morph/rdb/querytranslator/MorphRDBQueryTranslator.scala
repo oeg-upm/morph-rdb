@@ -36,16 +36,11 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
     extends MorphBaseQueryTranslator(nameGenerator:NameGenerator
     , alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
     , condSQLGenerator:MorphBaseCondSQLGenerator, prSQLGenerator:MorphBasePRSQLGenerator) {
-	override val logger = Logger.getLogger("MorphQueryTranslator");
-	
 
-	//chebotko functions
-//	val alphaGenerator:MorphBaseAlphaGenerator = new MorphRDBAlphaGenerator(this);
-//	val betaGenerator:MorphBaseBetaGenerator = new MorphRDBBetaGenerator(this);
-//	val condSQLGenerator:MorphBaseCondSQLGenerator = new MorphRDBCondSQLGenerator(this);
-//	val prSQLGenerator:MorphBasePRSQLGenerator = new MorphRDBPRSQLGenerator(this);
+	override val logger = Logger.getLogger("MorphQueryTranslator");
+	this.alphaGenerator.owner = this;
+	this.betaGenerator.owner = this;
 	
-	//var mapTripleAlias:Map[Triple, String] = Map.empty;
 	var mapTemplateMatcher:Map[String, Matcher] = Map.empty;
 	var mapTemplateAttributes:Map[String, java.util.List[String]] = Map.empty;
 	val unfolder = null;
@@ -59,8 +54,8 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
 				//do nothing
 			  Nil
 			} else {
-				val resultAux = mapColumnsValues.keySet().map(column => {
-					val value = mapColumnsValues.get(column);
+				val resultAux = mapColumnsValues.keySet.map(column => {
+					val value = mapColumnsValues(column);
 					val constant = new ZConstant(value, ZConstant.UNKNOWN);
 					constant;			  
 				})
@@ -211,7 +206,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
 						}				  
 					}
 					
-					val termMapType = termMap.termType;
+					val termMapType = termMap.inferTermType;
 					val xsdDatatype = termMap.datatype;
 					val resultAuxString = {
 						if(resultAux != null) {

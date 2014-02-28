@@ -1,1 +1,1 @@
-http://example.com/BadStudent http%3A%2F%2Fexample.com%2Fdescription Bad%2520Student http%3A%2F%2Fexample.com%2Fgraph%2Fstudent .
+<http://example.com/BadStudent> <http://example.com/description> "Bad Student" <http://example.com/graph/student> .

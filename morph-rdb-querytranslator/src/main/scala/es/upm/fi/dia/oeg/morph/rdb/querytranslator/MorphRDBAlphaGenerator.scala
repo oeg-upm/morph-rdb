@@ -10,16 +10,16 @@ import com.hp.hpl.jena.graph.Triple
 import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLJoinCondition
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLLogicalTable
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLLogicalTable
+import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseQueryTranslator
 
 class MorphRDBAlphaGenerator(md:R2RMLMappingDocument,unfolder:R2RMLUnfolder)
 //(owner:IQueryTranslator) 
@@ -29,49 +29,44 @@ MorphBaseAlphaGenerator(md:AbstractMappingDocument,unfolder:AbstractUnfolder)
 {
 	override val logger = Logger.getLogger("MorphQueryTranslator");
 	
-	
-	
 	override def calculateAlpha(tp:Triple, abstractConceptMapping:AbstractConceptMapping 
 	    , predicateURI:String ) : MorphAlphaResult = {
-		//alpha subject
+		//ALPHA SUBJECT
 		val tpSubject = tp.getSubject();
 		val alphaSubject = this.calculateAlphaSubject(tpSubject, abstractConceptMapping);
 		val logicalTableAlias = alphaSubject.getAlias();
 
-		
-		val pms = abstractConceptMapping.getPropertyMappings(predicateURI);
+		val pmsAux = abstractConceptMapping.getPropertyMappings(predicateURI);
 		val alphaResult : MorphAlphaResult = {
 			if(RDF.`type`.getURI().equalsIgnoreCase(predicateURI)) {
 				new MorphAlphaResult(alphaSubject, null, predicateURI);
 			} else {
-				if(pms != null && !pms.isEmpty()) {
+			  val pms : Iterable[AbstractPropertyMapping]= {
+			    if (pmsAux == null) {Nil}
+			    else {pmsAux}
+			  }
 					
-					//alpha predicate object
-					val alphaPredicateObjects:List[SQLJoinTable] = {
-						if(pms != null && !pms.isEmpty()) {
-							if(pms.size() > 1) {
-								val errorMessage = "Multiple mappings of a predicate is not supported.";
-								logger.error(errorMessage);
-							}
-							
-							val pm = pms.iterator().next().asInstanceOf[R2RMLPredicateObjectMap];
-							val refObjectMap = pm.getRefObjectMap(0);
-							if(refObjectMap != null) { 
-								val alphaPredicateObject = this.calculateAlphaPredicateObject(
-										tp, abstractConceptMapping, pm, logicalTableAlias);
-								List(alphaPredicateObject);
-							} else {
-							  Nil;
-							}
-						} else {
-						  Nil;
-						}
-					}
-					
-					new MorphAlphaResult(alphaSubject, alphaPredicateObjects, predicateURI);
-				} else {
-				  null
+			//ALPHA PREDICATE OBJECT
+			val alphaPredicateObjects:List[SQLJoinTable] = {
+				if(pms.size() > 1) {
+					val errorMessage = "Multiple mappings of a predicate is not supported.";
+					logger.error(errorMessage);
 				}
+							
+				val pm = pms.iterator.next().asInstanceOf[R2RMLPredicateObjectMap];
+				val refObjectMap = pm.getRefObjectMap(0);
+				if(refObjectMap != null) { 
+					val alphaPredicateObject = this.calculateAlphaPredicateObject(
+							tp, abstractConceptMapping, pm, logicalTableAlias);
+					List(alphaPredicateObject);
+				} else {
+					Nil;
+				}
+
+			  }
+					
+			  new MorphAlphaResult(alphaSubject, alphaPredicateObjects, predicateURI);
+
 			}		  
 		}
 
@@ -84,9 +79,9 @@ MorphBaseAlphaGenerator(md:AbstractMappingDocument,unfolder:AbstractUnfolder)
 	} 
 
 	override def calculateAlphaPredicateObject(triple:Triple
-	    , abstractConceptMapping:AbstractConceptMapping , abstractPropertyMapping:AbstractPropertyMapping  
-		, logicalTableAlias:String ) : SQLJoinTable = {
-		
+	    , abstractConceptMapping:AbstractConceptMapping 
+	    , abstractPropertyMapping:AbstractPropertyMapping, logicalTableAlias:String ) 
+	: SQLJoinTable = {
 		
 		val pm = abstractPropertyMapping.asInstanceOf[R2RMLPredicateObjectMap];  
 		val refObjectMap = pm.getRefObjectMap(0);
@@ -108,23 +103,12 @@ MorphBaseAlphaGenerator(md:AbstractMappingDocument,unfolder:AbstractUnfolder)
 				val sqlParentLogicalTable = new SQLJoinTable(sqlParentLogicalTableAux
 				    , Constants.JOINS_TYPE_INNER, null);
 				
-				//val tripleAlias = this.owner.getTripleAlias(triple);
-				  
-//				val joinQueryAlias = {
-//					if(tripleAlias == null) {
-//						val sqlParentLogicalTableAuxAlias = sqlParentLogicalTableAux.generateAlias();
-//						this.owner.putTripleAlias(triple, sqlParentLogicalTableAuxAlias);
-//						sqlParentLogicalTableAuxAlias;
-//					} else {
-//					  tripleAlias
-//					}				  
-//				}
-
-				val joinQueryAlias = sqlParentLogicalTableAux.generateAlias();
-				sqlParentLogicalTableAux.setAlias(joinQueryAlias);
+				val sqlParentLogicalTableAuxAlias = sqlParentLogicalTableAux.generateAlias(); 
+				this.owner.mapTripleAlias += (triple -> sqlParentLogicalTableAuxAlias);
+				val joinQueryAlias = sqlParentLogicalTableAuxAlias;
 	
 				val joinConditions = refObjectMap.getJoinConditions();
-				val onExpression = R2RMLJoinCondition.generateJoinCondition(
+				val onExpression = R2RMLUnfolder.unfoldJoinConditions(
 						joinConditions, logicalTableAlias, joinQueryAlias
 						, databaseType);
 				if(onExpression != null) {
@@ -148,7 +132,7 @@ MorphBaseAlphaGenerator(md:AbstractMappingDocument,unfolder:AbstractUnfolder)
 		val sqlLogicalTable = unfolder.visit(r2rmlLogicalTable);
 
 		
-		val cmLogicalTableAlias = r2rmlLogicalTable.getAlias();
+		val cmLogicalTableAlias = r2rmlLogicalTable.alias;
 		val logicalTableAlias = {
 			if(cmLogicalTableAlias == null || cmLogicalTableAlias.equals("")) {
 				sqlLogicalTable.generateAlias();

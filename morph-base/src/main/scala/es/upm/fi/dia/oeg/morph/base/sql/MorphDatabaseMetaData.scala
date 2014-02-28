@@ -8,7 +8,9 @@ import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
 class MorphDatabaseMetaData(val conn:Connection, val dbName:String, val dbType:String
     , var tablesMetaData : List[MorphTableMetaData], jdbcDBMetaData:DatabaseMetaData) 
     {
-  
+	val logger = Logger.getLogger(this.getClass().getName());
+	logger.info("Database MetaData created: " + this.dbName);
+	
 	def this(conn:Connection, dbName:String, dbType:String) = {
 	  this(conn, dbName, dbType, Nil, null)
 	}
@@ -29,39 +31,34 @@ class MorphDatabaseMetaData(val conn:Connection, val dbName:String, val dbType:S
 }
 
 object MorphDatabaseMetaData {
-	val logger = Logger.getLogger("TableMetaData");
+	val logger = Logger.getLogger(this.getClass().getName());
 	
  	def apply(conn:Connection , properties:ConfigurationProperties) 
  	: MorphDatabaseMetaData = {
- 	   val jdbcDBMetaData = try {
- 	     conn.getMetaData();
- 	   } catch {
+ 	  logger.info("Building Database MetaData");
+ 	  
+ 	   val jdbcDBMetaData = try { conn.getMetaData(); } 
+ 	   catch { 
  	     case e:Exception => {
- 	    	 logger.error("Error while getting JDBC DatabaseMetaData");
- 	    	 null 	       
+ 	    	 logger.error("Error while getting JDBC DatabaseMetaData" + e.getMessage());
+ 	    	 null 
  	     }
  	   }
+ 	     
+ 	   val jdbcDriverName = if(jdbcDBMetaData != null) {jdbcDBMetaData.getDriverName()}
+ 	   else {null}
  	   
- 	   val productName = jdbcDBMetaData.getDatabaseProductName()
- 	   val driverName = jdbcDBMetaData.getDriverName()
- 	   
- 	   
- 	   val dbName = {
- 	     if(properties != null) { properties.databaseName}
+ 	   val dbName = {if(properties != null) { properties.databaseName}
  	     else { null }
  	   }
- 	   
+
+ 	   val jdbcProductName = if(jdbcDBMetaData != null) {jdbcDBMetaData.getDatabaseProductName()}
+ 	   else {null}
  	   val dbType = {
- 	     if(properties != null) { 
- 	       if(properties.databaseType != null) {
- 	         properties.databaseType
- 	       } else {
- 	    	   if(jdbcDBMetaData != null) { jdbcDBMetaData.getDatabaseProductName() }
- 	    	   else { null } 	         
- 	       }
+ 	     if(properties != null && properties.databaseType != null) {
+ 	       properties.databaseType
  	     } else {
- 	       if(jdbcDBMetaData != null) { jdbcDBMetaData.getDatabaseProductName() }
- 	       else { null }  
+ 	    	 jdbcProductName  
  	     } 	     
  	   }
  	   
@@ -71,11 +68,11 @@ object MorphDatabaseMetaData {
 					val listTableMetaData = MorphTableMetaData.buildTablesMetaData(conn, dbName, dbType);
 					val mapColumnsMetaData = MorphColumnMetaDataFactory.buildMapColumnsMetaData(conn, dbName, dbType);
 					val commonTableNames = listTableMetaData.map(x => x.tableName).toSet.intersect(mapColumnsMetaData.keySet);
-					for(tableName <- commonTableNames) {
+					commonTableNames.foreach(tableName => {
 						val tableMetaData = listTableMetaData.find(p => p.tableName.equals(tableName)).get;
 						val columnsMetaData = mapColumnsMetaData(tableName);
-						tableMetaData.columnsMetaData = columnsMetaData;
-					}
+						tableMetaData.columnsMetaData = columnsMetaData;					  
+					})
 					new MorphDatabaseMetaData(conn, dbName, dbType, listTableMetaData
 					    , jdbcDBMetaData);
 				} catch {

@@ -135,7 +135,7 @@ extends MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:AbstractU
 							val parentTriplesMap = md.getParentTripleMap(refObjectMap);
 							val parentSubjectMap = parentTriplesMap.subjectMap;
 							val parentLogicalTable = parentTriplesMap.logicalTable;
-							val refObjectMapAlias = parentLogicalTable.getAlias();							
+							val refObjectMapAlias = parentLogicalTable.alias;							
 				
 							//Collection<R2RMLJoinCondition> joinConditions = refObjectMap.getJoinConditions();
 							//ZExp onExpression = R2RMLUtility.generateJoinCondition(joinConditions, logicalTableAlias, refObjectMapAlias);

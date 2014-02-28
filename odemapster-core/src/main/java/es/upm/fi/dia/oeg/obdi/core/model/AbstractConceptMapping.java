@@ -1,26 +1,28 @@
 package es.upm.fi.dia.oeg.obdi.core.model;
 
-import java.sql.DatabaseMetaData;
 import java.util.Collection;
 import java.util.List;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
+import es.upm.fi.dia.oeg.morph.base.model.IConceptMapping;
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseLogicalTable;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData;
 import es.upm.fi.dia.oeg.morph.base.sql.MorphTableMetaData;
 
 
 
 
-public abstract class AbstractConceptMapping extends AbstractRDB2RDFMapping implements IConceptMapping {
+public abstract class AbstractConceptMapping 
+extends AbstractRDB2RDFMapping implements IConceptMapping {
 	public abstract String getConceptName();
 	public abstract Collection<AbstractPropertyMapping> getPropertyMappings(String propertyURI);
 	public abstract Collection<AbstractPropertyMapping> getPropertyMappings();
-	public abstract Collection<IRelationMapping> getRelationMappings();
+//	public abstract Collection<IRelationMapping> getRelationMappings();
 	//public abstract String getLogicalTableAlias();
 	//public abstract void setLogicalTableAlias(String logicalTableAlias);
 	public abstract boolean isPossibleInstance(String uri);
-	public abstract AbstractLogicalTable getLogicalTable();
+	public abstract MorphBaseLogicalTable getLogicalTable();
 	public abstract Long getLogicalTableSize();
 	public abstract MorphTableMetaData getTableMetaData();
 	public abstract Collection<String> getMappedClassURIs();

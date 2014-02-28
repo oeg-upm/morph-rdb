@@ -7,10 +7,9 @@ class ValueTransformator {
 }
 
 object ValueTransformator {
-	def transformToLexical(originalValue:String, datatype:String) : String = {
-	    if(datatype == null || originalValue == null) {
-		    originalValue
-		  } else {
+	def transformToLexical(originalValue:String, pDatatype:Option[String]) : String = {
+		if(pDatatype.isDefined && originalValue != null) {
+			val datatype = pDatatype.get;
 		    val xsdDateTimeURI = XSDDatatype.XSDdateTime.getURI().toString();
 		    val xsdBooleanURI = XSDDatatype.XSDboolean.getURI().toString();
 		    
@@ -26,8 +25,10 @@ object ValueTransformator {
 				}		      
 		    } else {
 		      originalValue
-		    }
-		  }
+		    }		  
+		} else {
+		  originalValue
+		}
 	}
 	
 }

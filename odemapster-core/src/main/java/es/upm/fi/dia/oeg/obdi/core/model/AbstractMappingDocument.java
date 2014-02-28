@@ -24,7 +24,7 @@ public abstract class AbstractMappingDocument {
 	private String id;
 	private String purpose;
 	protected ConfigurationProperties configurationProperties;
-	protected Connection conn;
+	//protected Connection conn;
 	//protected Map<String, TableMetaData> tablesMetaData = new HashMap<String, TableMetaData>(); // <tableName, TableMetaData>
 	protected MorphDatabaseMetaData dbMetaData = null;
 	//protected Map<String, Map<String, ColumnMetaData>> columnsMetaData = new HashMap<String, Map<String,ColumnMetaData>>();//<tableName, <columnName, ColumnMetaData>> 
@@ -34,7 +34,7 @@ public abstract class AbstractMappingDocument {
 	
 	public abstract String getMappingDocumentID();
 	
-	public abstract void buildMetaData();
+	public abstract void buildMetaData(Connection connection);
 	
 	public List<String> getMappedConcepts() {
 		List<String> result = new ArrayList<String>();
@@ -130,14 +130,14 @@ public abstract class AbstractMappingDocument {
 		return this.classMappings;
 	}
 
-	public Collection<IRelationMapping> getRelationMappingsByPropertyAndRange(
-			String propertyURI, String rangeConceptName) {
-		Collection<IRelationMapping> rmFromPropertyURI = this.getRelationMappingsByPropertyURI(propertyURI);
-		Collection<IRelationMapping> rmFromRange = this.getRelationMappingsByRangeClassName(rangeConceptName);
-		Collection<IRelationMapping> result = new HashSet<IRelationMapping>(rmFromPropertyURI);
-		result.retainAll(rmFromRange);
-		return result;
-	}
+//	public Collection<IRelationMapping> getRelationMappingsByPropertyAndRange(
+//			String propertyURI, String rangeConceptName) {
+//		Collection<IRelationMapping> rmFromPropertyURI = this.getRelationMappingsByPropertyURI(propertyURI);
+//		Collection<IRelationMapping> rmFromRange = this.getRelationMappingsByRangeClassName(rangeConceptName);
+//		Collection<IRelationMapping> result = new HashSet<IRelationMapping>(rmFromPropertyURI);
+//		result.retainAll(rmFromRange);
+//		return result;
+//	}
 
 	public Collection<String> getDistinctConceptMappingsNames() {
 		Collection<String> result = new ArrayList<String>();
@@ -208,23 +208,23 @@ public abstract class AbstractMappingDocument {
 		return result;
 	}
 	
-	public Collection<IRelationMapping> getRelationMappingsByPropertyURI(
-			String propertyURI) {
-		Collection<IRelationMapping> result = new ArrayList<IRelationMapping>();
-
-		for(AbstractConceptMapping conceptmapDef : this.classMappings) {
-			Collection<AbstractPropertyMapping> pms = conceptmapDef.getPropertyMappings();
-			for(AbstractPropertyMapping pm : pms) {
-				Collection<String> predicateNames = pm.getMappedPredicateNames();
-				for(String predicateName : predicateNames) {
-					if(predicateName.equals(propertyURI) && pm.isObjectPropertyMapping(0)) {
-						result.add((IRelationMapping) pm);
-					}
-				}
-			}
-		}
-		return result;
-	}
+//	public Collection<IRelationMapping> getRelationMappingsByPropertyURI(
+//			String propertyURI) {
+//		Collection<IRelationMapping> result = new ArrayList<IRelationMapping>();
+//
+//		for(AbstractConceptMapping conceptmapDef : this.classMappings) {
+//			Collection<AbstractPropertyMapping> pms = conceptmapDef.getPropertyMappings();
+//			for(AbstractPropertyMapping pm : pms) {
+//				Collection<String> predicateNames = pm.getMappedPredicateNames();
+//				for(String predicateName : predicateNames) {
+//					if(predicateName.equals(propertyURI) && pm.isObjectPropertyMapping(0)) {
+//						result.add((IRelationMapping) pm);
+//					}
+//				}
+//			}
+//		}
+//		return result;
+//	}
 	
 	public String getMappedPropertyURI(String propertyMappingID) {
 		for(AbstractConceptMapping conceptmapDef : this.classMappings) {
@@ -265,34 +265,34 @@ public abstract class AbstractMappingDocument {
 //		return result;
 //	}
 	
-	protected Collection<IRelationMapping> getRelationMappings() {
-		Collection<IRelationMapping> result = new Vector<IRelationMapping>();
-		if(this.classMappings != null) {
-			for(AbstractConceptMapping cm : this.classMappings) {
-				result.addAll(cm.getRelationMappings());
-			}
-		}
-		return result;
-	}
+//	protected Collection<IRelationMapping> getRelationMappings() {
+//		Collection<IRelationMapping> result = new Vector<IRelationMapping>();
+//		if(this.classMappings != null) {
+//			for(AbstractConceptMapping cm : this.classMappings) {
+//				result.addAll(cm.getRelationMappings());
+//			}
+//		}
+//		return result;
+//	}
 	
-	public Collection<IRelationMapping> getRelationMappingsByRangeClassName(
-			String rangeClassName) {
-		Collection<IRelationMapping> result = new ArrayList<IRelationMapping>();
-		for(AbstractConceptMapping classMapping : this.classMappings) {
-			Collection<IRelationMapping> rms = classMapping.getRelationMappings();
-			for(IRelationMapping rm : rms) {
-				String rangeConceptID = rm.getRangeClassMapping();
-				if(rangeConceptID != null) {
-					AbstractConceptMapping rangeCM = (AbstractConceptMapping) this.getConceptMappingByMappingId(rangeConceptID);
-					if(rangeClassName.equals(rangeCM.getConceptName())) {
-						result.add(rm);
-					}
-					
-				}
-			}
-		}
-		return result;
-	}
+//	public Collection<IRelationMapping> getRelationMappingsByRangeClassName(
+//			String rangeClassName) {
+//		Collection<IRelationMapping> result = new ArrayList<IRelationMapping>();
+//		for(AbstractConceptMapping classMapping : this.classMappings) {
+//			Collection<IRelationMapping> rms = classMapping.getRelationMappings();
+//			for(IRelationMapping rm : rms) {
+//				String rangeConceptID = rm.getRangeClassMapping();
+//				if(rangeConceptID != null) {
+//					AbstractConceptMapping rangeCM = (AbstractConceptMapping) this.getConceptMappingByMappingId(rangeConceptID);
+//					if(rangeClassName.equals(rangeCM.getConceptName())) {
+//						result.add(rm);
+//					}
+//					
+//				}
+//			}
+//		}
+//		return result;
+//	}
 
 	public String getId() {
 		return id;
@@ -327,13 +327,13 @@ public abstract class AbstractMappingDocument {
 		this.configurationProperties = configurationProperties;
 	}
 
-	public Connection getConn() {
-		return conn;
-	}
+//	public Connection getConn() {
+//		return conn;
+//	}
 
-	public void setConn(Connection conn) {
-		this.conn = conn;
-	}
+//	public void setConn(Connection conn) {
+//		this.conn = conn;
+//	}
 
 	public MorphDatabaseMetaData getDBMetaData() {
 		return dbMetaData;

@@ -50,51 +50,30 @@ public abstract class AbstractRunner {
 	public void loadConfigurationProperties(ConfigurationProperties configurationProperties) throws Exception {
 		this.configurationProperties = configurationProperties;
 
-		//mapping document
+		//BUILDING CONNECTION AND DATA SOURCE READER
+		this.buildDataSourceReader();
+		
+		//BUILDING MAPPING DOCUMENT
 		String mappingDocumentFile = 
 				this.configurationProperties.mappingDocumentFilePath();
 		if(mappingDocumentFile != null) {
 			this.readMappingDocumentFile(mappingDocumentFile);
 		}
 
-//		//sparql query
-//		String queryFilePath = this.configurationProperties.getQueryFilePath();
-//		Query sparqQuery = null;
-//		if(queryFilePath != null && !queryFilePath.equals("") ) {
-//			logger.info("Parsing query file : " + queryFilePath);
-//			sparqQuery = QueryFactory.read(queryFilePath);
-//		}
-
-		//unfolder
+		//BUILDING UNFOLDER
 		this.unfolder = this.createUnfolder();
 		
-		//data translator
+		//BUILDING DATA TRANSLATOR
 		this.createDataTranslator(this.configurationProperties);
 
-		//query translator
-		this.queryTranslatorFactoryClassName = 
-				this.configurationProperties.queryTranslatorFactoryClassName();
-		//if(this.queryTranslatorClassName != null) {
-			this.buildQueryTranslator();	
-		//}
+		//BUILDING QUERY TRANSLATOR
+		this.buildQueryTranslator();
 
-		//query writer
-		this.queryResultWriterClassName = 
-				this.configurationProperties.queryResultWriterClassName();
-		if(this.queryResultWriterClassName != null) {
-			this.buildQueryResultWriter();
-		}
+		//BUILDING QUERY RESULT WRITER
+		this.buildQueryResultWriter();
 
-		//query evaluator
-		this.dataSourceReaderClassName = 
-				this.configurationProperties.queryEvaluatorClassName();
-		if(this.dataSourceReaderClassName != null) {
-			this.buildDataSourceReader();
-		}
-
-		//result processor
-		this.resultProcessor = new DefaultResultProcessor(
-				dataSourceReader, queryResultWriter);				
+		//BUILDING RESULT PROCESSOR
+		this.resultProcessor = new DefaultResultProcessor(dataSourceReader, queryResultWriter);				
 
 	}
 
@@ -105,6 +84,9 @@ public abstract class AbstractRunner {
 	}
 
 	public void buildQueryTranslator() throws Exception {
+		this.queryTranslatorFactoryClassName = 
+				this.configurationProperties.queryTranslatorFactoryClassName();
+		
 		if(this.mappingDocument == null) {
 			String mappingDocumentFilePath = this.getMappingDocumentPath();
 			if(mappingDocumentFilePath == null) {
@@ -157,6 +139,9 @@ public abstract class AbstractRunner {
 	}
 	
 	private void buildDataSourceReader() throws Exception {
+		this.dataSourceReaderClassName = 
+				this.configurationProperties.queryEvaluatorClassName();
+		
 		final String dataSourceReaderClassName;
 		
 		if(this.dataSourceReaderClassName == null || this.dataSourceReaderClassName.equals("")) {
@@ -184,6 +169,9 @@ public abstract class AbstractRunner {
 	}
 
 	private void buildQueryResultWriter() throws Exception {
+		this.queryResultWriterClassName = 
+				this.configurationProperties.queryResultWriterClassName();
+		
 		final String queryResultWriterClassName;
 		if(this.queryResultWriterClassName == null || this.queryResultWriterClassName.equals("")) {
 			queryResultWriterClassName = Constants.QUERY_RESULT_WRITER_CLASSNAME_DEFAULT(); 

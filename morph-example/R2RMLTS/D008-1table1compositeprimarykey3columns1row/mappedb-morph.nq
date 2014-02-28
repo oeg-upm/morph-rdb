@@ -1,1 +1,4 @@
-http://example.com/Tennis http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type http%3A%2F%2Factivity.com%2FSport  .
+<http://example.com/Student/10/Venus%2520Williams> <http://xmlns.com/foaf/0.1/name> "Venus Williams" .
+<http://example.com/Student/10/Venus%2520Williams> <http://example.com/id> "10"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://example.com/Student/10/Venus%2520Williams> <http://www.w3.org/1999/02/22-rdf-syntax-ns%23type> <http://xmlns.com/foaf/0.1/Person> .
+<http://example.com/Tennis> <http://www.w3.org/1999/02/22-rdf-syntax-ns%23type> <http://activity.com/Sport> .

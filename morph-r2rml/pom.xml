@@ -5,13 +5,17 @@
   <version>1.0-SNAPSHOT</version>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>es.upm.fi.dia.oeg.morph</groupId>
-			<artifactId>odemapster-r2rml-rdb</artifactId>
+			<artifactId>odemapster-core</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+		
 	</dependencies>
-	
+
+
+			
 	<distributionManagement>
 <!-- 		<repository>
 			<uniqueVersion>false</uniqueVersion>

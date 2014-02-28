@@ -5,57 +5,34 @@ import scala.collection.JavaConversions._
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import com.hp.hpl.jena.rdf.model.Resource
+import com.hp.hpl.jena.rdf.model.RDFNode
 
-class R2RMLPredicateMap() extends R2RMLTermMap {
-	
-	def this(resource:Resource) = {
-		this();
-		this.parse(resource);
-		this.resource = resource;
-	}
+class R2RMLPredicateMap(termMapType:Constants.MorphTermMapType.Value
+    , termType:Option[String], datatype:Option[String], languageTag:Option[String]) 
+    extends R2RMLTermMap(termMapType, termType, datatype, languageTag) {
 
-	def this(constantValue:String) = {
-		this();
-		this.termMapType = Constants.MorphTermMapType.ConstantTermMap;
-		this.constantValue = constantValue;
-		this.termType = Constants.R2RML_IRI_URI;
-	}	  
+	val inferredTermType = this.inferTermType;
+	if(inferredTermType != null && !inferredTermType.equals(Constants.R2RML_IRI_URI)) {
+		throw new Exception("Non IRI value is not permitted in the graph!");
+	}  
 }
 
 object R2RMLPredicateMap {
-	def extractPredicateMaps(resource:Resource) 
-	: List[R2RMLPredicateMap] = {
-		val pmStatements = resource.listProperties(Constants.R2RML_PREDICATEMAP_PROPERTY);
-		val predicateMaps1 = if(pmStatements != null) {
-			pmStatements.toList().flatMap(pmStatement => {
-				if(pmStatement != null) {
-					val predicateMapResource = pmStatement.getObject().asInstanceOf[Resource];
-					val pm = new R2RMLPredicateMap(predicateMapResource);
-					Some(pm);
-				} else {
-				  None
-				}			  
-			});
-		} else {
-		  Nil
-		}
-		
-		val pStatements = resource.listProperties(Constants.R2RML_PREDICATE_PROPERTY);
-		val predicateMaps2 = if(pStatements != null) {
-			pStatements.toList().flatMap(predicateStatement => {
-				if(predicateStatement != null) {
-					val constantValueObject = predicateStatement.getObject().toString();
-					val predicateMap = new R2RMLPredicateMap(constantValueObject);
-					Some(predicateMap);
-				} else {
-				  None
-				}			  
-			}); 
-		} else {
-		  Nil
-		}
-
-		val predicateMaps = predicateMaps1.toList ::: predicateMaps2.toList;
-		predicateMaps
-	}  
+	def apply(rdfNode:RDFNode) : R2RMLPredicateMap = {
+		val coreProperties = R2RMLTermMap.extractCoreProperties(rdfNode);
+		//coreProperties = (termMapType, termType, datatype, languageTag)
+		val termMapType = coreProperties._1;
+		val termType = coreProperties._2;
+		val datatype = coreProperties._3;
+		val languageTag = coreProperties._4;
+		val pm =new R2RMLPredicateMap(termMapType, termType, datatype, languageTag);
+		pm.parse(rdfNode);
+		pm;
+	}
+	
+	def extractPredicateMaps(resource:Resource) : Set[R2RMLPredicateMap] = {
+	  val tms = R2RMLTermMap.extractTermMaps(resource, Constants.MorphPOS.pre);
+	  val result = tms.map(tm => tm.asInstanceOf[R2RMLPredicateMap]);
+	  result;
+	}
 }

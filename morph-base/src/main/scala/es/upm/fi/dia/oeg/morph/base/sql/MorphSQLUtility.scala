@@ -562,7 +562,7 @@ object MorphSQLUtility {
 	}
 	
 	def getXMLDatatype(pColumnName:String, mapXMLDatatype:Map[String, String], dbType:String) : String = {
-		val columnName = MorphSQLUtility.printWithoutEnclosedCharacters(pColumnName, dbType);
+		val columnName = MorphSQLUtility.printWithoutEnclosedCharacters(pColumnName, dbType).replaceAll("\"", "");
 		val mappedType = mapXMLDatatype.find(p => p._1.equalsIgnoreCase(columnName));
 		val result = if(mappedType.isDefined) { mappedType.get._2 } else { null }
 		result;

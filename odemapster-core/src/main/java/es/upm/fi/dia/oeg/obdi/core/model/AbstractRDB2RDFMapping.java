@@ -26,6 +26,10 @@ public abstract class AbstractRDB2RDFMapping {
 			return this.hashCode() + "";
 		}
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 	
 }

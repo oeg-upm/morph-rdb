@@ -21,6 +21,8 @@ abstract class MorphBaseBetaGenerator(md:AbstractMappingDocument, unfolder:Abstr
   
 	val logger = Logger.getLogger("MorphBaseBetaGenerator");
 	val alphaGenerator:MorphBaseAlphaGenerator=null;
+	var owner:MorphBaseQueryTranslator=null;
+	
 //	val databaseType = {
 //		if(this.owner == null) {null}
 //		else {this.owner.getDatabaseType();}

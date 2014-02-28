@@ -2,71 +2,31 @@
 <sparql>
     <head>
         <variable name="student"/>
-        <variable name="studentName"/>
         <variable name="sport"/>
-        <variable name="sportName"/>
-        <variable name="sportCode"/>
-        <variable name="sportType"/>
     </head>
     <results>
         <result>
             <binding name="student">
                 <uri>http://mappingpedia.linkeddata.es/resources/Person/B1</uri>
             </binding>
-            <binding name="studentName">
-                <literal>Paul</literal>
-            </binding>
             <binding name="sport">
                 <uri>http://mappingpedia.linkeddata.es/resources/Sport/100</uri>
-            </binding>
-            <binding name="sportName">
-                <literal>Tennis</literal>
-            </binding>
-            <binding name="sportCode">
-                <literal>TNS</literal>
-            </binding>
-            <binding name="sportType">
-                <literal>BOTH</literal>
             </binding>
         </result>
         <result>
             <binding name="student">
                 <uri>http://mappingpedia.linkeddata.es/resources/Person/B2</uri>
             </binding>
-            <binding name="studentName">
-                <literal>John</literal>
-            </binding>
             <binding name="sport">
                 <uri>http://mappingpedia.linkeddata.es/resources/Sport/200</uri>
-            </binding>
-            <binding name="sportName">
-                <literal>Chess</literal>
-            </binding>
-            <binding name="sportCode">
-                <literal>CHS</literal>
-            </binding>
-            <binding name="sportType">
-                <literal>INDOOR</literal>
             </binding>
         </result>
         <result>
             <binding name="student">
                 <uri>http://mappingpedia.linkeddata.es/resources/Person/B3</uri>
             </binding>
-            <binding name="studentName">
-                <literal>George</literal>
-            </binding>
             <binding name="sport">
                 <uri>http://mappingpedia.linkeddata.es/resources/Sport/300</uri>
-            </binding>
-            <binding name="sportName">
-                <literal>Soccer</literal>
-            </binding>
-            <binding name="sportCode">
-                <literal>SCR</literal>
-            </binding>
-            <binding name="sportType">
-                <literal>OUTDOOR</literal>
             </binding>
         </result>
     </results>

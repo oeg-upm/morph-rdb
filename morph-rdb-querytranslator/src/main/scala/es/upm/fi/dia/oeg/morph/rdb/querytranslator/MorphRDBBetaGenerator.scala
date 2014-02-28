@@ -48,15 +48,14 @@ extends MorphBaseBetaGenerator(md:AbstractMappingDocument, unfolder:AbstractUnfo
 				  }
 				}
 			} else {
-//				val databaseColumnsString = refObjectMap.getParentDatabaseColumnsString();
-				//val md = this.owner.getMappingDocument().asInstanceOf[R2RMLMappingDocument];
 				val parentTriplesMap = md.getParentTripleMap(refObjectMap);
+				val parentLogicalTable = parentTriplesMap.logicalTable;
 				val parentSubjectMap = parentTriplesMap.subjectMap;
 				val parentColumns = parentSubjectMap.getReferencedColumns;
 				
-				//val refObjectMapAlias = this.owner.getTripleAlias(tp);
-				val parentLogicalTable = parentTriplesMap.logicalTable;
-				val refObjectMapAlias = parentLogicalTable.getAlias();
+				val refObjectMapAliasAux = this.owner.mapTripleAlias.get(tp);
+				val refObjectMapAlias = if(refObjectMapAliasAux.isDefined) { refObjectMapAliasAux.get}
+				else {null}
 				
 				if(parentColumns != null) {
 					val betaObjectsAux = parentColumns.map(parentColumn => {

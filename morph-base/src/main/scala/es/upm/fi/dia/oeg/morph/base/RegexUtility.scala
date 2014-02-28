@@ -2,7 +2,6 @@ package es.upm.fi.dia.oeg.morph.base
 
 import scala.util.matching.Regex
 import scala.collection.JavaConversions._
-import java.util.HashMap
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -13,9 +12,7 @@ object RegexUtility {
 	def main(args:Array[String]) = {
 		val template = "Hello \\{ {Name} \\} Please find attached {Invoice Number} which is due on {Due Date}";
 		
-		var replacements = new HashMap[String, Object]();
-		replacements.put("Name", "Freddy");
-		replacements.put("Invoice Number", "INV0001");
+		val replacements = Map("Name" -> "Freddy", "Invoice Number" -> "INV0001")
 		
 		val attributes = RegexUtility.getTemplateColumns(template, true);
 		System.out.println("attributes = " + attributes);
@@ -24,7 +21,8 @@ object RegexUtility {
 		System.out.println("template2 = " + template2);	  
 	}
 	
-	def getTemplateMatching(inputTemplateString: String, inputURIString : String) : HashMap[String, String] = {
+	def getTemplateMatching(inputTemplateString: String, inputURIString : String) 
+	: Map[String, String] = {
 	  var newTemplateString = inputTemplateString;
 	  if (!newTemplateString.startsWith("<")) {
 	    newTemplateString = "<" + newTemplateString;
@@ -41,7 +39,7 @@ object RegexUtility {
 	    newURIString = newURIString + ">";
 	  }
 	  
-		val result = new HashMap[String, String];
+		//val result:Map[String, String] = Map.empty;
 		val columnsFromTemplate = this.getTemplateColumns(newTemplateString, false);
 		//println("columnsFromTemplate = " + columnsFromTemplate);
 		
@@ -60,16 +58,16 @@ object RegexUtility {
 		val pattern = new Regex(templateString1);
 		val firstMatch = pattern.findFirstMatchIn(newURIString);
 		
-		if(firstMatch != None) {
+		val result : Map[String, String]= if(firstMatch != None) {
 			val subgroups = firstMatch.get.subgroups;
 			var i = 0;
-			val columnsListIterator = columnsList.iterator;
-			while(columnsListIterator.hasNext) {
-			  val column = columnsListIterator.next;
-			  	//println("column = " + column);
-				result += column -> subgroups(i);
-				i = i+1;
-			}
+			columnsList.map(column  => {
+			  val resultAux = (column -> subgroups(i));
+			  i = i+1;
+			  resultAux
+			}).toMap
+		} else {
+		  Map.empty
 		}
 		
 		result;

@@ -68,7 +68,7 @@ abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:Ab
 		//var exps : Set[ZExpression] = Set.empty;
 		
 		//val mapColumnMetaData = cm.getLogicalTable().getColumnsMetaData();
-		val tableMetaData = cm.getLogicalTable().getTableMetaData();
+		val tableMetaData = cm.getLogicalTable().tableMetaData;
 		
 		val isRDFTypeStatement = RDF.`type`.getURI().equals(predicateURI);
 
@@ -308,16 +308,14 @@ abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:Ab
 	def  genCondSQLSTG(stg:List[Triple], alphaResult:MorphAlphaResult , betaGenerator:MorphBaseBetaGenerator 
 			, cm:AbstractConceptMapping ) : ZExpression = {
 
-		var exps : Set[ZExpression] = Set.empty;
+		//var exps : Set[ZExpression] = Set.empty;
 		val firstTriple = stg.get(0);
 
 		val condSubject = this.genCondSQLSubject(firstTriple
 				, alphaResult, betaGenerator, cm);
-		if(condSubject != null) {
-			exps = exps ++ Set(condSubject);
-			//condSQLTB.add(condSubject);
-		} 
 
+		var condSTGPredicateObject : Set[ZExpression] = Set.empty;
+		
 		for(i <- 0 until stg.size()) {
 			val iTP = stg.get(i);
 
@@ -345,11 +343,10 @@ abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:Ab
 
 			
 			if(processableTriplePattern) {
-				val condPredicateObject = this.genCondSQLPredicateObject(
-				    iTP, alphaResult, betaGenerator, cm, iTPPredicateURI);
+				val condPredicateObject = this.genCondSQLPredicateObject(iTP, alphaResult, betaGenerator, cm, iTPPredicateURI);
 				//condSQLTB.add(condPredicateObject);
 				if(condPredicateObject != null) {
-					exps = exps ++ Set(condPredicateObject);
+					condSTGPredicateObject = condSTGPredicateObject ++ Set(condPredicateObject);
 				}
 
 				for(j <- i+1 until stg.size()) {
@@ -367,14 +364,15 @@ abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:Ab
 						val expsPredicateObject = this.genCondSQL(
 								iTP, jTP, alphaResult, betaGenerator, cm);
 						if(expsPredicateObject != null) {
-							exps = exps ++ Set(expsPredicateObject);	
+							condSTGPredicateObject = condSTGPredicateObject ++ Set(expsPredicateObject);	
 						}
 					}
 				}					
 			}
 		}
 
-		val result = MorphSQLUtility.combineExpresions(exps.toList, Constants.SQL_LOGICAL_OPERATOR_AND);
+		val exps = Set(condSubject) ++ condSTGPredicateObject
+		val result = MorphSQLUtility.combineExpresions(exps, Constants.SQL_LOGICAL_OPERATOR_AND);
 		logger.debug("genCondSQLTB = " + result);
 		result;
 	}

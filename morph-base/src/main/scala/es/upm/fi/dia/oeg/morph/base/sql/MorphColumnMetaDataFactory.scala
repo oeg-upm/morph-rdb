@@ -19,6 +19,8 @@ object MorphColumnMetaDataFactory {
 		
 	def buildMapColumnsMetaData(conn : Connection, databaseName : String, databaseType : String) 
 		: Map[String, List[MorphColumnMetaData]] = {
+		logger.info("\t\tBuilding Columns MetaData for database: " + databaseName);
+		
 		//var result = Map.empty[String, Map[String, ColumnMetaData]];
 		var result:Map[String, List[MorphColumnMetaData]] = Map.empty;
 		

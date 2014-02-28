@@ -1,4 +1,4 @@
-http://example.com/resource/student_Demi Moore http%3A%2F%2Fexample.com%2FnumSport 0  .
-http://example.com/resource/student_Demi Moore http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Demi Moore  .
-http://example.com/resource/student_Venus Williams http%3A%2F%2Fexample.com%2FnumSport 1  .
-http://example.com/resource/student_Venus Williams http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Venus Williams  .
+<http://example.com/resource/student_Demi%2520Moore> <http://example.com/numSport> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://example.com/resource/student_Demi%2520Moore> <http://xmlns.com/foaf/0.1/name> "Demi Moore" .
+<http://example.com/resource/student_Venus%2520Williams> <http://example.com/numSport> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://example.com/resource/student_Venus%2520Williams> <http://xmlns.com/foaf/0.1/name> "Venus Williams" .

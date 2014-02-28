@@ -14,7 +14,7 @@ class ConfigurationProperties() extends java.util.Properties {
 	var configurationFileURL:String =null;
 	var configurationDirectory:String=null
 	
-	var conn:Connection=null;
+//	var conn:Connection=null;
 	var ontologyFilePath:String=null;
 	var mappingDocumentFilePath:String=null ;
 	var outputFilePath:String =null;
@@ -60,7 +60,6 @@ class ConfigurationProperties() extends java.util.Properties {
 			throw new Exception("Only zero or one database is supported.");
 		}
 
-		this.conn = null;
 		for(i <- 0 until noOfDatabase) {
 			val propertyDatabaseDriver = Constants.DATABASE_DRIVER_PROP_NAME + "[" + i + "]";
 			this.databaseDriver = this.getProperty(propertyDatabaseDriver);
@@ -89,14 +88,7 @@ class ConfigurationProperties() extends java.util.Properties {
 				this.databaseTimeout = Integer.parseInt(timeoutPropertyString.trim());
 			}
 
-			logger.info("Obtaining database connection...");
-			this.conn = DBUtility.getLocalConnection(
-					databaseUser, databaseName, databasePassword, 
-					databaseDriver, 
-					databaseURL, "Configuration Properties");
-			if(this.conn != null) {
-				logger.info("Connection obtained.");
-			}			
+	
 		}
 
 		this.mappingDocumentFilePath = this.readString(Constants.MAPPINGDOCUMENT_FILE_PATH, null);

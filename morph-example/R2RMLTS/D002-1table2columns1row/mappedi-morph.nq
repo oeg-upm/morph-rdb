@@ -1,1 +1,1 @@
-http://example.com/10/Venus http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Venus  .
+<http://example.com/10/Venus> <http://xmlns.com/foaf/0.1/name> "Venus" .

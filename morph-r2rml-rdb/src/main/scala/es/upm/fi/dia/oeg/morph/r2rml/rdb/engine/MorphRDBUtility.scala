@@ -3,7 +3,6 @@ package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 import java.util.Collection
 import es.upm.fi.dia.oeg.morph.base.Constants
 import Zql.ZExpression
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLJoinCondition
 import scala.collection.JavaConversions._
 import Zql.ZConstant
 import Zql.ZQuery
@@ -25,15 +24,11 @@ class MorphRDBUtility {
 object MorphRDBUtility {
 	val logger = Logger.getLogger(this.getClass().getName());
 
-	def generateCondForWellDefinedURI(termMap:R2RMLTermMap, ownerTriplesMap:AbstractConceptMapping
-	    , uri:String , alias:String 
-			//, columnsMetaData:Map[String, ColumnMetaData] 
-			//, tableMetaData:TableMetaData
+	def generateCondForWellDefinedURI(termMap:R2RMLTermMap
+	    , ownerTriplesMap:AbstractConceptMapping, uri:String , alias:String 
 			) : ZExpression = {
-			//val logicalTable = termMap.owner.getLogicalTable();
 			val logicalTable = ownerTriplesMap.getLogicalTable();
-			val logicalTableMetaData = logicalTable.getTableMetaData();
-			val conn = logicalTable.getOwner().getOwner().getConn();
+			val logicalTableMetaData = logicalTable.tableMetaData;
 			val tableMetaData = logicalTableMetaData;
 			
 //			val tableMetaData = {
@@ -64,21 +59,23 @@ object MorphRDBUtility {
 								val exprsAux = matchedColValues.keySet.map(pkColumnString => {
 									val value = matchedColValues(pkColumnString);
 
-									val termMapColumnTypeName = termMap.columnTypeName;
-									val columnTypeName = {
-											if(termMapColumnTypeName != null) {
-												termMapColumnTypeName
-											} else {
-												if(tableMetaData != null && tableMetaData.getColumnMetaData(pkColumnString).isDefined) {
-													val columnTypeNameAux = tableMetaData.getColumnMetaData(pkColumnString).get.dataType;
-													termMap.columnTypeName = columnTypeNameAux;
-													columnTypeNameAux
-												} else {
-													null
-												}
-											}
-									}
-
+//									val termMapColumnTypeName = termMap.columnTypeName;
+//									val columnTypeName = {
+//											if(termMapColumnTypeName != null) {
+//												termMapColumnTypeName
+//											} else {
+//												if(tableMetaData != null && tableMetaData.getColumnMetaData(pkColumnString).isDefined) {
+//													val columnTypeNameAux = tableMetaData.getColumnMetaData(pkColumnString).get.dataType;
+//													termMap.columnTypeName = columnTypeNameAux;
+//													columnTypeNameAux
+//												} else {
+//													null
+//												}
+//											}
+//									}
+									val columnTypeName = null
+									  
+									
 									val pkColumnConstant = MorphSQLConstant.apply(
 											alias + "." + pkColumnString
 											, ZConstant.COLUMNNAME, tableMetaData.dbType);
@@ -116,34 +113,34 @@ object MorphRDBUtility {
 			result;
 	} 
 	
-	def generateJoinCondition(joinConditions:Collection[R2RMLJoinCondition] 
-	, parentTableAlias:String, joinQueryAlias:String , dbType:String ) : ZExpression = {
-		var onExpression:ZExpression = null;
-		val enclosedCharacter = Constants.getEnclosedCharacter(dbType);
-		
-		if(joinConditions != null) {
-			for(joinCondition <- joinConditions) {
-				var childColumnName = joinCondition.getChildColumnName();
-				childColumnName = childColumnName.replaceAll("\"", enclosedCharacter);
-				childColumnName = parentTableAlias + "." + childColumnName;
-				val childColumn = new ZConstant(childColumnName, ZConstant.COLUMNNAME);
-
-				var parentColumnName = joinCondition.getParentColumnName();
-				parentColumnName = parentColumnName.replaceAll("\"", enclosedCharacter);
-				parentColumnName = joinQueryAlias + "." + parentColumnName;
-				val parentColumn = new ZConstant(parentColumnName, ZConstant.COLUMNNAME);
-				
-				val joinConditionExpression = new ZExpression("=", childColumn, parentColumn);
-				if(onExpression == null) {
-					onExpression = joinConditionExpression;
-				} else {
-					onExpression = new ZExpression("AND", onExpression, joinConditionExpression);
-				}
-			}
-		}
-		
-		return onExpression;
-	}
+//	def generateJoinCondition(joinConditions:Collection[R2RMLJoinCondition] 
+//	, parentTableAlias:String, joinQueryAlias:String , dbType:String ) : ZExpression = {
+//		var onExpression:ZExpression = null;
+//		val enclosedCharacter = Constants.getEnclosedCharacter(dbType);
+//		
+//		if(joinConditions != null) {
+//			for(joinCondition <- joinConditions) {
+//				var childColumnName = joinCondition.getChildColumnName();
+//				childColumnName = childColumnName.replaceAll("\"", enclosedCharacter);
+//				childColumnName = parentTableAlias + "." + childColumnName;
+//				val childColumn = new ZConstant(childColumnName, ZConstant.COLUMNNAME);
+//
+//				var parentColumnName = joinCondition.getParentColumnName();
+//				parentColumnName = parentColumnName.replaceAll("\"", enclosedCharacter);
+//				parentColumnName = joinQueryAlias + "." + parentColumnName;
+//				val parentColumn = new ZConstant(parentColumnName, ZConstant.COLUMNNAME);
+//				
+//				val joinConditionExpression = new ZExpression("=", childColumn, parentColumn);
+//				if(onExpression == null) {
+//					onExpression = joinConditionExpression;
+//				} else {
+//					onExpression = new ZExpression("AND", onExpression, joinConditionExpression);
+//				}
+//			}
+//		}
+//		
+//		return onExpression;
+//	}
 	
 	def toZQuery(sqlString:String ) : ZQuery = {
 		try {

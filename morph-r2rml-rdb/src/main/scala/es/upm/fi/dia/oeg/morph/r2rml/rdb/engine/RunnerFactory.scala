@@ -18,7 +18,7 @@ object RunnerFactory {
 	def createR2RMLRunnerC(configurationProperties:ConfigurationProperties) : R2RMLRunner = {
 		val r2rmlRunner = new R2RMLRunner();
 		r2rmlRunner.loadConfigurationProperties(configurationProperties);
-		r2rmlRunner.buildQueryTranslator();
+//		r2rmlRunner.buildQueryTranslator();
 		val queryTranslator = r2rmlRunner.getQueryTranslator();
 		val queryTranslationOptimizerC = 
 				QueryTranslationOptimizerFactory.createQueryTranslationOptimizerC();
@@ -36,7 +36,7 @@ object RunnerFactory {
 	def  createR2RMLRunnerE(configurationProperties:ConfigurationProperties) : R2RMLRunner = {
 		val r2rmlRunner = new R2RMLRunner();
 		r2rmlRunner.loadConfigurationProperties(configurationProperties);
-		r2rmlRunner.buildQueryTranslator();
+//		r2rmlRunner.buildQueryTranslator();
 		val queryTranslator = r2rmlRunner.getQueryTranslator();
 		val queryTranslationOptimizerE = 
 				QueryTranslationOptimizerFactory.createQueryTranslationOptimizerE();
@@ -54,7 +54,7 @@ object RunnerFactory {
 	def createR2RMLRunnerFC(configurationProperties:ConfigurationProperties ) : R2RMLRunner = {
 		val r2rmlRunner = new R2RMLRunner();
 		r2rmlRunner.loadConfigurationProperties(configurationProperties);
-		r2rmlRunner.buildQueryTranslator();
+//		r2rmlRunner.buildQueryTranslator();
 		val queryTranslator = r2rmlRunner.getQueryTranslator();
 		val queryTranslationOptimizerFC = 
 				QueryTranslationOptimizerFactory.createQueryTranslationOptimizerFC();
@@ -72,7 +72,7 @@ object RunnerFactory {
 	def createR2RMLRunnerFE(properties:ConfigurationProperties ) : R2RMLRunner = {
 		val r2rmlRunner = new R2RMLRunner();
 		r2rmlRunner.loadConfigurationProperties(properties);
-		r2rmlRunner.buildQueryTranslator();
+//		r2rmlRunner.buildQueryTranslator();
 		val queryTranslator = r2rmlRunner.getQueryTranslator();
 		val queryTranslationOptimizerFE = 
 				QueryTranslationOptimizerFactory.createQueryTranslationOptimizerFE();

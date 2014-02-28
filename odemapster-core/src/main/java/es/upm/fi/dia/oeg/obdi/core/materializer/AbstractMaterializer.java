@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.tdb.TDBFactory;
 
 import es.upm.fi.dia.oeg.morph.base.Constants;
@@ -15,14 +16,15 @@ import es.upm.fi.dia.oeg.morph.base.Constants;
 public abstract class AbstractMaterializer {
 	private static Logger logger = Logger.getLogger(AbstractMaterializer.class);
 	protected String outputFileName;
-	protected Model model;
+	public Model model;
 	protected String rdfLanguage;
 	
 	public abstract Object createSubject(boolean isBlankNode, String subjectURI);
 	public abstract void materializeDataPropertyTriple(String predicateName, Object objectValue, String datatype, String lang, String graph);
 	public abstract void materializeObjectPropertyTriple(String predicateName, String rangeURI, boolean isBlankNodeObject, String graph);
 	public abstract void materializeRDFTypeTriple(String subjectURI, String conceptName, boolean isBlankNodeSubject, String graph);
-	public abstract void materializeQuad(String subject, String predicate, String object, String graph);
+//	public abstract void materializeQuad(String subject, String predicate, String object, String graph);
+	public abstract void materializeQuad(RDFNode subject, RDFNode predicate, RDFNode object, RDFNode graph);
 	public abstract void materialize() throws IOException;
 	
 	public static AbstractMaterializer create(String rdfLanguage, String outputFileName
@@ -59,10 +61,7 @@ public abstract class AbstractMaterializer {
 			//logger.warn("Unspecified jena mode, memory based will be used!");
 			model = AbstractMaterializer.createJenaMemoryModel();
 		} else {
-			if(jenaMode.equalsIgnoreCase(Constants.JENA_MODE_TYPE_HSQL())) {
-				//logger.debug("jena mode = idb hsqldb");
-				//model = AbstractMaterializer.createJenaHSQLDBModel();
-			} else if(jenaMode.equalsIgnoreCase(Constants.JENA_MODE_TYPE_TDB())) {
+			if(jenaMode.equalsIgnoreCase(Constants.JENA_MODE_TYPE_TDB())) {
 				//logger.debug("jena mode = tdb");
 				model = AbstractMaterializer.createJenaTDBModel();
 			} else if (jenaMode.equalsIgnoreCase(Constants.JENA_MODE_TYPE_MEMORY())){

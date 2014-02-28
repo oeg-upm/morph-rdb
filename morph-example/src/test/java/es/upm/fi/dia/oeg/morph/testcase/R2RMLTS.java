@@ -131,7 +131,7 @@ public class R2RMLTS {
 			AbstractRunner runner = new R2RMLRunner();
 			runner.loadConfigurationfile(configurationDirectory, configurationFile);
 			runner.run();
-			logger.info("------" + testName + " DONE------\n\n");
+			logger.info("------" + testName + " DONE------");
 			assertTrue(conformingMapping);
 		} catch(Exception e) {
 			e.printStackTrace();

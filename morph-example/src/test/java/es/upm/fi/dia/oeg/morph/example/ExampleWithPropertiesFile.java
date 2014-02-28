@@ -177,6 +177,7 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
+	@Test
 	public void sparql09() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "query09.r2rml.properties";

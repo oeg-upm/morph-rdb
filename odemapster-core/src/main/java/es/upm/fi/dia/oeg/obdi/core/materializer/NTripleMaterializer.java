@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.hp.hpl.jena.rdf.model.AnonId;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 import es.upm.fi.dia.oeg.morph.base.GeneralUtility;
@@ -149,14 +150,31 @@ public class NTripleMaterializer extends AbstractMaterializer {
 		}
 	}
 	
-	@Override
-	public void materializeQuad(String subject, String predicate, String object, String graph) {
-		String quad = GeneralUtility.createQuad(subject, predicate, object, graph);
-		try {
-			this.write(quad);
-		} catch(Exception e) {
-			logger.error("unable to serialize triple, subjectURI=" + quad);
-		}
+//	@Override
+//	public void materializeQuad(String subject, String predicate, String object, String graph) {
+//		String quad = GeneralUtility.createQuad(subject, predicate, object, graph);
+//		try {
+//			this.write(quad);
+//		} catch(Exception e) {
+//			logger.error("unable to serialize triple, subjectURI=" + quad);
+//		}
+//	}
 
+	@Override
+	public void materializeQuad(RDFNode subject, RDFNode predicate,
+			RDFNode object, RDFNode graph) {
+		String triple = null;
+		try {
+			String subjectString = GeneralUtility.nodeToString(subject);
+			String predicateString = GeneralUtility.nodeToString(predicate);
+			String objectString = GeneralUtility.nodeToString(object);
+			String graphString = GeneralUtility.nodeToString(graph);
+			
+			triple = GeneralUtility.createQuad(subjectString, predicateString, objectString, graphString);
+			this.write(triple);
+		} catch(Exception e) {
+			logger.error("unable to serialize triple, subjectURI=" + subject);
+		}
+		
 	}	
 }

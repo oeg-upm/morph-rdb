@@ -1,24 +1,19 @@
 package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
 import scala.collection.JavaConversions._
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElementVisitor
 import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
 import java.util.Collection
 import org.apache.log4j.Logger
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLLogicalTable
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLLogicalTable
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLJoinCondition
 import es.upm.fi.dia.oeg.obdi.core.sql.SQLJoinTable
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import java.util.HashSet
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLTable
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLSQLQuery
 import Zql.ZQuery
 import Zql.ZSelectItem
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
@@ -30,9 +25,18 @@ import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLObjectMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTermMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateMap
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLLogicalTable
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTable
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLSQLQuery
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLJoinCondition
+import Zql.ZExpression
+import Zql.ZConstant
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
+import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElementVisitor
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
 
 class R2RMLUnfolder(md:R2RMLMappingDocument) 
-extends AbstractUnfolder(md:AbstractMappingDocument) with R2RMLElementVisitor {
+extends AbstractUnfolder(md:AbstractMappingDocument) with MorphR2RMLElementVisitor {
 	var mapTermMapColumnsAliases:Map[Object, List[String]] = Map.empty;
 	val logger = Logger.getLogger(this.getClass().getName());
 	var mapRefObjectMapAlias:Map[R2RMLRefObjectMap, String] = Map.empty;
@@ -54,7 +58,7 @@ extends AbstractUnfolder(md:AbstractMappingDocument) with R2RMLElementVisitor {
 		val dbType = md.getConfigurationProperties().databaseType;
 		val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
 			  
-		val logicalTableType = logicalTable.getLogicalTableType();
+		val logicalTableType = logicalTable.logicalTableType;
 		val result = logicalTableType match {
 		  case LogicalTableType.TABLE_NAME => {
 			  val logicalTableValue = logicalTable.getValue();
@@ -171,7 +175,7 @@ extends AbstractUnfolder(md:AbstractMappingDocument) with R2RMLElementVisitor {
 				this.unfoldLogicalTable(logicalTable).asInstanceOf[SQLFromItem];
 			} 
 		  case _:R2RMLSQLQuery => {
-				val logicalTableAux = logicalTable.accept(this);
+				val logicalTableAux = this.unfoldLogicalTable(logicalTable)
 				logicalTableAux match {
 				  case _:SQLQuery => {
 						val zQuery = this.unfoldLogicalTable(logicalTable).asInstanceOf[ZQuery];
@@ -184,7 +188,7 @@ extends AbstractUnfolder(md:AbstractMappingDocument) with R2RMLElementVisitor {
 		  case _ => {null}
 		}
 		val logicalTableAlias = logicalTableUnfolded.generateAlias();
-		logicalTable.setAlias(logicalTableAlias);
+		logicalTable.alias = logicalTableAlias;
 		//result.addFrom(logicalTableUnfolded);
 		val logicalTableUnfoldedJoinTable = new SQLJoinTable(logicalTableUnfolded, null, null); 
 		result.addFromItem(logicalTableUnfoldedJoinTable);
@@ -220,14 +224,13 @@ extends AbstractUnfolder(md:AbstractMappingDocument) with R2RMLElementVisitor {
 					val refObjectMap = predicateObjectMap.getRefObjectMap(0);
 					if(refObjectMap != null) {
 						val parentTriplesMap = this.md.getParentTripleMap(refObjectMap);
-//						val parentLogicalTable = refObjectMap.getParentLogicalTable();
 						val parentLogicalTable = parentTriplesMap.getLogicalTable();
-						
 						if(parentLogicalTable == null) {
 							val errorMessage = "Parent logical table is not found for RefObjectMap : " + predicateObjectMap.getMappedPredicateName(0);
 							throw new Exception(errorMessage);
 						}
 						val sqlParentLogicalTable = this.unfoldLogicalTable(parentLogicalTable.asInstanceOf[R2RMLLogicalTable]);
+						//parentLogicalTable.alias = parentLogicalTableAlias;
 								
 						val joinQuery = new SQLJoinTable(sqlParentLogicalTable);
 						joinQuery.setJoinType("LEFT");
@@ -264,12 +267,8 @@ extends AbstractUnfolder(md:AbstractMappingDocument) with R2RMLElementVisitor {
 
 						
 						val joinConditions = refObjectMap.getJoinConditions();
-						val onExpression = if(joinConditions != null && joinConditions.size() > 0) {
-							R2RMLJoinCondition.generateJoinCondition(joinConditions
-									, logicalTableAlias, joinQueryAlias, dbType);
-						} else {
-							Constants.SQL_EXPRESSION_TRUE;
-						}
+						val onExpression = R2RMLUnfolder.unfoldJoinConditions(
+						    joinConditions, logicalTableAlias, joinQueryAlias, dbType);
 						joinQuery.setOnExpression(onExpression);
 						//result.addJoinQuery(joinQuery);		
 						result.addFromItem(joinQuery);
@@ -289,6 +288,8 @@ extends AbstractUnfolder(md:AbstractMappingDocument) with R2RMLElementVisitor {
 
 		result;		
 	}
+
+
 	
 	def unfoldTriplesMap(triplesMap:R2RMLTriplesMap , subjectURI:String ) : SQLQuery  = {
 		val logicalTable = triplesMap.getLogicalTable().asInstanceOf[R2RMLLogicalTable];
@@ -298,7 +299,7 @@ extends AbstractUnfolder(md:AbstractMappingDocument) with R2RMLElementVisitor {
 		val resultAux = this.unfoldTriplesMap(logicalTable, subjectMap, predicateObjectMaps);
 		val result = if(subjectURI != null) {
 			val whereExpression = MorphRDBUtility.generateCondForWellDefinedURI(
-			    subjectMap, triplesMap, subjectURI, logicalTable.getAlias());
+			    subjectMap, triplesMap, subjectURI, logicalTable.alias);
 			if(whereExpression != null) {
 				resultAux.addWhere(whereExpression);
 				resultAux;
@@ -395,7 +396,7 @@ extends AbstractUnfolder(md:AbstractMappingDocument) with R2RMLElementVisitor {
 		result;
 	}
 
-	def visit( mappingDocument:AbstractMappingDocument) : Collection[SQLQuery] = {
+	def visit( md:R2RMLMappingDocument) : Collection[SQLQuery] = {
 		val  result = this.unfoldMappingDocument();
 		result;
 	}
@@ -415,9 +416,43 @@ extends AbstractUnfolder(md:AbstractMappingDocument) with R2RMLElementVisitor {
 		null;
 	}
 
-	def visit(cm:AbstractConceptMapping ) : SQLQuery  = {
-		val triplesMap = cm.asInstanceOf[R2RMLTriplesMap];
+	def visit(triplesMap:R2RMLTriplesMap ) : SQLQuery  = {
 		val result = this.unfoldTriplesMap(triplesMap);
 		result;
 	}
+}
+
+object R2RMLUnfolder {
+	def unfoldJoinConditions(pJoinConditions:Iterable[R2RMLJoinCondition] 
+	, parentTableAlias:String, joinQueryAlias:String , dbType:String ) : ZExpression  = {
+		val joinConditions = {
+		  if(pJoinConditions == null) { Nil }
+		  else {pJoinConditions}
+		}
+		
+		//var onExpression : ZExpression = null;
+		val enclosedCharacter = Constants.getEnclosedCharacter(dbType);
+		
+		val joinConditionExpressions = joinConditions.map(joinCondition => {
+			var childColumnName = joinCondition.childColumnName
+			childColumnName = childColumnName.replaceAll("\"", enclosedCharacter);
+			childColumnName = parentTableAlias + "." + childColumnName;
+			val childColumn = new ZConstant(childColumnName, ZConstant.COLUMNNAME);
+
+			var parentColumnName = joinCondition.parentColumnName;
+			parentColumnName = parentColumnName.replaceAll("\"", enclosedCharacter);
+			parentColumnName = joinQueryAlias + "." + parentColumnName;
+			val parentColumn = new ZConstant(parentColumnName, ZConstant.COLUMNNAME);
+				
+			new ZExpression("=", childColumn, parentColumn);
+		})
+		
+		val result = if(joinConditionExpressions.size > 0) {
+		  MorphSQLUtility.combineExpresions(joinConditionExpressions, Constants.SQL_LOGICAL_OPERATOR_AND);
+		} else {
+		  Constants.SQL_EXPRESSION_TRUE;
+		}
+		 
+		result;
+	}  
 }

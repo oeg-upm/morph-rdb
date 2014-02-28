@@ -25,6 +25,7 @@ class R2RMLRunner extends AbstractRunner {
 
 	override def readMappingDocumentFile(mappingDocumentFile:String ) = {
 		this.mappingDocument = new R2RMLMappingDocument(mappingDocumentFile, configurationProperties);
+		this.mappingDocument.buildMetaData(this.conn);
 	}
 
 //	override def buildQueryTranslator() = {

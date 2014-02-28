@@ -4,6 +4,7 @@ import org.apache.log4j.Logger
 import java.net.URL
 import com.hp.hpl.jena.shared.CannotEncodeCharacterException
 import java.util.regex.Pattern
+import com.hp.hpl.jena.rdf.model.RDFNode
 
 class GeneralUtility {
 
@@ -125,6 +126,40 @@ object GeneralUtility {
 			val result = "<" + uri + ">";   
 			result;			
 		}
+	}
+
+	def nodeToString(rdfNode:RDFNode) : String = {
+	  if(rdfNode == null) {
+	    null
+	  } else {
+		if(rdfNode.isURIResource()) {
+		  this.createURIref(rdfNode.asResource().getURI())
+		} 
+		else if(rdfNode.isAnon()) {
+		  val id = rdfNode.asResource().getId();
+		  GeneralUtility.createBlankNode(id.getLabelString());
+		}
+		else if(rdfNode.isLiteral()) {
+			val literalNode = rdfNode.asLiteral();
+			val datatype = literalNode.getDatatype();
+			val lang = literalNode.getLanguage();
+			val literalValue = literalNode.getValue();
+			val literalValueString = literalValue.toString();
+			
+			val literalString = if(datatype == null) {
+				if(lang == null || lang.equals("")) {
+					GeneralUtility.createLiteral(literalValueString);
+				} else {
+					GeneralUtility.createLanguageLiteral(literalValueString, lang);
+				}
+			} else {
+				GeneralUtility.createDataTypeLiteral(literalValueString, datatype.getURI());
+			}
+			
+			literalString
+		}
+		else { rdfNode.toString()}	    
+	  }
 
 	}
 	
@@ -155,7 +190,7 @@ object GeneralUtility {
 			result = result.replaceAll("\\%", "%25");//put this first
 			result = result.replaceAll("<", "%3C");
 			result = result.replaceAll(">", "%3E");
-			result = result.replaceAll("#", "%23");
+//			result = result.replaceAll("#", "%23");
 
 			result = result.replaceAll("\\{", "%7B");
 			result = result.replaceAll("\\}", "%7D");
@@ -177,9 +212,9 @@ object GeneralUtility {
 			result = result.replaceAll("&", "%26");
 			result = result.replaceAll("\\+", "%2B");
 			result = result.replaceAll(",", "%2C");
-			result = result.replaceAll("/", "%2F");
-			result = result.replaceAll(":", "%3A");
-			result = result.replaceAll(";", "%3B");
+			//result = result.replaceAll("/", "%2F");
+			//result = result.replaceAll(":", "%3A");
+			//result = result.replaceAll(";", "%3B");
 			result = result.replaceAll("=", "%3D");
 			result = result.replaceAll("\\?", "%3F");
 			result = result.replaceAll("@", "%40");

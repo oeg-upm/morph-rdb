@@ -10,6 +10,7 @@ import com.hp.hpl.jena.rdf.model.AnonId;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -109,9 +110,11 @@ public class RDFXMLMaterializer extends AbstractMaterializer {
 		} 	
 	}
 
+
+
 	@Override
-	public void materializeQuad(String subject, String predicate,
-			String object, String graph) {
+	public void materializeQuad(RDFNode subject, RDFNode predicate,
+			RDFNode object, RDFNode graph) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,6 +1,7 @@
 package es.upm.fi.dia.oeg.obdi.core.engine;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.Collection;
 
 import org.apache.log4j.Logger;
@@ -13,11 +14,22 @@ import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument;
 
 public abstract class AbstractDataTranslator {
 	private static Logger logger = Logger.getLogger(AbstractDataTranslator.class);
-	protected AbstractMaterializer materializer;
 	protected ConfigurationProperties properties;
+	protected AbstractMaterializer materializer;
 	protected AbstractUnfolder unfolder;
-	protected AbstractRunner owner;
-		
+	protected AbstractRunner runner;
+	protected Connection connection;
+	
+	public AbstractDataTranslator(ConfigurationProperties properties
+			, AbstractMaterializer materializer, AbstractUnfolder unfolder
+			, AbstractRunner runner, Connection connection) {
+		this.properties = properties;
+		this.materializer = materializer;
+		this.unfolder = unfolder;
+		this.runner= runner;
+		this.connection = connection;
+	}
+	
 	public AbstractDataTranslator(ConfigurationProperties properties) {
 		try {
 			this.properties = properties;

@@ -18,7 +18,8 @@ import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
 abstract class MorphBaseAlphaGenerator(md:AbstractMappingDocument,unfolder:AbstractUnfolder)
 //(val owner:IQueryTranslator) 
 {
-
+	var owner:MorphBaseQueryTranslator = null;
+	
   def logger = Logger.getLogger("MorphBaseAlphaGenerator");
   
 //	val databaseType = {

@@ -37,7 +37,7 @@ extends MorphBasePRSQLGenerator(md:AbstractMappingDocument, unfolder:AbstractUnf
 			if(!SPARQLUtility.isBlankNode(tpObject)) {
 				if(RDF.`type`.getURI().equalsIgnoreCase(predicateURI)) {
 					val tm = cmSubject.asInstanceOf[R2RMLTriplesMap];
-					val classURIs = tm.subjectMap.getClassURIs();
+					val classURIs = tm.subjectMap.classURIs;
 					val resultAux = classURIs.map(classURI => {
 						val zConstant = new ZConstant(classURI, ZConstant.STRING);
 						val selectItem:ZSelectItem = new ZSelectItem();

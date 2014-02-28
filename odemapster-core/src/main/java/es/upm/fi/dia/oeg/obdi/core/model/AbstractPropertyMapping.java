@@ -20,15 +20,15 @@ public abstract class AbstractPropertyMapping extends AbstractRDB2RDFMapping imp
 		return parent;
 	}
 	
-	public abstract MappingType getPropertyMappingType(int index);
+	//public abstract MappingType getPropertyMappingType(int index);
 
-	public boolean isObjectPropertyMapping(int index) {
-		return MappingType.RELATION == this.getPropertyMappingType(index);
-	}
-
-	public boolean isDataPropertyMapping(int index) {
-		return MappingType.ATTRIBUTE == this.getPropertyMappingType(index);
-	}
+//	public boolean isObjectPropertyMapping(int index) {
+//		return MappingType.RELATION == this.getPropertyMappingType(index);
+//	}
+//
+//	public boolean isDataPropertyMapping(int index) {
+//		return MappingType.ATTRIBUTE == this.getPropertyMappingType(index);
+//	}
 
 	public Resource getResource() {
 		return resource;

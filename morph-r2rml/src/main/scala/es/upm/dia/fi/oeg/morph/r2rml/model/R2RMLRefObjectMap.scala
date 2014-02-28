@@ -3,11 +3,9 @@ package es.upm.dia.fi.oeg.morph.r2rml.model
 import scala.collection.JavaConversions._
 import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLJoinCondition
 import com.hp.hpl.jena.rdf.model.RDFNode
 import com.hp.hpl.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractLogicalTable
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 
 class R2RMLRefObjectMap(val parentTriplesMapResource:Resource, val joinConditions:Set[R2RMLJoinCondition]) {
@@ -15,7 +13,7 @@ class R2RMLRefObjectMap(val parentTriplesMapResource:Resource, val joinCondition
 //	var resource:Resource=null;
 	
 	val logger = Logger.getLogger(this.getClass().getName());
-	
+	var rdfNode:RDFNode = null;
 	//private String alias;
 	
 	
@@ -88,7 +86,7 @@ object R2RMLRefObjectMap {
 		val joinConditions:Set[R2RMLJoinCondition] = if(joinConditionsStatements != null) {
 		  joinConditionsStatements.map(joinConditionStatement => {
 				val joinConditionResource = joinConditionStatement.getObject().asInstanceOf[Resource];
-				val joinCondition = new R2RMLJoinCondition(joinConditionResource); 
+				val joinCondition = R2RMLJoinCondition(joinConditionResource); 
 				joinCondition
 		  }).toSet
 		} else {
@@ -113,5 +111,30 @@ object R2RMLRefObjectMap {
 		hasParentTriplesMap;
 	}
 	
-  
+	def extractRefObjectMaps(resource:Resource) : Set[R2RMLRefObjectMap] = {
+		val mappingProperties = List(Constants.R2RML_OBJECTMAP_PROPERTY);
+		val maps = mappingProperties.map(mapProperty => {
+			val mapStatements = resource.listProperties(mapProperty);
+			if(mapStatements != null) {
+				mapStatements.toList().flatMap(mapStatement => {
+					if(mapStatement != null) {
+						val mapStatementObject = mapStatement.getObject();
+						val mapStatementObjectResource = mapStatementObject.asInstanceOf[Resource];
+						if(R2RMLRefObjectMap.isRefObjectMap(mapStatementObjectResource)) {
+							val rom = R2RMLRefObjectMap(mapStatementObjectResource);
+							rom.rdfNode = mapStatementObjectResource;
+							Some(rom);
+						} else {
+							None;
+						}
+					} else {
+					  None
+					}			  
+				});
+			} else {
+			  Nil
+			}
+		}).flatten
+		maps.toSet;
+	}  
 }

@@ -1,57 +1,57 @@
 package es.upm.dia.fi.oeg.morph.r2rml.model
 
 import scala.collection.JavaConversions._
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElement
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
 import org.apache.log4j.Logger
 import com.hp.hpl.jena.rdf.model.ModelFactory
 import com.hp.hpl.jena.util.FileManager
 import com.hp.hpl.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.Constants
+import java.util.Collection
+import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElementVisitor
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
 import es.upm.fi.dia.oeg.obdi.core.model.IAttributeMapping
 import es.upm.fi.dia.oeg.obdi.core.model.IRelationMapping
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractRDB2RDFMapping.MappingType
-import java.util.Collection
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
-import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
+import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElement
+import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElementVisitor
+import java.sql.Connection
 
 class R2RMLMappingDocument(mdPath:String, props:ConfigurationProperties) 
-extends AbstractMappingDocument with R2RMLElement {
+extends AbstractMappingDocument with MorphR2RMLElement {
 	val logger = Logger.getLogger(this.getClass().getName());
 	super.setMappingDocumentPath(mdPath);
 	super.setConfigurationProperties(props);
 	
-	if(configurationProperties != null) {
-		val conn = configurationProperties.conn;
-		if(conn != null) {
-			super.setConn(conn);
-			val databaseName = configurationProperties.databaseName;
-			val databaseType = configurationProperties.databaseType;
-			if(databaseName != null) {
-				logger.debug("building metadata.");
-				super.setDbMetaData(MorphDatabaseMetaData(conn, configurationProperties));
-			}
-		}
-	}
-
    this.parse();
-   this.buildMetaData();
    
-   def buildMetaData() = {
-     val dbName = this.configurationProperties.databaseName;
-     val dbType = this.configurationProperties.databaseType;
-     this.dbMetaData = MorphDatabaseMetaData(this.conn, configurationProperties);
-     this.getConceptMappings().foreach(cm => cm.buildMetaData(this.dbMetaData));
+   //BUILDING METADATA
+   try {
+	   this.buildMetaData(null);
+   } catch {
+     case e:Exception => {
+       logger.warn("Error while building metadata.")
+     }
+   }
+   
+   
+   def buildMetaData(conn:Connection) = {
+     if(this.dbMetaData == null && this.configurationProperties != null && conn != null) {
+	     this.dbMetaData = MorphDatabaseMetaData(conn, configurationProperties);
+	     this.getConceptMappings().foreach(cm => cm.buildMetaData(this.dbMetaData));       
+     }
+
    }
 	
 
-	def accept(visitor:R2RMLElementVisitor) : Object  = {
+	def accept(visitor:MorphR2RMLElementVisitor) : Object  = {
 		val result = visitor.visit(this);
 		result;
-	}	
+	}
 	
 	def parse() = {
 		val inputFileName = this.getMappingDocumentPath();
@@ -128,11 +128,11 @@ extends AbstractMappingDocument with R2RMLElement {
 		null;
 	}
 
-	override def getRelationMappings() : java.util.Collection[IRelationMapping] = {
-		// TODO Auto-generated method stub
-		logger.warn("TODO: Implement getRelationMappings()");
-		null;
-	}
+//	override def getRelationMappings() : java.util.Collection[IRelationMapping] = {
+//		// TODO Auto-generated method stub
+//		logger.warn("TODO: Implement getRelationMappings()");
+//		null;
+//	}
 
 	override def getRelationMappings(domain:String ,range:String ) 
 	: java.util.Collection[IRelationMapping]  = {
@@ -224,9 +224,10 @@ extends AbstractMappingDocument with R2RMLElement {
 		val om = pom.getObjectMap(0);
 		val rom = pom.getRefObjectMap(0);
 		val cms = this.getConceptMappings();
+		val inferredTermType = om.inferTermType;
 		
 		val result:Iterable[AbstractConceptMapping] = if(om != null && rom == null) {
-			if(Constants.R2RML_IRI_URI.equals(om.termType)) {
+			if(Constants.R2RML_IRI_URI.equals(inferredTermType)) {
 				if(cms != null) {
 				  Nil
 				} else {
@@ -260,7 +261,7 @@ extends AbstractMappingDocument with R2RMLElement {
 					cms.flatMap(cm => {
 						if(cm.isPossibleInstance(templateString)) {
 							val tm2 = cm.asInstanceOf[R2RMLTriplesMap];
-							val classURIs = tm2.subjectMap.getClassURIs();
+							val classURIs = tm2.subjectMap.classURIs;
 							if(classURIs != null && !classURIs.isEmpty()) {
 								Some(cm);	
 							} else {

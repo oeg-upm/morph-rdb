@@ -1,2 +1,2 @@
-http://example.com/Student/10/Venus Williams http%3A%2F%2Fexample.com%2Fname Venus Williams  .
-http://example.com/Student/10/Venus Williams http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Venus Williams  .
+<http://example.com/Student/10/Venus%2520Williams> <http://example.com/name> "Venus Williams" .
+<http://example.com/Student/10/Venus%2520Williams> <http://xmlns.com/foaf/0.1/name> "Venus Williams" .

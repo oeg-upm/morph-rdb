@@ -1,8 +1,13 @@
-1 http%3A%2F%2Fexample.com%2Fdept%23COMPANY EXAMPLE%2520Corporation  .
-1 http%3A%2F%2Fexample.com%2Fdept%23location NEW YORK  .
-1 http%3A%2F%2Fexample.com%2Fdept%23name APPSERVER  .
-1 http%3A%2F%2Fexample.com%2Fdept%23deptno 10  .
-1 http%3A%2F%2Fexample.com%2Femp%23etype PART_TIME  .
-1 http%3A%2F%2Fexample.com%2Femp%23empno 7369  .
-1 http%3A%2F%2Fexample.com%2Femp%23deptNum 10  .
-1 http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type 0  .
+null <http://example.com/dept%23COMPANY> <EXAMPLE%2520Corporation> .
+null <http://example.com/dept%23location> "NEW YORK" .
+null <http://example.com/dept%23name> "APPSERVER" .
+null <http://example.com/dept%23deptno> "10"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<1> <http://example.com/emp%23etype> "PART_TIME" .
+<1> <http://example.com/emp%23job> "CLERK" .
+<1> <http://example.com/emp%23empno> "7369"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<1> <http://example.com/emp%23deptNum> "10"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<1> <http://example.com/emp%23emptype> <0> .
+<1> <http://www.w3.org/1999/02/22-rdf-syntax-ns%23type> <0> .
+<1> <http://www.w3.org/1999/02/22-rdf-syntax-ns%23type> <0> .
+<1> <http://example.com/emp%23jobtype> <0> .
+<1> <http://example.com/emp%23name> "SMITH" .

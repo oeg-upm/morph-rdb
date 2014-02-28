@@ -1,3 +1,3 @@
-http://example.com/1/Bolivia, Plurinational State of http%3A%2F%2Fexample.com%2Fname Bolivia, Plurinational State of  .
-http://example.com/2/Ireland http%3A%2F%2Fexample.com%2Fname Ireland  .
-http://example.com/3/Saint Martin (French part) http%3A%2F%2Fexample.com%2Fname Saint Martin (French part)  .
+<http://example.com/1/Bolivia%2C%2520Plurinational%2520State%2520of> <http://example.com/name> "Bolivia, Plurinational State of" .
+<http://example.com/2/Ireland> <http://example.com/name> "Ireland" .
+<http://example.com/3/Saint%2520Martin%2520(French%2520part)> <http://example.com/name> "Saint Martin (French part)" .

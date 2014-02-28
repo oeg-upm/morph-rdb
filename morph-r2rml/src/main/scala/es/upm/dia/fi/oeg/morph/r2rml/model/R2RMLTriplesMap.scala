@@ -1,44 +1,44 @@
 package es.upm.dia.fi.oeg.morph.r2rml.model
 
 import scala.collection.JavaConversions._
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElement
-import es.upm.fi.dia.oeg.obdi.core.model.IConceptMapping
 import com.hp.hpl.jena.rdf.model.Resource
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import org.apache.log4j.Logger
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.model.R2RMLLogicalTable
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.engine.R2RMLElementVisitor
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractRDB2RDFMapping.MappingType
-import es.upm.fi.dia.oeg.obdi.core.model.IRelationMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractLogicalTable
 import java.sql.DatabaseMetaData
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
 import es.upm.fi.dia.oeg.morph.base.sql.MorphTableMetaData
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseLogicalTable
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
+import es.upm.fi.dia.oeg.obdi.core.model.IRelationMapping
+import es.upm.fi.dia.oeg.obdi.core.model.AbstractRDB2RDFMapping.MappingType
+import es.upm.fi.dia.oeg.morph.base.model.IConceptMapping
+import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElement
+import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElementVisitor
 
 class R2RMLTriplesMap(val logicalTable:R2RMLLogicalTable, val subjectMap:R2RMLSubjectMap
     , val predicateObjectMaps:Set[R2RMLPredicateObjectMap]) 
-extends AbstractConceptMapping with R2RMLElement with IConceptMapping
+extends AbstractConceptMapping with MorphR2RMLElement with IConceptMapping
 {
   	val logger = Logger.getLogger(this.getClass().getName());
-	var triplesMapName:String = null;
+	//var triplesMapName:String = null;
 	
 	def buildMetaData(dbMetadata:MorphDatabaseMetaData) = {
+	  logger.info("Building metadata for TriplesMap: " + this.getName);
+	  
 	  this.logicalTable.buildMetaData(dbMetadata);
-	  this.subjectMap.buildMetadata(dbMetadata);
-	  this.predicateObjectMaps.foreach(pom => pom.buildMetadata(dbMetadata));
+//	  this.subjectMap.buildMetadata(dbMetadata);
+//	  this.predicateObjectMaps.foreach(pom => pom.buildMetadata(dbMetadata));
 	}
 	
-	def accept(visitor:R2RMLElementVisitor ) : Object ={ return visitor.visit(this); }
+	def accept(visitor:MorphR2RMLElementVisitor ) : Object ={ return visitor.visit(this); }
 	
-	override def toString() : String = { return this.triplesMapName; }
+	override def toString() : String = { return this.getName() }
 	
 	override def getConceptName() :String = {
 		var result : String = null;
 		
-		val classURIs = this.subjectMap.getClassURIs();
+		val classURIs = this.subjectMap.classURIs;
 		if(classURIs == null || classURIs.size() == 0) {
 			logger.warn("No class URI defined for TriplesMap: " + this);
 		} else {
@@ -66,21 +66,21 @@ extends AbstractConceptMapping with R2RMLElement with IConceptMapping
 	  this.predicateObjectMaps
 	}
 	
-	override def getRelationMappings() : java.util.Collection[IRelationMapping] = {
-		val result = if(this.predicateObjectMaps != null) {
-			this.predicateObjectMaps.flatMap(pm => {
-				val mappingType = pm.getPropertyMappingType(0);
-				if(mappingType == MappingType.RELATION) {
-					Some(pm);
-				} else {
-				  None
-				}
-			});
-		} else {
-		  Nil
-		}
-		result;
-	}
+//	override def getRelationMappings() : java.util.Collection[IRelationMapping] = {
+//		val result = if(this.predicateObjectMaps != null) {
+//			this.predicateObjectMaps.flatMap(pm => {
+//				val mappingType = pm.getPropertyMappingType(0);
+//				if(mappingType == MappingType.RELATION) {
+//					Some(pm);
+//				} else {
+//				  None
+//				}
+//			});
+//		} else {
+//		  Nil
+//		}
+//		result;
+//	}
 	
 	override def isPossibleInstance(uri:String ) : Boolean = {
 		var result = false;
@@ -110,14 +110,14 @@ extends AbstractConceptMapping with R2RMLElement with IConceptMapping
 	}
 
 	override def getMappedClassURIs() : java.util.Collection[String] = {
-		this.subjectMap.getClassURIs();
+		this.subjectMap.classURIs;
 	}
 
 	override def getTableMetaData() : MorphTableMetaData = {
-		this.logicalTable.getTableMetaData();
+		this.logicalTable.tableMetaData;
 	}
 	
-	def getLogicalTable(): AbstractLogicalTable = {
+	def getLogicalTable(): R2RMLLogicalTable = {
 	  this.logicalTable;      
 	}
 
@@ -131,7 +131,6 @@ object R2RMLTriplesMap {
 	val logger = Logger.getLogger(this.getClass().getName());
 	
 	def apply(tmResource:Resource) : R2RMLTriplesMap = {
-		val triplesMapName = tmResource.getLocalName();
 		
 		//LOGICAL TABLE
 		val logicalTableStatement = tmResource.getProperty(Constants.R2RML_LOGICALTABLE_PROPERTY);
@@ -189,9 +188,12 @@ object R2RMLTriplesMap {
 		};
 		
 		val tm = new R2RMLTriplesMap(logicalTable, subjectMap, predicateObjectMaps.toSet);
-		tm.setResource(tmResource);
+		tm.setResource(tmResource)
+		tm.setName(tmResource.getLocalName());
 		tm;
-	}	
+	}
+	
+	
 }
 
 	

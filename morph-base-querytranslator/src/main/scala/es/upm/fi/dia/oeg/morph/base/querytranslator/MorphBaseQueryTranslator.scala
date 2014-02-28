@@ -104,13 +104,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 	val mapTermsC : Map[Op, Set[Node]] = Map.empty;
 	var mapAggreatorAlias:Map[String, ZSelectItem] = Map.empty;//varname - selectitem
 	val notNullColumns:List[String] = Nil;
+	var mapTripleAlias:Map[Triple, String] = Map.empty;
 
-	//CHEBOTKO FUNCTIONS
-//	val nameGenerator:NameGenerator = new NameGenerator();
-//	val alphaGenerator:MorphBaseAlphaGenerator;
-//	val betaGenerator:MorphBaseBetaGenerator;
-//	val condSQLGenerator:MorphBaseCondSQLGenerator;
-//	val prSQLGenerator:MorphBasePRSQLGenerator;
 	
 	Optimize.setFactory(new MorphQueryRewritterFactory());
 	val functionsMap:Map[String, String] = Map(
@@ -792,7 +787,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				val mappingDocumentURL = this.getMappingDocumentURL();
 				val triplesMapResource = cm.getResource();
 				//val columnsMetaData = cm.getLogicalTable().getColumnsMetaData();
-				val tableMetaData = cm.getLogicalTable().getTableMetaData();
+				val tableMetaData = cm.getLogicalTable().tableMetaData;
 				val tpBounder = new TriplePatternPredicateBounder(mappingDocumentURL, tableMetaData);
 				val boundedTriplePatterns = tpBounder.expandUnboundedPredicateTriplePattern(tp, triplesMapResource);
 				logger.debug("boundedTriplePatterns = " + boundedTriplePatterns);

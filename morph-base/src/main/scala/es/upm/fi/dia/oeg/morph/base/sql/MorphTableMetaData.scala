@@ -8,7 +8,9 @@ import es.upm.fi.dia.oeg.morph.base.Constants
 
 class MorphTableMetaData(val tableName:String , val tableRows:Long
     , var columnsMetaData : List[MorphColumnMetaData], val dbType:String) {
-	val logger = Logger.getLogger("TableMetaData");
+	val logger = Logger.getLogger(this.getClass().getName());
+	logger.info("\tTable MetaData created: " + this.tableName);
+
 	
 	def putColumnMetaData(columnMetaData:MorphColumnMetaData) = {
 	  this.columnsMetaData = this.columnsMetaData ::: List(columnMetaData);
@@ -33,10 +35,12 @@ class MorphTableMetaData(val tableName:String , val tableRows:Long
 }
 
 object MorphTableMetaData {
-	val logger = Logger.getLogger("TableMetaData");
+	val logger = Logger.getLogger(this.getClass().getName());
 	
 	def buildTablesMetaData(conn:Connection, databaseName:String, databaseType:String) 
 	: List[MorphTableMetaData] = {
+	  logger.info("\tBuilding Tables MetaData for database: " + databaseName);
+		
 		val morphInformationSchema = MorphInformationSchema.apply(databaseType);
 		val tableNameColumn = morphInformationSchema.tableNameColumn;
 		val tableRowsColumn = morphInformationSchema.tableRowsColumn;
@@ -72,6 +76,8 @@ object MorphTableMetaData {
 	
 	def buildTableMetaData(tableName:String, dbMetaData:MorphDatabaseMetaData) 
 	: MorphTableMetaData = {
+	  logger.info("\tBuilding Table MetaData for table: " + tableName);
+	  
 	  val dbType = dbMetaData.dbType;
 	  val dbName = dbMetaData.dbName;
 	  val conn = dbMetaData.conn;
@@ -94,8 +100,6 @@ object MorphTableMetaData {
 			if(optionTableMetaData.isDefined) {
 				optionTableMetaData.get;
 			} else {
-				logger.info("building table metadata for " + tableName);
-	
 				val stmt = conn.createStatement();
 				val query = "SELECT COUNT(*) FROM " + tableName + " T";
 				val rs = stmt.executeQuery(query);

@@ -60,7 +60,8 @@ class MorphXMLQueryResultWriter extends AbstractQueryResultWriter {
 				val translatedColumnValue = queryTranslator.translateResultSet(varName, rs);
 				val translatedDBValue = translatedColumnValue.translatedValue;
 				val xsdDataType = translatedColumnValue.xsdDatatype;
-				val lexicalValue = ValueTransformator.transformToLexical(translatedDBValue, xsdDataType)
+				val lexicalValue = ValueTransformator.transformToLexical(
+				    translatedDBValue, xsdDataType)
 				if(lexicalValue != null) {
 					val bindingElement = xmlDoc.createElement("binding");
 					bindingElement.setAttribute("name", varName);

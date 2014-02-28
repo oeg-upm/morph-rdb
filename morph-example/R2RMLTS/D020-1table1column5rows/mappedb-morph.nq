@@ -1,5 +1,5 @@
-http://company.com/Alice http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FPerson  .
-Bob http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FPerson  .
-Bob/Charles http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FPerson  .
-path/../Danny http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FPerson  .
-Emily Smith http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FPerson  .
+<http://company.com/Alice> <http://www.w3.org/1999/02/22-rdf-syntax-ns%23type> <http://xmlns.com/foaf/0.1/Person> .
+<Bob> <http://www.w3.org/1999/02/22-rdf-syntax-ns%23type> <http://xmlns.com/foaf/0.1/Person> .
+<Bob/Charles> <http://www.w3.org/1999/02/22-rdf-syntax-ns%23type> <http://xmlns.com/foaf/0.1/Person> .
+<path/../Danny> <http://www.w3.org/1999/02/22-rdf-syntax-ns%23type> <http://xmlns.com/foaf/0.1/Person> .
+<Emily%2520Smith> <http://www.w3.org/1999/02/22-rdf-syntax-ns%23type> <http://xmlns.com/foaf/0.1/Person> .

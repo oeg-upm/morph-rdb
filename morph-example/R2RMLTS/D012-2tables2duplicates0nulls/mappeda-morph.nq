@@ -1,6 +1,3 @@
-Bob_Smith_30 http%3A%2F%2Fexample.com%2Famount 30  .
-Bob_Smith_30 http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Bob Smith  .
-Sue_Jones_20 http%3A%2F%2Fexample.com%2Famount 20  .
-Sue_Jones_20 http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Sue Jones  .
-Bob_Smith_30 http%3A%2F%2Fexample.com%2Famount 30  .
-Bob_Smith_30 http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2Fname Bob Smith  .
+null <http://example.com/amount> "30.0"^^<http://www.w3.org/2001/XMLSchema#double> .
+null <http://example.com/amount> "20.0"^^<http://www.w3.org/2001/XMLSchema#double> .
+null <http://example.com/amount> "30.0"^^<http://www.w3.org/2001/XMLSchema#double> .

@@ -1,5 +1,6 @@
 <http://mappingpedia.linkeddata.es/resources/Student/B1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Person> .
-<http://mappingpedia.linkeddata.es/resources/Student/B1> <http://mappingpedia.linkeddata.es/vocabulary/name> "Paul" .
-<http://mappingpedia.linkeddata.es/resources/Student/B1> <http://mappingpedia.linkeddata.es/vocabulary/fullname> "Paul Jr." .
 <http://mappingpedia.linkeddata.es/resources/Student/B1> <http://mappingpedia.linkeddata.es/vocabulary/phone> "777-3426" .
-<http://mappingpedia.linkeddata.es/resources/Student/B1> <http://mappingpedia.linkeddata.es/vocabulary/hasSport> <http://mappingpedia.linkeddata.es/resources/Sport/100> .
+<http://mappingpedia.linkeddata.es/resources/Student/B1> <http://mappingpedia.linkeddata.es/vocabulary/fullname> "Paul Jr." .
+<http://mappingpedia.linkeddata.es/resources/Student/B1> <http://mappingpedia.linkeddata.es/vocabulary/name> "Paul" .
+<http://mappingpedia.linkeddata.es/resources/Student/B1> <http://mappingpedia.linkeddata.es/vocabulary/email> null .
+<http://mappingpedia.linkeddata.es/resources/Student/B1> <http://mappingpedia.linkeddata.es/vocabulary/webpage> null .

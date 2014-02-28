@@ -1,71 +1,41 @@
 package es.upm.dia.fi.oeg.morph.r2rml.model
 
 import scala.collection.JavaConversions._
-
 import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
 import com.hp.hpl.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
+import com.hp.hpl.jena.rdf.model.RDFNode
 
-class R2RMLGraphMap 
-extends R2RMLTermMap {
-	
+class R2RMLGraphMap (termMapType:Constants.MorphTermMapType.Value
+    , termType:Option[String], datatype:Option[String], languageTag:Option[String]) 
+extends R2RMLTermMap(termMapType, termType, datatype, languageTag) {
 
-		
-	def this(resource:Resource) = {
-	  this();
-	  this.parse(resource);
+	val inferredTermType = this.inferTermType;
+	if(inferredTermType != null && !inferredTermType.equals(Constants.R2RML_IRI_URI)) {
+		throw new Exception("Non IRI value is not permitted in the graph!");
 	}
-	
-	def this(constantValue:String ) = {
-		this();
-		this.termMapType = Constants.MorphTermMapType.ConstantTermMap;
-		this.constantValue = constantValue;
-		this.termType = Constants.R2RML_LITERAL_URI;
-	}
+
 
 }
 
 object R2RMLGraphMap {
+	def apply(rdfNode:RDFNode) : R2RMLGraphMap = {
+		val coreProperties = R2RMLTermMap.extractCoreProperties(rdfNode);
+		//coreProperties = (termMapType, termType, datatype, languageTag)
+		val termMapType = coreProperties._1;
+		val termType = coreProperties._2;
+		val datatype = coreProperties._3;
+		val languageTag = coreProperties._4;
+		val gm = new R2RMLGraphMap(termMapType, termType, datatype, languageTag);
+		gm.parse(rdfNode)
+		gm;
+	}
 	
 	def extractGraphMaps(resource:Resource) : Set[R2RMLGraphMap]= {
-		val graphMapStatements = resource.listProperties(Constants.R2RML_GRAPHMAP_PROPERTY);
-		val graphMaps1 = if(graphMapStatements != null) {
-		  graphMapStatements.toList().flatMap(graphMapStatement => {
-				if(graphMapStatement != null) {
-					val graphMapResource = graphMapStatement.getObject().asInstanceOf[Resource];
-					val gm = new R2RMLGraphMap(graphMapResource);
-					gm.parse(graphMapResource);
-					if(gm.termType != null && !gm.termType.equals(Constants.R2RML_IRI_URI)) {
-						throw new Exception("Non IRI value is not permitted in the graph!");
-					}
-					Some(gm);
-				} else {
-				  None
-				}		    
-		  })
-		} else {
-		  Set.empty
-		}
+	  val tms = R2RMLTermMap.extractTermMaps(resource, Constants.MorphPOS.graph);
+	  val result = tms.map(tm => tm.asInstanceOf[R2RMLGraphMap]);
+	  result;
+	}
 
-		val graphStatements = resource.listProperties(Constants.R2RML_GRAPH_PROPERTY);
-		val graphMaps2 = if(graphStatements != null) {
-		  graphStatements.toList().flatMap(graphStatement => {
-					val graphStatementObjectValue = graphStatement.getObject().toString();
-					if(!Constants.R2RML_DEFAULT_GRAPH_URI.equals(graphStatementObjectValue)) {
-						val gm = new R2RMLGraphMap(graphStatementObjectValue);
-						Some(gm);
-					} else {
-					  None
-					}
-		  })
-
-		} else {
-		  Set.empty
-		}
-		
-		val graphMaps = graphMaps1.toList ::: graphMaps2.toList;
-		val graphMapsInSet = graphMaps.toSet;
-		graphMapsInSet;
-	}	
 }
