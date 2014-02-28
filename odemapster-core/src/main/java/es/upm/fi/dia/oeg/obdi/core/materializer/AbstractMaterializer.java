@@ -26,6 +26,7 @@ public abstract class AbstractMaterializer {
 //	public abstract void materializeQuad(String subject, String predicate, String object, String graph);
 	public abstract void materializeQuad(RDFNode subject, RDFNode predicate, RDFNode object, RDFNode graph);
 	public abstract void materialize() throws IOException;
+	public abstract void postMaterialize() throws IOException;
 	
 	public static AbstractMaterializer create(String rdfLanguage, String outputFileName
 			, String jenaMode) throws IOException {

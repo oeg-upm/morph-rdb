@@ -118,4 +118,10 @@ public class RDFXMLMaterializer extends AbstractMaterializer {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void postMaterialize() throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
 }

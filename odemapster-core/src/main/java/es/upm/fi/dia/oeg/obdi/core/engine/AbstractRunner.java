@@ -386,6 +386,7 @@ public abstract class AbstractRunner {
 		
 		//cleaning up
 		try {
+			this.dataTranslator.materializer.postMaterialize();
 			//out.flush(); out.close();
 			//fileOut.flush(); fileOut.close();
 			DBUtility.closeConnection(this.conn, this.getClass().getName());

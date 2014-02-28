@@ -145,7 +145,7 @@ public class NTripleMaterializer extends AbstractMaterializer {
 	public void materialize() throws IOException {
 		//nothing to do, the triples were added during the data translation process
 		if(this.writer != null) {
-			//this.writer.flush();
+			this.writer.flush();
 			this.writer.close();
 		}
 	}
@@ -175,6 +175,15 @@ public class NTripleMaterializer extends AbstractMaterializer {
 		} catch(Exception e) {
 			logger.error("unable to serialize triple, subjectURI=" + subject);
 		}
+		
+	}
+
+	@Override
+	public void postMaterialize() throws IOException {
+//		if(this.writer != null) {
+//			this.writer.flush();
+//			this.writer.close();
+//		}
 		
 	}	
 }

@@ -93,7 +93,7 @@ public class ExampleWithoutPropertiesFile {
 		String resultFile = System.getProperty("user.dir") 
 				+ File.separator + "examples" + File.separator + "subjects-result.nt";
 		String mappingDocumentFile = System.getProperty("user.dir") 
-				+ File.separator + "examples" + File.separator + "example.ttl";
+				+ File.separator + "examples" + File.separator + "example2.ttl";
 		String classURI = "http://mappingpedia.linkeddata.es/vocabulary/Person";
 		
 		ConfigurationProperties properties = new ConfigurationProperties();
