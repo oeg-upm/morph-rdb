@@ -1,8 +1,6 @@
 package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
 import scala.collection.JavaConversions._
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractParser
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
 import com.hp.hpl.jena.rdf.model.Resource
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLSubjectMap
@@ -11,11 +9,13 @@ import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLSubjectMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateMap
 import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElementVisitor
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
+import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseParser
 
-class R2RMLParser extends AbstractParser with MorphR2RMLElementVisitor {
-	override def parse(mappingResource:Object ) : AbstractMappingDocument = {
+class R2RMLParser extends MorphBaseParser with MorphR2RMLElementVisitor {
+	override def parse(mappingResource:Object ) : MorphBaseMappingDocument = {
 		val mappingDocumentPath = mappingResource.asInstanceOf[String];
-		val md = new R2RMLMappingDocument(mappingDocumentPath, null); 
+		val md = R2RMLMappingDocument(mappingDocumentPath); 
 		return md;
 	}
 

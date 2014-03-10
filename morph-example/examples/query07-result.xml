@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="student"/>
+        <variable name="sport"/>
+        <variable name="sportId"/>
+        <variable name="sportName"/>
+    </head>
+    <results>
+        <result>
+            <binding name="student">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B1</uri>
+            </binding>
+            <binding name="sport">
+                <uri>http://mappingpedia.linkeddata.es/resources/Sport/100</uri>
+            </binding>
+            <binding name="sportId">
+                <literal>100</literal>
+            </binding>
+            <binding name="sportName">
+                <literal>Tennis</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="student">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B2</uri>
+            </binding>
+            <binding name="sport">
+                <uri>http://mappingpedia.linkeddata.es/resources/Sport/200</uri>
+            </binding>
+            <binding name="sportId">
+                <literal>200</literal>
+            </binding>
+            <binding name="sportName">
+                <literal>Chess</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="student">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B3</uri>
+            </binding>
+            <binding name="sport">
+                <uri>http://mappingpedia.linkeddata.es/resources/Sport/300</uri>
+            </binding>
+            <binding name="sportId">
+                <literal>300</literal>
+            </binding>
+            <binding name="sportName">
+                <literal>Soccer</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>

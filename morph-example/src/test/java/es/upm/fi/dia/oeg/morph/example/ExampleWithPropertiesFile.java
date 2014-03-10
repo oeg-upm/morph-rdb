@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
+import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLRDBRunnerFactory;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLRunner;
 
 
@@ -17,8 +19,8 @@ public class ExampleWithPropertiesFile {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "batch.r2rml.properties";
 		try {
-			R2RMLRunner runner = new R2RMLRunner();
-			runner.loadConfigurationfile(configurationDirectory, configurationFile);
+			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
 			runner.run();
 			logger.info("Batch process DONE------\n\n");
 		} catch (Exception e) {
@@ -33,8 +35,8 @@ public class ExampleWithPropertiesFile {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "batch-postgresql.r2rml.properties";
 		try {
-			R2RMLRunner runner = new R2RMLRunner();
-			runner.loadConfigurationfile(configurationDirectory, configurationFile);
+			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
 			runner.run();
 			logger.info("Batch process DONE------\n\n");
 		} catch (Exception e) {
@@ -161,6 +163,22 @@ public class ExampleWithPropertiesFile {
 		}
 	}	
 
+	@Test
+	public void sparql07() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "query07.r2rml.properties";
+		try {
+			String[] args = {configurationDirectory, configurationFile};
+			R2RMLRunner.main(args);
+			logger.info("Query process DONE------");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("Error : " + e.getMessage());
+			logger.info("Query process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}	
+	
 	@Test
 	public void sparql08() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";

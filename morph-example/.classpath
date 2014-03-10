@@ -16,5 +16,10 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/morph-base"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/morph-base-querytranslator"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/morph-r2rml"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/morph-r2rml-rdb"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/morph-r2rml-rdb-querytranslator"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

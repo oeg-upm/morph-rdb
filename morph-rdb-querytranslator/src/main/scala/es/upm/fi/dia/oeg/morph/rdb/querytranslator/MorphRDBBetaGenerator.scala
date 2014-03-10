@@ -1,8 +1,6 @@
 package es.upm.fi.dia.oeg.morph.rdb.querytranslator
 
 import scala.collection.JavaConversions._
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
 import com.hp.hpl.jena.graph.Triple
 import Zql.ZConstant
 import Zql.ZSelectItem
@@ -12,17 +10,18 @@ import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
+import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 
 
 class MorphRDBBetaGenerator(md:R2RMLMappingDocument, unfolder:R2RMLUnfolder)
-extends MorphBaseBetaGenerator(md:AbstractMappingDocument, unfolder:AbstractUnfolder) {
+extends MorphBaseBetaGenerator(md, unfolder) {
 
-	override def calculateBetaObject(tp:Triple , cm:AbstractConceptMapping , predicateURI:String 
-	    , alphaResult:MorphAlphaResult , pm:AbstractPropertyMapping ) : java.util.List[ZSelectItem] = {
+	override def calculateBetaObject(tp:Triple , cm:MorphBaseClassMapping , predicateURI:String 
+	    , alphaResult:MorphAlphaResult , pm:MorphBasePropertyMapping ) : List[ZSelectItem] = {
 	  
 		val predicateObjectMap = pm.asInstanceOf[R2RMLPredicateObjectMap];
 		val refObjectMap = predicateObjectMap.getRefObjectMap(0); 
@@ -48,7 +47,7 @@ extends MorphBaseBetaGenerator(md:AbstractMappingDocument, unfolder:AbstractUnfo
 				  }
 				}
 			} else {
-				val parentTriplesMap = md.getParentTripleMap(refObjectMap);
+				val parentTriplesMap = md.getParentTriplesMap(refObjectMap);
 				val parentLogicalTable = parentTriplesMap.logicalTable;
 				val parentSubjectMap = parentTriplesMap.subjectMap;
 				val parentColumns = parentSubjectMap.getReferencedColumns;
@@ -71,8 +70,8 @@ extends MorphBaseBetaGenerator(md:AbstractMappingDocument, unfolder:AbstractUnfo
 		betaObjects;
 	}
 
-	override def calculateBetaSubject(tp:Triple , cm:AbstractConceptMapping , alphaResult:MorphAlphaResult ) 
-	: java.util.List[ZSelectItem] = {
+	override def calculateBetaSubject(tp:Triple , cm:MorphBaseClassMapping , alphaResult:MorphAlphaResult ) 
+	: List[ZSelectItem] = {
 		
 		val triplesMap = cm.asInstanceOf[R2RMLTriplesMap];
 		val subjectMap = triplesMap.subjectMap;

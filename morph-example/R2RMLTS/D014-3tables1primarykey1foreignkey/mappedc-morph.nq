@@ -1,8 +1,0 @@
-1 http%3A%2F%2Fexample.com%2Fdept%23COMPANY EXAMPLE%2520Corporation  .
-1 http%3A%2F%2Fexample.com%2Fdept%23location NEW YORK  .
-1 http%3A%2F%2Fexample.com%2Fdept%23name APPSERVER  .
-1 http%3A%2F%2Fexample.com%2Fdept%23deptno 10  .
-http://example.com/emp/7369 http%3A%2F%2Fexample.com%2Femp%23job CLERK  .
-http://example.com/emp/7369 http%3A%2F%2Fexample.com%2Femp%23name SMITH  .
-http://example.com/emp/7369 http%3A%2F%2Fexample.com%2Femp%23emptype http%3A%2F%2Fexample.com%2Femp%2Fetype%2FPART_TIME  .
-http://example.com/emp/7369 http%3A%2F%2Fexample.com%2Femp%23empno 7369  .

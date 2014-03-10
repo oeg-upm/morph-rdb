@@ -2,13 +2,12 @@ package es.upm.dia.fi.oeg.morph.r2rml.model
 
 import scala.collection.JavaConversions._
 import org.apache.log4j.Logger
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import com.hp.hpl.jena.rdf.model.RDFNode
 import com.hp.hpl.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 
-class R2RMLRefObjectMap(val parentTriplesMapResource:Resource, val joinConditions:Set[R2RMLJoinCondition]) {
+class R2RMLRefObjectMap(val parentTriplesMapResource:Resource
+    , val joinConditions:Set[R2RMLJoinCondition]) {
 //	var owner:AbstractMappingDocument=null ;
 //	var resource:Resource=null;
 	
@@ -17,7 +16,9 @@ class R2RMLRefObjectMap(val parentTriplesMapResource:Resource, val joinCondition
 	//private String alias;
 	
 	
-
+	def getRelationName() = this.rdfNode.asResource().getLocalName();
+	def getRangeClassMapping() = this.getParentTripleMapName;
+	
 //	public String getAlias() {
 //		return alias;
 //	}

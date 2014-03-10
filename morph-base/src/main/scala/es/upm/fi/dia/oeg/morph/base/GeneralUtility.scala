@@ -1,5 +1,7 @@
 package es.upm.fi.dia.oeg.morph.base
 
+import scala.collection.JavaConversions._
+
 import org.apache.log4j.Logger
 import java.net.URL
 import com.hp.hpl.jena.shared.CannotEncodeCharacterException
@@ -36,40 +38,17 @@ object GeneralUtility {
 		result;
 	}
 
-	def removeStrangeChars(pSomeString:String ) : String = {
-	  var someString = pSomeString;
-		someString = someString.replaceAll("Ñ", "N");
-		someString = someString.replaceAll("ñ", "n");
-		someString = someString.replaceAll("á", "a");
-		//someString = someString.replaceAll("�?", "A");
-		someString = someString.replaceAll("ª", "a");
-		someString = someString.replaceAll("ã", "a");
-		someString = someString.replaceAll("Ã", "A");
 
-		someString = someString.replaceAll("é", "e");
-		someString = someString.replaceAll("É", "E");
-		someString = someString.replaceAll("ë", "e");
-		someString = someString.replaceAll("Ë", "E");
-		someString = someString.replaceAll("í", "i");
-		//someString = someString.replaceAll("�?", "I");
-		someString = someString.replaceAll("ï", "i");
-		//someString = someString.replaceAll("�?", "I");
-		someString = someString.replaceAll("ó", "o");
-		someString = someString.replaceAll("Ó", "O");
-		someString = someString.replaceAll("ö", "o");
-		someString = someString.replaceAll("Ö", "O");
-		someString = someString.replaceAll("ú", "u");
-		someString = someString.replaceAll("Ú", "U");
-		someString = someString.replaceAll("ü", "u");
-		someString = someString.replaceAll("Ü", "U");
-
-		someString;
-	}
 
 	def encodeURI(originalURI:String )  : String = {
 		val result = 
 		try {
-			originalURI.trim().replaceAll(" ", "%20");
+			originalURI.trim()
+			.replaceAll(" ", "%20")
+			.replaceAll(",", "%2C")
+			.replaceAll("\\(", "%28")
+			.replaceAll("\\)", "%29")
+
 			//uri = uri.replaceAll(" ", "_");
 			//uri = ODEMapsterUtility.removeStrangeChars(uri);
 			//uri = ODEMapsterUtility.preEncoding(uri);
@@ -187,7 +166,7 @@ object GeneralUtility {
 	def encodeUnsafeChars(originalValue:String ) : String = {
 		var result = originalValue; 
 		if(result != null) {
-			result = result.replaceAll("\\%", "%25");//put this first
+			//result = result.replaceAll("\\%", "%25");//put this first
 			result = result.replaceAll("<", "%3C");
 			result = result.replaceAll(">", "%3E");
 //			result = result.replaceAll("#", "%23");
@@ -212,9 +191,9 @@ object GeneralUtility {
 			result = result.replaceAll("&", "%26");
 			result = result.replaceAll("\\+", "%2B");
 			result = result.replaceAll(",", "%2C");
-			//result = result.replaceAll("/", "%2F");
-			//result = result.replaceAll(":", "%3A");
-			//result = result.replaceAll(";", "%3B");
+			result = result.replaceAll("/", "%2F");
+			result = result.replaceAll(":", "%3A");
+			result = result.replaceAll(";", "%3B");
 			result = result.replaceAll("=", "%3D");
 			result = result.replaceAll("\\?", "%3F");
 			result = result.replaceAll("@", "%40");
@@ -255,5 +234,17 @@ object GeneralUtility {
 			result.append( s.substring( start ) );
 			return result.toString();
 		}
+	}
+	
+	def readFileAsString(filePath:String) : String = {
+	  val source = scala.io.Source.fromFile(filePath)
+	  val result = source.getLines.mkString
+	  result;
+	}
+	
+	def readFileAsLines(filePath:String) : java.util.List[String] = {
+	  val source = scala.io.Source.fromFile(filePath)
+	  val result = source.getLines.toList
+	  result;
 	}	
 }

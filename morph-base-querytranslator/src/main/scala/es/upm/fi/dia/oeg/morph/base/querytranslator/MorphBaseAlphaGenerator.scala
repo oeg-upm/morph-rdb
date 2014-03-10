@@ -5,17 +5,15 @@ import java.util.Collection
 import com.hp.hpl.jena.graph.Node
 import com.hp.hpl.jena.graph.Triple
 import com.hp.hpl.jena.vocabulary.RDF
-import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslationException
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLJoinTable
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLLogicalTable
 import org.apache.log4j.Logger
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
+import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
+import es.upm.fi.dia.oeg.morph.base.sql.SQLJoinTable
+import es.upm.fi.dia.oeg.morph.base.sql.SQLLogicalTable
+import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 
-abstract class MorphBaseAlphaGenerator(md:AbstractMappingDocument,unfolder:AbstractUnfolder)
+abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:MorphBaseUnfolder)
 //(val owner:IQueryTranslator) 
 {
 	var owner:MorphBaseQueryTranslator = null;
@@ -26,19 +24,19 @@ abstract class MorphBaseAlphaGenerator(md:AbstractMappingDocument,unfolder:Abstr
 //		if(this.owner == null) {null}
 //		else {this.owner.getDatabaseType();}
 //	}
-	val databaseType = md.getConfigurationProperties().databaseType;
+	//val databaseType = md.configurationProperties.databaseType;
 	
-	def calculateAlpha(tp:Triple, cm:AbstractConceptMapping, predicateURI:String) : MorphAlphaResult;
+	def calculateAlpha(tp:Triple, cm:MorphBaseClassMapping, predicateURI:String) : MorphAlphaResult;
 
-	def calculateAlpha(tp:Triple, cm:AbstractConceptMapping , predicateURI:String , pm:AbstractPropertyMapping ) 
+	def calculateAlpha(tp:Triple, cm:MorphBaseClassMapping , predicateURI:String , pm:MorphBasePropertyMapping ) 
 	: MorphAlphaResult;
 
-	def  calculateAlphaPredicateObject(tp:Triple, cm:AbstractConceptMapping , pm:AbstractPropertyMapping  
+	def  calculateAlphaPredicateObject(tp:Triple, cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping  
 			, logicalTableAlias:String ) : SQLJoinTable;
 	
-	def calculateAlphaSubject(subject:Node , cm:AbstractConceptMapping ) : SQLLogicalTable;
+	def calculateAlphaSubject(subject:Node , cm:MorphBaseClassMapping ) : SQLLogicalTable;
 	
-	def calculateAlphaSTG(triples:Collection[Triple] , cm:AbstractConceptMapping ) 
+	def calculateAlphaSTG(triples:Collection[Triple] , cm:MorphBaseClassMapping ) 
 	: java.util.List[MorphAlphaResultUnion] = {
 		var alphaResultUnionList : List[MorphAlphaResultUnion]  = Nil;
 		
@@ -125,14 +123,14 @@ abstract class MorphBaseAlphaGenerator(md:AbstractMappingDocument,unfolder:Abstr
 		return alphaResultUnionList;
 	}
 	
-	def calculateAlphaPredicateObjectSTG(tp:Triple , cm:AbstractConceptMapping , tpPredicateURI:String 
+	def calculateAlphaPredicateObjectSTG(tp:Triple , cm:MorphBaseClassMapping , tpPredicateURI:String 
 	    , logicalTableAlias:String ) : List[SQLJoinTable];
 
-	def calculateAlphaPredicateObjectSTG2(tp:Triple , cm:AbstractConceptMapping , tpPredicateURI:String 
+	def calculateAlphaPredicateObjectSTG2(tp:Triple , cm:MorphBaseClassMapping , tpPredicateURI:String 
 	    ,  logicalTableAlias:String) : List[SQLLogicalTable] ;
 
 
-	def  calculateAlphaPredicateObject2(triple:Triple , cm:AbstractConceptMapping , pm:AbstractPropertyMapping
+	def  calculateAlphaPredicateObject2(triple:Triple , cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping
 	    , logicalTableAlias:String ) : SQLLogicalTable;
 
 

@@ -140,7 +140,7 @@ object MorphSQLUtility {
 		result;
 	}
 	
-	def replaceExp(oldExp : ZExp, mapReplacement : java.util.Map[ZConstant, ZConstant])  : ZExp= {
+	def replaceExp(oldExp : ZExp, mapReplacement : Map[ZConstant, ZConstant])  : ZExp= {
 		var newExpression : ZExp = null;
 
 		if(mapReplacement.size == 0) { 
@@ -296,7 +296,8 @@ object MorphSQLUtility {
 	  this.containedInPrefixes(exp, prefixes, allPrefixes)
 	}
 	
-	def containedInPrefixes(exp:ZExp , prefixes:Iterable[String] , allPrefixes:Boolean ) : Iterable[ZExpression] = {
+	def containedInPrefixes(exp:ZExp , prefixes:Iterable[String] , allPrefixes:Boolean ) 
+	: Iterable[ZExpression] = {
 		var result : Set[ZExpression]= Set.empty;
 		
 		exp match {
@@ -456,16 +457,14 @@ object MorphSQLUtility {
 		resultAux;
 	}
 
-	def pushOrderByDownJava(oldOrderByCollection:java.util.List[ZOrderBy]
-	, mapInnerAliasSelectItem:java.util.Map[String, ZSelectItem]) : java.util.List[ZOrderBy] = {
+	def pushOrderByDownJava(oldOrderByCollection:List[ZOrderBy]
+	, mapInnerAliasSelectItem:Map[String, ZSelectItem]) : List[ZOrderBy] = {
 	  this.pushOrderByDown(oldOrderByCollection.toList, mapInnerAliasSelectItem.toMap);
 	}
 	
 	def pushOrderByDown(oldOrderByCollection:List[ZOrderBy]
 	, mapInnerAliasSelectItem:Map[String, ZSelectItem]) : List[ZOrderBy] = {
-		val whereReplacement : LinkedHashMap[ZConstant, ZConstant] = LinkedHashMap.empty;
-		
-		for(alias <- mapInnerAliasSelectItem.keySet) {
+		val whereReplacement = mapInnerAliasSelectItem.keySet.map(alias => {
 			val selectItem = mapInnerAliasSelectItem(alias);
 			
 			val aliasColumn = new ZConstant(alias, ZConstant.COLUMNNAME);
@@ -503,10 +502,9 @@ object MorphSQLUtility {
 					}
 				}			  
 			}
-			
 
-			whereReplacement += (aliasColumn -> zConstant);
-		}
+			(aliasColumn -> zConstant);
+		}).toMap
 
 		val newOrderByCollection = {
 		    oldOrderByCollection.map(oldOrderBy => {

@@ -2,7 +2,6 @@ package es.upm.dia.fi.oeg.morph.r2rml.model
 
 import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
 import com.hp.hpl.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.RegexUtility
 import scala.collection.JavaConversions._
@@ -12,10 +11,6 @@ import es.upm.fi.dia.oeg.morph.base.GeneralUtility
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
 import Zql.ZConstant
 import java.util.HashMap
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
 import com.hp.hpl.jena.rdf.model.RDFNode
 import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElement
@@ -95,12 +90,12 @@ extends MorphR2RMLElement with IConstantTermMap with IColumnTermMap with ITempla
 		val result = this match {
 		  case _:R2RMLObjectMap => {
 			if(this.termMapType == Constants.MorphTermMapType.ColumnTermMap 
-			    || this.languageTag != null || this.datatype != null) {
+			    || this.languageTag.isDefined || this.datatype.isDefined ) {
 				Constants.R2RML_LITERAL_URI;
 			} else { 
 				Constants.R2RML_IRI_URI;
 			}
-		  } 
+		  }
 		  case _ => { Constants.R2RML_IRI_URI;}
 		}
 
@@ -178,7 +173,6 @@ object R2RMLTermMap {
 	    	} else {
 	    	  None
 	    	}
-	    		      
 	    }
 	    case _ => {
 	      None

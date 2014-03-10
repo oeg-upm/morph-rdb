@@ -7,27 +7,25 @@ import Zql.ZExpression
 import com.hp.hpl.jena.graph.Node
 import com.hp.hpl.jena.graph.Triple
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
-import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslationException
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUtility
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseCondSQLGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
+import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
+import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 
 class MorphRDBCondSQLGenerator(md:R2RMLMappingDocument, unfolder:R2RMLUnfolder) 
-extends MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:AbstractUnfolder) {
+extends MorphBaseCondSQLGenerator(md, unfolder:MorphBaseUnfolder) {
 	override val logger = Logger.getLogger("MorphCondSQLGenerator");
 
 	override def genCondSQLPredicateObject(tp:Triple, alphaResult:MorphAlphaResult 
-			, betaGenerator:MorphBaseBetaGenerator, cm:AbstractConceptMapping , pm:AbstractPropertyMapping ) 
+			, betaGenerator:MorphBaseBetaGenerator, cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping) 
 	: ZExpression = {
 			val tpObject = tp.getObject();
 			val logicalTableAlias = alphaResult.alphaSubject.getAlias();
@@ -132,7 +130,7 @@ extends MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:AbstractU
 							}
 						} else if(refObjectMap != null && objectMap == null) {
 							//val refObjectMapAlias = this.owner.getTripleAlias(tp);
-							val parentTriplesMap = md.getParentTripleMap(refObjectMap);
+							val parentTriplesMap = md.getParentTriplesMap(refObjectMap);
 							val parentSubjectMap = parentTriplesMap.subjectMap;
 							val parentLogicalTable = parentTriplesMap.logicalTable;
 							val refObjectMapAlias = parentLogicalTable.alias;							
@@ -251,7 +249,7 @@ extends MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:AbstractU
 //	}
 
 	override def genCondSQLSubjectURI(tpSubject:Node , alphaResult:MorphAlphaResult 
-			, cm:AbstractConceptMapping ) : ZExpression = {
+			, cm:MorphBaseClassMapping ) : ZExpression = {
 			val subjectURI = tpSubject.getURI();
 			val tm = cm.asInstanceOf[R2RMLTriplesMap];
 			val subjectURIConstant = new ZConstant(subjectURI, ZConstant.STRING);
@@ -267,7 +265,7 @@ extends MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:AbstractU
 					} catch {
 					case e:Exception => {
 						logger.error(e.getMessage());
-						throw new QueryTranslationException(e);
+						throw new Exception(e);
 					}
 					}
 				} 
@@ -282,7 +280,7 @@ extends MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:AbstractU
 			    case _ => {
 			    	val errorMessage = "Invalid term map type"; 
 			    	logger.error(errorMessage);
-					throw new QueryTranslationException(errorMessage);
+					throw new Exception(errorMessage);
 				}			    
 			  }
 

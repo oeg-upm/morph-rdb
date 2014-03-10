@@ -89,11 +89,15 @@ extends ZSelectItem {
 		  	if(this.isExpression()) {
 		  	  null
 		  	} else {
-				if(this.column.startsWith("\"") && this.column.endsWith("\"")) {
-					this.column.substring(1, this.column.length()-1);
-				} else {
-					this.column;
-				}		  	  
+		  	  //NOT WORKING for 9A
+//				if(this.column.startsWith("\"") && this.column.endsWith("\"")) {
+//					this.column.substring(1, this.column.length()-1);
+//				} else {
+//					this.column;
+//				}
+		  	  
+		  	  val enclosedChar = Constants.getEnclosedCharacter(dbType);
+		  	  this.column.replaceAll("\"", enclosedChar)
 		  	}
 		}
 		result

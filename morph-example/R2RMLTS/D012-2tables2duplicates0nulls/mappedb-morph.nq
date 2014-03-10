@@ -1,3 +1,6 @@
-null <http://example.com/city> "London" .
-null <http://example.com/city> "Madrid" .
-null <http://example.com/city> "London" .
+_:Bob_Smith <http://xmlns.com/foaf/0.1/name> "Bob Smith" .
+_:Sue_Jones <http://xmlns.com/foaf/0.1/name> "Sue Jones" .
+_:Bob_Smith <http://xmlns.com/foaf/0.1/name> "Bob Smith" .
+_:Bob_Smith <http://example.com/city> "London" .
+_:Sue_Jones <http://example.com/city> "Madrid" .
+_:Bob_Smith <http://example.com/city> "London" .

@@ -1,21 +1,16 @@
 package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
 import scala.collection.JavaConversions._
-import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractDataTranslator
+import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import org.apache.log4j.Logger
-import es.upm.fi.dia.oeg.obdi.core.materializer.AbstractMaterializer
 import java.util.Collection
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslatorException
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.morph.base.DBUtility
 import java.sql.ResultSet
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.GeneralUtility
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype
-import es.upm.fi.dia.oeg.obdi.core.engine.RDBReader
 import java.sql.ResultSetMetaData
+import java.sql.Connection
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTermMap
@@ -23,33 +18,40 @@ import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLObjectMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLRefObjectMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLSubjectMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTermMap
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTermMap
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.base.RegexUtility
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
 import Zql.ZConstant
 import es.upm.fi.dia.oeg.morph.base.sql.DatatypeMapper
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
+import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLLogicalTable
 import com.hp.hpl.jena.rdf.model.RDFNode
 import com.hp.hpl.jena.rdf.model.AnonId
 import com.hp.hpl.jena.vocabulary.RDF
 import com.hp.hpl.jena.rdf.model.Literal
+import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
+import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElementVisitor
+import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataTranslator
+import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
+import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataSourceReader
 
-class R2RMLDataTranslator(properties:ConfigurationProperties) 
-extends AbstractDataTranslator(properties:ConfigurationProperties ){
-	val logger = Logger.getLogger(this.getClass().getName());
+class R2RMLDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMaterializer
+    , unfolder:R2RMLUnfolder, dataSourceReader:RDBReader
+    , connection:Connection, properties:MorphProperties) 
+extends MorphBaseDataTranslator(md, materializer , unfolder, dataSourceReader
+    , connection, properties) 
+with MorphR2RMLElementVisitor {
+	override val logger = Logger.getLogger(this.getClass().getName());
 
 	override def processCustomFunctionTransformationExpression(
 			argument:Object ) : Object = {
 		null;
 	}
 
-	override def setMaterializer(materializer:AbstractMaterializer ) = {
-		this.materializer = materializer;
-		
-	}
-
-	override def translateData(triplesMaps:Collection[AbstractConceptMapping]) = {
+	override def translateData(triplesMaps:Iterable[MorphBaseClassMapping]) = {
 		for(triplesMap <- triplesMaps) {
 			try {
 			  this.visit(triplesMap.asInstanceOf[R2RMLTriplesMap]);
@@ -62,19 +64,19 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 				}
 				
 				//e.printStackTrace();
-				throw new QueryTranslatorException(e.getMessage(), e);			    
+				throw new Exception(e.getMessage(), e);			    
 			  }
 			}
 		}
 	}
 	
-	override def translateData(mappingDocument:AbstractMappingDocument ) = {
+	override def translateData(mappingDocument:MorphBaseMappingDocument ) = {
 		val conn = this.connection
 		
-		val triplesMaps = mappingDocument.getConceptMappings();
+		val triplesMaps = mappingDocument.classMappings
 		if(triplesMaps != null) {
 			this.translateData(triplesMaps);
-			DBUtility.closeConnection(conn, "R2RMLDataTranslator");
+			//DBUtility.closeConnection(conn, "R2RMLDataTranslator");
 		}
 	}
 
@@ -220,14 +222,14 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 		null;
 	}
 
-	def visit(mappingDocument:AbstractMappingDocument) : Object = {
+	override def visit(mappingDocument:R2RMLMappingDocument) : Object = {
 		try {
 			this.translateData(mappingDocument);
 		} catch {
 		  case e:Exception => {
 			e.printStackTrace();
 			logger.error("error during data translation process : " + e.getMessage());
-			throw new QueryTranslatorException(e.getMessage());		    
+			throw new Exception(e.getMessage());		    
 		  }
 		}
 
@@ -252,7 +254,7 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 
 	
 	def generateRDFTriples(logicalTable:R2RMLLogicalTable ,  sm:R2RMLSubjectMap
-			, poms:Iterable[R2RMLPredicateObjectMap] , sqlQuery:String) = {
+			, poms:Iterable[R2RMLPredicateObjectMap] , iQuery:IQuery) = {
 		logger.info("Translating RDB data into RDF instances...");
 		
 		if(sm == null) {
@@ -263,17 +265,10 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 		
 		val logicalTableAlias = logicalTable.alias;
 		
-		val conn = if(this.connection == null) {
-			DBUtility.getLocalConnection(this.properties.databaseUser
-					, this.properties.databaseName, this.properties.databasePassword
-					, this.properties.databaseDriver, this.properties.databaseURL, 
-					"R2RMLDataTranslator");
-		} else {
-		  this.connection
-		}
-		
+		val conn = this.connection
 		val timeout = this.properties.databaseTimeout;
-		val rows = RDBReader.evaluateQuery(sqlQuery, conn, timeout);
+		val sqlQuery = iQuery.toString();
+		val rows = DBUtility.executeQuery(conn, sqlQuery, timeout);
 		
 		var mapXMLDatatype : Map[String, String] = Map.empty;
 		var mapDBDatatype:Map[String, Integer]  = Map.empty;
@@ -365,6 +360,15 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 						objectValue;
 					});
 					
+					val refObjects = pom.refObjectMaps.map(refObjectMap => {
+					  val parentTripleMapName = refObjectMap.getParentTripleMapName;
+					  val parentTriplesMap = this.md.getParentTriplesMap(refObjectMap)
+					  val parentSubjectMap = parentTriplesMap.subjectMap; 
+					  val parentTableAlias = this.unfolder.mapRefObjectMapAlias.getOrElse(refObjectMap, null);
+					  val parentSubjects = this.translateData(parentSubjectMap, rows, parentTableAlias, mapXMLDatatype)
+					  parentSubjects
+					})
+					
 					val pogm = pom.graphMaps;
 					val predicateObjectGraphs = pogm.map(pogmElement=> {
 					  val poGraphValue = this.translateData(pogmElement, rows, null, mapXMLDatatype);
@@ -378,6 +382,10 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 						  objects.foreach(objectsElement => {
 						    this.materializer.materializeQuad(subject, predicatesElement, objectsElement, null)
 						  });
+
+						  refObjects.foreach(refObjectsElement => {
+						    this.materializer.materializeQuad(subject, predicatesElement, refObjectsElement, null)
+						  });
 						});					  
 					} else {
 					  val unionGraphs = subjectGraphs ++ predicateObjectGraphs
@@ -388,6 +396,11 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 						      this.materializer.materializeQuad(subject, predicatesElement, objectsElement, unionGraph)
 						    })
 						  });
+
+						  refObjects.foreach(refObjectsElement => {
+						    this.materializer.materializeQuad(subject, predicatesElement, refObjectsElement, unionGraph)
+						  });
+						  
 						});					    
 					  })
 					}
@@ -464,26 +477,24 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 	def visit(triplesMap:R2RMLTriplesMap) : Object = {
 //		String sqlQuery = triplesMap.accept(
 //				new R2RMLElementUnfoldVisitor()).toString();
-		val r2rmlUnfolder = this.unfolder.asInstanceOf[R2RMLUnfolder];
-		val sqlQuery = triplesMap.accept(r2rmlUnfolder).toString();
-		this.generateRDFTriples(triplesMap, sqlQuery);
+		val query = triplesMap.accept(this.unfolder).asInstanceOf[IQuery];
+		this.generateRDFTriples(triplesMap, query);
 		null;
 	}
 
-	override def generateRDFTriples(cm:AbstractConceptMapping , sqlQuery:String ) = {
+	override def generateRDFTriples(cm:MorphBaseClassMapping , iQuery:IQuery ) = {
 		val triplesMap = cm.asInstanceOf[R2RMLTriplesMap];
 		val logicalTable = triplesMap.getLogicalTable().asInstanceOf[R2RMLLogicalTable];
 		val sm = triplesMap.subjectMap;
 		val poms = triplesMap.predicateObjectMaps;
-		this.generateRDFTriples(logicalTable, sm, poms, sqlQuery);
-		//conn.close();		
+		this.generateRDFTriples(logicalTable, sm, poms, iQuery);		
 	}
 
-	override def generateSubjects(cm:AbstractConceptMapping, sqlQuery:String) = {
+	override def generateSubjects(cm:MorphBaseClassMapping, iQuery:IQuery) = {
 		val triplesMap = cm.asInstanceOf[R2RMLTriplesMap];
 		val logicalTable = triplesMap.getLogicalTable().asInstanceOf[R2RMLLogicalTable];
 		val sm = triplesMap.subjectMap;
-		this.generateRDFTriples(logicalTable, sm, Nil, sqlQuery);
+		this.generateRDFTriples(logicalTable, sm, Nil, iQuery);
 		//conn.close();		
 	}
 	
@@ -527,18 +538,19 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 	, language:Option[String]) : Literal = {
 	    try {
 			val encodedValueAux = GeneralUtility.encodeLiteral(value.toString());
-			val encodedValue = if(this.properties != null) {
-				if(this.properties.literalRemoveStrangeChars) {
-				  GeneralUtility.removeStrangeChars(encodedValueAux);
-				} else { encodedValueAux }
-			} else { encodedValueAux }
+//			val encodedValue = if(this.properties != null) {
+//				if(this.properties.literalRemoveStrangeChars) {
+//				  GeneralUtility.removeStrangeChars(encodedValueAux);
+//				} else { encodedValueAux }
+//			} else { encodedValueAux }
+			val encodedValue = encodedValueAux;
 			
 			val valueWithDataType = if(datatype.isDefined ) {
-				val xsdDataTimeURI = XSDDatatype.XSDdateTime.getURI().toString();
+				val xsdDateTimeURI = XSDDatatype.XSDdateTime.getURI().toString();
 				val xsdBooleanURI = XSDDatatype.XSDboolean.getURI().toString();
 					  
 				datatype.get match {
-					case xsdDataTimeURI => {
+					case xsdDateTimeURI => {
 					  this.translateDateTime(encodedValue);
 					} 
 					case xsdBooleanURI => {
@@ -550,15 +562,25 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 				  }
 			  } else { encodedValue }
 
-			val result:Literal = if(datatype.isDefined) {
-			  this.materializer.model.createTypedLiteral(encodedValue, datatype.get);
+			val result:Literal = if(language.isDefined) {
+			  this.materializer.model.createLiteral(valueWithDataType, language.get);
 			} else {
-				if(language.isDefined) {
-				  this.materializer.model.createLiteral(encodedValue, language.get);
-				} else {
-				  this.materializer.model.createLiteral(encodedValue);
-				}			  
+			  if(datatype.isDefined) {
+			    this.materializer.model.createTypedLiteral(valueWithDataType, datatype.get);
+			  } else {
+			    this.materializer.model.createLiteral(valueWithDataType);
+			  }
 			}
+			
+//			val result:Literal = if(datatype.isDefined) {
+//			  this.materializer.model.createTypedLiteral(encodedValue, datatype.get);
+//			} else {
+//				if(language.isDefined) {
+//				  this.materializer.model.createLiteral(encodedValue, language.get);
+//				} else {
+//				  this.materializer.model.createLiteral(encodedValue);
+//				}			  
+//			}
 			result
 		} catch {
 			case e:Exception => {
@@ -636,13 +658,16 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 			    	termMap.columnName
 			    }
 
+			  val dbValue = this.getResultSetValue(termMap, rs, columnTermMapValue);
 
 				val datatype = if(termMap.datatype.isDefined) { termMap.datatype } 
 				else {
-				  mapXMLDatatype.get(termMap.columnName.replaceAll("\"", ""))
+				  val columnNameAux = termMap.columnName.replaceAll("\"", "");
+				  val datatypeAux = mapXMLDatatype.get(columnNameAux)
+				  datatypeAux
 				}
 				
-			  	val dbValue = this.getResultSetValue(termMap, rs, columnTermMapValue);
+			  	
 				this.translateData(termMap, dbValue, datatype);
 			} 
 		  case Constants.MorphTermMapType.ConstantTermMap => {
@@ -667,18 +692,22 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 					}
 					
 					val databaseValue = this.getResultSetValue(termMap, rs, databaseColumn);
-					val databaseValueString = databaseValue.toString(); 
-					if(databaseValueString != null) {
-							Some(attribute -> databaseValueString);
+					if(databaseValue != null) {
+						val databaseValueString = databaseValue.toString();
+						Some(attribute -> databaseValueString);
 					} else {
 					  None
 					}
 				}).toMap
 
-				val templateWithDBValue = RegexUtility.replaceTokens(termMap.templateString, replacements);
-				if(templateWithDBValue != null) {
-					this.translateData(termMap, templateWithDBValue, datatype);  
-				} else { null }
+				if(replacements.isEmpty) {
+				  null
+				} else {
+					val templateWithDBValue = RegexUtility.replaceTokens(termMap.templateString, replacements);
+					if(templateWithDBValue != null) {
+						this.translateData(termMap, templateWithDBValue, datatype);  
+					} else { null }				  
+				}
 			}	
 		}
 		result
@@ -698,7 +727,10 @@ extends AbstractDataTranslator(properties:ConfigurationProperties ){
 			val zConstant = MorphSQLConstant(pColumnName, ZConstant.COLUMNNAME);
 			val tableName = zConstant.table;
 			//val columnNameAux = zConstant.column.replaceAll("\"", "")
-			val columnNameAux = zConstant.column
+			//val columnNameAux = zConstant.column.replaceAll(dbEnclosedCharacter, ""); //doesn't work for 9a
+			val columnNameAux = zConstant.column 
+			
+			
 			val columnName = {
 				if(tableName != null) {
 					tableName + "." + columnNameAux

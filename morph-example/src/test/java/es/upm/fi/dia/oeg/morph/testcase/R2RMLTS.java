@@ -10,8 +10,9 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
+import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLRDBRunnerFactory;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLRunner;
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractRunner;
 
 public class R2RMLTS {
 	private static Logger logger = Logger.getLogger(R2RMLTS.class);
@@ -128,8 +129,8 @@ public class R2RMLTS {
 			String directoryName = this.mapTestCaseName.get(testName);
 			String configurationDirectory = mappingDirectory + File.separator + directoryName + File.separator;
 			String configurationFile = testName + ".r2rml.properties";
-			AbstractRunner runner = new R2RMLRunner();
-			runner.loadConfigurationfile(configurationDirectory, configurationFile);
+			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory(); 
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
 			runner.run();
 			logger.info("------" + testName + " DONE------");
 			assertTrue(conformingMapping);

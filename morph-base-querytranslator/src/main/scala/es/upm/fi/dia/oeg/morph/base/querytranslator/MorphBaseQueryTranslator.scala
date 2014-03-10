@@ -62,26 +62,25 @@ import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
 import es.upm.fi.dia.oeg.morph.base.TriplePatternPredicateBounder
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractResultSet
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
-import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslationOptimizer
-import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
-import es.upm.fi.dia.oeg.obdi.core.exception.InsatisfiableSQLExpression
-import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslationException
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
-import es.upm.fi.dia.oeg.obdi.core.sql.IQuery
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLJoinTable
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLLogicalTable
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLUnion
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractResultSet
+import es.upm.fi.dia.oeg.morph.base.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.morph.base.DBUtility
-import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
-import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility;
+import es.upm.fi.dia.oeg.morph.base.MorphProperties
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
+import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
+import es.upm.fi.dia.oeg.morph.base.sql.IQuery
+import es.upm.fi.dia.oeg.morph.base.sql.SQLQuery
+import es.upm.fi.dia.oeg.morph.base.sql.SQLFromItem
+import es.upm.fi.dia.oeg.morph.base.sql.SQLJoinTable
+import es.upm.fi.dia.oeg.morph.base.sql.SQLUnion
+import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
+import es.upm.fi.dia.oeg.morph.base.engine.QueryTranslationOptimizer
+import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphQueryRewritterFactory
+import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphQueryTranslatorUtility
+import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphSQLSelectItemGenerator
+import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphMappingInferrer
+import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphQueryRewriter
 
 abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
     , alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
@@ -89,18 +88,14 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
     extends IQueryTranslator {
   
 	val logger = Logger.getLogger("MorphBaseQueryTranslator");
-	var sparqQuery :Query = null;
+	
 	var currentTranslationResult:IQuery = null;
 	
-	var connection:Connection = null;
-	var mappingDocument:AbstractMappingDocument = null;
-	val unfolder:AbstractUnfolder;
-	var configurationProperties:ConfigurationProperties =null;
-	var databaseType:String =null;
+	
 	
 	//query translator
-	var mapInferredTypes:Map[Node, Set[AbstractConceptMapping]] = Map.empty ;
-	var optimizer:IQueryTranslationOptimizer  = null;
+	var mapInferredTypes:Map[Node, Set[MorphBaseClassMapping]] = Map.empty ;
+	
 	val mapTermsC : Map[Op, Set[Node]] = Map.empty;
 	var mapAggreatorAlias:Map[String, ZSelectItem] = Map.empty;//varname - selectitem
 	val notNullColumns:List[String] = Nil;
@@ -131,7 +126,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 
 
 	def getMappingDocumentURL() : String = {
-		this.mappingDocument.getMappingDocumentPath();
+		this.mappingDocument.mappingDocumentPath;
 	}
 
 	def getColumnsByNode(node:Node , oldSelectItems:List[ZSelectItem] ) : LinkedHashSet[String] =  {
@@ -269,11 +264,11 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				val triples = bgp.getPattern().getList().toList;
 				val isSTG = MorphQueryTranslatorUtility.isSTG(bgp);
 	
-				if(this.optimizer != null && this.optimizer.isSelfJoinElimination() && isSTG) {
+				if(this.optimizer != null && this.optimizer.selfJoinElimination && isSTG) {
 					this.transSTG(triples);
 				} else {
 					val separationIndex = {
-						if(this.optimizer != null && this.optimizer.isSelfJoinElimination()) {
+						if(this.optimizer != null && this.optimizer.selfJoinElimination) {
 							MorphQueryTranslatorUtility.getFirstTBEndIndex(triples);
 						} else {
 						  1
@@ -337,8 +332,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		val exprList = opFilter.getExprs();
 		
 		val resultFrom = {
-			if(this.optimizer != null && this.optimizer.isSubQueryAsView()) {
-				val conn = this.getConnection();
+			if(this.optimizer != null && this.optimizer.subQueryAsView) {
+				val conn = this.connection;
 				val subQueryViewName = "sqf" + Math.abs(opFilterSubOp.hashCode());
 				val dropViewSQL = "DROP VIEW IF EXISTS " + subQueryViewName;
 				logger.info(dropViewSQL + ";\n");
@@ -346,9 +341,15 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				val createViewSQL = "CREATE VIEW " + subQueryViewName + " AS " + subOpSQL;
 				logger.info(createViewSQL + ";\n");
 				DBUtility.execute(conn, createViewSQL);
-				new SQLFromItem(subQueryViewName, LogicalTableType.TABLE_NAME, this.databaseType);
+				val sqlFromItem = new SQLFromItem(subQueryViewName
+				    , Constants.LogicalTableType.TABLE_NAME);
+				sqlFromItem.databaseType = this.databaseType
+				sqlFromItem;
 			} else {
-				new SQLFromItem(subOpSQL.toString(), LogicalTableType.QUERY_STRING, this.databaseType);
+				val sqlFromItem = new SQLFromItem(subOpSQL.toString()
+				    , Constants.LogicalTableType.QUERY_STRING);
+				sqlFromItem.databaseType = this.databaseType;
+				sqlFromItem
 			}		  
 		}
 		resultFrom.setAlias(transGPSQLAlias);
@@ -356,7 +357,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		val exprListSQL = this.transExprList(opFilterSubOp, exprList, subOpSelectItems, subOpSQL.getAlias());
 
 		val transFilterSQL = {
-			if(this.optimizer != null && this.optimizer.isSubQueryElimination()) {
+			if(this.optimizer != null && this.optimizer.subQueryElimination) {
 				subOpSQL.pushFilterDown(exprListSQL);
 				subOpSQL;
 			} else {
@@ -508,7 +509,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				zOrderBy.setAscOrder(true);
 			}
 			zOrderBy;		  
-		})
+		}).toList;
 		
 
 		//IQuery transOpOrder; 
@@ -528,7 +529,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 
 
 	def transProject(opProject:OpProject ) : IQuery = {
-		val selectItemGenerator = new MorphSQLSelectItemGenerator(this.nameGenerator, this.databaseType);
+		val selectItemGenerator = new MorphSQLSelectItemGenerator(
+		    this.nameGenerator, this.databaseType);
 		val opProjectSubOp = opProject.getSubOp();
 		val opProjectSubOpSQL = this.trans(opProjectSubOp);
 		val oldSelectItems = opProjectSubOpSQL.getSelectItems().toList;
@@ -546,8 +548,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		val newSelectItemsVar = newSelectItemsTuple.map(tuple => tuple._1);
 		val newSelectItemsMappingId = newSelectItemsTuple.map(tuple => tuple._2);
 		
-		if(this.optimizer != null && this.optimizer.isSubQueryAsView()) {
-			val conn = this.getConnection();
+		if(this.optimizer != null && this.optimizer.subQueryAsView) {
+			val conn = this.connection;
 			val subQueryViewName = "sqp" + Math.abs(opProject.hashCode());
 			val dropViewSQL = "DROP VIEW IF EXISTS " + subQueryViewName;
 			logger.info(dropViewSQL + ";\n");
@@ -555,12 +557,15 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 			val createViewSQL = "CREATE VIEW " + subQueryViewName + " AS " + opProjectSubOpSQL;
 			logger.info(createViewSQL  + ";\n");
 			DBUtility.execute(conn, createViewSQL);
-			new SQLFromItem(subQueryViewName, LogicalTableType.TABLE_NAME, this.databaseType);
+			val sqlFromItem = new SQLFromItem(subQueryViewName
+			    , Constants.LogicalTableType.TABLE_NAME);
+			sqlFromItem.databaseType = this.databaseType;
+			sqlFromItem;
 		}
 
 		val newSelectItems : List[ZSelectItem] = newSelectItemsVar.flatten.toList ::: newSelectItemsMappingId.flatten.toList;
 		val transProjectSQL = {
-			if(this.optimizer != null && this.optimizer.isSubQueryElimination()) {
+			if(this.optimizer != null && this.optimizer.subQueryElimination) {
 				//push group by down
 				opProjectSubOpSQL.pushGroupByDown();
 				
@@ -575,7 +580,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 			} else {
 				val resultAux = new SQLQuery(opProjectSubOpSQL);
 				resultAux.setSelectItems(newSelectItems);
-				val orderByConditions = opProjectSubOpSQL.getOrderBy();
+				val orderByConditions = opProjectSubOpSQL.getOrderByConditions;
 				if(orderByConditions != null) {
 					resultAux.pushOrderByDown(newSelectItems);
 					opProjectSubOpSQL.setOrderBy(null);				
@@ -703,10 +708,9 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				query2.addSelectItems(selectItemsC2);
 				query2.addSelectItems(selectItemsMappingId2);
 	
-				val transUnionSQL = new SQLUnion();
-				transUnionSQL.setDatabaseType(this.databaseType);
-				transUnionSQL.add(query1);
-				transUnionSQL.add(query2);
+				val queries = List(query1, query2); 
+				val transUnionSQL = new SQLUnion(List(query1 ,query2));
+				transUnionSQL.databaseType = this.databaseType;
 				logger.debug("transUnionSQL = \n" + transUnionSQL);
 	
 				transUnionSQL;
@@ -735,7 +739,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 						logger.warn(errorMessage);
 						val errorMessage2 = "All class mappings will be used.";
 						logger.warn(errorMessage2);
-						val cmsAux = this.mappingDocument.getClassMappings();
+						val cmsAux = this.mappingDocument.classMappings;
 						if(cmsAux == null || cmsAux.size() == 0) {
 							val errorMessage3 = "Mapping document doesn't contain any class mappings!";
 							logger.error(errorMessage3);
@@ -759,7 +763,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				} else if(unionOfSQLQueries.size() == 1) {
 					unionOfSQLQueries.head;
 				} else if(unionOfSQLQueries.size() > 1) {
-					new SQLUnion(unionOfSQLQueries);
+					SQLUnion(unionOfSQLQueries);
 				} else {
 				  null
 				}
@@ -769,7 +773,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		result;
 	}
 
-	def transTP(tp:Triple , cm:AbstractConceptMapping ) : IQuery = {
+	def transTP(tp:Triple , cm:MorphBaseClassMapping ) : IQuery = {
 		val tpPredicate = tp.getPredicate();
 		
 		val result : IQuery = {
@@ -778,14 +782,14 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				try {
 					this.transTP(tp, cm, predicateURI, false);	
 				} catch {
-				  case e:InsatisfiableSQLExpression => {
+				  case e:Exception => {
 					logger.debug("InsatisfiableSQLExpression for tp: " + tp);
 					null				    
 				  }
 				}
 			} else if(tpPredicate.isVariable()) {
 				val mappingDocumentURL = this.getMappingDocumentURL();
-				val triplesMapResource = cm.getResource();
+				val triplesMapResource = cm.resource;
 				//val columnsMetaData = cm.getLogicalTable().getColumnsMetaData();
 				val tableMetaData = cm.getLogicalTable().tableMetaData;
 				val tpBounder = new TriplePatternPredicateBounder(mappingDocumentURL, tableMetaData);
@@ -799,7 +803,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				
 				if(pms != null && pms.size() > 0) {
 					val sqlQueries = pms.flatMap(pm => {
-						val propertyMappingResource = pm.getResource();
+						val propertyMappingResource = pm.resource;
 						val boundedTriplePatternErrorMessages = boundedTriplePatterns.get(propertyMappingResource);
 						val predicateURI = pm.getMappedPredicateName(0);
 						if(boundedTriplePatternErrorMessages == null || boundedTriplePatternErrorMessages.isEmpty()) {
@@ -807,7 +811,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 								val sqlQuery : IQuery = this.transTP(tp, cm, predicateURI, true);
 								Some(sqlQuery);							
 							} catch{
-							  case e:InsatisfiableSQLExpression => {
+							  case e:Exception => {
 								logger.warn("-- Insatifiable sql while translating : " + predicateURI + " in " + cm.getConceptName());
 								logger.warn(e.getMessage());
 								logger.warn(boundedTriplePatternErrorMessages);
@@ -824,7 +828,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 					if(sqlQueries.size() == 1) {
 						sqlQueries.head;
 					} else if(sqlQueries.size() > 1) {
-						new SQLUnion(sqlQueries);
+						SQLUnion(sqlQueries);
 					} else {
 					  null
 					}
@@ -832,16 +836,16 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				  null
 				}
 			} else {
-				throw new QueryTranslationException("invalid tp.predicate : " + tpPredicate);
+				throw new Exception("invalid tp.predicate : " + tpPredicate);
 			}
 		}
 
 		result;
 	}
 
-	def transTP(tp:Triple , cm:AbstractConceptMapping , predicateURI:String , pm:AbstractPropertyMapping ) : IQuery;
+	def transTP(tp:Triple , cm:MorphBaseClassMapping , predicateURI:String , pm:MorphBasePropertyMapping ) : IQuery;
 
-	def transTP(tp:Triple , cm:AbstractConceptMapping , predicateURI:String , unboundedPredicate:Boolean ) : IQuery = {
+	def transTP(tp:Triple , cm:MorphBaseClassMapping , predicateURI:String , unboundedPredicate:Boolean ) : IQuery = {
 		val pms = cm.getPropertyMappings(predicateURI);
 		
 		val transTP : IQuery = {
@@ -873,9 +877,10 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		
 					val resultAux = {
 						//don't do subquery elimination here! why?
-						if(this.optimizer != null && this.optimizer.isSubQueryElimination()) {
+						if(this.optimizer != null && this.optimizer.subQueryElimination) {
 							try {
-								SQLQuery.createQuery(alphaSubject, alphaPredicateObjects, prSQL, condSQL, this.databaseType);
+								SQLQuery.createQuery(alphaSubject, alphaPredicateObjects
+								    , prSQL, condSQL, this.databaseType);
 							} catch {
 							  case e:Exception => {
 								val errorMessage = "error in eliminating subquery!";
@@ -898,8 +903,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 							      resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object}
 							    }
 							    case _:SQLQuery => {
-									val onExpression = alphaPredicateObject.getOnExpression();
-									alphaPredicateObject.setOnExpression(null);
+									val onExpression = alphaPredicateObject.onExpression;
+									alphaPredicateObject.onExpression = null;
 									resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object
 									resultAux2.pushFilterDown(onExpression);							      
 							    }
@@ -1219,8 +1224,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 
 			val transGP1Alias = transGP1SQL.generateAlias();
 			val transGP1FromItem = {
-				if(this.optimizer != null && this.optimizer.isSubQueryAsView()) {
-					val conn = this.getConnection();
+				if(this.optimizer != null && this.optimizer.subQueryAsView) {
+					val conn = this.connection;
 					val subQueryViewName = "sql" + Math.abs(gp1.hashCode());
 					val dropViewSQL = "DROP VIEW IF EXISTS " + subQueryViewName;
 					logger.info(dropViewSQL + ";\n");
@@ -1228,17 +1233,17 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 					val createViewSQL = "CREATE VIEW " + subQueryViewName + " AS " + transGP1SQL;
 					logger.info(createViewSQL + ";\n");
 					DBUtility.execute(conn, createViewSQL);
-					new SQLFromItem(subQueryViewName, LogicalTableType.TABLE_NAME, this.databaseType);
+					SQLFromItem(subQueryViewName, Constants.LogicalTableType.TABLE_NAME, this.databaseType);
 				} else {
-					new SQLFromItem(transGP1SQL.toString(), LogicalTableType.QUERY_STRING, this.databaseType);
+					SQLFromItem(transGP1SQL.toString(), Constants.LogicalTableType.QUERY_STRING, this.databaseType);
 				}			  
 			} 
 			transGP1FromItem.setAlias(transGP1Alias);
 
 			val transGP2Alias = transGP2SQL.generateAlias();
 			val transGP2FromItem = {
-				if(this.optimizer != null && this.optimizer.isSubQueryAsView()) {
-					val conn = this.getConnection();
+				if(this.optimizer != null && this.optimizer.subQueryAsView) {
+					val conn = this.connection;
 					val subQueryViewName = "sqr" + Math.abs(gp2.hashCode());
 					val dropViewSQL = "DROP VIEW IF EXISTS " + subQueryViewName;
 					logger.info(dropViewSQL + ";\n");
@@ -1246,9 +1251,10 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 					val createViewSQL = "CREATE VIEW " + subQueryViewName + " AS " + transGP2SQL;
 					logger.info(createViewSQL + ";\n");
 					DBUtility.execute(conn, createViewSQL);
-					new SQLFromItem(subQueryViewName, LogicalTableType.TABLE_NAME, this.databaseType);
+					SQLFromItem(subQueryViewName, Constants.LogicalTableType.TABLE_NAME
+					    , this.databaseType);
 				} else {
-					new SQLFromItem(transGP2SQL.toString(), LogicalTableType.QUERY_STRING, this.databaseType);
+					SQLFromItem(transGP2SQL.toString(), Constants.LogicalTableType.QUERY_STRING, this.databaseType);
 				}			  
 			}
 			transGP2FromItem.setAlias(transGP2Alias);
@@ -1368,7 +1374,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 
 			val transJoin : IQuery = {
 				if(this.optimizer != null) {
-					val isTransJoinSubQueryElimination = this.optimizer.isTransJoinSubQueryElimination();
+					val isTransJoinSubQueryElimination = 
+					  this.optimizer.transJoinSubQueryElimination;
 					if(isTransJoinSubQueryElimination) {
 						try {
 							if(transGP1SQL.isInstanceOf[SQLQuery] && transGP2SQL.isInstanceOf[SQLQuery]) {
@@ -1378,6 +1385,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 							}					
 						} catch {
 						  case e:Exception => {
+						    e.printStackTrace();
 							val errorMessage = "error while eliminating subquery in transjoin: " + e.getMessage();
 							logger.error(errorMessage);
 							null;						    
@@ -1425,7 +1433,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		
 		val start = System.currentTimeMillis();
 		val result = {
-			if(this.optimizer != null && this.optimizer.isSelfJoinElimination()) {
+			if(this.optimizer != null && this.optimizer.selfJoinElimination) {
 				val mapNodeLogicalTableSize = mapInferredTypes.keySet.map(node => {
 					val cms = mapInferredTypes(node);
 					val cm = cms.iterator.next();
@@ -1434,8 +1442,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				})
 				
 				val reorderSTG = {
-					if(this.configurationProperties != null) {
-						this.configurationProperties.reorderSTG;
+					if(this.properties != null) {
+						this.properties.reorderSTG;
 					} else {
 					  true
 					}				  
@@ -1533,7 +1541,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				logger.warn(errorMessage);
 				val errorMessage2 = "All class mappings will be used.";
 				logger.warn(errorMessage2);
-				val allCms = this.mappingDocument.getClassMappings().toList;
+				val allCms = this.mappingDocument.classMappings.toList;
 				if(allCms == null || allCms.size() == 0) {
 					val errorMessage3 = "Mapping document doesn't contain any class mappins!";
 					logger.error(errorMessage3);
@@ -1550,14 +1558,14 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		
 		val result = {
 			if(resultAux.size() == 1) { resultAux.head;} 
-			else if(cms.size() > 1) { new SQLUnion(resultAux); } 
+			else if(cms.size() > 1) { SQLUnion(resultAux); } 
 			else {null}		  
 		}
 		result;
 	}
 
 
-	def transSTG(stg:List[Triple], cm:AbstractConceptMapping ) : IQuery  = {
+	def transSTG(stg:List[Triple], cm:MorphBaseClassMapping ) : IQuery  = {
 		//AlphaSTG
 		val alphaResultUnionList = this.alphaGenerator.calculateAlphaSTG(stg, cm);
 
@@ -1580,7 +1588,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				val alphaResult = alphaResultUnionList.head.get(0);
 				val alphaSubject = alphaResult.alphaSubject;
 				val alphaPredicateObjects = alphaResultUnionList.flatMap(alphaTP => {
-					val tpAlphaPredicateObjects = alphaTP.get(0).alphaPredicateObjects;
+					val tpAlphaPredicateObjects:List[SQLJoinTable] = alphaTP.get(0).alphaPredicateObjects;
 					tpAlphaPredicateObjects;				  
 				})
 				
@@ -1594,13 +1602,14 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				//don't do subquery elimination here! why?
 				val resultAux = {
 					if(this.optimizer != null) {
-						val isTransSTGSubQueryElimination = this.optimizer.isTransSTGSubQueryElimination();
+						val isTransSTGSubQueryElimination = 
+						  this.optimizer.transSTGSubQueryElimination;
 						if(isTransSTGSubQueryElimination) {
 							try {
 								SQLQuery.createQuery(alphaSubject, alphaPredicateObjects, prSQLSTG, condSQLSQL, this.databaseType);
 							} catch {
 							  case e:Exception => {
-								val errorMessage = "error in eliminating subquery!";
+								val errorMessage = "error in eliminating subquery!" + e.getMessage;
 								logger.error(errorMessage);
 								null;							    
 							  }
@@ -1658,40 +1667,22 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 //	def getTripleAlias(tp:Triple ) : String ;
 //	def putTripleAlias(tp:Triple , alias:String );
 
-	override def getSPARQLQuery() :Query  = {this.sparqQuery;}
 	
-	override def setSPARQLQuery(query:Query ) = {
-	  this.sparqQuery = query;
-	}
+
 	
 	override def setSPARQLQueryByString(sparqlQueryString:String ) = {
 		val sparqQuery = QueryFactory.create(sparqlQueryString);
-		this.setSPARQLQuery(sparqQuery);
+		this.sparqlQuery = sparqQuery;
 	}
 
 	override def setSPARQLQueryByFile(queryFilePath:String ) =  {
 		if(queryFilePath != null && !queryFilePath.equals("") ) {
 			logger.info("Parsing query file : " + queryFilePath);
 			val sparqQuery = QueryFactory.read(queryFilePath);
-			this.setSPARQLQuery(sparqQuery);
+			this.sparqlQuery = sparqQuery;
 		}
 	}
 	
-	def setConfigurationProperties(x$1: ConfigurationProperties): Unit = this.configurationProperties = x$1;
-
-	def setDatabaseType(x$1: String): Unit = {this.databaseType = x$1;}
-
-	def setMappingDocument(x$1: AbstractMappingDocument): Unit = this.mappingDocument = x$1;
-	
-	def setOptimizer(x$1: IQueryTranslationOptimizer): Unit = this.optimizer = x$1;
-	
-	def getConnection(): java.sql.Connection = { this.connection ; }
-	
-	def getDatabaseType(): String = { this.databaseType; }
-	
-	def getUnfolder(): AbstractUnfolder = { this.unfolder; }
-	
 	def getTranslationResult(): IQuery = this.currentTranslationResult;
 	
-	def getMappingDocument() : AbstractMappingDocument = { this.mappingDocument }
 }

@@ -8,7 +8,7 @@ class MorphColumnMetaData (val tableName : String, val columnName : String
     , val dataType : String, val isNullable : Boolean, val characterMaximumLength:Integer) {
 
 	val logger = Logger.getLogger(this.getClass().getName());
-	logger.info("\t\tColumn MetaData created: " + this.tableName + "." + this.columnName);
+	logger.debug("\t\tColumn MetaData created: " + this.tableName + "." + this.columnName);
 
 //	override def toString() = {
 //		val result = "ColumnMetaData [tableName=" + tableName + ", columnName=" + columnName + ", dataType=" + dataType + ", isNullable=" + isNullable + "]";

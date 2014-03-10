@@ -3,7 +3,6 @@ package es.upm.dia.fi.oeg.morph.r2rml.model
 import scala.collection.JavaConversions._
 
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import com.hp.hpl.jena.rdf.model.Resource
 import com.hp.hpl.jena.rdf.model.RDFNode
 

@@ -1,1 +1,1 @@
-null <http://example.com/dept%23location> "NEW YORK" .
+_:Department10 <http://example.com/dept#location> "NEWTYORK" .

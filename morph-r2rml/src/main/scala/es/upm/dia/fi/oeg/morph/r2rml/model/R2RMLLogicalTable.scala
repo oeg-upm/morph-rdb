@@ -1,18 +1,16 @@
 package es.upm.dia.fi.oeg.morph.r2rml.model
 
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseLogicalTable
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType
 import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
 import es.upm.fi.dia.oeg.morph.base.sql.MorphTableMetaData
 import com.hp.hpl.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElementVisitor
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLFromItem.LogicalTableType
 import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElement
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
 
-abstract class R2RMLLogicalTable(val logicalTableType:LogicalTableType ) 
+abstract class R2RMLLogicalTable(val logicalTableType:Constants.LogicalTableType.Value) 
 extends MorphBaseLogicalTable with MorphR2RMLElement{
 	val logger = Logger.getLogger(this.getClass().getName());
 	var alias:String = null;

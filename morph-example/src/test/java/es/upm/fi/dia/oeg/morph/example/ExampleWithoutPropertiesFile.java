@@ -8,9 +8,10 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
-import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties;
+import es.upm.fi.dia.oeg.morph.base.MorphProperties;
 import es.upm.fi.dia.oeg.morph.base.Constants;
-import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLRunner;
+import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLRDBRunnerFactory;
 
 public class ExampleWithoutPropertiesFile {
 	private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
@@ -32,7 +33,7 @@ public class ExampleWithoutPropertiesFile {
 		String mappingDocumentFile = System.getProperty("user.dir") 
 				+ File.separator + "examples" + File.separator + "example.ttl";
 		
-		ConfigurationProperties properties = new ConfigurationProperties();
+		MorphProperties properties = new MorphProperties();
 		properties.setNoOfDatabase(1);
 		properties.setDatabaseUser(dbUserName);
 		properties.setDatabasePassword(dbPassword);
@@ -43,8 +44,8 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRunner runner = new R2RMLRunner();
-			runner.loadConfigurationProperties(properties);
+			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
 			runner.run();
 			assertTrue("testBatch done", true);
 		} catch(Exception e) {
@@ -64,7 +65,7 @@ public class ExampleWithoutPropertiesFile {
 		String mappingDocumentFile = System.getProperty("user.dir") 
 				+ File.separator + "examples" + File.separator + "example.ttl";
 		
-		ConfigurationProperties properties = new ConfigurationProperties();
+		MorphProperties properties = new MorphProperties();
 		properties.setNoOfDatabase(1);
 		properties.setDatabaseUser(dbUserName);
 		properties.setDatabasePassword(dbPassword);
@@ -75,8 +76,8 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRunner runner = new R2RMLRunner();
-			runner.loadConfigurationProperties(properties);
+			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
 			runner.readSPARQLFile(queryFile);
 			runner.run();
 			assertTrue("sparql01 done", true);
@@ -96,7 +97,7 @@ public class ExampleWithoutPropertiesFile {
 				+ File.separator + "examples" + File.separator + "example2.ttl";
 		String classURI = "http://mappingpedia.linkeddata.es/vocabulary/Person";
 		
-		ConfigurationProperties properties = new ConfigurationProperties();
+		MorphProperties properties = new MorphProperties();
 		properties.setNoOfDatabase(1);
 		properties.setDatabaseUser(dbUserName);
 		properties.setDatabasePassword(dbPassword);
@@ -107,8 +108,8 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRunner runner = new R2RMLRunner();
-			runner.loadConfigurationProperties(properties);
+			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
 			runner.materializeSubjects(classURI,resultFile);
 			assertTrue("testBatch done", true);
 		} catch(Exception e) {
@@ -128,7 +129,7 @@ public class ExampleWithoutPropertiesFile {
 		String classURI = "http://mappingpedia.linkeddata.es/vocabulary/Person";
 		String subjectURI = "http://mappingpedia.linkeddata.es/resources/Student/B1";
 		
-		ConfigurationProperties properties = new ConfigurationProperties();
+		MorphProperties properties = new MorphProperties();
 		properties.setNoOfDatabase(1);
 		properties.setDatabaseUser(dbUserName);
 		properties.setDatabasePassword(dbPassword);
@@ -139,8 +140,8 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRunner runner = new R2RMLRunner();
-			runner.loadConfigurationProperties(properties);
+			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
 			runner.materializeInstanceDetails(subjectURI, classURI, resultFile);
 			assertTrue("testBatch done", true);
 		} catch(Exception e) {
@@ -160,7 +161,7 @@ public class ExampleWithoutPropertiesFile {
 		String mappingDocumentFile = System.getProperty("user.dir") 
 				+ File.separator + "examples" + File.separator + "example.ttl";
 		
-		ConfigurationProperties properties = new ConfigurationProperties();
+		MorphProperties properties = new MorphProperties();
 		properties.setNoOfDatabase(1);
 		properties.setDatabaseUser(dbUserName);
 		properties.setDatabasePassword(dbPassword);
@@ -171,8 +172,8 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRunner runner = new R2RMLRunner();
-			runner.loadConfigurationProperties(properties);
+			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
 			runner.readSPARQLFile(queryFile);
 			runner.run();
 			assertTrue("sparql01 done", true);
@@ -193,7 +194,7 @@ public class ExampleWithoutPropertiesFile {
 		String mappingDocumentFile = System.getProperty("user.dir") 
 				+ File.separator + "examples" + File.separator + "example.ttl";
 		
-		ConfigurationProperties properties = new ConfigurationProperties();
+		MorphProperties properties = new MorphProperties();
 		properties.setNoOfDatabase(1);
 		properties.setDatabaseUser(dbUserName);
 		properties.setDatabasePassword(dbPassword);
@@ -204,8 +205,8 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRunner runner = new R2RMLRunner();
-			runner.loadConfigurationProperties(properties);
+			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
 			runner.readSPARQLFile(queryFile);
 			runner.run();
 			assertTrue("sparql01 done", true);

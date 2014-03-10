@@ -5,7 +5,6 @@ import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.Constants
 import com.hp.hpl.jena.rdf.model.Resource
 import java.util.HashSet
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import com.hp.hpl.jena.rdf.model.RDFNode
 
 class R2RMLSubjectMap(termMapType:Constants.MorphTermMapType.Value

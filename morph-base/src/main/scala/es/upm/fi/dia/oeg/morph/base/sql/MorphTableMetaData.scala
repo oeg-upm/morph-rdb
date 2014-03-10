@@ -9,7 +9,7 @@ import es.upm.fi.dia.oeg.morph.base.Constants
 class MorphTableMetaData(val tableName:String , val tableRows:Long
     , var columnsMetaData : List[MorphColumnMetaData], val dbType:String) {
 	val logger = Logger.getLogger(this.getClass().getName());
-	logger.info("\tTable MetaData created: " + this.tableName);
+	logger.debug("\tTable MetaData created: " + this.tableName);
 
 	
 	def putColumnMetaData(columnMetaData:MorphColumnMetaData) = {
@@ -39,7 +39,7 @@ object MorphTableMetaData {
 	
 	def buildTablesMetaData(conn:Connection, databaseName:String, databaseType:String) 
 	: List[MorphTableMetaData] = {
-	  logger.info("\tBuilding Tables MetaData for database: " + databaseName);
+	  logger.debug("\tBuilding Tables MetaData for database: " + databaseName);
 		
 		val morphInformationSchema = MorphInformationSchema.apply(databaseType);
 		val tableNameColumn = morphInformationSchema.tableNameColumn;

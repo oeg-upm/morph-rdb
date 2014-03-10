@@ -1,26 +1,17 @@
 package es.upm.dia.fi.oeg.morph.r2rml.model
 
 import scala.collection.JavaConversions._
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import com.hp.hpl.jena.rdf.model.Resource
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.obdi.core.model.IRelationMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
-import es.upm.fi.dia.oeg.obdi.core.model.IAttributeMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractRDB2RDFMapping.MappingType
 import org.apache.log4j.Logger
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractRDB2RDFMapping.MappingType
-import es.upm.fi.dia.oeg.obdi.core.model.IAttributeMapping
-import es.upm.fi.dia.oeg.obdi.core.model.IRelationMapping
+import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 
 class R2RMLPredicateObjectMap(val predicateMaps:List[R2RMLPredicateMap]
 		, val objectMaps:List[R2RMLObjectMap], val refObjectMaps:List[R2RMLRefObjectMap]
 		//, objectMapTypes:List[R2RMLPredicateObjectMap.ObjectMapType.Value]
-		, val graphMaps:Set[R2RMLGraphMap] ) extends AbstractPropertyMapping 
-with IRelationMapping with  IAttributeMapping {
+		, val graphMaps:Set[R2RMLGraphMap] ) extends MorphBasePropertyMapping 
+{
 	val logger = Logger.getLogger(this.getClass().getName());
 	var alias:String = null;
 
@@ -144,12 +135,8 @@ with IRelationMapping with  IAttributeMapping {
 		this.alias = alias;
 	}
 
-	override def getRangeClassMapping() : String = {
-		// TODO Auto-generated method stub
-		null;
-	}
 
-	override def getMappedPredicateNames() : java.util.Collection[String] = {
+	override def getMappedPredicateNames() : Iterable[String] = {
 		val result = this.predicateMaps.map(pm => {
 			pm.getOriginalValue();
 		});

@@ -3,13 +3,12 @@ package es.upm.fi.dia.oeg.morph.base.sql
 import org.apache.log4j.Logger
 import java.sql.Connection
 import java.sql.DatabaseMetaData
-import es.upm.fi.dia.oeg.morph.base.ConfigurationProperties
 
 class MorphDatabaseMetaData(val conn:Connection, val dbName:String, val dbType:String
     , var tablesMetaData : List[MorphTableMetaData], jdbcDBMetaData:DatabaseMetaData) 
     {
 	val logger = Logger.getLogger(this.getClass().getName());
-	logger.info("Database MetaData created: " + this.dbName);
+	logger.debug("Database MetaData created: " + this.dbName);
 	
 	def this(conn:Connection, dbName:String, dbType:String) = {
 	  this(conn, dbName, dbType, Nil, null)
@@ -33,9 +32,12 @@ class MorphDatabaseMetaData(val conn:Connection, val dbName:String, val dbType:S
 object MorphDatabaseMetaData {
 	val logger = Logger.getLogger(this.getClass().getName());
 	
- 	def apply(conn:Connection , properties:ConfigurationProperties) 
+ 	def apply(conn:Connection 
+// 	    , properties:ConfigurationProperties
+ 	    , databaseName:String, databaseType:String
+ 	    ) 
  	: MorphDatabaseMetaData = {
- 	  logger.info("Building Database MetaData");
+ 	  logger.debug("Building Database MetaData");
  	  
  	   val jdbcDBMetaData = try { conn.getMetaData(); } 
  	   catch { 
@@ -48,18 +50,14 @@ object MorphDatabaseMetaData {
  	   val jdbcDriverName = if(jdbcDBMetaData != null) {jdbcDBMetaData.getDriverName()}
  	   else {null}
  	   
- 	   val dbName = {if(properties != null) { properties.databaseName}
+ 	   val dbName = {if(databaseName != null) { databaseName}
  	     else { null }
  	   }
 
  	   val jdbcProductName = if(jdbcDBMetaData != null) {jdbcDBMetaData.getDatabaseProductName()}
  	   else {null}
- 	   val dbType = {
- 	     if(properties != null && properties.databaseType != null) {
- 	       properties.databaseType
- 	     } else {
- 	    	 jdbcProductName  
- 	     } 	     
+ 	   val dbType = { if(databaseType != null) { databaseType } 
+ 	   	else { jdbcProductName } 	     
  	   }
  	   
 		val dbMetaData : MorphDatabaseMetaData = {

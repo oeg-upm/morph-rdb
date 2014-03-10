@@ -97,7 +97,8 @@ object RegexUtility {
 		return buffer.toString();		
 	}
 	
-	def replaceTokens(pText:String, replacements:java.util.Map[String, Object] ) : String  = {
+	def replaceTokens(pText:String, replacements:Map[String, Object] ) : String  = {
+	  if(replacements != null && !replacements.isEmpty) {
 		val text = pText.replaceAll("\\\\\\{", "morphopencurly")
 				.replaceAll("\\\\\\}", "morphclosecurly");
 		
@@ -108,6 +109,8 @@ object RegexUtility {
 			.replaceAll("morphopencurly", "\\{")
 			.replaceAll("morphclosecurly", "\\}");
 
-		return replacedToken;
+		return replacedToken;	    
+	  } else { null }
+
 	}	
 }

@@ -8,14 +8,13 @@ import Zql.ZConstant
 import Zql.ZQuery
 import java.io.ByteArrayInputStream
 import Zql.ZqlParser
-import es.upm.fi.dia.oeg.obdi.core.sql.SQLQuery
 import org.apache.log4j.Logger
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTermMap
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
 import es.upm.fi.dia.oeg.morph.base.sql.SQLDataType
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTermMap
+import es.upm.fi.dia.oeg.morph.base.sql.SQLQuery
 
 class MorphRDBUtility {
 
@@ -25,7 +24,7 @@ object MorphRDBUtility {
 	val logger = Logger.getLogger(this.getClass().getName());
 
 	def generateCondForWellDefinedURI(termMap:R2RMLTermMap
-	    , ownerTriplesMap:AbstractConceptMapping, uri:String , alias:String 
+	    , ownerTriplesMap:MorphBaseClassMapping, uri:String , alias:String 
 			) : ZExpression = {
 			val logicalTable = ownerTriplesMap.getLogicalTable();
 			val logicalTableMetaData = logicalTable.tableMetaData;

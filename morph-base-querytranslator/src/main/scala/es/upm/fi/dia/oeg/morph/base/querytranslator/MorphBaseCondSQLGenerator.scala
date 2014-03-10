@@ -1,7 +1,6 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator
 
 import scala.collection.JavaConversions._
-import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
 import org.apache.log4j.Logger
 import java.util.Collection
 import org.apache.log4j.Logger
@@ -16,21 +15,18 @@ import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.MorphTriple
 import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
-import es.upm.fi.dia.oeg.obdi.core.engine.IQueryTranslator
-import es.upm.fi.dia.oeg.obdi.core.exception.InsatisfiableSQLExpression
-import es.upm.fi.dia.oeg.obdi.core.exception.QueryTranslationException
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractConceptMapping
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractPropertyMapping
-import es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder
-import es.upm.fi.dia.oeg.obdi.core.model.AbstractMappingDocument
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
+import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
+import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 
-abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:AbstractUnfolder) {
+abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
 	val logger = Logger.getLogger(this.getClass().getName());
-	val dbType = md.getConfigurationProperties().databaseType;
+	//val dbType = md.configurationProperties.databaseType;
 		
 	def  genCondSQL(tp:Triple, alphaResult:MorphAlphaResult
-	    , betaGenerator:MorphBaseBetaGenerator, cm:AbstractConceptMapping
+	    , betaGenerator:MorphBaseBetaGenerator, cm:MorphBaseClassMapping
 	    ,  predicateURI:String) : MorphCondSQLResult =  {
 
 		val condSQLSubject = this.genCondSQLSubject(tp, alphaResult, betaGenerator, cm);
@@ -62,7 +58,7 @@ abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:Ab
 	}
 
 	def genCondSQLPredicateObject(tp:Triple, alphaResult:MorphAlphaResult 
-	    , betaGenerator:MorphBaseBetaGenerator, cm:AbstractConceptMapping
+	    , betaGenerator:MorphBaseBetaGenerator, cm:MorphBaseClassMapping
 	    , predicateURI:String) : ZExpression = {
 		
 		//var exps : Set[ZExpression] = Set.empty;
@@ -80,14 +76,14 @@ abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:Ab
 				if(!isRDFTypeStatement) {
 					val errorMessage = "No mappings found for predicate : " + predicateURI;
 					logger.error(errorMessage);
-					throw new QueryTranslationException(errorMessage);				
+					throw new Exception(errorMessage);				
 				} else {
 				  null
 				}
 			} else if(pms.size() > 1) {
 				val errorMessage = "Multiple mappings are not permitted for predicate " + predicateURI;
 				logger.error(errorMessage);
-				throw new QueryTranslationException(errorMessage);
+				throw new Exception(errorMessage);
 				null
 			} else {//if(pms.size() == 1)
 				var exps : Set[ZExpression] = Set.empty;
@@ -96,7 +92,7 @@ abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:Ab
 				val predicate = tp.getPredicate();
 				val tpObject= tp.getObject();
 				
-				val pm = pms.iterator().next();
+				val pm = pms.iterator.next();
 				val result1 = this.genCondSQLPredicateObject(tp, alphaResult, betaGenerator, cm, pm);
 				if(result1 != null) {
 					exps = exps ++ Set(result1);	
@@ -259,7 +255,7 @@ abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:Ab
 
 
 	def genCondSQLSubject(tp:Triple , alphaResult:MorphAlphaResult, betaGenerator:MorphBaseBetaGenerator 
-	    , cm:AbstractConceptMapping ) : ZExpression = {
+	    , cm:MorphBaseClassMapping ) : ZExpression = {
 		
 		val subject = tp.getSubject();
 		val betaSubjectSelectItems = betaGenerator.calculateBetaSubject(tp, cm, alphaResult);
@@ -303,10 +299,10 @@ abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:Ab
 		result1;
 	}
 
-	def genCondSQLSubjectURI(tpSubject:Node , alphaResult:MorphAlphaResult, cm:AbstractConceptMapping) : ZExpression;
+	def genCondSQLSubjectURI(tpSubject:Node , alphaResult:MorphAlphaResult, cm:MorphBaseClassMapping) : ZExpression;
 
 	def  genCondSQLSTG(stg:List[Triple], alphaResult:MorphAlphaResult , betaGenerator:MorphBaseBetaGenerator 
-			, cm:AbstractConceptMapping ) : ZExpression = {
+			, cm:MorphBaseClassMapping ) : ZExpression = {
 
 		//var exps : Set[ZExpression] = Set.empty;
 		val firstTriple = stg.get(0);
@@ -323,7 +319,7 @@ abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:Ab
 			if(!iTPPredicate.isURI()) {
 				val errorMessage = "Only bounded predicate is not supported in triple : " + iTP;
 				logger.warn(errorMessage);
-				throw new QueryTranslationException(errorMessage);
+				throw new Exception(errorMessage);
 			}
 			val iTPPredicateURI = iTPPredicate.getURI();
 			
@@ -378,7 +374,7 @@ abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:Ab
 	}
 
 	private def genCondSQL(tp1:Triple , tp2:Triple ,alphaResult:MorphAlphaResult 
-	    , betaGenerator:MorphBaseBetaGenerator , cm:AbstractConceptMapping ) : ZExpression = {
+	    , betaGenerator:MorphBaseBetaGenerator , cm:MorphBaseClassMapping ) : ZExpression = {
 		var exps : Set[ZExpression] = Set.empty;
 
 		val tp1Subject = tp1.getSubject();
@@ -467,6 +463,6 @@ abstract class MorphBaseCondSQLGenerator(md:AbstractMappingDocument, unfolder:Ab
 	}
 
 	def genCondSQLPredicateObject(tp:Triple ,alphaResult:MorphAlphaResult , betaGenerator:MorphBaseBetaGenerator 
-	    ,cm:AbstractConceptMapping , pm:AbstractPropertyMapping ) : ZExpression 
+	    ,cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping ) : ZExpression 
 	
 }
