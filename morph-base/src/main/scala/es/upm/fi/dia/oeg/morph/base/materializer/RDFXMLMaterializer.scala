@@ -5,8 +5,14 @@ import com.hp.hpl.jena.rdf.model.Resource
 import java.io.FileOutputStream
 import com.hp.hpl.jena.rdf.model.RDFNode
 import com.hp.hpl.jena.rdf.model.Model
+import java.io.OutputStream
+import java.io.Writer
 
-class RDFXMLMaterializer(model:Model) extends MorphBaseMaterializer(model:Model) {
+class RDFXMLMaterializer(model:Model, rdfxmlOutputStream:Writer) 
+extends MorphBaseMaterializer(model, rdfxmlOutputStream) {
+	//THIS IS IMPORTANT, SCALA PASSES PARAMETER BY VALUE!
+	this.outputStream = rdfxmlOutputStream;
+	
 	override val logger = Logger.getLogger(this.getClass().getName());
 	var outputFileName:String=null;
 	
@@ -80,9 +86,10 @@ class RDFXMLMaterializer(model:Model) extends MorphBaseMaterializer(model:Model)
 				logger.debug("Size of model = " + model.size());
 				logger.info("Writing model to " + outputFileName + " ......");
 				val startWritingModel = System.currentTimeMillis();
-				val fos = new FileOutputStream(outputFileName);
-				model.write(fos, this.rdfLanguage);
-				fos.flush();fos.close();
+				//val fos = new FileOutputStream(outputFileName);
+				model.write(this.outputStream, this.rdfLanguage);
+				this.outputStream.flush();
+//				this.outputStream.close();
 				val endWritingModel = System.currentTimeMillis();
 				val durationWritingModel = (endWritingModel-startWritingModel) / 1000;
 				logger.info("Writing model time was "+(durationWritingModel)+" s.");				
@@ -102,7 +109,7 @@ class RDFXMLMaterializer(model:Model) extends MorphBaseMaterializer(model:Model)
 		// TODO Auto-generated method stub
 	}
 
-	override def postMaterialize() {
-		// TODO Auto-generated method stub		
-	}
+//	override def postMaterialize() {
+//		// TODO Auto-generated method stub		
+//	}
 }

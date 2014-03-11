@@ -1,7 +1,6 @@
 package es.upm.fi.dia.oeg.morph.base.materializer
 
 import scala.collection.JavaConversions._
-
 import org.apache.log4j.Logger
 import com.hp.hpl.jena.rdf.model.Model
 import com.hp.hpl.jena.rdf.model.RDFNode
@@ -9,11 +8,14 @@ import es.upm.fi.dia.oeg.morph.base.Constants
 import com.hp.hpl.jena.rdf.model.ModelFactory
 import java.io.File
 import com.hp.hpl.jena.tdb.TDBFactory
+import java.io.OutputStream
+import java.io.Writer
 
-abstract class MorphBaseMaterializer(val model:Model) {
+abstract class MorphBaseMaterializer(val model:Model, var outputStream:Writer) {
 	val logger = Logger.getLogger(this.getClass().getName());
 //	var outputFileName:String = null;
 	var rdfLanguage:String =null;
+	
 	
 //	def createSubject(isBlankNode:Boolean , subjectURI:String ):Object ;
 //	def materializeDataPropertyTriple(predicateName:String , objectValue:Object , datatype:String , lang:String , graph:String );
@@ -22,7 +24,7 @@ abstract class MorphBaseMaterializer(val model:Model) {
 //	public abstract void materializeQuad(String subject, String predicate, String object, String graph);
 	def materializeQuad(subject:RDFNode , predicate:RDFNode , obj:RDFNode , graph:RDFNode );
 	def materialize();
-	def postMaterialize();
+	def postMaterialize() = this.outputStream.close()
 	
 	
 	def setModelPrefixMap(prefixMap:Map[String, String] ) = {

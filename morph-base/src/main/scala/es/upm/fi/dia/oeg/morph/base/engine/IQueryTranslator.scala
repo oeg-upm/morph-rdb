@@ -22,7 +22,6 @@ trait IQueryTranslator {
 
 	var mappingDocument:MorphBaseMappingDocument= null;
 
-	
 	def setSPARQLQueryByString(queryString:String );
 	
 	def setSPARQLQueryByFile(queryFilePath:String );
@@ -41,6 +40,6 @@ trait IQueryTranslator {
 	
 	def translateResultSet(varName:String , rs:MorphBaseResultSet ):TermMapResult ;
 	
-	
+	def setDatabaseType(dbType:String) = {this.databaseType = dbType}
 
 }

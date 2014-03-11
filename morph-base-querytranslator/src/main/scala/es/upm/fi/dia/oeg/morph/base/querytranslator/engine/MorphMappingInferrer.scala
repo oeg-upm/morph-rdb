@@ -125,7 +125,7 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 
 					if(RDF.`type`.getURI().equalsIgnoreCase(predicateURI) && tpObject.isURI()) {
 						val subjectType = tpObject.getURI();
-						val cms = this.mappingDocument.getConceptMappingsByConceptName(subjectType);
+						val cms = this.mappingDocument.getClassMappingsByClassURI(subjectType);
 
 						if(cms != null && cms.size() > 0) {
 							mapNodeTypes = this.addToInferredTypes(mapNodeTypes, tpSubject, cms.toSet);
@@ -183,7 +183,7 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 					}			  
 				})
 			
-				val subjectTypes = this.mappingDocument.getConceptMappingByPropertyURIs(predicateURIs);
+				val subjectTypes = this.mappingDocument.getClassMappingByPropertyURIs(predicateURIs);
 				Some((subject -> subjectTypes.toSet));			  
 			} else {
 			  None

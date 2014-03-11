@@ -11,10 +11,11 @@ import es.upm.fi.dia.oeg.morph.base.ValueTransformator
 import es.upm.fi.dia.oeg.morph.base.XMLUtility
 import es.upm.fi.dia.oeg.morph.base.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseQueryResultWriter
+import java.io.OutputStream
 
 
-class MorphXMLQueryResultWriter(queryTranslator:IQueryTranslator) 
-extends MorphBaseQueryResultWriter(queryTranslator) {
+class MorphXMLQueryResultWriter(queryTranslator:IQueryTranslator, outputStream:OutputStream) 
+extends MorphBaseQueryResultWriter(queryTranslator, outputStream) {
 	if(queryTranslator == null) {
 		throw new Exception("Query Translator is not set yet!");
     }
@@ -106,10 +107,6 @@ extends MorphBaseQueryResultWriter(queryTranslator) {
 
 	override def getOutput() = {
 		this.xmlDoc;
-	}
-
-	override def setOutput(output:Object) = {
-		this.outputFileName = output.asInstanceOf[String];
 	}
 
 }

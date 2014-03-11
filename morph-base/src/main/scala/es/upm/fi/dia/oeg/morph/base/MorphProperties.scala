@@ -17,7 +17,7 @@ class MorphProperties extends java.util.Properties {
 //	var conn:Connection=null;
 	var ontologyFilePath:String=null;
 	var mappingDocumentFilePath:String=null ;
-	var outputFilePath:String =null;
+	var outputFilePath:Option[String] = None;
 	var queryFilePath:String =null;
 	var rdfLanguage:String=null;
 	var jenaMode:String =null;
@@ -108,10 +108,18 @@ class MorphProperties extends java.util.Properties {
 		}
 
 		this.ontologyFilePath = this.getProperty(Constants.ONTOFILE_PROP_NAME);
-		this.outputFilePath = this.getProperty(Constants.OUTPUTFILE_PROP_NAME);
+		val outputFilePropertyValue = this.getProperty(Constants.OUTPUTFILE_PROP_NAME);
+		this.outputFilePath = if(outputFilePropertyValue != null 
+		    && !outputFilePropertyValue.equals("")) {
+		  Some(outputFilePropertyValue)
+		} else { None }
+		
 
 		if(configurationDirectory != null) {
-			this.outputFilePath = configurationDirectory + outputFilePath;
+		  if(this.outputFilePath.isDefined) {
+		    this.outputFilePath = Some(configurationDirectory + outputFilePath.get);
+		  }
+			
 			if(this.ontologyFilePath != null && !this.ontologyFilePath.equals("")) {
 				this.ontologyFilePath = configurationDirectory + ontologyFilePath;
 			}
@@ -218,9 +226,12 @@ class MorphProperties extends java.util.Properties {
 	def setDatabaseDriver(dbDriver:String) = {this.databaseDriver=dbDriver}
 	def setDatabaseType(dbType:String) = {this.databaseType=dbType}
 	def setMappingDocumentFilePath(mdPath:String) = {this.mappingDocumentFilePath=mdPath}
-	def setOutputFilePath(outputPath:String) = {this.outputFilePath=outputPath}
-
 	
+	def setOutputFilePath(outputPath:String) = {
+	  this.outputFilePath = if(outputPath == null || outputPath.equals("")) {
+	    None
+	  } else {Some(outputPath)}
+	}
 }
 
 object MorphProperties {

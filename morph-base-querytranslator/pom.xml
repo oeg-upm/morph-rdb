@@ -103,7 +103,7 @@
 		</repository>
 
 		<repository>
-			<id>aldebaran-external-libs</id>
+			<id>aldebaran-snapshots</id>
 			<name>Aldebaran External Libraries</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
 		</repository>

@@ -336,6 +336,8 @@ with MorphR2RMLElementVisitor {
 					if(subjectGraphs == null || subjectGraphs.isEmpty) {
 //						this.materializer.materializeRDFTypeTriple(subjectString, classURI, sm.isBlankNode(), null);
 					  this.materializer.materializeQuad(subject, RDF.`type`, statementObject, null);
+					  this.materializer.outputStream.flush();
+					  
 					} else {
 						subjectGraphs.foreach(subjectGraph => {
 //							this.materializer.materializeRDFTypeTriple(subjectString, classURI, sm.isBlankNode(), subjectGraph);

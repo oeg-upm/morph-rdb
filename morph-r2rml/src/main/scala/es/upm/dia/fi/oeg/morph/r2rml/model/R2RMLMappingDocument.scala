@@ -16,30 +16,21 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
 
-class R2RMLMappingDocument(classMappings:Iterable[MorphBaseClassMapping]) 
-extends MorphBaseMappingDocument(classMappings:Iterable[MorphBaseClassMapping]) with MorphR2RMLElement {
+class R2RMLMappingDocument(classMappings:Iterable[R2RMLTriplesMap]) 
+extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {
 	override val logger = Logger.getLogger(this.getClass());
    
-   
-   
-   def buildMetaData(conn:Connection, databaseName:String
+	def buildMetaData(conn:Connection, databaseName:String
        , databaseType:String) = {
-     if(this.dbMetaData == null && conn != null) {
-	     this.dbMetaData = MorphDatabaseMetaData(conn, databaseName, databaseType);
-	     this.classMappings.foreach(cm => cm.buildMetaData(this.dbMetaData));       
-     }
-
-   }
-	
-
-	def accept(visitor:MorphR2RMLElementVisitor) : Object  = {
-		val result = visitor.visit(this);
-		result;
+		if(this.dbMetaData == null && conn != null) {
+			this.dbMetaData = MorphDatabaseMetaData(conn, databaseName, databaseType);
+			this.classMappings.foreach(cm => cm.buildMetaData(this.dbMetaData));       
+		}
 	}
-	
 
+	def accept(visitor:MorphR2RMLElementVisitor) : Object  = { visitor.visit(this);  }
 	
-	override def getMappedProperties() : java.util.List[String] = {
+	override def getMappedProperties() : Iterable[String] = {
 		val cms = this.classMappings.toList;
 		val resultAux = cms.map(cm => {
 			val tm = cm.asInstanceOf[R2RMLTriplesMap];
@@ -185,6 +176,20 @@ extends MorphBaseMappingDocument(classMappings:Iterable[MorphBaseClassMapping]) 
 		resultInSet
 	}
 	
+	def getClassMappingsByInstanceTemplate(templateValue:String) 
+	: Iterable[MorphBaseClassMapping] = {
+	  this.classMappings.filter(cm => {
+	    val tm = cm.asInstanceOf[R2RMLTriplesMap]
+	    tm.subjectMap.templateString.startsWith(templateValue)
+	  })
+	}
+
+	def getClassMappingsByInstanceURI(instanceURI:String):Iterable[MorphBaseClassMapping] = {
+	  this.classMappings.filter(cm => {
+	    val possibleInstance = cm.isPossibleInstance(instanceURI)
+	    possibleInstance
+	  })
+	}	
 	
 }
 
@@ -238,7 +243,7 @@ object R2RMLMappingDocument {
 		}
    
 		//md.configurationProperties = props;
-		md.setMappingDocumentPrefixMap(model.getNsPrefixMap());
+		md.mappingDocumentPrefixMap = model.getNsPrefixMap().toMap;
 		md
 		
 	}  

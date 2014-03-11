@@ -27,5 +27,5 @@ abstract class MorphBaseDataTranslator(val md:MorphBaseMappingDocument
 	
 	def translateData(triplesMaps:Iterable[MorphBaseClassMapping] );
 	
-	def postTranslation() = {this.materializer.postMaterialize}
+//	def postTranslation() = {this.materializer.postMaterialize}
 }

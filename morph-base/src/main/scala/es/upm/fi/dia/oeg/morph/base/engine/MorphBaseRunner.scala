@@ -1,7 +1,6 @@
 package es.upm.fi.dia.oeg.morph.base.engine
 
 import scala.collection.JavaConversions._
-
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import java.sql.Connection
 import es.upm.fi.dia.oeg.morph.base.Constants
@@ -13,6 +12,9 @@ import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.materializer.MaterializerFactory
 import com.hp.hpl.jena.query.QueryFactory
 import es.upm.fi.dia.oeg.newrqr.RewriterWrapper
+import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
+import java.io.OutputStream
+import java.io.Writer
 
 abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     //, conn:Connection
@@ -22,48 +24,28 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     , materializer : MorphBaseMaterializer
     , val queryTranslator:Option[IQueryTranslator]
     , resultProcessor:Option[AbstractQueryResultTranslator]
+    , var outputStream:Writer
     //, queryResultWriter :MorphBaseQueryResultWriter
     ) {
   
 	var ontologyFilePath:String=null;
 	val logger = Logger.getLogger(this.getClass());
-//	var configurationProperties:ConfigurationProperties =null;
-//	var conn:Connection =null;
-//	var dataTranslator :MorphBaseDataTranslator = null;
-//	var materializer : MorphBaseMaterializer = null;
-	//	private Collection<IQuery> sqlQueries;
-	//private String queryResultWriterClassName = null;
-//	var queryResultWriterOutput :Object = null;
-		
-
-
-
 	
-
-
-
+	def setOutputStream(outputStream:Writer) = { 
+	  this.outputStream = outputStream
+	  this.materializer.outputStream = outputStream; 
+	  }
 	
-
-
-
-
-
-
-
-
-
-
-
-	def postMaterialize() = {
-		//CLEANING UP
-		try {
-			this.dataTranslator.materializer.postMaterialize();
-			//out.flush(); out.close();
-			//fileOut.flush(); fileOut.close();
-			this.dataSourceReader.closeConnection;
-			
-		} catch { case e:Exception => { e.printStackTrace(); } } 
-	}
+//	def postMaterialize() = {
+//		//CLEANING UP
+//		try {
+//			this.dataTranslator.materializer.postMaterialize();
+//			//out.flush(); out.close();
+//			//fileOut.flush(); fileOut.close();
+//			this.dataSourceReader.closeConnection;
+//			
+//		} catch { case e:Exception => { e.printStackTrace(); } } 
+//	}
 	
 	def materializeMappingDocuments(md:MorphBaseMappingDocument ) {
 		val start = System.currentTimeMillis();
@@ -85,7 +67,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		this.dataTranslator.materializer.materialize();
 
 		//POSTMATERIALIZE PROCESS
-		this.postMaterialize();
+//		this.postMaterialize();
 
 		val endGeneratingModel = System.currentTimeMillis();
 		val durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
@@ -99,14 +81,18 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		}
 	}
 	
-	def materializeSubjects(classURI:String , outputFileName:String ) ={
+	def materializeContainer(containerValue:String) = {
+		val cms = this.mappingDocument.getClassMappingsByInstanceTemplate(containerValue);
+		this.materializeClassMappings(cms);
+	}
+	
+	def materializeClassMappings(cms:Iterable[MorphBaseClassMapping]) = {
 		val startGeneratingModel = System.currentTimeMillis();
-		
-		//PREMATERIALIZE PROCESS
+
+	  //PREMATERIALIZE PROCESS
 //		this.preMaterializeProcess(outputFileName);
 
 		//MATERIALIZING MODEL
-		val cms = this.mappingDocument.getConceptMappingsByConceptName(classURI);
 		cms.foreach(cm => {
 			val sqlQuery = this.unfolder.unfoldConceptMapping(cm);
 			this.dataTranslator.generateSubjects(cm, sqlQuery);		  
@@ -114,24 +100,41 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		this.dataTranslator.materializer.materialize();
 
 		//POSTMATERIALIZE PROCESS
-		this.postMaterialize();
+//		this.postMaterialize();
 
 		val endGeneratingModel = System.currentTimeMillis();
 		val durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
 		logger.info("Materializing Subjects time was "+(durationGeneratingModel)+" s.");
+	}
+	
+	def materializeLDPRequest(ldpRequest:String) = {
+	  if(ldpRequest.endsWith("/")) {
+	    logger.info("Materializing LDPC");
+	    this.materializeContainer(ldpRequest);
+	  } else {
+	    logger.info("Materializing LDPR");
+	    this.materializeResource(ldpRequest);
+	  }
+	}
+	
+	def materializeResource(instanceURI:String) = {
+	  val cms = this.mappingDocument.getClassMappingsByInstanceURI(instanceURI);
+	  this.materializeInstanceDetails(instanceURI, cms)
+	}
+	
+	def materializeSubjects(classURI:String) ={
+		//MATERIALIZING MODEL
+		val cms = this.mappingDocument.getClassMappingsByClassURI(classURI);
+		this.materializeClassMappings(cms);
 		//return result;
 	}
 
-	def materializeInstanceDetails(subjectURI:String , classURI:String
-	    , outputFileName:String ) = {
+	def materializeInstanceDetails(subjectURI:String,cms:Iterable[MorphBaseClassMapping]):Unit={
 		val startGeneratingModel = System.currentTimeMillis();
 		
 		//PREMATERIALIZE PROCESS
 //		this.preMaterializeProcess(outputFileName);
 
-		//MATERIALIZING MODEL
-		val cms = this.mappingDocument.getConceptMappingsByConceptName(classURI);
-		
 		cms.foreach(cm => {
 			val sqlQuery = this.unfolder.unfoldConceptMapping(cm, subjectURI);
 			if(sqlQuery != null) {
@@ -141,11 +144,24 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		this.dataTranslator.materializer.materialize();
 
 		//POSTMATERIALIZE PROCESS
-		this.postMaterialize();
+//		this.postMaterialize();
 
 		val endGeneratingModel = System.currentTimeMillis();
 		val durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
 		logger.info("Materializing Subjects time was "+(durationGeneratingModel)+" s.");
+	  
+	}
+	
+	def materializeInstanceDetails(subjectURI:String , classURI:String
+	    , outputStream:OutputStream) : Unit = {
+		val startGeneratingModel = System.currentTimeMillis();
+		
+		//PREMATERIALIZE PROCESS
+//		this.preMaterializeProcess(outputFileName);
+
+		//MATERIALIZING MODEL
+		val cms = this.mappingDocument.getClassMappingsByClassURI(classURI);
+		this.materializeInstanceDetails(subjectURI, cms);
 	}
 
 	def run() : String = {
@@ -169,7 +185,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 				//REWRITE THE QUERY BASED ON THE MAPPINGS AND ONTOLOGY
 				logger.info("Rewriting query...");
 				//				Collection <String> mappedOntologyElements = MappingsExtractor.getMappedPredcatesFromR2O(mappingDocumentFile);
-				val mappedOntologyElements = this.mappingDocument.getMappedConcepts();
+				val mappedOntologyElements = this.mappingDocument.getMappedClasses();
 				val mappedOntologyElements2 = this.mappingDocument.getMappedProperties();
 				mappedOntologyElements.addAll(mappedOntologyElements2);
 
