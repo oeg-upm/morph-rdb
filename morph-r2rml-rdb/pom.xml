@@ -57,6 +57,13 @@
 			<artifactId>morph-base-querytranslator</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>		 -->
+
+		<dependency>
+			<groupId>rqr4r2o</groupId>
+			<artifactId>rqr4r2o</artifactId>
+			<version>0.1</version>
+		</dependency>	
+			
 	</dependencies>
 
 	<distributionManagement>
