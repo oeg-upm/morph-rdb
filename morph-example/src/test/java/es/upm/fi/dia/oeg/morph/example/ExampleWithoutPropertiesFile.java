@@ -89,68 +89,9 @@ public class ExampleWithoutPropertiesFile {
 		}
 	}
 	
-	@Test
-	public void testMaterializeSubjects() {
-		String resultFile = System.getProperty("user.dir") 
-				+ File.separator + "examples" + File.separator + "subjects-result.nt";
-		String mappingDocumentFile = System.getProperty("user.dir") 
-				+ File.separator + "examples" + File.separator + "example.ttl";
-		String classURI = "http://mappingpedia.linkeddata.es/vocabulary/Person";
-		
-		MorphProperties properties = new MorphProperties();
-		properties.setNoOfDatabase(1);
-		properties.setDatabaseUser(dbUserName);
-		properties.setDatabasePassword(dbPassword);
-		properties.setDatabaseName(dbName);
-		properties.setDatabaseURL(jdbc_url);
-		properties.setDatabaseDriver(databaseDriver);
-		properties.setDatabaseType(databaseType);
-		properties.setMappingDocumentFilePath(mappingDocumentFile);
-		properties.setOutputFilePath(resultFile);
-		try {
-			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
-			MorphBaseRunner runner = runnerFactory.createRunner(properties);
-			runner.materializeSubjects(classURI,resultFile);
-			assertTrue("testBatch done", true);
-		} catch(Exception e) {
-			e.printStackTrace();
-			String errorMessage = "Error occured: " + e.getMessage();
-			logger.warn(errorMessage);
-			assertTrue(e.getMessage(), false);
-		}
-	}
+
 	
-	@Test
-	public void testMaterializeInstanceDetails() {
-		String resultFile = System.getProperty("user.dir") 
-				+ File.separator + "examples" + File.separator + "instance-details-result.nt";
-		String mappingDocumentFile = System.getProperty("user.dir") 
-				+ File.separator + "examples" + File.separator + "example2.ttl";
-		String classURI = "http://mappingpedia.linkeddata.es/vocabulary/Person";
-		String subjectURI = "http://mappingpedia.linkeddata.es/resources/Student/B1";
-		
-		MorphProperties properties = new MorphProperties();
-		properties.setNoOfDatabase(1);
-		properties.setDatabaseUser(dbUserName);
-		properties.setDatabasePassword(dbPassword);
-		properties.setDatabaseName(dbName);
-		properties.setDatabaseURL(jdbc_url);
-		properties.setDatabaseDriver(databaseDriver);
-		properties.setDatabaseType(databaseType);
-		properties.setMappingDocumentFilePath(mappingDocumentFile);
-		properties.setOutputFilePath(resultFile);
-		try {
-			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
-			MorphBaseRunner runner = runnerFactory.createRunner(properties);
-			runner.materializeInstanceDetails(subjectURI, classURI, resultFile);
-			assertTrue("testBatch done", true);
-		} catch(Exception e) {
-			e.printStackTrace();
-			String errorMessage = "Error occured: " + e.getMessage();
-			logger.warn(errorMessage);
-			assertTrue(e.getMessage(), false);
-		}
-	}
+
 	
 	@Test
 	public void testQueryGetSubjects() {
