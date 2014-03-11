@@ -18,17 +18,8 @@ extends MorphBaseMaterializer(model,ntOutputStream) {
 	this.outputStream = ntOutputStream;
 	
 	override val logger = Logger.getLogger(this.getClass().getName());
-//	val writer = new PrintWriter(this.outputStream); 
-//	val bufferedWriter = new BufferedOutputStream(this.outputStream);
-//	val out= new BufferedWriter(new OutputStreamWriter(outputStream));
 
-	
 	def write(triple:String ) = {
-		val writer3 = new PrintWriter("result3.nt", "UTF-8");
-		writer3.write(triple);
-		writer3.flush();
-		//writer3.close();
-		
 		this.outputStream.write(triple)
 		this.outputStream.flush();
 	}
