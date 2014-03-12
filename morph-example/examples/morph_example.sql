@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-02-2014 a las 16:05:04
+-- Tiempo de generación: 12-03-2014 a las 19:10:10
 -- Versión del servidor: 5.6.11
 -- Versión de PHP: 5.5.3
 
