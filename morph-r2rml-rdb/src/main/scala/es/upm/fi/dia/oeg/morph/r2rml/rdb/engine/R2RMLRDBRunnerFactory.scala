@@ -21,19 +21,19 @@ import java.io.Writer
 class R2RMLRDBRunnerFactory extends MorphBaseRunnerFactory{
   
 	override def createRunner(mappingDocument:MorphBaseMappingDocument
-    , dataSourceReader:MorphBaseDataSourceReader
+//    , dataSourceReader:MorphBaseDataSourceReader
     , unfolder:MorphBaseUnfolder
-    , dataTranslator :MorphBaseDataTranslator
-    , materializer : MorphBaseMaterializer
+    , dataTranslator :Option[MorphBaseDataTranslator]
+//    , materializer : MorphBaseMaterializer
     , queryTranslator:Option[IQueryTranslator]
     , resultProcessor:Option[AbstractQueryResultTranslator]
 	, outputStream:Writer
     ) : R2RMLRunner = { 
 	  new R2RMLRunner(mappingDocument.asInstanceOf[R2RMLMappingDocument]
-    , dataSourceReader
+//    , dataSourceReader
     , unfolder.asInstanceOf[R2RMLUnfolder]
-    , dataTranslator.asInstanceOf[R2RMLDataTranslator]
-    , materializer
+    , dataTranslator.asInstanceOf[Option[R2RMLDataTranslator]]
+//    , materializer
     , queryTranslator
     , resultProcessor
     , outputStream

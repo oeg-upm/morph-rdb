@@ -6,11 +6,12 @@ import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.TermMapResult
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
+import com.hp.hpl.jena.sparql.algebra.Op
 
 trait IQueryTranslator {
 	var connection:Connection = null;
 
-	var sparqlQuery :Query = null;
+//	var sparqlQuery :Query = null;
 	
 	var optimizer:QueryTranslationOptimizer  = null;
 	
@@ -22,9 +23,9 @@ trait IQueryTranslator {
 
 	var mappingDocument:MorphBaseMappingDocument= null;
 
-	def setSPARQLQueryByString(queryString:String );
-	
-	def setSPARQLQueryByFile(queryFilePath:String );
+//	def setSPARQLQueryByString(queryString:String );
+//	
+//	def setSPARQLQueryByFile(queryFilePath:String );
 	
 	def getTranslationResult():IQuery ;
 	
@@ -42,4 +43,5 @@ trait IQueryTranslator {
 	
 	def setDatabaseType(dbType:String) = {this.databaseType = dbType}
 
+	def trans(op:Op ) : IQuery;	
 }

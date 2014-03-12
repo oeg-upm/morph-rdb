@@ -15,26 +15,46 @@ import es.upm.fi.dia.oeg.newrqr.RewriterWrapper
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import java.io.OutputStream
 import java.io.Writer
+import com.hp.hpl.jena.graph.NodeFactory
+import com.hp.hpl.jena.vocabulary.RDF
+import com.hp.hpl.jena.graph.Triple
+import com.hp.hpl.jena.sparql.core.BasicPattern
+import com.hp.hpl.jena.sparql.algebra.op.OpBGP
+import com.hp.hpl.jena.sparql.algebra.op.OpProject
+import com.hp.hpl.jena.sparql.algebra.OpAsQuery
+import com.hp.hpl.jena.sparql.core.Var
+import com.hp.hpl.jena.vocabulary.RDFS
 
 abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     //, conn:Connection
-    , dataSourceReader:MorphBaseDataSourceReader
+    //, dataSourceReader:MorphBaseDataSourceReader
     , unfolder:MorphBaseUnfolder
-    , dataTranslator :MorphBaseDataTranslator
-    , materializer : MorphBaseMaterializer
+    , dataTranslator : Option[MorphBaseDataTranslator]
+    //, materializer : Option[MorphBaseMaterializer]
     , val queryTranslator:Option[IQueryTranslator]
-    , resultProcessor:Option[AbstractQueryResultTranslator]
+    , queryResultTranslator:Option[AbstractQueryResultTranslator]
     , var outputStream:Writer
     //, queryResultWriter :MorphBaseQueryResultWriter
     ) {
   
-	var ontologyFilePath:String=null;
 	val logger = Logger.getLogger(this.getClass());
+	var ontologyFilePath:String=null;
+	var sparqlQuery:Query=null;
 	
 	def setOutputStream(outputStream:Writer) = { 
-	  this.outputStream = outputStream
-	  this.materializer.outputStream = outputStream; 
-	  }
+		this.outputStream = outputStream
+		//	  if(this.materializer.isDefined) {
+		//		  this.materializer.get.outputStream = outputStream;
+		//	  }
+		if(this.dataTranslator.isDefined) {
+			this.dataTranslator.get.materializer.outputStream = outputStream; 
+		}
+		
+		if(this.queryResultTranslator.isDefined) {
+		  this.queryResultTranslator.get.queryResultWriter.outputStream = outputStream;
+		}
+	   
+	}
 	
 //	def postMaterialize() = {
 //		//CLEANING UP
@@ -48,6 +68,12 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 //	}
 	
 	def materializeMappingDocuments(md:MorphBaseMappingDocument ) {
+	  if(!this.dataTranslator.isDefined) {
+	    val errorMessage = "Data Translator has not been defined yet!";
+	    logger.error(errorMessage);
+	    throw new Exception(errorMessage)
+	  }
+	  
 		val start = System.currentTimeMillis();
 		
 		//PREMATERIALIZE PROCESS
@@ -61,10 +87,10 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		//this.dataTranslator.translateData(cms);
 		cms.foreach(cm => {
 			val sqlQuery = this.unfolder.unfoldConceptMapping(cm);
-			this.dataTranslator.generateRDFTriples(cm, sqlQuery);
+			this.dataTranslator.get.generateRDFTriples(cm, sqlQuery);
 		})
 		
-		this.dataTranslator.materializer.materialize();
+		this.dataTranslator.get.materializer.materialize();
 
 		//POSTMATERIALIZE PROCESS
 //		this.postMaterialize();
@@ -77,7 +103,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 	def readSPARQLFile(sparqQueryFileURL:String ) {
 		if(this.queryTranslator.isDefined) {
 			val sparqQuery = QueryFactory.read(sparqQueryFileURL);
-			this.queryTranslator.get.sparqlQuery = sparqQuery;
+			this.sparqlQuery = sparqQuery;
 		}
 	}
 	
@@ -87,6 +113,12 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 	}
 	
 	def materializeClassMappings(cms:Iterable[MorphBaseClassMapping]) = {
+	  if(!this.dataTranslator.isDefined) {
+	    val errorMessage = "Data Translator has not been defined yet!";
+	    logger.error(errorMessage);
+	    throw new Exception(errorMessage)
+	  }
+
 		val startGeneratingModel = System.currentTimeMillis();
 
 	  //PREMATERIALIZE PROCESS
@@ -95,9 +127,9 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		//MATERIALIZING MODEL
 		cms.foreach(cm => {
 			val sqlQuery = this.unfolder.unfoldConceptMapping(cm);
-			this.dataTranslator.generateSubjects(cm, sqlQuery);		  
+			this.dataTranslator.get.generateSubjects(cm, sqlQuery);		  
 		})
-		this.dataTranslator.materializer.materialize();
+		this.dataTranslator.get.materializer.materialize();
 
 		//POSTMATERIALIZE PROCESS
 //		this.postMaterialize();
@@ -117,6 +149,55 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 	  }
 	}
 	
+	def queryResource(ldpRequest:String) = {
+	  val cms = this.mappingDocument.getClassMappingsByInstanceURI(ldpRequest);
+	  cms.foreach(cm => {
+		  val classURI = cm.getMappedClassURIs.iterator.next;
+		  val stgSubject = NodeFactory.createURI(ldpRequest);
+		  val tp1Predicate = RDF.`type`.asNode();
+		  val tp1Object = NodeFactory.createURI(classURI);
+		  val tp1 = new Triple(stgSubject, tp1Predicate, tp1Object);
+
+		  val tp2Predicate = NodeFactory.createVariable("p");
+		  val tp2Object = NodeFactory.createVariable("o");
+		  val tp2 = new Triple(stgSubject, tp2Predicate, tp2Object);
+			
+		  val basicPattern = BasicPattern.wrap(List(tp1, tp2));
+		  val bgp = new OpBGP(basicPattern);
+		  val varPredicate = Var.alloc(tp2Predicate);
+		  val varObject = Var.alloc(tp2Object);
+		  
+		  val opProject = new OpProject(bgp, List(varPredicate, varObject));
+		  val sparqlQuery = OpAsQuery.asQuery(opProject);
+		  sparqlQuery.setQuerySelectType();
+		  val mapSparqlSQL = this.translateSPARQLQueriesIntoSQLQueries(List(sparqlQuery));
+		  this.queryResultTranslator.get.translateResult(mapSparqlSQL);	    
+	  })
+
+	}
+	
+	def queryContainer(ldpRequest:String) = {
+		val cms = this.mappingDocument.getClassMappingsByInstanceTemplate(ldpRequest);
+		cms.foreach(cm => {
+			val subjectVariable = "s";
+			val classURI = cm.getMappedClassURIs.iterator.next;
+			val tpSubject = NodeFactory.createVariable(subjectVariable);
+			val tpPredicate1 = RDF.`type`.asNode();
+			val tpObject1 = NodeFactory.createURI(classURI);
+			val tp1 = new Triple(tpSubject, tpPredicate1, tpObject1);
+			val tpObject2 = RDFS.Resource.asNode();
+			val tp2 = new Triple(tpSubject, tpPredicate1, tpObject2);//FORCING STG
+			val basicPattern = BasicPattern.wrap(List(tp1, tp2));
+			val bgp = new OpBGP(basicPattern);
+			val varSubject = Var.alloc(subjectVariable);
+			val opProject = new OpProject(bgp, List(varSubject));
+			val sparqlQuery = OpAsQuery.asQuery(opProject);
+			sparqlQuery.setQuerySelectType();
+			val mapSparqlSQL = this.translateSPARQLQueriesIntoSQLQueries(List(sparqlQuery));
+			this.queryResultTranslator.get.translateResult(mapSparqlSQL);				
+		})
+	}
+	
 	def materializeResource(instanceURI:String) = {
 	  val cms = this.mappingDocument.getClassMappingsByInstanceURI(instanceURI);
 	  this.materializeInstanceDetails(instanceURI, cms)
@@ -130,6 +211,12 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 	}
 
 	def materializeInstanceDetails(subjectURI:String,cms:Iterable[MorphBaseClassMapping]):Unit={
+	  if(!this.dataTranslator.isDefined) {
+	    val errorMessage = "Data Translator has not been defined yet!";
+	    logger.error(errorMessage);
+	    throw new Exception(errorMessage)
+	  }
+	  
 		val startGeneratingModel = System.currentTimeMillis();
 		
 		//PREMATERIALIZE PROCESS
@@ -138,10 +225,10 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		cms.foreach(cm => {
 			val sqlQuery = this.unfolder.unfoldConceptMapping(cm, subjectURI);
 			if(sqlQuery != null) {
-				this.dataTranslator.generateRDFTriples(cm, sqlQuery);	
+				this.dataTranslator.get.generateRDFTriples(cm, sqlQuery);	
 			}		  
 		})
-		this.dataTranslator.materializer.materialize();
+		this.dataTranslator.get.materializer.materialize();
 
 		//POSTMATERIALIZE PROCESS
 //		this.postMaterialize();
@@ -167,15 +254,15 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 	def run() : String = {
 		var status:String  = null;
 
-		val sparqlQuery = if(this.queryTranslator.isDefined) {
-		  this.queryTranslator.get.sparqlQuery
-		} else { null }
+//		val sparqlQuery = if(this.queryTranslator.isDefined) {
+//		  this.queryTranslator.get.sparqlQuery
+//		} else { null }
 		
-		if(sparqlQuery == null) {
+		if(this.sparqlQuery == null) {
 			//set output file
 			this.materializeMappingDocuments(mappingDocument);
 		} else {
-			logger.debug("sparql query = " + sparqlQuery);
+			logger.debug("sparql query = " + this.sparqlQuery);
 
 			//LOADING ONTOLOGY FILE
 			//REWRITE THE SPARQL QUERY IF NECESSARY
@@ -203,12 +290,12 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 
 
 			//TRANSLATE SPARQL QUERIES INTO SQL QUERIES
-			val sqlQueries = this.translateSPARQLQueriesIntoSQLQueries(queries);
+			val mapSparqlSql= this.translateSPARQLQueriesIntoSQLQueries(queries);
 
 			//translate result
 			//if (this.conn != null) {
 			//GFT does not need a Connection instance
-			this.resultProcessor.get.translateResult(sqlQueries);	
+			this.queryResultTranslator.get.translateResult(mapSparqlSql);	
 			//}
 		}
 
@@ -217,15 +304,16 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 
 	}
 
-	def translateSPARQLQueriesIntoSQLQueries(sparqlQueries:Iterable[Query] ):Iterable[IQuery]={
+	def translateSPARQLQueriesIntoSQLQueries(sparqlQueries:Iterable[Query] )
+	:Map[Query, IQuery]={
 		val sqlQueries = sparqlQueries.map(sparqlQuery => {
 			logger.debug("SPARQL Query = \n" + sparqlQuery);
 			val sqlQuery = this.queryTranslator.get.translate(sparqlQuery);
 			logger.debug("SQL Query = \n" + sqlQuery);
-			sqlQuery;
+			(sparqlQuery -> sqlQuery);
 		})
 
-		sqlQueries;
+		sqlQueries.toMap
 	}
 
 

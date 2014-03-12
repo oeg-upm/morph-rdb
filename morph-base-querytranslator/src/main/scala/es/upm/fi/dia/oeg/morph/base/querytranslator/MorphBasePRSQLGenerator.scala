@@ -13,7 +13,7 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 
-class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
+abstract class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
 
   val logger = Logger.getLogger("MorphBasePRSQLGenerator");
 //	val databaseType = {
@@ -42,9 +42,10 @@ class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnf
 		if(tpPredicate != tpSubject) {
 			//line 22
 			if(unboundedPredicate) {
-				val selectItemPredicate = this.genPRSQLPredicate(tp, alphaResult, betaGenerator, nameGenerator, predicateURI);
-				if(selectItemPredicate != null) {
-					prList = prList ::: List(selectItemPredicate);
+				val selectItemPredicates = this.genPRSQLPredicate(tp, cmSubject, alphaResult
+				    , betaGenerator, nameGenerator, predicateURI);
+				if(selectItemPredicates != null) {
+					prList = prList ::: selectItemPredicates.toList;
 				}				
 			}
 		}
@@ -106,18 +107,23 @@ class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnf
 		selectItems.toList;
 	}
 
-	def  genPRSQLPredicate(tp:Triple, alphaResult:MorphAlphaResult 
-	    , betaGenerator:MorphBaseBetaGenerator, nameGenerator:NameGenerator 
-	    , predicateURI:String ) : ZSelectItem = {
+	def  genPRSQLPredicate(tp:Triple, cm:MorphBaseClassMapping
+	    , alphaResult:MorphAlphaResult, betaGenerator:MorphBaseBetaGenerator
+	    , nameGenerator:NameGenerator, predicateURI:String ) : Iterable[ZSelectItem] = {
 			val betaPre = betaGenerator.calculateBetaPredicate(predicateURI);
 			val selectItem = MorphSQLSelectItem.apply(betaPre, this.dbType, "text");
-
-			val alias = nameGenerator.generateName(tp.getPredicate());
+			val tpPredicate = tp.getPredicate();
+			
+			val alias = nameGenerator.generateName(tpPredicate);
 			selectItem.setAlias(alias);
-			return selectItem;
+			
+			val predicateMappingIdSelectItems = this.genPRSQLPredicateMappingId(tpPredicate,cm);
+			return List(selectItem) ::: predicateMappingIdSelectItems;
 
 	}
-	
+
+  	def genPRSQLPredicateMappingId(node:Node,cm:MorphBaseClassMapping ):List[ZSelectItem];
+
 	def  genPRSQLSubject(tp:Triple , alphaResult:MorphAlphaResult 
 	    , betaGenerator:MorphBaseBetaGenerator, nameGenerator:NameGenerator 
 	    , cmSubject:MorphBaseClassMapping ) : List[ZSelectItem] = {
@@ -159,6 +165,7 @@ class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnf
 		val selectItemsSubjects = this.genPRSQLSubject(firstTriple, alphaResult, betaGenerator, nameGenerator, cmSubject);
 
 		val tpSubject = firstTriple.getSubject();
+		var selectItemsSTGPredicates: LinkedHashSet[ZSelectItem] = new LinkedHashSet[ZSelectItem]();
 		var selectItemsSTGObjects : LinkedHashSet[ZSelectItem] = new LinkedHashSet[ZSelectItem]();
 		
 		for(tp <- stg)  {
@@ -174,10 +181,10 @@ class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnf
 			} else {
 				val tpObject = tp.getObject();
 				if(tpPredicate != tpSubject) {
-					val selectItemPredicate = this.genPRSQLPredicate(tp, alphaResult
-					    , betaGenerator, nameGenerator,predicateURI);
-					if(selectItemPredicate != null) {
-						//prList.add(selectItemPredicate);	
+					val selectItemPredicates = this.genPRSQLPredicate(tp, cmSubject
+					    , alphaResult, betaGenerator, nameGenerator, predicateURI);
+					if(selectItemPredicates != null) {
+						selectItemsSTGPredicates = selectItemsSTGPredicates ++ selectItemPredicates; 	
 					}
 					
 				}
@@ -190,7 +197,7 @@ class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnf
 			}
 		}
 
-		val prList = selectItemsSubjects.toList ::: selectItemsSTGObjects.toList;
+		val prList = selectItemsSubjects.toList ::: selectItemsSTGPredicates.toList ::: selectItemsSTGObjects.toList;
 		prList;
 	}
 	

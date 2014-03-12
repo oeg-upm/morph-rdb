@@ -22,6 +22,7 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
+import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTermMap
 
 class MorphRDBPRSQLGenerator(md:R2RMLMappingDocument, unfolder:R2RMLUnfolder)
 extends MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
@@ -134,6 +135,8 @@ extends MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseU
 	override def  genPRSQLSubject(tp:Triple, alphaResult:MorphAlphaResult 
 	    , betaGenerator:MorphBaseBetaGenerator, nameGenerator:NameGenerator 
 	    , cmSubject:MorphBaseClassMapping) : List[ZSelectItem] = {
+		val triplesMap = cmSubject.asInstanceOf[R2RMLTriplesMap];
+		val subjectMap = triplesMap.subjectMap;
 		
 		val tpSubject = tp.getSubject();
 		val result:List[ZSelectItem] = {
@@ -142,7 +145,7 @@ extends MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseU
 						, betaGenerator, nameGenerator, cmSubject).toList;
 				
 				val subject = tp.getSubject();
-				val selectItemsMappingId = this.genPRSQLSubjectMappingId(subject, cmSubject);
+				val selectItemsMappingId = this.genPRSQLMappingId(subject, subjectMap);
 				if(selectItemsMappingId == null) {
 					parentResult
 				} else {
@@ -156,25 +159,32 @@ extends MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseU
 		result;
 	}
 
-	def genPRSQLSubjectMappingId(subject:Node , cmSubject:MorphBaseClassMapping ) = {
+	def genPRSQLMappingId(node:Node , termMap:R2RMLTermMap):List[ZSelectItem] = {
 		val result : List[ZSelectItem] = {
-			if(subject.isVariable()) {
-				val triplesMap = cmSubject.asInstanceOf[R2RMLTriplesMap];
-				val subjectMap = triplesMap.subjectMap;
-				val mappingHashCodeConstant = new ZConstant(subjectMap.hashCode() + "", ZConstant.NUMBER);
+			if(node.isVariable()) {
+				val termMapHashCode = termMap.hashCode();
+				val mappingHashCodeConstant = new ZConstant(
+				    termMapHashCode + "", ZConstant.NUMBER);
 				val mappingSelectItem = MorphSQLSelectItem.apply(
 						mappingHashCodeConstant, dbType, Constants.POSTGRESQL_COLUMN_TYPE_INTEGER);
-				val mappingSelectItemAlias = Constants.PREFIX_MAPPING_ID + subject.getName();
+				val mappingSelectItemAlias = Constants.PREFIX_MAPPING_ID + node.getName();
 				mappingSelectItem.setAlias(mappingSelectItemAlias);
 				val childResult = List(mappingSelectItem);
 				
-				this.putMappedMapping(subjectMap.hashCode(), subjectMap);
+				this.putMappedMapping(termMapHashCode, termMap);
 				childResult;
-			} else {
-			  Nil;
-			}	
+			} else { Nil; }	
 		}
 
 		result;
 	}
+	
+	override def genPRSQLPredicateMappingId(node:Node,cm:MorphBaseClassMapping ):List[ZSelectItem] = {
+		val triplesMap = cm.asInstanceOf[R2RMLTriplesMap];
+		val poMap = triplesMap.predicateObjectMaps.iterator.next;
+		val predicateMap = poMap.predicateMaps.iterator.next;
+		val selectItemPredicateMappingId = this.genPRSQLMappingId(node, predicateMap);
+		selectItemPredicateMappingId
+	}
+	
 }

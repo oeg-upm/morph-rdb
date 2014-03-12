@@ -3,6 +3,7 @@ package es.upm.fi.dia.oeg.morph.base.querytranslator
 import com.hp.hpl.jena.graph.Node
 import com.hp.hpl.jena.sparql.core.Var
 import es.upm.fi.dia.oeg.morph.base.Constants
+import com.hp.hpl.jena.graph.Node_Variable
 
 class NameGenerator {
 	
@@ -11,7 +12,7 @@ class NameGenerator {
 		
 		val result = {
 			if(node.isVariable()) {
-				this.generateName(node.asInstanceOf[Var]);
+				Constants.PREFIX_VAR + node.getName();
 			} else if(node.isURI()) {
 				val localName = node.getLocalName(); 
 				Constants.PREFIX_URI + localName + nodeHashCode;
@@ -29,4 +30,8 @@ class NameGenerator {
 	def generateName(pVar:Var) : String = {
 		Constants.PREFIX_VAR + pVar.getName();
 	}
+
+	def generateName(pVar:Node_Variable) : String = {
+		Constants.PREFIX_VAR + pVar.getName();
+	}	
 }

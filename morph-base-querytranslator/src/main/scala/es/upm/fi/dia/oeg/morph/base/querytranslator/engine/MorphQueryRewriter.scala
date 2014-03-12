@@ -201,7 +201,7 @@ extends Rewrite {
 					if(needsPhantomTP) {
 					  val phantomSubject = rightTpSubject;
 					  val phantomPredicate = RDF.`type`.asNode();
-					  val phantomObject = RDFS.Class.asNode();
+					  val phantomObject = RDFS.Resource.asNode();
 					  
 					  val phantomTriple = new Triple(phantomSubject, phantomPredicate, phantomObject);
 					  val newLeftChildRewrittenTPList = leftChildRewrittenTPList ::: List(phantomTriple);

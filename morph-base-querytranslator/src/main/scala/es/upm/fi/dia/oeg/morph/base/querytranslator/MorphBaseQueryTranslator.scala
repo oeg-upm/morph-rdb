@@ -1418,7 +1418,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		}
 	}
 
-	def translate(sparqlQuery:Query ) : IQuery  = {
+	override def translate(sparqlQuery:Query ) : IQuery  = {
+		
 		val opSparqlQuery = Algebra.compile(sparqlQuery) ;
 		logger.info("SPARQL query = \n" + opSparqlQuery);
 		logger.debug("opSparqlQuery = " + opSparqlQuery);
@@ -1670,19 +1671,20 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 	
 
 	
-	override def setSPARQLQueryByString(sparqlQueryString:String ) = {
-		val sparqQuery = QueryFactory.create(sparqlQueryString);
-		this.sparqlQuery = sparqQuery;
-	}
 
-	override def setSPARQLQueryByFile(queryFilePath:String ) =  {
-		if(queryFilePath != null && !queryFilePath.equals("") ) {
-			logger.info("Parsing query file : " + queryFilePath);
-			val sparqQuery = QueryFactory.read(queryFilePath);
-			this.sparqlQuery = sparqQuery;
-		}
-	}
 	
 	def getTranslationResult(): IQuery = this.currentTranslationResult;
 	
+//	override def setSPARQLQueryByString(sparqlQueryString:String ) = {
+//		val sparqQuery = QueryFactory.create(sparqlQueryString);
+//		this.sparqlQuery = sparqQuery;
+//	}
+//
+//   override def setSPARQLQueryByFile(queryFilePath:String ) =  {
+//		if(queryFilePath != null && !queryFilePath.equals("") ) {
+//			logger.info("Parsing query file : " + queryFilePath);
+//			val sparqQuery = QueryFactory.read(queryFilePath);
+//			this.sparqlQuery = sparqQuery;
+//		}
+//	}	
 }

@@ -12,19 +12,23 @@ import es.upm.fi.dia.oeg.morph.base.XMLUtility
 import es.upm.fi.dia.oeg.morph.base.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseQueryResultWriter
 import java.io.OutputStream
+import java.io.Writer
 
 
-class MorphXMLQueryResultWriter(queryTranslator:IQueryTranslator, outputStream:OutputStream) 
-extends MorphBaseQueryResultWriter(queryTranslator, outputStream) {
+class MorphXMLQueryResultWriter(queryTranslator:IQueryTranslator, xmlOutputStream:Writer) 
+extends MorphBaseQueryResultWriter(queryTranslator, xmlOutputStream) {
+	this.outputStream = xmlOutputStream;
+	
+	val logger = Logger.getLogger(this.getClass().getName());
+	
 	if(queryTranslator == null) {
 		throw new Exception("Query Translator is not set yet!");
     }
 	
-	val logger = Logger.getLogger(this.getClass().getName());
 	val xmlDoc = XMLUtility.createNewXMLDocument();
 	val resultsElement = xmlDoc.createElement("results");
 
-	var outputFileName:String = null;
+	//var outputFileName:String = null;
 	
 
 	override def initialize() = { }
@@ -38,7 +42,7 @@ extends MorphBaseQueryResultWriter(queryTranslator, outputStream) {
 		//create head element
 		val headElement = xmlDoc.createElement("head");
 		rootElement.appendChild(headElement);
-		val sparqlQuery = this.queryTranslator.sparqlQuery;
+		val sparqlQuery = this.sparqlQuery;
 		val varNames = sparqlQuery.getResultVars();
 		for(varName <- varNames) {
 			val variableElement = xmlDoc.createElement("variable");
@@ -52,7 +56,7 @@ extends MorphBaseQueryResultWriter(queryTranslator, outputStream) {
 
 	def process() = {
 		val queryTranslator = this.queryTranslator;
-		val sparqlQuery = queryTranslator.sparqlQuery;
+		val sparqlQuery = this.sparqlQuery;
 		val varNames = sparqlQuery.getResultVars();
 		
 		var i=0;
@@ -100,8 +104,8 @@ extends MorphBaseQueryResultWriter(queryTranslator, outputStream) {
 	}
 
 	def postProcess() = {
-		logger.info("Writing result to " + outputFileName);
-		XMLUtility.saveXMLDocument(xmlDoc, outputFileName);
+		logger.info("Writing query result to " + outputStream);
+		XMLUtility.saveXMLDocument(xmlDoc, outputStream);
 	}
 
 

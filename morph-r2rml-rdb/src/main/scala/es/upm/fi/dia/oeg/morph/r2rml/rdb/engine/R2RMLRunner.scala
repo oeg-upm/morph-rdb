@@ -16,18 +16,18 @@ import java.io.Writer
 
 
 class R2RMLRunner(mappingDocument:R2RMLMappingDocument
-    , dataSourceReader:MorphBaseDataSourceReader
+//    , dataSourceReader:MorphBaseDataSourceReader
     , unfolder:R2RMLUnfolder
-    , dataTranslator:R2RMLDataTranslator
-    , materializer:MorphBaseMaterializer
+    , dataTranslator:Option[R2RMLDataTranslator]
+//    , materializer:MorphBaseMaterializer
     , queryTranslator:Option[IQueryTranslator]
     , resultProcessor:Option[AbstractQueryResultTranslator]
     , outputStream:Writer
     ) extends MorphBaseRunner(mappingDocument
-    , dataSourceReader
+//    , dataSourceReader
     , unfolder
     , dataTranslator
-    , materializer
+//    , materializer
     , queryTranslator
     , resultProcessor
     , outputStream

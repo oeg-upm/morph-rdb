@@ -7,6 +7,8 @@ import org.apache.xml.serialize.XMLSerializer
 import java.io.FileOutputStream
 import java.io.File
 import java.io.StringWriter
+import java.io.OutputStream
+import java.io.Writer
 
 class XMLUtility {
 
@@ -24,7 +26,7 @@ object XMLUtility {
 	 * This method uses Xerces specific classes
 	 * prints the XML document to file.
      */
-	def saveXMLDocument(document:Document , filename:String ) = {
+	def saveXMLDocument(document:Document , outputStream:Writer ) = {
 		try
 		{
 			//print
@@ -35,7 +37,7 @@ object XMLUtility {
 			//XMLSerializer serializer = new XMLSerializer(System.out, format);
 
 			//to generate a file output use fileoutputstream instead of system.out
-			val serializer = new XMLSerializer(new FileOutputStream(new File(filename)), format);
+			val serializer = new XMLSerializer(outputStream, format);
 			serializer.serialize(document);
 		} catch {
 		  case e:Exception => {

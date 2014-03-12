@@ -91,6 +91,8 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
 		val mapValue = {
 			try {
 				val mappingHashCode = rs.getInt(Constants.PREFIX_MAPPING_ID + varName);
+				
+				//IN CASE OF UNION, A VARIABLE MAY MAPPED TO MULTIPLE MAPPINGS
 				if(mappingHashCode == null) {
 					val varNameHashCode = varName.hashCode();
 					//super.getMappedMapping(varNameHashCode);
