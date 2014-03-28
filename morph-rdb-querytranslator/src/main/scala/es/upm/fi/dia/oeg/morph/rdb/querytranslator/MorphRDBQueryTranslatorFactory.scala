@@ -1,6 +1,6 @@
 package es.upm.fi.dia.oeg.morph.rdb.querytranslator
 
-import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUnfolder
 import java.sql.Connection
 import es.upm.fi.dia.oeg.morph.base.querytranslator.NameGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
@@ -17,7 +17,7 @@ class MorphRDBQueryTranslatorFactory extends IQueryTranslatorFactory {
 	    , conn:Connection) : IQueryTranslator = {
 		val md = abstractMappingDocument.asInstanceOf[R2RMLMappingDocument];
 		//val unfolder = abstractUnfolder.asInstanceOf[R2RMLUnfolder];
-		val unfolder = new R2RMLUnfolder(md);
+		val unfolder = new MorphRDBUnfolder(md);
 		
 		val nameGenerator = new NameGenerator();
 		val alphaGenerator:MorphBaseAlphaGenerator = new MorphRDBAlphaGenerator(md, unfolder);

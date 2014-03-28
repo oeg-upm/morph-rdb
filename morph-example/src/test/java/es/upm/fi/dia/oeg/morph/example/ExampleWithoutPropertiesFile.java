@@ -11,7 +11,7 @@ import org.junit.Test;
 import es.upm.fi.dia.oeg.morph.base.MorphProperties;
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
-import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLRDBRunnerFactory;
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
 
 public class ExampleWithoutPropertiesFile {
 	private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
@@ -44,7 +44,7 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(properties);
 			runner.run();
 			assertTrue("testBatch done", true);
@@ -76,7 +76,7 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(properties);
 			runner.readSPARQLFile(queryFile);
 			runner.run();
@@ -113,7 +113,7 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(properties);
 			runner.readSPARQLFile(queryFile);
 			runner.run();
@@ -146,7 +146,7 @@ public class ExampleWithoutPropertiesFile {
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		try {
-			R2RMLRDBRunnerFactory runnerFactory = new R2RMLRDBRunnerFactory();
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(properties);
 			runner.readSPARQLFile(queryFile);
 			runner.run();

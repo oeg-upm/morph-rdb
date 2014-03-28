@@ -119,7 +119,7 @@ object Constants {
 	val QUERY_RESULT_TRANSLATOR_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.morph.base.querytranslator.engine.DefaultQueryResultTranslatorFactory";
 	
 	val DATASOURCE_READER_CLASSNAME = "datasourcereader.class.name";
-	val DATASOURCE_READER_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.RDBReader";
+	val DATASOURCE_READER_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBDataSourceReader";
 	val QUERY_RESULT_WRITER_FACTORY_CLASSNAME = "queryresultwriterfactory.class.name";
 	//val QUERY_RESULT_WRITER_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.obdi.core.engine.XMLQueryResultWriter";
 	val QUERY_RESULT_WRITER_FACTORY_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.morph.base.querytranslator.engine.XMLQueryResultWriterFactory";
@@ -130,6 +130,9 @@ object Constants {
 	val  REMOVE_STRANGE_CHARS_FROM_LITERAL = "literal.removestrangechars";
 	val  ENCODE_UNSAFE_CHARS_IN_URI_COLUMN = "uricolumn.encodeunsafecharacters";
 	val  ENCODE_RESERVED_CHARS_IN_URI_COLUMN = "uricolumn.encodereserveccharacters";
+	
+	val TRANSFORMATION_STRING_TOLOWERCASE = "toLowerCase";
+	val TRANSFORMATION_STRING_TOUPPERCASE = "toUpperCase";
 	
 	//aliases
 	val  URI_AS_ALIAS="uri_";

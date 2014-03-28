@@ -6,7 +6,7 @@ import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseResultSet
 import es.upm.fi.dia.oeg.morph.base.engine.RDBResultSet
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataSourceReader
 
-class RDBReader() extends MorphBaseDataSourceReader {
+class MorphRDBDataSourceReader() extends MorphBaseDataSourceReader {
 	var timeout:Int = 60;
 	var connection:Connection=null;
 	var dbType:String = null;

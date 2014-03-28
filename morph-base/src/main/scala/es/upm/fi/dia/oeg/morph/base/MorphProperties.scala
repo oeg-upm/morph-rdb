@@ -36,13 +36,13 @@ class MorphProperties extends java.util.Properties {
 	var transJoinSubQueryElimination = true;
 	var transSTGSubQueryElimination = true;
 	var subQueryAsView = false;
-	
 
 	//batch upgrade
 	var literalRemoveStrangeChars:Boolean = true;
 	var encodeUnsafeChars:Boolean = true;
 	var encodeReservedChars:Boolean = false;
-
+	var transformString:Option[String] = null;
+	
 	//database
 	var noOfDatabase=0;
 	var databaseDriver:String =null; 
@@ -176,6 +176,9 @@ class MorphProperties extends java.util.Properties {
 		    Constants.ENCODE_RESERVED_CHARS_IN_URI_COLUMN, false);
 		logger.debug("Encode Reserved Chars From URI Column = " + this.encodeReservedChars);
 
+		this.transformString = this.readString(MorphProperties.TRANSFORM_STRING_PROPERTY, None);
+		logger.debug("String transformation = " + this.transformString);
+
 	}
 
 
@@ -212,12 +215,20 @@ class MorphProperties extends java.util.Properties {
 		val propertyString = this.getProperty(property);
 		val result = if(propertyString != null && !propertyString.equals("")) {
 			propertyString;
-		} else {
-		  defaultValue
-		}
+		} 
+		else { defaultValue }
 		return result;
 	}
-	
+
+	def readString(property:String , defaultValue:Option[String]) : Option[String] = {
+		val propertyString = this.getProperty(property);
+		val result = if(propertyString != null && !propertyString.equals("")) {
+			Some(propertyString);
+		} 
+		else { defaultValue }
+		result;
+	}
+
 	def setNoOfDatabase(x:Int) = {this.noOfDatabase=x}
 	def setDatabaseUser(dbUser:String) = {this.databaseUser=dbUser}
 	def setDatabaseURL(dbURL:String) = {this.databaseURL=dbURL}
@@ -235,6 +246,8 @@ class MorphProperties extends java.util.Properties {
 }
 
 object MorphProperties {
+	val TRANSFORM_STRING_PROPERTY = "transform.string"
+
   val logger = Logger.getLogger(this.getClass());
   
   def apply(pConfigurationDirectory:String , configurationFile:String) : MorphProperties = {

@@ -18,7 +18,7 @@ import es.upm.fi.dia.oeg.morph.base.engine.QueryTranslationOptimizerFactory
 import java.io.OutputStream
 import java.io.Writer
 
-class R2RMLRDBRunnerFactory extends MorphBaseRunnerFactory{
+class MorphRDBRunnerFactory extends MorphBaseRunnerFactory{
   
 	override def createRunner(mappingDocument:MorphBaseMappingDocument
 //    , dataSourceReader:MorphBaseDataSourceReader
@@ -28,11 +28,11 @@ class R2RMLRDBRunnerFactory extends MorphBaseRunnerFactory{
     , queryTranslator:Option[IQueryTranslator]
     , resultProcessor:Option[AbstractQueryResultTranslator]
 	, outputStream:Writer
-    ) : R2RMLRunner = { 
-	  new R2RMLRunner(mappingDocument.asInstanceOf[R2RMLMappingDocument]
+    ) : MorphRDBRunner = { 
+	  new MorphRDBRunner(mappingDocument.asInstanceOf[R2RMLMappingDocument]
 //    , dataSourceReader
-    , unfolder.asInstanceOf[R2RMLUnfolder]
-    , dataTranslator.asInstanceOf[Option[R2RMLDataTranslator]]
+    , unfolder.asInstanceOf[MorphRDBUnfolder]
+    , dataTranslator.asInstanceOf[Option[MorphRDBDataTranslator]]
 //    , materializer
     , queryTranslator
     , resultProcessor
@@ -48,8 +48,8 @@ class R2RMLRDBRunnerFactory extends MorphBaseRunnerFactory{
 		mappingDocument
 	}
 	
-	override def createUnfolder(md:MorphBaseMappingDocument, dbType:String):R2RMLUnfolder = {
-		val unfolder = new R2RMLUnfolder(md.asInstanceOf[R2RMLMappingDocument]);
+	override def createUnfolder(md:MorphBaseMappingDocument, dbType:String):MorphRDBUnfolder = {
+		val unfolder = new MorphRDBUnfolder(md.asInstanceOf[R2RMLMappingDocument]);
 		unfolder.dbType = dbType
 		unfolder;	  
 	}
@@ -59,23 +59,23 @@ class R2RMLRDBRunnerFactory extends MorphBaseRunnerFactory{
 	    , dataSourceReader:MorphBaseDataSourceReader
 	    , connection:Connection, properties:MorphProperties)
 	:MorphBaseDataTranslator = {
-			new R2RMLDataTranslator(mappingDocument.asInstanceOf[R2RMLMappingDocument]
-			, materializer , unfolder.asInstanceOf[R2RMLUnfolder]
-			, dataSourceReader.asInstanceOf[RDBReader] , connection, properties);	  
+			new MorphRDBDataTranslator(mappingDocument.asInstanceOf[R2RMLMappingDocument]
+			, materializer , unfolder.asInstanceOf[MorphRDBUnfolder]
+			, dataSourceReader.asInstanceOf[MorphRDBDataSourceReader] , connection, properties);	  
 	}
 }
 
-object R2RMLRDBRunnerFactory {
+object MorphRDBRunnerFactory {
 	def createR2RMLRunnerC(configurationDirectory:String , configurationFile:String) 
 	: MorphBaseRunner = {
 		val properties = MorphProperties.apply(configurationDirectory, configurationFile);
-		val r2rmlRunner = R2RMLRDBRunnerFactory.createR2RMLRunnerC(properties);
+		val r2rmlRunner = MorphRDBRunnerFactory.createR2RMLRunnerC(properties);
 		return r2rmlRunner;
 	}
 
 	def createR2RMLRunnerC(properties:MorphProperties) 
 	: MorphBaseRunner = {
-		val runnerFactory = new R2RMLRDBRunnerFactory();
+		val runnerFactory = new MorphRDBRunnerFactory();
 		val r2rmlRunner = runnerFactory.createRunner(properties);
 		val queryTranslator = r2rmlRunner.queryTranslator
 		if(queryTranslator.isDefined) {
@@ -90,12 +90,12 @@ object R2RMLRDBRunnerFactory {
 	def createR2RMLRunnerE(configurationDirectory:String, configurationFile:String) : MorphBaseRunner = {
 		val properties = 
 				MorphProperties.apply(configurationDirectory, configurationFile);
-		val r2rmlRunner = R2RMLRDBRunnerFactory.createR2RMLRunnerE(properties);
+		val r2rmlRunner = MorphRDBRunnerFactory.createR2RMLRunnerE(properties);
 		r2rmlRunner;
 	}
 	
 	def  createR2RMLRunnerE(properties:MorphProperties) : MorphBaseRunner = {
-		val runnerFactory = new R2RMLRDBRunnerFactory();
+		val runnerFactory = new MorphRDBRunnerFactory();
 		val r2rmlRunner = runnerFactory.createRunner(properties);
 //		r2rmlRunner.buildQueryTranslator();
 		val queryTranslator = r2rmlRunner.queryTranslator;
@@ -111,12 +111,12 @@ object R2RMLRDBRunnerFactory {
 	def createR2RMLRunnerFC(configurationDirectory:String, configurationFile:String) : MorphBaseRunner = {
 		val properties = 
 				MorphProperties.apply(configurationDirectory, configurationFile);
-		val r2rmlRunner = R2RMLRDBRunnerFactory.createR2RMLRunnerFC(properties);
+		val r2rmlRunner = MorphRDBRunnerFactory.createR2RMLRunnerFC(properties);
 		r2rmlRunner;
 	}
 
 	def createR2RMLRunnerFC(properties:MorphProperties ) : MorphBaseRunner = {
-		val runnerFactory = new R2RMLRDBRunnerFactory();
+		val runnerFactory = new MorphRDBRunnerFactory();
 		val r2rmlRunner = runnerFactory.createRunner(properties);
 //		r2rmlRunner.buildQueryTranslator();
 		val queryTranslator = r2rmlRunner.queryTranslator;
@@ -132,12 +132,12 @@ object R2RMLRDBRunnerFactory {
 	def createR2RMLRunnerFE(configurationDirectory:String, configurationFile:String) : MorphBaseRunner = {
 		val properties = 
 				MorphProperties.apply(configurationDirectory, configurationFile);
-		val r2rmlRunner = R2RMLRDBRunnerFactory.createR2RMLRunnerFE(properties);
+		val r2rmlRunner = MorphRDBRunnerFactory.createR2RMLRunnerFE(properties);
 		r2rmlRunner;
 	}
 
 	def createR2RMLRunnerFE(properties:MorphProperties ) : MorphBaseRunner = {
-		val runnerFactory = new R2RMLRDBRunnerFactory();
+		val runnerFactory = new MorphRDBRunnerFactory();
 		val r2rmlRunner = runnerFactory.createRunner(properties);
 //		r2rmlRunner.buildQueryTranslator();
 		val queryTranslator = r2rmlRunner.queryTranslator;

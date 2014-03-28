@@ -9,15 +9,15 @@ import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
-import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUnfolder
 
 
-class MorphRDBBetaGenerator(md:R2RMLMappingDocument, unfolder:R2RMLUnfolder)
+class MorphRDBBetaGenerator(md:R2RMLMappingDocument, unfolder:MorphRDBUnfolder)
 extends MorphBaseBetaGenerator(md, unfolder) {
 
 	override def calculateBetaObject(tp:Triple , cm:MorphBaseClassMapping , predicateURI:String 

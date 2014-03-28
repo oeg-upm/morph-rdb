@@ -11,7 +11,6 @@ import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUtility
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
-import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseCondSQLGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
@@ -19,8 +18,9 @@ import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUnfolder
 
-class MorphRDBCondSQLGenerator(md:R2RMLMappingDocument, unfolder:R2RMLUnfolder) 
+class MorphRDBCondSQLGenerator(md:R2RMLMappingDocument, unfolder:MorphRDBUnfolder) 
 extends MorphBaseCondSQLGenerator(md, unfolder:MorphBaseUnfolder) {
 	override val logger = Logger.getLogger("MorphCondSQLGenerator");
 

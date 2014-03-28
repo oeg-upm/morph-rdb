@@ -34,7 +34,7 @@ import es.upm.fi.dia.oeg.morph.base.sql.SQLJoinTable
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 
-class R2RMLUnfolder(md:R2RMLMappingDocument) 
+class MorphRDBUnfolder(md:R2RMLMappingDocument) 
 extends MorphBaseUnfolder(md) with MorphR2RMLElementVisitor {
 	var mapTermMapColumnsAliases:Map[Object, List[String]] = Map.empty;
 	val logger = Logger.getLogger(this.getClass().getName());
@@ -271,7 +271,7 @@ extends MorphBaseUnfolder(md) with MorphR2RMLElementVisitor {
 
 						
 						val joinConditions = refObjectMap.getJoinConditions();
-						val onExpression = R2RMLUnfolder.unfoldJoinConditions(
+						val onExpression = MorphRDBUnfolder.unfoldJoinConditions(
 						    joinConditions, logicalTableAlias, joinQueryAlias, dbType);
 						val joinQuery = new SQLJoinTable(sqlParentLogicalTable
 						    , Constants.JOINS_TYPE_LEFT, onExpression);
@@ -427,7 +427,7 @@ extends MorphBaseUnfolder(md) with MorphR2RMLElementVisitor {
 	}
 }
 
-object R2RMLUnfolder {
+object MorphRDBUnfolder {
 	def unfoldJoinConditions(pJoinConditions:Iterable[R2RMLJoinCondition] 
 	, parentTableAlias:String, joinQueryAlias:String , dbType:String ) : ZExpression  = {
 		val joinConditions = {

@@ -15,10 +15,10 @@ import java.io.OutputStream
 import java.io.Writer
 
 
-class R2RMLRunner(mappingDocument:R2RMLMappingDocument
+class MorphRDBRunner(mappingDocument:R2RMLMappingDocument
 //    , dataSourceReader:MorphBaseDataSourceReader
-    , unfolder:R2RMLUnfolder
-    , dataTranslator:Option[R2RMLDataTranslator]
+    , unfolder:MorphRDBUnfolder
+    , dataTranslator:Option[MorphRDBDataTranslator]
 //    , materializer:MorphBaseMaterializer
     , queryTranslator:Option[IQueryTranslator]
     , resultProcessor:Option[AbstractQueryResultTranslator]
@@ -36,21 +36,21 @@ class R2RMLRunner(mappingDocument:R2RMLMappingDocument
 	override val logger = Logger.getLogger(this.getClass());
 }
 
-object R2RMLRunner {
+object MorphRDBRunner {
 	val logger = Logger.getLogger("R2RMLRunner");
 	
-	def apply(properties:MorphProperties ) : R2RMLRunner = {
-		val runnerFactory = new R2RMLRDBRunnerFactory();
+	def apply(properties:MorphProperties ) : MorphRDBRunner = {
+		val runnerFactory = new MorphRDBRunnerFactory();
 		//val runner = new R2RMLRunner();
 //		runner.loadConfigurationProperties(properties);
 		val runner = runnerFactory.createRunner(properties);
-		runner.asInstanceOf[R2RMLRunner];
+		runner.asInstanceOf[MorphRDBRunner];
 	}
 	
-	def apply(configurationDirectory:String , configurationFile:String ) : R2RMLRunner = {
+	def apply(configurationDirectory:String , configurationFile:String ) : MorphRDBRunner = {
 		val configurationProperties = 
 				MorphProperties.apply(configurationDirectory, configurationFile);
-		val runner = R2RMLRunner(configurationProperties)
+		val runner = MorphRDBRunner(configurationProperties)
 		runner
 	}
 	
@@ -67,7 +67,7 @@ object R2RMLRunner {
 			val configurationFile = args(1);
 			logger.debug("propertiesFile = " + configurationFile);
 			
-			val runner = R2RMLRunner(configurationDirectory, configurationFile);
+			val runner = MorphRDBRunner(configurationDirectory, configurationFile);
 			runner.run();
 		} catch {
 		  case e:Exception => {

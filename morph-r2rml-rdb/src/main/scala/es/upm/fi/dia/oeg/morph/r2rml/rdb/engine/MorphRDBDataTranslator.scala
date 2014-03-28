@@ -38,8 +38,8 @@ import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataSourceReader
 
-class R2RMLDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMaterializer
-    , unfolder:R2RMLUnfolder, dataSourceReader:RDBReader
+class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMaterializer
+    , unfolder:MorphRDBUnfolder, dataSourceReader:MorphRDBDataSourceReader
     , connection:Connection, properties:MorphProperties) 
 extends MorphBaseDataTranslator(md, materializer , unfolder, dataSourceReader
     , connection, properties) 
@@ -51,7 +51,13 @@ with MorphR2RMLElementVisitor {
 		null;
 	}
 
-	override def translateData(triplesMaps:Iterable[MorphBaseClassMapping]) = {
+	override def translateData(triplesMap:MorphBaseClassMapping) : Unit = {
+		val query = this.unfolder.unfoldConceptMapping(triplesMap);
+		this.generateRDFTriples(triplesMap, query);
+		null;	  
+	}
+	
+	override def translateData(triplesMaps:Iterable[MorphBaseClassMapping]) : Unit = {
 		for(triplesMap <- triplesMaps) {
 			try {
 			  this.visit(triplesMap.asInstanceOf[R2RMLTriplesMap]);
@@ -479,8 +485,7 @@ with MorphR2RMLElementVisitor {
 	def visit(triplesMap:R2RMLTriplesMap) : Object = {
 //		String sqlQuery = triplesMap.accept(
 //				new R2RMLElementUnfoldVisitor()).toString();
-		val query = triplesMap.accept(this.unfolder).asInstanceOf[IQuery];
-		this.generateRDFTriples(triplesMap, query);
+		this.translateData(triplesMap);
 		null;
 	}
 
@@ -660,7 +665,27 @@ with MorphR2RMLElementVisitor {
 			    	termMap.columnName
 			    }
 
-			  val dbValue = this.getResultSetValue(termMap, rs, columnTermMapValue);
+			  val dbValueAux = this.getResultSetValue(termMap, rs, columnTermMapValue);
+//			  val dbValue = dbValueAux match {
+//				  case dbValueAuxString:String => {
+//					  if(this.properties.transformString.isDefined) {
+//					    this.properties.transformString.get match {
+//						    case Constants.TRANSFORMATION_STRING_TOLOWERCASE => {
+//						      dbValueAuxString.toLowerCase();
+//						    }
+//						    case Constants.TRANSFORMATION_STRING_TOUPPERCASE => {
+//						      dbValueAuxString.toUpperCase();
+//						    }
+//						    case _ => { dbValueAuxString }
+//					    }
+//
+//					  } 
+//					  else { dbValueAuxString }
+//				  }
+//				  case _ => { dbValueAux }
+//			  }
+			  val dbValue = dbValueAux;
+			  
 
 				val datatype = if(termMap.datatype.isDefined) { termMap.datatype } 
 				else {
@@ -693,9 +718,27 @@ with MorphR2RMLElementVisitor {
 						attribute;
 					}
 					
-					val databaseValue = this.getResultSetValue(termMap, rs, databaseColumn);
-					if(databaseValue != null) {
-						val databaseValueString = databaseValue.toString();
+					val dbValueAux = this.getResultSetValue(termMap, rs, databaseColumn);
+					  val dbValue = dbValueAux match {
+						  case dbValueAuxString:String => {
+							  if(this.properties.transformString.isDefined) {
+							    this.properties.transformString.get match {
+								    case Constants.TRANSFORMATION_STRING_TOLOWERCASE => {
+								      dbValueAuxString.toLowerCase();
+								    }
+								    case Constants.TRANSFORMATION_STRING_TOUPPERCASE => {
+								      dbValueAuxString.toUpperCase();
+								    }
+								    case _ => { dbValueAuxString }
+							    }
+		
+							  } 
+							  else { dbValueAuxString }
+						  }
+						  case _ => { dbValueAux }
+					  }					
+					if(dbValue != null) {
+						val databaseValueString = dbValue.toString();
 						Some(attribute -> databaseValueString);
 					} else {
 					  None

@@ -21,11 +21,15 @@ abstract class MorphBaseDataTranslator(val md:MorphBaseMappingDocument
 	
 	def translateData(mappingDocument:MorphBaseMappingDocument ) ;
 	
+	def translateData(triplesMaps:Iterable[MorphBaseClassMapping] );
+	
+	def translateData(triplesMap:MorphBaseClassMapping);
+	
 	def generateRDFTriples(cm:MorphBaseClassMapping , iQuery:IQuery );
 	
 	def generateSubjects(cm:MorphBaseClassMapping , iQuery:IQuery) ;
 	
-	def translateData(triplesMaps:Iterable[MorphBaseClassMapping] );
+	
 	
 //	def postTranslation() = {this.materializer.postMaterialize}
 }

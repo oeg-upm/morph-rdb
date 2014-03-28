@@ -14,7 +14,6 @@ import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.RegexUtility
 import es.upm.fi.dia.oeg.morph.base.TermMapResult
 import es.upm.fi.dia.oeg.morph.base.GeneralUtility
-import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.R2RMLUnfolder
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTermMap

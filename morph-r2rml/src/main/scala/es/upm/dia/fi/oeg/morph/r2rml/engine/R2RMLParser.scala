@@ -1,4 +1,4 @@
-package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
+package es.upm.fi.dia.oeg.morph.r2rml.engine
 
 import scala.collection.JavaConversions._
 import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
