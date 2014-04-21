@@ -22,7 +22,7 @@ extends MorphBaseClassMapping(predicateObjectMaps) with MorphR2RMLElement with I
   	val logger = Logger.getLogger(this.getClass());
 	//var triplesMapName:String = null;
 	
-	def buildMetaData(dbMetadata:MorphDatabaseMetaData) = {
+	def buildMetaData(dbMetadata:Option[MorphDatabaseMetaData]) = {
 	  logger.debug("Building metadata for TriplesMap: " + this.name);
 	  
 	  this.logicalTable.buildMetaData(dbMetadata);
@@ -112,7 +112,7 @@ extends MorphBaseClassMapping(predicateObjectMaps) with MorphR2RMLElement with I
 		this.subjectMap.classURIs;
 	}
 
-	override def getTableMetaData() : MorphTableMetaData = {
+	override def getTableMetaData() : Option[MorphTableMetaData] = {
 		this.logicalTable.tableMetaData;
 	}
 	

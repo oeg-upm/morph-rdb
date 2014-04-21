@@ -39,6 +39,7 @@ object Constants {
 	val SQL_EXPRESSION_FALSE = new ZExpression(
 			"=", new ZConstant("1", ZConstant.NUMBER), new ZConstant("0", ZConstant.NUMBER));
 	
+	val DATABASE_DEFAULT = DATABASE_MYSQL;
 	val DATABASE_MONETDB = "MonetDB";
 	val DATABASE_ORACLE = "Oracle";
 	val DATABASE_MYSQL = "MySQL";

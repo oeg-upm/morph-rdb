@@ -18,7 +18,7 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 {
 	var owner:MorphBaseQueryTranslator = null;
 	
-  def logger = Logger.getLogger("MorphBaseAlphaGenerator");
+  def logger = Logger.getLogger(this.getClass());
   
 //	val databaseType = {
 //		if(this.owner == null) {null}

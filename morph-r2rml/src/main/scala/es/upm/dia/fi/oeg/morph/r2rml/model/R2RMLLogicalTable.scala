@@ -15,10 +15,12 @@ extends MorphBaseLogicalTable with MorphR2RMLElement{
 	val logger = Logger.getLogger(this.getClass().getName());
 	var alias:String = null;
 
-	def buildMetaData(dbMetaData:MorphDatabaseMetaData ) = {
+	def buildMetaData(dbMetaData:Option[MorphDatabaseMetaData] ) = {
 		val tableName = this match {
 		  case r2rmlTable:R2RMLTable => {
-		    val dbType = dbMetaData.dbType;
+		    val dbType = if(dbMetaData.isDefined) { dbMetaData.get.dbType; }
+		    else { Constants.DATABASE_DEFAULT }
+		      
 		    val enclosedChar = Constants.getEnclosedCharacter(dbType);
 		    val tableNameAux = r2rmlTable.getValue().replaceAll("\"", enclosedChar);
 		    tableNameAux
@@ -34,16 +36,14 @@ extends MorphBaseLogicalTable with MorphR2RMLElement{
 		  }
 		}
 		
-		val optionTableMetaData = dbMetaData.getTableMetaData(tableName);
-		val tableMetaData = {
-			if(optionTableMetaData.isDefined) {
-				optionTableMetaData.get;
-			} else {
-				MorphTableMetaData.buildTableMetaData(tableName, dbMetaData);
-			}		  
+		if(dbMetaData.isDefined) {
+			val optionTableMetaData = dbMetaData.get.getTableMetaData(tableName);
+			val tableMetaData = optionTableMetaData.getOrElse(
+			    MorphTableMetaData.buildTableMetaData(tableName, dbMetaData.get));
+	
+			this.tableMetaData = Some(tableMetaData);
 		}
 
-		this.tableMetaData = tableMetaData;
 	}
 
 	def getValue() : String;

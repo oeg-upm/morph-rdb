@@ -14,7 +14,7 @@ abstract class MorphBaseMappingDocument(val classMappings:Iterable[MorphBaseClas
 	var name:String =null;
 	var purpose:String =null;
 	//var configurationProperties:ConfigurationProperties =null;
-	var dbMetaData:MorphDatabaseMetaData  = null;
+	var dbMetaData:Option[MorphDatabaseMetaData] = None;
 	var mappingDocumentPath:String = null;
 	
 	def buildMetaData(connection:Connection, databaseName:String

@@ -14,9 +14,11 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 
 abstract class MorphBaseBetaGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
-	val dbType = md.dbMetaData.dbType;
+	val logger = Logger.getLogger(this.getClass());
 	
-	val logger = Logger.getLogger("MorphBaseBetaGenerator");
+	val dbType = if(md.dbMetaData.isDefined) { md.dbMetaData.get.dbType; } 
+	else { Constants.DATABASE_DEFAULT; }
+	
 	val alphaGenerator:MorphBaseAlphaGenerator=null;
 	var owner:MorphBaseQueryTranslator=null;
 	

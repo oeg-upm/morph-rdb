@@ -86,8 +86,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
     , alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
     , condSQLGenerator:MorphBaseCondSQLGenerator, prSQLGenerator:MorphBasePRSQLGenerator) 
     extends IQueryTranslator {
-  
-	val logger = Logger.getLogger("MorphBaseQueryTranslator");
+	val logger = Logger.getLogger(this.getClass());
 	
 	var currentTranslationResult:IQuery = null;
 	

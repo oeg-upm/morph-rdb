@@ -4,13 +4,13 @@ import es.upm.fi.dia.oeg.morph.base.sql.MorphTableMetaData
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
 
 abstract class MorphBaseLogicalTable {
-	var tableMetaData:MorphTableMetaData = null;
+	var tableMetaData:Option[MorphTableMetaData] = None;
 
-	def buildMetaData(dbMetaData:MorphDatabaseMetaData);
+	def buildMetaData(dbMetaData:Option[MorphDatabaseMetaData]);
 	
 	def getLogicalTableSize() : Long = {
-		if(this.tableMetaData != null) { this.tableMetaData.getTableRows();	
-		} else { -1 }
+		if(this.tableMetaData.isDefined) { this.tableMetaData.get.getTableRows();} 
+		else { -1 }
 	}
 	
 

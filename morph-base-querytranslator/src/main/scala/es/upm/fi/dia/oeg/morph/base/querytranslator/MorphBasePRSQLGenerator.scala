@@ -14,14 +14,16 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 
 abstract class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
-
-  val logger = Logger.getLogger("MorphBasePRSQLGenerator");
+  val logger = Logger.getLogger(this.getClass());
 //	val databaseType = {
 //		if(this.owner == null) {null}
 //		else {this.owner.getDatabaseType();}
 //	}
 	//val dbType = md.configurationProperties.databaseType;
-  val dbType = md.dbMetaData.dbType;
+  	val dbType = if(md.dbMetaData.isDefined) {md.dbMetaData.get.dbType;}
+  	else {Constants.DATABASE_DEFAULT}
+  	  
+  	
 	var mapHashCodeMapping : Map[Integer, Object] = Map.empty
 
 	

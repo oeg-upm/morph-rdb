@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="p"/>
+        <variable name="o"/>
+    </head>
+    <results>
+        <result>
+            <binding name="p">
+                <uri>http://mappingpedia.linkeddata.es/vocabulary/name</uri>
+            </binding>
+            <binding name="o">
+                <uri>http://mappingpedia.linkeddata.es/resources/Sport/200</uri>
+            </binding>
+        </result>
+        <result>
+            <binding name="p">
+                <uri>http://mappingpedia.linkeddata.es/vocabulary/name</uri>
+            </binding>
+            <binding name="o">
+                <literal>john@acd.edu</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="p">
+                <uri>http://mappingpedia.linkeddata.es/vocabulary/name</uri>
+            </binding>
+            <binding name="o">
+                <literal>John</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>

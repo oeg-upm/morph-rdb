@@ -13,7 +13,7 @@ import es.upm.fi.dia.oeg.morph.base.sql.MorphTableMetaData
 
 class TriplePatternPredicateBounder(mappingFile : String
     //, mapColumnsMetaData : java.util.Map[String, ColumnMetaData]
-    , tableMetaData:MorphTableMetaData
+    , tableMetaData:Option[MorphTableMetaData]
 ) {
   
 	val logger = Logger.getLogger("TriplePatternPredicateBounder");
@@ -79,24 +79,22 @@ class TriplePatternPredicateBounder(mappingFile : String
 						val rrDatatypeResource = mappingDocument.getDatatypeResource(objectMapResource);
 						val objectMapDatatype = {
 							if(rrDatatypeResource == null) {
-								if(this.tableMetaData == null) {
-									null
-								} else {
+								if(this.tableMetaData.isDefined) {
 									val tableName = mappingDocument.getRRLogicalTableTableName(
 									    triplesMapResource);
 									val rrColumnResource = 
 										mappingDocument.getRRColumnResource(objectMapResource);
 									val columnName = rrColumnResource.getLiteral().getValue().toString();
 									//val columnMetaData = this.mapColumnsMetaData(columnName);
-									val columnMetaData = this.tableMetaData.getColumnMetaData(columnName);
+									val columnMetaData = this.tableMetaData.get.getColumnMetaData(columnName);
 									if(columnMetaData == null) {
 										null
 									} else {
 										val objectDatatypeFromFromMetaData = 
 										  columnMetaData.get.dataType;
 										objectDatatypeFromFromMetaData									  
-									}
-								}
+									}								  
+								} else { null }
 							} else {
 								rrDatatypeResource.asLiteral().getValue().toString();
 							} 
@@ -171,8 +169,8 @@ class TriplePatternPredicateBounder(mappingFile : String
 									val columnName = 
 										rrColumnResource.getLiteral().getValue().toString();
 									
-									if(this.tableMetaData != null) { 
-										val columnMetaData = this.tableMetaData.getColumnMetaData(columnName);
+									if(this.tableMetaData.isDefined ) { 
+										val columnMetaData = this.tableMetaData.get.getColumnMetaData(columnName);
 									    if(columnMetaData.isDefined) {
 									    	val objectDatatypeFromFromMetaData = 
 									    			columnMetaData.get.dataType;

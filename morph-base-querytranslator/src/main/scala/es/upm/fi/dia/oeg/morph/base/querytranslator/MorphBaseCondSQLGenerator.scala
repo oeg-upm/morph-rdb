@@ -192,9 +192,9 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 									val betaColumn = betaColumnConstant.column;
 	
 									val cmd = {
-										if(tableMetaData != null ) {
-										  if(tableMetaData.getColumnMetaData(betaColumn).isDefined) {
-										    tableMetaData.getColumnMetaData(betaColumn).get
+										if(tableMetaData.isDefined ) {
+										  if(tableMetaData.get.getColumnMetaData(betaColumn).isDefined) {
+										    tableMetaData.get.getColumnMetaData(betaColumn).get
 										  } else {
 										    null
 										  }

@@ -13,7 +13,7 @@ class DBUtility {
 }
 
 object DBUtility {
-	def logger = Logger.getLogger("DBUtility");
+	def logger = Logger.getLogger(this.getClass());
 	
 	
 	def execute(conn : Connection , query: String) : Boolean = {
@@ -47,10 +47,17 @@ object DBUtility {
 	}
 
 	def executeQuery(conn:Connection , query:String , timeout:Integer) : ResultSet = {
+		logger.info("Executing query: " + query);
+		
+		if(conn == null) {
+		  val errorMessage = "No connection defined!";
+		  logger.error(errorMessage);
+		  throw new Exception(errorMessage); 
+		}
+		
 		val stmt = conn.createStatement(
 				java.sql.ResultSet.TYPE_FORWARD_ONLY,
 				java.sql.ResultSet.CONCUR_READ_ONLY);
-		
 		val dbmd = conn.getMetaData();
 		val dbProductName = dbmd.getDatabaseProductName();
 		if(Constants.DATABASE_MYSQL.equalsIgnoreCase(dbProductName)) {
@@ -60,9 +67,7 @@ object DBUtility {
 		if(timeout > 0) {
 			stmt.setQueryTimeout(timeout);
 		}
-		
 		val start = System.currentTimeMillis();
-		logger.info("Executing query: " + query);
 		val result = stmt.executeQuery(query);
 		val end = System.currentTimeMillis();
 		logger.info("SQL execution time was "+(end-start)+" ms.");

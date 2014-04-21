@@ -22,8 +22,9 @@ extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {
    
 	def buildMetaData(conn:Connection, databaseName:String
        , databaseType:String) = {
-		if(this.dbMetaData == null && conn != null) {
-			this.dbMetaData = MorphDatabaseMetaData(conn, databaseName, databaseType);
+		if(conn != null && this.dbMetaData == None) {
+			val newMetaData = MorphDatabaseMetaData(conn, databaseName, databaseType);
+			this.dbMetaData = Some(newMetaData);
 			this.classMappings.foreach(cm => cm.buildMetaData(this.dbMetaData));       
 		}
 	}

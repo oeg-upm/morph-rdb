@@ -25,7 +25,8 @@ import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 class MorphRDBAlphaGenerator(md:R2RMLMappingDocument,unfolder:MorphRDBUnfolder)
 extends MorphBaseAlphaGenerator(md,unfolder)
 {
-	val databaseType = md.dbMetaData.dbType;
+	val databaseType = if(md.dbMetaData.isDefined) { md.dbMetaData.get.dbType; }
+	else { Constants.DATABASE_DEFAULT }
 	
 	override val logger = Logger.getLogger("MorphQueryTranslator");
 	

@@ -15,10 +15,10 @@ abstract class MorphBaseClassMapping(val propertyMappings:Iterable[MorphBaseProp
 	def isPossibleInstance(uri:String):Boolean ;
 	def getLogicalTable():MorphBaseLogicalTable ;
 	def getLogicalTableSize():Long ;
-	def getTableMetaData():MorphTableMetaData ;
+	def getTableMetaData():Option[MorphTableMetaData] ;
 	def getMappedClassURIs():Iterable[String] ;
 	def getSubjectReferencedColumns():List[String] ;
-	def buildMetaData(dbMetaData:MorphDatabaseMetaData );
+	def buildMetaData(dbMetaData:Option[MorphDatabaseMetaData] );
 	
 	def setId(id:String) = { this.id = id }
 	

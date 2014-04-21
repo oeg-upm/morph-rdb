@@ -28,7 +28,9 @@ object MorphRDBUtility {
 			) : ZExpression = {
 			val logicalTable = ownerTriplesMap.getLogicalTable();
 			val logicalTableMetaData = logicalTable.tableMetaData;
-			val tableMetaData = logicalTableMetaData;
+			//val tableMetaData = logicalTableMetaData;
+			val dbType = if(logicalTableMetaData.isDefined) { logicalTableMetaData.get.dbType }
+			else { Constants.DATABASE_DEFAULT }
 			
 //			val tableMetaData = {
 //					if(logicalTableMetaData == null && conn != null) {
@@ -77,7 +79,7 @@ object MorphRDBUtility {
 									
 									val pkColumnConstant = MorphSQLConstant.apply(
 											alias + "." + pkColumnString
-											, ZConstant.COLUMNNAME, tableMetaData.dbType);
+											, ZConstant.COLUMNNAME, dbType);
 
 									val pkValueConstant = {
 											if(columnTypeName != null) {
