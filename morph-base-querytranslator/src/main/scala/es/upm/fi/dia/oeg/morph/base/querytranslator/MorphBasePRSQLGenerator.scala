@@ -82,7 +82,7 @@ abstract class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:Mor
 	    , cmSubject:MorphBaseClassMapping , predicateURI:String , columnType:String) 
 	: List[ZSelectItem] = {
 		
-		def betaObjSelectItems = betaGenerator.calculateBetaObject(tp, cmSubject, predicateURI, alphaResult);
+		val betaObjSelectItems = betaGenerator.calculateBetaObject(tp, cmSubject, predicateURI, alphaResult);
 		val selectItems = for(i <- 0 until betaObjSelectItems.size()) yield {
 			val betaObjSelectItem = betaObjSelectItems.get(i);
 			val selectItem = MorphSQLSelectItem.apply(betaObjSelectItem, dbType, columnType);
@@ -119,12 +119,12 @@ abstract class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:Mor
 			val alias = nameGenerator.generateName(tpPredicate);
 			selectItem.setAlias(alias);
 			
-			val predicateMappingIdSelectItems = this.genPRSQLPredicateMappingId(tpPredicate,cm);
+			val predicateMappingIdSelectItems = this.genPRSQLPredicateMappingId(tpPredicate,cm, predicateURI);
 			return List(selectItem) ::: predicateMappingIdSelectItems;
 
 	}
 
-  	def genPRSQLPredicateMappingId(node:Node,cm:MorphBaseClassMapping ):List[ZSelectItem];
+  	def genPRSQLPredicateMappingId(node:Node,cm:MorphBaseClassMapping, predicateURI:String ):List[ZSelectItem];
 
 	def  genPRSQLSubject(tp:Triple , alphaResult:MorphAlphaResult 
 	    , betaGenerator:MorphBaseBetaGenerator, nameGenerator:NameGenerator 

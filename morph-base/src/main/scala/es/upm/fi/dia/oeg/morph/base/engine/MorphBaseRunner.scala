@@ -24,6 +24,8 @@ import com.hp.hpl.jena.sparql.algebra.op.OpProject
 import com.hp.hpl.jena.sparql.algebra.OpAsQuery
 import com.hp.hpl.jena.sparql.core.Var
 import com.hp.hpl.jena.vocabulary.RDFS
+import com.hp.hpl.jena.rdf.model.Statement
+import com.hp.hpl.jena.rdf.model.Resource
 
 abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     //, conn:Connection
@@ -174,6 +176,23 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		  this.queryResultTranslator.get.translateResult(mapSparqlSQL);	    
 	  })
 
+	}
+	
+	def updateResource(resourceURI:String, statements:Iterable[Statement]) : IQuery = {
+		val triples = statements.map(stmt => {
+			val obj = stmt.getObject().asNode()
+			val triple = Triple.create(stmt.getSubject().asNode(), stmt.getPredicate().asNode(), stmt.getObject().asNode());
+			triple 
+		})
+		val basicPattern = BasicPattern.wrap(triples.toList);
+		val bgp = new OpBGP(basicPattern);
+		
+		this.queryTranslator.get.translate(bgp)
+	}
+
+	def updateResource(resourceURI:String, resource:Resource) : IQuery = {
+		val statements = resource.listProperties().toList();
+		this.updateResource(resourceURI, statements);
 	}
 	
 	def queryContainer(ldpRequest:String) = {

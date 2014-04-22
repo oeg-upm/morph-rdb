@@ -17,11 +17,12 @@ import com.hp.hpl.jena.sparql.expr.ExprList
 import com.hp.hpl.jena.sparql.expr.Expr
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
+import com.hp.hpl.jena.sparql.algebra.op.OpProject
 
 class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 	val logger = Logger.getLogger("MorphMappingInferrer");
 	var mapInferredTypes : Map[Node, Set[MorphBaseClassMapping]] = null;
-	var query:Query  = null;
+	//var query:Query  = null;
 
 	def addToInferredTypes(mapNodeTypes:Map[Node, Set[MorphBaseClassMapping]] 
 	, node:Node , cms:Set[MorphBaseClassMapping] ) 
@@ -51,13 +52,13 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 //		result2
 //	}
 
-	def infer() : Map[Node, Set[MorphBaseClassMapping]] = {
-		if(this.mapInferredTypes == null) {
-			this.mapInferredTypes = this.infer(query); 
-		}
-
-		this.mapInferredTypes;
-	}
+//	def infer() : Map[Node, Set[MorphBaseClassMapping]] = {
+//		if(this.mapInferredTypes == null) {
+//			this.mapInferredTypes = this.infer(query); 
+//		}
+//
+//		this.mapInferredTypes;
+//	}
 
 	def infer(query:Query ) : Map[Node, Set[MorphBaseClassMapping]] = {
 		if(this.mapInferredTypes == null || this.mapInferredTypes.isEmpty) {
@@ -113,52 +114,55 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 		var mapNodeTypes:Map[Node, Set[MorphBaseClassMapping]] = Map.empty;
 
 		op match {
-		case bgp:OpBGP => {
-			val bp = bgp.getPattern();
-			val bpTriples = bp.getList();
-			for(tp <- bpTriples) {
-				val tpSubject = tp.getSubject();
-				val tpPredicate = tp.getPredicate();
-				if(tpPredicate.isURI()) {
-					val predicateURI = tpPredicate.getURI();
-					val tpObject = tp.getObject();
-
-					if(RDF.`type`.getURI().equalsIgnoreCase(predicateURI) && tpObject.isURI()) {
-						val subjectType = tpObject.getURI();
-						val cms = this.mappingDocument.getClassMappingsByClassURI(subjectType);
-
-						if(cms != null && cms.size() > 0) {
-							mapNodeTypes = this.addToInferredTypes(mapNodeTypes, tpSubject, cms.toSet);
-							//this.mapNodeConceptMapping.put(subject, cm);
-						} else {
-							val errorMessage = "No rdf:type mapping for: " + subjectType;
-							logger.debug(errorMessage);
-						}
-					}					
-				}
-
+			case opProject:OpProject => { 
+			  mapNodeTypes = this.inferByRDFType(opProject.getSubOp())
 			}
-		}
-		case opLeftJoin:OpLeftJoin => {
-			val mapNodeTypesLeft = this.inferByRDFType(opLeftJoin.getLeft());
-			val mapNodeTypesRight = this.inferByRDFType(opLeftJoin.getRight());
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);
-		}
-		case opUnion:OpUnion => {
-			val mapNodeTypesLeft = this.inferByRDFType(opUnion.getLeft());
-			val mapNodeTypesRight = this.inferByRDFType(opUnion.getRight());
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);
-		}
-		case opJoin:OpJoin => {
-			val opJoinLeft = opJoin.getLeft();
-			val opJoinRight = opJoin.getRight();
-			val mapNodeTypesLeft = this.inferByRDFType(opJoinLeft);
-			val mapNodeTypesRight = this.inferByRDFType(opJoinRight);
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);
-		}
-		case opFilter:OpFilter => {
-			mapNodeTypes = this.inferByRDFType(opFilter.getSubOp());
-		}
+			case bgp:OpBGP => {
+				val bp = bgp.getPattern();
+				val bpTriples = bp.getList();
+				for(tp <- bpTriples) {
+					val tpSubject = tp.getSubject();
+					val tpPredicate = tp.getPredicate();
+					if(tpPredicate.isURI()) {
+						val predicateURI = tpPredicate.getURI();
+						val tpObject = tp.getObject();
+	
+						if(RDF.`type`.getURI().equalsIgnoreCase(predicateURI) && tpObject.isURI()) {
+							val subjectType = tpObject.getURI();
+							val cms = this.mappingDocument.getClassMappingsByClassURI(subjectType);
+	
+							if(cms != null && cms.size() > 0) {
+								mapNodeTypes = this.addToInferredTypes(mapNodeTypes, tpSubject, cms.toSet);
+								//this.mapNodeConceptMapping.put(subject, cm);
+							} else {
+								val errorMessage = "No rdf:type mapping for: " + subjectType;
+								logger.debug(errorMessage);
+							}
+						}					
+					}
+	
+				}
+			}
+			case opLeftJoin:OpLeftJoin => {
+				val mapNodeTypesLeft = this.inferByRDFType(opLeftJoin.getLeft());
+				val mapNodeTypesRight = this.inferByRDFType(opLeftJoin.getRight());
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);
+			}
+			case opUnion:OpUnion => {
+				val mapNodeTypesLeft = this.inferByRDFType(opUnion.getLeft());
+				val mapNodeTypesRight = this.inferByRDFType(opUnion.getRight());
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);
+			}
+			case opJoin:OpJoin => {
+				val opJoinLeft = opJoin.getLeft();
+				val opJoinRight = opJoin.getRight();
+				val mapNodeTypesLeft = this.inferByRDFType(opJoinLeft);
+				val mapNodeTypesRight = this.inferByRDFType(opJoinRight);
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);
+			}
+			case opFilter:OpFilter => {
+				mapNodeTypes = this.inferByRDFType(opFilter.getSubOp());
+			}
 		}
 
 		return mapNodeTypes;
@@ -205,45 +209,47 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 		var mapNodeTypes:Map[Node, Set[MorphBaseClassMapping]] = Map.empty;
 
 		op match {
-		  case bgp:OpBGP => {
-			val bp = bgp.getPattern();
-			val bpTriples = bp.getList();
-			this.bgpToSTGs(bpTriples.toList);
-
-			for(tp <- bpTriples) {
-				val tpSubject = tp.getSubject();
-				if(tpSubject.isURI()) {
-					val subjectURI = tpSubject.getURI();
-					val subjectTypes = this.inferByURI(subjectURI);
-					if(subjectTypes != null && subjectTypes.size() > 0) {
-						mapNodeTypes = this.addToInferredTypes(mapNodeTypes, tpSubject, subjectTypes);
+		  	case bgp:OpBGP => {
+				val bp = bgp.getPattern();
+				val bpTriples = bp.getList();
+				this.bgpToSTGs(bpTriples.toList);
+	
+				for(tp <- bpTriples) {
+					val tpSubject = tp.getSubject();
+					if(tpSubject.isURI()) {
+						val subjectURI = tpSubject.getURI();
+						val subjectTypes = this.inferByURI(subjectURI);
+						if(subjectTypes != null && subjectTypes.size() > 0) {
+							mapNodeTypes = this.addToInferredTypes(mapNodeTypes, tpSubject, subjectTypes);
+						}
 					}
-				}
-			}		    
-		  }
-		  case opLeftJoin:OpLeftJoin => {
-			val mapNodeTypesLeft = this.inferSubjectTypesBySubjectURI(opLeftJoin.getLeft());
-			val mapNodeTypesRight = this.inferSubjectTypesBySubjectURI(opLeftJoin.getRight());
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
-		  }
-		  case opUnion:OpUnion => {
-			val mapNodeTypesLeft = this.inferSubjectTypesBySubjectURI(opUnion.getLeft());
-			val mapNodeTypesRight = this.inferSubjectTypesBySubjectURI(opUnion.getRight());
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
-		  }
-		  case opJoin:OpJoin => {
-			val mapNodeTypesLeft = this.inferSubjectTypesBySubjectURI(opJoin.getLeft());
-			val mapNodeTypesRight = this.inferSubjectTypesBySubjectURI(opJoin.getRight());
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
-		  }
-		  case opFilter:OpFilter => {
-		    val opFilterSubOp = opFilter.getSubOp() ;
-			val exprList = opFilter.getExprs();
-			val mapNodeTypesExprs = this.inferObjectTypesByExprList(exprList);
-			val mapNodeTypesSubOp = this.inferSubjectTypesBySubjectURI(opFilterSubOp);
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesSubOp, mapNodeTypesExprs);		    
-		  }
-		  
+				}		    
+		  	}
+		  	case opLeftJoin:OpLeftJoin => {
+				val mapNodeTypesLeft = this.inferSubjectTypesBySubjectURI(opLeftJoin.getLeft());
+				val mapNodeTypesRight = this.inferSubjectTypesBySubjectURI(opLeftJoin.getRight());
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
+		  	}
+		  	case opUnion:OpUnion => {
+				val mapNodeTypesLeft = this.inferSubjectTypesBySubjectURI(opUnion.getLeft());
+				val mapNodeTypesRight = this.inferSubjectTypesBySubjectURI(opUnion.getRight());
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
+		  	}
+		  	case opJoin:OpJoin => {
+				val mapNodeTypesLeft = this.inferSubjectTypesBySubjectURI(opJoin.getLeft());
+				val mapNodeTypesRight = this.inferSubjectTypesBySubjectURI(opJoin.getRight());
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
+		  	}
+		  	case opFilter:OpFilter => {
+			    val opFilterSubOp = opFilter.getSubOp() ;
+				val exprList = opFilter.getExprs();
+				val mapNodeTypesExprs = this.inferObjectTypesByExprList(exprList);
+				val mapNodeTypesSubOp = this.inferSubjectTypesBySubjectURI(opFilterSubOp);
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesSubOp, mapNodeTypesExprs);		    
+		  	}
+			case opProject:OpProject => { 
+				mapNodeTypes = this.inferByRDFType(opProject.getSubOp())
+			}
 		}
 		
 		return mapNodeTypes;
@@ -295,36 +301,39 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 		var mapNodeTypes : Map[Node, Set[MorphBaseClassMapping]] = Map.empty
 
 		op match {
-		  case bgp:OpBGP => {
-			for(tp <- bgp.getPattern().getList()) {
-				val tpObject = tp.getObject();
-				if(tpObject.isURI()) {
-					val objectURI = tpObject.getURI();
-					val nodeTypes = this.inferByURI(objectURI);
-					if(nodeTypes != null && nodeTypes.size() > 0) {
-						mapNodeTypes = this.addToInferredTypes(mapNodeTypes, tpObject, nodeTypes);
+			case bgp:OpBGP => {
+				for(tp <- bgp.getPattern().getList()) {
+					val tpObject = tp.getObject();
+					if(tpObject.isURI()) {
+						val objectURI = tpObject.getURI();
+						val nodeTypes = this.inferByURI(objectURI);
+						if(nodeTypes != null && nodeTypes.size() > 0) {
+							mapNodeTypes = this.addToInferredTypes(mapNodeTypes, tpObject, nodeTypes);
+						}
 					}
-				}
-			}		    
-		  }
-		  case opLeftJoin:OpLeftJoin => {
-			val mapNodeTypesLeft = this.inferObjectTypesByObjectURI(opLeftJoin.getLeft());
-			val mapNodeTypesRight = this.inferObjectTypesByObjectURI(opLeftJoin.getRight());
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
-		  }
-		  case opUnion:OpUnion => {
-			val mapNodeTypesLeft = this.inferObjectTypesByObjectURI(opUnion.getLeft());
-			val mapNodeTypesRight = this.inferObjectTypesByObjectURI(opUnion.getRight());
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
-		  }
-		  case opJoin:OpJoin => {
-			val mapNodeTypesLeft = this.inferObjectTypesByObjectURI(opJoin.getLeft());
-			val mapNodeTypesRight = this.inferObjectTypesByObjectURI(opJoin.getRight());
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);
-		  }
-		  case opFilter:OpFilter => {
-			  mapNodeTypes = this.inferObjectTypesByObjectURI(opFilter.getSubOp());		    
-		  }
+				}		    
+			}
+			case opLeftJoin:OpLeftJoin => {
+				val mapNodeTypesLeft = this.inferObjectTypesByObjectURI(opLeftJoin.getLeft());
+				val mapNodeTypesRight = this.inferObjectTypesByObjectURI(opLeftJoin.getRight());
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
+			}
+			case opUnion:OpUnion => {
+				val mapNodeTypesLeft = this.inferObjectTypesByObjectURI(opUnion.getLeft());
+				val mapNodeTypesRight = this.inferObjectTypesByObjectURI(opUnion.getRight());
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
+			}
+			case opJoin:OpJoin => {
+				val mapNodeTypesLeft = this.inferObjectTypesByObjectURI(opJoin.getLeft());
+				val mapNodeTypesRight = this.inferObjectTypesByObjectURI(opJoin.getRight());
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);
+			}
+			case opFilter:OpFilter => {
+				mapNodeTypes = this.inferObjectTypesByObjectURI(opFilter.getSubOp());		    
+			}
+			case opProject:OpProject => { 
+				mapNodeTypes = this.inferByRDFType(opProject.getSubOp())
+			}
 		}
 		
 		mapNodeTypes;
@@ -335,59 +344,60 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 		var mapNodeTypes : Map[Node, Set[MorphBaseClassMapping]] = Map.empty;
 
 		op match {
-		  case bgp:OpBGP => {
-			for(tp <- bgp.getPattern().getList()) {
-				val tpSubject = tp.getSubject();
-				val tpPredicate = tp.getPredicate();
-				val tpObject = tp.getObject();
-				
-				val subjectTypes = mapSubjectTypes.get(tpSubject);
-				
-				if(tpPredicate.isURI()) {
-					val predicateURI = tpPredicate.getURI();
-					if(!RDF.`type`.getURI().equalsIgnoreCase(predicateURI)) {
-						val nodeTypes = {
-							if(subjectTypes.isDefined) {
-								val subjectTypesSet = subjectTypes.get;
-								if(subjectTypesSet != null && !subjectTypesSet.isEmpty) {
-									val cm = subjectTypes.get.iterator.next();
-									this.mappingDocument.getPossibleRange(predicateURI, cm);								  
+			case bgp:OpBGP => {
+				for(tp <- bgp.getPattern().getList()) {
+					val tpSubject = tp.getSubject();
+					val tpPredicate = tp.getPredicate();
+					val tpObject = tp.getObject();
+					
+					val subjectTypes = mapSubjectTypes.get(tpSubject);
+					
+					if(tpPredicate.isURI()) {
+						val predicateURI = tpPredicate.getURI();
+						if(!RDF.`type`.getURI().equalsIgnoreCase(predicateURI)) {
+							val nodeTypes = {
+								if(subjectTypes.isDefined) {
+									val subjectTypesSet = subjectTypes.get;
+									if(subjectTypesSet != null && !subjectTypesSet.isEmpty) {
+										val cm = subjectTypes.get.iterator.next();
+										this.mappingDocument.getPossibleRange(predicateURI, cm);								  
+									} else {
+									  this.mappingDocument.getPossibleRange(predicateURI);
+									}
 								} else {
 								  this.mappingDocument.getPossibleRange(predicateURI);
 								}
-							} else {
-							  this.mappingDocument.getPossibleRange(predicateURI);
 							}
+							
+							if(nodeTypes != null && nodeTypes.size() > 0) {
+								mapNodeTypes += (tpObject -> nodeTypes.toSet);	
+							}
+	
 						}
-						
-						if(nodeTypes != null && nodeTypes.size() > 0) {
-							mapNodeTypes += (tpObject -> nodeTypes.toSet);	
-						}
-
 					}
 				}
-			}		    
-		  }
-		  case opLeftJoin:OpLeftJoin => {
-			val mapNodeTypesLeft = this.inferObjectTypesByPredicateURI(opLeftJoin.getLeft(), mapSubjectTypes);
-			val mapNodeTypesRight = this.inferObjectTypesByPredicateURI(opLeftJoin.getRight(), mapSubjectTypes);
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
-		  }
-		  case opUnion:OpUnion => {
-			val mapNodeTypesLeft = this.inferObjectTypesByPredicateURI(opUnion.getLeft(), mapSubjectTypes);
-			val mapNodeTypesRight = this.inferObjectTypesByPredicateURI(opUnion.getRight(), mapSubjectTypes);
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
-		  }
-		  case opJoin:OpJoin => {
-			val mapNodeTypesLeft = this.inferObjectTypesByPredicateURI(opJoin.getLeft(), mapSubjectTypes);
-			val mapNodeTypesRight = this.inferObjectTypesByPredicateURI(opJoin.getRight(), mapSubjectTypes);
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
-		  }
-		  case opFilter:OpFilter => {
-			mapNodeTypes = this.inferObjectTypesByPredicateURI(opFilter.getSubOp(), mapSubjectTypes);
-		    
-		  }
-		  
+			}
+			case opLeftJoin:OpLeftJoin => {
+				val mapNodeTypesLeft = this.inferObjectTypesByPredicateURI(opLeftJoin.getLeft(), mapSubjectTypes);
+				val mapNodeTypesRight = this.inferObjectTypesByPredicateURI(opLeftJoin.getRight(), mapSubjectTypes);
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
+			}
+			case opUnion:OpUnion => {
+				val mapNodeTypesLeft = this.inferObjectTypesByPredicateURI(opUnion.getLeft(), mapSubjectTypes);
+				val mapNodeTypesRight = this.inferObjectTypesByPredicateURI(opUnion.getRight(), mapSubjectTypes);
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
+			}
+			case opJoin:OpJoin => {
+				val mapNodeTypesLeft = this.inferObjectTypesByPredicateURI(opJoin.getLeft(), mapSubjectTypes);
+				val mapNodeTypesRight = this.inferObjectTypesByPredicateURI(opJoin.getRight(), mapSubjectTypes);
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
+			}
+			case opFilter:OpFilter => {
+				mapNodeTypes = this.inferObjectTypesByPredicateURI(opFilter.getSubOp(), mapSubjectTypes);
+			}
+			case opProject:OpProject => { 
+				mapNodeTypes = this.inferByRDFType(opProject.getSubOp())
+			}		  
 		}
 		
 		mapNodeTypes;
@@ -397,38 +407,41 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 		var mapNodeTypes : Map[Node, Set[MorphBaseClassMapping]] = Map.empty;
 
 		op match {
-		  case bgp:OpBGP => {
-			val bp = bgp.getPattern();
-			val bpTriples = bp.getList();
-			val mapSubjectSTGs = this.bgpToSTGs(bpTriples.toList);
-			
-			//get subject types by all the predicate URIs of the STGs
-			val subjectsTypesByPredicateURIs = this.inferSubjectsTypesByPredicateURIs(mapSubjectSTGs);
-			for(subject <- subjectsTypesByPredicateURIs.keySet) {
-				val subjectTypes = subjectsTypesByPredicateURIs.get(subject);
-				if(subjectTypes.isDefined) {
-				  mapNodeTypes = this.addToInferredTypes(mapNodeTypes, subject, subjectTypes.get);
-				}
-			}		    
-		  }
-		  case opLeftJoin:OpLeftJoin => {
-			val mapNodeTypesLeft = this.inferSubjectTypesByPredicatesURIs(opLeftJoin.getLeft());
-			val mapNodeTypesRight = this.inferSubjectTypesByPredicatesURIs(opLeftJoin.getRight());
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
-		  }
-		  case opUnion:OpUnion => {
-			val mapNodeTypesLeft = this.inferSubjectTypesByPredicatesURIs(opUnion.getLeft());
-			val mapNodeTypesRight = this.inferSubjectTypesByPredicatesURIs(opUnion.getRight());
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
-		  }
-		  case opJoin:OpJoin => {
-			val mapNodeTypesLeft = this.inferSubjectTypesByPredicatesURIs(opJoin.getLeft());
-			val mapNodeTypesRight = this.inferSubjectTypesByPredicatesURIs(opJoin.getRight());
-			mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
-		  }
-		  case opFilter:OpFilter => {
-			  mapNodeTypes = this.inferSubjectTypesByPredicatesURIs(opFilter.getSubOp());		    
-		  }
+			case bgp:OpBGP => {
+				val bp = bgp.getPattern();
+				val bpTriples = bp.getList();
+				val mapSubjectSTGs = this.bgpToSTGs(bpTriples.toList);
+				
+				//get subject types by all the predicate URIs of the STGs
+				val subjectsTypesByPredicateURIs = this.inferSubjectsTypesByPredicateURIs(mapSubjectSTGs);
+				for(subject <- subjectsTypesByPredicateURIs.keySet) {
+					val subjectTypes = subjectsTypesByPredicateURIs.get(subject);
+					if(subjectTypes.isDefined) {
+					  mapNodeTypes = this.addToInferredTypes(mapNodeTypes, subject, subjectTypes.get);
+					}
+				}		    
+			}
+			case opLeftJoin:OpLeftJoin => {
+				val mapNodeTypesLeft = this.inferSubjectTypesByPredicatesURIs(opLeftJoin.getLeft());
+				val mapNodeTypesRight = this.inferSubjectTypesByPredicatesURIs(opLeftJoin.getRight());
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
+			}
+			case opUnion:OpUnion => {
+				val mapNodeTypesLeft = this.inferSubjectTypesByPredicatesURIs(opUnion.getLeft());
+				val mapNodeTypesRight = this.inferSubjectTypesByPredicatesURIs(opUnion.getRight());
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
+			}
+			case opJoin:OpJoin => {
+				val mapNodeTypesLeft = this.inferSubjectTypesByPredicatesURIs(opJoin.getLeft());
+				val mapNodeTypesRight = this.inferSubjectTypesByPredicatesURIs(opJoin.getRight());
+				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight);		    
+			}
+			case opFilter:OpFilter => {
+				mapNodeTypes = this.inferSubjectTypesByPredicatesURIs(opFilter.getSubOp());		    
+			}
+			case opProject:OpProject => { 
+				mapNodeTypes = this.inferByRDFType(opProject.getSubOp())
+			}
 		}
 		
 		mapNodeTypes;

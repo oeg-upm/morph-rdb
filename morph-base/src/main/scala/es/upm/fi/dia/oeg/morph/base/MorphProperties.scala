@@ -41,7 +41,7 @@ class MorphProperties extends java.util.Properties {
 	var literalRemoveStrangeChars:Boolean = true;
 	var encodeUnsafeChars:Boolean = true;
 	var encodeReservedChars:Boolean = false;
-	var transformString:Option[String] = null;
+	var transformString:Option[String] = None;
 	
 	//database
 	var noOfDatabase=0;

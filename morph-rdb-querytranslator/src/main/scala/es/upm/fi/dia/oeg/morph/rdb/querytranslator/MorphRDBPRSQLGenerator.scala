@@ -179,9 +179,11 @@ extends MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseU
 		result;
 	}
 	
-	override def genPRSQLPredicateMappingId(node:Node,cm:MorphBaseClassMapping ):List[ZSelectItem] = {
-		val triplesMap = cm.asInstanceOf[R2RMLTriplesMap];
-		val poMap = triplesMap.predicateObjectMaps.iterator.next;
+	override def genPRSQLPredicateMappingId(node:Node,cm:MorphBaseClassMapping, predicateURI:String ):List[ZSelectItem] = {
+//		val triplesMap = cm.asInstanceOf[R2RMLTriplesMap];
+//		val poMap = triplesMap.predicateObjectMaps.iterator.next;
+		val pms = cm.getPropertyMappings(predicateURI);
+		val poMap = pms.iterator.next.asInstanceOf[R2RMLPredicateObjectMap];
 		val predicateMap = poMap.predicateMaps.iterator.next;
 		val selectItemPredicateMappingId = this.genPRSQLMappingId(node, predicateMap);
 		selectItemPredicateMappingId

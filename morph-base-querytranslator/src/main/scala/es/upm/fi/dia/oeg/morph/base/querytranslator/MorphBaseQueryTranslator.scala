@@ -1417,13 +1417,11 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		}
 	}
 
-	override def translate(sparqlQuery:Query ) : IQuery  = {
-		
-		val opSparqlQuery = Algebra.compile(sparqlQuery) ;
-		logger.info("SPARQL query = \n" + opSparqlQuery);
-		logger.debug("opSparqlQuery = " + opSparqlQuery);
+	override def translate(op:Op) : IQuery  = {
+		logger.info("SPARQL query = \n" + op);
+		logger.debug("opSparqlQuery = " + op);
 		val typeInferrer = new MorphMappingInferrer(this.mappingDocument);
-		this.mapInferredTypes = typeInferrer.infer(sparqlQuery);
+		this.mapInferredTypes = typeInferrer.infer(op);
 		logger.info("Inferred Types : \n" + typeInferrer.printInferredTypes());
 
 //		this.buildAlphaGenerator();
@@ -1453,11 +1451,11 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				
 				val opSparqlQuery2 = {
 					try {
-						queryRewritter.rewrite(opSparqlQuery);	
+						queryRewritter.rewrite(op);	
 					} catch {
 					  case e:Exception => {
 						e.printStackTrace();
-						opSparqlQuery;					    
+						op;					    
 					  }
 					}				  
 				}
@@ -1465,7 +1463,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				logger.debug("opSparqlQueryRewritten = \n" + opSparqlQuery2);
 				this.trans(opSparqlQuery2);
 			} else {
-				this.trans(opSparqlQuery);
+				this.trans(op);
 			}		  
 		}
 
@@ -1480,6 +1478,11 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		logger.debug("sql = \n" + result + "\n");
 		this.currentTranslationResult = result;
 		this.currentTranslationResult;
+	}
+	
+	override def translate(sparqlQuery:Query ) : IQuery  = {
+		val opSparqlQuery = Algebra.compile(sparqlQuery) ;
+		this.translate(opSparqlQuery);
 	}
 
 	def translateFromQueryFile(queryFilePath:String ) : IQuery  = {

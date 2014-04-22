@@ -31,6 +31,8 @@ trait IQueryTranslator {
 	
 	def translate(query:Query) :IQuery ;
 
+	def translate(op:Op) :IQuery ;
+	
 	def translateFromQueryFile(queryFilePath:String ) : IQuery;
 
 	//IQueryTranslationOptimizer getOptimizer();
