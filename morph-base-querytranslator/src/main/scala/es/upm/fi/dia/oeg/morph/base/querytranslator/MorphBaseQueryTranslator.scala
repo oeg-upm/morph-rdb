@@ -886,7 +886,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		val prSQLResult = transTPResult.prSQLResult;
 		val prSQL = prSQLResult.toList;
 		val condSQLResult = transTPResult.condSQLResult;
-		val condSQL = { if(condSQLResult != null) { condSQLResult.expression; } 
+		val condSQL = { if(condSQLResult != null) { condSQLResult.toExpression; } 
 			else { null }
 		}
 		

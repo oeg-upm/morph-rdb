@@ -41,11 +41,10 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 			}		  
 		}
 
-		val condSQLTP = List(condSQLSubject, condSQLPredicateObject);
-		val condSQL = MorphSQLUtility.combineExpresions(condSQLTP, Constants.SQL_LOGICAL_OPERATOR_AND);
-
-		logger.debug("genCondSQL = " + condSQL);
-		new MorphCondSQLResult(condSQL);
+		//val condSQLTP = List(condSQLSubject, condSQLPredicateObject);
+		//val condSQL = MorphSQLUtility.combineExpresions(condSQLTP, Constants.SQL_LOGICAL_OPERATOR_AND);
+		//logger.debug("genCondSQL = " + condSQL);
+		new MorphCondSQLResult(condSQLSubject, condSQLPredicateObject);
 	}
 
 
@@ -58,7 +57,7 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 
 	def genCondSQLPredicateObject(tp:Triple, alphaResult:MorphAlphaResult 
 	    , betaGenerator:MorphBaseBetaGenerator, cm:MorphBaseClassMapping
-	    , predicateURI:String) : ZExpression = {
+	    , predicateURI:String) : Iterable[ZExpression] = {
 		
 		//var exps : Set[ZExpression] = Set.empty;
 		
@@ -70,20 +69,19 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 		val pms = cm.getPropertyMappings(predicateURI);
 		val pmsSize = pms.size();
 		
-		val result : ZExpression = {
-			if(pms == null || pmsSize == 0) {
+		val result =	if(pms == null || pmsSize == 0) {
 				if(!isRDFTypeStatement) {
 					val errorMessage = "No mappings found for predicate : " + predicateURI;
 					logger.error(errorMessage);
 					throw new Exception(errorMessage);				
 				} else {
-				  null
+				  Set.empty
 				}
 			} else if(pms.size() > 1) {
 				val errorMessage = "Multiple mappings are not permitted for predicate " + predicateURI;
 				logger.error(errorMessage);
 				throw new Exception(errorMessage);
-				null
+				Set.empty
 			} else {//if(pms.size() == 1)
 				var exps : Set[ZExpression] = Set.empty;
 			  
@@ -244,12 +242,12 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 					}
 				}
 	
-				MorphSQLUtility.combineExpresions(exps.toList, Constants.SQL_LOGICAL_OPERATOR_AND);
+				//MorphSQLUtility.combineExpresions(exps.toList, Constants.SQL_LOGICAL_OPERATOR_AND);
+				exps
 			}
 		  
-		}
 		
-		result;
+		result
 	}
 
 
@@ -338,10 +336,11 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 
 			
 			if(processableTriplePattern) {
-				val condPredicateObject = this.genCondSQLPredicateObject(iTP, alphaResult, betaGenerator, cm, iTPPredicateURI);
+				val condPredicateObject = this.genCondSQLPredicateObject(
+				    iTP, alphaResult, betaGenerator, cm, iTPPredicateURI);
 				//condSQLTB.add(condPredicateObject);
 				if(condPredicateObject != null) {
-					condSTGPredicateObject = condSTGPredicateObject ++ Set(condPredicateObject);
+					condSTGPredicateObject = condSTGPredicateObject ++ condPredicateObject;
 				}
 
 				for(j <- i+1 until stg.size()) {
@@ -368,7 +367,7 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 
 		val exps = Set(condSubject) ++ condSTGPredicateObject
 		val genCondSQLSTG = MorphSQLUtility.combineExpresions(exps, Constants.SQL_LOGICAL_OPERATOR_AND);
-		new MorphCondSQLResult(genCondSQLSTG);
+		new MorphCondSQLResult(condSubject, condSTGPredicateObject);
 	}
 
 	private def genCondSQL(tp1:Triple , tp2:Triple ,alphaResult:MorphAlphaResult 
