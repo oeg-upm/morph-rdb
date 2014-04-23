@@ -301,7 +301,7 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 	def genCondSQLSubjectURI(tpSubject:Node , alphaResult:MorphAlphaResult, cm:MorphBaseClassMapping) : ZExpression;
 
 	def  genCondSQLSTG(stg:List[Triple], alphaResult:MorphAlphaResult , betaGenerator:MorphBaseBetaGenerator 
-			, cm:MorphBaseClassMapping ) : ZExpression = {
+			, cm:MorphBaseClassMapping ) : MorphCondSQLResult = {
 
 		//var exps : Set[ZExpression] = Set.empty;
 		val firstTriple = stg.get(0);
@@ -367,9 +367,8 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 		}
 
 		val exps = Set(condSubject) ++ condSTGPredicateObject
-		val result = MorphSQLUtility.combineExpresions(exps, Constants.SQL_LOGICAL_OPERATOR_AND);
-		logger.debug("genCondSQLTB = " + result);
-		result;
+		val genCondSQLSTG = MorphSQLUtility.combineExpresions(exps, Constants.SQL_LOGICAL_OPERATOR_AND);
+		new MorphCondSQLResult(genCondSQLSTG);
 	}
 
 	private def genCondSQL(tp1:Triple , tp2:Triple ,alphaResult:MorphAlphaResult 

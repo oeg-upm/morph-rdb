@@ -165,7 +165,7 @@ abstract class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:Mor
 
 	def  genPRSQLSTG(stg:Iterable[Triple],alphaResult:MorphAlphaResult 
 	    , betaGenerator:MorphBaseBetaGenerator,nameGenerator:NameGenerator 
-	    , cmSubject:MorphBaseClassMapping ) : List[ZSelectItem] = {
+	    , cmSubject:MorphBaseClassMapping ) : MorphPRSQLResult = {
 		
 		val firstTriple = stg.iterator.next();
 		val selectItemsSubjects = this.genPRSQLSubject(firstTriple, alphaResult, betaGenerator, nameGenerator, cmSubject);
@@ -203,8 +203,13 @@ abstract class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:Mor
 			}
 		}
 
-		val prList = selectItemsSubjects.toList ::: selectItemsSTGPredicates.toList ::: selectItemsSTGObjects.toList;
-		prList;
+		
+//		val prList = selectItemsSubjects.toList ::: selectItemsSTGPredicates.toList ::: selectItemsSTGObjects.toList;
+//		prList;
+		
+		val prSQLResult = new MorphPRSQLResult(selectItemsSubjects.toList
+		    , selectItemsSTGPredicates.toList, selectItemsSTGObjects.toList);
+		prSQLResult
 	}
 	
 	def getMappedMapping(hashCode:Integer ) = {

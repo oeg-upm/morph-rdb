@@ -1574,7 +1574,28 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		result;
 	}
 
+	def transSTGUnionFree(stg:List[Triple], cm:MorphBaseClassMapping ) : MorphTransTPResult  = {
+		//AlphaSTG
+		val alphaResultUnionList = this.alphaGenerator.calculateAlphaSTG(stg, cm);
 
+		//ALPHA(stg) returns the same result for subject
+		val alphaResult = alphaResultUnionList.head.get(0);
+		val alphaSubject = alphaResult.alphaSubject;
+		val alphaPredicateObjects = alphaResultUnionList.flatMap(alphaTP => {
+			val tpAlphaPredicateObjects:List[SQLJoinTable] = alphaTP.get(0).alphaPredicateObjects;
+			tpAlphaPredicateObjects;				  
+		})
+		
+		//PRSQLSTG
+		val prSQLSTGResult = this.prSQLGenerator.genPRSQLSTG(stg, alphaResult, betaGenerator, nameGenerator, cm);
+
+		//CondSQLSTG
+		val condSQLSQLResult = this.condSQLGenerator.genCondSQLSTG(stg, alphaResult, betaGenerator, cm);
+
+		val transTPResult = new MorphTransTPResult(alphaResult, condSQLSQLResult, prSQLSTGResult)
+		transTPResult
+	}
+	
 	def transSTG(stg:List[Triple], cm:MorphBaseClassMapping ) : IQuery  = {
 		//AlphaSTG
 		val alphaResultUnionList = this.alphaGenerator.calculateAlphaSTG(stg, cm);
@@ -1594,56 +1615,59 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				val opJoin = OpJoin.create(opBGPHead, opBGPTail);
 				this.trans(opJoin);
 			} else {// no union in alpha
-				//ALPHA(stg) returns the same result for subject
-				val alphaResult = alphaResultUnionList.head.get(0);
-				val alphaSubject = alphaResult.alphaSubject;
-				val alphaPredicateObjects = alphaResultUnionList.flatMap(alphaTP => {
-					val tpAlphaPredicateObjects:List[SQLJoinTable] = alphaTP.get(0).alphaPredicateObjects;
-					tpAlphaPredicateObjects;				  
-				})
+//				//ALPHA(stg) returns the same result for subject
+//				val alphaResult = alphaResultUnionList.head.get(0);
+//				val alphaSubject = alphaResult.alphaSubject;
+//				val alphaPredicateObjects = alphaResultUnionList.flatMap(alphaTP => {
+//					val tpAlphaPredicateObjects:List[SQLJoinTable] = alphaTP.get(0).alphaPredicateObjects;
+//					tpAlphaPredicateObjects;				  
+//				})
+//				
+//				//PRSQLSTG
+//				val prSQLSTGResult = this.prSQLGenerator.genPRSQLSTG(stg, alphaResult, betaGenerator, nameGenerator, cm);
+//	
+//				//CondSQLSTG
+//				val condSQLSQLResult = this.condSQLGenerator.genCondSQLSTG(stg, alphaResult, betaGenerator, cm);
+//	
+//				//TRANS(STG)
+//				//don't do subquery elimination here! why?
+//				val resultAux = {
+//					if(this.optimizer != null) {
+//						val isTransSTGSubQueryElimination = 
+//						  this.optimizer.transSTGSubQueryElimination;
+//						if(isTransSTGSubQueryElimination) {
+//							try {
+//								SQLQuery.createQuery(alphaSubject, alphaPredicateObjects, prSQLSTG, condSQLSQL, this.databaseType);
+//							} catch {
+//							  case e:Exception => {
+//								val errorMessage = "error in eliminating subquery!" + e.getMessage;
+//								logger.error(errorMessage);
+//								null;							    
+//							  }
+//							}					
+//						} else {
+//						  null
+//						}
+//					} else {
+//					  null
+//					}				  
+//				}
+//	
+//				if(resultAux == null) { //without subquery elimination or error occured during the process
+//					val resultAux2 = new SQLQuery(alphaSubject);
+//					resultAux2.setDatabaseType(this.databaseType);
+//					for(alphaPredicateObject <- alphaPredicateObjects) {
+//						resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object
+//					}
+//					resultAux2.setSelectItems(prSQLSTG);
+//					resultAux2.setWhere(condSQLSQL);
+//					resultAux2
+//				} else {
+//				  resultAux
+//				}
 				
-				//PRSQLSTG
-				val prSQLSTG = this.prSQLGenerator.genPRSQLSTG(stg, alphaResult, betaGenerator, nameGenerator, cm);
-	
-				//CondSQLSTG
-				val condSQLSQL = this.condSQLGenerator.genCondSQLSTG(stg, alphaResult, betaGenerator, cm);
-	
-				//TRANS(STG)
-				//don't do subquery elimination here! why?
-				val resultAux = {
-					if(this.optimizer != null) {
-						val isTransSTGSubQueryElimination = 
-						  this.optimizer.transSTGSubQueryElimination;
-						if(isTransSTGSubQueryElimination) {
-							try {
-								SQLQuery.createQuery(alphaSubject, alphaPredicateObjects, prSQLSTG, condSQLSQL, this.databaseType);
-							} catch {
-							  case e:Exception => {
-								val errorMessage = "error in eliminating subquery!" + e.getMessage;
-								logger.error(errorMessage);
-								null;							    
-							  }
-							}					
-						} else {
-						  null
-						}
-					} else {
-					  null
-					}				  
-				}
-	
-				if(resultAux == null) { //without subquery elimination or error occured during the process
-					val resultAux2 = new SQLQuery(alphaSubject);
-					resultAux2.setDatabaseType(this.databaseType);
-					for(alphaPredicateObject <- alphaPredicateObjects) {
-						resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object
-					}
-					resultAux2.setSelectItems(prSQLSTG);
-					resultAux2.setWhere(condSQLSQL);
-					resultAux2
-				} else {
-				  resultAux
-				}
+				val transSTGResult = this.transSTGUnionFree(stg, cm);
+				this.toIQuery(transSTGResult);
 			}		  
 		}
 

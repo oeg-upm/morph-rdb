@@ -34,7 +34,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     , dataTranslator : Option[MorphBaseDataTranslator]
     //, materializer : Option[MorphBaseMaterializer]
     , val queryTranslator:Option[IQueryTranslator]
-    , queryResultTranslator:Option[AbstractQueryResultTranslator]
+    , val queryResultTranslator:Option[AbstractQueryResultTranslator]
     , var outputStream:Writer
     //, queryResultWriter :MorphBaseQueryResultWriter
     ) {
@@ -55,7 +55,6 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		if(this.queryResultTranslator.isDefined) {
 		  this.queryResultTranslator.get.queryResultWriter.outputStream = outputStream;
 		}
-	   
 	}
 	
 //	def postMaterialize() = {
@@ -109,166 +108,25 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		}
 	}
 	
-	def materializeContainer(containerValue:String) = {
-		val cms = this.mappingDocument.getClassMappingsByInstanceTemplate(containerValue);
-		this.materializeClassMappings(cms);
-	}
+
 	
-	def materializeClassMappings(cms:Iterable[MorphBaseClassMapping]) = {
-	  if(!this.dataTranslator.isDefined) {
-	    val errorMessage = "Data Translator has not been defined yet!";
-	    logger.error(errorMessage);
-	    throw new Exception(errorMessage)
-	  }
 
-		val startGeneratingModel = System.currentTimeMillis();
-
-	  //PREMATERIALIZE PROCESS
-//		this.preMaterializeProcess(outputFileName);
-
-		//MATERIALIZING MODEL
-		cms.foreach(cm => {
-			val sqlQuery = this.unfolder.unfoldConceptMapping(cm);
-			this.dataTranslator.get.generateSubjects(cm, sqlQuery);		  
-		})
-		this.dataTranslator.get.materializer.materialize();
-
-		//POSTMATERIALIZE PROCESS
-//		this.postMaterialize();
-
-		val endGeneratingModel = System.currentTimeMillis();
-		val durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
-		logger.info("Materializing Subjects time was "+(durationGeneratingModel)+" s.");
-	}
 	
-	def materializeLDPRequest(ldpRequest:String) = {
-	  if(ldpRequest.endsWith("/")) {
-	    logger.info("Materializing LDPC");
-	    this.materializeContainer(ldpRequest);
-	  } else {
-	    logger.info("Materializing LDPR");
-	    this.materializeResource(ldpRequest);
-	  }
-	}
+
 	
-	def queryResource(ldpRequest:String) = {
-	  val cms = this.mappingDocument.getClassMappingsByInstanceURI(ldpRequest);
-	  cms.foreach(cm => {
-		  val classURI = cm.getMappedClassURIs.iterator.next;
-		  val stgSubject = NodeFactory.createURI(ldpRequest);
-		  val tp1Predicate = RDF.`type`.asNode();
-		  val tp1Object = NodeFactory.createURI(classURI);
-		  val tp1 = new Triple(stgSubject, tp1Predicate, tp1Object);
 
-		  val tp2Predicate = NodeFactory.createVariable("p");
-		  val tp2Object = NodeFactory.createVariable("o");
-		  val tp2 = new Triple(stgSubject, tp2Predicate, tp2Object);
-			
-		  val basicPattern = BasicPattern.wrap(List(tp1, tp2));
-		  val bgp = new OpBGP(basicPattern);
-		  val varPredicate = Var.alloc(tp2Predicate);
-		  val varObject = Var.alloc(tp2Object);
-		  
-		  val opProject = new OpProject(bgp, List(varPredicate, varObject));
-		  val sparqlQuery = OpAsQuery.asQuery(opProject);
-		  sparqlQuery.setQuerySelectType();
-		  val mapSparqlSQL = this.translateSPARQLQueriesIntoSQLQueries(List(sparqlQuery));
-		  this.queryResultTranslator.get.translateResult(mapSparqlSQL);	    
-	  })
-
-	}
 	
-	def updateResource(resourceURI:String, statements:Iterable[Statement]) : IQuery = {
-		val triples = statements.map(stmt => {
-			val obj = stmt.getObject().asNode()
-			val triple = Triple.create(stmt.getSubject().asNode(), stmt.getPredicate().asNode(), stmt.getObject().asNode());
-			triple 
-		})
-		val basicPattern = BasicPattern.wrap(triples.toList);
-		val bgp = new OpBGP(basicPattern);
-		
-		this.queryTranslator.get.translate(bgp)
-	}
 
-	def updateResource(resourceURI:String, resource:Resource) : IQuery = {
-		val statements = resource.listProperties().toList();
-		this.updateResource(resourceURI, statements);
-	}
+
+
 	
-	def queryContainer(ldpRequest:String) = {
-		val cms = this.mappingDocument.getClassMappingsByInstanceTemplate(ldpRequest);
-		cms.foreach(cm => {
-			val subjectVariable = "s";
-			val classURI = cm.getMappedClassURIs.iterator.next;
-			val tpSubject = NodeFactory.createVariable(subjectVariable);
-			val tpPredicate1 = RDF.`type`.asNode();
-			val tpObject1 = NodeFactory.createURI(classURI);
-			val tp1 = new Triple(tpSubject, tpPredicate1, tpObject1);
-			val tpObject2 = RDFS.Resource.asNode();
-			val tp2 = new Triple(tpSubject, tpPredicate1, tpObject2);//FORCING STG
-			val basicPattern = BasicPattern.wrap(List(tp1, tp2));
-			val bgp = new OpBGP(basicPattern);
-			val varSubject = Var.alloc(subjectVariable);
-			val opProject = new OpProject(bgp, List(varSubject));
-			val sparqlQuery = OpAsQuery.asQuery(opProject);
-			sparqlQuery.setQuerySelectType();
-			val mapSparqlSQL = this.translateSPARQLQueriesIntoSQLQueries(List(sparqlQuery));
-			this.queryResultTranslator.get.translateResult(mapSparqlSQL);				
-		})
-	}
+
 	
-	def materializeResource(instanceURI:String) = {
-	  val cms = this.mappingDocument.getClassMappingsByInstanceURI(instanceURI);
-	  this.materializeInstanceDetails(instanceURI, cms)
-	}
+
+
+
 	
-	def materializeSubjects(classURI:String) ={
-		//MATERIALIZING MODEL
-		val cms = this.mappingDocument.getClassMappingsByClassURI(classURI);
-		this.materializeClassMappings(cms);
-		//return result;
-	}
 
-	def materializeInstanceDetails(subjectURI:String,cms:Iterable[MorphBaseClassMapping]):Unit={
-	  if(!this.dataTranslator.isDefined) {
-	    val errorMessage = "Data Translator has not been defined yet!";
-	    logger.error(errorMessage);
-	    throw new Exception(errorMessage)
-	  }
-	  
-		val startGeneratingModel = System.currentTimeMillis();
-		
-		//PREMATERIALIZE PROCESS
-//		this.preMaterializeProcess(outputFileName);
-
-		cms.foreach(cm => {
-			val sqlQuery = this.unfolder.unfoldConceptMapping(cm, subjectURI);
-			if(sqlQuery != null) {
-				this.dataTranslator.get.generateRDFTriples(cm, sqlQuery);	
-			}		  
-		})
-		this.dataTranslator.get.materializer.materialize();
-
-		//POSTMATERIALIZE PROCESS
-//		this.postMaterialize();
-
-		val endGeneratingModel = System.currentTimeMillis();
-		val durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
-		logger.info("Materializing Subjects time was "+(durationGeneratingModel)+" s.");
-	  
-	}
-	
-	def materializeInstanceDetails(subjectURI:String , classURI:String
-	    , outputStream:OutputStream) : Unit = {
-		val startGeneratingModel = System.currentTimeMillis();
-		
-		//PREMATERIALIZE PROCESS
-//		this.preMaterializeProcess(outputFileName);
-
-		//MATERIALIZING MODEL
-		val cms = this.mappingDocument.getClassMappingsByClassURI(classURI);
-		this.materializeInstanceDetails(subjectURI, cms);
-	}
 
 	def run() : String = {
 		var status:String  = null;
@@ -335,7 +193,89 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		sqlQueries.toMap
 	}
 
+	def materializeClassMappings(cms:Iterable[MorphBaseClassMapping]) = {
+	  if(!this.dataTranslator.isDefined) {
+	    val errorMessage = "Data Translator has not been defined yet!";
+	    logger.error(errorMessage);
+	    throw new Exception(errorMessage)
+	  }
 
+		val startGeneratingModel = System.currentTimeMillis();
+
+	  //PREMATERIALIZE PROCESS
+//		this.preMaterializeProcess(outputFileName);
+
+		//MATERIALIZING MODEL
+		cms.foreach(cm => {
+			val sqlQuery = this.unfolder.unfoldConceptMapping(cm);
+			this.dataTranslator.get.generateSubjects(cm, sqlQuery);		  
+		})
+		this.dataTranslator.get.materializer.materialize();
+
+		//POSTMATERIALIZE PROCESS
+//		this.postMaterialize();
+
+		val endGeneratingModel = System.currentTimeMillis();
+		val durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
+		logger.info("Materializing Subjects time was "+(durationGeneratingModel)+" s.");
+	}
+
+	def materializeInstanceDetails(subjectURI:String,cms:Iterable[MorphBaseClassMapping]):Unit={
+	  if(!this.dataTranslator.isDefined) {
+	    val errorMessage = "Data Translator has not been defined yet!";
+	    logger.error(errorMessage);
+	    throw new Exception(errorMessage)
+	  }
+	  
+		val startGeneratingModel = System.currentTimeMillis();
+		
+		//PREMATERIALIZE PROCESS
+//		this.preMaterializeProcess(outputFileName);
+
+		cms.foreach(cm => {
+			val sqlQuery = this.unfolder.unfoldConceptMapping(cm, subjectURI);
+			if(sqlQuery != null) {
+				this.dataTranslator.get.generateRDFTriples(cm, sqlQuery);	
+			}		  
+		})
+		this.dataTranslator.get.materializer.materialize();
+
+		//POSTMATERIALIZE PROCESS
+//		this.postMaterialize();
+
+		val endGeneratingModel = System.currentTimeMillis();
+		val durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
+		logger.info("Materializing Subjects time was "+(durationGeneratingModel)+" s.");
+	  
+	}
+	
+	def materializeInstanceDetails(subjectURI:String , classURI:String
+	    , outputStream:OutputStream) : Unit = {
+		val startGeneratingModel = System.currentTimeMillis();
+		
+		//PREMATERIALIZE PROCESS
+//		this.preMaterializeProcess(outputFileName);
+
+		//MATERIALIZING MODEL
+		val cms = this.mappingDocument.getClassMappingsByClassURI(classURI);
+		this.materializeInstanceDetails(subjectURI, cms);
+	}
+
+	def materializeSubjects(classURI:String) ={
+		//MATERIALIZING MODEL
+		val cms = this.mappingDocument.getClassMappingsByClassURI(classURI);
+		this.materializeClassMappings(cms);
+		//return result;
+	}
+	
+
+	
+
+	
+
+
+
+	
 }
 
 object MorphBaseRunner {
