@@ -779,7 +779,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 			if(tpPredicate.isURI()) {
 				val predicateURI = tpPredicate.getURI();
 				try {
-					this.transTP(tp, cm, predicateURI, false);	
+					val transTPResult = this.transTP(tp, cm, predicateURI, false);
+					this.toIQuery(transTPResult);
 				} catch {
 				  case e:Exception => {
 					logger.debug("InsatisfiableSQLExpression for tp: " + tp);
@@ -807,7 +808,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 						val predicateURI = pm.getMappedPredicateName(0);
 						if(boundedTriplePatternErrorMessages == null || boundedTriplePatternErrorMessages.isEmpty()) {
 							try {
-								val sqlQuery : IQuery = this.transTP(tp, cm, predicateURI, true);
+								val transTPResult = this.transTP(tp, cm, predicateURI, true);
+								val sqlQuery = this.toIQuery(transTPResult);
 								Some(sqlQuery);							
 							} catch{
 							  case e:Exception => {
@@ -842,92 +844,97 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		result;
 	}
 
-	def transTP(tp:Triple , cm:MorphBaseClassMapping , predicateURI:String , pm:MorphBasePropertyMapping ) : IQuery;
+//	def transTP(tp:Triple , cm:MorphBaseClassMapping , predicateURI:String , pm:MorphBasePropertyMapping ) : IQuery;
 
-	def transTP(tp:Triple , cm:MorphBaseClassMapping , predicateURI:String , unboundedPredicate:Boolean ) : IQuery = {
+	def transTP(tp:Triple , cm:MorphBaseClassMapping , predicateURI:String 
+	    , unboundedPredicate:Boolean ) : MorphTransTPResult = {
 		val pms = cm.getPropertyMappings(predicateURI);
 		
-		val transTP : IQuery = {
-			if(pms == null || pms.size() == 0 && !RDF.`type`.getURI().equalsIgnoreCase(predicateURI)) {
-				val errorMessage = "Undefined mappings of predicate : " + predicateURI;
-				logger.error(errorMessage);
-				null;
-			} else {
-				//alpha
-				val alphaResult = this.alphaGenerator.calculateAlpha(tp, cm, predicateURI);
-				if(alphaResult != null) {
-					val alphaSubject = alphaResult.alphaSubject;
-					val alphaPredicateObjects = alphaResult.alphaPredicateObjects;
-		
-					//PRSQL
-					val prSQL = this.prSQLGenerator.genPRSQL(tp, alphaResult, this.betaGenerator
-					    , this.nameGenerator, cm, predicateURI, unboundedPredicate);
-		
-					//CondSQL
-					val condSQLResult = this.condSQLGenerator.genCondSQL(tp, alphaResult
-					    , this.betaGenerator, cm, predicateURI);
-					val condSQL = {
-						if(condSQLResult != null) {
-							condSQLResult.expression;
-						} else {
-						  null
-						}
-					}
-		
-					val resultAux = {
-						//don't do subquery elimination here! why?
-						if(this.optimizer != null && this.optimizer.subQueryElimination) {
-							try {
-								SQLQuery.createQuery(alphaSubject, alphaPredicateObjects
-								    , prSQL, condSQL, this.databaseType);
-							} catch {
-							  case e:Exception => {
-								val errorMessage = "error in eliminating subquery!";
-								logger.error(errorMessage);
-								null;							    
-							  }
-							}
-						} else {
-						  null
-						} 					  
-					}
-
-		
-					if(resultAux == null) { //without subquery elimination or error occured during the process
-						val resultAux2 = new SQLQuery(alphaSubject);
-						if(alphaPredicateObjects != null) {
-							for(alphaPredicateObject <- alphaPredicateObjects) {
-							  alphaSubject match {
-							    case _:SQLFromItem => {
-							      resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object}
-							    }
-							    case _:SQLQuery => {
-									val onExpression = alphaPredicateObject.onExpression;
-									alphaPredicateObject.onExpression = null;
-									resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object
-									resultAux2.pushFilterDown(onExpression);							      
-							    }
-							    case _ => {
-							      resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object
-							    }
-							  }
-							}					
-						}
-						resultAux2.setSelectItems(prSQL);
-						resultAux2.setWhere(condSQL);
-						resultAux2;
-					} else {
-					  resultAux
-					}
-				} else {
-				  null
-				}
-			}
+		if(pms == null || pms.size() == 0 && !RDF.`type`.getURI().equalsIgnoreCase(predicateURI)) {
+			val errorMessage = "Undefined property mappings of predicate : " + predicateURI;
+			logger.error(errorMessage);
+			throw new Exception(errorMessage);
 		}
+			
+		//alpha
+		val alphaResult = this.alphaGenerator.calculateAlpha(tp, cm, predicateURI);
+		if(alphaResult == null) {
+			val errorMessage = "Undefined alpha mappings of predicate : " + predicateURI;
+			logger.error(errorMessage);
+			throw new Exception(errorMessage);
+		}
+		
 
-		transTP;		
+		//PRSQL
+		val prSQLResult = this.prSQLGenerator.genPRSQL(tp, alphaResult, this.betaGenerator
+		    , this.nameGenerator, cm, predicateURI, unboundedPredicate);
+		
+		
+		//CondSQL
+		val condSQLResult = this.condSQLGenerator.genCondSQL(tp, alphaResult
+		    , this.betaGenerator, cm, predicateURI);
+		
+		val transTPResult = new MorphTransTPResult(alphaResult, condSQLResult, prSQLResult);
+		transTPResult
+
 	}
 
+	def toIQuery(transTPResult:MorphTransTPResult) : IQuery = {
+		val alphaResult = transTPResult.alphaResult
+		val alphaSubject = alphaResult.alphaSubject;
+		val alphaPredicateObjects = alphaResult.alphaPredicateObjects;
+		val prSQLResult = transTPResult.prSQLResult;
+		val prSQL = prSQLResult.toList;
+		val condSQLResult = transTPResult.condSQLResult;
+		val condSQL = { if(condSQLResult != null) { condSQLResult.expression; } 
+			else { null }
+		}
+		
+		val resultAux = {
+			//don't do subquery elimination here! why?
+			if(this.optimizer != null && this.optimizer.subQueryElimination) {
+				try {
+					SQLQuery.createQuery(alphaSubject, alphaPredicateObjects
+					    , prSQL, condSQL, this.databaseType);
+				} catch {
+				  case e:Exception => {
+					val errorMessage = "error in eliminating subquery!";
+					logger.error(errorMessage);
+					null;							    
+				  }
+				}
+			} else { null } 					  
+		}
+
+
+		if(resultAux == null) { //without subquery elimination or error occured during the process
+			val resultAux2 = new SQLQuery(alphaSubject);
+			if(alphaPredicateObjects != null) {
+				for(alphaPredicateObject <- alphaPredicateObjects) {
+				  alphaSubject match {
+				    case _:SQLFromItem => {
+				      resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object}
+				    }
+				    case _:SQLQuery => {
+						val onExpression = alphaPredicateObject.onExpression;
+						alphaPredicateObject.onExpression = null;
+						resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object
+						resultAux2.pushFilterDown(onExpression);							      
+				    }
+				    case _ => {
+				      resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object
+				    }
+				  }
+				}					
+			}
+			resultAux2.setSelectItems(prSQL);
+			resultAux2.setWhere(condSQL);
+			resultAux2;
+		} else {
+		  resultAux
+		}	  
+	}
+	 
 	def transConstant(nodeValue:NodeValue ) : List[ZExp] = {
 		
 		val isLiteral = nodeValue.isLiteral();

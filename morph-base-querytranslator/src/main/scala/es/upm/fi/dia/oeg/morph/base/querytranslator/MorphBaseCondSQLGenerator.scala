@@ -2,7 +2,6 @@ package es.upm.fi.dia.oeg.morph.base.querytranslator
 
 import scala.collection.JavaConversions._
 import org.apache.log4j.Logger
-import java.util.Collection
 import org.apache.log4j.Logger
 import Zql.ZConstant
 import Zql.ZExp

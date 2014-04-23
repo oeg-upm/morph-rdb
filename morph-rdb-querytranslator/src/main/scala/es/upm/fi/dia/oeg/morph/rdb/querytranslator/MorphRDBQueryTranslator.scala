@@ -243,11 +243,11 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
 		result;
 	}
 
-	override def transTP(tp:Triple , cm:MorphBaseClassMapping ,predicateURI:String 
-	    , pm:MorphBasePropertyMapping ) : IQuery = {
-		// TODO Auto-generated method stub
-		null;
-	}
+//	override def transTP(tp:Triple , cm:MorphBaseClassMapping ,predicateURI:String 
+//	    , pm:MorphBasePropertyMapping ) : IQuery = {
+//		// TODO Auto-generated method stub
+//		null;
+//	}
 
 //	override def getTripleAlias(tp:Triple ) : String = {
 //	  if(this.mapTripleAlias.contains(tp)) {

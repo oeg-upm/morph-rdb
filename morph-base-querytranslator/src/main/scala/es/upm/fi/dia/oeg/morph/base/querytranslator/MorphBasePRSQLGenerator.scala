@@ -6,7 +6,6 @@ import com.hp.hpl.jena.graph.Triple
 import com.hp.hpl.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
-import java.util.Collection
 import org.apache.log4j.Logger
 import scala.collection.mutable.LinkedHashSet
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
@@ -30,29 +29,32 @@ abstract class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:Mor
 	def  genPRSQL(tp:Triple , alphaResult:MorphAlphaResult 
 	    , betaGenerator:MorphBaseBetaGenerator, nameGenerator:NameGenerator
 	    , cmSubject:MorphBaseClassMapping, predicateURI:String , unboundedPredicate:Boolean) 
-	: List[ZSelectItem] = {
+	: MorphPRSQLResult = {
 		val tpSubject = tp.getSubject();
 		val tpPredicate = tp.getPredicate();
 		val tpObject = tp.getObject();
 		
 
-		var prList : List[ZSelectItem ]= Nil;
+		//var prList : List[ZSelectItem ]= Nil;
 
-		val selectItemsSubjects = this.genPRSQLSubject(tp, alphaResult, betaGenerator, nameGenerator, cmSubject);
-		prList = prList ::: selectItemsSubjects.toList;
+		val selectItemsSubjectsAux = this.genPRSQLSubject(tp, alphaResult, betaGenerator, nameGenerator, cmSubject);
+		val selectItemSubjects = if(selectItemsSubjectsAux != null) {selectItemsSubjectsAux.toList}
+		else { Nil }
+		
 
-		if(tpPredicate != tpSubject) {
+		val selectItemPredicates:List[ZSelectItem]= if(tpPredicate != tpSubject) {
 			//line 22
 			if(unboundedPredicate) {
-				val selectItemPredicates = this.genPRSQLPredicate(tp, cmSubject, alphaResult
+				val selectItemPredicatesAux = this.genPRSQLPredicate(tp, cmSubject, alphaResult
 				    , betaGenerator, nameGenerator, predicateURI);
-				if(selectItemPredicates != null) {
-					prList = prList ::: selectItemPredicates.toList;
-				}				
-			}
-		}
+				if(selectItemPredicatesAux != null) { selectItemPredicatesAux.toList; }
+				else { Nil }
+			} 
+			else { Nil }
+		} 
+		else { Nil }
 
-		if(tpObject != tpSubject && tpObject != tpPredicate) {
+		val selectItemObjects = if(tpObject != tpSubject && tpObject != tpPredicate) {
 			val columnType = {
 				if(tpPredicate.isVariable()) {
 					if(Constants.DATABASE_POSTGRESQL.equalsIgnoreCase(dbType)) {
@@ -62,19 +64,21 @@ abstract class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:Mor
 					} else {
 						Constants.MONETDB_COLUMN_TYPE_TEXT;
 					}
-				} else {
-				  null
-				}
+				} 
+				else { null }
 			}
 			
 			//line 23
-			val objectSelectItems = this.genPRSQLObject(tp, alphaResult, betaGenerator, nameGenerator
+			val selectItemObjectsAux = this.genPRSQLObject(tp, alphaResult, betaGenerator, nameGenerator
 			    ,cmSubject, predicateURI, columnType);
-			prList = prList ::: objectSelectItems.toList;
+			if(selectItemObjectsAux != null ) { selectItemObjectsAux.toList }
+			else { Nil }
 		}
+		else { Nil }
 
-		logger.debug("genPRSQL = " + prList);
-		prList;
+		val prSQLResult = new MorphPRSQLResult(selectItemSubjects, selectItemPredicates, selectItemObjects)
+		logger.debug("prSQLResult = " + prSQLResult);
+		prSQLResult;
 	}
 	
 	def genPRSQLObject(tp:Triple, alphaResult:MorphAlphaResult
@@ -159,7 +163,7 @@ abstract class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:Mor
 	
 
 
-	def  genPRSQLSTG(stg:Collection[Triple],alphaResult:MorphAlphaResult 
+	def  genPRSQLSTG(stg:Iterable[Triple],alphaResult:MorphAlphaResult 
 	    , betaGenerator:MorphBaseBetaGenerator,nameGenerator:NameGenerator 
 	    , cmSubject:MorphBaseClassMapping ) : List[ZSelectItem] = {
 		

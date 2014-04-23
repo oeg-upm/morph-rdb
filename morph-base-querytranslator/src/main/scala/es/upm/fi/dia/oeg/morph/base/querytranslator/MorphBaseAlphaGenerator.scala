@@ -1,7 +1,6 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator
 
 import scala.collection.JavaConversions._
-import java.util.Collection
 import com.hp.hpl.jena.graph.Node
 import com.hp.hpl.jena.graph.Triple
 import com.hp.hpl.jena.vocabulary.RDF
@@ -18,7 +17,7 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 {
 	var owner:MorphBaseQueryTranslator = null;
 	
-  def logger = Logger.getLogger(this.getClass());
+  	val logger = Logger.getLogger(this.getClass());
   
 //	val databaseType = {
 //		if(this.owner == null) {null}
@@ -36,11 +35,11 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 	
 	def calculateAlphaSubject(subject:Node , cm:MorphBaseClassMapping ) : SQLLogicalTable;
 	
-	def calculateAlphaSTG(triples:Collection[Triple] , cm:MorphBaseClassMapping ) 
+	def calculateAlphaSTG(triples:Iterable[Triple] , cm:MorphBaseClassMapping ) 
 	: java.util.List[MorphAlphaResultUnion] = {
 		var alphaResultUnionList : List[MorphAlphaResultUnion]  = Nil;
 		
-		val firstTriple = triples.iterator().next();
+		val firstTriple = triples.iterator.next();
 		val tpSubject = firstTriple.getSubject();
 		val alphaSubject = this.calculateAlphaSubject(tpSubject, cm);
 		val logicalTableAlias = alphaSubject.getAlias();
