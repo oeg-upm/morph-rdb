@@ -5,6 +5,7 @@ import es.upm.fi.dia.oeg.morph.base.Constants
 
 abstract class MorphBaseDataSourceReader {
 	def evaluateQuery(query:String): MorphBaseResultSet;
+	def execute(query:String): Boolean;
 	def setConnection(obj:Object);
 	def setTimeout(timeout:Int);
 	def closeConnection();

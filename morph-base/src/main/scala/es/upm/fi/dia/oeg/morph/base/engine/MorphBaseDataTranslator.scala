@@ -10,7 +10,7 @@ import es.upm.fi.dia.oeg.morph.base.MorphProperties
 
 abstract class MorphBaseDataTranslator(val md:MorphBaseMappingDocument
     , val materializer:MorphBaseMaterializer, unfolder:MorphBaseUnfolder
-    , dataSourceReader:MorphBaseDataSourceReader, connection:Connection
+    , val dataSourceReader:MorphBaseDataSourceReader, connection:Connection
     , properties:MorphProperties ) {
   
 	val logger = Logger.getLogger(this.getClass().getName());
@@ -29,6 +29,7 @@ abstract class MorphBaseDataTranslator(val md:MorphBaseMappingDocument
 	
 	def generateSubjects(cm:MorphBaseClassMapping , iQuery:IQuery) ;
 	
+	def getDataSourceReader = this.dataSourceReader;
 	
 	
 //	def postTranslation() = {this.materializer.postMaterialize}
