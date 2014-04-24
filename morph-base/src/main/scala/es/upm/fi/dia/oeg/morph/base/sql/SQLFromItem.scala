@@ -34,8 +34,9 @@ extends ZFromItem(fullName) with SQLLogicalTable {
 
 	override def print(withAlias:Boolean ) : String  = {
 		val alias = this.getAlias();
+		this.setAlias("");
+		
 		val result = if(alias != null && withAlias) {
-			this.setAlias("");
 			val resultAux = if(this.form == Constants.LogicalTableType.TABLE_NAME) {
 				val tableName = super.toString().trim();
 				tableName + " " + alias;

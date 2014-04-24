@@ -45,5 +45,7 @@ trait IQueryTranslator {
 	
 	def setDatabaseType(dbType:String) = {this.databaseType = dbType}
 
-	def trans(op:Op ) : IQuery;	
+	def trans(op:Op ) : IQuery;
+	
+	
 }

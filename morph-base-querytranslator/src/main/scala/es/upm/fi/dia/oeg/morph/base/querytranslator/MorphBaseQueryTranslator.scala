@@ -10,6 +10,8 @@ import Zql.ZExpression
 import Zql.ZGroupBy
 import Zql.ZOrderBy
 import Zql.ZSelectItem
+import Zql.ZUpdate
+
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype
 import com.hp.hpl.jena.graph.Node
 import com.hp.hpl.jena.graph.Triple
@@ -780,7 +782,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				val predicateURI = tpPredicate.getURI();
 				try {
 					val transTPResult = this.transTP(tp, cm, predicateURI, false);
-					this.toIQuery(transTPResult);
+					transTPResult.toQuery(optimizer, databaseType);
 				} catch {
 				  case e:Exception => {
 					logger.debug("InsatisfiableSQLExpression for tp: " + tp);
@@ -809,7 +811,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 						if(boundedTriplePatternErrorMessages == null || boundedTriplePatternErrorMessages.isEmpty()) {
 							try {
 								val transTPResult = this.transTP(tp, cm, predicateURI, true);
-								val sqlQuery = this.toIQuery(transTPResult);
+								val sqlQuery = transTPResult.toQuery(optimizer, databaseType);
 								Some(sqlQuery);							
 							} catch{
 							  case e:Exception => {
@@ -879,61 +881,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 
 	}
 
-	def toIQuery(transTPResult:MorphTransTPResult) : IQuery = {
-		val alphaResult = transTPResult.alphaResult
-		val alphaSubject = alphaResult.alphaSubject;
-		val alphaPredicateObjects = alphaResult.alphaPredicateObjects;
-		val prSQLResult = transTPResult.prSQLResult;
-		val prSQL = prSQLResult.toList;
-		val condSQLResult = transTPResult.condSQLResult;
-		val condSQL = { if(condSQLResult != null) { condSQLResult.toExpression; } 
-			else { null }
-		}
-		
-		val resultAux = {
-			//don't do subquery elimination here! why?
-			if(this.optimizer != null && this.optimizer.subQueryElimination) {
-				try {
-					SQLQuery.createQuery(alphaSubject, alphaPredicateObjects
-					    , prSQL, condSQL, this.databaseType);
-				} catch {
-				  case e:Exception => {
-					val errorMessage = "error in eliminating subquery!";
-					logger.error(errorMessage);
-					null;							    
-				  }
-				}
-			} else { null } 					  
-		}
 
-
-		if(resultAux == null) { //without subquery elimination or error occured during the process
-			val resultAux2 = new SQLQuery(alphaSubject);
-			if(alphaPredicateObjects != null) {
-				for(alphaPredicateObject <- alphaPredicateObjects) {
-				  alphaSubject match {
-				    case _:SQLFromItem => {
-				      resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object}
-				    }
-				    case _:SQLQuery => {
-						val onExpression = alphaPredicateObject.onExpression;
-						alphaPredicateObject.onExpression = null;
-						resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object
-						resultAux2.pushFilterDown(onExpression);							      
-				    }
-				    case _ => {
-				      resultAux2.addFromItem(alphaPredicateObject);//alpha predicate object
-				    }
-				  }
-				}					
-			}
-			resultAux2.setSelectItems(prSQL);
-			resultAux2.setWhere(condSQL);
-			resultAux2;
-		} else {
-		  resultAux
-		}	  
-	}
 	 
 	def transConstant(nodeValue:NodeValue ) : List[ZExp] = {
 		
@@ -1424,6 +1372,22 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		}
 	}
 
+	def translateUpdate(bgp:OpBGP) : ZUpdate = {
+		val typeInferrer = new MorphMappingInferrer(this.mappingDocument);
+		this.mapInferredTypes = typeInferrer.infer(bgp);
+		logger.info("Inferred Types : \n" + typeInferrer.printInferredTypes());
+		val isSTG = MorphQueryTranslatorUtility.isSTG(bgp);
+		if(!isSTG) {
+			val errorMessage = "Only STG pattern is supported for update operation!"
+		    logger.error(errorMessage);
+			throw new Exception(errorMessage);
+		}
+		
+		val triples = bgp.getPattern().getList().toList;
+		val transTPResult = this.transSTGUnionFree(triples);
+		transTPResult.toUpdate;
+	}
+	
 	override def translate(op:Op) : IQuery  = {
 		logger.info("SPARQL query = \n" + op);
 		logger.debug("opSparqlQuery = " + op);
@@ -1541,7 +1505,13 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		result;
 	}
 
-
+	def transSTGUnionFree(stg:List[Triple] ) : MorphTransTPResult = {
+		val stgSubject = stg.get(0).getSubject();
+		val cms = this.mapInferredTypes(stgSubject);
+		val cm = cms.toList.head;
+		this.transSTGUnionFree(stg, cm);
+	}
+	
 	def transSTG(stg:List[Triple] ) : IQuery  = {
 		val stgSubject = stg.get(0).getSubject();
 		val cmsAux = this.mapInferredTypes(stgSubject).toList;
@@ -1553,7 +1523,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				logger.warn(errorMessage2);
 				val allCms = this.mappingDocument.classMappings.toList;
 				if(allCms == null || allCms.size() == 0) {
-					val errorMessage3 = "Mapping document doesn't contain any class mappins!";
+					val errorMessage3 = "Mapping document doesn't contain any class mappings!";
 					logger.error(errorMessage3);
 					null
 				} else {
@@ -1564,7 +1534,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 			}		  
 		}
 
-		val resultAux = cms.map(cm => {this.transSTG(stg, cm);})
+		val resultAux = cms.map(cm => { this.transSTG(stg, cm);} )
 		
 		val result = {
 			if(resultAux.size() == 1) { resultAux.head;} 
@@ -1667,7 +1637,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 //				}
 				
 				val transSTGResult = this.transSTGUnionFree(stg, cm);
-				this.toIQuery(transSTGResult);
+				transSTGResult.toQuery(optimizer, databaseType);
 			}		  
 		}
 
