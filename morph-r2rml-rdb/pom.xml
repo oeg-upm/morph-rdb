@@ -34,36 +34,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.26</version>
 		</dependency>
-		<dependency>
-			<groupId>org.antlr</groupId>
-			<artifactId>stringtemplate</artifactId>
-			<version>4.0.2</version>
-		</dependency>
 
-		<dependency>
-			<groupId>zql</groupId>
-			<artifactId>zql</artifactId>
-			<version>0.1</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>es.upm.fi.dia.oeg.morph</groupId>
 			<artifactId>morph-r2rml</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		
-<!-- 		<dependency>
-			<groupId>es.upm.fi.dia.oeg.morph</groupId>
-			<artifactId>morph-base-querytranslator</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>		 -->
-
-		<dependency>
-			<groupId>rqr4r2o</groupId>
-			<artifactId>rqr4r2o</artifactId>
-			<version>0.1</version>
-		</dependency>	
-			
 	</dependencies>
 
 	<distributionManagement>
@@ -80,10 +57,6 @@
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
 		</snapshotRepository>
 		
-<!-- 			<repository>
-				<id>fpriyatna.dropbox.repo</id>
-				<url>file:////home/fpriyatna/Dropbox/Public/repository</url>
-			</repository> -->
 	</distributionManagement>
 
 	<repositories>
@@ -99,24 +72,6 @@
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
 		</repository>
 
-<!-- 		<repository>
-			<id>fpriyatna-dropbox</id>
-			<name>Dropbox Account of fpriyatna</name>
-			<url>https://www.dropbox.com/sh/9urddohopn5izkw/injtfdr_si</url>
-		</repository> -->
-
-<!-- 		<repository>
-			<id>fpriyatna-gdrive</id>
-			<name>GDrive Account of fpriyatna</name>
-			<url>https://drive.google.com/folderview?id=0B2mQi1xrpbmfX054ZlpqSDZCVlE</url>
-		</repository> -->
-
-		<repository>
-			<id>denebola</id>
-			<name>Denebola Repository</name>
-			<url>http://denebola.dia.fi.upm.es/repository/</url>
-		</repository>
-		
 	</repositories>
 		  
 </project>

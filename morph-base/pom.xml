@@ -62,17 +62,13 @@
 			<name>Aldebaran Releases</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-releases-local</url>
 		</repository>
+
 		<snapshotRepository>
 			<uniqueVersion>true</uniqueVersion>
 			<id>aldebaran-snapshots</id>
 			<name>Aldebaran Snapshots</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
 		</snapshotRepository>
-
-<!-- 			<repository>
-				<id>fpriyatna.dropbox.repo</id>
-				<url>file:////home/fpriyatna/Dropbox/Public/repository</url>
-			</repository> -->
 
 	</distributionManagement>
 
@@ -88,29 +84,6 @@
 			<name>Aldebaran Snapshots</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
 		</repository>		
-
-<!-- 		<repository>
-			<id>fpriyatna-dropbox</id>
-			<name>Dropbox Account of fpriyatna</name>
-			<url>https://www.dropbox.com/sh/9urddohopn5izkw/injtfdr_si</url>
-		</repository> -->
-
-<!-- 		<repository>
-			<id>fpriyatna-gdrive</id>
-			<name>GDrive Account of fpriyatna</name>
-			<url>https://drive.google.com/folderview?id=0B2mQi1xrpbmfX054ZlpqSDZCVlE</url>
-		</repository> -->
-
-		<repository>
-			<id>denebola</id>
-			<name>Denebola Repository</name>
-			<url>http://denebola.dia.fi.upm.es/repository/</url>
-		</repository>		
-		
-
-		
-
 		
 	</repositories>
-
 </project>
