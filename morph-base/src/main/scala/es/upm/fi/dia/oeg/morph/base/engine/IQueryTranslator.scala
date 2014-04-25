@@ -7,6 +7,9 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.TermMapResult
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import com.hp.hpl.jena.sparql.algebra.Op
+import com.hp.hpl.jena.sparql.algebra.op.OpBGP
+import Zql.ZUpdate
+import Zql.ZInsert
 
 trait IQueryTranslator {
 	var connection:Connection = null;
@@ -47,5 +50,8 @@ trait IQueryTranslator {
 
 	def trans(op:Op ) : IQuery;
 	
+	def translateUpdate(stg:OpBGP) : ZUpdate;
+	
+	def translateInsert(stg:OpBGP) : ZInsert;
 	
 }

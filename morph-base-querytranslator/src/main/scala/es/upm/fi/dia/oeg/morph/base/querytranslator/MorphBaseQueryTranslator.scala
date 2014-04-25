@@ -11,7 +11,6 @@ import Zql.ZGroupBy
 import Zql.ZOrderBy
 import Zql.ZSelectItem
 import Zql.ZUpdate
-
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype
 import com.hp.hpl.jena.graph.Node
 import com.hp.hpl.jena.graph.Triple
@@ -83,6 +82,7 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphQueryTranslatorU
 import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphSQLSelectItemGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphMappingInferrer
 import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphQueryRewriter
+import Zql.ZInsert
 
 abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
     , alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
@@ -1372,21 +1372,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		}
 	}
 
-	def translateUpdate(bgp:OpBGP) : ZUpdate = {
-		val typeInferrer = new MorphMappingInferrer(this.mappingDocument);
-		this.mapInferredTypes = typeInferrer.infer(bgp);
-		logger.info("Inferred Types : \n" + typeInferrer.printInferredTypes());
-		val isSTG = MorphQueryTranslatorUtility.isSTG(bgp);
-		if(!isSTG) {
-			val errorMessage = "Only STG pattern is supported for update operation!"
-		    logger.error(errorMessage);
-			throw new Exception(errorMessage);
-		}
-		
-		val triples = bgp.getPattern().getList().toList;
-		val transTPResult = this.transSTGUnionFree(triples);
-		transTPResult.toUpdate;
-	}
+
 	
 	override def translate(op:Op) : IQuery  = {
 		logger.info("SPARQL query = \n" + op);
@@ -1689,5 +1675,37 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 //			val sparqQuery = QueryFactory.read(queryFilePath);
 //			this.sparqlQuery = sparqQuery;
 //		}
-//	}	
+//	}
+
+	override def translateUpdate(stg:OpBGP) : ZUpdate = {
+		val isSTG = MorphQueryTranslatorUtility.isSTG(stg);
+		if(!isSTG) {
+			val errorMessage = "Only STG pattern is supported for update operation!"
+		    logger.error(errorMessage);
+			throw new Exception(errorMessage);
+		}
+
+		val typeInferrer = new MorphMappingInferrer(this.mappingDocument);
+		this.mapInferredTypes = typeInferrer.infer(stg);
+		logger.info("Inferred Types : \n" + typeInferrer.printInferredTypes());
+		val triples = stg.getPattern().getList().toList;
+		val transTPResult = this.transSTGUnionFree(triples);
+		transTPResult.toUpdate;
+	}
+	
+	override def translateInsert(stg:OpBGP) : ZInsert = {
+		val isSTG = MorphQueryTranslatorUtility.isSTG(stg);
+		if(!isSTG) {
+			val errorMessage = "Only STG pattern is supported for insert operation!"
+		    logger.error(errorMessage);
+			throw new Exception(errorMessage);
+		}
+
+		val typeInferrer = new MorphMappingInferrer(this.mappingDocument);
+		this.mapInferredTypes = typeInferrer.infer(stg);
+		logger.info("Inferred Types : \n" + typeInferrer.printInferredTypes());
+		val triples = stg.getPattern().getList().toList;
+		val transTPResult = this.transSTGUnionFree(triples);
+		transTPResult.toInsert;
+	}
 }

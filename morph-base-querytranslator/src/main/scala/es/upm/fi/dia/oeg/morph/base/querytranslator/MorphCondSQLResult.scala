@@ -9,4 +9,8 @@ class MorphCondSQLResult(val condSQLSubject:ZExpression, val condSQLPredicateObj
 	  val expressionList = List(condSQLSubject) ::: condSQLPredicateObjects.toList;
 	  MorphSQLUtility.combineExpresions(expressionList, Constants.SQL_LOGICAL_OPERATOR_AND);
 	}
+	
+	def toList() = {
+	  List(condSQLSubject) ::: condSQLPredicateObjects.toList
+	}
 }

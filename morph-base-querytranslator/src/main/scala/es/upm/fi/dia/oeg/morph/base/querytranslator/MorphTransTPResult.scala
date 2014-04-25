@@ -1,7 +1,6 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator
 
 import scala.collection.JavaConversions._
-
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.sql.SQLQuery
 import org.apache.log4j.Logger
@@ -9,6 +8,10 @@ import es.upm.fi.dia.oeg.morph.base.sql.SQLFromItem
 import es.upm.fi.dia.oeg.morph.base.engine.QueryTranslationOptimizer
 import Zql.ZUpdate
 import es.upm.fi.dia.oeg.morph.base.Constants
+import Zql.ZInsert
+import Zql.ZExpression
+import Zql.ZConstant
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
 
 class MorphTransTPResult(val alphaResult:MorphAlphaResult
     , val condSQLResult:MorphCondSQLResult, val prSQLResult:MorphPRSQLResult) {
@@ -75,7 +78,6 @@ class MorphTransTPResult(val alphaResult:MorphAlphaResult
 	  val alphaSubject = this.alphaResult.alphaSubject;
 	  val tableName = alphaSubject.print(true); 
 	  val zUpdate = new ZUpdate(tableName);
-	  //zUpdate.addColumnUpdate("col1", Constants.SQL_EXPRESSION_TRUE);
 	  
 	  val condSQLSubject = this.condSQLResult.condSQLSubject;
 	  zUpdate.addWhere(condSQLSubject);
@@ -87,9 +89,44 @@ class MorphTransTPResult(val alphaResult:MorphAlphaResult
 	    }
 	    else { None }
 	  }).toMap
-	  
 	  mapSetValue.foreach { case(k,v) => { zUpdate.addColumnUpdate(k, v)} } 
 	  
 	  zUpdate
 	}
+	
+	def toInsert() = {
+	  val alphaSubject = this.alphaResult.alphaSubject;
+	  val tableName = alphaSubject.print(false); 
+	  val zInsert = new ZInsert(tableName);
+	  
+	  val condSQLs = this.condSQLResult.toList;
+	  val condSQLTuples = condSQLs.flatMap(x => {
+	    if(x.getOperator().equals("=")) {
+	      val key = x.getOperand(0)
+	      val column = key match {
+	        case zConstant:ZConstant => {
+	          val morphConstant = MorphSQLConstant(zConstant);
+	          val column = morphConstant.column.toString();
+	          column
+	        }
+	        case _ => key.toString();
+	      }
+	      val value = x.getOperand(1);
+	      Some((column, value))
+	    }
+	    else { None }
+	  }).toList
+	  val keys = condSQLTuples.map(tuple => tuple._1);
+	  val values = condSQLTuples.map(tuple => tuple._2);
+	  
+	  val columns = new java.util.Vector[String]();
+	  keys.foreach(key => columns.add(key));
+	  zInsert.addColumns(columns);
+	  
+	  val valueSpec = new ZExpression(",")
+	  values.foreach(value => valueSpec.addOperand(value));
+	  zInsert.addValueSpec(valueSpec);
+	  
+	  zInsert
+	}	
 }
