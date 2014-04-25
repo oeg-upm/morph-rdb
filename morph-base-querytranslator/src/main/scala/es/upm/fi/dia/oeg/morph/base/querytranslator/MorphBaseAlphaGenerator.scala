@@ -55,7 +55,7 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 				val processableTriplePattern = {
 					if(tp.getObject().isURI()) {
 						val objectURI = tp.getObject().getURI();
-						if(RDF.`type`.getURI().equals(tpPredicateURI) && mappedClassURIs.contains(objectURI)) {
+						if(RDF.`type`.getURI().equals(tpPredicateURI) && mappedClassURIs.contains(objectURI) && triples.size > 1) {
 							false;
 						} else {
 						  true;

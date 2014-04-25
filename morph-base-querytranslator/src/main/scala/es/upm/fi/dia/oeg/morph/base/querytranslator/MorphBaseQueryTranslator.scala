@@ -1677,7 +1677,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 //		}
 //	}
 
-	override def translateUpdate(stg:OpBGP) : ZUpdate = {
+	override def translateUpdate(stg:OpBGP) = {
 		val isSTG = MorphQueryTranslatorUtility.isSTG(stg);
 		if(!isSTG) {
 			val errorMessage = "Only STG pattern is supported for update operation!"
@@ -1693,7 +1693,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		transTPResult.toUpdate;
 	}
 	
-	override def translateInsert(stg:OpBGP) : ZInsert = {
+	override def translateInsert(stg:OpBGP) = {
 		val isSTG = MorphQueryTranslatorUtility.isSTG(stg);
 		if(!isSTG) {
 			val errorMessage = "Only STG pattern is supported for insert operation!"
@@ -1708,4 +1708,21 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		val transTPResult = this.transSTGUnionFree(triples);
 		transTPResult.toInsert;
 	}
+	
+	override def translateDelete(stg:OpBGP) = {
+		val isSTG = MorphQueryTranslatorUtility.isSTG(stg);
+		if(!isSTG && stg.getPattern().getList().size() > 1) {
+			val errorMessage = "Only STG pattern is supported for delete operation!"
+		    logger.error(errorMessage);
+			throw new Exception(errorMessage);
+		}
+
+		val typeInferrer = new MorphMappingInferrer(this.mappingDocument);
+		this.mapInferredTypes = typeInferrer.infer(stg);
+		logger.info("Inferred Types : \n" + typeInferrer.printInferredTypes());
+		val triples = stg.getPattern().getList().toList;
+		val transTPResult = this.transSTGUnionFree(triples);
+		transTPResult.toDelete;
+	}
+
 }

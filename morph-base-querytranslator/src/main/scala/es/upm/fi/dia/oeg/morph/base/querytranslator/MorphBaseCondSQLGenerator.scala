@@ -44,7 +44,7 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 		//val condSQLTP = List(condSQLSubject, condSQLPredicateObject);
 		//val condSQL = MorphSQLUtility.combineExpresions(condSQLTP, Constants.SQL_LOGICAL_OPERATOR_AND);
 		//logger.debug("genCondSQL = " + condSQL);
-		new MorphCondSQLResult(condSQLSubject, condSQLPredicateObject);
+		new MorphCondSQLResult(List(condSQLSubject), condSQLPredicateObject);
 	}
 
 
@@ -367,7 +367,7 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 
 		val exps = Set(condSubject) ++ condSTGPredicateObject
 		val genCondSQLSTG = MorphSQLUtility.combineExpresions(exps, Constants.SQL_LOGICAL_OPERATOR_AND);
-		new MorphCondSQLResult(condSubject, condSTGPredicateObject);
+		new MorphCondSQLResult(List(condSubject), condSTGPredicateObject);
 	}
 
 	private def genCondSQL(tp1:Triple , tp2:Triple ,alphaResult:MorphAlphaResult 

@@ -4,13 +4,12 @@ import Zql.ZExpression
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
 import es.upm.fi.dia.oeg.morph.base.Constants
 
-class MorphCondSQLResult(val condSQLSubject:ZExpression, val condSQLPredicateObjects:Iterable[ZExpression]  ) {
+class MorphCondSQLResult(val condSQLSubject:Iterable[ZExpression], val condSQLPredicateObjects:Iterable[ZExpression]  ) {
 	def toExpression() = {
-	  val expressionList = List(condSQLSubject) ::: condSQLPredicateObjects.toList;
-	  MorphSQLUtility.combineExpresions(expressionList, Constants.SQL_LOGICAL_OPERATOR_AND);
+	  MorphSQLUtility.combineExpresions(this.toList, Constants.SQL_LOGICAL_OPERATOR_AND);
 	}
 	
 	def toList() = {
-	  List(condSQLSubject) ::: condSQLPredicateObjects.toList
+	  condSQLSubject.toList ::: condSQLPredicateObjects.toList
 	}
 }

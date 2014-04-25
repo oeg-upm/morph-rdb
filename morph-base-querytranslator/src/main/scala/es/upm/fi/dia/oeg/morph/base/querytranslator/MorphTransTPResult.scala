@@ -12,6 +12,9 @@ import Zql.ZInsert
 import Zql.ZExpression
 import Zql.ZConstant
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
+import Zql.ZDelete
+import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
+import es.upm.fi.dia.oeg.morph.base.sql.SQLUnion
 
 class MorphTransTPResult(val alphaResult:MorphAlphaResult
     , val condSQLResult:MorphCondSQLResult, val prSQLResult:MorphPRSQLResult) {
@@ -80,7 +83,7 @@ class MorphTransTPResult(val alphaResult:MorphAlphaResult
 	  val zUpdate = new ZUpdate(tableName);
 	  
 	  val condSQLSubject = this.condSQLResult.condSQLSubject;
-	  zUpdate.addWhere(condSQLSubject);
+	  zUpdate.addWhere(MorphSQLUtility.combineExpresions(condSQLSubject, Constants.SQL_LOGICAL_OPERATOR_AND));
 	  
 	  val condSQLPredicateObjects = this.condSQLResult.condSQLPredicateObjects;
 	  val mapSetValue = this.condSQLResult.condSQLPredicateObjects.flatMap(x => {
@@ -128,5 +131,35 @@ class MorphTransTPResult(val alphaResult:MorphAlphaResult
 	  zInsert.addValueSpec(valueSpec);
 	  
 	  zInsert
-	}	
+	}
+	
+	def toDelete() = {
+	  val alphaSubject = this.alphaResult.alphaSubject;
+	  val tableName = alphaSubject.print(false); 
+	  val zDelete = new ZDelete(tableName);
+	  
+	  val condSQLSubject = this.condSQLResult.condSQLSubject;
+	  val newExpressions = condSQLSubject.map(x => {
+	    if(x.getOperator().equals("=")) {
+	      val key = x.getOperand(0)
+	      val column = key match {
+	        case zConstant:ZConstant => {
+	          val morphConstant = MorphSQLConstant(zConstant);
+	          val column = morphConstant.column.toString();
+	          column
+	        }
+	        case _ => key.toString();
+	      }
+	      val value = x.getOperand(1);
+	      val newExpression = new ZExpression("=", new ZConstant(column, ZConstant.COLUMNNAME), value);
+	      newExpression
+	    }
+	    else { x }
+	  }).toList
+	  val newExpression = MorphSQLUtility.combineExpresions(newExpressions, Constants.SQL_LOGICAL_OPERATOR_AND);
+	  zDelete.addWhere(newExpression);
+	  
+	  zDelete
+	}
+	
 }

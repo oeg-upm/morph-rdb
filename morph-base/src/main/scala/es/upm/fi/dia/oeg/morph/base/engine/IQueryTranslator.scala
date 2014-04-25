@@ -10,6 +10,7 @@ import com.hp.hpl.jena.sparql.algebra.Op
 import com.hp.hpl.jena.sparql.algebra.op.OpBGP
 import Zql.ZUpdate
 import Zql.ZInsert
+import Zql.ZDelete
 
 trait IQueryTranslator {
 	var connection:Connection = null;
@@ -53,5 +54,7 @@ trait IQueryTranslator {
 	def translateUpdate(stg:OpBGP) : ZUpdate;
 	
 	def translateInsert(stg:OpBGP) : ZInsert;
+	
+	def translateDelete(stg:OpBGP) : ZDelete;
 	
 }
