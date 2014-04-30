@@ -1,33 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sparql>
-    <head>
-        <variable name="student"/>
-        <variable name="sport"/>
-    </head>
-    <results>
-        <result>
-            <binding name="student">
-                <uri>http://mappingpedia.linkeddata.es/resources/Person/B1</uri>
-            </binding>
-            <binding name="sport">
-                <uri>http://mappingpedia.linkeddata.es/resources/Sport/100</uri>
-            </binding>
-        </result>
-        <result>
-            <binding name="student">
-                <uri>http://mappingpedia.linkeddata.es/resources/Person/B2</uri>
-            </binding>
-            <binding name="sport">
-                <uri>http://mappingpedia.linkeddata.es/resources/Sport/200</uri>
-            </binding>
-        </result>
-        <result>
-            <binding name="student">
-                <uri>http://mappingpedia.linkeddata.es/resources/Person/B3</uri>
-            </binding>
-            <binding name="sport">
-                <uri>http://mappingpedia.linkeddata.es/resources/Sport/300</uri>
-            </binding>
-        </result>
-    </results>
-</sparql>
+<http://mappingpedia.linkeddata.es/resources/Person/B1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Person> .
+<http://mappingpedia.linkeddata.es/resources/Person/B1> <http://mappingpedia.linkeddata.es/vocabulary/name> "Paul" .
+<http://mappingpedia.linkeddata.es/resources/Person/B1> <http://mappingpedia.linkeddata.es/vocabulary/hasSport> <http://mappingpedia.linkeddata.es/resources/Sport/100> .
+<http://mappingpedia.linkeddata.es/resources/Person/B1> <http://mappingpedia.linkeddata.es/vocabulary/phone> "777-3426" .
+<http://mappingpedia.linkeddata.es/resources/Person/B1> <http://mappingpedia.linkeddata.es/vocabulary/birthdate> "2000-12-31T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://mappingpedia.linkeddata.es/resources/Person/B2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Person> .
+<http://mappingpedia.linkeddata.es/resources/Person/B2> <http://mappingpedia.linkeddata.es/vocabulary/name> "John" .
+<http://mappingpedia.linkeddata.es/resources/Person/B2> <http://mappingpedia.linkeddata.es/vocabulary/hasSport> <http://mappingpedia.linkeddata.es/resources/Sport/200> .
+<http://mappingpedia.linkeddata.es/resources/Person/B2> <http://mappingpedia.linkeddata.es/vocabulary/email> "john@acd.edu" .
+<http://mappingpedia.linkeddata.es/resources/Person/B3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Person> .
+<http://mappingpedia.linkeddata.es/resources/Person/B3> <http://mappingpedia.linkeddata.es/vocabulary/name> "George" .
+<http://mappingpedia.linkeddata.es/resources/Person/B3> <http://mappingpedia.linkeddata.es/vocabulary/hasSport> <http://mappingpedia.linkeddata.es/resources/Sport/300> .
+<http://mappingpedia.linkeddata.es/resources/Person/B3> <http://mappingpedia.linkeddata.es/vocabulary/webpage> "www.george.edu" .
+<http://mappingpedia.linkeddata.es/resources/Person/B3> <http://mappingpedia.linkeddata.es/vocabulary/birthdate> "1990-06-18T00:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://mappingpedia.linkeddata.es/resources/Person/B4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Person> .
+<http://mappingpedia.linkeddata.es/resources/Person/B4> <http://mappingpedia.linkeddata.es/vocabulary/name> "Ringo" .
+<http://mappingpedia.linkeddata.es/resources/Person/B4> <http://mappingpedia.linkeddata.es/vocabulary/webpage> "www.starr.edu" .
+<http://mappingpedia.linkeddata.es/resources/Person/B4> <http://mappingpedia.linkeddata.es/vocabulary/phone> "888-4537" .
+<http://mappingpedia.linkeddata.es/resources/Person/B4> <http://mappingpedia.linkeddata.es/vocabulary/email> "ringo@acd.edu" .
+<http://mappingpedia.linkeddata.es/resources/Sport/100> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Sport> .
+<http://mappingpedia.linkeddata.es/resources/Sport/100> <http://mappingpedia.linkeddata.es/vocabulary/type> "BOTH" .
+<http://mappingpedia.linkeddata.es/resources/Sport/100> <http://mappingpedia.linkeddata.es/vocabulary/code> "TNS" .
+<http://mappingpedia.linkeddata.es/resources/Sport/100> <http://mappingpedia.linkeddata.es/vocabulary/name> "Tennis" .
+<http://mappingpedia.linkeddata.es/resources/Sport/100> <http://mappingpedia.linkeddata.es/vocabulary/id> "100"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://mappingpedia.linkeddata.es/resources/Sport/200> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Sport> .
+<http://mappingpedia.linkeddata.es/resources/Sport/200> <http://mappingpedia.linkeddata.es/vocabulary/type> "INDOOR" .
+<http://mappingpedia.linkeddata.es/resources/Sport/200> <http://mappingpedia.linkeddata.es/vocabulary/code> "CHS" .
+<http://mappingpedia.linkeddata.es/resources/Sport/200> <http://mappingpedia.linkeddata.es/vocabulary/name> "Chess" .
+<http://mappingpedia.linkeddata.es/resources/Sport/200> <http://mappingpedia.linkeddata.es/vocabulary/id> "200"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://mappingpedia.linkeddata.es/resources/Sport/300> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Sport> .
+<http://mappingpedia.linkeddata.es/resources/Sport/300> <http://mappingpedia.linkeddata.es/vocabulary/type> "OUTDOOR" .
+<http://mappingpedia.linkeddata.es/resources/Sport/300> <http://mappingpedia.linkeddata.es/vocabulary/code> "SCR" .
+<http://mappingpedia.linkeddata.es/resources/Sport/300> <http://mappingpedia.linkeddata.es/vocabulary/name> "Soccer" .
+<http://mappingpedia.linkeddata.es/resources/Sport/300> <http://mappingpedia.linkeddata.es/vocabulary/id> "300"^^<http://www.w3.org/2001/XMLSchema#integer> .

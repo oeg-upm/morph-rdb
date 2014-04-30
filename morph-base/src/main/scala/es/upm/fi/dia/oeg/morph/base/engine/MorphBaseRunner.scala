@@ -40,8 +40,9 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     ) {
   
 	val logger = Logger.getLogger(this.getClass());
-	var ontologyFilePath:String=null;
-	var sparqlQuery:Query=null;
+	var ontologyFilePath:Option[String]=None;
+	var sparqlQuery:Option[Query]=None;
+	var mapSparqlSql:Map[Query, IQuery] = Map.empty;
 	
 	def setOutputStream(outputStream:Writer) = { 
 		this.outputStream = outputStream
@@ -103,29 +104,15 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 
 	def readSPARQLFile(sparqQueryFileURL:String ) {
 		if(this.queryTranslator.isDefined) {
-			val sparqQuery = QueryFactory.read(sparqQueryFileURL);
-			this.sparqlQuery = sparqQuery;
+			this.sparqlQuery = Some(QueryFactory.read(sparqQueryFileURL));
 		}
 	}
-	
 
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-
-
-	
+	def readSPARQLString(sparqString:String ) {
+		if(this.queryTranslator.isDefined) {
+			this.sparqlQuery = Some(QueryFactory.create(sparqString));
+		}
+	}
 
 
 	def run() : String = {
@@ -135,16 +122,16 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 //		  this.queryTranslator.get.sparqlQuery
 //		} else { null }
 		
-		if(this.sparqlQuery == null) {
+		if(!this.sparqlQuery.isDefined) {
 			//set output file
 			this.materializeMappingDocuments(mappingDocument);
 		} else {
-			logger.debug("sparql query = " + this.sparqlQuery);
+			logger.debug("sparql query = " + this.sparqlQuery.get);
 
 			//LOADING ONTOLOGY FILE
 			//REWRITE THE SPARQL QUERY IF NECESSARY
-			val queries = if(this.ontologyFilePath == null || this.ontologyFilePath.equals("")) {
-				List(sparqlQuery);
+			val queries = if(!this.ontologyFilePath.isDefined) {
+				List(sparqlQuery.get);
 			} else {
 				//REWRITE THE QUERY BASED ON THE MAPPINGS AND ONTOLOGY
 				logger.info("Rewriting query...");
@@ -156,7 +143,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 
 				//RewriterWrapper rewritterWapper = new RewriterWrapper(ontologyFilePath, rewritterWrapperMode, mappedOntologyElements);
 				//queries = rewritterWapper.rewrite(originalQuery);
-				val queriesAux = RewriterWrapper.rewrite(sparqlQuery, ontologyFilePath
+				val queriesAux = RewriterWrapper.rewrite(sparqlQuery.get, ontologyFilePath.get
 				    , RewriterWrapper.fullMode, mappedOntologyElements
 				    , RewriterWrapper.globalMatchMode);
 
@@ -167,7 +154,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 
 
 			//TRANSLATE SPARQL QUERIES INTO SQL QUERIES
-			val mapSparqlSql= this.translateSPARQLQueriesIntoSQLQueries(queries);
+			this.mapSparqlSql= this.translateSPARQLQueriesIntoSQLQueries(queries);
 
 			//translate result
 			//if (this.conn != null) {
@@ -268,19 +255,23 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		//return result;
 	}
 	
-
+	def getQueryTranslator() = {
+	  queryTranslator.getOrElse(null);
+	}
 	
-
+	def getQueryResultWriter() = {
+		if(queryResultTranslator.isDefined) {
+		  queryResultTranslator.get.queryResultWriter
+		}
+		else { null }
+	}
 	
-
+	def getTranslationResults : java.util.Collection[IQuery] = {
+	  this.mapSparqlSql.values
+	}
+	
 
 
 	
 }
 
-object MorphBaseRunner {
-
-	
-
-
-}

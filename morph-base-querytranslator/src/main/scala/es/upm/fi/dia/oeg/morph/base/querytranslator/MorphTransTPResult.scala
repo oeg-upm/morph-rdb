@@ -24,7 +24,7 @@ class MorphTransTPResult(val alphaResult:MorphAlphaResult
 	def toQuery(optimizer:QueryTranslationOptimizer, databaseType:String) : IQuery = {
 		val alphaResult = this.alphaResult
 		val alphaSubject = alphaResult.alphaSubject;
-		val alphaPredicateObjects = alphaResult.alphaPredicateObjects;
+		val alphaPredicateObjects = alphaResult.alphaPredicateObjects.map(x => x._1);
 		val prSQLResult = this.prSQLResult;
 		val prSQL = prSQLResult.toList;
 		val condSQLResult = this.condSQLResult;

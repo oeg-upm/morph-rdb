@@ -680,29 +680,34 @@ class SQLQuery extends ZQuery with IQuery {
 
 	def pushExpDown(pushedExp:ZExp , mapInnerAliasSelectItem:Map[String, ZSelectItem] ) 
 	: ZExp = {
-		val dbType = this.getDatabaseType();
-		
-		val whereReplacement= mapInnerAliasSelectItem.keys.map(alias => {
-			val aliasColumn = new ZConstant(alias, ZConstant.COLUMNNAME);
-			val selectItem = mapInnerAliasSelectItem(alias);
-			val zConstant = if(selectItem.isExpression()) {
-				val selectItemValue = selectItem.getExpression().toString();
-				new ZConstant(selectItemValue, ZConstant.UNKNOWN);
-			} else {
-				val selectItemTable = selectItem.getTable();
-				val selectItemColumn = selectItem.getColumn();
-				val selectItemValue = if(selectItemTable != null && !selectItemTable.equals("")) {
-					selectItemTable + "." + selectItemColumn;  
+		val result = if(pushedExp == null) {
+		  pushedExp
+		} else {
+			val dbType = this.getDatabaseType();
+			
+			val whereReplacement= mapInnerAliasSelectItem.keys.map(alias => {
+				val aliasColumn = new ZConstant(alias, ZConstant.COLUMNNAME);
+				val selectItem = mapInnerAliasSelectItem(alias);
+				val zConstant = if(selectItem.isExpression()) {
+					val selectItemValue = selectItem.getExpression().toString();
+					new ZConstant(selectItemValue, ZConstant.UNKNOWN);
 				} else {
-					selectItemColumn; 
+					val selectItemTable = selectItem.getTable();
+					val selectItemColumn = selectItem.getColumn();
+					val selectItemValue = if(selectItemTable != null && !selectItemTable.equals("")) {
+						selectItemTable + "." + selectItemColumn;  
+					} else {
+						selectItemColumn; 
+					}
+					MorphSQLUtility.createConstant(selectItemValue, ZConstant.COLUMNNAME, dbType);
 				}
-				MorphSQLUtility.createConstant(selectItemValue, ZConstant.COLUMNNAME, dbType);
-			}
-			(aliasColumn -> zConstant);
-		}).toMap;
-
-		val newFilter = MorphSQLUtility.replaceExp(pushedExp, whereReplacement);
-		newFilter;
+				(aliasColumn -> zConstant);
+			}).toMap;
+	
+			val newFilter = MorphSQLUtility.replaceExp(pushedExp, whereReplacement);
+			newFilter;		  
+		}
+		result
 	}
 
 	def getDistinct() : Boolean = { this.distinct; }

@@ -16,9 +16,12 @@ class MorphAlphaResultUnion(var alphaResultUnion:List[MorphAlphaResult]) {
 		
 		if(predicateURI != null) {
 			for(alphaResult <- this.alphaResultUnion) {
-				if(predicateURI.equals(alphaResult.predicateURI)) {
-					result = alphaResult;
+				for(alphaPO <- alphaResult.alphaPredicateObjects) {
+					if(predicateURI.equals(alphaPO._2)) {
+						result = alphaResult;
+					}				  
 				}
+
 			}			
 		}
 		

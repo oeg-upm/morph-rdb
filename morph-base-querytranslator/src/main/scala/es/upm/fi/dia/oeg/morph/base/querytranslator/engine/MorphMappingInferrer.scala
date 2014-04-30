@@ -18,6 +18,7 @@ import com.hp.hpl.jena.sparql.expr.Expr
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import com.hp.hpl.jena.sparql.algebra.op.OpProject
+import com.hp.hpl.jena.sparql.algebra.op.OpDistinct
 
 class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 	val logger = Logger.getLogger("MorphMappingInferrer");
@@ -163,6 +164,9 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 			case opFilter:OpFilter => {
 				mapNodeTypes = this.inferByRDFType(opFilter.getSubOp());
 			}
+			case opDistinct:OpDistinct => {
+			  mapNodeTypes = this.inferByRDFType(opDistinct.getSubOp());
+			}
 		}
 
 		return mapNodeTypes;
@@ -248,8 +252,11 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 				mapNodeTypes = MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesSubOp, mapNodeTypesExprs);		    
 		  	}
 			case opProject:OpProject => { 
-				mapNodeTypes = this.inferByRDFType(opProject.getSubOp())
+				mapNodeTypes = this.inferSubjectTypesBySubjectURI(opProject.getSubOp())
 			}
+			case opDistinct:OpDistinct => {
+			  mapNodeTypes = this.inferSubjectTypesBySubjectURI(opDistinct.getSubOp());
+			}		
 		}
 		
 		return mapNodeTypes;
@@ -332,8 +339,11 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 				mapNodeTypes = this.inferObjectTypesByObjectURI(opFilter.getSubOp());		    
 			}
 			case opProject:OpProject => { 
-				mapNodeTypes = this.inferByRDFType(opProject.getSubOp())
+				mapNodeTypes = this.inferObjectTypesByObjectURI(opProject.getSubOp())
 			}
+			case opDistinct:OpDistinct => {
+			  mapNodeTypes = this.inferObjectTypesByObjectURI(opDistinct.getSubOp());
+			}	
 		}
 		
 		mapNodeTypes;
@@ -396,8 +406,11 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 				mapNodeTypes = this.inferObjectTypesByPredicateURI(opFilter.getSubOp(), mapSubjectTypes);
 			}
 			case opProject:OpProject => { 
-				mapNodeTypes = this.inferByRDFType(opProject.getSubOp())
-			}		  
+				mapNodeTypes = this.inferObjectTypesByPredicateURI(opProject.getSubOp(), mapSubjectTypes)
+			}
+			case opDistinct:OpDistinct => {
+			  mapNodeTypes = this.inferObjectTypesByPredicateURI(opDistinct.getSubOp(), mapSubjectTypes);
+			}	
 		}
 		
 		mapNodeTypes;
@@ -440,8 +453,11 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 				mapNodeTypes = this.inferSubjectTypesByPredicatesURIs(opFilter.getSubOp());		    
 			}
 			case opProject:OpProject => { 
-				mapNodeTypes = this.inferByRDFType(opProject.getSubOp())
+				mapNodeTypes = this.inferSubjectTypesByPredicatesURIs(opProject.getSubOp())
 			}
+			case opDistinct:OpDistinct => {
+			  mapNodeTypes = this.inferSubjectTypesByPredicatesURIs(opDistinct.getSubOp());
+			}			
 		}
 		
 		mapNodeTypes;

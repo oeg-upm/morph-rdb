@@ -15,6 +15,7 @@ import java.io.OutputStream
 import java.io.Writer
 import java.io.FileWriter
 import java.io.StringWriter
+import com.hp.hpl.jena.query.QueryFactory
 
 abstract class MorphBaseRunnerFactory {
 	val logger = Logger.getLogger(this.getClass());
@@ -69,7 +70,7 @@ abstract class MorphBaseRunnerFactory {
 			  Some(qtAux);
 		  } catch {
 		    case e:Exception => {
-		      logger.warn("Error building query translator!");
+		      logger.warn("Error building query translator!" + e.getMessage());
 		    }
 		    None
 		  }
@@ -103,7 +104,13 @@ abstract class MorphBaseRunnerFactory {
 		    ,  resultProcessor
 		    , outputStream
 		)
+
 		runner.ontologyFilePath = properties.ontologyFilePath;
+		if(properties.queryFilePath.isDefined) {
+			runner.sparqlQuery = Some(QueryFactory.read(properties.queryFilePath.get))
+		}
+		
+		
 		runner;
 	}
 	

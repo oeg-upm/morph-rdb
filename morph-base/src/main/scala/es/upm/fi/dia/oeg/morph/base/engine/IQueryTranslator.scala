@@ -31,7 +31,7 @@ trait IQueryTranslator {
 //	
 //	def setSPARQLQueryByFile(queryFilePath:String );
 	
-	def getTranslationResult():IQuery ;
+	//def getTranslationResult():IQuery ;
 	
 	def translate(query:Query) :IQuery ;
 

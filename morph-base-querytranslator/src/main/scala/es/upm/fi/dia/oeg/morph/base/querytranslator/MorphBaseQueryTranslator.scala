@@ -90,7 +90,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
     extends IQueryTranslator {
 	val logger = Logger.getLogger(this.getClass());
 	
-	var currentTranslationResult:IQuery = null;
+	//var currentTranslationResult:IQuery = null;
 	
 	
 	
@@ -1433,8 +1433,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		val end = System.currentTimeMillis();
 		logger.debug("Query translation time = "+ (end-start)+" ms.");
 		logger.debug("sql = \n" + result + "\n");
-		this.currentTranslationResult = result;
-		this.currentTranslationResult;
+		//this.currentTranslationResult = result;
+		result;
 	}
 	
 	override def translate(sparqlQuery:Query ) : IQuery  = {
@@ -1535,12 +1535,13 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		val alphaResultUnionList = this.alphaGenerator.calculateAlphaSTG(stg, cm);
 
 		//ALPHA(stg) returns the same result for subject
-		val alphaResult = alphaResultUnionList.head.get(0);
-		val alphaSubject = alphaResult.alphaSubject;
+		//val alphaResult = alphaResultUnionList.head.get(0);
+		val alphaSubject = alphaResultUnionList.head.get(0).alphaSubject;
 		val alphaPredicateObjects = alphaResultUnionList.flatMap(alphaTP => {
-			val tpAlphaPredicateObjects:List[SQLJoinTable] = alphaTP.get(0).alphaPredicateObjects;
+			val tpAlphaPredicateObjects = alphaTP.get(0).alphaPredicateObjects;
 			tpAlphaPredicateObjects;				  
-		})
+		}).toList
+		val alphaResult = new MorphAlphaResult(alphaSubject, alphaPredicateObjects);
 		
 		//PRSQLSTG
 		val prSQLSTGResult = this.prSQLGenerator.genPRSQLSTG(stg, alphaResult, betaGenerator, nameGenerator, cm);
@@ -1662,7 +1663,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 	
 
 	
-	def getTranslationResult(): IQuery = this.currentTranslationResult;
+	//def getTranslationResult(): IQuery = this.currentTranslationResult;
 	
 //	override def setSPARQLQueryByString(sparqlQueryString:String ) = {
 //		val sparqQuery = QueryFactory.create(sparqlQueryString);

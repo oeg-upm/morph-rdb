@@ -31,7 +31,7 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 	: MorphAlphaResult;
 
 	def  calculateAlphaPredicateObject(tp:Triple, cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping  
-			, logicalTableAlias:String ) : SQLJoinTable;
+			, logicalTableAlias:String ) : (SQLJoinTable, String);
 	
 	def calculateAlphaSubject(subject:Node , cm:MorphBaseClassMapping ) : SQLLogicalTable;
 	
@@ -46,8 +46,8 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 		
 		for(tp <- triples) {
 			val tpPredicate = tp.getPredicate();
-			var alphaPredicateObjects : List[SQLJoinTable] = Nil;
-			var alphaPredicateObjects2 : List[SQLLogicalTable] = Nil;
+			var alphaPredicateObjects : List[(SQLJoinTable, String)] = Nil;
+			var alphaPredicateObjects2 : List[(SQLLogicalTable, String)] = Nil;
 			if(tpPredicate.isURI()) {
 				val tpPredicateURI = tpPredicate.getURI();
 
@@ -73,14 +73,14 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 						alphaPredicateObjects = alphaPredicateObjects ::: alphaPredicateObjectAux.toList;	
 					}
 
-					val alphaPredicateObjectAux2 = calculateAlphaPredicateObjectSTG2(
-							tp, cm, tpPredicateURI,logicalTableAlias);
-					if(alphaPredicateObjectAux2 != null) {
-						alphaPredicateObjects2 = alphaPredicateObjects2 ::: alphaPredicateObjectAux2.toList;	
-					}
+//					val alphaPredicateObjectAux2 = calculateAlphaPredicateObjectSTG2(
+//							tp, cm, tpPredicateURI,logicalTableAlias);
+//					if(alphaPredicateObjectAux2 != null) {
+//						alphaPredicateObjects2 = alphaPredicateObjects2 ::: alphaPredicateObjectAux2.toList;	
+//					}
 
 					val alphaResult = new MorphAlphaResult(alphaSubject
-							, alphaPredicateObjects, tpPredicateURI);
+							, alphaPredicateObjects);
 					
 					val alphaTP = new MorphAlphaResultUnion(alphaResult);
 					alphaResultUnionList = alphaResultUnionList ::: List(alphaTP);					
@@ -96,14 +96,14 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 						alphaPredicateObjects = alphaPredicateObjects ::: alphaPredicateObjectAux;	
 					}
 					
-					val alphaPredicateObjectAux2 = calculateAlphaPredicateObjectSTG2(
-							tp, cm, tpPredicateURI,logicalTableAlias);					
-					if(alphaPredicateObjectAux2 != null) {
-						alphaPredicateObjects2 = alphaPredicateObjects2 ::: alphaPredicateObjectAux2.toList;	
-					}
+//					val alphaPredicateObjectAux2 = calculateAlphaPredicateObjectSTG2(
+//							tp, cm, tpPredicateURI,logicalTableAlias);					
+//					if(alphaPredicateObjectAux2 != null) {
+//						alphaPredicateObjects2 = alphaPredicateObjects2 ::: alphaPredicateObjectAux2.toList;	
+//					}
 
 					val alphaResult = new MorphAlphaResult(alphaSubject
-							, alphaPredicateObjects, tpPredicateURI);
+							, alphaPredicateObjects);
 					
 					alphaTP.add(alphaResult);
 				}
@@ -123,14 +123,14 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 	}
 	
 	def calculateAlphaPredicateObjectSTG(tp:Triple , cm:MorphBaseClassMapping , tpPredicateURI:String 
-	    , logicalTableAlias:String ) : List[SQLJoinTable];
+	    , logicalTableAlias:String ) : List[(SQLJoinTable, String)];
 
-	def calculateAlphaPredicateObjectSTG2(tp:Triple , cm:MorphBaseClassMapping , tpPredicateURI:String 
-	    ,  logicalTableAlias:String) : List[SQLLogicalTable] ;
-
-
-	def  calculateAlphaPredicateObject2(triple:Triple , cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping
-	    , logicalTableAlias:String ) : SQLLogicalTable;
+//	def calculateAlphaPredicateObjectSTG2(tp:Triple , cm:MorphBaseClassMapping , tpPredicateURI:String 
+//	    ,  logicalTableAlias:String) : List[SQLLogicalTable] ;
+//
+//
+//	def  calculateAlphaPredicateObject2(triple:Triple , cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping
+//	    , logicalTableAlias:String ) : SQLLogicalTable;
 
 
 

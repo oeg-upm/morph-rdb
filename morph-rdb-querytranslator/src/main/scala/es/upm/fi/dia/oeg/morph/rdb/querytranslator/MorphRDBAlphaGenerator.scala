@@ -40,14 +40,15 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 		val pmsAux = abstractConceptMapping.getPropertyMappings(predicateURI);
 		val alphaResult : MorphAlphaResult = {
 			if(RDF.`type`.getURI().equalsIgnoreCase(predicateURI)) {
-				new MorphAlphaResult(alphaSubject, null, predicateURI);
+				val alphaPO = List((null, predicateURI));
+				new MorphAlphaResult(alphaSubject, alphaPO);
 			} else {
 			  val pms = { if (pmsAux == null) {Nil}
 			    else {pmsAux}
 			  }
 					
 			//ALPHA PREDICATE OBJECT
-			val alphaPredicateObjects:List[SQLJoinTable] = {
+			val alphaPredicateObjects:List[(SQLJoinTable, String)] = {
 				if(pms.size > 1) {
 					val errorMessage = "Multiple mappings of a predicate is not supported.";
 					logger.error(errorMessage);
@@ -65,7 +66,7 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 
 			  }
 					
-			  new MorphAlphaResult(alphaSubject, alphaPredicateObjects, predicateURI);
+			  new MorphAlphaResult(alphaSubject, alphaPredicateObjects);
 
 			}		  
 		}
@@ -81,7 +82,7 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 	override def calculateAlphaPredicateObject(triple:Triple
 	    , abstractConceptMapping:MorphBaseClassMapping 
 	    , abstractPropertyMapping:MorphBasePropertyMapping, logicalTableAlias:String ) 
-	: SQLJoinTable = {
+	: (SQLJoinTable, String) = {
 		
 		val pm = abstractPropertyMapping.asInstanceOf[R2RMLPredicateObjectMap];  
 		val refObjectMap = pm.getRefObjectMap(0);
@@ -121,7 +122,8 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 			}		  
 		}
 		
-		result;
+		val predicateURI = triple.getPredicate().getURI();
+		(result, predicateURI);
 	}
 	
 	override def calculateAlphaSubject(subject:Node, abstractConceptMapping:MorphBaseClassMapping ) 
@@ -148,11 +150,11 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 	}
 	
 	override def calculateAlphaPredicateObjectSTG(tp:Triple ,cm:MorphBaseClassMapping 
-	    , tpPredicateURI:String , logicalTableAlias:String ) : List[SQLJoinTable] = {
+	    , tpPredicateURI:String , logicalTableAlias:String ) : List[(SQLJoinTable, String)] = {
 		
 		
 		val isRDFTypeStatement = RDF.`type`.getURI().equals(tpPredicateURI);
-		val  alphaPredicateObjects:List[SQLJoinTable] = {
+		val  alphaPredicateObjects:List[(SQLJoinTable, String)] = {
 			if(isRDFTypeStatement) {
 				//do nothing
 			  Nil;
@@ -182,69 +184,69 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 		alphaPredicateObjects;
 	}
 
-	override def calculateAlphaPredicateObjectSTG2(tp:Triple , cm:MorphBaseClassMapping 
-	    , tpPredicateURI:String , logicalTableAlias:String ) : List[SQLLogicalTable] = {
-		
-		val isRDFTypeStatement = RDF.`type`.getURI().equals(tpPredicateURI);
-		
-		val alphaPredicateObjects : List[SQLLogicalTable] = {
-			if(isRDFTypeStatement) {
-				//do nothing
-			  Nil;
-			} else {
-				val pms = cm.getPropertyMappings(tpPredicateURI);
-				if(pms != null && !pms.isEmpty()) {
-					val pm = pms.iterator.next().asInstanceOf[R2RMLPredicateObjectMap];
-					val refObjectMap = pm.getRefObjectMap(0);
-					if(refObjectMap != null) { 
-						val alphaPredicateObject = 
-								this.calculateAlphaPredicateObject2(tp, cm, pm, logicalTableAlias);
-						List(alphaPredicateObject);
-					} else {
-					  Nil;
-					}
-				} else {
-					if(!isRDFTypeStatement) {
-						val errorMessage = "Undefined mapping for : " + tpPredicateURI + " in : " + cm.toString();
-						logger.error(errorMessage);
-						Nil;
-					} else {
-					  Nil;
-					}
-				}
-			}		  
-		}
-
-		alphaPredicateObjects;
-	}
-	
-	override def calculateAlphaPredicateObject2(triple:Triple 
-	    , abstractConceptMapping:MorphBaseClassMapping , abstractPropertyMapping:MorphBasePropertyMapping 
-	    , logicalTableAlias:String ) : SQLLogicalTable  = {
-		
-		
-		val pm = abstractPropertyMapping.asInstanceOf[R2RMLPredicateObjectMap];  
-		val refObjectMap = pm.getRefObjectMap(0);
-		
-		val result:SQLLogicalTable  =  {
-			if(refObjectMap != null) {
-				//val parentLogicalTable = refObjectMap.getParentLogicalTable().asInstanceOf[R2RMLLogicalTable];
-				//val md = this.owner.getMappingDocument().asInstanceOf[R2RMLMappingDocument];
-			  val parentTriplesMap = md.getParentTriplesMap(refObjectMap);
-				val parentLogicalTable = parentTriplesMap.logicalTable.asInstanceOf[R2RMLLogicalTable];
-				if(parentLogicalTable == null) {
-					val errorMessage = "Parent logical table is not found for RefObjectMap : " + refObjectMap;
-					logger.error(errorMessage);
-				}
-				//val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
-				val sqlParentLogicalTableAux = unfolder.visit(parentLogicalTable);
-				sqlParentLogicalTableAux;
-			} else {
-			  null;
-			}
-		}
-		
-		result;
-	  
-	}	
+//	override def calculateAlphaPredicateObjectSTG2(tp:Triple , cm:MorphBaseClassMapping 
+//	    , tpPredicateURI:String , logicalTableAlias:String ) : List[SQLLogicalTable] = {
+//		
+//		val isRDFTypeStatement = RDF.`type`.getURI().equals(tpPredicateURI);
+//		
+//		val alphaPredicateObjects : List[SQLLogicalTable] = {
+//			if(isRDFTypeStatement) {
+//				//do nothing
+//			  Nil;
+//			} else {
+//				val pms = cm.getPropertyMappings(tpPredicateURI);
+//				if(pms != null && !pms.isEmpty()) {
+//					val pm = pms.iterator.next().asInstanceOf[R2RMLPredicateObjectMap];
+//					val refObjectMap = pm.getRefObjectMap(0);
+//					if(refObjectMap != null) { 
+//						val alphaPredicateObject = 
+//								this.calculateAlphaPredicateObject2(tp, cm, pm, logicalTableAlias);
+//						List(alphaPredicateObject);
+//					} else {
+//					  Nil;
+//					}
+//				} else {
+//					if(!isRDFTypeStatement) {
+//						val errorMessage = "Undefined mapping for : " + tpPredicateURI + " in : " + cm.toString();
+//						logger.error(errorMessage);
+//						Nil;
+//					} else {
+//					  Nil;
+//					}
+//				}
+//			}		  
+//		}
+//
+//		alphaPredicateObjects;
+//	}
+//	
+//	override def calculateAlphaPredicateObject2(triple:Triple 
+//	    , abstractConceptMapping:MorphBaseClassMapping , abstractPropertyMapping:MorphBasePropertyMapping 
+//	    , logicalTableAlias:String ) : SQLLogicalTable  = {
+//		
+//		
+//		val pm = abstractPropertyMapping.asInstanceOf[R2RMLPredicateObjectMap];  
+//		val refObjectMap = pm.getRefObjectMap(0);
+//		
+//		val result:SQLLogicalTable  =  {
+//			if(refObjectMap != null) {
+//				//val parentLogicalTable = refObjectMap.getParentLogicalTable().asInstanceOf[R2RMLLogicalTable];
+//				//val md = this.owner.getMappingDocument().asInstanceOf[R2RMLMappingDocument];
+//			  val parentTriplesMap = md.getParentTriplesMap(refObjectMap);
+//				val parentLogicalTable = parentTriplesMap.logicalTable.asInstanceOf[R2RMLLogicalTable];
+//				if(parentLogicalTable == null) {
+//					val errorMessage = "Parent logical table is not found for RefObjectMap : " + refObjectMap;
+//					logger.error(errorMessage);
+//				}
+//				//val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
+//				val sqlParentLogicalTableAux = unfolder.visit(parentLogicalTable);
+//				sqlParentLogicalTableAux;
+//			} else {
+//			  null;
+//			}
+//		}
+//		
+//		result;
+//	  
+//	}	
 }

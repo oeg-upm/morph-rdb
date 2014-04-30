@@ -15,10 +15,10 @@ class MorphProperties extends java.util.Properties {
 	var configurationDirectory:String=null
 	
 //	var conn:Connection=null;
-	var ontologyFilePath:String=null;
+	var ontologyFilePath:Option[String]=None;
 	var mappingDocumentFilePath:String=null ;
 	var outputFilePath:Option[String] = None;
-	var queryFilePath:String =null;
+	var queryFilePath:Option[String] = None;
 	var rdfLanguage:String=null;
 	var jenaMode:String =null;
 	var databaseType:String =null;
@@ -99,15 +99,16 @@ class MorphProperties extends java.util.Properties {
 			}
 		}
 
-		this.queryFilePath = this.getProperty(Constants.QUERYFILE_PROP_NAME);
-		val isNetResourceQuery = GeneralUtility.isNetResource(this.queryFilePath);
-		if(!isNetResourceQuery && configurationDirectory != null) {
-			if(this.queryFilePath != null && !this.queryFilePath.equals("")) {
-				this.queryFilePath = configurationDirectory + queryFilePath;
-			}
+		val queryFilePathPropertyValue = this.getProperty(Constants.QUERYFILE_PROP_NAME);
+		if(queryFilePathPropertyValue != null && !queryFilePathPropertyValue.equals("")) {
+			this.queryFilePath = Some(queryFilePathPropertyValue);
 		}
 
-		this.ontologyFilePath = this.getProperty(Constants.ONTOFILE_PROP_NAME);
+		val ontologyFilePathPropertyValue = this.getProperty(Constants.ONTOFILE_PROP_NAME);
+		if(ontologyFilePathPropertyValue != null && !ontologyFilePathPropertyValue.equals("")) {
+			this.ontologyFilePath = Some(ontologyFilePathPropertyValue);  
+		}
+		
 		val outputFilePropertyValue = this.getProperty(Constants.OUTPUTFILE_PROP_NAME);
 		this.outputFilePath = if(outputFilePropertyValue != null 
 		    && !outputFilePropertyValue.equals("")) {
@@ -116,13 +117,23 @@ class MorphProperties extends java.util.Properties {
 		
 
 		if(configurationDirectory != null) {
-		  if(this.outputFilePath.isDefined) {
-		    this.outputFilePath = Some(configurationDirectory + outputFilePath.get);
-		  }
-			
-			if(this.ontologyFilePath != null && !this.ontologyFilePath.equals("")) {
-				this.ontologyFilePath = configurationDirectory + ontologyFilePath;
+			if(this.outputFilePath.isDefined) {
+				this.outputFilePath = Some(configurationDirectory + outputFilePath.get);
 			}
+			
+			if(this.ontologyFilePath.isDefined) {
+				val isNetResourceOntology = GeneralUtility.isNetResource(ontologyFilePath.get);
+				if(!isNetResourceOntology) {
+					this.ontologyFilePath = Some(configurationDirectory + ontologyFilePath.get);
+				}
+			}
+
+			if(this.queryFilePath.isDefined) {
+				val isNetResourceQuery = GeneralUtility.isNetResource(queryFilePath.get);
+				if(!isNetResourceQuery) {
+					this.queryFilePath = Some(configurationDirectory + queryFilePath.get);
+				}
+			}			
 		}
 
 		this.rdfLanguage = this.readString(Constants.OUTPUTFILE_RDF_LANGUAGE

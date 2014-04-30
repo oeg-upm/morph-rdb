@@ -300,46 +300,52 @@ object MorphSQLUtility {
 	: Iterable[ZExpression] = {
 		var result : Set[ZExpression]= Set.empty;
 		
-		exp match {
-		  case expExpression:ZExpression => {
-			val operands : List[ZExp] = expExpression.getOperands().toList.asInstanceOf[List[ZExp]];
-			
-			if(MorphSQLUtility.areAllConstants(operands)) {
-				var resultAux : List[ZExp]= Nil;
-				for(operand <- operands) {
-					operand match {
-					  case zConstant:ZConstant => {
-						if(zConstant.getType() == ZConstant.COLUMNNAME) {
-							val operandString = MorphSQLUtility.printWithoutEnclosedCharacters(zConstant.getValue());
-							for(prefix <- prefixes) {
-								if(operandString.contains(prefix + ".")) {
-									resultAux = resultAux ::: List(operand);	
-								}						
-							}
-						} else {
-							resultAux = resultAux ::: List(operand);
-						}					    
-					  } 
-					}
-				}
+		if(exp != null) {
+			exp match {
+			  case expExpression:ZExpression => {
+				val operands : List[ZExp] = expExpression.getOperands().toList.asInstanceOf[List[ZExp]];
 				
-				if(allPrefixes) {
-					if(resultAux.size() == operands.size()) {
-						result = result ++ Set(expExpression);
-					}					
-				} else {
-					if(resultAux.size() > 0) {
-						result = result ++ Set(expExpression);
+				if(MorphSQLUtility.areAllConstants(operands)) {
+					var resultAux : List[ZExp]= Nil;
+					for(operand <- operands) {
+						operand match {
+						  case zConstant:ZConstant => {
+							if(zConstant.getType() == ZConstant.COLUMNNAME) {
+								val operandString = MorphSQLUtility.printWithoutEnclosedCharacters(zConstant.getValue());
+								for(prefix <- prefixes) {
+									if(operandString.contains(prefix + ".")) {
+										resultAux = resultAux ::: List(operand);	
+									}						
+								}
+							} else {
+								resultAux = resultAux ::: List(operand);
+							}					    
+						  } 
+						}
 					}
-				}
-			} else {
-				for(operand <- operands) {
-					val resultChild = MorphSQLUtility.containedInPrefixes(operand, prefixes, allPrefixes);
-					result = result ++ resultChild.toSet;
-				}
-			}		    
-		  }
+					
+					if(allPrefixes) {
+						if(resultAux.size() == operands.size()) {
+							result = result ++ Set(expExpression);
+						}					
+					} else {
+						if(resultAux.size() > 0) {
+							result = result ++ Set(expExpression);
+						}
+					}
+				} else {
+					for(operand <- operands) {
+						val resultChild = MorphSQLUtility.containedInPrefixes(operand, prefixes, allPrefixes);
+						result = result ++ resultChild.toSet;
+					}
+				}		    
+			  }
+			  case _ => {
+			    exp
+			  }
+			}		  
 		}
+
 		
 		result;
 	}
