@@ -6,12 +6,15 @@ import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseQueryResultWriter
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.engine.AbstractQueryResultTranslator
 import com.hp.hpl.jena.query.Query
+import org.apache.log4j.Logger
 
 class QueryResultTranslator(dataSourceReader:MorphBaseDataSourceReader 
 			, queryResultWriter:MorphBaseQueryResultWriter ) 
 			extends AbstractQueryResultTranslator(dataSourceReader, queryResultWriter){
-
+	val logger = Logger.getLogger(this.getClass());
+	
 	def translateResult(mapSparqlSql:Map[Query, IQuery] ) {
+		val start = System.currentTimeMillis();
 		this.queryResultWriter.initialize();
 
 		var i=0;
@@ -35,6 +38,9 @@ class QueryResultTranslator(dataSourceReader:MorphBaseDataSourceReader
 		if(i > 0) {
 			this.queryResultWriter.postProcess();	
 		}
+		
+		val end = System.currentTimeMillis();
+		logger.info("Result generation time = "+ (end-start)+" ms.");
 	}
 
 }

@@ -116,6 +116,10 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 
 
 	def run() : String = {
+		val start = System.currentTimeMillis();
+
+
+
 		var status:String  = null;
 
 //		val sparqlQuery = if(this.queryTranslator.isDefined) {
@@ -163,6 +167,8 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 			//}
 		}
 
+		val end = System.currentTimeMillis();
+		logger.info("Running time = "+ (end-start)+" ms.");
 		logger.info("**********************DONE****************************");
 		return status;
 

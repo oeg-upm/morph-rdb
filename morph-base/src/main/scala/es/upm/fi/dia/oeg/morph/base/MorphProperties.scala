@@ -249,6 +249,12 @@ class MorphProperties extends java.util.Properties {
 	def setDatabaseType(dbType:String) = {this.databaseType=dbType}
 	def setMappingDocumentFilePath(mdPath:String) = {this.mappingDocumentFilePath=mdPath}
 	
+	def setQueryFilePath(queryFilePath:String) = {
+	  this.queryFilePath = if(queryFilePath == null || queryFilePath.equals("")) {
+	    None
+	  } else {Some(queryFilePath)}
+	}
+	
 	def setOutputFilePath(outputPath:String) = {
 	  this.outputFilePath = if(outputPath == null || outputPath.equals("")) {
 	    None

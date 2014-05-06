@@ -1375,7 +1375,6 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 
 	
 	override def translate(op:Op) : IQuery  = {
-		logger.info("SPARQL query = \n" + op);
 		logger.debug("opSparqlQuery = " + op);
 		val typeInferrer = new MorphMappingInferrer(this.mappingDocument);
 		this.mapInferredTypes = typeInferrer.infer(op);
@@ -1386,7 +1385,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 //		this.buildPRSQLGenerator();
 //		this.buildCondSQLGenerator();
 		
-		val start = System.currentTimeMillis();
+		
 		val result = {
 			if(this.optimizer != null && this.optimizer.selfJoinElimination) {
 				val mapNodeLogicalTableSize = mapInferredTypes.keySet.map(node => {
@@ -1430,16 +1429,19 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 			result.cleanupOrderBy();
 		}
 
-		val end = System.currentTimeMillis();
-		logger.debug("Query translation time = "+ (end-start)+" ms.");
+
 		logger.debug("sql = \n" + result + "\n");
 		//this.currentTranslationResult = result;
 		result;
 	}
 	
 	override def translate(sparqlQuery:Query ) : IQuery  = {
+		val start = System.currentTimeMillis();
 		val opSparqlQuery = Algebra.compile(sparqlQuery) ;
-		this.translate(opSparqlQuery);
+		val result = this.translate(opSparqlQuery);
+		val end = System.currentTimeMillis();
+		logger.info("Query translation time = "+ (end-start)+" ms.");
+		result
 	}
 
 	def translateFromQueryFile(queryFilePath:String ) : IQuery  = {
