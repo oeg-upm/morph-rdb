@@ -5,7 +5,7 @@ import java.sql.Connection
 import scala.collection.JavaConversions._
 
 class MorphColumnMetaData (val tableName : String, val columnName : String
-    , val dataType : String, val isNullable : Boolean, val characterMaximumLength:Integer) {
+    , val dataType : String, val isNullable : Boolean, val characterMaximumLength:Long, val columnKey:String) {
 
 	val logger = Logger.getLogger(this.getClass().getName());
 	logger.debug("\t\tColumn MetaData created: " + this.tableName + "." + this.columnName);
@@ -18,4 +18,8 @@ class MorphColumnMetaData (val tableName : String, val columnName : String
 //	def getDataType() = {
 //	  this.dataType;
 //	}
+	
+	def isPrimaryKeyColumn = {
+	  this.columnKey != null && this.columnKey.equals("PRI");
+	}
 }

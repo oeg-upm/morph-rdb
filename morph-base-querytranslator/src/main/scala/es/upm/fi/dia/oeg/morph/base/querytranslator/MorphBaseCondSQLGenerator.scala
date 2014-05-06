@@ -200,7 +200,7 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 										}
 									}
 									
-									if(cmd == null || cmd.isNullable) {
+									if(cmd == null || cmd.isNullable || !cmd.isPrimaryKeyColumn) {
 										val exp = this.generateIsNotNullExpression(betaObjectExpression);
 										if(exp != null) {
 											exps = exps ++ Set(exp);

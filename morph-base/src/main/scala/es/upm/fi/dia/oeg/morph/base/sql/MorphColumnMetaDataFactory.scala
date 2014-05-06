@@ -33,6 +33,7 @@ object MorphColumnMetaDataFactory {
 				val datatypeColumn = morphInformationSchema.datatypeColumn;
 				val isNullableColumn = morphInformationSchema.isNullableColumn;
 				val characterMaximumLengthColumn = morphInformationSchema.characterMaximumLengthColumn;
+				val columnKeyColumn = morphInformationSchema.columnKeyColumn;
 				
 				val query = {
 					if(databaseType.equalsIgnoreCase(Constants.DATABASE_MYSQL)) {
@@ -47,37 +48,47 @@ object MorphColumnMetaDataFactory {
 				if(query != null) {
 					val rs = stmt.executeQuery(query);
 					while(rs.next()) {
-						val tableName = rs.getString(tableNameColumn);
-						if(!result.contains(tableName)) {
-							result += tableName -> Nil;					  
-						}
-						var listColumnsMetaData = result(tableName);
-						val columnName = rs.getString(columnNameColumn);
-
-						if(!listColumnsMetaData.exists(x=>x.columnName.equals(columnName))) {
-						  	val dataType = rs.getString(datatypeColumn);
-							val isNullable =  {
-								val isNullableString = rs.getString(isNullableColumn);
-								if(isNullableString == null) {
-									true;
-								} else {
-									if(isNullableString.equalsIgnoreCase("NO") 
-									    || isNullableString.equalsIgnoreCase("FALSE")) {
-										false;
-									} else {
-									  true
-									}
-								}							
+						try {
+							val tableName = rs.getString(tableNameColumn);
+							if(!result.contains(tableName)) {
+								result += tableName -> Nil;					  
 							}
-							val characterMaximumLength = rs.getInt(characterMaximumLengthColumn);
-							val newColumnMetaData = new MorphColumnMetaData(
-									tableName, columnName, dataType, isNullable, characterMaximumLength);
-							listColumnsMetaData = listColumnsMetaData ::: List(newColumnMetaData);
-							result += tableName -> listColumnsMetaData;
+							var listColumnsMetaData = result(tableName);
+							val columnName = rs.getString(columnNameColumn);
+	
+							if(!listColumnsMetaData.exists(x=>x.columnName.equals(columnName))) {
+							  	val dataType = rs.getString(datatypeColumn);
+								val isNullable =  {
+									val isNullableString = rs.getString(isNullableColumn);
+									if(isNullableString == null) {
+										true;
+									} else {
+										if(isNullableString.equalsIgnoreCase("NO") 
+										    || isNullableString.equalsIgnoreCase("FALSE")) {
+											false;
+										} else {
+										  true
+										}
+									}							
+								}
+								val columnKey = rs.getString(columnKeyColumn);
+								val characterMaximumLength = rs.getLong(characterMaximumLengthColumn);
+								val newColumnMetaData = new MorphColumnMetaData(
+										tableName, columnName, dataType, isNullable, characterMaximumLength, columnKey);
+								listColumnsMetaData = listColumnsMetaData ::: List(newColumnMetaData);
+								result += tableName -> listColumnsMetaData;
+							}					    
+					  	}
+						catch {
+						  case e:Exception => {
+						    val errorMessage = "Error while getting table meta data: " + e.getMessage();
+						    logger.error(errorMessage);
+						  }
 						}
-					}				  
+					}
 				}
-			} catch {
+			} 
+			catch {
 			  case e:Exception => {
 			    val errorMessage = "Error while getting table meta data: " + e.getMessage();
 			    logger.error(errorMessage);
