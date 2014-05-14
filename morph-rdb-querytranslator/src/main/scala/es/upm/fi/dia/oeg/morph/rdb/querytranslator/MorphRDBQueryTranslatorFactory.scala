@@ -13,6 +13,12 @@ import es.upm.fi.dia.oeg.morph.base.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.IQueryTranslatorFactory
 
 class MorphRDBQueryTranslatorFactory extends IQueryTranslatorFactory {
+
+	def createQueryTranslator(abstractMappingDocument:MorphBaseMappingDocument
+	    ) : IQueryTranslator = {
+		this.createQueryTranslator(abstractMappingDocument, null)
+	}
+	
 	def createQueryTranslator(abstractMappingDocument:MorphBaseMappingDocument
 	    , conn:Connection) : IQueryTranslator = {
 		val md = abstractMappingDocument.asInstanceOf[R2RMLMappingDocument];

@@ -57,4 +57,7 @@ trait IQueryTranslator {
 	
 	def translateDelete(stg:OpBGP) : ZDelete;
 	
+	def setConnection(conn:Connection) = {this.connection = conn}
+	
+	def setOptimizer(optimizer:QueryTranslationOptimizer) = { this.optimizer = optimizer }
 }
