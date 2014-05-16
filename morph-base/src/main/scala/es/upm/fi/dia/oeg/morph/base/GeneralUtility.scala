@@ -40,25 +40,18 @@ object GeneralUtility {
 
 
 
-	def encodeURI(originalURI:String )  : String = {
-		val result = 
+	def encodeURI(originalURI:String, mapURIEncodingChars:Map[String,String] )  : String = {
+		val resultAux = originalURI.trim();
+		var result = resultAux;
+		
 		try {
-			originalURI.trim()
-			.replaceAll(" ", "%20")
-			.replaceAll(",", "%2C")
-			.replaceAll("\\(", "%28")
-			.replaceAll("\\)", "%29")
-
-			//uri = uri.replaceAll(" ", "_");
-			//uri = ODEMapsterUtility.removeStrangeChars(uri);
-			//uri = ODEMapsterUtility.preEncoding(uri);
-			//	uri = new URI(uri).toASCIIString();
-			//uri = new URI(null, uri, null).toASCIIString();
-			//uri = ODEMapsterUtility.postEncoding(uri);
+			if(mapURIEncodingChars != null) {
+				mapURIEncodingChars.foreach{case(key,value) => result = result.replaceAll(key, value)};
+			} 
 		} catch {
 		  case e:Exception => {
 			logger.error("Error encoding uri for uri = " + originalURI + " because of " + e.getMessage());
-			throw e;		    
+			resultAux
 		  }
 		}
 

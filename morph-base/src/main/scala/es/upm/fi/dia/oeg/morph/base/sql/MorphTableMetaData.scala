@@ -42,7 +42,7 @@ object MorphTableMetaData {
 	  logger.debug("\tBuilding Tables MetaData for database: " + databaseName);
 		
 		val morphInformationSchema = MorphInformationSchema.apply(databaseType);
-		val tableNameColumn = morphInformationSchema.tableNameColumn;
+		val relNameColumn = morphInformationSchema.relNameColumn;
 		val tableRowsColumn = morphInformationSchema.tableRowsColumn;
 		val columnNameColumn = morphInformationSchema.columnNameColumn;
 		val datatypeColumn = morphInformationSchema.datatypeColumn;
@@ -64,7 +64,7 @@ object MorphTableMetaData {
 		if(queryTablesMetadata != null) {
 			val rs = stmt.executeQuery(queryTablesMetadata);
 			while(rs.next()) {
-				val tableName = rs.getString(tableNameColumn);
+				val tableName = rs.getString(relNameColumn);
 				val tableRows = rs.getLong(tableRowsColumn);
 				val tableMetaData = new MorphTableMetaData(tableName, tableRows, null, databaseType);
 				result = result ::: List(tableMetaData);

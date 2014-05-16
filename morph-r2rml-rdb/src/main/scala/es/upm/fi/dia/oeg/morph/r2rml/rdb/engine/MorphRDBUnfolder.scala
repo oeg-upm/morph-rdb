@@ -55,8 +55,8 @@ extends MorphBaseUnfolder(md) with MorphR2RMLElementVisitor {
 
 	def unfoldLogicalTable(logicalTable:R2RMLLogicalTable) : SQLLogicalTable = {
 		//val dbType = md.configurationProperties.databaseType;
-		val dbType = if(md.dbMetaData.isDefined) { md.dbMetaData.get.dbType; }
-		else { Constants.DATABASE_DEFAULT }
+//		val dbType = if(md.dbMetaData.isDefined) { md.dbMetaData.get.dbType; }
+//		else { Constants.DATABASE_DEFAULT }
 		  
 		val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
 			  

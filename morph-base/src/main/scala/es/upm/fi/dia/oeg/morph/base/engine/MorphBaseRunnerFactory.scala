@@ -153,7 +153,7 @@ abstract class MorphBaseRunnerFactory {
 
 	def buildQueryTranslator(queryTranslatorFactoryClassName:String
 	    , md:MorphBaseMappingDocument, connection:Connection
-	    , configurationProperties:MorphProperties) : IQueryTranslator = {
+	    , properties:MorphProperties) : IQueryTranslator = {
 		val className = if(queryTranslatorFactoryClassName == null || queryTranslatorFactoryClassName.equals("")) {
 			Constants.QUERY_TRANSLATOR_FACTORY_CLASSNAME_DEFAULT;
 		} else {
@@ -166,23 +166,24 @@ abstract class MorphBaseRunnerFactory {
 
 		//query translation optimizer
 		val queryTranslationOptimizer = this.buildQueryTranslationOptimizer();
-		val eliminateSelfJoin = configurationProperties.selfJoinElimination;
+		val eliminateSelfJoin = properties.selfJoinElimination;
 		queryTranslationOptimizer.selfJoinElimination = eliminateSelfJoin;
-		val eliminateSubQuery = configurationProperties.subQueryElimination;
+		val eliminateSubQuery = properties.subQueryElimination;
 		queryTranslationOptimizer.subQueryElimination = eliminateSubQuery;
-		val transJoinEliminateSubQuery = configurationProperties.transJoinSubQueryElimination;
+		val transJoinEliminateSubQuery = properties.transJoinSubQueryElimination;
 		queryTranslationOptimizer.transJoinSubQueryElimination = transJoinEliminateSubQuery;
-		val transSTGEliminateSubQuery = configurationProperties.transSTGSubQueryElimination;
+		val transSTGEliminateSubQuery = properties.transSTGSubQueryElimination;
 		queryTranslationOptimizer.transSTGSubQueryElimination = transSTGEliminateSubQuery;
-		val subQueryAsView = configurationProperties.subQueryAsView;
+		val subQueryAsView = properties.subQueryAsView;
 		queryTranslationOptimizer.subQueryAsView = subQueryAsView;
 		queryTranslator.optimizer = queryTranslationOptimizer;
 		logger.debug("query translator = " + queryTranslator);
 		
 		//sparql query
-		val queryFilePath = configurationProperties.queryFilePath;
+		val queryFilePath = properties.queryFilePath;
 //		queryTranslator.setSPARQLQueryByFile(queryFilePath);
 		
+		queryTranslator.properties = properties;
 		queryTranslator
 	}
 	

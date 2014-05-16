@@ -52,6 +52,9 @@ class MorphProperties extends java.util.Properties {
 	var databasePassword:String =null;
 	var databaseTimeout = 0;
 
+	//uri encoding
+	//var uriEncode:Option[String]=None;
+	var mapURIEncodingChars:Map[String, String]=Map.empty;
 	
 	def readConfigurationFile() = {
 		
@@ -190,6 +193,15 @@ class MorphProperties extends java.util.Properties {
 		this.transformString = this.readString(MorphProperties.TRANSFORM_STRING_PROPERTY, None);
 		logger.debug("String transformation = " + this.transformString);
 
+		val uriEncodeString = this.readString(MorphProperties.URI_ENCODE_PROPERTY, None);
+		val mapURIEncodings = uriEncodeString.get.split(",,");
+		val mapEncodingChars = mapURIEncodings.map(x => {
+			val mapEncodingChar = x.substring(1, x.length()-1).split("->");
+			(mapEncodingChar(0).substring(1, mapEncodingChar(0).length()-1) -> mapEncodingChar(1).substring(1, mapEncodingChar(1).length()-1))
+		} )
+		
+		this.mapURIEncodingChars = mapEncodingChars.toMap;
+		logger.debug("this.mapURIEncodingChars = " + this.mapURIEncodingChars);
 	}
 
 
@@ -263,9 +275,11 @@ class MorphProperties extends java.util.Properties {
 }
 
 object MorphProperties {
-	val TRANSFORM_STRING_PROPERTY = "transform.string"
-
-  val logger = Logger.getLogger(this.getClass());
+	val TRANSFORM_STRING_PROPERTY = "transform.string";
+	val URI_ENCODE_PROPERTY = "uri.encode";
+	  
+			
+	val logger = Logger.getLogger(this.getClass());
   
   def apply(pConfigurationDirectory:String , configurationFile:String) : MorphProperties = {
     val properties = new MorphProperties();

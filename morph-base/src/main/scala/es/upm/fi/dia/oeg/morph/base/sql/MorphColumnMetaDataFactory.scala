@@ -71,7 +71,13 @@ object MorphColumnMetaDataFactory {
 										}
 									}							
 								}
-								val columnKey = rs.getString(columnKeyColumn);
+								
+								val columnKey = if(columnKeyColumn.isDefined) {
+									val columnKeyString = rs.getString(columnKeyColumn.get);
+									Some(columnKeyString);
+								} 
+								else { None }
+								
 								val characterMaximumLength = rs.getLong(characterMaximumLengthColumn);
 								val newColumnMetaData = new MorphColumnMetaData(
 										tableName, columnName, dataType, isNullable, characterMaximumLength, columnKey);

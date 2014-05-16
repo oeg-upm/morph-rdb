@@ -135,6 +135,8 @@ object Constants {
 	val TRANSFORMATION_STRING_TOLOWERCASE = "toLowerCase";
 	val TRANSFORMATION_STRING_TOUPPERCASE = "toUpperCase";
 	
+	val URI_ENCODE= "uri.encode";
+	
 	//aliases
 	val  URI_AS_ALIAS="uri_";
 	val  RANGE_TABLE_ALIAS="rt_";
@@ -259,6 +261,7 @@ object Constants {
 	      ""
 	    }	    
 	}
-	
+
+	val MAP_DEFAULT_URI_ENCODING_CHARS = Map(" " -> "%20", "," -> "%2C", "\\(" -> "%28", "\\)" -> "%29");
 	
 }

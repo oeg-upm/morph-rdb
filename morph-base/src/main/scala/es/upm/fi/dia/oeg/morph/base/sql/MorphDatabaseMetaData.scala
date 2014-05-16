@@ -75,7 +75,7 @@ object MorphDatabaseMetaData {
 					    , jdbcDBMetaData);
 				} catch {
 				  case e:Exception => {
-				    logger.error("Error while building table meta data");
+				    logger.error("Error while building table meta data:" + e.getMessage());
 				    null
 				  }
 				}
