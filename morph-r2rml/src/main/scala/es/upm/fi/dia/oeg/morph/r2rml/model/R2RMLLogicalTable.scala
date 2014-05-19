@@ -1,4 +1,4 @@
-package es.upm.dia.fi.oeg.morph.r2rml.model
+package es.upm.fi.dia.oeg.morph.r2rml.model
 
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseLogicalTable
 import org.apache.log4j.Logger
@@ -6,9 +6,10 @@ import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
 import es.upm.fi.dia.oeg.morph.base.sql.MorphTableMetaData
 import com.hp.hpl.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElementVisitor
-import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElement
-import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
+import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElementVisitor
+import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElement
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLSQLQuery
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTable
 
 abstract class R2RMLLogicalTable(val logicalTableType:Constants.LogicalTableType.Value) 
 extends MorphBaseLogicalTable with MorphR2RMLElement{

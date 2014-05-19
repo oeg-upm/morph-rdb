@@ -1,4 +1,4 @@
-package es.upm.dia.fi.oeg.morph.r2rml.model
+package es.upm.fi.dia.oeg.morph.r2rml.model
 
 import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.Constants
@@ -13,8 +13,8 @@ import Zql.ZConstant
 import java.util.HashMap
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
 import com.hp.hpl.jena.rdf.model.RDFNode
-import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElement
-import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElementVisitor
+import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElement
+import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElementVisitor
 
 abstract class R2RMLTermMap(val termMapType:Constants.MorphTermMapType.Value
     , termType:Option[String], val datatype:Option[String], val languageTag:Option[String])

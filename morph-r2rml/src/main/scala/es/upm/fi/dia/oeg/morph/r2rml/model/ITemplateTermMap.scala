@@ -1,4 +1,4 @@
-package es.upm.dia.fi.oeg.morph.r2rml.model
+package es.upm.fi.dia.oeg.morph.r2rml.model
 
 import es.upm.fi.dia.oeg.morph.base.RegexUtility
 import scala.collection.JavaConversions._

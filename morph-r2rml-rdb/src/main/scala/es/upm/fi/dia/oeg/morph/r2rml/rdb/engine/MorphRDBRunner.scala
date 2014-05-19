@@ -2,7 +2,7 @@ package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
 import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument

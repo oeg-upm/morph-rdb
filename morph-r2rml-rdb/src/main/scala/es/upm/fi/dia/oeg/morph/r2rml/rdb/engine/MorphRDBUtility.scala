@@ -13,8 +13,8 @@ import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
 import es.upm.fi.dia.oeg.morph.base.sql.SQLDataType
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTermMap
 import es.upm.fi.dia.oeg.morph.base.sql.SQLQuery
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTermMap
 
 class MorphRDBUtility {
 

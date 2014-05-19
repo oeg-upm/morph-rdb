@@ -1,11 +1,8 @@
-package es.upm.dia.fi.oeg.morph.r2rml.model
+package es.upm.fi.dia.oeg.morph.r2rml.model
 
 import org.apache.log4j.Logger
 import com.hp.hpl.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
-import Zql.ZExpression
-import Zql.ZConstant
-import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
 
 class R2RMLJoinCondition(val childColumnName:String , val parentColumnName:String ) {
 	def logger = Logger.getLogger(this.getClass().getName());

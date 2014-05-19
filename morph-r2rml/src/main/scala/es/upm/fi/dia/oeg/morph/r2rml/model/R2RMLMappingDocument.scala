@@ -1,4 +1,4 @@
-package es.upm.dia.fi.oeg.morph.r2rml.model
+package es.upm.fi.dia.oeg.morph.r2rml.model
 
 import scala.collection.JavaConversions._
 import org.apache.log4j.Logger
@@ -8,8 +8,8 @@ import com.hp.hpl.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.Constants
 import java.util.Collection
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
-import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElement
-import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElementVisitor
+import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElement
+import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElementVisitor
 import java.sql.Connection
 import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument

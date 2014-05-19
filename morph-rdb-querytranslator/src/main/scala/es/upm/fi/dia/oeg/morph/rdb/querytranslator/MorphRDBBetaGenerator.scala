@@ -5,10 +5,10 @@ import com.hp.hpl.jena.graph.Triple
 import Zql.ZConstant
 import Zql.ZSelectItem
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTriplesMap
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument

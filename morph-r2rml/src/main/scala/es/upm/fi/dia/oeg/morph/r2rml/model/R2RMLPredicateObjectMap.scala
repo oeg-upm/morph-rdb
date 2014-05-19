@@ -1,4 +1,4 @@
-package es.upm.dia.fi.oeg.morph.r2rml.model
+package es.upm.fi.dia.oeg.morph.r2rml.model
 
 import scala.collection.JavaConversions._
 import com.hp.hpl.jena.rdf.model.Resource

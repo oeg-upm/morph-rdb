@@ -70,17 +70,18 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 //	}
 	
 	def materializeMappingDocuments(md:MorphBaseMappingDocument ) {
-	  if(!this.dataTranslator.isDefined) {
-	    val errorMessage = "Data Translator has not been defined yet!";
-	    logger.error(errorMessage);
-	    throw new Exception(errorMessage)
-	  }
+		if(!this.dataTranslator.isDefined) {
+			val errorMessage = "Data Translator has not been defined yet!";
+			logger.error(errorMessage);
+			throw new Exception(errorMessage)
+		}
 	  
-		val start = System.currentTimeMillis();
+		//val start = System.currentTimeMillis();
 		
 		//PREMATERIALIZE PROCESS
 //		this.preMaterializeProcess(outputFileName);
 
+		logger.info("Translating data ...");
 		//MATERIALIZING MODEL
 		val startGeneratingModel = System.currentTimeMillis();
 //		this.dataTranslator.translateData(md);

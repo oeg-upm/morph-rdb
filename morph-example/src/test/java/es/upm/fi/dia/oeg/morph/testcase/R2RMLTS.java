@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
-import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner;
 
 public class R2RMLTS {
 	private static Logger logger = Logger.getLogger(R2RMLTS.class);

@@ -7,8 +7,8 @@ import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
-import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner;
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
 
 
 public class ExampleWithPropertiesFile {

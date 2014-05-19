@@ -11,9 +11,9 @@ import com.hp.hpl.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTriplesMap
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBasePRSQLGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.NameGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
@@ -21,7 +21,7 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTermMap
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTermMap
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUnfolder
 
 class MorphRDBPRSQLGenerator(md:R2RMLMappingDocument, unfolder:MorphRDBUnfolder)

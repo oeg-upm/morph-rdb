@@ -7,12 +7,12 @@ import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUnfolder
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTriplesMap
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLLogicalTable
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLLogicalTable
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseQueryTranslator
 import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument

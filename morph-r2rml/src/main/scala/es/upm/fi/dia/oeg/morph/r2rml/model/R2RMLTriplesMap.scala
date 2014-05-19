@@ -1,4 +1,4 @@
-package es.upm.dia.fi.oeg.morph.r2rml.model
+package es.upm.fi.dia.oeg.morph.r2rml.model
 
 import scala.collection.JavaConversions._
 import com.hp.hpl.jena.rdf.model.Resource
@@ -9,10 +9,11 @@ import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
 import es.upm.fi.dia.oeg.morph.base.sql.MorphTableMetaData
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseLogicalTable
 import es.upm.fi.dia.oeg.morph.base.model.IConceptMapping
-import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElement
-import es.upm.dia.fi.oeg.morph.r2rml.MorphR2RMLElementVisitor
+import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElement
+import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElementVisitor
 import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLLogicalTable
 
 class R2RMLTriplesMap(val logicalTable:R2RMLLogicalTable, val subjectMap:R2RMLSubjectMap
     , val predicateObjectMaps:Set[R2RMLPredicateObjectMap]) 

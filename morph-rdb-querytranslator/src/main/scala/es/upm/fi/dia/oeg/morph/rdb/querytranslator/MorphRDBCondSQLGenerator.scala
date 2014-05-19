@@ -7,10 +7,10 @@ import Zql.ZExpression
 import com.hp.hpl.jena.graph.Node
 import com.hp.hpl.jena.graph.Triple
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLTriplesMap
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTriplesMap
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUtility
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseCondSQLGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphAlphaResult

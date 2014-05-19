@@ -1,8 +1,5 @@
 package es.upm.fi.dia.oeg.morph.base.engine
 
-import es.upm.fi.dia.oeg.morph.base.engine.QueryTranslationOptimizer
-
-
 class QueryTranslationOptimizerFactory {
 
 }

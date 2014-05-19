@@ -7,7 +7,7 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseAlphaGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseBetaGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBaseCondSQLGenerator
 import es.upm.fi.dia.oeg.morph.base.querytranslator.MorphBasePRSQLGenerator
-import es.upm.dia.fi.oeg.morph.r2rml.model.R2RMLMappingDocument
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.IQueryTranslatorFactory
