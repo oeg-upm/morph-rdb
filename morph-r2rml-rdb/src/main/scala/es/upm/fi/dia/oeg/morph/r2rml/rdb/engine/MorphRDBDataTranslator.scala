@@ -508,7 +508,8 @@ with MorphR2RMLElementVisitor {
 	def createIRI(originalIRI:String) = {
 	    var resultIRI = originalIRI;
 	    try {
-			resultIRI = GeneralUtility.encodeURI(resultIRI, properties.mapURIEncodingChars);
+			resultIRI = GeneralUtility.encodeURI(resultIRI
+			    , properties.mapURIEncodingChars, properties.uriTransformationOperation);
 			if(this.properties != null) {
 				if(this.properties.encodeUnsafeChars) {
 				  resultIRI = GeneralUtility.encodeUnsafeChars(resultIRI);

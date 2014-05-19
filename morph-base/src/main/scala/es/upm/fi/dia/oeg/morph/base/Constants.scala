@@ -264,4 +264,8 @@ object Constants {
 
 	val MAP_DEFAULT_URI_ENCODING_CHARS = Map(" " -> "%20", "," -> "%2C", "\\(" -> "%28", "\\)" -> "%29");
 	
+	val URI_TRANSFORM_TOLOWERCASE="toLowercase";
+	val URI_TRANSFORM_TOUPPERCASE="toUppercase";
+	val URI_TRANSFORM_REMOVEACCENT="removeAccent";
+	
 }

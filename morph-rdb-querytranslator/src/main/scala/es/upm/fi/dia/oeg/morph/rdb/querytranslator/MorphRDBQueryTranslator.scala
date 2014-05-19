@@ -213,7 +213,8 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
 						if(resultAux != null) {
 							if(termMapType != null) {
 								if(termMapType.equals(Constants.R2RML_IRI_URI)) {
-									GeneralUtility.encodeURI(resultAux, properties.mapURIEncodingChars);
+									GeneralUtility.encodeURI(resultAux, properties.mapURIEncodingChars
+									    , properties.uriTransformationOperation);
 								} else if(termMapType.equals(Constants.R2RML_LITERAL_URI)) {
 									GeneralUtility.encodeLiteral(resultAux);
 								} else {

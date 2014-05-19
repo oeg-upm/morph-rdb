@@ -55,6 +55,7 @@ class MorphProperties extends java.util.Properties {
 	//uri encoding
 	//var uriEncode:Option[String]=None;
 	var mapURIEncodingChars:Map[String, String]=Map.empty;
+	var uriTransformationOperation:List[String]=Nil;
 	
 	def readConfigurationFile() = {
 		
@@ -201,7 +202,10 @@ class MorphProperties extends java.util.Properties {
 		} )
 		
 		this.mapURIEncodingChars = mapEncodingChars.toMap;
-		logger.debug("this.mapURIEncodingChars = " + this.mapURIEncodingChars);
+		logger.info("this.mapURIEncodingChars = " + this.mapURIEncodingChars);
+		
+		this.uriTransformationOperation = this.readListString(MorphProperties.URI_TRANSFORM_PROPERTY
+		    , Nil, ",") 
 	}
 
 
@@ -252,6 +256,15 @@ class MorphProperties extends java.util.Properties {
 		result;
 	}
 
+	def readListString(property:String , defaultValue:List[String], separator:String) : List[String] = {
+		val propertyString = this.getProperty(property);
+		val result = if(propertyString != null && !propertyString.equals("")) {
+			propertyString.split(separator).toList
+		} 
+		else { defaultValue }
+		result;
+	}
+	
 	def setNoOfDatabase(x:Int) = {this.noOfDatabase=x}
 	def setDatabaseUser(dbUser:String) = {this.databaseUser=dbUser}
 	def setDatabaseURL(dbURL:String) = {this.databaseURL=dbURL}
@@ -276,7 +289,9 @@ class MorphProperties extends java.util.Properties {
 
 object MorphProperties {
 	val TRANSFORM_STRING_PROPERTY = "transform.string";
+
 	val URI_ENCODE_PROPERTY = "uri.encode";
+	val URI_TRANSFORM_PROPERTY = "uri.transform";
 	  
 			
 	val logger = Logger.getLogger(this.getClass());
