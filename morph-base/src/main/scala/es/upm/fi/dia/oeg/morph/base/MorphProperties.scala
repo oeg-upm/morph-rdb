@@ -195,14 +195,15 @@ class MorphProperties extends java.util.Properties {
 		logger.debug("String transformation = " + this.transformString);
 
 		val uriEncodeString = this.readString(MorphProperties.URI_ENCODE_PROPERTY, None);
-		val mapURIEncodings = uriEncodeString.get.split(",,");
-		val mapEncodingChars = mapURIEncodings.map(x => {
-			val mapEncodingChar = x.substring(1, x.length()-1).split("->");
-			(mapEncodingChar(0).substring(1, mapEncodingChar(0).length()-1) -> mapEncodingChar(1).substring(1, mapEncodingChar(1).length()-1))
-		} )
-		
-		this.mapURIEncodingChars = mapEncodingChars.toMap;
-		logger.info("this.mapURIEncodingChars = " + this.mapURIEncodingChars);
+		if(uriEncodeString.isDefined) {
+			val mapURIEncodings = uriEncodeString.get.split(",,");
+			val mapEncodingChars = mapURIEncodings.map(x => {
+				val mapEncodingChar = x.substring(1, x.length()-1).split("->");
+				(mapEncodingChar(0).substring(1, mapEncodingChar(0).length()-1) -> mapEncodingChar(1).substring(1, mapEncodingChar(1).length()-1))
+			} )
+			this.mapURIEncodingChars = mapEncodingChars.toMap;
+			logger.info("this.mapURIEncodingChars = " + this.mapURIEncodingChars);
+		}
 		
 		this.uriTransformationOperation = this.readListString(MorphProperties.URI_TRANSFORM_PROPERTY
 		    , Nil, ",") 

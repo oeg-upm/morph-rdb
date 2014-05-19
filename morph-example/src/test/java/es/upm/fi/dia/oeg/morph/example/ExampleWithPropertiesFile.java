@@ -15,6 +15,7 @@ public class ExampleWithPropertiesFile {
 	private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
 	static { PropertyConfigurator.configure("log4j.properties"); }
 	
+	@Test
 	public void testBatchMySQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "batch.r2rml.properties";

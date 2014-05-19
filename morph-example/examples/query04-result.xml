@@ -20,6 +20,17 @@
         </result>
         <result>
             <binding name="a">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B4</uri>
+            </binding>
+            <binding name="n">
+                <literal>Ringo</literal>
+            </binding>
+            <binding name="e">
+                <literal>ringo@acd.edu</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="a">
                 <uri>http://mappingpedia.linkeddata.es/resources/Person/B3</uri>
             </binding>
             <binding name="n">
@@ -38,17 +49,6 @@
             </binding>
             <binding name="w">
                 <literal>www.starr.edu</literal>
-            </binding>
-        </result>
-        <result>
-            <binding name="a">
-                <uri>http://mappingpedia.linkeddata.es/resources/Person/B4</uri>
-            </binding>
-            <binding name="n">
-                <literal>Ringo</literal>
-            </binding>
-            <binding name="e">
-                <literal>ringo@acd.edu</literal>
             </binding>
         </result>
     </results>
