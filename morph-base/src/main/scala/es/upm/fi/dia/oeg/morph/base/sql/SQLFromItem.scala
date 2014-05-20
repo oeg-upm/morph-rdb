@@ -15,7 +15,7 @@ extends ZFromItem(fullName) with SQLLogicalTable {
 	override def generateAlias() :String ={
 		//return R2OConstants.VIEW_ALIAS + this.hashCode();
 		if(super.getAlias() == null) {
-			super.setAlias(Constants.VIEW_ALIAS + new Random().nextInt(10000));
+			super.setAlias(Constants.VIEW_ALIAS + new Random().nextInt(Constants.VIEW_ALIAS_RANDOM_LIMIT));
 		}
 		super.getAlias();
 	}

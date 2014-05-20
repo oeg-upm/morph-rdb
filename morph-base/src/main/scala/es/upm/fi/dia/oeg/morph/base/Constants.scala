@@ -142,6 +142,7 @@ object Constants {
 	val  RANGE_TABLE_ALIAS="rt_";
 	val  VIEW_ALIAS="v_";
 	val  TABLE_ALIAS_PREFIX="t_";
+	val  VIEW_ALIAS_RANDOM_LIMIT=100000;
 
 	//prefixes and suffixes
 	val  PREFIX_URI = "uri_";
