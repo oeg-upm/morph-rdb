@@ -183,12 +183,13 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
 									})
 									val replacements = replaceMentAux.toMap;
 									
-									if(replacements.size() > 0) {
+									val templateResult = if(replacements.size() > 0) {
 										RegexUtility.replaceTokens(templateString, replacements);	
 									} else {
 										logger.debug("no replacements found for the R2RML template!");
 										null;
 									}
+									templateResult;
 								} 
 							  case Constants.MorphTermMapType.ColumnTermMap => {
 									//String columnName = termMap.getColumnName();

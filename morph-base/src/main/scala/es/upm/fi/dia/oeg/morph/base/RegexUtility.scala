@@ -87,7 +87,10 @@ object RegexUtility {
 		var buffer:StringBuffer = new StringBuffer();
 		while (matcher.find()) {
 			val matcherGroup1 = matcher.group(1);
-			val replacement = replacements.get(matcherGroup1);
+			val replacementAux = replacements.get(matcherGroup1);;
+			val replacement = if(replacementAux == null) { ""} 
+			else { replacementAux }
+			
 			if (replacement != null) {
 				matcher.appendReplacement(buffer, "");
 				buffer.append(replacement);
