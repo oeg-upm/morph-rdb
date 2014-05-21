@@ -1073,7 +1073,7 @@ object SQLQuery {
 	def createQuery(mainTable:SQLLogicalTable , joinTables:Iterable[SQLJoinTable] 
 	, selectItems:List[ZSelectItem], whereCondition:ZExpression , databaseType:String ) 
 	: SQLQuery = {
-		val joinTablesLogicalTables = if(joinTables != null) {
+		val joinTablesLogicalTables = if(joinTables != null ) {
 			joinTables.map(alphaPredicateObject => { alphaPredicateObject.joinSource })
 		} else { Nil }
 		val joinTablesExpressions = if(joinTables != null) {
