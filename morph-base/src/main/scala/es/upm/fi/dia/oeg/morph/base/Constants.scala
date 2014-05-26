@@ -38,6 +38,9 @@ object Constants {
 			"=", new ZConstant("1", ZConstant.NUMBER), new ZConstant("1", ZConstant.NUMBER));
 	val SQL_EXPRESSION_FALSE = new ZExpression(
 			"=", new ZConstant("1", ZConstant.NUMBER), new ZConstant("0", ZConstant.NUMBER));
+
+	val MAP_ZSQL_CUSTOM_FUNCTIONS = Map("CONCAT" -> 2, "SUBSTRING" -> 3, "CONVERT" -> 2
+	    , "COALESCE" -> 2, "ABS" -> 1, "LOWER" -> 1, "UPPER" -> 1, "REPLACE" -> 3, "TRIM" -> 1);
 	
 	val DATABASE_DEFAULT = DATABASE_MYSQL;
 	val DATABASE_MONETDB = "MonetDB";

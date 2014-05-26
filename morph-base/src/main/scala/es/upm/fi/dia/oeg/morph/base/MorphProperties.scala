@@ -42,6 +42,8 @@ class MorphProperties extends java.util.Properties {
 	var encodeUnsafeChars:Boolean = true;
 	var encodeReservedChars:Boolean = false;
 	var transformString:Option[String] = None;
+	var mapDataTranslationLimits:Map[String,String] = Map.empty;
+	var mapDataTranslationOffsets:Map[String,String] = Map.empty;
 	
 	//database
 	var noOfDatabase=0;
@@ -194,22 +196,45 @@ class MorphProperties extends java.util.Properties {
 		this.transformString = this.readString(MorphProperties.TRANSFORM_STRING_PROPERTY, None);
 		logger.debug("String transformation = " + this.transformString);
 
-		val uriEncodeString = this.readString(MorphProperties.URI_ENCODE_PROPERTY, None);
-		if(uriEncodeString.isDefined) {
-			val mapURIEncodings = uriEncodeString.get.split(",,");
-			val mapEncodingChars = mapURIEncodings.map(x => {
-				val mapEncodingChar = x.substring(1, x.length()-1).split("->");
-				(mapEncodingChar(0).substring(1, mapEncodingChar(0).length()-1) -> mapEncodingChar(1).substring(1, mapEncodingChar(1).length()-1))
-			} )
-			this.mapURIEncodingChars = mapEncodingChars.toMap;
-			logger.info("this.mapURIEncodingChars = " + this.mapURIEncodingChars);
-		}
+//		val uriEncodeString = this.readString(MorphProperties.URI_ENCODE_PROPERTY, None);
+//		if(uriEncodeString.isDefined) {
+//			val mapURIEncodings = uriEncodeString.get.split(",,");
+//			val mapEncodingChars = mapURIEncodings.map(x => {
+//				val mapEncodingChar = x.substring(1, x.length()-1).split("->");
+//				(mapEncodingChar(0).substring(1, mapEncodingChar(0).length()-1) -> mapEncodingChar(1).substring(1, mapEncodingChar(1).length()-1))
+//			} )
+//			this.mapURIEncodingChars = mapEncodingChars.toMap;
+//			logger.info("this.mapURIEncodingChars = " + this.mapURIEncodingChars);
+//		}
+		this.mapURIEncodingChars = this.readMapStringString(MorphProperties.URI_ENCODE_PROPERTY, Map.empty);
 		
 		this.uriTransformationOperation = this.readListString(MorphProperties.URI_TRANSFORM_PROPERTY
 		    , Nil, ",") 
+		    
+		this.mapDataTranslationLimits = this.readMapStringString(MorphProperties.DATATRANSLATION_LIMIT, Map.empty);
+		this.mapDataTranslationOffsets = this.readMapStringString(MorphProperties.DATATRANSLATION_OFFSET, Map.empty);
+		
 	}
 
 
+	def readMapStringString(property:String , defaultValue:Map[String,String]) : Map[String,String] = {
+		val propertyString = this.readString(property, None);
+		if(propertyString.isDefined) {
+			val propertyStringSplited = propertyString.get.split(",,");
+			val result = propertyStringSplited.map(x => {
+				val resultElement = x.substring(1, x.length()-1).split("->");
+				val resultKey =  resultElement(0).substring(1, resultElement(0).length()-1);
+				val resultValue = resultElement(1).substring(1, resultElement(1).length()-1)
+				val resultAux = (resultKey -> resultValue);
+				resultAux;
+			} )
+			result.toMap;
+		} else {
+		  defaultValue;
+		}
+	  
+	}
+	
 	def readBoolean(property:String , defaultValue:Boolean ) : Boolean = {
 		val propertyString = this.getProperty(property);
 		val result = if(propertyString != null) {
@@ -289,13 +314,17 @@ class MorphProperties extends java.util.Properties {
 }
 
 object MorphProperties {
+	val logger = Logger.getLogger(this.getClass());
+	
 	val TRANSFORM_STRING_PROPERTY = "transform.string";
 
 	val URI_ENCODE_PROPERTY = "uri.encode";
 	val URI_TRANSFORM_PROPERTY = "uri.transform";
-	  
+	
+	val DATATRANSLATION_LIMIT="datatranslation.limit";
+	val DATATRANSLATION_OFFSET="datatranslation.offset";
 			
-	val logger = Logger.getLogger(this.getClass());
+	
   
   def apply(pConfigurationDirectory:String , configurationFile:String) : MorphProperties = {
     val properties = new MorphProperties();

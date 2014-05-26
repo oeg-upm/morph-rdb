@@ -41,7 +41,7 @@ abstract class MorphBaseRunnerFactory {
 		val mappingDocument = this.readMappingDocumentFile(mappingDocumentFile, properties, connection);
 
 		//BUILDING UNFOLDER
-		val unfolder = this.createUnfolder(mappingDocument, properties.databaseType);
+		val unfolder = this.createUnfolder(mappingDocument, properties);
 		
 		val outputStream:Writer = if(properties.outputFilePath.isDefined) {
 		  new FileWriter(properties.outputFilePath.get)
@@ -128,7 +128,7 @@ abstract class MorphBaseRunnerFactory {
 	    ,props:MorphProperties, connection:Connection)
 	:MorphBaseMappingDocument
 	    
-	def createUnfolder(md:MorphBaseMappingDocument, dbType:String):MorphBaseUnfolder;
+	def createUnfolder(md:MorphBaseMappingDocument, properties:MorphProperties):MorphBaseUnfolder;
 	
 	def createDataTranslator(md:MorphBaseMappingDocument, materializer:MorphBaseMaterializer
 	    , unfolder:MorphBaseUnfolder, dataSourceReader:MorphBaseDataSourceReader
@@ -162,7 +162,7 @@ abstract class MorphBaseRunnerFactory {
 
 		val queryTranslatorFactory = Class.forName(className).newInstance().asInstanceOf[IQueryTranslatorFactory]; 
 		val queryTranslator = queryTranslatorFactory.createQueryTranslator(
-		    md, connection);
+		    md, connection, properties);
 
 		//query translation optimizer
 		val queryTranslationOptimizer = this.buildQueryTranslationOptimizer();
