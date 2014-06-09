@@ -15,6 +15,7 @@ class DBUtility {
 object DBUtility {
 	def logger = Logger.getLogger(this.getClass());
 	
+
 	
 	def execute(conn : Connection , query: String) : Boolean = {
 		val stmt = conn.createStatement();

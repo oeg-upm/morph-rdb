@@ -33,9 +33,10 @@ import es.upm.fi.dia.oeg.morph.base.sql.SQLQuery
 import es.upm.fi.dia.oeg.morph.base.sql.SQLJoinTable
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
+import es.upm.fi.dia.oeg.morph.base.MorphProperties
 
-class MorphRDBUnfolder(md:R2RMLMappingDocument) 
-extends MorphBaseUnfolder(md) with MorphR2RMLElementVisitor {
+class MorphRDBUnfolder(md:R2RMLMappingDocument,properties:MorphProperties) 
+extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 	var mapTermMapColumnsAliases:Map[Object, List[String]] = Map.empty;
 	val logger = Logger.getLogger(this.getClass().getName());
 	var mapRefObjectMapAlias:Map[R2RMLRefObjectMap, String] = Map.empty;
@@ -163,7 +164,7 @@ extends MorphBaseUnfolder(md) with MorphR2RMLElementVisitor {
 	
 
 	
-	def  unfoldTriplesMap(logicalTable:R2RMLLogicalTable, subjectMap:R2RMLSubjectMap
+	def  unfoldTriplesMap(triplesMapId:String, logicalTable:R2RMLLogicalTable, subjectMap:R2RMLSubjectMap
 			, poms:Collection[R2RMLPredicateObjectMap] ) : IQuery = {
 //		val triplesMap = subjectMap.getOwner();
 //		logger.info("unfolding triplesMap : " + triplesMap);
@@ -293,7 +294,28 @@ extends MorphBaseUnfolder(md) with MorphR2RMLElementVisitor {
 //		}
 		//logger.info(triplesMap + " unfolded = \n" + result);
 
-		result;		
+		try {
+			val sliceString = this.properties.mapDataTranslationLimits.find(_._1.equals(triplesMapId));
+			if(sliceString.isDefined) {
+			  val sliceLong = sliceString.get._2.toLong;
+			  result.setSlice(sliceLong);
+			}
+			
+			val offsetString = this.properties.mapDataTranslationOffsets.find(_._1.equals(triplesMapId));
+			if(offsetString.isDefined) {
+			  val offsetLong = offsetString.get._2.toLong;
+			  result.setOffset(offsetLong);
+			}
+			
+		} catch {
+		  case e:Exception => {
+		    logger.error("errors parsing LIMIT from properties file!")
+		  }
+		}
+
+		
+		result;
+		
 	}
 
 
@@ -302,8 +324,9 @@ extends MorphBaseUnfolder(md) with MorphR2RMLElementVisitor {
 		val logicalTable = triplesMap.getLogicalTable().asInstanceOf[R2RMLLogicalTable];
 		val subjectMap = triplesMap.subjectMap;
 		val predicateObjectMaps = triplesMap.predicateObjectMaps;
+		val triplesMapId = triplesMap.id;
 		
-		val resultAux = this.unfoldTriplesMap(logicalTable, subjectMap, predicateObjectMaps);
+		val resultAux = this.unfoldTriplesMap(triplesMapId, logicalTable, subjectMap, predicateObjectMaps);
 		val result = if(subjectURI != null) {
 			val whereExpression = MorphRDBUtility.generateCondForWellDefinedURI(
 			    subjectMap, triplesMap, subjectURI, logicalTable.alias);
@@ -357,7 +380,8 @@ extends MorphBaseUnfolder(md) with MorphR2RMLElementVisitor {
 		val logicalTable = triplesMap.getLogicalTable().asInstanceOf[R2RMLLogicalTable];
 		val subjectMap = triplesMap.subjectMap;
 		val predicateObjectMaps = triplesMap.predicateObjectMaps;
-		val result = this.unfoldTriplesMap(logicalTable, subjectMap, null);
+		val id = triplesMap.id;
+		val result = this.unfoldTriplesMap(id, logicalTable, subjectMap, null);
 		return result;
 	}
 

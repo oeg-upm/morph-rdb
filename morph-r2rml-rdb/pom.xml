@@ -41,7 +41,8 @@
 			<artifactId>morph-r2rml</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-		
+
+
 	</dependencies>
 
 	<distributionManagement>
@@ -73,6 +74,11 @@
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
 		</repository>
 
+    <repository>
+      <id>codelds</id>
+      <url>https://code.lds.org/nexus/content/groups/main-repo</url>
+    </repository>
+  
 	</repositories>
 		  
 </project>
