@@ -703,47 +703,59 @@ with MorphR2RMLElementVisitor {
 			  this.translateData(termMap, termMap.constantValue, datatype);
 			} 
 		  case Constants.MorphTermMapType.TemplateTermMap => {
-				val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }		    
+			  val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }		    
 		    
-				val  attributes = RegexUtility.getTemplateColumns(termMap.templateString, true);
-				val replacements = attributes.flatMap(attribute => {
-					val databaseColumn = if(logicalTableAlias != null) {
-						val attributeSplit = attribute.split("\\.");
-						if(attributeSplit.length >= 1) {
-							val columnName = attributeSplit(attributeSplit.length - 1).replaceAll("\"", dbEnclosedCharacter);
-							logicalTableAlias + "_" + columnName;
-						} else {
-						  logicalTableAlias + "_" + attribute;
-						}
-					} else {
-						attribute;
-					}
+			  val attributes = RegexUtility.getTemplateColumns(termMap.templateString, true);
+			  val replacements = attributes.flatMap(attribute => {
+				  val databaseColumn = if(logicalTableAlias != null) {
+					  val attributeSplit = attribute.split("\\.");
+					  if(attributeSplit.length >= 1) {
+						  val columnName = attributeSplit(attributeSplit.length - 1).replaceAll("\"", dbEnclosedCharacter);
+						  logicalTableAlias + "_" + columnName;
+					  } 
+					  else { logicalTableAlias + "_" + attribute; }
+				  } else { attribute; }
 					
-					val dbValueAux = this.getResultSetValue(termMap, rs, databaseColumn);
-					  val dbValue = dbValueAux match {
-						  case dbValueAuxString:String => {
-							  if(this.properties.transformString.isDefined) {
-							    this.properties.transformString.get match {
-								    case Constants.TRANSFORMATION_STRING_TOLOWERCASE => {
-								      dbValueAuxString.toLowerCase();
-								    }
-								    case Constants.TRANSFORMATION_STRING_TOUPPERCASE => {
-								      dbValueAuxString.toUpperCase();
-								    }
-								    case _ => { dbValueAuxString }
-							    }
+				  val dbValueAux = this.getResultSetValue(termMap, rs, databaseColumn);
+				  val dbValue = dbValueAux match {
+				  	case dbValueAuxString:String => {
+				  		if(this.properties.transformString.isDefined) {
+				  			this.properties.transformString.get match {
+				  				case Constants.TRANSFORMATION_STRING_TOLOWERCASE => {
+				  					dbValueAuxString.toLowerCase();
+				  				}
+				  				case Constants.TRANSFORMATION_STRING_TOUPPERCASE => {
+				  					dbValueAuxString.toUpperCase();
+				  				}
+				  				case _ => { dbValueAuxString }
+				  			}
 		
-							  } 
-							  else { dbValueAuxString }
+				  		} 
+				  		else { dbValueAuxString }
+				  	}
+				  	case _ => { dbValueAux }
+				  }
+				  
+				  if(dbValue != null) {
+					  var databaseValueString = dbValue.toString();
+					  if(termMap.inferTermType.equals(Constants.R2RML_IRI_URI)) {
+						  val uriTransformationOperations = this.properties.uriTransformationOperation;
+						  if(uriTransformationOperations != null) {
+							  uriTransformationOperations.foreach{
+							  	case Constants.URI_TRANSFORM_TOLOWERCASE => {
+							  		databaseValueString = databaseValueString.toLowerCase();
+							  	}
+							  	case Constants.URI_TRANSFORM_TOUPPERCASE => {
+							  		databaseValueString = databaseValueString.toUpperCase();
+							  	}
+							  	case _ => { }
+							  }
 						  }
-						  case _ => { dbValueAux }
-					  }					
-					if(dbValue != null) {
-						val databaseValueString = dbValue.toString();
-						Some(attribute -> databaseValueString);
-					} else {
-					  None
-					}
+					  }
+					  
+					  Some(attribute -> databaseValueString);
+				  } 
+				  else { None }
 				}).toMap
 
 				if(replacements.isEmpty) {

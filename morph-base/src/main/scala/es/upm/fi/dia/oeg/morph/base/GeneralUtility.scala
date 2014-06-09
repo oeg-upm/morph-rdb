@@ -51,7 +51,8 @@ object GeneralUtility {
 				  result = result.replaceAll(key, value)}};
 			}
 			
-			if(uriTransformationOperations != null) {
+			//DO THIS ON DATA LEVEL, NOT ON URI LEVEL
+/*			if(uriTransformationOperations != null) {
 				uriTransformationOperations.foreach{
 				  case Constants.URI_TRANSFORM_TOLOWERCASE => {
 					  result = result.toLowerCase();
@@ -61,7 +62,7 @@ object GeneralUtility {
 				  }
 				  case _ => {}
 				}
-			}
+			}*/
 		} catch {
 		  case e:Exception => {
 			logger.error("Error encoding uri for uri = " + originalURI + " because of " + e.getMessage());
