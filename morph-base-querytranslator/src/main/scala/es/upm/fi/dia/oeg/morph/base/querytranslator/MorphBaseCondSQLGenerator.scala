@@ -26,13 +26,14 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 		
 	def  genCondSQL(tp:Triple, alphaResult:MorphAlphaResult
 	    , betaGenerator:MorphBaseBetaGenerator, cm:MorphBaseClassMapping
-	    ,  predicateURI:String) : MorphCondSQLResult =  {
+	    ,  predicateURI:String, mapVarNotNull:Map[Node, Boolean]) : MorphCondSQLResult =  {
 
 		val condSQLSubject = this.genCondSQLSubject(tp, alphaResult, betaGenerator, cm);
 
 		val condSQLPredicateObject = {
 			try {
-				this.genCondSQLPredicateObject(tp, alphaResult, betaGenerator, cm, predicateURI);			
+				this.genCondSQLPredicateObject(tp, alphaResult, betaGenerator, cm
+				    , predicateURI, mapVarNotNull);			
 			} catch {
 			  case e:Exception => {
 			    logger.error(e.getMessage());
@@ -57,7 +58,7 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 
 	def genCondSQLPredicateObject(tp:Triple, alphaResult:MorphAlphaResult 
 	    , betaGenerator:MorphBaseBetaGenerator, cm:MorphBaseClassMapping
-	    , predicateURI:String) : Iterable[ZExpression] = {
+	    , predicateURI:String, mapVarNotNull:Map[Node, Boolean]) : Iterable[ZExpression] = {
 		
 		//var exps : Set[ZExpression] = Set.empty;
 		
@@ -165,6 +166,7 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 					}
 	
 				} else { //object.isVariable() // improvement by Freddy
+					
 					if(!SPARQLUtility.isBlankNode(tpObject)) {
 						val isSingleTripleFromTripleBlock = {
 							tp match {
@@ -180,8 +182,9 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 						}
 	
 						//for dealing with unbound() function, we should remove this part
-						if(!isSingleTripleFromTripleBlock) {
-							
+						//if(!isSingleTripleFromTripleBlock) {
+						val isNotNullObject = mapVarNotNull.get(tpObject);
+						if(isNotNullObject.isDefined && isNotNullObject.get == true) {
 							for(betaObjectExpression <- betaObjectExpressions) {
 								betaObjectExpression match {
 								  case betaObjectZConstant:ZConstant => {
@@ -200,7 +203,13 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 										}
 									}
 									
-									if(cmd == null || cmd.isNullable || !cmd.isPrimaryKeyColumn) {
+									val generateIsNotNullCondition = if(cmd == null) { true } 
+									else {
+									  if(cmd.isNullable && !cmd.isPrimaryKeyColumn) { true }
+									  else { false }
+									}
+									
+									if(generateIsNotNullCondition) {
 										val exp = this.generateIsNotNullExpression(betaObjectExpression);
 										if(exp != null) {
 											exps = exps ++ Set(exp);
@@ -299,7 +308,7 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 	def genCondSQLSubjectURI(tpSubject:Node , alphaResult:MorphAlphaResult, cm:MorphBaseClassMapping) : ZExpression;
 
 	def  genCondSQLSTG(stg:List[Triple], alphaResult:MorphAlphaResult , betaGenerator:MorphBaseBetaGenerator 
-			, cm:MorphBaseClassMapping ) : MorphCondSQLResult = {
+			, cm:MorphBaseClassMapping, mapVarNotNull:Map[Node, Boolean] ) : MorphCondSQLResult = {
 
 		//var exps : Set[ZExpression] = Set.empty;
 		val firstTriple = stg.get(0);
@@ -337,7 +346,7 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 			
 			if(processableTriplePattern) {
 				val condPredicateObject = this.genCondSQLPredicateObject(
-				    iTP, alphaResult, betaGenerator, cm, iTPPredicateURI);
+				    iTP, alphaResult, betaGenerator, cm, iTPPredicateURI, mapVarNotNull);
 				//condSQLTB.add(condPredicateObject);
 				if(condPredicateObject != null) {
 					condSTGPredicateObject = condSTGPredicateObject ++ condPredicateObject;

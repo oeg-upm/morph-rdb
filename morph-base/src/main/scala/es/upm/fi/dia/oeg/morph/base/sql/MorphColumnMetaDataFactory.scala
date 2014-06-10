@@ -56,6 +56,8 @@ object MorphColumnMetaDataFactory {
 							var listColumnsMetaData = result(tableName);
 							val columnName = rs.getString(columnNameColumn);
 	
+
+							
 							if(!listColumnsMetaData.exists(x=>x.columnName.equals(columnName))) {
 							  	val dataType = rs.getString(datatypeColumn);
 								val isNullable =  {

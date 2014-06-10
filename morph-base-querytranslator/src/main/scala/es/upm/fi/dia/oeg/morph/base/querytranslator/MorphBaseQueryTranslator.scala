@@ -90,20 +90,16 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
     extends IQueryTranslator {
 	val logger = Logger.getLogger(this.getClass());
 	
-	//var currentTranslationResult:IQuery = null;
-	
-	
-	
 	//query translator
 	var mapInferredTypes:Map[Node, Set[MorphBaseClassMapping]] = Map.empty ;
-	
-	val mapTermsC : Map[Op, Set[Node]] = Map.empty;
+	//val mapTermsC : Map[Op, Set[Node]] = Map.empty;
 	var mapAggreatorAlias:Map[String, ZSelectItem] = Map.empty;//varname - selectitem
-	val notNullColumns:List[String] = Nil;
+	//val notNullColumns:List[String] = Nil;
 	var mapTripleAlias:Map[Triple, String] = Map.empty;
-
+	var mapVarNotNull:Map[Node, Boolean] = Map.empty;
 	
 	Optimize.setFactory(new MorphQueryRewritterFactory());
+	
 	val functionsMap:Map[String, String] = Map(
 	    "E_Bound" -> "IS NOT NULL"
 	    , "E_LogicalNot" -> "NOT"
@@ -112,19 +108,9 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 	    , "E_Regex" -> "LIKE"
 	    , "E_OneOf" -> "IN")
 
-//	def buildAlphaGenerator();
-//
-//	def buildBetaGenerator();
-//
-//	def buildCondSQLGenerator();
-//
-//	def buildPRSQLGenerator();
-
 	def generateTermCName(termC:Node ) : String  = {
 		this.nameGenerator.generateName(termC);
 	}
-	
-
 
 	def getMappingDocumentURL() : String = {
 		this.mappingDocument.mappingDocumentPath;
@@ -874,7 +860,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		
 		//CondSQL
 		val condSQLResult = this.condSQLGenerator.genCondSQL(tp, alphaResult
-		    , this.betaGenerator, cm, predicateURI);
+		    , this.betaGenerator, cm, predicateURI, mapVarNotNull);
 		
 		val transTPResult = new MorphTransTPResult(alphaResult, condSQLResult, prSQLResult);
 		transTPResult
@@ -1378,6 +1364,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		logger.debug("opSparqlQuery = " + op);
 		val typeInferrer = new MorphMappingInferrer(this.mappingDocument);
 		this.mapInferredTypes = typeInferrer.infer(op);
+		this.initializeMapVarIsNullable(op);
+		
 		logger.info("Inferred Types : \n" + typeInferrer.printInferredTypes());
 
 //		this.buildAlphaGenerator();
@@ -1549,7 +1537,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		val prSQLSTGResult = this.prSQLGenerator.genPRSQLSTG(stg, alphaResult, betaGenerator, nameGenerator, cm);
 
 		//CondSQLSTG
-		val condSQLSQLResult = this.condSQLGenerator.genCondSQLSTG(stg, alphaResult, betaGenerator, cm);
+		val condSQLSQLResult = this.condSQLGenerator.genCondSQLSTG(
+		    stg, alphaResult, betaGenerator, cm, mapVarNotNull);
 
 		val transTPResult = new MorphTransTPResult(alphaResult, condSQLSQLResult, prSQLSTGResult)
 		transTPResult
@@ -1726,6 +1715,81 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		val triples = stg.getPattern().getList().toList;
 		val transTPResult = this.transSTGUnionFree(triples);
 		transTPResult.toDelete;
+	}
+	
+	def initializeMapVarIsNullable(op:Op) : Unit = {
+		op match {
+		  	case bgp:OpBGP => {
+		  	  val triples = bgp.getPattern().getList();
+		  	  for(tp <- triples) {
+		  	    val tpSubject = tp.getSubject();
+		  	    if(tpSubject.isVariable()) {
+		  	      this.mapVarNotNull += (tpSubject -> true);
+		  	    }
+		  	    val tpObject = tp.getObject();
+		  	    
+		  	    if(tpObject.isVariable()) {
+		  	      this.mapVarNotNull += (tpObject -> true);
+		  	    }
+		  	  }
+			} 
+			case opJoin:OpJoin => { // AND pattern
+			  this.initializeMapVarIsNullable(opJoin.getLeft());
+			  this.initializeMapVarIsNullable(opJoin.getRight());
+			} 
+			case opLeftJoin:OpLeftJoin => { //OPT pattern
+				val leftChild = opLeftJoin.getLeft();
+				this.initializeMapVarIsNullable(leftChild);
+				val rightChild = opLeftJoin.getRight();
+				rightChild match {
+				  case rightBGP:OpBGP => {
+					  if(rightBGP.getPattern().size() == 1) {
+					    val tp=rightBGP.getPattern().get(0);
+				  	    val tpSubject = tp.getSubject();
+				  	    if(tpSubject.isVariable()) {
+				  	      this.mapVarNotNull += (tpSubject -> true);
+				  	    }
+					  } else if(rightBGP.getPattern().size() > 1) {
+					    this.initializeMapVarIsNullable(rightChild);
+					  } else {
+					    this.initializeMapVarIsNullable(rightChild);
+					  }
+				  }
+				  case _ => { this.initializeMapVarIsNullable(rightChild); }
+				}
+			} 
+			case opUnion:OpUnion => { //UNION pattern
+				val leftChild = opUnion.getLeft();
+				val rightChild = opUnion.getRight();
+				val leftChildRewritten = this.initializeMapVarIsNullable(leftChild);
+				val rightChildRewritten = this.initializeMapVarIsNullable(rightChild);
+			} 
+			case opFilter:OpFilter => { //FILTER pattern
+				val exprs = opFilter.getExprs();
+				val subOp = opFilter.getSubOp();
+				val subOpRewritten = this.initializeMapVarIsNullable(subOp);
+			} 
+			case opProject:OpProject => {
+				val subOp = opProject.getSubOp();
+				val subOpRewritten = this.initializeMapVarIsNullable(subOp);
+			} 
+			case opSlice:OpSlice => {
+				val subOp = opSlice.getSubOp();
+				val subOpRewritten = this.initializeMapVarIsNullable(subOp);
+			} 
+			case opDistinct:OpDistinct => {
+				val subOp = opDistinct.getSubOp();
+				val subOpRewritten = this.initializeMapVarIsNullable(subOp);
+			} 
+			case opOrder:OpOrder => {
+				val subOp = opOrder.getSubOp();
+				val subOpRewritten = this.initializeMapVarIsNullable(subOp);
+			} 
+			case _ => {
+				op;
+			}
+		}
+
 	}
 
 }

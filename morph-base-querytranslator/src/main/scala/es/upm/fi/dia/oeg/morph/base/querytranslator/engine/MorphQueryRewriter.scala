@@ -32,24 +32,22 @@ extends Rewrite {
 	
 	
 	def rewrite(op:Op) : Op = {
-		var result : Op = null;
-		
-		op match {
+		val result : Op = op match {
 		  	case bgp:OpBGP => {
-		  		result = this.rewriteBGP(bgp);
+		  		this.rewriteBGP(bgp);
 			} 
 			case opJoin:OpJoin => { // AND pattern
-			  result = this.rewriteJoin(opJoin);
+			  this.rewriteJoin(opJoin);
 			} 
 			case opLeftJoin:OpLeftJoin => { //OPT pattern
-				result = this.rewriteLeftJoin(opLeftJoin);
+				this.rewriteLeftJoin(opLeftJoin);
 			} 
 			case opUnion:OpUnion => { //UNION pattern
 				val leftChild = opUnion.getLeft();
 				val rightChild = opUnion.getRight();
 				val leftChildRewritten = this.rewrite(leftChild);
 				val rightChildRewritten = this.rewrite(rightChild);
-				result = new OpUnion(leftChildRewritten, rightChildRewritten);
+				new OpUnion(leftChildRewritten, rightChildRewritten);
 			} 
 			case opFilter:OpFilter => { //FILTER pattern
 				val exprs = opFilter.getExprs();
@@ -65,34 +63,32 @@ extends Rewrite {
 	//				op2 = TransformFilterPlacement.transform(exprs, basicPattern);
 	//			}
 				val subOpRewritten = this.rewrite(subOp);
-				result = OpFilter.filter(exprs, subOpRewritten);
+				OpFilter.filter(exprs, subOpRewritten);
 			} 
 			case opProject:OpProject => {
 				val subOp = opProject.getSubOp();
 				val subOpRewritten = this.rewrite(subOp);
-				result = new OpProject(subOpRewritten, opProject.getVars());
+				new OpProject(subOpRewritten, opProject.getVars());
 			} 
 			case opSlice:OpSlice => {
 				val subOp = opSlice.getSubOp();
 				val subOpRewritten = this.rewrite(subOp);
-				result = new OpSlice(subOpRewritten, opSlice.getStart(), opSlice.getLength());
+				new OpSlice(subOpRewritten, opSlice.getStart(), opSlice.getLength());
 			} 
 			case opDistinct:OpDistinct => {
 				val subOp = opDistinct.getSubOp();
 				val subOpRewritten = this.rewrite(subOp);
-				result = new OpDistinct(subOpRewritten);
+				new OpDistinct(subOpRewritten);
 			} 
 			case opOrder:OpOrder => {
 				val subOp = opOrder.getSubOp();
 				val subOpRewritten = this.rewrite(subOp);
-				result = new OpOrder(subOpRewritten, opOrder.getConditions());
+				new OpOrder(subOpRewritten, opOrder.getConditions());
 			} 
 			case _ => {
-				result = op;
+				op;
 			}
 		}
-		
-
 
 		result;
 	}
@@ -195,9 +191,10 @@ extends Rewrite {
 					val leftChildTriples = leftChildRewrittenBGP.getPattern().getList().toList;
 					val leftChildSubjects = SPARQLUtility.getSubjects(leftChildTriples);
 					val leftChildObjects = SPARQLUtility.getObjects(leftChildTriples);
-					val needsPhantomTP = leftChildObjects.contains(rightTpSubject) && 
-							!leftChildSubjects.contains(rightTpSubject) ;
-					
+//					val needsPhantomTP = leftChildObjects.contains(rightTpSubject) && 
+//							!leftChildSubjects.contains(rightTpSubject) ;
+					val needsPhantomTP = !leftChildSubjects.contains(rightTpSubject) ;
+										
 					if(needsPhantomTP) {
 					  val phantomSubject = rightTpSubject;
 					  val phantomPredicate = RDF.`type`.asNode();
@@ -228,7 +225,8 @@ extends Rewrite {
 					  this.rewriteLeftJoin(newOpLeftJoin.asInstanceOf[OpLeftJoin]);
 					} else {
 					  	if(leftChildSubjects.contains(rightTpSubject) 
-					  			&& !leftChildObjects.contains(rightTpObject)) {
+					  			//&& !leftChildObjects.contains(rightTpObject)
+					  			){
 						
 					  		val rightEtp = new MorphTriple(rightTpSubject, rightTpPredicate
 					  				, rightTpObject, true);
