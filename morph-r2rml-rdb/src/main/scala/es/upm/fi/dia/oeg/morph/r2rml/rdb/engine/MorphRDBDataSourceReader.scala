@@ -11,23 +11,23 @@ class MorphRDBDataSourceReader() extends MorphBaseDataSourceReader {
 	var connection:Connection=null;
 	var dbType:String = null;
 	
-	def evaluateQuery(query:String , connection:Connection , timeout:Int ) : ResultSet = {
-		DBUtility.executeQuery(this.connection, query, this.timeout);
-	}
+//	def execute(query:String , connection:Connection , timeout:Int ) : ResultSet = {
+//		DBUtility.execute(this.connection, query, this.timeout);
+//	}
 		
-	override def evaluateQuery(query:String ) : MorphBaseResultSet  = {
-		val rs = this.evaluateQuery(query, this.connection, this.timeout);
+	override def execute(query:String ) : MorphBaseResultSet  = {
+		val rs = DBUtility.execute(this.connection, query, this.timeout);
 		val abstractResultSet = new RDBResultSet(rs);
 		abstractResultSet;
 	}
 
-	def execute(query:String , connection:Connection , timeout:Int ) : Boolean = {
-		DBUtility.execute(this.connection, query);
-	}
-
-	override def execute(query:String ) : Boolean  = {
-		this.execute(query, this.connection, this.timeout);
-	}
+//	def execute(query:String , connection:Connection , timeout:Int ) : Boolean = {
+//		DBUtility.execute(this.connection, query, timeout);
+//	}
+//
+//	override def execute(query:String ) : Boolean  = {
+//		this.execute(query, this.connection, this.timeout);
+//	}
 
 		
 	override def setConnection(connection:Object) = {

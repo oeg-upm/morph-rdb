@@ -274,7 +274,7 @@ with MorphR2RMLElementVisitor {
 		val conn = this.connection
 		val timeout = this.properties.databaseTimeout;
 		val sqlQuery = iQuery.toString();
-		val rows = DBUtility.executeQuery(conn, sqlQuery, timeout);
+		val rows = DBUtility.execute(conn, sqlQuery, timeout);
 		
 		var mapXMLDatatype : Map[String, String] = Map.empty;
 		var mapDBDatatype:Map[String, Integer]  = Map.empty;

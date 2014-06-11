@@ -324,10 +324,10 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				val subQueryViewName = "sqf" + Math.abs(opFilterSubOp.hashCode());
 				val dropViewSQL = "DROP VIEW IF EXISTS " + subQueryViewName;
 				logger.info(dropViewSQL + ";\n");
-				DBUtility.execute(conn, dropViewSQL);
+				DBUtility.execute(conn, dropViewSQL, 0);
 				val createViewSQL = "CREATE VIEW " + subQueryViewName + " AS " + subOpSQL;
 				logger.info(createViewSQL + ";\n");
-				DBUtility.execute(conn, createViewSQL);
+				DBUtility.execute(conn, createViewSQL, 0);
 				val sqlFromItem = new SQLFromItem(subQueryViewName
 				    , Constants.LogicalTableType.TABLE_NAME);
 				sqlFromItem.databaseType = this.databaseType
@@ -540,10 +540,10 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 			val subQueryViewName = "sqp" + Math.abs(opProject.hashCode());
 			val dropViewSQL = "DROP VIEW IF EXISTS " + subQueryViewName;
 			logger.info(dropViewSQL + ";\n");
-			DBUtility.execute(conn, dropViewSQL);
+			DBUtility.execute(conn, dropViewSQL, 0);
 			val createViewSQL = "CREATE VIEW " + subQueryViewName + " AS " + opProjectSubOpSQL;
 			logger.info(createViewSQL  + ";\n");
-			DBUtility.execute(conn, createViewSQL);
+			DBUtility.execute(conn, createViewSQL, 0);
 			val sqlFromItem = new SQLFromItem(subQueryViewName
 			    , Constants.LogicalTableType.TABLE_NAME);
 			sqlFromItem.databaseType = this.databaseType;
@@ -1169,10 +1169,10 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 					val subQueryViewName = "sql" + Math.abs(gp1.hashCode());
 					val dropViewSQL = "DROP VIEW IF EXISTS " + subQueryViewName;
 					logger.info(dropViewSQL + ";\n");
-					DBUtility.execute(conn, dropViewSQL);
+					DBUtility.execute(conn, dropViewSQL, 0);
 					val createViewSQL = "CREATE VIEW " + subQueryViewName + " AS " + transGP1SQL;
 					logger.info(createViewSQL + ";\n");
-					DBUtility.execute(conn, createViewSQL);
+					DBUtility.execute(conn, createViewSQL, 0);
 					SQLFromItem(subQueryViewName, Constants.LogicalTableType.TABLE_NAME, this.databaseType);
 				} else {
 					SQLFromItem(transGP1SQL.toString(), Constants.LogicalTableType.QUERY_STRING, this.databaseType);
@@ -1187,10 +1187,10 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 					val subQueryViewName = "sqr" + Math.abs(gp2.hashCode());
 					val dropViewSQL = "DROP VIEW IF EXISTS " + subQueryViewName;
 					logger.info(dropViewSQL + ";\n");
-					DBUtility.execute(conn, dropViewSQL);
+					DBUtility.execute(conn, dropViewSQL, 0);
 					val createViewSQL = "CREATE VIEW " + subQueryViewName + " AS " + transGP2SQL;
 					logger.info(createViewSQL + ";\n");
-					DBUtility.execute(conn, createViewSQL);
+					DBUtility.execute(conn, createViewSQL, 0);
 					SQLFromItem(subQueryViewName, Constants.LogicalTableType.TABLE_NAME
 					    , this.databaseType);
 				} else {

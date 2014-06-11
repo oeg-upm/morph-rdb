@@ -17,7 +17,7 @@ object DBUtility {
 	
 
 	
-	def execute(conn : Connection , query: String) : Boolean = {
+/*	def execute(conn : Connection , query: String) : Boolean = {
 		val stmt = conn.createStatement();
 
 		try  {
@@ -44,10 +44,9 @@ object DBUtility {
 			false;
 		  }
 		}
+	}*/
 
-	}
-
-	def executeQuery(conn:Connection , query:String , timeout:Integer) : ResultSet = {
+	def execute(conn:Connection , query:String , timeout:Integer) : ResultSet = {
 		logger.info("Executing query: " + query);
 		
 		if(conn == null) {
@@ -59,20 +58,23 @@ object DBUtility {
 		val stmt = conn.createStatement(
 				java.sql.ResultSet.TYPE_FORWARD_ONLY,
 				java.sql.ResultSet.CONCUR_READ_ONLY);
+
 		val dbmd = conn.getMetaData();
 		val dbProductName = dbmd.getDatabaseProductName();
 		if(Constants.DATABASE_MYSQL.equalsIgnoreCase(dbProductName)) {
 			stmt.setFetchSize(Integer.MIN_VALUE);	
-		}
+		} 
+		else { stmt.setFetchSize(100); }
 		
-		if(timeout > 0) {
-			stmt.setQueryTimeout(timeout);
-		}
+		if(timeout > 0) { stmt.setQueryTimeout(timeout); }
 		val start = System.currentTimeMillis();
-		val result = stmt.executeQuery(query);
+		val result = stmt.execute(query);
 		val end = System.currentTimeMillis();
 		logger.info("SQL execution time was "+(end-start)+" ms.");
-		result;
+		
+		if(result) { stmt.getResultSet(); } 
+		else { null }
+		
 	}
 
 	def closeConnection(conn:Connection , requesterString:String) = {
@@ -142,7 +144,9 @@ object DBUtility {
 			prop.put("autoReconnect", "true");
 			Class.forName(driverString);
 			logger.debug("Opening database connection.");
-			DriverManager.getConnection(url, prop);
+			val conn = DriverManager.getConnection(url, prop);
+			conn.setAutoCommit(false);
+			conn;
 		} catch {
 		  case e:ClassNotFoundException => {
 			val errorMessage = "Error opening database connection, class not found : " + e.getMessage();

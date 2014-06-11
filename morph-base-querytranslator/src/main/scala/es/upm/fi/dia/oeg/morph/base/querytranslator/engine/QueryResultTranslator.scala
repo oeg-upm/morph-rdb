@@ -22,7 +22,7 @@ class QueryResultTranslator(dataSourceReader:MorphBaseDataSourceReader
 			val sparqlQuery = mapElement._1
 			val iQuery = mapElement._2
 			
-			val abstractResultSet = this.dataSourceReader.evaluateQuery(iQuery.toString());
+			val abstractResultSet = this.dataSourceReader.execute(iQuery.toString());
 			val columnNames = iQuery.getSelectItemAliases();
 			abstractResultSet.setColumnNames(columnNames);
 
