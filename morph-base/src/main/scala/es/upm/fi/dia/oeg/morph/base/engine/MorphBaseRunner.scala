@@ -81,7 +81,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		//PREMATERIALIZE PROCESS
 //		this.preMaterializeProcess(outputFileName);
 
-		logger.info("Translating data ...");
+		logger.info("Materializing mapping document ...");
 		//MATERIALIZING MODEL
 		val startGeneratingModel = System.currentTimeMillis();
 //		this.dataTranslator.translateData(md);
@@ -89,6 +89,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		
 		//this.dataTranslator.translateData(cms);
 		cms.foreach(cm => {
+			logger.info("Materializing triples map " + cm.name);
 			val sqlQuery = this.unfolder.unfoldConceptMapping(cm);
 			this.dataTranslator.get.generateRDFTriples(cm, sqlQuery);
 		})

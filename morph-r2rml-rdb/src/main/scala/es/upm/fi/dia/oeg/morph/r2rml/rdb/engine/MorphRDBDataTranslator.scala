@@ -305,8 +305,10 @@ with MorphR2RMLElementVisitor {
 		val sgm = sm.graphMaps;
 
 		var i=0;
+		var setSubjects : Set[RDFNode] = Set.empty;
+		var setBetaSub : Set[String] = Set.empty;
+		
 		while(rows.next()) {
-			i = i+1;
 			try {
 				//translate subject map
 				val subject = this.translateData(sm, rows, logicalTableAlias, mapXMLDatatype);
@@ -315,10 +317,12 @@ with MorphR2RMLElementVisitor {
 					logger.debug("null value in the subject triple!");
 					throw new Exception(errorMessage);
 				}
+				setSubjects = setSubjects + subject._1
+				setBetaSub = setBetaSub + subject._2.toString
 //				val subjectString = subject.toString();
 //				this.materializer.createSubject(sm.isBlankNode(), subjectString);
 				
-				val subjectGraphs = sgm.map(sgmElement=> {
+				val subjectGraphs = sgm.flatMap(sgmElement=> {
 					val subjectGraphValue = this.translateData(sgmElement, rows, logicalTableAlias, mapXMLDatatype);
 //					val subjectGraphValue = this.translateData(sgmElement, unfoldedSubjectGraph, mapXMLDatatype);
 					val graphMapTermType = sgmElement.inferTermType;
@@ -332,7 +336,8 @@ with MorphR2RMLElementVisitor {
 							throw new Exception(errorMessage);						  
 						}
 					}
-					subjectGraph
+					if(subjectGraph == null) { None }
+					else { Some(subjectGraph); }
 				});
 				
 
@@ -341,13 +346,12 @@ with MorphR2RMLElementVisitor {
 					val statementObject = this.materializer.model.createResource(classURI);
 					if(subjectGraphs == null || subjectGraphs.isEmpty) {
 //						this.materializer.materializeRDFTypeTriple(subjectString, classURI, sm.isBlankNode(), null);
-					  this.materializer.materializeQuad(subject, RDF.`type`, statementObject, null);
+					  this.materializer.materializeQuad(subject._1, RDF.`type`, statementObject, null);
 					  this.materializer.outputStream.flush();
-					  
 					} else {
 						subjectGraphs.foreach(subjectGraph => {
 //							this.materializer.materializeRDFTypeTriple(subjectString, classURI, sm.isBlankNode(), subjectGraph);
-							this.materializer.materializeQuad(subject, RDF.`type`, statementObject, subjectGraph);
+							this.materializer.materializeQuad(subject._1, RDF.`type`, statementObject, subjectGraph._1);
 						  });
 					}
 				});
@@ -356,16 +360,18 @@ with MorphR2RMLElementVisitor {
 					val alias = if(pom.getAlias() == null) { logicalTableAlias; } 
 					else { pom.getAlias() }
 				  
-					val predicates = pom.predicateMaps.map(predicateMap => {
+					val predicates = pom.predicateMaps.flatMap(predicateMap => {
 						val predicateValue = this.translateData(predicateMap, rows, null, mapXMLDatatype);
 //						val predicateValue = this.translateData(predicateMap, unfoldedPredicateMap, mapXMLDatatype);
-						predicateValue;
+						if(predicateValue == null) { None }
+						else { Some(predicateValue); }
 					});
 					
-					val objects = pom.objectMaps.map(objectMap => {
+					val objects = pom.objectMaps.flatMap(objectMap => {
 						val objectValue = this.translateData(objectMap, rows, alias, mapXMLDatatype);
 //						val objectValue = this.translateData(objectMap, unfoldedObjectMap, mapXMLDatatype);
-						objectValue;
+						if(objectValue == null) { None }
+						else { Some(objectValue); }
 					});
 					
 					val refObjects = pom.refObjectMaps.map(refObjectMap => {
@@ -378,21 +384,22 @@ with MorphR2RMLElementVisitor {
 					})
 					
 					val pogm = pom.graphMaps;
-					val predicateObjectGraphs = pogm.map(pogmElement=> {
+					val predicateObjectGraphs = pogm.flatMap(pogmElement=> {
 					  val poGraphValue = this.translateData(pogmElement, rows, null, mapXMLDatatype);
 //					  val poGraphValue = this.translateData(pogmElement, unfoldedPOGraphMap, mapXMLDatatype);
-					  poGraphValue
+					  if(poGraphValue == null) { None }
+					  else { Some(poGraphValue); }
 					});
 
 										    
 					if(sgm.isEmpty && pogm.isEmpty) {
 						predicates.foreach(predicatesElement => {
 						  objects.foreach(objectsElement => {
-						    this.materializer.materializeQuad(subject, predicatesElement, objectsElement, null)
+						    this.materializer.materializeQuad(subject._1, predicatesElement._1, objectsElement._1, null)
 						  });
 
 						  refObjects.foreach(refObjectsElement => {
-						    this.materializer.materializeQuad(subject, predicatesElement, refObjectsElement, null)
+						    this.materializer.materializeQuad(subject._1, predicatesElement._1, refObjectsElement._1, null)
 						  });
 						});					  
 					} else {
@@ -401,12 +408,12 @@ with MorphR2RMLElementVisitor {
 						predicates.foreach(predicatesElement => {
 						  objects.foreach(objectsElement => {
 						    unionGraphs.foreach(unionGraph => {
-						      this.materializer.materializeQuad(subject, predicatesElement, objectsElement, unionGraph)
+						      this.materializer.materializeQuad(subject._1, predicatesElement._1, objectsElement._1, unionGraph._1)
 						    })
 						  });
 
 						  refObjects.foreach(refObjectsElement => {
-						    this.materializer.materializeQuad(subject, predicatesElement, refObjectsElement, unionGraph)
+						    this.materializer.materializeQuad(subject._1, predicatesElement._1, refObjectsElement._1, unionGraph._1)
 						  });
 						  
 						});					    
@@ -414,7 +421,7 @@ with MorphR2RMLElementVisitor {
 					}
 
 				});
-				
+				i = i+1;
 			} catch {
 			  case e:Exception => {
 			    e.printStackTrace();
@@ -423,8 +430,9 @@ with MorphR2RMLElementVisitor {
 			}
 		}
 		
-		
 		logger.info(i + " instances retrieved.");
+		logger.info(setSubjects.size + " unique instances (URI) retrieved.");
+		logger.info(setBetaSub.size + " unique instances (DB Column) retrieved.");
 		rows.close();
 
 	}
@@ -650,12 +658,12 @@ with MorphR2RMLElementVisitor {
 	
 	def translateData(termMap:R2RMLTermMap, rs:ResultSet , logicalTableAlias:String 
 	    , mapXMLDatatype : Map[String, String]
-	) : RDFNode = {
+	) : (RDFNode, List[Object]) = {
 		val dbType = this.properties.databaseType;
 		val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
 		val inferedTermType = termMap.inferTermType;
 				
-		val result = termMap.termMapType match {
+		val result:(RDFNode, List[Object]) = termMap.termMapType match {
 			case Constants.MorphTermMapType.ColumnTermMap => {
 			  val columnTermMapValue =
 			    if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
@@ -666,7 +674,7 @@ with MorphR2RMLElementVisitor {
 			    	termMap.columnName
 			    }
 
-			  val dbValueAux = this.getResultSetValue(termMap, rs, columnTermMapValue);
+			  val dbValueAux = this.getResultSetValue(termMap.datatype, rs, columnTermMapValue);
 //			  val dbValue = dbValueAux match {
 //				  case dbValueAuxString:String => {
 //					  if(this.properties.transformString.isDefined) {
@@ -696,17 +704,18 @@ with MorphR2RMLElementVisitor {
 				}
 				
 			  	
-				this.translateData(termMap, dbValue, datatype);
+				(this.translateData(termMap, dbValue, datatype), List(dbValue));
 			} 
 		  case Constants.MorphTermMapType.ConstantTermMap => {
 				val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }		    
-			  this.translateData(termMap, termMap.constantValue, datatype);
+			  (this.translateData(termMap, termMap.constantValue, datatype), List());
 			} 
 		  case Constants.MorphTermMapType.TemplateTermMap => {
 			  val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }		    
-		    
+			  var rawDBValues:List[Object] = Nil;
+			  
 			  val attributes = RegexUtility.getTemplateColumns(termMap.templateString, true);
-			  val replacements = attributes.flatMap(attribute => {
+			  val replacements:Map[String, String] = attributes.flatMap(attribute => {
 				  val databaseColumn = if(logicalTableAlias != null) {
 					  val attributeSplit = attribute.split("\\.");
 					  if(attributeSplit.length >= 1) {
@@ -716,7 +725,9 @@ with MorphR2RMLElementVisitor {
 					  else { logicalTableAlias + "_" + attribute; }
 				  } else { attribute; }
 					
-				  val dbValueAux = this.getResultSetValue(termMap, rs, databaseColumn);
+				  val dbValueAux = this.getResultSetValue(termMap.datatype, rs, databaseColumn);
+				  rawDBValues = rawDBValues ::: List(dbValueAux);
+				  
 				  val dbValue = dbValueAux match {
 				  	case dbValueAuxString:String => {
 				  		if(this.properties.transformString.isDefined) {
@@ -763,7 +774,7 @@ with MorphR2RMLElementVisitor {
 				} else {
 					val templateWithDBValue = RegexUtility.replaceTokens(termMap.templateString, replacements);
 					if(templateWithDBValue != null) {
-						this.translateData(termMap, templateWithDBValue, datatype);  
+						(this.translateData(termMap, templateWithDBValue, datatype), rawDBValues);  
 					} else { null }				  
 				}
 			}	
@@ -772,7 +783,7 @@ with MorphR2RMLElementVisitor {
 
 	}
 	
-	def getResultSetValue(termMap:R2RMLTermMap, rs:ResultSet, pColumnName:String ) : Object = {
+	def getResultSetValue(termMapDatatype:Option[String], rs:ResultSet, pColumnName:String ) : Object = {
 		try {
 			val dbType = this.properties.databaseType;
 			val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
@@ -798,9 +809,11 @@ with MorphR2RMLElementVisitor {
 			}
 
 			  
-			val result = if(termMap.datatype == null) {
+			val result = if(termMapDatatype == null) {
 				rs.getString(columnName);
-			} else if(termMap.datatype.equals(XSDDatatype.XSDdateTime.getURI())) {
+			} else if(!termMapDatatype.isDefined) {
+				rs.getString(columnName);
+			} else if(termMapDatatype.get.equals(XSDDatatype.XSDdateTime.getURI())) {
 				rs.getDate(columnName).toString();
 			} else {
 				rs.getObject(columnName);
