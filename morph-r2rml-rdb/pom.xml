@@ -16,7 +16,29 @@
       </plugin>
     </plugins>
   </build> -->
-  
+
+   <build>
+      <sourceDirectory>src/main/scala</sourceDirectory>
+      <testSourceDirectory>src/test/scala</testSourceDirectory>
+      <plugins>
+         <plugin>
+            <groupId>org.scala-tools</groupId>
+            <artifactId>maven-scala-plugin</artifactId>
+            <executions>
+               <execution>
+                  <goals>
+                     <goal>compile</goal>
+                     <goal>testCompile</goal>
+                  </goals>
+               </execution>
+            </executions>
+            <configuration>
+               <scalaVersion>${scala.version}</scalaVersion>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+
 	<dependencies>
 <!-- 		<dependency>
 			<groupId>org.scala-lang</groupId>
@@ -46,7 +68,7 @@
 	</dependencies>
 
 	<distributionManagement>
-<!-- 		<repository>
+ 		<repository>
 			<uniqueVersion>false</uniqueVersion>
 			<id>aldebaran-releases</id>
 			<name>Aldebaran Releases</name>
@@ -57,8 +79,9 @@
 			<id>aldebaran-snapshots</id>
 			<name>Aldebaran Snapshots</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
-		</snapshotRepository> -->
-		
+		</snapshotRepository>
+
+<!--
 		<repository>
 			<uniqueVersion>false</uniqueVersion>
 			<id>dropbox-releases</id>
@@ -72,6 +95,7 @@
 			<name>Dropbox Snapshots</name>
 			<url>file:///C:/Users/Freddy Priyatna/Dropbox/Public/mvn-repository/snapshots/</url>
 		</snapshotRepository>
+-->
 		
 	</distributionManagement>
 
@@ -92,13 +116,15 @@
       <id>codelds</id>
       <url>https://code.lds.org/nexus/content/groups/main-repo</url>
     </repository>
-  
+
+<!--
 		<repository>
 			<id>dropbox-snapshots</id>
 			<name>Dropbox Snapshots</name>
 			<url>https://dl.dropboxusercontent.com/u/531378/mvn-repository/snapshots/</url>
 		</repository>
-		
+-->
+
 	</repositories>
 		  
 </project>
