@@ -3,7 +3,13 @@
   <groupId>es.upm.fi.dia.oeg.morph</groupId>
   <artifactId>morph-r2rml-rdb-querytranslator</artifactId>
   <version>1.0-SNAPSHOT</version>
-  
+  <packaging>jar</packaging>
+  <parent>
+    <groupId>es.upm.fi.dia.oeg.morph</groupId>
+    <artifactId>morph-rdb</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
 <!--   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
@@ -75,24 +81,6 @@
 			<name>Aldebaran Snapshots</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
 		</snapshotRepository>
-
-
-<!--
-		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>dropbox-releases</id>
-			<name>Dropbox Releases</name>
-			<url>file:///C:/Users/Freddy Priyatna/Dropbox/Public/mvn-repository/releases/</url>
-		</repository>
-
-		<snapshotRepository>
-			<uniqueVersion>true</uniqueVersion>
-			<id>dropbox-snapshots</id>
-			<name>Dropbox Snapshots</name>
-			<url>file:///C:/Users/Freddy Priyatna/Dropbox/Public/mvn-repository/snapshots/</url>
-		</snapshotRepository>
--->
-		
 	</distributionManagement>
 
 	<repositories>
@@ -107,14 +95,5 @@
 			<name>Aldebaran Snapshots</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
 		</repository>
-
-<!--
-		<repository>
-			<id>dropbox-snapshots</id>
-			<name>Dropbox Snapshots</name>
-			<url>https://dl.dropboxusercontent.com/u/531378/mvn-repository/snapshots/</url>
-		</repository>
- -->		
-
 	</repositories>
 </project>

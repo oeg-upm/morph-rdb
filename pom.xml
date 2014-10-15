@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>es.upm.fi.dia.oeg.morph</groupId>
+  <artifactId>morph-rdb</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>morph-RDB Parent Project</name>
+  <modules>
+    <module>morph-base</module>
+    <module>morph-base-querytranslator</module>
+    <module>morph-r2rml</module>
+    <module>morph-r2rml-rdb</module>
+    <module>morph-r2rml-rdb-querytranslator</module>
+  </modules>
+
+	<distributionManagement>
+ 		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>aldebaran-releases</id>
+			<name>Aldebaran Releases</name>
+			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-releases-local</url>
+		</repository>
+		
+		<snapshotRepository>
+			<uniqueVersion>true</uniqueVersion>
+			<id>aldebaran-snapshots</id>
+			<name>Aldebaran Snapshots</name>
+			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>
