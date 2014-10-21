@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src/main/scala" including="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="src" path="/morph-base"/>
+  <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.11.2/scala-library-2.11.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/hp/hpl/jena/arq/2.8.8/arq-2.8.8.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/hp/hpl/jena/jena/2.6.4/jena-2.6.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/hp/hpl/jena/iri/0.8/iri-0.8.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/ibm/icu/icu4j/3.4.4/icu4j-3.4.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/xerces/xercesImpl/2.7.1/xercesImpl-2.7.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-log4j12/1.6.4/slf4j-log4j12-1.6.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/codehaus/woodstox/wstx-asl/3.2.9/wstx-asl-3.2.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/lucene/lucene-core/2.3.1/lucene-core-2.3.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/hp/hpl/jena/tdb/0.8.10/tdb-0.8.10.jar"/>
+  <classpathentry kind="var" path="M2_REPO/ant/ant-apache-log4j/1.6.5/ant-apache-log4j-1.6.5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/zql/zql/0.1/zql-0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/rqr4r2o/rqr4r2o/0.1/rqr4r2o-0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/jena/jena-core/2.11.1/jena-core-2.11.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/jena/jena-iri/1.0.1/jena-iri-1.0.1.jar"/>
+</classpath>
