@@ -8,6 +8,7 @@
 	<packaging>jar</packaging>
   
   	<artifactId>morph-r2rml</artifactId>
+   <name>morph-r2rml</name>
 
    <build>
       <sourceDirectory>src/main/scala</sourceDirectory>

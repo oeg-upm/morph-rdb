@@ -8,6 +8,7 @@
   	<packaging>jar</packaging>
   
   	<artifactId>morph-r2rml-rdb</artifactId>
+   <name>morph-r2rml-rdb</name>
 
 <!--   <build>
     <sourceDirectory>src</sourceDirectory>

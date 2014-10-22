@@ -9,6 +9,7 @@
 	<packaging>jar</packaging>
 
 	<artifactId>morph-base-querytranslator</artifactId>
+   <name>morph-base-querytranslator</name>
    
 
 

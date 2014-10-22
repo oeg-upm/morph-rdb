@@ -10,11 +10,12 @@
   <packaging>pom</packaging>
   <name>morph-RDB Parent Project</name>
   <modules>
-    <module>morph-base</module>
-    <module>morph-base-querytranslator</module>
-    <module>morph-r2rml</module>
-    <module>morph-r2rml-rdb</module>
-    <module>morph-r2rml-rdb-querytranslator</module>
+      <module>morph-base</module>
+      <module>morph-base-querytranslator</module>
+      <module>morph-r2rml</module>
+      <module>morph-r2rml-rdb</module>
+      <module>morph-r2rml-rdb-querytranslator</module>
+      <module>morph-rdb-dist</module>
   </modules>
 
 	<distributionManagement>
