@@ -87,6 +87,7 @@
       </plugins>
    </build>
 
+<!--
 	<distributionManagement>
       <repository>
 			<uniqueVersion>false</uniqueVersion>
@@ -102,7 +103,7 @@
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
 		</snapshotRepository>
 
-<!--		<repository>
+		<repository>
 			<uniqueVersion>false</uniqueVersion>
 			<id>dropbox-releases</id>
 			<name>Dropbox Releases</name>
@@ -115,9 +116,10 @@
 			<name>Dropbox Snapshots</name>
 			<url>file:///C:/Users/Freddy Priyatna/Dropbox/Public/mvn-repository/snapshots/</url>
 		</snapshotRepository>
--->
+
 		
 	</distributionManagement>
+-->
 
 	<repositories>
 		<repository>

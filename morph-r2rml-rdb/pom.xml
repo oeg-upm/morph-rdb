@@ -74,6 +74,7 @@
 
 	</dependencies>
 
+<!--
 	<distributionManagement>
  		<repository>
 			<uniqueVersion>false</uniqueVersion>
@@ -88,6 +89,7 @@
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
 		</snapshotRepository>
 	</distributionManagement>
+-->
 
 	<repositories>
 		<repository>
