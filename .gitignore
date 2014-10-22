@@ -1,4 +1,8 @@
 bin
 target/
 log/
+.settings/
 .cache
+.classpath
+.project
+
