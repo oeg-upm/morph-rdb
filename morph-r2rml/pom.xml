@@ -13,6 +13,9 @@
    <build>
       <sourceDirectory>src/main/scala</sourceDirectory>
       <testSourceDirectory>src/test/scala</testSourceDirectory>
+      <pluginManagement>
+      </pluginManagement>
+      
       <plugins>
          <plugin>
             <groupId>org.scala-tools</groupId>
@@ -40,23 +43,6 @@
 		</dependency>
 	</dependencies>
 
-<!--	
-	<distributionManagement>
- 		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>aldebaran-releases</id>
-			<name>Aldebaran Releases</name>
-			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-releases-local</url>
-		</repository>
-		<snapshotRepository>
-			<uniqueVersion>true</uniqueVersion>
-			<id>aldebaran-snapshots</id>
-			<name>Aldebaran Snapshots</name>
-			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
-		</snapshotRepository>
-
-	</distributionManagement>
--->
 
 	<repositories>
 		<repository>

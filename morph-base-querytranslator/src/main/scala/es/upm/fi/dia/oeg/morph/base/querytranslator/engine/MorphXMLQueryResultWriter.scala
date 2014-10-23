@@ -67,34 +67,37 @@ extends MorphBaseQueryResultWriter(queryTranslator, xmlOutputStream) {
 			
 			for(varName <- varNames) {
 				val translatedColumnValue = queryTranslator.translateResultSet(varName, rs);
-				val translatedDBValue = translatedColumnValue.translatedValue;
-				val xsdDataType = translatedColumnValue.xsdDatatype;
-				val lexicalValue = ValueTransformator.transformToLexical(
-				    translatedDBValue, xsdDataType)
-				if(lexicalValue != null) {
-					val bindingElement = xmlDoc.createElement("binding");
-					bindingElement.setAttribute("name", varName);
-					resultElement.appendChild(bindingElement);
-	
-					val termType = translatedColumnValue.termType;
-					if(termType != null) {
-						val termTypeElementName = { 
-						  if(termType.equalsIgnoreCase(Constants.R2RML_IRI_URI)) {
-							"uri";
-						  } else if(termType.equalsIgnoreCase(Constants.R2RML_LITERAL_URI)) {
-							"literal";
-						  } else {
-							  null
-						  }
-						}
-						
-						val termTypeElement = xmlDoc.createElement(termTypeElementName);
-						bindingElement.appendChild(termTypeElement);
-						termTypeElement.setTextContent(lexicalValue);
-					} else {
-						bindingElement.setTextContent(lexicalValue);	
+				if(translatedColumnValue != null) {
+					val translatedDBValue = translatedColumnValue.translatedValue;
+					val xsdDataType = translatedColumnValue.xsdDatatype;
+					val lexicalValue = ValueTransformator.transformToLexical(
+					    translatedDBValue, xsdDataType)
+					if(lexicalValue != null) {
+						val bindingElement = xmlDoc.createElement("binding");
+						bindingElement.setAttribute("name", varName);
+						resultElement.appendChild(bindingElement);
+		
+						val termType = translatedColumnValue.termType;
+						if(termType != null) {
+							val termTypeElementName = { 
+							  if(termType.equalsIgnoreCase(Constants.R2RML_IRI_URI)) {
+								"uri";
+							  } else if(termType.equalsIgnoreCase(Constants.R2RML_LITERAL_URI)) {
+								"literal";
+							  } else {
+								  null
+							  }
+							}
+							
+							val termTypeElement = xmlDoc.createElement(termTypeElementName);
+							bindingElement.appendChild(termTypeElement);
+							termTypeElement.setTextContent(lexicalValue);
+						} else {
+							bindingElement.setTextContent(lexicalValue);	
+						}				  
 					}				  
 				}
+
 			}
 			i = i+1;
 		}

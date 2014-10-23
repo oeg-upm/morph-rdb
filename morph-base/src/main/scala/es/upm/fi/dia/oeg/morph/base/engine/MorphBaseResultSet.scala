@@ -8,7 +8,9 @@ abstract class MorphBaseResultSet {
 	def getString(columnLabel:String) : String;
 	def getInt(columnIndex:Int ) : Integer;
 	def getInt(columnLabel:String) : Integer;
-
+	def getObject(columnIndex:Int ) : java.lang.Object;
+	def getObject(columnLabel:String) : java.lang.Object;
+	
 	def getColumnNames() : List[String]  = {
 		this.columnNames;
 	}
