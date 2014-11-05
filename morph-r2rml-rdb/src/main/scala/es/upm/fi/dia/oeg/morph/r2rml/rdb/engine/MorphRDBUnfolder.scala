@@ -455,7 +455,7 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 
 object MorphRDBUnfolder {
 	def unfoldJoinConditions(pJoinConditions:Iterable[R2RMLJoinCondition] 
-	, parentTableAlias:String, joinQueryAlias:String , dbType:String ) : ZExpression  = {
+	, childTableAlias:String, joinQueryAlias:String , dbType:String ) : ZExpression  = {
 		val joinConditions = {
 		  if(pJoinConditions == null) { Nil }
 		  else {pJoinConditions}
@@ -467,7 +467,7 @@ object MorphRDBUnfolder {
 		val joinConditionExpressions = joinConditions.map(joinCondition => {
 			var childColumnName = joinCondition.childColumnName
 			childColumnName = childColumnName.replaceAll("\"", enclosedCharacter);
-			childColumnName = parentTableAlias + "." + childColumnName;
+			childColumnName = childTableAlias + "." + childColumnName;
 			val childColumn = new ZConstant(childColumnName, ZConstant.COLUMNNAME);
 
 			var parentColumnName = joinCondition.parentColumnName;
