@@ -9,7 +9,10 @@
 @prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> .
 @base <http://mappingpedia.org/rdb2rdf/r2rml/tc/> .
 
-	
+
+<PredicateMapWebpage> rr:constant <http://mappingpedia.linkeddata.es/vocabulary/webpage>.
+<ObjectMapWebpage> rr:termType rr:Literal; rr:column "webpage".
+
 <TriplesMapPerson>
 	a rr:TriplesMap;
         
@@ -31,8 +34,8 @@
     ];
 
     rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/webpage> ]; 
-      rr:objectMap    [ rr:termType rr:Literal; rr:column "webpage"; ];
+      rr:predicateMap <PredicateMapWebpage>; 
+      rr:objectMap    [ rr:termType rr:Literal; rr:column "webpage"; ] ;
     ];
 	
     rr:predicateObjectMap [ 

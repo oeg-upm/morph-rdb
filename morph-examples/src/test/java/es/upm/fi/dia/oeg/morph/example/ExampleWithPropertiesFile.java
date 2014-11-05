@@ -2,8 +2,8 @@ package es.upm.fi.dia.oeg.morph.example;
 
 import static org.junit.Assert.assertTrue;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+//import org.apache.log4j.Logger;
+//import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
@@ -12,8 +12,8 @@ import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
 
 
 public class ExampleWithPropertiesFile {
-	private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
-	static { PropertyConfigurator.configure("log4j.properties"); }
+//	private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
+//	static { PropertyConfigurator.configure("log4j.properties"); }
 	
 	@Test
 	public void testBatchMySQL() {
@@ -23,11 +23,10 @@ public class ExampleWithPropertiesFile {
 			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
 			runner.run();
-			logger.info("Batch process DONE------\n\n");
+			System.out.println("Batch process DONE------\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Batch process FAILED------\n\n");
+			System.out.println("Batch process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}
@@ -39,11 +38,11 @@ public class ExampleWithPropertiesFile {
 			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
 			runner.run();
-			logger.info("Batch process DONE------\n\n");
+			System.out.println("Batch process DONE------\n\n");
 		} catch (Exception e) {
 			//e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Batch process FAILED------\n\n");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Batch process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}
@@ -56,11 +55,11 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
-			logger.info("Query process DONE------");
+			System.out.println("Query process DONE------");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Query process FAILED------");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------");
 			assertTrue(e.getMessage(), false);
 		}
 	}
@@ -71,11 +70,11 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
-			logger.info("Query process DONE------\n\n");
+			System.out.println("Query process DONE------\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Query process FAILED------\n\n");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}
@@ -88,11 +87,11 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
-			logger.info("Query process DONE------\n\n");
+			System.out.println("Query process DONE------\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Query process FAILED------\n\n");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}
@@ -105,11 +104,11 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
-			logger.info("Query process DONE------\n\n");
+			System.out.println("Query process DONE------\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Query process FAILED------\n\n");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}	
@@ -122,11 +121,11 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
-			logger.info("Query process DONE------\n\n");
+			System.out.println("Query process DONE------\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Query process FAILED------\n\n");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}	
@@ -139,11 +138,11 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
-			logger.info("Query process DONE------\n\n");
+			System.out.println("Query process DONE------\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Query process FAILED------\n\n");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}
@@ -155,11 +154,11 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
-			logger.info("Query process DONE------");
+			System.out.println("Query process DONE------");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Query process FAILED------\n\n");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}	
@@ -171,11 +170,11 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
-			logger.info("Query process DONE------");
+			System.out.println("Query process DONE------");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Query process FAILED------\n\n");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}	
@@ -187,11 +186,11 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
-			logger.info("Query process DONE------\n\n");
+			System.out.println("Query process DONE------\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Query process FAILED------\n\n");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}
@@ -203,11 +202,11 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
-			logger.info("Query process DONE------\n\n");
+			System.out.println("Query process DONE------\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Query process FAILED------\n\n");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}
@@ -218,11 +217,11 @@ public class ExampleWithPropertiesFile {
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
-			logger.info("Query process DONE------\n\n");
+			System.out.println("Query process DONE------\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("Query process FAILED------\n\n");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}	

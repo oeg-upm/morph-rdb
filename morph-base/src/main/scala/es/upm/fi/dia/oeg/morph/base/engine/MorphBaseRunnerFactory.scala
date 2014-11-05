@@ -18,6 +18,7 @@ import java.io.StringWriter
 import com.hp.hpl.jena.query.QueryFactory
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter
+import java.io.PrintWriter
 
 abstract class MorphBaseRunnerFactory {
 	val logger = Logger.getLogger(this.getClass());
@@ -48,7 +49,8 @@ abstract class MorphBaseRunnerFactory {
 		val outputStream:Writer = if(properties.outputFilePath.isDefined) {
 			val outputFileName = properties.outputFilePath.get;
 		  //new FileWriter(outputFileName)
-			new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), "UTF-8"));
+			//new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), "UTF-8"));
+			new PrintWriter( outputFileName, "UTF-8")
 		} else { new StringWriter }
 		//BUILDING MATERIALIZER
 		val materializer = this.buildMaterializer(properties, mappingDocument, outputStream);

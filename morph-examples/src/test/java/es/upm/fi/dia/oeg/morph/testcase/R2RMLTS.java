@@ -6,15 +6,18 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+
+
+
+//import org.apache.log4j.Logger;
+//import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
 
 public class R2RMLTS {
-	private static Logger logger = Logger.getLogger(R2RMLTS.class);
+//	private static Logger logger = Logger.getLogger(R2RMLTS.class);
 	//private String mappingDirectory = TestUtility.getMappingDirectoryByOS();
 	private String mappingDirectory = System.getProperty("user.dir") 
 			+ File.separator + "R2RMLTS";
@@ -119,9 +122,9 @@ public class R2RMLTS {
 //	}
 	
 	
-	static {
-		PropertyConfigurator.configure("log4j.properties");
-	}
+//	static {
+//		PropertyConfigurator.configure("log4j.properties");
+//	}
 	
 	public void run(String testName, boolean conformingMapping) {
 		try {
@@ -131,12 +134,12 @@ public class R2RMLTS {
 			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory(); 
 			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
 			runner.run();
-			logger.info("------" + testName + " DONE------");
+			System.out.println("------" + testName + " DONE------");
 			assertTrue(conformingMapping);
 		} catch(Exception e) {
 			e.printStackTrace();
-			logger.error("Error : " + e.getMessage());
-			logger.info("------" + testName + " FAILED------\n\n");
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("------" + testName + " FAILED------\n\n");
 			assertTrue(e.getMessage(), !conformingMapping);
 		}
 	}

@@ -43,7 +43,7 @@ extends MorphR2RMLElement with IConstantTermMap with IColumnTermMap with ITempla
 	def parse(rdfNode:RDFNode) = {
 	  this.rdfNode = rdfNode;
 	  
-	  if(rdfNode.isAnon()) {
+	  //if(rdfNode.isAnon()) {
 		  val resourceNode = rdfNode.asResource();
 			val constantStatement = resourceNode.getProperty(Constants.R2RML_CONSTANT_PROPERTY);
 			if(constantStatement != null) {
@@ -71,9 +71,7 @@ extends MorphR2RMLElement with IConstantTermMap with IColumnTermMap with ITempla
 					}
 				}
 			}	    
-	  } else {
-	       this.constantValue = rdfNode.toString();
-	  }
+	  //} else { this.constantValue = rdfNode.toString(); }
 
 
 	}

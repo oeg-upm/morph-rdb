@@ -813,9 +813,12 @@ with MorphR2RMLElementVisitor {
 				rs.getString(columnName);
 			} else if(!termMapDatatype.isDefined) {
 				rs.getString(columnName);
-			} else if(termMapDatatype.get.equals(XSDDatatype.XSDdateTime.getURI())) {
-				rs.getDate(columnName).toString();
-			} else {
+			} 
+//			else if(termMapDatatype.get.equals(XSDDatatype.XSDdateTime.getURI())) {
+//				val rsDateValue = rs.getDate(columnName);
+//				if(rsDateValue == null) { null; } else { rsDateValue.toString(); }
+//			} 
+			else {
 				rs.getObject(columnName);
 			}
 			result

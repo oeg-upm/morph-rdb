@@ -4,8 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
 import es.upm.fi.dia.oeg.morph.base.MorphProperties;
@@ -14,7 +12,7 @@ import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
 
 public class ExampleWithoutPropertiesFile {
-	private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
+	//private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
 	private String jdbc_url = "jdbc:mysql://127.0.0.1:3306/morph_example";
 	private String dbUserName = "root";
 	private String dbPassword = "";
@@ -22,9 +20,9 @@ public class ExampleWithoutPropertiesFile {
 	private String databaseDriver = "com.mysql.jdbc.Driver";
 	private String databaseType = Constants.DATABASE_MYSQL();
 	
-	static {
-		PropertyConfigurator.configure("log4j.properties");
-	}
+//	static {
+//		PropertyConfigurator.configure("log4j.properties");
+//	}
 
 	@Test
 	public void testBatch() {
@@ -51,7 +49,6 @@ public class ExampleWithoutPropertiesFile {
 		} catch(Exception e) {
 			e.printStackTrace();
 			String errorMessage = "Error occured: " + e.getMessage();
-			logger.warn(errorMessage);
 			assertTrue(e.getMessage(), false);
 		}
 	}
@@ -84,7 +81,6 @@ public class ExampleWithoutPropertiesFile {
 		} catch(Exception e) {
 			e.printStackTrace();
 			String errorMessage = "Error occured: " + e.getMessage();
-			logger.warn(errorMessage);
 			assertTrue(e.getMessage(), false);
 		}
 	}
@@ -121,7 +117,6 @@ public class ExampleWithoutPropertiesFile {
 		} catch(Exception e) {
 			e.printStackTrace();
 			String errorMessage = "Error occured: " + e.getMessage();
-			logger.warn(errorMessage);
 			assertTrue(e.getMessage(), false);
 		}
 	}
@@ -154,7 +149,6 @@ public class ExampleWithoutPropertiesFile {
 		} catch(Exception e) {
 			e.printStackTrace();
 			String errorMessage = "Error occured: " + e.getMessage();
-			logger.warn(errorMessage);
 			assertTrue(e.getMessage(), false);
 		}
 	}
