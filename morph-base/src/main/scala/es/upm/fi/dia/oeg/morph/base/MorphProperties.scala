@@ -256,7 +256,7 @@ class MorphProperties extends java.util.Properties {
 		
 		val propertyString = this.getProperty(property);
 		val result = if(propertyString != null && !propertyString.equals("")) {
-		  Integer.parseInt(propertyString)
+		  Integer.parseInt(propertyString.trim());
 		} else {
 		  defaultValue
 		}
