@@ -5,4 +5,5 @@ log/
 .cache
 .classpath
 .project
+morph-examples/examples/batch-result.nt
 

@@ -40,40 +40,80 @@ extends MorphR2RMLElement with IConstantTermMap with IColumnTermMap with ITempla
 		result;
 	}
 	
-	def parse(rdfNode:RDFNode) = {
-	  this.rdfNode = rdfNode;
-	  
-	  //if(rdfNode.isAnon()) {
-		  val resourceNode = rdfNode.asResource();
+//	def parse(rdfNode:RDFNode) = {
+//	  this.rdfNode = rdfNode;
+//	  
+//	  //if(rdfNode.isAnon()) {
+//		  val resourceNode = rdfNode.asResource();
+//			val constantStatement = resourceNode.getProperty(Constants.R2RML_CONSTANT_PROPERTY);
+//			if(constantStatement != null) {
+//				this.constantValue = constantStatement.getObject().toString();
+//			} else {
+//				val columnStatement = resourceNode.getProperty(Constants.R2RML_COLUMN_PROPERTY);
+//				if(columnStatement != null) {
+//					this.columnName = columnStatement.getObject().toString();
+//				} else {
+//					val templateStatement = resourceNode.getProperty(Constants.R2RML_TEMPLATE_PROPERTY);
+//					if(templateStatement != null) {
+//						this.templateString = templateStatement.getObject().toString();
+//					} else {
+//						val termMapType = this match {
+//						  case _:R2RMLSubjectMap => { "SubjectMap"; } 
+//						  case _:R2RMLPredicateMap => { "PredicateMap"; } 
+//						  case _:R2RMLObjectMap => { "ObjectMap"; } 
+//						  case _:R2RMLGraphMap => { "GraphMap"; } 
+//						  case _ => { "TermMap"; }					  
+//						}
+//	
+//						val errorMessage = "Invalid mapping for " + resourceNode.getLocalName();
+//						logger.error(errorMessage);
+//						throw new Exception(errorMessage);
+//					}
+//				}
+//			}	    
+//	  //} else { this.constantValue = rdfNode.toString(); }
+//	}
+
+	/**
+	 * Contributor: Franck Michel
+ * Decide the type of the term map (constant, column, reference, template) based on its properties,
+ * and assign the value of the appropriate trait member: IConstantTermMap.constantValue, IColumnTermMap.columnName etc.
+ *
+ * If the term map resource has no property (constant, column, reference, template) then it means that this is a
+ * constant term map like "[] rr:predicate ex:name".
+ *
+ * If the node passed in not a resource but a literal, then it means that we have a constant property wich object
+ * is a literal and not an IRI or blank node, like in: "[] rr:object 'any string';"
+ *
+ * @param rdfNode the term map Jena resource
+ */
+	def parse(rdfNode: RDFNode) = {
+		this.rdfNode = rdfNode;
+
+		if (rdfNode.isLiteral) {
+			// We are in the case of a constant property with a literal object, like "[] rr:object 'NAME'",
+			this.constantValue = rdfNode.toString()
+		} else {
+			val resourceNode = rdfNode.asResource();
+
 			val constantStatement = resourceNode.getProperty(Constants.R2RML_CONSTANT_PROPERTY);
-			if(constantStatement != null) {
+			if (constantStatement != null)
 				this.constantValue = constantStatement.getObject().toString();
-			} else {
+			else {
 				val columnStatement = resourceNode.getProperty(Constants.R2RML_COLUMN_PROPERTY);
-				if(columnStatement != null) {
+				if (columnStatement != null)
 					this.columnName = columnStatement.getObject().toString();
-				} else {
+				else {
 					val templateStatement = resourceNode.getProperty(Constants.R2RML_TEMPLATE_PROPERTY);
-					if(templateStatement != null) {
+					if (templateStatement != null)
 						this.templateString = templateStatement.getObject().toString();
-					} else {
-						val termMapType = this match {
-						  case _:R2RMLSubjectMap => { "SubjectMap"; } 
-						  case _:R2RMLPredicateMap => { "PredicateMap"; } 
-						  case _:R2RMLObjectMap => { "ObjectMap"; } 
-						  case _:R2RMLGraphMap => { "GraphMap"; } 
-						  case _ => { "TermMap"; }					  
-						}
-	
-						val errorMessage = "Invalid mapping for " + resourceNode.getLocalName();
-						logger.error(errorMessage);
-						throw new Exception(errorMessage);
+					else {
+						// We are in the case of a constant property, like "[] rr:predicate ex:name",
+						this.constantValue = rdfNode.toString()
 					}
 				}
-			}	    
-	  //} else { this.constantValue = rdfNode.toString(); }
-
-
+			}
+		}
 	}
 
 	def inferTermType() : String = {
