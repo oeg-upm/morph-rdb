@@ -163,9 +163,18 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 	}
 	
 
-	
-	def  unfoldTriplesMap(triplesMapId:String, logicalTable:R2RMLLogicalTable, subjectMap:R2RMLSubjectMap
-			, poms:Collection[R2RMLPredicateObjectMap] ) : IQuery = {
+/**
+ * Contributor: Franck Michel
+ * Unfolding a triples map means to progressively build an SQL query by accumulating pieces:
+ * (1) create the FROM clause from the logical table,
+ * (2) for each column in the subject predicate and object maps, add items to the SELECT clause,
+ * (3) for each column in the parent triples map of each referencing object map, add items of the SELECT clause,
+ * (4) for each join condition, add an SQL WHERE condition and an alias in the FROM clause for the parent table,
+ *
+ * @return an SQLQuery (IQuery) describing the actual SQL query to be run against the RDB
+ */
+	def  unfoldTriplesMap(triplesMapId:String, logicalTable:R2RMLLogicalTable
+	    , subjectMap:R2RMLSubjectMap, poms:Collection[R2RMLPredicateObjectMap] ) : IQuery = {
 //		val triplesMap = subjectMap.getOwner();
 //		logger.info("unfolding triplesMap : " + triplesMap);
 
@@ -208,34 +217,38 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 		
 		//val logicalTableAlias = logicalTable.getAlias();
 		if(poms != null) {
-			for(predicateObjectMap <- poms) {
+			for(pom <- poms) {
 				//UNFOLD PREDICATEMAP
-				val predicateMaps = predicateObjectMap.predicateMaps;
+				val predicateMaps = pom.predicateMaps;
 				if(predicateMaps != null && !predicateMaps.isEmpty()) {
-					val predicateMap = predicateObjectMap.getPredicateMap(0);
-					val predicateMapSelectItems = this.unfoldTermMap(predicateMap, logicalTableAlias);
-					result.addSelectItems(predicateMapSelectItems);
+					//val predicateMap = pom.getPredicateMap(0);				  
+					for (pm <- pom.predicateMaps) {
+						val predicateMapSelectItems = this.unfoldTermMap(pm, logicalTableAlias);
+						result.addSelectItems(predicateMapSelectItems);				    
+					}
 				}
 
 
 				//UNFOLD OBJECTMAP
-				val objectMaps = predicateObjectMap.objectMaps;
+				val objectMaps = pom.objectMaps;
 				if(objectMaps != null && !objectMaps.isEmpty()) {
-					val objectMap = predicateObjectMap.getObjectMap(0);
-					val objectMapSelectItems = this.unfoldTermMap(objectMap, logicalTableAlias);
-					result.addSelectItems(objectMapSelectItems);
+					//val objectMap = pom.getObjectMap(0);
+					for (om <- pom.objectMaps) {
+						val objectMapSelectItems = this.unfoldTermMap(om, logicalTableAlias);
+						result.addSelectItems(objectMapSelectItems);					  
+					}
 				}
 
 
 				//UNFOLD REFOBJECTMAP
-				val refObjectMaps = predicateObjectMap.refObjectMaps;
+				val refObjectMaps = pom.refObjectMaps;
 				if(refObjectMaps != null && !refObjectMaps.isEmpty()) {
-					val refObjectMap = predicateObjectMap.getRefObjectMap(0);
+					val refObjectMap = pom.getRefObjectMap(0);
 					if(refObjectMap != null) {
 						val parentTriplesMap = this.md.getParentTriplesMap(refObjectMap);
 						val parentLogicalTable = parentTriplesMap.getLogicalTable();
 						if(parentLogicalTable == null) {
-							val errorMessage = "Parent logical table is not found for RefObjectMap : " + predicateObjectMap.getMappedPredicateName(0);
+							val errorMessage = "Parent logical table is not found for RefObjectMap : " + pom.getMappedPredicateName(0);
 							throw new Exception(errorMessage);
 						}
 						val sqlParentLogicalTable = this.unfoldLogicalTable(parentLogicalTable.asInstanceOf[R2RMLLogicalTable]);
@@ -245,7 +258,7 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 						sqlParentLogicalTable.setAlias(joinQueryAlias);
 						//refObjectMap.setAlias(joinQueryAlias);
 						this.mapRefObjectMapAlias += (refObjectMap -> joinQueryAlias);
-						predicateObjectMap.setAlias(joinQueryAlias);
+						pom.setAlias(joinQueryAlias);
 						
 						//val refObjectMapColumnsString = refObjectMap.getParentDatabaseColumnsString();
 						val parentSubjectMap = parentTriplesMap.subjectMap;
