@@ -58,6 +58,7 @@ object MorphRDBRunner {
 		try {
 			if(args == null || args.length == 0 || args.length != 2) {
 				logger.info("usage R2RMLRunner propertiesDirectory propertiesFile");
+				logger.info("Bye");
 				System.exit(-1);
 			}
 			
