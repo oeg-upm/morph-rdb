@@ -243,57 +243,61 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 				//UNFOLD REFOBJECTMAP
 				val refObjectMaps = pom.refObjectMaps;
 				if(refObjectMaps != null && !refObjectMaps.isEmpty()) {
-					val refObjectMap = pom.getRefObjectMap(0);
-					if(refObjectMap != null) {
-						val parentTriplesMap = this.md.getParentTriplesMap(refObjectMap);
-						val parentLogicalTable = parentTriplesMap.getLogicalTable();
-						if(parentLogicalTable == null) {
-							val errorMessage = "Parent logical table is not found for RefObjectMap : " + pom.getMappedPredicateName(0);
-							throw new Exception(errorMessage);
-						}
-						val sqlParentLogicalTable = this.unfoldLogicalTable(parentLogicalTable.asInstanceOf[R2RMLLogicalTable]);
-						//parentLogicalTable.alias = parentLogicalTableAlias;
-								
-						val joinQueryAlias = sqlParentLogicalTable.generateAlias();
-						sqlParentLogicalTable.setAlias(joinQueryAlias);
-						//refObjectMap.setAlias(joinQueryAlias);
-						this.mapRefObjectMapAlias += (refObjectMap -> joinQueryAlias);
-						pom.setAlias(joinQueryAlias);
-						
-						//val refObjectMapColumnsString = refObjectMap.getParentDatabaseColumnsString();
-						val parentSubjectMap = parentTriplesMap.subjectMap;
-						val refObjectMapColumnsString = parentSubjectMap.getReferencedColumns;
-						
-						if(refObjectMapColumnsString != null ) {
-							for(refObjectMapColumnString <- refObjectMapColumnsString) {
-								val selectItem = MorphSQLSelectItem(
-								    refObjectMapColumnString, joinQueryAlias, dbType, null);
-								if(selectItem.getAlias() == null) {
-									val alias = selectItem.getTable() + "_" + selectItem.getColumn();
-									selectItem.setAlias(alias);
-									if(this.mapTermMapColumnsAliases.containsKey(refObjectMap)) {
-											val oldColumnAliases = this.mapTermMapColumnsAliases(refObjectMap);
-											val newColumnAliases = oldColumnAliases ::: List(alias);
-											this.mapTermMapColumnsAliases += (refObjectMap -> newColumnAliases);
-									} else {
-										this.mapTermMapColumnsAliases +=(refObjectMap -> List(alias));
-									}
-								}							
-								//resultSelectItems.add(selectItem);
-								result.addSelectItem(selectItem);
+					//val refObjectMap = pom.getRefObjectMap(0);
+					for(refObjectMap <- refObjectMaps) {
+						if(refObjectMap != null) {
+							val parentTriplesMap = this.md.getParentTriplesMap(refObjectMap);
+							val parentLogicalTable = parentTriplesMap.getLogicalTable();
+							if(parentLogicalTable == null) {
+								val errorMessage = "Parent logical table is not found for RefObjectMap : " + pom.getMappedPredicateName(0);
+								throw new Exception(errorMessage);
 							}
-						}
+							val sqlParentLogicalTable = this.unfoldLogicalTable(parentLogicalTable.asInstanceOf[R2RMLLogicalTable]);
+							//parentLogicalTable.alias = parentLogicalTableAlias;
+									
+							val joinQueryAlias = sqlParentLogicalTable.generateAlias();
+							sqlParentLogicalTable.setAlias(joinQueryAlias);
+							//refObjectMap.setAlias(joinQueryAlias);
+							this.mapRefObjectMapAlias += (refObjectMap -> joinQueryAlias);
+							pom.setAlias(joinQueryAlias);
+							
+							//val refObjectMapColumnsString = refObjectMap.getParentDatabaseColumnsString();
+							val parentSubjectMap = parentTriplesMap.subjectMap;
+							val refObjectMapColumnsString = parentSubjectMap.getReferencedColumns;
+							
+							if(refObjectMapColumnsString != null ) {
+								for(refObjectMapColumnString <- refObjectMapColumnsString) {
+									val selectItem = MorphSQLSelectItem(
+									    refObjectMapColumnString, joinQueryAlias, dbType, null);
+									if(selectItem.getAlias() == null) {
+										val alias = selectItem.getTable() + "_" + selectItem.getColumn();
+										selectItem.setAlias(alias);
+										if(this.mapTermMapColumnsAliases.containsKey(refObjectMap)) {
+												val oldColumnAliases = this.mapTermMapColumnsAliases(refObjectMap);
+												val newColumnAliases = oldColumnAliases ::: List(alias);
+												this.mapTermMapColumnsAliases += (refObjectMap -> newColumnAliases);
+										} else {
+											this.mapTermMapColumnsAliases +=(refObjectMap -> List(alias));
+										}
+									}							
+									//resultSelectItems.add(selectItem);
+									result.addSelectItem(selectItem);
+								}
+							}
+	
+	
+							
+							val joinConditions = refObjectMap.getJoinConditions();
+							val onExpression = MorphRDBUnfolder.unfoldJoinConditions(
+							    joinConditions, logicalTableAlias, joinQueryAlias, dbType);
+							val joinQuery = new SQLJoinTable(sqlParentLogicalTable
+							    , Constants.JOINS_TYPE_LEFT, onExpression);
+							//result.addJoinQuery(joinQuery);		
+							result.addFromItem(joinQuery);
+						}					  
+					}
+					
 
-
-						
-						val joinConditions = refObjectMap.getJoinConditions();
-						val onExpression = MorphRDBUnfolder.unfoldJoinConditions(
-						    joinConditions, logicalTableAlias, joinQueryAlias, dbType);
-						val joinQuery = new SQLJoinTable(sqlParentLogicalTable
-						    , Constants.JOINS_TYPE_LEFT, onExpression);
-						//result.addJoinQuery(joinQuery);		
-						result.addFromItem(joinQuery);
-					}					
 				}
 
 
