@@ -374,13 +374,14 @@ with MorphR2RMLElementVisitor {
 						else { Some(objectValue); }
 					});
 					
-					val refObjects = pom.refObjectMaps.map(refObjectMap => {
+					val refObjects = pom.refObjectMaps.flatMap(refObjectMap => {
 					  val parentTripleMapName = refObjectMap.getParentTripleMapName;
 					  val parentTriplesMap = this.md.getParentTriplesMap(refObjectMap)
 					  val parentSubjectMap = parentTriplesMap.subjectMap; 
 					  val parentTableAlias = this.unfolder.mapRefObjectMapAlias.getOrElse(refObjectMap, null);
 					  val parentSubjects = this.translateData(parentSubjectMap, rows, parentTableAlias, mapXMLDatatype)
-					  parentSubjects
+					  if(parentSubjects == null) { None }
+					  else { Some(parentSubjects) }
 					})
 					
 					val pogm = pom.graphMaps;
@@ -561,7 +562,7 @@ with MorphR2RMLElementVisitor {
 //			} else { encodedValueAux }
 			val encodedValue = encodedValueAux;
 			
-			val valueWithDataType = if(datatype.isDefined ) {
+			val valueWithDataType = if(datatype.isDefined && datatype.get != null) {
 				val datatypeGet = datatype.get;
 				val xsdDateTimeURI = XSDDatatype.XSDdateTime.getURI().toString();
 				val xsdBooleanURI = XSDDatatype.XSDboolean.getURI().toString();

@@ -15,6 +15,7 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
+import com.hp.hpl.jena.rdf.model.Model
 
 class R2RMLMappingDocument(classMappings:Iterable[R2RMLTriplesMap]) 
 extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {
@@ -190,7 +191,8 @@ extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {
 	    val possibleInstance = cm.isPossibleInstance(instanceURI)
 	    possibleInstance
 	  })
-	}	
+	}
+
 	
 }
 
@@ -218,6 +220,9 @@ object R2RMLMappingDocument {
 		// read the Turtle file
 		model.read(in, null, "TURTLE");
 		
+		//contribution from Frank Michel, inferring triples map
+		inferTriplesMaps(model);
+		 
 		val triplesMapResources = model.listResourcesWithProperty(RDF.`type`
 				, Constants.R2RML_TRIPLESMAP_CLASS);
 		val classMappings = if(triplesMapResources != null) {
@@ -247,5 +252,18 @@ object R2RMLMappingDocument {
 		md.mappingDocumentPrefixMap = model.getNsPrefixMap().toMap;
 		md
 		
-	}  
+	}
+	
+	/**
+	 *  Add triples with rdf:type rr:TriplesMap for resources that have one rr:logicalTable
+	 *  Contribution from Frank Michel
+	 */
+	private def inferTriplesMaps(model: Model) {
+		val stmtsLogTab = model.listStatements(null, Constants.R2RML_LOGICALTABLE_PROPERTY, null);
+		for (stmt <- stmtsLogTab) {
+			val stmtType = model.createStatement(stmt.getSubject, RDF.`type`, Constants.R2RML_TRIPLESMAP_CLASS);
+			model.add(stmtType)
+		}
+	}
+
 }
