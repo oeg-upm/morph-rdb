@@ -14,7 +14,7 @@
 <ObjectMapWebpage> rr:termType rr:Literal; rr:column "webpage".
 
 <TriplesMapPerson>
-	a rr:TriplesMap;
+	# a rr:TriplesMap;
         
 	rr:logicalTable [ 
         rr:tableName  "student" 
