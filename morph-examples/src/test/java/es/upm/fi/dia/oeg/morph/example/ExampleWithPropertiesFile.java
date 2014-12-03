@@ -2,6 +2,7 @@ package es.upm.fi.dia.oeg.morph.example;
 
 import static org.junit.Assert.assertTrue;
 
+
 //import org.apache.log4j.Logger;
 //import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
@@ -224,5 +225,23 @@ public class ExampleWithPropertiesFile {
 			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
-	}	
+	}
+	
+
+	@Test
+	public void testExampleShopping() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "example_shopping.r2rml.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+
 }

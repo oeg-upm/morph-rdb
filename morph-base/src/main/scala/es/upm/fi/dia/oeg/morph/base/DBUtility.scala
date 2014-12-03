@@ -136,6 +136,13 @@ object DBUtility {
 	    , driverString:String, url:String, requester:String) : Connection = {
 
 		try {
+			val urlSplit = url.split("/");
+			val fullURL = {
+			  if(databaseName.equals(urlSplit(urlSplit.length-1))) {
+			    url
+			  }
+			  else { url + databaseName}
+			}
 			val prop = new Properties();
 			prop.put("ResultSetMetaDataOptions", "1");
 			prop.put("user", username);
@@ -144,7 +151,7 @@ object DBUtility {
 			prop.put("autoReconnect", "true");
 			Class.forName(driverString);
 			logger.debug("Opening database connection.");
-			val conn = DriverManager.getConnection(url, prop);
+			val conn = DriverManager.getConnection(fullURL, prop);
 			conn.setAutoCommit(false);
 			conn;
 		} catch {

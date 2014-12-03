@@ -21,23 +21,21 @@ import java.io.Writer
 class MorphRDBRunnerFactory extends MorphBaseRunnerFactory{
   
 	override def createRunner(mappingDocument:MorphBaseMappingDocument
-//    , dataSourceReader:MorphBaseDataSourceReader
     , unfolder:MorphBaseUnfolder
     , dataTranslator :Option[MorphBaseDataTranslator]
-//    , materializer : MorphBaseMaterializer
     , queryTranslator:Option[IQueryTranslator]
     , resultProcessor:Option[AbstractQueryResultTranslator]
 	, outputStream:Writer
     ) : MorphRDBRunner = { 
-	  new MorphRDBRunner(mappingDocument.asInstanceOf[R2RMLMappingDocument]
-//    , dataSourceReader
-    , unfolder.asInstanceOf[MorphRDBUnfolder]
-    , dataTranslator.asInstanceOf[Option[MorphRDBDataTranslator]]
-//    , materializer
-    , queryTranslator
-    , resultProcessor
-    , outputStream
-    )
+	  val morphRDBRunner = new MorphRDBRunner(mappingDocument.asInstanceOf[R2RMLMappingDocument]
+	  , unfolder.asInstanceOf[MorphRDBUnfolder]
+	  , dataTranslator.asInstanceOf[Option[MorphRDBDataTranslator]]
+	  , queryTranslator
+	  , resultProcessor
+	  , outputStream)
+	  
+
+	  morphRDBRunner;
 	}
 	
 	override def readMappingDocumentFile(mappingDocumentFile:String

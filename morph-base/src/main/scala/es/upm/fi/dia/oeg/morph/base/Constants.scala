@@ -89,12 +89,18 @@ object Constants {
 	//database
 	val NO_OF_DATABASE_NAME_PROP_NAME = "no_of_database";
 	val DATABASE_NAME_PROP_NAME = "database.name";
+	val JDCB_DATABASE_PROP_NAME = "jdbc.database";
 	val DATABASE_DRIVER_PROP_NAME = "database.driver";
+	val JDCB_DRIVER_PROP_NAME = "jdbc.driver";
 	val DATABASE_URL_PROP_NAME = "database.url";
+	val JDCB_URL_PROP_NAME = "jdbc.url";
 	val DATABASE_USER_PROP_NAME = "database.user";
-	val  DATABASE_PWD_PROP_NAME = "database.pwd";
-	val  DATABASE_TYPE_PROP_NAME = "database.type";
-	val  DATABASE_TIMEOUT_PROP_NAME = "database.timeout";
+	val JDCB_USERNAME_PROP_NAME = "jdbc.username";
+	val DATABASE_PWD_PROP_NAME = "database.pwd";
+	val JDCB_PASSWORD_PROP_NAME = "jdbc.password";
+	val DATABASE_TYPE_PROP_NAME = "database.type";
+	val DRIVER_PROP_NAME = "driver";
+	val DATABASE_TIMEOUT_PROP_NAME = "database.timeout";
 
 	
 	val  MAPPINGDOCUMENT_FILE_PATH = "mappingdocument.file.path";
