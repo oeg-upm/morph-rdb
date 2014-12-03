@@ -73,7 +73,17 @@ extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {
 	  })
 
 	  val parentTripleMap = parentTripleMaps.iterator.next;
-	  parentTripleMap.asInstanceOf[R2RMLTriplesMap]
+	  //parentTripleMap.asInstanceOf[R2RMLTriplesMap]
+	  
+	  //contribution from Frank Michel
+	  if (parentTripleMaps.iterator.hasNext) {
+		  val parentTripleMap = parentTripleMaps.iterator.next;
+		  parentTripleMap.asInstanceOf[R2RMLTriplesMap]
+	  } 
+	  else {
+		  throw new Exception("Error: referenced parent triples map des not exist: " + parentTripleMapResources)
+	  }
+	  
 	}
 	
 	override def getPossibleRange(predicateURI:String ) : Iterable[MorphBaseClassMapping] = {
