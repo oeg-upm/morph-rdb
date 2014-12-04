@@ -45,14 +45,17 @@ abstract class MorphBaseRunnerFactory {
 		    , connection, morphProperties.databaseTimeout);
 
 		//BUILDING MAPPING DOCUMENT
-		val mappingsGenerator = new R2RMLMapper();
-		val mappingDocumentFile = if(morphProperties.mappingDocumentFilePath == null) {
-			mappingsGenerator.run(properties);
-		    mappingsGenerator.getGeneratedMappingsFile();
-		} 
-		else { morphProperties.mappingDocumentFilePath; }
-		  
-		  
+		var automaticMappingsGeneration = false;
+		val mappingDocumentFile = try {
+			if(morphProperties.mappingDocumentFilePath == null) {
+				val mappingsGenerator = new R2RMLMapper();
+				mappingsGenerator.run(properties);
+				automaticMappingsGeneration = true;
+			    mappingsGenerator.getGeneratedMappingsFile();
+			} 
+			else { morphProperties.mappingDocumentFilePath; }
+		}
+		catch { case e:Exception => { morphProperties.mappingDocumentFilePath; } }
 		
 		val mappingDocument = this.readMappingDocumentFile(mappingDocumentFile
 		    , morphProperties, connection);
@@ -67,7 +70,7 @@ abstract class MorphBaseRunnerFactory {
 			new PrintWriter( outputFileName, "UTF-8")
 		} 
 		else {
-		  if(mappingsGenerator.getGeneratedMappingsFile() == null) { new StringWriter }
+		  if(!automaticMappingsGeneration) { new StringWriter }
 		  else { 
 		    val outputFileName = morphProperties.databaseName + "-result.nt"; 
 		    new PrintWriter( outputFileName, "UTF-8");
