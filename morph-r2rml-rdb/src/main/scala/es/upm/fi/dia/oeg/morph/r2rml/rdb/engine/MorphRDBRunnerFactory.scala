@@ -41,8 +41,8 @@ class MorphRDBRunnerFactory extends MorphBaseRunnerFactory{
 	override def readMappingDocumentFile(mappingDocumentFile:String
 	    ,props:MorphProperties, connection:Connection ) 
 	: MorphBaseMappingDocument = {
-		val mappingDocument = R2RMLMappingDocument(mappingDocumentFile, props
-		    , connection);
+		val mappingDocument = R2RMLMappingDocument(
+		    mappingDocumentFile, props, connection);
 		mappingDocument
 	}
 	

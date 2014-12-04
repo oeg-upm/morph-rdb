@@ -20,6 +20,7 @@ import java.io.BufferedWriter
 import java.io.OutputStreamWriter
 import java.io.PrintWriter
 import java.util.Properties
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.mappingsgenerator.main.R2RMLMapper
 //import es.upm.fi.dia.oeg.morph.r2rml.rdb.mappingsgenerator.main.R2RMLMapper
 
 abstract class MorphBaseRunnerFactory {
@@ -44,7 +45,15 @@ abstract class MorphBaseRunnerFactory {
 		    , connection, morphProperties.databaseTimeout);
 
 		//BUILDING MAPPING DOCUMENT
-		val mappingDocumentFile = morphProperties.mappingDocumentFilePath;
+		val mappingsGenerator = new R2RMLMapper();
+		val mappingDocumentFile = if(morphProperties.mappingDocumentFilePath == null) {
+			mappingsGenerator.run(properties);
+		    mappingsGenerator.getGeneratedMappingsFile();
+		} 
+		else { morphProperties.mappingDocumentFilePath; }
+		  
+		  
+		
 		val mappingDocument = this.readMappingDocumentFile(mappingDocumentFile
 		    , morphProperties, connection);
 
@@ -56,7 +65,15 @@ abstract class MorphBaseRunnerFactory {
 		  //new FileWriter(outputFileName)
 			//new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), "UTF-8"));
 			new PrintWriter( outputFileName, "UTF-8")
-		} else { new StringWriter }
+		} 
+		else {
+		  if(mappingsGenerator.getGeneratedMappingsFile() == null) { new StringWriter }
+		  else { 
+		    val outputFileName = morphProperties.databaseName + "-result.nt"; 
+		    new PrintWriter( outputFileName, "UTF-8");
+		  }
+		   
+		}
 		//BUILDING MATERIALIZER
 		val materializer = this.buildMaterializer(morphProperties, mappingDocument
 		    , outputStream);
