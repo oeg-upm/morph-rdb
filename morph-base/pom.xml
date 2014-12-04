@@ -60,6 +60,14 @@
 			<artifactId>jena-core</artifactId>
 			<version>2.11.1</version>
 		</dependency>
+
+		<dependency>
+		    <groupId>es.upm.fi.dia.oeg.morph</groupId>
+		    <artifactId>r2rml-mappings-generator</artifactId>
+		    <version>0.0.1</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}/lib/r2rml-mappings-generator.jar</systemPath>
+		</dependency>
 		
 	</dependencies>
 
