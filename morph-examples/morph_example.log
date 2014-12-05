@@ -1,0 +1,31 @@
+** Analysing schema: morph_example
+Table: SPORT
+    (No foreign keys)
+
+    Fields:
+        id  INT  PRIMARY KEY
+        name  VARCHAR  
+        code  CHAR  
+        type  CHAR  
+
+Table: STUDENT
+    Constraint: Student_ibfk_1 (referenced table: SPORT)
+        Key: sport - on table: SPORT(id)
+        Cardinality: 1x1 (checked data: 3 record(s))
+
+    Fields:
+        id  CHAR  PRIMARY KEY
+        name  VARCHAR  
+        sport  INT  MUL
+        status  VARCHAR  
+        webpage  VARCHAR  
+        phone  VARCHAR  
+        email  VARCHAR  
+        suffix  VARCHAR  
+        birthdate  DATETIME  
+
+** Statistics: morph_example
+Tables: 2
+Constraints: 1
+
+** End of analysis for schema: morph_example
