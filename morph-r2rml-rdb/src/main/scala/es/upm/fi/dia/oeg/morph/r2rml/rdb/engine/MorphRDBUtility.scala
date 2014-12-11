@@ -154,8 +154,8 @@ object MorphRDBUtility {
 		} catch {
 		  case e:Exception => {
 			val errorMessage = "error parsing query string : \n" + sqlString; 
-			logger.error(errorMessage);
-			logger.error("error message = " + e.getMessage());
+			logger.warn(errorMessage);
+			logger.warn("error message = " + e.getMessage());
 			throw e;		    
 		  }
 		  case e:Error => {

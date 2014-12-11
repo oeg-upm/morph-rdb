@@ -1,0 +1,1976 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1#> .
+@prefix rev: <http://purl.org/stuff/rev#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1#> .
+@prefix dc: <http://purl.org/stuff/rev#> .
+@prefix rev: <http://purl.org/stuff/rev#> .
+@prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> .
+@prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> .
+@prefix ex: <http://example.com/> .
+
+@base <http://mappingpedia.org/rdb2rdf/r2rml/tc/> .
+
+<#TriplesMap1>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:tableName "dept" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/dept/{CODE}";
+		rr:termType rr:IRI;
+		rr:class <http://example.com/Dept>;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Dept#code>;
+		rr:objectMap [ rr:column "CODE"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Dept#name>;
+		rr:objectMap [ rr:column "NAME"; rr:datatype xsd:string; ];
+	].
+
+<#TriplesMap2>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Dept#code>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Dept> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:string ];
+	].
+
+<#TriplesMap3>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Dept#name>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Dept> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:string ];
+	].
+
+<#TriplesMap4>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Dept>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap5>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:tableName "course" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/course/{CNO}";
+		rr:termType rr:IRI;
+		rr:class <http://example.com/Course>;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Course#cno>;
+		rr:objectMap [ rr:column "CNO"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Course#title>;
+		rr:objectMap [ rr:column "TITLE"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Course#code>;
+		rr:objectMap [ rr:column "CODE"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Dept#ref-code>;
+		rr:objectMap [
+			rr:parentTriplesMap <#TriplesMap1>;
+			rr:joinCondition [
+				rr:child "CODE";
+				rr:parent "CODE";
+			];
+		];
+	].
+
+<#TriplesMap6>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Course>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap7>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Course#cno>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Course> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap8>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Course#title>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Course> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:string ];
+	].
+
+<#TriplesMap9>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Course#code>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Course> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:string ];
+	].
+
+<#TriplesMap10>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/DeptHasCourse>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Dept> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Course> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate owl:inverseOf;
+		rr:objectMap [ rr:constant <http://example.com/CourseBelongsToDept> ];
+	].
+
+<#TriplesMap11>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT DISTINCT t_56049.CODE FROM (dept AS t_56049 JOIN course AS t_78228 ON ((t_56049.CODE=t_78228.CODE)))" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/dept/{CODE}";
+		rr:termType rr:IRI;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/DeptHasCourse>;
+		rr:objectMap [ rr:template "http://example.com/course/{CODE}" ];
+	].
+
+<#TriplesMap12>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/CourseBelongsToDept>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Course> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Dept> ];
+	].
+
+<#TriplesMap13>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:tableName "offer" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/offer/{ONO}";
+		rr:termType rr:IRI;
+		rr:class <http://example.com/Offer>;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Offer#ono>;
+		rr:objectMap [ rr:column "ONO"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Offer#cno>;
+		rr:objectMap [ rr:column "CNO"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Offer#sno>;
+		rr:objectMap [ rr:column "SNO"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Offer#pid>;
+		rr:objectMap [ rr:column "PID"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Offer#cono>;
+		rr:objectMap [ rr:column "CONO"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Course#ref-offer>;
+		rr:objectMap [
+			rr:parentTriplesMap <#TriplesMap5>;
+			rr:joinCondition [
+				rr:child "CNO";
+				rr:parent "CNO";
+			];
+		];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Semester#ref-offer>;
+		rr:objectMap [
+			rr:parentTriplesMap <#TriplesMap24>;
+			rr:joinCondition [
+				rr:child "SNO";
+				rr:parent "SNO";
+			];
+		];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Professor#ref-offer>;
+		rr:objectMap [
+			rr:parentTriplesMap <#TriplesMap20>;
+			rr:joinCondition [
+				rr:child "PID";
+				rr:parent "ID";
+			];
+		];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Offer#ref-offer>;
+		rr:objectMap [
+			rr:parentTriplesMap <#TriplesMap13>;
+			rr:joinCondition [
+				rr:child "CONO";
+				rr:parent "ONO";
+			];
+		];
+	].
+
+<#TriplesMap14>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Offer#ono>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap15>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Offer#cno>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap16>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Offer#sno>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap17>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Offer#pid>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap18>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Offer#cono>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap19>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Offer>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap20>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:tableName "professor" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/professor/{ID}";
+		rr:termType rr:IRI;
+		rr:class <http://example.com/Professor>;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Professor#id>;
+		rr:objectMap [ rr:column "ID"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Professor#title>;
+		rr:objectMap [ rr:column "TITLE"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Person#ref-id>;
+		rr:objectMap [
+			rr:parentTriplesMap <#TriplesMap47>;
+			rr:joinCondition [
+				rr:child "ID";
+				rr:parent "ID";
+			];
+		];
+	].
+
+<#TriplesMap21>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Professor#id>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Professor> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap22>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Professor#title>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Professor> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:string ];
+	].
+
+<#TriplesMap23>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Professor>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap24>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:tableName "semester" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/semester/{SNO}";
+		rr:termType rr:IRI;
+		rr:class <http://example.com/Semester>;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Semester#sno>;
+		rr:objectMap [ rr:column "SNO"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Semester#year>;
+		rr:objectMap [ rr:column "YEAR"; rr:datatype xsd:date; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Semester#session>;
+		rr:objectMap [ rr:column "SESSION"; rr:datatype xsd:string; ];
+	].
+
+<#TriplesMap25>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Semester#sno>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Semester> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap26>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Semester#year>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Semester> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:date ];
+	].
+
+<#TriplesMap27>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Semester#session>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Semester> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:string ];
+	].
+
+<#TriplesMap28>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Semester>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap29>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/CourseHasOffer>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Course> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate owl:inverseOf;
+		rr:objectMap [ rr:constant <http://example.com/OfferBelongsToCourse> ];
+	].
+
+<#TriplesMap30>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT DISTINCT t_73818.ONO, t_53085.CNO FROM (course AS t_53085 JOIN offer AS t_25093 ON ((t_53085.CNO=t_25093.CNO))) JOIN offer AS t_73818 ON ((t_73818.ONO=t_25093.CONO))" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/course/{CNO}";
+		rr:termType rr:IRI;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/CourseHasOffer>;
+		rr:objectMap [ rr:template "http://example.com/offer/{ONO}" ];
+	].
+
+<#TriplesMap31>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/OfferBelongsToCourse>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Course> ];
+	].
+
+<#TriplesMap32>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/CourseHasProfessor>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Course> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Professor> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate owl:inverseOf;
+		rr:objectMap [ rr:constant <http://example.com/ProfessorBelongsToCourse> ];
+	].
+
+<#TriplesMap33>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT DISTINCT t_93558.ID, t_50712.CNO FROM (course AS t_50712 JOIN offer AS t_08796 ON ((t_50712.CNO=t_08796.CNO))) JOIN professor AS t_93558 ON ((t_93558.ID=t_08796.PID))" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/course/{CNO}";
+		rr:termType rr:IRI;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/CourseHasProfessor>;
+		rr:objectMap [ rr:template "http://example.com/professor/{ID}" ];
+	].
+
+<#TriplesMap34>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/ProfessorBelongsToCourse>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Professor> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Course> ];
+	].
+
+<#TriplesMap35>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/OfferHasProfessor>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Professor> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate owl:inverseOf;
+		rr:objectMap [ rr:constant <http://example.com/ProfessorBelongsToOffer> ];
+	].
+
+<#TriplesMap36>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT DISTINCT t_27147.ID, t_43196.ONO FROM (offer AS t_43196 JOIN offer AS t_73194 ON ((t_43196.ONO=t_73194.CONO))) JOIN professor AS t_27147 ON ((t_27147.ID=t_73194.PID))" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/offer/{ONO}";
+		rr:termType rr:IRI;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/OfferHasProfessor>;
+		rr:objectMap [ rr:template "http://example.com/professor/{ID}" ];
+	].
+
+<#TriplesMap37>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/ProfessorBelongsToOffer>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Professor> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	].
+
+<#TriplesMap38>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/CourseHasSemester>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Course> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Semester> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate owl:inverseOf;
+		rr:objectMap [ rr:constant <http://example.com/SemesterBelongsToCourse> ];
+	].
+
+<#TriplesMap39>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT DISTINCT t_10755.SNO, t_39769.CNO FROM (course AS t_39769 JOIN offer AS t_95264 ON ((t_39769.CNO=t_95264.CNO))) JOIN semester AS t_10755 ON ((t_10755.SNO=t_95264.SNO))" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/course/{CNO}";
+		rr:termType rr:IRI;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/CourseHasSemester>;
+		rr:objectMap [ rr:template "http://example.com/semester/{SNO}" ];
+	].
+
+<#TriplesMap40>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/SemesterBelongsToCourse>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Semester> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Course> ];
+	].
+
+<#TriplesMap41>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/OfferHasSemester>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Semester> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate owl:inverseOf;
+		rr:objectMap [ rr:constant <http://example.com/SemesterBelongsToOffer> ];
+	].
+
+<#TriplesMap42>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT DISTINCT t_87227.SNO, t_06299.ONO FROM (offer AS t_06299 JOIN offer AS t_40528 ON ((t_06299.ONO=t_40528.CONO))) JOIN semester AS t_87227 ON ((t_87227.SNO=t_40528.SNO))" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/offer/{ONO}";
+		rr:termType rr:IRI;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/OfferHasSemester>;
+		rr:objectMap [ rr:template "http://example.com/semester/{SNO}" ];
+	].
+
+<#TriplesMap43>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/SemesterBelongsToOffer>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Semester> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	].
+
+<#TriplesMap44>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/ProfessorHasSemester>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Professor> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Semester> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate owl:inverseOf;
+		rr:objectMap [ rr:constant <http://example.com/SemesterBelongsToProfessor> ];
+	].
+
+<#TriplesMap45>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT DISTINCT t_21874.SNO, t_97961.ID FROM (professor AS t_97961 JOIN offer AS t_96863 ON ((t_97961.ID=t_96863.PID))) JOIN semester AS t_21874 ON ((t_21874.SNO=t_96863.SNO))" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/professor/{ID}";
+		rr:termType rr:IRI;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/ProfessorHasSemester>;
+		rr:objectMap [ rr:template "http://example.com/semester/{SNO}" ];
+	].
+
+<#TriplesMap46>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/SemesterBelongsToProfessor>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Semester> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Professor> ];
+	].
+
+<#TriplesMap47>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:tableName "person" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/person/{ID}";
+		rr:termType rr:IRI;
+		rr:class <http://example.com/Person>;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Person#id>;
+		rr:objectMap [ rr:column "ID"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Person#name>;
+		rr:objectMap [ rr:column "NAME"; rr:datatype xsd:string; ];
+	].
+
+<#TriplesMap48>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Person#id>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Person> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap49>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Person#name>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Person> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:string ];
+	].
+
+<#TriplesMap50>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Person>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap51>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:tableName "professor" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/professor/{ID}";
+		rr:termType rr:IRI;
+		rr:class <http://example.com/Professor>;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Professor#id>;
+		rr:objectMap [ rr:column "ID"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Professor#title>;
+		rr:objectMap [ rr:column "TITLE"; rr:datatype xsd:string; ];
+	].
+
+<#TriplesMap52>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Professor>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap53>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/PersonHasProfessor>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Person> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Professor> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate owl:inverseOf;
+		rr:objectMap [ rr:constant <http://example.com/ProfessorBelongsToPerson> ];
+	].
+
+<#TriplesMap54>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT DISTINCT t_56741.ID FROM (person AS t_56741 JOIN professor AS t_49329 ON ((t_56741.ID=t_49329.ID)))" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/person/{ID}";
+		rr:termType rr:IRI;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/PersonHasProfessor>;
+		rr:objectMap [ rr:template "http://example.com/professor/{ID}" ];
+	].
+
+<#TriplesMap55>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/ProfessorBelongsToPerson>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Professor> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Person> ];
+	].
+
+<#TriplesMap56>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:tableName "student" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/student/{ID}";
+		rr:termType rr:IRI;
+		rr:class <http://example.com/Student>;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Student#rollno>;
+		rr:objectMap [ rr:column "ROLLNO"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Student#degree>;
+		rr:objectMap [ rr:column "DEGREE"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Student#id>;
+		rr:objectMap [ rr:column "ID"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Person#ref-id>;
+		rr:objectMap [
+			rr:parentTriplesMap <#TriplesMap47>;
+			rr:joinCondition [
+				rr:child "ID";
+				rr:parent "ID";
+			];
+		];
+	].
+
+<#TriplesMap57>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Student#rollno>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Student> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap58>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Student#degree>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Student> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:string ];
+	].
+
+<#TriplesMap59>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Student#id>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Student> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap60>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Student>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap61>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:tableName "reg" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/reg/{SID}/reg/{SNO}";
+		rr:termType rr:IRI;
+		rr:class <http://example.com/Reg>;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Reg#sid>;
+		rr:objectMap [ rr:column "SID"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Reg#semester>;
+		rr:objectMap [ rr:template "http://example.com/semester/{SNO}" ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Student#ref-reg>;
+		rr:objectMap [
+			rr:parentTriplesMap <#TriplesMap56>;
+			rr:joinCondition [
+				rr:child "SID";
+				rr:parent "ID";
+			];
+		];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Semester#ref-reg>;
+		rr:objectMap [
+			rr:parentTriplesMap <#TriplesMap24>;
+			rr:joinCondition [
+				rr:child "SNO";
+				rr:parent "SNO";
+			];
+		];
+	].
+
+<#TriplesMap62>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Reg#sid>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Reg> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap63>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Reg#sno>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Reg> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap64>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Reg>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap65>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/SemesterHasStudent>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Semester> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Student> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate owl:inverseOf;
+		rr:objectMap [ rr:constant <http://example.com/StudentBelongsToSemester> ];
+	].
+
+<#TriplesMap66>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT DISTINCT t_49934.ID, t_63091.SNO FROM (semester AS t_63091 JOIN reg AS t_48132 ON ((t_63091.SNO=t_48132.SNO))) JOIN student AS t_49934 ON ((t_49934.ID=t_48132.SID))" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/semester/{SNO}";
+		rr:termType rr:IRI;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/SemesterHasStudent>;
+		rr:objectMap [ rr:template "http://example.com/student/{ID}" ];
+	].
+
+<#TriplesMap67>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/StudentBelongsToSemester>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Student> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Semester> ];
+	].
+
+<#TriplesMap68>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Person>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap69>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:tableName "student" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/student/{ROLLNO}";
+		rr:termType rr:IRI;
+		rr:class <http://example.com/Student>;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Student#rollno>;
+		rr:objectMap [ rr:column "ROLLNO"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Student#degree>;
+		rr:objectMap [ rr:column "DEGREE"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Student#id>;
+		rr:objectMap [ rr:column "ID"; rr:datatype xsd:integer; ];
+	].
+
+<#TriplesMap70>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Student>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap71>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/PersonHasStudent>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Person> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Student> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate owl:inverseOf;
+		rr:objectMap [ rr:constant <http://example.com/StudentBelongsToPerson> ];
+	].
+
+<#TriplesMap72>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT DISTINCT t_20333.ID FROM (person AS t_20333 JOIN student AS t_03652 ON ((t_20333.ID=t_03652.ID)))" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/person/{ID}";
+		rr:termType rr:IRI;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/PersonHasStudent>;
+		rr:objectMap [ rr:template "http://example.com/student/{ID}" ];
+	].
+
+<#TriplesMap73>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/StudentBelongsToPerson>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Student> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Person> ];
+	].
+
+<#TriplesMap74>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:tableName "study" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/study/{ONO}/study/{RNO}";
+		rr:termType rr:IRI;
+		rr:class <http://example.com/Study>;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Study#grade>;
+		rr:objectMap [ rr:column "GRADE"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Study#offer>;
+		rr:objectMap [ rr:template "http://example.com/offer/{ONO}" ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Study#rno>;
+		rr:objectMap [ rr:column "RNO"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Offer#ref-study>;
+		rr:objectMap [
+			rr:parentTriplesMap <#TriplesMap13>;
+			rr:joinCondition [
+				rr:child "ONO";
+				rr:parent "ONO";
+			];
+		];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Student#ref-study>;
+		rr:objectMap [
+			rr:parentTriplesMap <#TriplesMap56>;
+			rr:joinCondition [
+				rr:child "RNO";
+				rr:parent "ROLLNO";
+			];
+		];
+	].
+
+<#TriplesMap75>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Study#grade>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Study> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:string ];
+	].
+
+<#TriplesMap76>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Study#ono>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Study> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap77>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Study#rno>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Study> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap78>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Study>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap79>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/OfferHasStudent>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Student> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate owl:inverseOf;
+		rr:objectMap [ rr:constant <http://example.com/StudentBelongsToOffer> ];
+	].
+
+<#TriplesMap80>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT DISTINCT t_65113.ROLLNO, t_21333.ONO FROM (offer AS t_21333 JOIN study AS t_98204 ON ((t_21333.ONO=t_98204.ONO))) JOIN student AS t_65113 ON ((t_65113.ROLLNO=t_98204.RNO))" 
+	];
+
+	rr:subjectMap [
+		rr:template "http://example.com/offer/{ONO}";
+		rr:termType rr:IRI;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/OfferHasStudent>;
+		rr:objectMap [ rr:template "http://example.com/student/{ROLLNO}" ];
+	].
+
+<#TriplesMap81>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/StudentBelongsToOffer>;
+		rr:termType rr:IRI;
+		rr:class owl:ObjectProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Student> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant <http://example.com/Offer> ];
+	].
+

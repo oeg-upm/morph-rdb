@@ -1,51 +1,52 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>es.upm.fi.dia.oeg.morph</groupId>
-  <artifactId>morph-examples</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+	<groupId>es.upm.fi.dia.oeg.morph</groupId>
+	<artifactId>morph-examples</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-  <name>morph-examples</name>
-  <url>http://maven.apache.org</url>
+	<name>morph-examples</name>
+	<url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
-  <dependencies>
-	<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>4.10</version>
-		<scope>test</scope>
-	</dependency>
-		
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.scala-lang</groupId>
 			<artifactId>scala-library</artifactId>
 			<version>2.11.2</version>
 		</dependency>
 
-<!-- 
 		<dependency>
-			<groupId>es.upm.fi.dia.oeg.morph</groupId>
-			<artifactId>morph-rdb-dist</artifactId>
-			<version>3.4.3-SNAPSHOT</version>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
 		</dependency>
- -->
-	
-  </dependencies>
+
+		<!-- <dependency> <groupId>es.upm.fi.dia.oeg.morph</groupId> <artifactId>morph-rdb-dist</artifactId> 
+			<version>3.4.3-SNAPSHOT</version> </dependency> -->
+
+	</dependencies>
 
 	<distributionManagement>
- 		<repository>
+		<repository>
 			<uniqueVersion>false</uniqueVersion>
 			<id>aldebaran-releases</id>
 			<name>Aldebaran Releases</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-releases-local</url>
 		</repository>
-		
+
 		<snapshotRepository>
 			<uniqueVersion>true</uniqueVersion>
 			<id>aldebaran-snapshots</id>
@@ -53,7 +54,7 @@
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
 		</snapshotRepository>
 	</distributionManagement>
-  	 
+
 	<repositories>
 		<repository>
 			<id>aldebaran-external-libs</id>
@@ -66,7 +67,7 @@
 			<name>Aldebaran External Libraries</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
 		</repository>
-		
+
 	</repositories>
-	
+
 </project>

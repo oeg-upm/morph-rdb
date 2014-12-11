@@ -21,7 +21,6 @@ import java.io.OutputStreamWriter
 import java.io.PrintWriter
 import java.util.Properties
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.mappingsgenerator.main.R2RMLMapper
-//import es.upm.fi.dia.oeg.morph.r2rml.rdb.mappingsgenerator.main.R2RMLMapper
 
 abstract class MorphBaseRunnerFactory {
 	val logger = Logger.getLogger(this.getClass());
