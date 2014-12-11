@@ -64,9 +64,9 @@
 		<dependency>
 		    <groupId>es.upm.fi.dia.oeg.morph</groupId>
 		    <artifactId>r2rml-mappings-generator</artifactId>
-		    <version>0.0.1</version>
+		    <version>1.1.1</version>
 		    <scope>system</scope>
-		    <systemPath>${project.basedir}/lib/r2rml-mappings-generator.jar</systemPath>
+		    <systemPath>${project.basedir}/lib/r2rml-mappings-generator-1.1.1.jar</systemPath>
 		</dependency>
 		
 	</dependencies>
