@@ -74,6 +74,7 @@ public class R2RMLTS {
 		this.mapTestCaseName.put("R2RMLTC0008b", "D008-1table1compositeprimarykey3columns1row");
 		this.mapTestCaseName.put("R2RMLTC0008c", "D008-1table1compositeprimarykey3columns1row");
 
+		this.mapTestCaseName.put("DirectGraphTC0009", "D009-2tables1primarykey1foreignkey");
 		this.mapTestCaseName.put("R2RMLTC0009a", "D009-2tables1primarykey1foreignkey");
 		this.mapTestCaseName.put("R2RMLTC0009b", "D009-2tables1primarykey1foreignkey");
 		this.mapTestCaseName.put("R2RMLTC0009c", "D009-2tables1primarykey1foreignkey");
@@ -606,6 +607,12 @@ public class R2RMLTS {
 	@Test
 	public void testDirectGraphTC0008() throws Exception {
 		String testName = "DirectGraphTC0008";
+		this.run(testName, true);
+	}
+	
+	@Test
+	public void testDirectGraphTC0009() throws Exception {
+		String testName = "DirectGraphTC0009";
 		this.run(testName, true);
 	}
 }
