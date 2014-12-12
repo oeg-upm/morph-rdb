@@ -59,6 +59,7 @@ public class R2RMLTS {
 		this.mapTestCaseName.put("DirectGraphTC0006", "D006-1table1primarykey1column1row");
 		this.mapTestCaseName.put("R2RMLTC0006a", "D006-1table1primarykey1column1row");
 
+		this.mapTestCaseName.put("DirectGraphTC0007", "D007-1table1primarykey2columns1row");
 		this.mapTestCaseName.put("R2RMLTC0007a", "D007-1table1primarykey2columns1row");
 		this.mapTestCaseName.put("R2RMLTC0007b", "D007-1table1primarykey2columns1row");
 		this.mapTestCaseName.put("R2RMLTC0007c", "D007-1table1primarykey2columns1row");
@@ -68,6 +69,7 @@ public class R2RMLTS {
 		this.mapTestCaseName.put("R2RMLTC0007g", "D007-1table1primarykey2columns1row");
 		this.mapTestCaseName.put("R2RMLTC0007h", "D007-1table1primarykey2columns1row");
 
+		this.mapTestCaseName.put("DirectGraphTC0008", "D008-1table1compositeprimarykey3columns1row");
 		this.mapTestCaseName.put("R2RMLTC0008a", "D008-1table1compositeprimarykey3columns1row");
 		this.mapTestCaseName.put("R2RMLTC0008b", "D008-1table1compositeprimarykey3columns1row");
 		this.mapTestCaseName.put("R2RMLTC0008c", "D008-1table1compositeprimarykey3columns1row");
@@ -593,5 +595,17 @@ public class R2RMLTS {
 	public void testDirectGraphTC0006() throws Exception {
 		String testName = "DirectGraphTC0006";
 		this.run(testName, true);
-	}	
+	}
+	
+	@Test
+	public void testDirectGraphTC0007() throws Exception {
+		String testName = "DirectGraphTC0007";
+		this.run(testName, true);
+	}
+	
+	@Test
+	public void testDirectGraphTC0008() throws Exception {
+		String testName = "DirectGraphTC0008";
+		this.run(testName, true);
+	}
 }
