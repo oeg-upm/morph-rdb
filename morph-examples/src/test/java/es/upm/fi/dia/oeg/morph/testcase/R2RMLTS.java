@@ -24,11 +24,14 @@ public class R2RMLTS {
 	private Map<String, String> mapTestCaseName = new LinkedHashMap<String, String>();
 	
 	public R2RMLTS() {
+		this.mapTestCaseName.put("DirectGraphTC0000", "D000-1table1column0rows");
 		this.mapTestCaseName.put("R2RMLTC0000", "D000-1table1column0rows");
 		
+		this.mapTestCaseName.put("DirectGraphTC0001", "D001-1table1column1row");
 		this.mapTestCaseName.put("R2RMLTC0001a", "D001-1table1column1row");
 		this.mapTestCaseName.put("R2RMLTC0001b", "D001-1table1column1row");
 		
+		this.mapTestCaseName.put("DirectGraphTC0002", "D002-1table2columns1row");
 		this.mapTestCaseName.put("R2RMLTC0002a", "D002-1table2columns1row");
 		this.mapTestCaseName.put("R2RMLTC0002b", "D002-1table2columns1row");
 		this.mapTestCaseName.put("R2RMLTC0002c", "D002-1table2columns1row");
@@ -130,7 +133,7 @@ public class R2RMLTS {
 		try {
 			String directoryName = this.mapTestCaseName.get(testName);
 			String configurationDirectory = mappingDirectory + File.separator + directoryName + File.separator;
-			String configurationFile = testName + ".r2rml.properties";
+			String configurationFile = testName + ".morph.properties";
 			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory(); 
 			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
 			runner.run();
@@ -543,6 +546,24 @@ public class R2RMLTS {
 	@Test
 	public void testR2RMLTC0020b() throws Exception {
 		String testName = "R2RMLTC0020b";
+		this.run(testName, true);
+	}
+
+	@Test
+	public void testDirectGraphTC0000() throws Exception {
+		String testName = "DirectGraphTC0000";
+		this.run(testName, true);
+	}
+
+	@Test
+	public void testDirectGraphTC0001() throws Exception {
+		String testName = "DirectGraphTC0001";
+		this.run(testName, true);
+	}
+
+	@Test
+	public void testDirectGraphTC0002() throws Exception {
+		String testName = "DirectGraphTC0002";
 		this.run(testName, true);
 	}
 
