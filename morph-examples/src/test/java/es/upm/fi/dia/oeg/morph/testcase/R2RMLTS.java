@@ -80,19 +80,23 @@ public class R2RMLTS {
 		this.mapTestCaseName.put("R2RMLTC0009c", "D009-2tables1primarykey1foreignkey");
 		this.mapTestCaseName.put("R2RMLTC0009d", "D009-2tables1primarykey1foreignkey");
 
+		this.mapTestCaseName.put("DirectGraphTC0010", "D010-1table1primarykey3colums3rows");
 		this.mapTestCaseName.put("R2RMLTC0010a", "D010-1table1primarykey3colums3rows");
 		this.mapTestCaseName.put("R2RMLTC0010b", "D010-1table1primarykey3colums3rows");
 		this.mapTestCaseName.put("R2RMLTC0010c", "D010-1table1primarykey3colums3rows");
 
+		this.mapTestCaseName.put("DirectGraphTC0011", "D011-M2MRelations");
 		this.mapTestCaseName.put("R2RMLTC0011a", "D011-M2MRelations");
 		this.mapTestCaseName.put("R2RMLTC0011b", "D011-M2MRelations");
 		
+		this.mapTestCaseName.put("DirectGraphTC0012", "D012-2tables2duplicates0nulls");
 		this.mapTestCaseName.put("R2RMLTC0012a", "D012-2tables2duplicates0nulls");
 		this.mapTestCaseName.put("R2RMLTC0012b", "D012-2tables2duplicates0nulls");
 		this.mapTestCaseName.put("R2RMLTC0012c", "D012-2tables2duplicates0nulls");
 		this.mapTestCaseName.put("R2RMLTC0012d", "D012-2tables2duplicates0nulls");
 		this.mapTestCaseName.put("R2RMLTC0012e", "D012-2tables2duplicates0nulls");
 
+		this.mapTestCaseName.put("DirectGraphTC0013", "D013-1table1primarykey3columns2rows1nullvalue");
 		this.mapTestCaseName.put("R2RMLTC0013a", "D013-1table1primarykey3columns2rows1nullvalue");
 
 		this.mapTestCaseName.put("R2RMLTC0014a", "D014-3tables1primarykey1foreignkey");
@@ -613,6 +617,30 @@ public class R2RMLTS {
 	@Test
 	public void testDirectGraphTC0009() throws Exception {
 		String testName = "DirectGraphTC0009";
+		this.run(testName, true);
+	}
+	
+	@Test
+	public void testDirectGraphTC0010() throws Exception {
+		String testName = "DirectGraphTC0010";
+		this.run(testName, true);
+	}
+	
+	@Test
+	public void testDirectGraphTC0011() throws Exception {
+		String testName = "DirectGraphTC0011";
+		this.run(testName, true);
+	}
+	
+	@Test
+	public void testDirectGraphTC0012() throws Exception {
+		String testName = "DirectGraphTC0012";
+		this.run(testName, true);
+	}
+	
+	@Test
+	public void testDirectGraphTC0013() throws Exception {
+		String testName = "DirectGraphTC0013";
 		this.run(testName, true);
 	}
 }
