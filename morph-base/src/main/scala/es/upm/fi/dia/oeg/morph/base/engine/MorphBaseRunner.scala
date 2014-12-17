@@ -26,6 +26,7 @@ import com.hp.hpl.jena.sparql.core.Var
 import com.hp.hpl.jena.vocabulary.RDFS
 import com.hp.hpl.jena.rdf.model.Statement
 import com.hp.hpl.jena.rdf.model.Resource
+import org.apache.log4j.PropertyConfigurator
 
 abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     //, conn:Connection
@@ -40,6 +41,8 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     ) {
   
 	val logger = Logger.getLogger(this.getClass());
+	PropertyConfigurator.configure("log4j.properties");
+	
 	var ontologyFilePath:Option[String]=None;
 	var sparqlQuery:Option[Query]=None;
 	var mapSparqlSql:Map[Query, IQuery] = Map.empty;
