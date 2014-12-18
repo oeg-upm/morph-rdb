@@ -83,7 +83,7 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 				} 
 				catch {
 				  case e:Exception => {
-					logger.warn("Not able to parse the query, string will be used.");
+					logger.debug("Not able to parse the query, string will be used.");
 					val resultAux = new SQLFromItem(sqlString, Constants.LogicalTableType.QUERY_STRING);
 					resultAux.databaseType = this.dbType;
 					resultAux
