@@ -1,0 +1,27 @@
+<http://example.com/Country> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://example.com/Country> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2002/07/owl#Thing> .
+<http://example.com/Country#code> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://example.com/Country#code> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/Country#code> <http://www.w3.org/2000/01/rdf-schema#domain> <http://example.com/Country> .
+<http://example.com/country/bo/en> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Country> .
+<http://example.com/country/bo/en> <http://example.com/Country#name> "Bolivia, Plurinational State of"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/country/bo/en> <http://example.com/Country#lan> "EN"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/country/bo/en> <http://example.com/Country#code> "BO"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/country/bo/es> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Country> .
+<http://example.com/country/bo/es> <http://example.com/Country#name> "Estado Plurinacional de Bolivia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/country/bo/es> <http://example.com/Country#lan> "ES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/country/bo/es> <http://example.com/Country#code> "BO"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/country/ie/en> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Country> .
+<http://example.com/country/ie/en> <http://example.com/Country#name> "Ireland"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/country/ie/en> <http://example.com/Country#lan> "EN"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/country/ie/en> <http://example.com/Country#code> "IE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/country/ie/es> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Country> .
+<http://example.com/country/ie/es> <http://example.com/Country#name> "Irlanda"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/country/ie/es> <http://example.com/Country#lan> "ES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/country/ie/es> <http://example.com/Country#code> "IE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/Country#name> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://example.com/Country#name> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/Country#name> <http://www.w3.org/2000/01/rdf-schema#domain> <http://example.com/Country> .
+<http://example.com/Country#lan> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://example.com/Country#lan> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/Country#lan> <http://www.w3.org/2000/01/rdf-schema#domain> <http://example.com/Country> .
