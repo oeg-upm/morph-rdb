@@ -218,6 +218,12 @@ public class DMTS {
 	}
 	
 	@Test
+	public void testDirectGraphTC0011b() throws Exception {
+		String testName = "DirectGraphTC0011b";
+		this.run(testName, true);
+	}
+	
+	@Test
 	public void testDirectGraphTC0012() throws Exception {
 		String testName = "DirectGraphTC0012";
 		this.run(testName, true);
