@@ -20,7 +20,7 @@ public class R2RMLTS {
 //	private static Logger logger = Logger.getLogger(R2RMLTS.class);
 	//private String mappingDirectory = TestUtility.getMappingDirectoryByOS();
 	private String mappingDirectory = System.getProperty("user.dir") 
-			+ File.separator + "R2RMLTS";
+			+ File.separator + "testcases";
 	private Map<String, String> mapTestCaseName = new LinkedHashMap<String, String>();
 	
 	public R2RMLTS() {
@@ -149,7 +149,8 @@ public class R2RMLTS {
 	public void run(String testName, boolean conformingMapping) {
 		try {
 			String directoryName = this.mapTestCaseName.get(testName);
-			String configurationDirectory = mappingDirectory + File.separator + directoryName + File.separator;
+			//String configurationDirectory = mappingDirectory + File.separator + directoryName + File.separator;
+			String configurationDirectory = mappingDirectory + File.separator;
 			String configurationFile = testName + ".morph.properties";
 			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory(); 
 			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
