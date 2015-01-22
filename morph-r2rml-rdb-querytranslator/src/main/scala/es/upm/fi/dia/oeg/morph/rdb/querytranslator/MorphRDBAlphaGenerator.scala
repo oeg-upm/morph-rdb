@@ -122,7 +122,7 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 			}		  
 		}
 		
-		val predicateURI = triple.getPredicate().getURI();
+		val predicateURI = pm.getMappedPredicateName(0)
 		(result, predicateURI);
 	}
 	

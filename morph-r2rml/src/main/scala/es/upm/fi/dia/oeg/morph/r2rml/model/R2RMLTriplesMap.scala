@@ -50,21 +50,12 @@ extends MorphBaseClassMapping(predicateObjectMaps) with MorphR2RMLElement with I
 
 		return result;
 	}	
+
+	override def getPropertyMappings(propertyURI:String ) : Iterable[MorphBasePropertyMapping] =
+		this.predicateObjectMaps.filter(_.getMappedPredicateName(0).equals(propertyURI))
 	
-	override def getPropertyMappings(propertyURI:String ) 
-	: Iterable[MorphBasePropertyMapping] = {
-		val poms= this.predicateObjectMaps;
-		val result = poms.filter(pom => {
-				val predicateMapValue = pom.getPredicateMap(0).getOriginalValue();
-				predicateMapValue.equals(propertyURI)
-			})
-		
-		result;
-	}
-	
-	override def getPropertyMappings() : Iterable[MorphBasePropertyMapping] = {
-	  this.predicateObjectMaps
-	}
+	override def getPropertyMappings() : Iterable[MorphBasePropertyMapping] =
+		this.predicateObjectMaps
 	
 //	override def getRelationMappings() : java.util.Collection[IRelationMapping] = {
 //		val result = if(this.predicateObjectMaps != null) {
