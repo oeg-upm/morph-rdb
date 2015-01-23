@@ -55,18 +55,8 @@ class R2RMLMappingDocument(mappingFile : String) {
 		result;
 	}
 
-	def getPredicateObjectMapResources(triplesMapResources : List[Resource]) : List[Resource] = {
-		val result = {
-			if(triplesMapResources.isEmpty) {
-			  Nil;;
-			} else {
-				val resultHead =  this.getPredicateObjectMapResources(triplesMapResources.head);
-				val resultTail = this.getPredicateObjectMapResources(triplesMapResources.tail);
-				resultHead :::resultHead ::: resultTail;
-			}		  
-		}
-		result;
-	}
+	def getPredicateObjectMapResources(triplesMapResources : List[Resource]) : List[Resource] =
+		triplesMapResources.flatMap(this.getPredicateObjectMapResources(_))
 
 		
 	def getPredicateObjectMapResources(triplesMapResource : Resource) : List[Resource]= {
