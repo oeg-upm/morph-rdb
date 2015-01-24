@@ -20,41 +20,26 @@ abstract class MorphBaseMappingDocument(val classMappings:Iterable[MorphBaseClas
 	def buildMetaData(connection:Connection, databaseName:String
 	    , databaseType:String);
 	
-	def getMappedClasses() : Iterable[String] = {
-		this.classMappings.map(cm => cm.getConceptName());
-	}
+	def getMappedClasses() : Iterable[String] =
+		this.classMappings.map(_.getConceptName)
 	
-	def getClassMappingsByClassURI(classURI:String ) = {
-	  this.classMappings.filter(
-	      cm => cm.getMappedClassURIs.exists(mappedClass => mappedClass.equals(classURI))
-	      )
-	}
+	def getClassMappingsByClassURI(classURI:String) =
+		this.classMappings.filter(_.getMappedClassURIs.exists(_.equals(classURI)))
 	
 	def getMappedProperties() : Iterable[String];
 	
-	def getClassMappingByPropertyUri(propertyUri:String) : Iterable[MorphBaseClassMapping] = {
-	  this.classMappings.filter(cm => {
-	    val pms = cm.getPropertyMappings(propertyUri);
-	    !pms.isEmpty
-	    })
-	}
+	def getClassMappingByPropertyUri(propertyUri:String) : Iterable[MorphBaseClassMapping] =
+	  this.classMappings.filter(_.getPropertyMappings(propertyUri).nonEmpty)
 
 	def getClassMappingByPropertyURIs(propertyURIs:Iterable[String]) 
-	: Iterable[MorphBaseClassMapping]  = {
-		this.classMappings.flatMap(cm => {
-			val pms = cm.propertyMappings;
-			val mappedPredicateNames = pms.map(pm => pm.getMappedPredicateNames).flatten.toSet;
-			
-			if(propertyURIs.toSet.subsetOf(mappedPredicateNames)) {
-			  Some(cm);
-			} else {None}
-		})
-	}
+	: Iterable[MorphBaseClassMapping] =
+		this.classMappings.filter(cm =>
+			propertyURIs.toSet.subsetOf(cm.propertyMappings.flatMap(_.getMappedPredicateNames).toSet)
+		)
 	
 	def getPropertyMappingsByPropertyURI(propertyURI:String ) 
-	: Iterable[MorphBasePropertyMapping] = {
-	  this.classMappings.map(cm => cm.getPropertyMappings(propertyURI)).flatten
-	}
+	: Iterable[MorphBasePropertyMapping] =
+	  this.classMappings.flatMap(_.getPropertyMappings(propertyURI))
 	
 	def getPossibleRange(predicateURI:String , cm:MorphBaseClassMapping ):Iterable[MorphBaseClassMapping];
 	
