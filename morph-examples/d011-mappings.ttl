@@ -347,14 +347,14 @@
 
 	rr:predicateObjectMap [
 		rr:predicate owl:inverseOf;
-		rr:objectMap [ rr:constant <http://example.com/StudentBelongsToSport> ];
+		rr:objectMap [ rr:constant <http://example.com/StudenthasSport> ];
 	].
 
 <#TriplesMap15>
 	a rr:TriplesMap;
 
 	rr:logicalTable [ 
-		rr:sqlQuery "SELECT DISTINCT t_49689.ID_Student AS ID_Student, t_49689.ID_Sport AS ID_Sport FROM (sport AS t_21161 JOIN student_sport AS t_49689 ON ((t_21161.ID=t_49689.ID_Sport))) JOIN student AS t_63291 ON ((t_63291.ID=t_49689.ID_Student))" 
+		rr:sqlQuery "SELECT DISTINCT t_81003.\"ID_Student\" AS ID_Student, t_81003.\"ID_Sport\" AS ID_Sport FROM (\"sport\" AS t_31376 JOIN \"student_sport\" AS t_81003 ON ((t_31376.\"ID\"=t_81003.\"ID_Sport\"))) JOIN \"student\" AS t_32294 ON ((t_32294.\"ID\"=t_81003.\"ID_Student\"))" 
 	];
 
 	rr:subjectMap [
@@ -375,7 +375,7 @@
 	];
 
 	rr:subjectMap [
-		rr:constant <http://example.com/StudentBelongsToSport>;
+		rr:constant <http://example.com/StudenthasSport>;
 		rr:termType rr:IRI;
 		rr:class owl:ObjectProperty;
 	];
