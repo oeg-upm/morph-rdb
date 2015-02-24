@@ -34,40 +34,38 @@
 			<version>1.2.17</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>es.upm.fi.dia.oeg.morph</groupId> <artifactId>morph-rdb-dist</artifactId> 
-			<version>3.4.3-SNAPSHOT</version> </dependency> -->
+		<dependency>
+			<groupId>es.upm.fi.dia.oeg.morph</groupId>
+			<artifactId>morph-rdb-dist</artifactId>
+			<version>3.5.5-SNAPSHOT</version>
+		</dependency>
 
 	</dependencies>
 
 	<distributionManagement>
-		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>aldebaran-releases</id>
-			<name>Aldebaran Releases</name>
-			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-releases-local</url>
-		</repository>
 
-		<snapshotRepository>
-			<uniqueVersion>true</uniqueVersion>
-			<id>aldebaran-snapshots</id>
-			<name>Aldebaran Snapshots</name>
-			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
-		</snapshotRepository>
+		<!-- <repository> <uniqueVersion>false</uniqueVersion> <id>aldebaran-releases</id> 
+			<name>Aldebaran Releases</name> <url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-releases-local</url> 
+			</repository> <snapshotRepository> <uniqueVersion>true</uniqueVersion> <id>aldebaran-snapshots</id> 
+			<name>Aldebaran Snapshots</name> <url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url> 
+			</snapshotRepository> -->
 	</distributionManagement>
 
 	<repositories>
-		<repository>
-			<id>aldebaran-external-libs</id>
-			<name>Aldebaran External Libraries</name>
-			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-external-libs-local</url>
-		</repository>
+		<!-- <repository> <id>aldebaran-external-libs</id> <name>Aldebaran External 
+			Libraries</name> <url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-external-libs-local</url> 
+			</repository> <repository> <id>aldebaran-snapshots</id> <name>Aldebaran External 
+			Libraries</name> <url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url> 
+			</repository> -->
 
 		<repository>
-			<id>aldebaran-snapshots</id>
-			<name>Aldebaran External Libraries</name>
-			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
+			<id>morph-rdb-mvn-repo</id>
+			<url>https://raw.github.com/oeg-upm/morph-rdb/mvn-repo/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
 		</repository>
-
 	</repositories>
 
 </project>
