@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>es.upm.fi.dia.oeg.morph</groupId>
+  <artifactId>morph-r2rml</artifactId>
+  <versioning>
+    <versions>
+      <version>3.5.5-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20150224161312</lastUpdated>
+  </versioning>
+</metadata>
