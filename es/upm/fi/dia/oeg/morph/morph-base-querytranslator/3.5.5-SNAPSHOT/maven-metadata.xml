@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>es.upm.fi.dia.oeg.morph</groupId>
+  <artifactId>morph-base-querytranslator</artifactId>
+  <version>3.5.5-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20150224.160647</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20150224160647</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>3.5.5-20150224.160647-1</value>
+        <updated>20150224160647</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>3.5.5-20150224.160647-1</value>
+        <updated>20150224160647</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>

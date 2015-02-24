@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>es.upm.fi.dia.oeg.morph</groupId>
+  <artifactId>morph-base-querytranslator</artifactId>
+  <versioning>
+    <versions>
+      <version>3.5.5-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20150224160647</lastUpdated>
+  </versioning>
+</metadata>
