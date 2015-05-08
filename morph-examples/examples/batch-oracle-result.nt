@@ -1,0 +1,4 @@
+<http://mappingpedia.linkeddata.es/resources/Person/1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://mappingpedia.linkeddata.es/vocabulary/Person> .
+<http://mappingpedia.linkeddata.es/resources/Person/1> <http://mappingpedia.linkeddata.es/vocabulary/phone> "4" .
+<http://mappingpedia.linkeddata.es/resources/Person/1> <http://mappingpedia.linkeddata.es/vocabulary/webpage> "3" .
+<http://mappingpedia.linkeddata.es/resources/Person/1> <http://mappingpedia.linkeddata.es/vocabulary/name> "2" .

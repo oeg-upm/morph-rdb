@@ -311,7 +311,8 @@ object MorphSQLUtility {
 						operand match {
 						  case zConstant:ZConstant => {
 							if(zConstant.getType() == ZConstant.COLUMNNAME) {
-								val operandString = MorphSQLUtility.printWithoutEnclosedCharacters(zConstant.getValue());
+								val operandString = MorphSQLUtility.printWithoutEnclosedCharacters(
+                    zConstant.getValue());
 								for(prefix <- prefixes) {
 									if(operandString.contains(prefix + ".")) {
 										resultAux = resultAux ::: List(operand);	

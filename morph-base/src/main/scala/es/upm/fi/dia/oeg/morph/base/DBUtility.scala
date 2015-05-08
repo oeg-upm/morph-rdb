@@ -138,16 +138,30 @@ object DBUtility {
 		try {
 			val urlSplit = url.split("/");
 			val fullURL = {
-			  if(databaseName.equals(urlSplit(urlSplit.length-1))) {
-			    url
-			  }
-			  else { url + databaseName}
+        if(databaseName == null) {
+          url
+        } else {
+          if(databaseName.equals(urlSplit(urlSplit.length-1))) {
+            url
+          }
+          else { url + databaseName}          
+        }
 			}
+      
 			val prop = new Properties();
 			prop.put("ResultSetMetaDataOptions", "1");
-			prop.put("user", username);
-			prop.put("database", databaseName);
-			prop.put("password", password);
+      if(username != null && !username.equals("")) {
+        prop.put("user", username);  
+      }
+
+      if(password != null && !password.equals("")) {
+        prop.put("password", password);  
+      }
+            
+      if(databaseName != null && !databaseName.equals("")) {
+        prop.put("database", databaseName);  
+      }
+			
 			prop.put("autoReconnect", "true");
 			Class.forName(driverString);
 			logger.debug("Opening database connection.");

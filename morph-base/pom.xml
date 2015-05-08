@@ -85,6 +85,14 @@
 			<systemPath>${project.basedir}/lib/rqr4r2o.jar</systemPath>
 		</dependency>
 
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc</artifactId>
+			<version>14</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ojdbc6.jar</systemPath>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

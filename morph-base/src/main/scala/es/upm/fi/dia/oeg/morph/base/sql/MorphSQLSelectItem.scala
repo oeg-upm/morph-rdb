@@ -32,7 +32,7 @@ extends ZSelectItem {
 	override def toString() = {
 		var result:String = null;
 		
-		val enclosedCharacter = Constants.getEnclosedCharacter(dbType);
+		val aliasEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
 
 		if(this.isExpression()) {
 			result = this.getExpression().toString();
@@ -51,7 +51,7 @@ extends ZSelectItem {
 //			}
 			
 			var resultList2 = List(this.schema, this.table, this.column).filter(x => x != null);
-			result = resultList2.map(x => x.replaceAll("\"", enclosedCharacter)).mkString(".");
+			result = resultList2.map(x => x.replaceAll("\"", aliasEnclosedCharacter)).mkString(".");
 
 		}
 
@@ -84,6 +84,13 @@ extends ZSelectItem {
 		result;
 	}
 	
+  def printColumnWithoutEnclosedChar() : String = {
+    val enclosedChar = Constants.getEnclosedCharacter(dbType);
+    val selectItemColumn = this.getColumn();
+    val result = selectItemColumn.replaceAll(enclosedChar, "");
+    result;
+  }
+   
 	override def getColumn() = {
 		val result : String = {
 		  	if(this.isExpression()) {
@@ -169,8 +176,8 @@ object MorphSQLSelectItem {
 
 	def apply(pInputColumnName:String, pPrefix:String, dbType:String) 
 		: MorphSQLSelectItem = {
-		val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
-		val columnName = pInputColumnName.replaceAll("\"", dbEnclosedCharacter);
+		val dbAliasEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
+		val columnName = pInputColumnName.replaceAll("\"", dbAliasEnclosedCharacter);
 		this(columnName, pPrefix, dbType, null);
 	}
 	

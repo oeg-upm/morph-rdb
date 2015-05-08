@@ -36,6 +36,22 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
+	@Test
+	public void testBatchOracle() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "batch-oracle.r2rml.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+
 	public void testBatchPostgreSQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "batch-postgresql.r2rml.properties";

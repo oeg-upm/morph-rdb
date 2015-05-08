@@ -95,7 +95,14 @@
 			<version>${project.version}</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc</artifactId>
+			<version>14</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ojdbc6.jar</systemPath>
+		</dependency>
+		
 	</dependencies>
 
 	<repositories>

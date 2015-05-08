@@ -51,13 +51,16 @@ object Constants {
 	val DATABASE_GFT = "GFT";
 
 	val DATABASE_POSTGRESQL_ENCLOSED_CHARACTER = "\"";
+  val DATABASE_ORACLE_ENCLOSED_CHARACTER = "\"";
 	val DATABASE_MONETDB_ENCLOSED_CHARACTER = "\"";
 	val DATABASE_MYSQL_ENCLOSED_CHARACTER = "`";
 	val DATABASE_GFT_ENCLOSED_CHARACTER = "'";
 	val DATABASE_ENCLOSED_CHARACTERS = List(
 	    DATABASE_POSTGRESQL_ENCLOSED_CHARACTER, DATABASE_MONETDB_ENCLOSED_CHARACTER
-	    , DATABASE_MYSQL_ENCLOSED_CHARACTER, DATABASE_GFT_ENCLOSED_CHARACTER)
+	    , DATABASE_MYSQL_ENCLOSED_CHARACTER, DATABASE_GFT_ENCLOSED_CHARACTER
+      , DATABASE_ORACLE_ENCLOSED_CHARACTER);
 	
+      
 	val POSTGRESQL_COLUMN_TYPE_TEXT = "text";
 	val POSTGRESQL_COLUMN_TYPE_INTEGER = "integer";
 	val MONETDB_COLUMN_TYPE_TEXT = "clob";
@@ -258,20 +261,37 @@ object Constants {
 	val R2RML_DEFAULT_GRAPH_CLASS = ResourceFactory.createResource(R2RML_DEFAULT_GRAPH_URI);
 
  
-	def getEnclosedCharacter(dbType:String) : String = {
-	    if (Constants.DATABASE_GFT.equalsIgnoreCase(dbType)) {
-	      Constants.DATABASE_GFT_ENCLOSED_CHARACTER;
-	    } else if (Constants.DATABASE_MONETDB.equalsIgnoreCase(dbType) ) {
-	      Constants.DATABASE_MONETDB_ENCLOSED_CHARACTER;
-	    } else if(Constants.DATABASE_MYSQL.equalsIgnoreCase(dbType)) {
-	      Constants.DATABASE_MYSQL_ENCLOSED_CHARACTER;
-	    } else if (Constants.DATABASE_POSTGRESQL.equalsIgnoreCase(dbType)) {
-	      Constants.DATABASE_POSTGRESQL_ENCLOSED_CHARACTER;
-	    } else {	    
-	      ""
-	    }	    
-	}
-
+  def getEnclosedCharacter(dbType:String) : String = {
+      if (Constants.DATABASE_GFT.equalsIgnoreCase(dbType)) {
+        Constants.DATABASE_GFT_ENCLOSED_CHARACTER;
+      } else if (Constants.DATABASE_MONETDB.equalsIgnoreCase(dbType) ) {
+        Constants.DATABASE_MONETDB_ENCLOSED_CHARACTER;
+      } else if(Constants.DATABASE_MYSQL.equalsIgnoreCase(dbType)) {
+        Constants.DATABASE_MYSQL_ENCLOSED_CHARACTER;
+      } else if (Constants.DATABASE_POSTGRESQL.equalsIgnoreCase(dbType)) {
+        Constants.DATABASE_POSTGRESQL_ENCLOSED_CHARACTER;
+      } else if (Constants.DATABASE_ORACLE.equalsIgnoreCase(dbType)) {
+        Constants.DATABASE_ORACLE_ENCLOSED_CHARACTER;
+      } else {      
+        ""
+      }     
+  }
+    def getColumnCharacter(dbType:String) : String = {
+      if (Constants.DATABASE_GFT.equalsIgnoreCase(dbType)) {
+        Constants.DATABASE_GFT_ENCLOSED_CHARACTER;
+      } else if (Constants.DATABASE_MONETDB.equalsIgnoreCase(dbType) ) {
+        Constants.DATABASE_MONETDB_ENCLOSED_CHARACTER;
+      } else if(Constants.DATABASE_MYSQL.equalsIgnoreCase(dbType)) {
+        Constants.DATABASE_MYSQL_ENCLOSED_CHARACTER;
+      } else if (Constants.DATABASE_POSTGRESQL.equalsIgnoreCase(dbType)) {
+        Constants.DATABASE_POSTGRESQL_ENCLOSED_CHARACTER;
+      } else if (Constants.DATABASE_ORACLE.equalsIgnoreCase(dbType)) {
+        Constants.DATABASE_ORACLE_ENCLOSED_CHARACTER;
+      } else {      
+        ""
+      }     
+  }
+    
 	val MAP_DEFAULT_URI_ENCODING_CHARS = Map(" " -> "%20", "," -> "%2C", "\\(" -> "%28", "\\)" -> "%29");
 	
 	val URI_TRANSFORM_TOLOWERCASE="toLowercase";

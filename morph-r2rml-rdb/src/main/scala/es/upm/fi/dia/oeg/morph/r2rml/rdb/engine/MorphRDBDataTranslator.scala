@@ -804,8 +804,8 @@ with MorphR2RMLElementVisitor {
 			val zConstant = MorphSQLConstant(pColumnName, ZConstant.COLUMNNAME);
 			val tableName = zConstant.table;
 			//val columnNameAux = zConstant.column.replaceAll("\"", "")
-			//val columnNameAux = zConstant.column.replaceAll(dbEnclosedCharacter, ""); //doesn't work for 9a
-			val columnNameAux = zConstant.column 
+			val columnNameAux = zConstant.column.replaceAll(dbEnclosedCharacter, ""); //doesn't work for 9a
+			//val columnNameAux = zConstant.column 
 			
 			
 			val columnName = {

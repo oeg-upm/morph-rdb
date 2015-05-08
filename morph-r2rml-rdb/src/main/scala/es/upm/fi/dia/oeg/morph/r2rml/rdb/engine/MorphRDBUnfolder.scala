@@ -112,7 +112,8 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 						    termMapReferencedColumn, logicalTableAlias, dbType);
 						if(selectItem != null) {
 							if(selectItem.getAlias() == null) {
-								val alias = selectItem.getTable() + "_" + selectItem.getColumn();
+                val selectItemColumn = selectItem.printColumnWithoutEnclosedChar();
+								val alias = selectItem.getTable() + "_" + selectItemColumn;
 								selectItem.setAlias(alias);
 								if(this.mapTermMapColumnsAliases.containsKey(termMap)) {
 									val oldColumnAliases = this.mapTermMapColumnsAliases(termMap);
@@ -129,12 +130,11 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 			  }
 			  case Constants.MorphTermMapType.ColumnTermMap => {
 			    val termColumnName = termMap.columnName;
-			    val selectItem = MorphSQLSelectItem.apply(
-						    termColumnName, logicalTableAlias, dbType);
+			    val selectItem = MorphSQLSelectItem.apply(termColumnName, logicalTableAlias, dbType);
 						
 			    if(selectItem != null) {
 			    	if(selectItem.getAlias() == null) {
-			    		val alias = selectItem.getTable() + "_" + selectItem.getColumn();
+			    		val alias = selectItem.getTable() + "_" + selectItem.printColumnWithoutEnclosedChar();
 			    		selectItem.setAlias(alias);
 						if(this.mapTermMapColumnsAliases.containsKey(termMap)) {
 							val oldColumnAliases = this.mapTermMapColumnsAliases(termMap);
