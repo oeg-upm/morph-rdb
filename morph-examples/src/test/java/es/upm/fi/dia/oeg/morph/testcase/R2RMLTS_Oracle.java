@@ -312,13 +312,13 @@ public class R2RMLTS_Oracle {
 	@Test
 	public void testR2RMLTC0005a() throws Exception {
 		String testName = "R2RMLTC0005a";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0005b() throws Exception {
 		String testName = "R2RMLTC0005b";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 
 	@Test
@@ -326,13 +326,13 @@ public class R2RMLTS_Oracle {
 		//wrong result in the testcase document
 		//or mapping is missing termtype
 		String testName = "R2RMLTC0006a";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0007a() throws Exception {
 		String testName = "R2RMLTC0007a";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 	
 	@Test

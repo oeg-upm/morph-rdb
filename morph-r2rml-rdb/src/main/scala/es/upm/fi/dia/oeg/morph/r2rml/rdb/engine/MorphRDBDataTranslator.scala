@@ -409,7 +409,11 @@ with MorphR2RMLElementVisitor {
 						predicates.foreach(predicatesElement => {
 						  objects.foreach(objectsElement => {
 						    unionGraphs.foreach(unionGraph => {
-						      this.materializer.materializeQuad(subject._1, predicatesElement._1, objectsElement._1, unionGraph._1)
+                  val tpS = subject._1;
+                  val tpP = predicatesElement._1;
+                  val tpO = objectsElement._1;
+                  val tpG = unionGraph._1;
+						      this.materializer.materializeQuad(tpS, tpP, tpO, tpG);
 						    })
 						  });
 
@@ -673,7 +677,7 @@ with MorphR2RMLElementVisitor {
 	) : (RDFNode, List[Object]) = {
 		val dbType = this.properties.databaseType;
 		val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
-		val inferedTermType = termMap.inferTermType;
+		val inferedTermType = termMap.inferTermType();
 				
 		val result:(RDFNode, List[Object]) = termMap.termMapType match {
 			case Constants.MorphTermMapType.ColumnTermMap => {
