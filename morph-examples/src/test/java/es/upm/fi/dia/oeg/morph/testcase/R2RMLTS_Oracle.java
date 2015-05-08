@@ -441,13 +441,13 @@ public class R2RMLTS_Oracle {
 	@Test
 	public void testR2RMLTC0011a() throws Exception {
 		String testName = "R2RMLTC0011a";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0011b() throws Exception {
 		String testName = "R2RMLTC0011b";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 	
 	@Test

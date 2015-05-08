@@ -18,30 +18,30 @@
        AND "Sport"."ID" = "Student_Sport"."ID_Sport";
        """; ];
 
-    rr:subjectMap [ rr:template "http://example.com/{ID}/{FirstName};{LastName}" ];
+    rr:subjectMap [ rr:template "http://example.com/{\"ID\"}/{\"FirstName\"};{\"LastName\"}" ];
 	
     rr:predicateObjectMap
     [ 
       rr:predicate	ex:id ; 
-      rr:objectMap	[ rr:column "ID"; ]
+      rr:objectMap	[ rr:column "\"ID\""; ]
     ];
 
     rr:predicateObjectMap
     [ 
       rr:predicate	ex:firstName ; 
-      rr:objectMap	[ rr:column "FirstName" ]
+      rr:objectMap	[ rr:column "\"FirstName\"" ]
     ];
 
     rr:predicateObjectMap
     [ 
       rr:predicate	ex:lastName ; 
-      rr:objectMap	[ rr:column "LastName" ]
+      rr:objectMap	[ rr:column "\"LastName\"" ]
     ];
 
     rr:predicateObjectMap
     [ 
       rr:predicate	ex:plays ; 
-      rr:objectMap	[ rr:template "http://example.com/{Sport_ID}/{Description}" ]
+      rr:objectMap	[ rr:template "http://example.com/{\"Sport_ID\"}/{\"Description\"}" ]
     ]
     .
 
