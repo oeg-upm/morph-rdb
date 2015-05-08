@@ -679,7 +679,8 @@ with MorphR2RMLElementVisitor {
 			case Constants.MorphTermMapType.ColumnTermMap => {
 				val columnTermMapValue = if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
 					val termMapColumnValueSplit = termMap.columnName.split("\\.");
-					val columnName = termMapColumnValueSplit(termMapColumnValueSplit.length - 1).replaceAll("\"", dbEnclosedCharacter);;
+					//val columnName = termMapColumnValueSplit(termMapColumnValueSplit.length - 1).replaceAll("\"", dbEnclosedCharacter);;
+          val columnName = termMapColumnValueSplit(termMapColumnValueSplit.length - 1).replaceAll(dbEnclosedCharacter, "");;
 					logicalTableAlias + "_" + columnName;
 				} 
 				else { termMap.columnName }
@@ -705,11 +706,19 @@ with MorphR2RMLElementVisitor {
 //			  }
 			  val dbValue = dbValueAux;
 			  val datatype = if(termMap.datatype.isDefined) { termMap.datatype } 
-			  	else {
-				  val columnNameAux = termMap.columnName.replaceAll("\"", "");
-				  val datatypeAux = mapXMLDatatype.get(columnNameAux)
-				  datatypeAux
-			  	}
+			  else {
+          val columnNameAux = termMap.columnName.replaceAll("\"", "");
+          val datatypeAux = {
+            val columnNameAuxDatatype = mapXMLDatatype.get(columnNameAux);
+            if(columnNameAuxDatatype != None) {
+              columnNameAuxDatatype
+            } else {
+              mapXMLDatatype.get(columnTermMapValue);
+            }
+          } 
+            
+          datatypeAux
+        }
 			  
 			  val result = (this.translateData(termMap, dbValue, datatype), List(dbValue));
 			  result;

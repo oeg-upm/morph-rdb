@@ -32,7 +32,7 @@ extends ZSelectItem {
 	override def toString() = {
 		var result:String = null;
 		
-		val aliasEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
+		val enclosedCharacter = Constants.getEnclosedCharacter(dbType);
 
 		if(this.isExpression()) {
 			result = this.getExpression().toString();
@@ -51,7 +51,7 @@ extends ZSelectItem {
 //			}
 			
 			var resultList2 = List(this.schema, this.table, this.column).filter(x => x != null);
-			result = resultList2.map(x => x.replaceAll("\"", aliasEnclosedCharacter)).mkString(".");
+			result = resultList2.map(x => x.replaceAll("\"", enclosedCharacter)).mkString(".");
 
 		}
 

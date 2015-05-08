@@ -194,7 +194,7 @@ public class R2RMLTS {
 	@Test
 	public void testR2RMLTC0001a() throws Exception {
 		String testName = "R2RMLTC0001a";
-		this.runOracle(testName, true);
+		this.run(testName, true);
 	}
 
 	@Test
