@@ -20,6 +20,6 @@
     rr:predicateObjectMap
     [ 
       rr:predicate		foaf:name ; 
-      rr:objectMap		[ rr:column "Name" ]
+      rr:objectMap		[ rr:column "\"Name\"" ]
     ]
     .

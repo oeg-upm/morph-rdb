@@ -282,19 +282,19 @@ public class R2RMLTS_Oracle {
 		//Purpose: Tests the presence of an undefined SQL Version identifier
 		//Expected result: non-conforming R2RML mapping 		
 		String testName = "R2RMLTC0003a";
-		this.run(testName, false);
+		this.runOracle(testName, false);
 	}
 	
 	@Test
 	public void testR2RMLTC0003b() throws Exception {
 		String testName = "R2RMLTC0003b";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0003c() throws Exception {
 		String testName = "R2RMLTC0003c";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 	
 	@Test
