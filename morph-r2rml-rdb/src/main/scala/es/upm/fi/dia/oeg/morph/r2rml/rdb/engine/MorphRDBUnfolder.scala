@@ -270,7 +270,8 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 									val selectItem = MorphSQLSelectItem(
 									    refObjectMapColumnString, joinQueryAlias, dbType, null);
 									if(selectItem.getAlias() == null) {
-										val alias = selectItem.getTable() + "_" + selectItem.getColumn();
+										//val alias = selectItem.getTable() + "_" + selectItem.getColumn();
+                    val alias = selectItem.getTable() + "_" + selectItem.printColumnWithoutEnclosedChar();
 										selectItem.setAlias(alias);
 										if(this.mapTermMapColumnsAliases.containsKey(refObjectMap)) {
 												val oldColumnAliases = this.mapTermMapColumnsAliases(refObjectMap);
