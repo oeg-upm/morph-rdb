@@ -164,6 +164,26 @@ public class R2RMLTS {
 			assertTrue(e.getMessage(), !conformingMapping);
 		}
 	}
+
+	public void runOracle(String testName, boolean conformingMapping) {
+		try {
+			String directoryName = this.mapTestCaseName.get(testName);
+			//String configurationDirectory = mappingDirectory + File.separator + directoryName + File.separator;
+			String configurationDirectory = mappingDirectory + File.separator;
+			String configurationFile = testName + "-oracle.morph.properties";
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory(); 
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("------" + testName + " DONE------");
+			assertTrue(conformingMapping);
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("------" + testName + " FAILED------\n\n");
+			assertTrue(e.getMessage(), !conformingMapping);
+		}
+	}
+
 	
 	@Test
 	public void testR2RMLTC0000() throws Exception {
@@ -174,7 +194,7 @@ public class R2RMLTS {
 	@Test
 	public void testR2RMLTC0001a() throws Exception {
 		String testName = "R2RMLTC0001a";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 
 	@Test

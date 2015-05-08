@@ -9,8 +9,8 @@ object DBUtilityTest extends App {
   println("Testing DBUtility ...");
   val driverString = "oracle.jdbc.OracleDriver";
   val url = "jdbc:oracle:thin:@localhost:1521:xe";
-  val username = "hr";
-  val password = "hr";
+  val username = "d001";
+  val password = "password";
   val databaseName = "";
   
   val prop = new Properties();
