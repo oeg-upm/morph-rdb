@@ -513,7 +513,7 @@ public class R2RMLTS_Oracle {
 	@Test
 	public void testR2RMLTC0015a() throws Exception {
 		String testName = "R2RMLTC0015a";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 	
 	@Test
@@ -522,7 +522,7 @@ public class R2RMLTS_Oracle {
 		//Purpose: Tests a term map with an invalid rr:language value, which is an error
 		//Expected result: non-conforming R2RML mapping 		
 		String testName = "R2RMLTC0015b";
-		this.run(testName, false);
+		this.runOracle(testName, false);
 	}
 	
 	@Test
