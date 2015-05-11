@@ -453,31 +453,31 @@ public class R2RMLTS_Oracle {
 	@Test
 	public void testR2RMLTC0012a() throws Exception {
 		String testName = "R2RMLTC0012a";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0012b() throws Exception {
 		String testName = "R2RMLTC0012b";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 	
 	@Test
 	public void testR2RMLTC0012c() throws Exception {
 		String testName = "R2RMLTC0012c";
-		this.run(testName, false);
+		this.runOracle(testName, false);
 	}
 
 	@Test
 	public void testR2RMLTC0012d() throws Exception {
 		String testName = "R2RMLTC0012d";
-		this.run(testName, false);
+		this.runOracle(testName, false);
 	}
 	
 	@Test
 	public void testR2RMLTC0012e() throws Exception {
 		String testName = "R2RMLTC0012e";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 	
 	@Test
