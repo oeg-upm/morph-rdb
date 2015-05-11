@@ -483,7 +483,7 @@ public class R2RMLTS_Oracle {
 	@Test
 	public void testR2RMLTC0013a() throws Exception {
 		String testName = "R2RMLTC0013a";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 	
 	@Test
