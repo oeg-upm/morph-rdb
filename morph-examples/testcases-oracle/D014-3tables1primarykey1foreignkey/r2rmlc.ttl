@@ -17,7 +17,7 @@
          from "DEPT"
        """ ];
 
-    rr:subjectMap [ rr:column "deptId"; rr:termType rr:BlankNode;
+    rr:subjectMap [ rr:column "\"deptId\""; rr:termType rr:BlankNode;
                     rr:inverseExpression "{\"deptno\"} = substr({deptId},length('Department')+1)"];
 
     rr:predicateObjectMap
