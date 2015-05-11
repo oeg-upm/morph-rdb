@@ -578,13 +578,13 @@ public class R2RMLTS_Oracle {
 	public void testR2RMLTC0020a() throws Exception {
 		//wrong mapping/result of TC
 		String testName = "R2RMLTC0020a";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 
 	@Test
 	public void testR2RMLTC0020b() throws Exception {
 		String testName = "R2RMLTC0020b";
-		this.run(testName, true);
+		this.runOracle(testName, true);
 	}
 
 
