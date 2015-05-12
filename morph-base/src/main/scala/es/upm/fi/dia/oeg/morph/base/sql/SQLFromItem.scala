@@ -15,7 +15,10 @@ extends ZFromItem(fullName) with SQLLogicalTable {
 	override def generateAlias() :String ={
 		//return R2OConstants.VIEW_ALIAS + this.hashCode();
 		if(super.getAlias() == null) {
-			super.setAlias(Constants.VIEW_ALIAS + new Random().nextInt(Constants.VIEW_ALIAS_RANDOM_LIMIT));
+      val generatedAlias = Constants.VIEW_ALIAS + new Random().nextInt(Constants.VIEW_ALIAS_RANDOM_LIMIT);
+      val generatedAlias2 = "T" + SQLFromItem.inc;
+      
+			super.setAlias(generatedAlias2);
 		}
 		super.getAlias();
 	}
@@ -61,6 +64,9 @@ extends ZFromItem(fullName) with SQLLogicalTable {
 }
 
 object SQLFromItem {
+  private var current = 0
+  private def inc = {current += 1; current}
+  
 	def apply(fullName:String, form:Constants.LogicalTableType.Value, dbType:String) = {
 	  val sqlFromItem = new SQLFromItem(fullName, form);
 	  sqlFromItem.databaseType = dbType;
