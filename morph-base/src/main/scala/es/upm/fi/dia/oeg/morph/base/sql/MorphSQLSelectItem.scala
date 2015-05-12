@@ -51,7 +51,21 @@ extends ZSelectItem {
 //			}
 			
 			var resultList2 = List(this.schema, this.table, this.column).filter(x => x != null);
-			result = resultList2.map(x => x.replaceAll("\"", enclosedCharacter)).mkString(".");
+			result = resultList2.map(x => {
+        val xStartedWithEnclosedChar = if(x.startsWith(enclosedCharacter)) {
+          x
+        } else {
+          enclosedCharacter + x;
+        }
+        
+        val xEndedWithEnclosedChar = if(xStartedWithEnclosedChar.endsWith(enclosedCharacter)) {
+          xStartedWithEnclosedChar
+        } else {
+          xStartedWithEnclosedChar + enclosedCharacter;
+        }
+        xEndedWithEnclosedChar
+        //x.replaceAll("\"", enclosedCharacter) 
+       }).mkString(".");
 
 		}
 

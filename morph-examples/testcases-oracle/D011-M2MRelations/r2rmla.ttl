@@ -18,30 +18,30 @@
        AND "Sport"."ID" = "Student_Sport"."ID_Sport";
        """; ];
 
-    rr:subjectMap [ rr:template "http://example.com/{\"ID\"}/{\"FirstName\"};{\"LastName\"}" ];
+    rr:subjectMap [ rr:template "http://example.com/{ID}/{FirstName};{LastName}" ];
 	
     rr:predicateObjectMap
     [ 
       rr:predicate	ex:id ; 
-      rr:objectMap	[ rr:column "\"ID\""; ]
+      rr:objectMap	[ rr:column "ID"; ]
     ];
 
     rr:predicateObjectMap
     [ 
       rr:predicate	ex:firstName ; 
-      rr:objectMap	[ rr:column "\"FirstName\"" ]
+      rr:objectMap	[ rr:column "FirstName" ]
     ];
 
     rr:predicateObjectMap
     [ 
       rr:predicate	ex:lastName ; 
-      rr:objectMap	[ rr:column "\"LastName\"" ]
+      rr:objectMap	[ rr:column "LastName" ]
     ];
 
     rr:predicateObjectMap
     [ 
       rr:predicate	ex:plays ; 
-      rr:objectMap	[ rr:template "http://example.com/{\"Sport_ID\"}/{\"Description\"}" ]
+      rr:objectMap	[ rr:template "http://example.com/{Sport_ID}/{Description}" ]
     ]
     .
 
@@ -50,17 +50,17 @@
 
 	rr:logicalTable [ rr:tableName  "\"Sport\"" ];
 	
-    rr:subjectMap [ rr:template "http://example.com/{\"ID\"}/{\"Description\"}"; ];
+    rr:subjectMap [ rr:template "http://example.com/{ID}/{Description}"; ];
 
     rr:predicateObjectMap
     [ 
       rr:predicate	ex:id ; 
-      rr:objectMap	[ rr:column "\"ID\""; ]
+      rr:objectMap	[ rr:column "ID"; ]
     ];
 
     rr:predicateObjectMap
     [ 
       rr:predicate	ex:description ; 
-      rr:objectMap	[ rr:column "\"Description\"" ]
+      rr:objectMap	[ rr:column "Description" ]
     ]
     .
