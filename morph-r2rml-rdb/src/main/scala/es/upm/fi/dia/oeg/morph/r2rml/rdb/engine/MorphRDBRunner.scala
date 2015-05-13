@@ -33,7 +33,7 @@ class MorphRDBRunner(mappingDocument:R2RMLMappingDocument
     , outputStream
         ) {
   
-	override val logger = Logger.getLogger(this.getClass());
+	//override val logger = Logger.getLogger(this.getClass());
 }
 
 object MorphRDBRunner {

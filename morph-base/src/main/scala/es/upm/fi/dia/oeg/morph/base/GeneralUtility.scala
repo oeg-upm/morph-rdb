@@ -45,11 +45,19 @@ object GeneralUtility {
 		val resultAux = originalURI.trim();
 		var result = resultAux;
 		
-		try {
-			if(mapURIEncodingChars != null) {
-				mapURIEncodingChars.foreach{case(key,value) => {
-				  result = result.replaceAll(key, value)}};
-			}
+    if(mapURIEncodingChars != null) {
+      mapURIEncodingChars.foreach{ case(key,value) => {
+        try {
+          result = result.replaceAll(key, value);  
+        } catch {
+          case e:Exception => {
+            logger.debug("Error encoding uri = " + originalURI + " because of " + e.getMessage());
+            result
+          }
+        }
+      } }
+    }
+    
 			
 			//DO THIS ON DATA LEVEL, NOT ON URI LEVEL
 /*			if(uriTransformationOperations != null) {
@@ -63,14 +71,7 @@ object GeneralUtility {
 				  case _ => {}
 				}
 			}*/
-		} catch {
-		  case e:Exception => {
-			logger.error("Error encoding uri for uri = " + originalURI + " because of " + e.getMessage());
-			resultAux
-		  }
-		}
-
-		result;
+    result;
 	}
 	
 	//Creates a quad
@@ -130,9 +131,11 @@ object GeneralUtility {
 			val literalNode = rdfNode.asLiteral();
 			val datatype = literalNode.getDatatype();
 			val lang = literalNode.getLanguage();
+      
 			val literalValue = literalNode.getValue();
 			val literalValueString = literalValue.toString();
 			
+      
 			val literalString = if(datatype == null) {
 				if(lang == null || lang.equals("")) {
 					GeneralUtility.createLiteral(literalValueString);

@@ -280,4 +280,20 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
+	@Test
+	public void testIASoft() {
+		//String configurationDirectory = System.getProperty("user.dir") + "/examples/iasoft";
+		String configurationDirectory = "C:/Users/Freddy/Dropbox/Documents/dodga/iasoft/morph-files";
+		String configurationFile = "pproc.r2rml.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
 }

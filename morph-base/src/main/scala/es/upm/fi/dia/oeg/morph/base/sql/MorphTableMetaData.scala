@@ -76,8 +76,8 @@ object MorphTableMetaData {
 	
 	def buildTableMetaData(tableName:String, dbMetaData:MorphDatabaseMetaData) 
 	: MorphTableMetaData = {
-	  logger.info("\tBuilding Table MetaData for table: " + tableName);
-	  
+	  logger.debug("\tBuilding Table MetaData for table: " + tableName);
+    
 	  val dbType = dbMetaData.dbType;
 	  val dbName = dbMetaData.dbName;
 	  val conn = dbMetaData.conn;

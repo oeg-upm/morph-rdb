@@ -435,6 +435,10 @@ with MorphR2RMLElementVisitor {
 			}
 		}
 		
+    if(this.materializer.noOfErrors > 0) {
+       logger.warn("Errors when generating " + this.materializer.noOfErrors + " triples, check log file for details!");      
+    }
+    
 		logger.info(i + " instances retrieved.");
 		logger.info(setSubjects.size + " unique instances (URI) retrieved.");
 		logger.info(setBetaSub.size + " unique instances (DB Column) retrieved.");
@@ -567,10 +571,11 @@ with MorphR2RMLElementVisitor {
 			val encodedValue = encodedValueAux;
 			
 			val valueWithDataType = if(datatype.isDefined && datatype.get != null) {
-				val datatypeGet = datatype.get;
+        val datatypeGet = datatype.get;
 				val xsdDateTimeURI = XSDDatatype.XSDdateTime.getURI().toString();
 				val xsdBooleanURI = XSDDatatype.XSDboolean.getURI().toString();
-
+        val xsdDurationURI = XSDDatatype.XSDduration.getURI().toString();
+  
 //				datatypeGet match {
 //					case xsdDateTimeURI => {
 //					  this.translateDateTime(encodedValue);
@@ -589,10 +594,13 @@ with MorphR2RMLElementVisitor {
 				else if (datatypeGet.equals(xsdBooleanURI)) {
 				  this.translateBoolean(encodedValue);
 				}
+        else if(datatypeGet.equals(xsdDurationURI)) {
+          encodedValue;
+        }
 				else {
 				  encodedValue
 				}
-			  } else { encodedValue }
+      } else { encodedValue }
 
 			val result:Literal = if(language.isDefined) {
 			  this.materializer.model.createLiteral(valueWithDataType, language.get);

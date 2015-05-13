@@ -21,12 +21,16 @@ import java.io.OutputStreamWriter
 import java.io.PrintWriter
 import java.util.Properties
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.mappingsgenerator.main.R2RMLMapper
+import org.apache.log4j.PropertyConfigurator
 
 abstract class MorphBaseRunnerFactory {
+  PropertyConfigurator.configure("log4j.properties");
 	val logger = Logger.getLogger(this.getClass());
-	
+	logger.info("running morph-rdb 3.5.7 ...");
+  
 	def createRunner(configurationDirectory:String , configurationFile:String) 
 	: MorphBaseRunner = {
+    
 		val configurationProperties = MorphProperties.apply(
 		    configurationDirectory, configurationFile);
 		this.createRunner(configurationProperties);

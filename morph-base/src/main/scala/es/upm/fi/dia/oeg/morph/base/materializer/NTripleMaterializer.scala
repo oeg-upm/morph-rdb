@@ -44,8 +44,10 @@ extends MorphBaseMaterializer(model,ntOutputStream) {
 				this.write(triple);
 			} catch {
 			  case e:Exception => {
-			    e.printStackTrace()
-			    logger.error("unable to serialize triple, subjectURI=" + subject);
+			    //e.printStackTrace();
+          val errorMessage = "unable to serialize triple, subjectURI=" + subject + ", error message = " + e.getMessage();
+			    logger.debug(errorMessage);
+          noOfErrors = noOfErrors + 1;
 			  }
 			}
 		}
