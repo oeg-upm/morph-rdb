@@ -15,7 +15,7 @@ abstract class MorphBaseMaterializer(val model:Model, var outputStream:Writer) {
 	val logger = Logger.getLogger(this.getClass().getName());
 //	var outputFileName:String = null;
 	var rdfLanguage:String =null;
-	var noOfErrors:Long=0;
+	//var noOfErrors:Long=0;
 	
 //	def createSubject(isBlankNode:Boolean , subjectURI:String ):Object ;
 //	def materializeDataPropertyTriple(predicateName:String , objectValue:Object , datatype:String , lang:String , graph:String );

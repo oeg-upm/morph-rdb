@@ -308,6 +308,7 @@ with MorphR2RMLElementVisitor {
 		var setSubjects : Set[RDFNode] = Set.empty;
 		var setBetaSub : Set[String] = Set.empty;
 		
+    var noOfErrors=0;
 		while(rows.next()) {
 			try {
 				//translate subject map
@@ -429,19 +430,20 @@ with MorphR2RMLElementVisitor {
 				i = i+1;
 			} catch {
 			  case e:Exception => {
+          noOfErrors = noOfErrors + 1;
 			    e.printStackTrace();
 			    logger.error("error while translating data: " + e.getMessage());
 			  }
 			}
 		}
 		
-    if(this.materializer.noOfErrors > 0) {
-       logger.warn("Errors when generating " + this.materializer.noOfErrors + " triples, check log file for details!");      
+    if(noOfErrors > 0) {
+       logger.debug("Error when generating " + noOfErrors + " triples, check log file for details!");      
     }
     
 		logger.info(i + " instances retrieved.");
-		logger.info(setSubjects.size + " unique instances (URI) retrieved.");
-		logger.info(setBetaSub.size + " unique instances (DB Column) retrieved.");
+		logger.debug(setSubjects.size + " unique instances (URI) retrieved.");
+		logger.debug(setBetaSub.size + " unique instances (DB Column) retrieved.");
 		rows.close();
 
 	}

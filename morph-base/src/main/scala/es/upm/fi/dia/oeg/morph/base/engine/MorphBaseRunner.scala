@@ -104,7 +104,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 
 		val endGeneratingModel = System.currentTimeMillis();
 		val durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
-		logger.info("Materializing Mapping Document time was "+(durationGeneratingModel)+" s.");
+		logger.debug("Materializing Mapping Document time was "+(durationGeneratingModel)+" s.");
 	}
 
 	def readSPARQLFile(sparqQueryFileURL:String ) {

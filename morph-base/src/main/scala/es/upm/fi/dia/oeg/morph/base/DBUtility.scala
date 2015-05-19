@@ -47,7 +47,8 @@ object DBUtility {
 	}*/
 
 	def execute(conn:Connection , query:String , timeout:Integer) : ResultSet = {
-		logger.info("Executing query: " + query);
+		logger.info("Executing query ...");
+    logger.debug("Executing query: " + query);
     
 		if(conn == null) {
 		  val errorMessage = "No connection defined!";
@@ -70,7 +71,7 @@ object DBUtility {
 		val start = System.currentTimeMillis();
 		val result = stmt.execute(query);
 		val end = System.currentTimeMillis();
-		logger.info("SQL execution time was "+(end-start)+" ms.");
+		logger.debug("SQL execution time was "+(end-start)+" ms.");
 		
 		if(result) { stmt.getResultSet(); } 
 		else { null }

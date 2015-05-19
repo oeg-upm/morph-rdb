@@ -96,7 +96,7 @@ abstract class MorphBaseRunnerFactory {
 		}
 		
 		//BUILDING QUERY TRANSLATOR
-		logger.info("Building query translator...");
+		logger.debug("Building query translator...");
 		val queryTranslatorFactoryClassName = 
 		  morphProperties.queryTranslatorFactoryClassName;
 		val queryTranslator = try {

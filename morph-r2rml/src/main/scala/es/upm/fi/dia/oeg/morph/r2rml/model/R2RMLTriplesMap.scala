@@ -24,7 +24,7 @@ extends MorphBaseClassMapping(predicateObjectMaps) with MorphR2RMLElement with I
 	//var triplesMapName:String = null;
 	
 	def buildMetaData(dbMetadata:Option[MorphDatabaseMetaData]) = {
-	  logger.info("Building metadata for TriplesMap: " + this.name);
+	  logger.debug("Building metadata for TriplesMap: " + this.name);
 	  
 	  this.logicalTable.buildMetaData(dbMetadata);
 //	  this.subjectMap.buildMetadata(dbMetadata);
