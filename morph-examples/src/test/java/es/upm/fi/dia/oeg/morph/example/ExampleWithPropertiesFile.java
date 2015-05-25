@@ -5,12 +5,22 @@ import static org.junit.Assert.assertTrue;
 
 
 
+
+
+
+
+import java.io.File;
+import java.sql.Connection;
+import java.util.Properties;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 //import org.apache.log4j.Logger;
 //import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
+import es.upm.fi.dia.oeg.morph.base.DBUtility;
+import es.upm.fi.dia.oeg.morph.base.MorphProperties;
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
@@ -19,7 +29,7 @@ import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
 public class ExampleWithPropertiesFile {
 	private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
 	static { PropertyConfigurator.configure("log4j.properties"); }
-	
+
 	@Test
 	public void testBatchMySQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
@@ -67,7 +77,7 @@ public class ExampleWithPropertiesFile {
 			assertTrue(e.getMessage(), false);
 		}
 	}
-	
+
 	@Test
 	public void sparql01() {
 		//2 instances
@@ -99,7 +109,7 @@ public class ExampleWithPropertiesFile {
 			assertTrue(e.getMessage(), false);
 		}
 	}
-	
+
 	@Test
 	public void sparql02() {
 		//4 instances
@@ -133,7 +143,7 @@ public class ExampleWithPropertiesFile {
 			assertTrue(e.getMessage(), false);
 		}
 	}	
-	
+
 	@Test
 	public void sparql04() {
 		//4 instances
@@ -150,7 +160,7 @@ public class ExampleWithPropertiesFile {
 			assertTrue(e.getMessage(), false);
 		}
 	}	
-	
+
 	@Test
 	public void sparql05() {
 		//1 instance
@@ -199,7 +209,7 @@ public class ExampleWithPropertiesFile {
 			assertTrue(e.getMessage(), false);
 		}
 	}	
-	
+
 	@Test
 	public void sparql08() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
@@ -246,7 +256,7 @@ public class ExampleWithPropertiesFile {
 			assertTrue(e.getMessage(), false);
 		}
 	}
-	
+
 
 	@Test
 	public void testExampleShopping() {
@@ -281,9 +291,8 @@ public class ExampleWithPropertiesFile {
 	}
 
 	@Test
-	public void testIASoft() {
-		//String configurationDirectory = System.getProperty("user.dir") + "/examples/iasoft";
-		String configurationDirectory = "C:/Users/Freddy/Dropbox/Documents/dodga/iasoft/morph-files";
+	public void testDODGAWithPropertiesFile() {
+		String configurationDirectory = "C:/Users/fpriyatna/Documents/dodga/iasoft/morph-files";
 		String configurationFile = "pproc.r2rml.properties";
 		try {
 			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
@@ -295,5 +304,4 @@ public class ExampleWithPropertiesFile {
 			System.out.println("Batch process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
-	}
-}
+	}}

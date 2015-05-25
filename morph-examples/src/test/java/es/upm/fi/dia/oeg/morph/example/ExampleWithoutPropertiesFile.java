@@ -3,16 +3,23 @@ package es.upm.fi.dia.oeg.morph.example;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.sql.Connection;
+import java.util.Properties;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
+import es.upm.fi.dia.oeg.morph.base.DBUtility;
 import es.upm.fi.dia.oeg.morph.base.MorphProperties;
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
 
 public class ExampleWithoutPropertiesFile {
-	//private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
+	private static Logger logger = Logger.getLogger(ExampleWithoutPropertiesFile.class);
+	static { PropertyConfigurator.configure("log4j.properties"); }
+	
 	private String jdbc_url = "jdbc:mysql://127.0.0.1:3306/morph_example";
 	private String dbUserName = "root";
 	private String dbPassword = "";
@@ -153,4 +160,47 @@ public class ExampleWithoutPropertiesFile {
 		}
 	}
 
+	@Test
+	public void testIASoftWithoutPropertiesFile() {
+		String driverString = "oracle.jdbc.OracleDriver";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String username = "";
+		String password = "";
+		String databaseName = "";
+
+		Properties prop = new Properties();
+		prop.put("ResultSetMetaDataOptions", "1");
+		prop.put("user", username);
+		prop.put("password", password);
+		prop.put("autoReconnect", "true");
+		Connection conn = null;
+		try {
+			Class.forName(driverString);
+			conn = DBUtility.getLocalConnection(username, databaseName, password, driverString, url
+					, "testIASoft");
+			logger.info("Connection obtained.");
+		} catch (Exception e) {
+			logger.error("Error while obtaining connection: " + e.getMessage());
+			e.printStackTrace();
+			assertTrue(false);
+		}
+
+		String configurationDirectory = "C:/Users/fpriyatna/Documents/dodga/iasoft/morph-files";
+		String mappingDocumentFile = configurationDirectory + File.separator + "pproc5.ttl";
+		String resultFile = configurationDirectory + File.separator + "pproc5-result.nt";
+		MorphProperties properties = new MorphProperties();
+		properties.setMappingDocumentFilePath(mappingDocumentFile);
+		properties.setOutputFilePath(resultFile);
+		properties.setDatabaseType(Constants.DATABASE_ORACLE());
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(conn, properties);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
 }

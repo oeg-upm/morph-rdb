@@ -36,120 +36,128 @@ abstract class MorphBaseRunnerFactory {
 		this.createRunner(configurationProperties);
 	}
 	
-	def createRunner(properties:Properties):MorphBaseRunner = {
-		val morphProperties = properties.asInstanceOf[MorphProperties];
-		
-		//BUILDING CONNECTION
-		val connection = this.createConnection(morphProperties);
+  def createRunner(properties:Properties):MorphBaseRunner = {
+    val morphProperties = properties.asInstanceOf[MorphProperties];
+    
+    //BUILDING CONNECTION
+    val connection = this.createConnection(morphProperties);
 
-		//BUILDING CONNECTION AND DATA SOURCE READER
-		val dataSourceReaderClassName = morphProperties.queryEvaluatorClassName;
-		val dataSourceReader = MorphBaseDataSourceReader(dataSourceReaderClassName
-		    , connection, morphProperties.databaseTimeout);
+    this.createRunner(connection, properties);
+  }
+  
+  def createRunner(connection:Connection, properties:Properties):MorphBaseRunner = {
+    val morphProperties = properties.asInstanceOf[MorphProperties];
+    
+    //BUILDING CONNECTION AND DATA SOURCE READER
+    val dataSourceReaderClassName = morphProperties.queryEvaluatorClassName;
+    val dataSourceReader = MorphBaseDataSourceReader(dataSourceReaderClassName
+        , connection, morphProperties.databaseTimeout);
 
-		//BUILDING MAPPING DOCUMENT
-		var automaticMappingsGeneration = false;
-		val mappingDocumentFile = try {
-			if(morphProperties.mappingDocumentFilePath == null) {
-				val mappingsGenerator = new R2RMLMapper();
-				mappingsGenerator.run(properties);
-				automaticMappingsGeneration = true;
-			    mappingsGenerator.getGeneratedMappingsFile();
-			} 
-			else { morphProperties.mappingDocumentFilePath; }
-		}
-		catch { case e:Exception => { morphProperties.mappingDocumentFilePath; } }
-		
-		val mappingDocument = this.readMappingDocumentFile(mappingDocumentFile
-		    , morphProperties, connection);
+    //BUILDING MAPPING DOCUMENT
+    var automaticMappingsGeneration = false;
+    val mappingDocumentFile = try {
+      if(morphProperties.mappingDocumentFilePath == null) {
+        val mappingsGenerator = new R2RMLMapper();
+        mappingsGenerator.run(properties);
+        automaticMappingsGeneration = true;
+          mappingsGenerator.getGeneratedMappingsFile();
+      } 
+      else { morphProperties.mappingDocumentFilePath; }
+    }
+    catch { case e:Exception => { morphProperties.mappingDocumentFilePath; } }
+    
+    val mappingDocument = this.readMappingDocumentFile(mappingDocumentFile
+        , morphProperties, connection);
 
-		//BUILDING UNFOLDER
-		val unfolder = this.createUnfolder(mappingDocument, morphProperties);
-		
-		val outputStream:Writer = if(morphProperties.outputFilePath.isDefined) {
-			val outputFileName = morphProperties.outputFilePath.get;
-		  //new FileWriter(outputFileName)
-			//new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), "UTF-8"));
-			new PrintWriter( outputFileName, "UTF-8")
-		} 
-		else {
-		  if(!automaticMappingsGeneration) { new StringWriter }
-		  else { 
-		    val outputFileName = morphProperties.databaseName + "-result.nt"; 
-		    new PrintWriter( outputFileName, "UTF-8");
-		  }
-		   
-		}
-		//BUILDING MATERIALIZER
-		val materializer = this.buildMaterializer(morphProperties, mappingDocument
-		    , outputStream);
-		
-		//BUILDING DATA TRANSLATOR
-		val dataTranslator = try {
-		 Some(this.createDataTranslator(mappingDocument, materializer, unfolder
-				 , dataSourceReader, connection, morphProperties)) 
-		} catch {
-		  case e:Exception => {
-		    logger.warn("Error building data translator!");
-		    None
-		  }
-		}
-		
-		//BUILDING QUERY TRANSLATOR
-		logger.debug("Building query translator...");
-		val queryTranslatorFactoryClassName = 
-		  morphProperties.queryTranslatorFactoryClassName;
-		val queryTranslator = try {
-			  val qtAux = this.buildQueryTranslator(queryTranslatorFactoryClassName
-					  , mappingDocument, connection, morphProperties);
-			  Some(qtAux);
-		  } catch {
-		    case e:Exception => {
-		      logger.warn("Error building query translator!" + e.getMessage());
-		    }
-		    None
-		  }
+    //BUILDING UNFOLDER
+    val unfolder = this.createUnfolder(mappingDocument, morphProperties);
+    
+    val outputStream:Writer = if(morphProperties.outputFilePath.isDefined) {
+      val outputFileName = morphProperties.outputFilePath.get;
+      //new FileWriter(outputFileName)
+      //new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), "UTF-8"));
+      new PrintWriter( outputFileName, "UTF-8")
+    } 
+    else {
+      if(!automaticMappingsGeneration) { new StringWriter }
+      else { 
+        val outputFileName = morphProperties.databaseName + "-result.nt"; 
+        new PrintWriter( outputFileName, "UTF-8");
+      }
+       
+    }
+    //BUILDING MATERIALIZER
+    val materializer = this.buildMaterializer(morphProperties, mappingDocument
+        , outputStream);
+    
+    //BUILDING DATA TRANSLATOR
+    val dataTranslator = try {
+     Some(this.createDataTranslator(mappingDocument, materializer, unfolder
+         , dataSourceReader, connection, morphProperties)) 
+    } catch {
+      case e:Exception => {
+        logger.warn("Error building data translator!");
+        None
+      }
+    }
+    
+    //BUILDING QUERY TRANSLATOR
+    logger.debug("Building query translator...");
+    val queryTranslatorFactoryClassName = 
+      morphProperties.queryTranslatorFactoryClassName;
+    val queryTranslator = try {
+        val qtAux = this.buildQueryTranslator(queryTranslatorFactoryClassName
+            , mappingDocument, connection, morphProperties);
+        Some(qtAux);
+      } catch {
+        case e:Exception => {
+          logger.warn("Error building query translator!" + e.getMessage());
+        }
+        None
+      }
 
-		//BUILDING QUERY RESULT WRITER
-		val queryResultWriter = if(queryTranslator.isDefined) {
-			val queryResultWriterFactoryClassName = 
-			  morphProperties.queryResultWriterFactoryClassName;
-//			val outputStream2 = if(properties.outputFilePath.isDefined) {
-//			  new FileOutputStream(properties.outputFilePath.get)
-//			} else { new ByteArrayOutputStream() }
-			
-			val qrwAux = this.buildQueryResultWriter(queryResultWriterFactoryClassName
-			    , queryTranslator.get, outputStream);
-			Some(qrwAux)
-		} else { None }
+    //BUILDING QUERY RESULT WRITER
+    val queryResultWriter = if(queryTranslator.isDefined) {
+      val queryResultWriterFactoryClassName = 
+        morphProperties.queryResultWriterFactoryClassName;
+//      val outputStream2 = if(properties.outputFilePath.isDefined) {
+//        new FileOutputStream(properties.outputFilePath.get)
+//      } else { new ByteArrayOutputStream() }
+      
+      val qrwAux = this.buildQueryResultWriter(queryResultWriterFactoryClassName
+          , queryTranslator.get, outputStream);
+      Some(qrwAux)
+    } else { None }
 
-		//BUILDING RESULT PROCESSOR
-		val resultProcessor = if(queryResultWriter.isDefined) {
-			val resultProcessorAux = this.buildQueryResultTranslator(dataSourceReader
-					, queryResultWriter.get);
-			Some(resultProcessorAux)
-		} else { None }
-		
-		val runner = this.createRunner(mappingDocument
-//		    , dataSourceReader
-		    , unfolder
-		    , dataTranslator
-//		    , materializer
-		    , queryTranslator
-		    ,  resultProcessor
-		    , outputStream
-		)
+    //BUILDING RESULT PROCESSOR
+    val resultProcessor = if(queryResultWriter.isDefined) {
+      val resultProcessorAux = this.buildQueryResultTranslator(dataSourceReader
+          , queryResultWriter.get);
+      Some(resultProcessorAux)
+    } else { None }
+    
+    val runner = this.createRunner(mappingDocument
+//        , dataSourceReader
+        , unfolder
+        , dataTranslator
+//        , materializer
+        , queryTranslator
+        ,  resultProcessor
+        , outputStream
+    )
 
-		runner.ontologyFilePath = morphProperties.ontologyFilePath;
-		if(morphProperties.queryFilePath.isDefined) {
-			runner.sparqlQuery = Some(QueryFactory.read(morphProperties.queryFilePath.get))
-		}
-		
-//		val mapper = new R2RMLMapper();
-//		mapper.run(properties);
-		
-		runner;
-	}
+    runner.ontologyFilePath = morphProperties.ontologyFilePath;
+    if(morphProperties.queryFilePath.isDefined) {
+      runner.sparqlQuery = Some(QueryFactory.read(morphProperties.queryFilePath.get))
+    }
+    
+//    val mapper = new R2RMLMapper();
+//    mapper.run(properties);
+    
+    runner;
+  }
+  
+
 	
 	def createRunner(mappingDocument:MorphBaseMappingDocument
 //    , dataSourceReader:MorphBaseDataSourceReader
