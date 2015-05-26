@@ -2,8 +2,10 @@ bin
 target/
 log/
 .settings/
-.cache
+.cache*
 .classpath
 .project
+morph.log
+*.*~
 morph-examples/examples/batch-result.nt
 

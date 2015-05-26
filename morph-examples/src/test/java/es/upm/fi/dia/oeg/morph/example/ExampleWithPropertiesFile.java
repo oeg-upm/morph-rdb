@@ -292,7 +292,8 @@ public class ExampleWithPropertiesFile {
 
 	@Test
 	public void testDODGAWithPropertiesFile() {
-		String configurationDirectory = "C:/Users/fpriyatna/Documents/dodga/iasoft/morph-files";
+		//String configurationDirectory = "C:/Users/fpriyatna/Documents/dodga/iasoft/morph-files";
+		String configurationDirectory = "/home/fpriyatna/Documentos/dodga/iasoft/morph-files";
 		String configurationFile = "pproc.r2rml.properties";
 		try {
 			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
