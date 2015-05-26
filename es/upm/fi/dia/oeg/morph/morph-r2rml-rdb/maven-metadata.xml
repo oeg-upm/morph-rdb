@@ -4,8 +4,8 @@
   <artifactId>morph-r2rml-rdb</artifactId>
   <versioning>
     <versions>
-      <version>3.5.5-SNAPSHOT</version>
+      <version>3.5.9-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20150508163244</lastUpdated>
+    <lastUpdated>20150526083538</lastUpdated>
   </versioning>
 </metadata>
