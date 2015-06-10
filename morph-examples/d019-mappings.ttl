@@ -1,0 +1,128 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1#> .
+@prefix rev: <http://purl.org/stuff/rev#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1#> .
+@prefix ex: <http://example.com> .
+
+@base <http://mappingpedia.org/rdb2rdf/r2rml/tc/> .
+
+<#TriplesMap1>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:tableName "employee"; 
+	];
+
+	rr:subjectMap [
+		rr:template "example.com/employee/ID={ID}.FirstName={FirstName}.LastName={LastName}";
+		rr:termType rr:BlankNode;
+		rr:class <http://example.com/Employee>;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Employee#id>;
+		rr:objectMap [ rr:column "ID"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Employee#firstname>;
+		rr:objectMap [ rr:column "FirstName"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate <http://example.com/Employee#lastname>;
+		rr:objectMap [ rr:column "LastName"; rr:datatype xsd:string; ];
+	].
+
+<#TriplesMap2>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Employee>;
+		rr:termType rr:IRI;
+		rr:class owl:Class;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:subClassOf;
+		rr:objectMap [ rr:constant owl:Thing ];
+	].
+
+<#TriplesMap3>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Employee#id>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Employee> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:integer ];
+	].
+
+<#TriplesMap4>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Employee#firstname>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Employee> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:string ];
+	].
+
+<#TriplesMap5>
+	a rr:TriplesMap;
+
+	rr:logicalTable [ 
+		rr:sqlQuery "SELECT 1 FROM INFORMATION_SCHEMA.TABLES LIMIT 1" 
+	];
+
+	rr:subjectMap [
+		rr:constant <http://example.com/Employee#lastname>;
+		rr:termType rr:IRI;
+		rr:class owl:DatatypeProperty;
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:domain;
+		rr:objectMap [ rr:constant <http://example.com/Employee> ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:range;
+		rr:objectMap [ rr:constant xsd:string ];
+	].
+

@@ -1,0 +1,23 @@
+_:example.com/employee/ID=10.FirstName=http://example.com/ns#Jhon.LastName=Smith <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Employee> .
+_:example.com/employee/ID=10.FirstName=http://example.com/ns#Jhon.LastName=Smith <http://example.com/Employee#lastname> "Smith"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:example.com/employee/ID=10.FirstName=http://example.com/ns#Jhon.LastName=Smith <http://example.com/Employee#firstname> "http://example.com/ns#Jhon"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:example.com/employee/ID=10.FirstName=http://example.com/ns#Jhon.LastName=Smith <http://example.com/Employee#id> "10"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:example.com/employee/ID=20.FirstName=Carlos.LastName=Mendoza <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Employee> .
+_:example.com/employee/ID=20.FirstName=Carlos.LastName=Mendoza <http://example.com/Employee#lastname> "Mendoza"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:example.com/employee/ID=20.FirstName=Carlos.LastName=Mendoza <http://example.com/Employee#firstname> "Carlos"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:example.com/employee/ID=20.FirstName=Carlos.LastName=Mendoza <http://example.com/Employee#id> "20"^^<http://www.w3.org/2001/XMLSchema#integer> .
+_:example.com/employee/ID=30.FirstName=Juan Daniel.LastName=Crespo <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Employee> .
+_:example.com/employee/ID=30.FirstName=Juan Daniel.LastName=Crespo <http://example.com/Employee#lastname> "Crespo"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:example.com/employee/ID=30.FirstName=Juan Daniel.LastName=Crespo <http://example.com/Employee#firstname> "Juan Daniel"^^<http://www.w3.org/2001/XMLSchema#string> .
+_:example.com/employee/ID=30.FirstName=Juan Daniel.LastName=Crespo <http://example.com/Employee#id> "30"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://example.com/Employee#lastname> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://example.com/Employee#lastname> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/Employee#lastname> <http://www.w3.org/2000/01/rdf-schema#domain> <http://example.com/Employee> .
+<http://example.com/Employee#id> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://example.com/Employee#id> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#integer> .
+<http://example.com/Employee#id> <http://www.w3.org/2000/01/rdf-schema#domain> <http://example.com/Employee> .
+<http://example.com/Employee#firstname> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://example.com/Employee#firstname> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://example.com/Employee#firstname> <http://www.w3.org/2000/01/rdf-schema#domain> <http://example.com/Employee> .
+<http://example.com/Employee> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://example.com/Employee> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2002/07/owl#Thing> .

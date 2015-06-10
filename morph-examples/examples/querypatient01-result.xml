@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="p"/>
+        <variable name="name"/>
+    </head>
+    <results>
+        <result>
+            <binding name="p">
+                <uri>http://mappingpedia.linkeddata.es/resources/Patient/1</uri>
+            </binding>
+            <binding name="name">
+                <literal>mary</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="p">
+                <uri>http://mappingpedia.linkeddata.es/resources/Patient/2</uri>
+            </binding>
+            <binding name="name">
+                <literal>john</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>

@@ -305,4 +305,85 @@ public class ExampleWithPropertiesFile {
 			System.out.println("Batch process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
-	}}
+	}
+
+	@Test
+	public void testExamplePatientTP() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "example_patientTP.r2rml.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
+	public void testExamplePatientSTG() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "example_patientSTG.r2rml.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+
+	@Test
+	public void testExamplePatientOSTG() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "example_patientOSTG.r2rml.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
+	public void testExamplePatientBGP() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "example_patientBGP.r2rml.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
+	public void testExamplePatientPT() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "example_patientPT.r2rml.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+}

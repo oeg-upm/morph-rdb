@@ -1,0 +1,70 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex: <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rev: <http://purl.org/stuff/rev#> .
+@prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> .
+@prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> .
+@base <http://mappingpedia.org/rdb2rdf/r2rml/tc/> .
+
+
+<TriplesMapPatient>
+	a rr:TriplesMap;
+        
+	rr:logicalTable [ 
+        rr:tableName  "tbl_patient" 
+    ];
+	
+    rr:subjectMap [    
+		a rr:Subject;
+		rr:template "http://mappingpedia.linkeddata.es/resources/Patient/{patientid}";
+		rr:termType rr:IRI;
+		rr:class <http://www.semanticweb.org/mrezk#Patient>;
+	];
+
+	rr:predicateObjectMap [ 
+      rr:predicateMap [ rr:constant <http://www.semanticweb.org/mrezk#hasPatientName> ]; 
+      rr:objectMap    [ rr:termType rr:Literal; rr:column "name"; ]; 
+    ];
+
+	rr:predicateObjectMap [ 
+      rr:predicateMap [ rr:constant <http://www.semanticweb.org/mrezk#hasName> ]; 
+      rr:objectMap    [ rr:termType rr:Literal; rr:column "name"; ]; 
+    ];
+	
+	rr:predicateObjectMap [ 
+      rr:predicateMap [ rr:constant <http://www.semanticweb.org/mrezk#hasStage2> ]; 
+      rr:objectMap    [ 
+         rr:parentTriplesMap <TriplesMapStage>;
+         rr:joinCondition [ rr:child "stage" ; rr:parent "stageid" ; ]
+      ];
+    ];
+	
+	rr:predicateObjectMap [ 
+      rr:predicateMap [ rr:constant <http://www.semanticweb.org/mrezk#hasNeoplasm> ]; 
+      rr:objectMap    [ rr:termType rr:IRI; rr:template "http://mappingpedia.linkeddata.es/resources/Neoplasm/{patientid}"; ]; 
+    ];
+.
+
+<TriplesMapStage>
+	a rr:TriplesMap;
+        
+	rr:logicalTable [ 
+        rr:tableName  "tbl_stage" 
+    ];
+	
+    rr:subjectMap [    
+		a rr:Subject;
+		rr:template "http://mappingpedia.linkeddata.es/resources/Stage/{stagename}";
+		rr:termType rr:IRI;
+		rr:class <http://www.semanticweb.org/mrezk#Stage>;
+	];
+
+	rr:predicateObjectMap [ 
+      rr:predicateMap [ rr:constant <http://www.semanticweb.org/mrezk#hasStageName> ]; 
+      rr:objectMap    [ rr:termType rr:Literal; rr:column "stagename"; ]; 
+    ];
+
+.
