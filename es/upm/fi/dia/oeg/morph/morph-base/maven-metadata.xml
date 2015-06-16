@@ -4,8 +4,8 @@
   <artifactId>morph-base</artifactId>
   <versioning>
     <versions>
-      <version>3.5.9-SNAPSHOT</version>
+      <version>3.5.10-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20150526083505</lastUpdated>
+    <lastUpdated>20150616164351</lastUpdated>
   </versioning>
 </metadata>
