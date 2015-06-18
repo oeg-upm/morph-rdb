@@ -8,8 +8,8 @@ import com.hp.hpl.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElementVisitor
 import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElement
-import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLSQLQuery
-import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTable
+//import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLSQLQuery
+//import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTable
 
 abstract class R2RMLLogicalTable(val logicalTableType:Constants.LogicalTableType.Value) 
 extends MorphBaseLogicalTable with MorphR2RMLElement{

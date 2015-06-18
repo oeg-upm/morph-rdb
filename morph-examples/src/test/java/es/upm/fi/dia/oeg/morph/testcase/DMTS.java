@@ -128,7 +128,7 @@ public class DMTS {
 	
 	public void run(String testName, boolean conformingMapping) {
 		try {
-			String directoryName = this.mapTestCaseName.get(testName);
+//			String directoryName = this.mapTestCaseName.get(testName);
 			//String configurationDirectory = mappingDirectory + File.separator + directoryName + File.separator;
 			String configurationDirectory = mappingDirectory + File.separator;
 			String configurationFile = testName + ".morph.properties";

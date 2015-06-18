@@ -2,25 +2,12 @@ package es.upm.fi.dia.oeg.morph.example;
 
 import static org.junit.Assert.assertTrue;
 
-
-
-
-
-
-
-
-import java.io.File;
-import java.sql.Connection;
-import java.util.Properties;
-
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 //import org.apache.log4j.Logger;
 //import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
-import es.upm.fi.dia.oeg.morph.base.DBUtility;
-import es.upm.fi.dia.oeg.morph.base.MorphProperties;
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
@@ -38,10 +25,10 @@ public class ExampleWithPropertiesFile {
 			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
 			runner.run();
-			System.out.println("Batch process DONE------\n\n");
+			logger.info("Batch process DONE------\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Batch process FAILED------\n\n");
+			logger.info("Batch process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}

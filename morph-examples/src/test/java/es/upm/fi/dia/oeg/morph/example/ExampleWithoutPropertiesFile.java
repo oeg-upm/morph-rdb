@@ -56,7 +56,7 @@ public class ExampleWithoutPropertiesFile {
 		} catch(Exception e) {
 			e.printStackTrace();
 			String errorMessage = "Error occured: " + e.getMessage();
-			assertTrue(e.getMessage(), false);
+			assertTrue(errorMessage, false);
 		}
 	}
 	
@@ -88,7 +88,7 @@ public class ExampleWithoutPropertiesFile {
 		} catch(Exception e) {
 			e.printStackTrace();
 			String errorMessage = "Error occured: " + e.getMessage();
-			assertTrue(e.getMessage(), false);
+			assertTrue(errorMessage, false);
 		}
 	}
 	
@@ -124,7 +124,7 @@ public class ExampleWithoutPropertiesFile {
 		} catch(Exception e) {
 			e.printStackTrace();
 			String errorMessage = "Error occured: " + e.getMessage();
-			assertTrue(e.getMessage(), false);
+			assertTrue(errorMessage, false);
 		}
 	}
 
@@ -156,7 +156,7 @@ public class ExampleWithoutPropertiesFile {
 		} catch(Exception e) {
 			e.printStackTrace();
 			String errorMessage = "Error occured: " + e.getMessage();
-			assertTrue(e.getMessage(), false);
+			assertTrue(errorMessage, false);
 		}
 	}
 

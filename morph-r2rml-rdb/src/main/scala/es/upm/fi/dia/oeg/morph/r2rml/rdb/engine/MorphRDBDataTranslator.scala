@@ -54,7 +54,7 @@ with MorphR2RMLElementVisitor {
 	override def translateData(triplesMap:MorphBaseClassMapping) : Unit = {
 		val query = this.unfolder.unfoldConceptMapping(triplesMap);
 		this.generateRDFTriples(triplesMap, query);
-		null;	  
+//		null;	  
 	}
 	
 	override def translateData(triplesMaps:Iterable[MorphBaseClassMapping]) : Unit = {
