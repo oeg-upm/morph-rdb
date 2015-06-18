@@ -193,7 +193,13 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
 								} 
 							  case Constants.MorphTermMapType.ColumnTermMap => {
 									//String columnName = termMap.getColumnName();
-									rs.getObject(varName).toString();
+                  val rsObjectVarName = rs.getObject(varName); 
+                  if(rsObjectVarName == null) {
+                    null
+                  } else {
+                    rsObjectVarName.toString();  
+                  }
+									
 								} 
 							  case Constants.MorphTermMapType.ConstantTermMap => {
 									termMap.getConstantValue();
@@ -236,7 +242,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
 			}
 		} catch {
 		  case e:Exception => {
-		    //e.printStackTrace();
+		    e.printStackTrace();
 		    logger.error("Error occured while translating result set : " + e.getMessage());
 		    null;
 		  }

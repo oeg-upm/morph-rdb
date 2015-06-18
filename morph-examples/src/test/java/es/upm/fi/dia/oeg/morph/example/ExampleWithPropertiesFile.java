@@ -62,6 +62,7 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
+	@Test
 	public void testBatchPostgreSQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "batch-postgresql.r2rml.properties";
@@ -95,6 +96,7 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
+	@Test
 	public void testSparql01PostgreSQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
 		String configurationFile = "query01postgresql.r2rml.properties";
@@ -128,6 +130,22 @@ public class ExampleWithPropertiesFile {
 	}
 
 	@Test
+	public void testSparql02PostgreSQL() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "query02postgresql.r2rml.properties";
+		try {
+			String[] args = {configurationDirectory, configurationFile};
+			MorphRDBRunner.main(args);
+			System.out.println("Query process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
 	public void sparql03() {
 		//4 instances
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
@@ -144,6 +162,23 @@ public class ExampleWithPropertiesFile {
 		}
 	}	
 
+	@Test
+	public void testSparql03PostgreSQL() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "query03postgresql.r2rml.properties";
+		try {
+			String[] args = {configurationDirectory, configurationFile};
+			MorphRDBRunner.main(args);
+			System.out.println("Query process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+
+	
 	@Test
 	public void sparql04() {
 		//4 instances
@@ -162,6 +197,22 @@ public class ExampleWithPropertiesFile {
 	}	
 
 	@Test
+	public void testSparql04PostgreSQL() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "query04postgresql.r2rml.properties";
+		try {
+			String[] args = {configurationDirectory, configurationFile};
+			MorphRDBRunner.main(args);
+			System.out.println("Query process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
 	public void sparql05() {
 		//1 instance
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
@@ -178,6 +229,22 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
+	@Test
+	public void testSparql05PostgreSQL() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "query05postgresql.r2rml.properties";
+		try {
+			String[] args = {configurationDirectory, configurationFile};
+			MorphRDBRunner.main(args);
+			System.out.println("Query process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
 	@Test
 	public void sparql06() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples";
