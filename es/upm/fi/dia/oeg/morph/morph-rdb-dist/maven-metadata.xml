@@ -4,8 +4,8 @@
   <artifactId>morph-rdb-dist</artifactId>
   <versioning>
     <versions>
-      <version>3.5.10-SNAPSHOT</version>
+      <version>3.5.11-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20150616164433</lastUpdated>
+    <lastUpdated>20150618155613</lastUpdated>
   </versioning>
 </metadata>
