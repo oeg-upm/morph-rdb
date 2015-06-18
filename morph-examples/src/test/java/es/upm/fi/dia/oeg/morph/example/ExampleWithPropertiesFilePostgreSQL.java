@@ -25,11 +25,11 @@ public class ExampleWithPropertiesFilePostgreSQL {
 			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
 			runner.run();
-			System.out.println("Batch process DONE------\n\n");
+			logger.info("Batch process DONE------\n\n");
 		} catch (Exception e) {
 			//e.printStackTrace();
-			System.out.println("Error : " + e.getMessage());
-			System.out.println("Batch process FAILED------\n\n");
+			logger.info("Error : " + e.getMessage());
+			logger.info("Batch process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
 	}
