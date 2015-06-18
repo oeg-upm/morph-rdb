@@ -53,7 +53,7 @@ class MorphSQLSelectItem(val dbType:String, schema:String, table:String
 		//			}
 
 
-		if(dbType.equalsIgnoreCase(Constants.DATABASE_POSTGRESQL)) {
+		if(dbType != null && dbType.equalsIgnoreCase(Constants.DATABASE_POSTGRESQL)) {
       val wrappedColumn = MorphSQLSelectItem.wrapColumnWithEnclosedChar(this.column, enclosedCharacter);
       var resultList2 = List(this.schema, this.table, wrappedColumn).filter(x => x != null);
       result = resultList2.mkString(".");

@@ -48,7 +48,7 @@ class MorphRDBRunnerFactory extends MorphBaseRunnerFactory{
 	
 	override def createUnfolder(md:MorphBaseMappingDocument, props:MorphProperties):MorphRDBUnfolder = {
 		val unfolder = new MorphRDBUnfolder(md.asInstanceOf[R2RMLMappingDocument], props);
-		unfolder.dbType = props.databaseType;
+		//unfolder.dbType = props.databaseType;
 		unfolder;	  
 	}
 

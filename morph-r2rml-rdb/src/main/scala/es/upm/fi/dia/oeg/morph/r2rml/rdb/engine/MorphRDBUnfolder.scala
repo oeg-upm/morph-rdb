@@ -40,7 +40,7 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 	var mapTermMapColumnsAliases:Map[Object, List[String]] = Map.empty;
 	val logger = Logger.getLogger(this.getClass().getName());
 	var mapRefObjectMapAlias:Map[R2RMLRefObjectMap, String] = Map.empty;
-	
+	val dbType = properties.databaseType;
 
 	def getAliases(termMapOrRefObjectMap:Object ) : Collection[String] = {
 	  if(this.mapTermMapColumnsAliases.get(termMapOrRefObjectMap).isDefined) {

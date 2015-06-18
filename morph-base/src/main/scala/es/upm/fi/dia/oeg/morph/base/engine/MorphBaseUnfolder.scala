@@ -19,7 +19,7 @@ abstract class MorphBaseUnfolder(md:MorphBaseMappingDocument, properties:MorphPr
 //	ZUtils.addCustomFunction("REPLACE", 3);
 //	ZUtils.addCustomFunction("TRIM", 1);
 	
-	var dbType = Constants.DATABASE_MYSQL;
+	//var dbType = Constants.DATABASE_MYSQL;
 
 	def unfoldConceptMapping(cm:MorphBaseClassMapping ) : IQuery;
 	
