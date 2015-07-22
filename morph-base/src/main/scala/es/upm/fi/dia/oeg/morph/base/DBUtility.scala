@@ -69,7 +69,15 @@ object DBUtility {
 		
 		if(timeout > 0) { stmt.setQueryTimeout(timeout); }
 		val start = System.currentTimeMillis();
-		val result = stmt.execute(query);
+    val result = try {
+      stmt.execute(query);
+    } catch {
+      case e:Exception => {
+        logger.error("Error while executing SQL Query: " + query);
+        throw e;  
+      }
+    }
+		//val result = stmt.execute(query);
 		val end = System.currentTimeMillis();
 		logger.debug("SQL execution time was "+(end-start)+" ms.");
 		
@@ -171,6 +179,7 @@ object DBUtility {
 			conn;
 		} catch {
 		  case e:ClassNotFoundException => {
+        e.printStackTrace();
 			val errorMessage = "Error opening database connection, class not found : " + e.getMessage();
 			logger.error(errorMessage);
 			null

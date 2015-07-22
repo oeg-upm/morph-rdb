@@ -73,8 +73,11 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 			} 
 		  case Constants.LogicalTableType.QUERY_STRING => {
         val logicalTableValue = logicalTable.getValue();
-				//val sqlString = logicalTableValue.replaceAll("\"", dbEnclosedCharacter);
-        val sqlString = logicalTableValue;
+				
+        //this line is needed when using " in sql query.
+        val sqlString = logicalTableValue.replaceAll("\"", dbEnclosedCharacter);
+        
+        //val sqlString = logicalTableValue;
 				try {
 					val sqlString2 = if(!sqlString.endsWith(";")) {
 						sqlString + ";";

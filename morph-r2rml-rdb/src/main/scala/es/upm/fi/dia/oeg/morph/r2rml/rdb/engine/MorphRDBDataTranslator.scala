@@ -431,7 +431,7 @@ with MorphR2RMLElementVisitor {
 			} catch {
 			  case e:Exception => {
           noOfErrors = noOfErrors + 1;
-			    e.printStackTrace();
+			    //e.printStackTrace();
 			    logger.error("error while translating data: " + e.getMessage());
 			  }
 			}
