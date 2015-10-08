@@ -3,9 +3,10 @@
   <groupId>es.upm.fi.dia.oeg.morph</groupId>
   <artifactId>morph-base</artifactId>
   <versioning>
+    <release>3.5.12</release>
     <versions>
-      <version>3.5.11-SNAPSHOT</version>
+      <version>3.5.12</version>
     </versions>
-    <lastUpdated>20151008140124</lastUpdated>
+    <lastUpdated>20151008141508</lastUpdated>
   </versioning>
 </metadata>
