@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>org.scala-lang</groupId>
 			<artifactId>scala-library</artifactId>
-			<version>2.11.2</version>
+			<version>${scala.version}</version>
 		</dependency>
 
 		<dependency>
@@ -37,23 +37,11 @@
 			<version>1.6.5</version>
 		</dependency>
 
-<!-- 		<dependency>
-			<groupId>zql</groupId>
-			<artifactId>zql</artifactId>
-			<version>0.1</version>
-		</dependency> -->
-
 		<dependency>
 			<groupId>com.hp.hpl.jena</groupId>
 			<artifactId>jena</artifactId>
 			<version>2.6.4</version>
 		</dependency>
-
-<!-- 		<dependency>
-			<groupId>rqr4r2o</groupId>
-			<artifactId>rqr4r2o</artifactId>
-			<version>0.1</version>
-		</dependency> -->
 
 		<dependency>
 			<groupId>org.apache.jena</groupId>
@@ -63,34 +51,26 @@
 
 		<dependency>
 			<groupId>es.upm.fi.dia.oeg.morph</groupId>
-			<artifactId>r2rml-mappings-generator</artifactId>
-			<version>1.1.6</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/r2rml-mappings-generator-v1.1.6.jar</systemPath>
+			<artifactId>mirror</artifactId>
+			<version>1.2.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>zql</groupId>
 			<artifactId>zql</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/Zql.jar</systemPath>
+			<version>0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>rqr4r2o</groupId>
 			<artifactId>rqr4r2o</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/rqr4r2o.jar</systemPath>
+			<version>0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc</artifactId>
 			<version>14</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/ojdbc6.jar</systemPath>
 		</dependency>
 		
 	</dependencies>
@@ -105,6 +85,7 @@
 			<plugin>
 				<groupId>org.scala-tools</groupId>
 				<artifactId>maven-scala-plugin</artifactId>
+				<version>2.15.2</version>
 				<executions>
 					<execution>
 						<goals>
@@ -157,17 +138,16 @@
 	</build>
 
 	<repositories>
-<!-- 		<repository>
-			<id>aldebaran-external-libs</id>
-			<name>Aldebaran External 
-			Libraries</name>
+		<repository>
+			<id>aldebaran-sstreams-external-libs</id>
+			<name>Aldebaran External Libraries</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-external-libs-local</url>
 		</repository>
 		<repository>
-			<id>aldebaran-snapshots</id>
-			<name>Aldebaran Snapshots</name>
-			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
-		</repository> -->
+			<id>aldebaran-morph-rdb-external-libs</id>
+			<name>Aldebaran Morph-RDB External Libraries</name>
+			<url>http://aldebaran.dia.fi.upm.es/artifactory/morph-rdb-external-libs-local</url>
+		</repository>
 	</repositories>
 
 
