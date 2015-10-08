@@ -67,11 +67,12 @@
 			<version>0.1</version>
 		</dependency>
 
-		<dependency>
+<!--		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc</artifactId>
 			<version>14</version>
 		</dependency>
+-->
 		
 	</dependencies>
 
