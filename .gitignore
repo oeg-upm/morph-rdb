@@ -1,10 +1,12 @@
 bin
 target/
 log/
+.idea
 .settings/
 .cache*
 .classpath
 .project
+*.iml
 morph.log
 *.*~
 morph-examples/examples/batch-result.nt
