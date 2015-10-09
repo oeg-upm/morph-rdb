@@ -217,7 +217,11 @@ object R2RMLMappingDocument {
 	def apply(mdPath:String, props:MorphProperties
 	    , connection:Connection)
 	: R2RMLMappingDocument = {
-
+	  if(mdPath == null) {
+			throw new IllegalArgumentException(
+					"Mapping File is not defined!");
+	  }
+	
 		val model = ModelFactory.createDefaultModel();
 		// use the FileManager to find the input file
 		val in = FileManager.get().open( mdPath );
