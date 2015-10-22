@@ -128,6 +128,7 @@ object GeneralUtility {
 		  GeneralUtility.createBlankNode(id.getLabelString());
 		}
 		else if(rdfNode.isLiteral()) {
+      /*
 			val literalNode = rdfNode.asLiteral();
 			val datatype = literalNode.getDatatype();
 			val lang = literalNode.getLanguage();
@@ -147,6 +148,9 @@ object GeneralUtility {
 			}
 			
 			literalString
+      */
+      
+      rdfNode.asNode().toString();
 		}
 		else { rdfNode.toString()}	    
 	  }
