@@ -8,22 +8,22 @@
 
 	<groupId>es.upm.fi.dia.oeg.morph</groupId>
 	<artifactId>morph-rdb</artifactId>
-	<version>3.5.14</version>
+	<version>3.5.15</version>
 
 	<modules>
-		 
+
 		<module>morph-base</module>
-		
+
 		<module>morph-base-querytranslator</module>
-	
+
 		<module>morph-r2rml</module>
-		 
+
 		<module>morph-r2rml-rdb</module>
 
 		<module>morph-r2rml-rdb-querytranslator</module>
 
 		<module>morph-rdb-dist</module>
-		 
+
 	</modules>
 
 	<properties>
@@ -77,23 +77,12 @@
 	</build>
 
 	<distributionManagement>
-		<!-- 
-		
-		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>aldebaran-releases</id>
-			<name>Aldebaran Releases</name>
-			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-releases-local</url>
-		</repository>
+		<!-- <repository> <uniqueVersion>false</uniqueVersion> <id>aldebaran-releases</id> 
+			<name>Aldebaran Releases</name> <url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-releases-local</url> 
+			</repository> <snapshotRepository> <uniqueVersion>true</uniqueVersion> <id>aldebaran-snapshots</id> 
+			<name>Aldebaran Snapshots</name> <url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url> 
+			</snapshotRepository> -->
 
-		<snapshotRepository>
-			<uniqueVersion>true</uniqueVersion>
-			<id>aldebaran-snapshots</id>
-			<name>Aldebaran Snapshots</name>
-			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url>
-		</snapshotRepository>
- -->
- 
 		<repository>
 			<id>internal.repo</id>
 			<name>Temporary Staging Repository</name>
