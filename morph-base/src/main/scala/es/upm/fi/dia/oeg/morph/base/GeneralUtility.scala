@@ -128,14 +128,14 @@ object GeneralUtility {
 		  GeneralUtility.createBlankNode(id.getLabelString());
 		}
 		else if(rdfNode.isLiteral()) {
-      /*
 			val literalNode = rdfNode.asLiteral();
+			val nodeLexicalForm = literalNode.getLexicalForm();
 			val datatype = literalNode.getDatatype();
 			val lang = literalNode.getLanguage();
       
-			val literalValue = literalNode.getValue();
-			val literalValueString = literalValue.toString();
-			
+			//val literalValue = literalNode.getValue();
+			//val literalValueString = literalValue.toString();
+			val literalValueString = nodeLexicalForm;
       
 			val literalString = if(datatype == null) {
 				if(lang == null || lang.equals("")) {
@@ -148,9 +148,8 @@ object GeneralUtility {
 			}
 			
 			literalString
-      */
       
-      rdfNode.asNode().toString();
+      //rdfNode.asNode().toString();
 		}
 		else { rdfNode.toString()}	    
 	  }
