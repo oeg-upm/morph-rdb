@@ -24,6 +24,9 @@
 
 		<module>morph-rdb-dist</module>
 
+		<module>morph-examples</module>
+
+
 	</modules>
 
 	<properties>
