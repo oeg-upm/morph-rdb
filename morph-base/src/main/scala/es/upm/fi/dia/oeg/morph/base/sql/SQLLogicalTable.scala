@@ -12,4 +12,10 @@ trait SQLLogicalTable {
 	
 	def setDatabaseType(databaseType:String) = {this.databaseType = databaseType};
 	def getDatabaseType() : String = this.databaseType;
+
+	def sameTableWith(anotherFromItem : SQLLogicalTable) = {
+		val thisWithoutAlias = this.print(false)
+		val anotherWithoutAlias = anotherFromItem.print(false);
+		thisWithoutAlias.equals(anotherWithoutAlias)
+	}
 }

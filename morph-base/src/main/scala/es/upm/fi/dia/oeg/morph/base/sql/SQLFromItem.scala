@@ -26,7 +26,9 @@ extends ZFromItem(fullName) with SQLLogicalTable {
 	override def toString() : String = {
 	  this.print(true)
 	}
-	
+
+
+
 	def setJoinType(joinType:String ) = { this.joinType = joinType;	}
 
 	def setOnExp(onExp:ZExp ) = { this.onExp = onExp; }

@@ -440,4 +440,22 @@ public class ExampleWithPropertiesFile {
 			assertTrue(e.getMessage(), false);
 		}
 	}
+
+	@Test
+	public void testBatchPostgreSQL2() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "batch-postgresql2.r2rml.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			//e.printStackTrace();
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+
 }

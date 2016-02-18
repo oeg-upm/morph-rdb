@@ -236,7 +236,7 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 
 				//UNFOLD OBJECTMAP
 				val objectMaps = pom.objectMaps;
-				if(objectMaps != null && !objectMaps.isEmpty()) {
+				if(objectMaps != null && !objectMaps.isEmpty) {
 					//val objectMap = pom.getObjectMap(0);
 					for (om <- pom.objectMaps) {
 						val objectMapSelectItems = this.unfoldTermMap(om, logicalTableAlias);
@@ -247,62 +247,75 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 
 				//UNFOLD REFOBJECTMAP
 				val refObjectMaps = pom.refObjectMaps;
-				if(refObjectMaps != null && !refObjectMaps.isEmpty()) {
+				if(refObjectMaps != null && !refObjectMaps.isEmpty) {
 					//val refObjectMap = pom.getRefObjectMap(0);
-					for(refObjectMap <- refObjectMaps) {
-						if(refObjectMap != null) {
-							val parentTriplesMap = this.md.getParentTriplesMap(refObjectMap);
-							val parentLogicalTable = parentTriplesMap.getLogicalTable();
-							if(parentLogicalTable == null) {
-								val errorMessage = "Parent logical table is not found for RefObjectMap : " + pom.getMappedPredicateName(0);
-								throw new Exception(errorMessage);
-							}
-							val sqlParentLogicalTable = this.unfoldLogicalTable(parentLogicalTable.asInstanceOf[R2RMLLogicalTable]);
-							//parentLogicalTable.alias = parentLogicalTableAlias;
-									
-							val joinQueryAlias = sqlParentLogicalTable.generateAlias();
-							sqlParentLogicalTable.setAlias(joinQueryAlias);
-							//refObjectMap.setAlias(joinQueryAlias);
-							this.mapRefObjectMapAlias += (refObjectMap -> joinQueryAlias);
-							pom.setAlias(joinQueryAlias);
-							
-							//val refObjectMapColumnsString = refObjectMap.getParentDatabaseColumnsString();
-							val parentSubjectMap = parentTriplesMap.subjectMap;
-							val refObjectMapColumnsString = parentSubjectMap.getReferencedColumns;
-							
-							if(refObjectMapColumnsString != null ) {
-								for(refObjectMapColumnString <- refObjectMapColumnsString) {
-									val selectItem = MorphSQLSelectItem(
-									    refObjectMapColumnString, joinQueryAlias, dbType, null);
-									if(selectItem.getAlias() == null) {
-										//val alias = selectItem.getTable() + "_" + selectItem.getColumn();
-                    val alias = selectItem.getTable() + "_" + selectItem.printColumnWithoutEnclosedChar();
-										selectItem.setAlias(alias);
-										if(this.mapTermMapColumnsAliases.containsKey(refObjectMap)) {
-												val oldColumnAliases = this.mapTermMapColumnsAliases(refObjectMap);
-												val newColumnAliases = oldColumnAliases ::: List(alias);
-												this.mapTermMapColumnsAliases += (refObjectMap -> newColumnAliases);
-										} else {
-											this.mapTermMapColumnsAliases +=(refObjectMap -> List(alias));
-										}
-									}							
-									//resultSelectItems.add(selectItem);
-									result.addSelectItem(selectItem);
+					refObjectMaps.filter(x => x!= null).map( refObjectMap => {
+						val joinConditions = refObjectMap.getJoinConditions();
+
+						val parentTriplesMap = this.md.getParentTriplesMap(refObjectMap);
+						val parentLogicalTable = parentTriplesMap.getLogicalTable();
+						if(parentLogicalTable == null) {
+							val errorMessage = "Parent logical table is not found for RefObjectMap : " + pom.getMappedPredicateName(0);
+							throw new Exception(errorMessage);
+						}
+						val sqlParentLogicalTable = this.unfoldLogicalTable(parentLogicalTable.asInstanceOf[R2RMLLogicalTable]);
+						//parentLogicalTable.alias = parentLogicalTableAlias;
+
+						val parentAndChildHaveSameLogicalTable = logicalTableUnfolded.sameTableWith(sqlParentLogicalTable);
+						val noJoinConditionSpecified = joinConditions == null || joinConditions.isEmpty;
+
+
+						val parentLogicalTableAlias = if(parentAndChildHaveSameLogicalTable && noJoinConditionSpecified) { logicalTableAlias }
+						else {sqlParentLogicalTable.generateAlias();}
+
+						sqlParentLogicalTable.setAlias(parentLogicalTableAlias);
+						//refObjectMap.setAlias(joinQueryAlias);
+						this.mapRefObjectMapAlias += (refObjectMap -> parentLogicalTableAlias);
+						pom.setAlias(parentLogicalTableAlias);
+
+
+
+
+						//val refObjectMapColumnsString = refObjectMap.getParentDatabaseColumnsString();
+						val parentSubjectMap = parentTriplesMap.subjectMap;
+						val refObjectMapColumnsString = parentSubjectMap.getReferencedColumns;
+
+						if(refObjectMapColumnsString != null ) {
+							for(refObjectMapColumnString <- refObjectMapColumnsString) {
+								val selectItem = MorphSQLSelectItem(
+									refObjectMapColumnString, parentLogicalTableAlias, dbType, null);
+								if(selectItem.getAlias() == null) {
+									//val alias = selectItem.getTable() + "_" + selectItem.getColumn();
+									val alias = selectItem.getTable() + "_" + selectItem.printColumnWithoutEnclosedChar();
+									selectItem.setAlias(alias);
+									if(this.mapTermMapColumnsAliases.containsKey(refObjectMap)) {
+										val oldColumnAliases = this.mapTermMapColumnsAliases(refObjectMap);
+										val newColumnAliases = oldColumnAliases ::: List(alias);
+										this.mapTermMapColumnsAliases += (refObjectMap -> newColumnAliases);
+									} else {
+										this.mapTermMapColumnsAliases +=(refObjectMap -> List(alias));
+									}
 								}
+								//resultSelectItems.add(selectItem);
+								result.addSelectItem(selectItem);
 							}
-	
-	
-							
-							val joinConditions = refObjectMap.getJoinConditions();
+						}
+
+
+
+						if(parentAndChildHaveSameLogicalTable && noJoinConditionSpecified) {
+							//no need to join tables
+						} else {
 							val onExpression = MorphRDBUnfolder.unfoldJoinConditions(
-							    joinConditions, logicalTableAlias, joinQueryAlias, dbType);
+								joinConditions, logicalTableAlias, parentLogicalTableAlias, dbType);
 							val joinQuery = new SQLJoinTable(sqlParentLogicalTable
-							    , Constants.JOINS_TYPE_LEFT, onExpression);
-							//result.addJoinQuery(joinQuery);		
+								, Constants.JOINS_TYPE_LEFT, onExpression);
+							//result.addJoinQuery(joinQuery);
 							result.addFromItem(joinQuery);
-						}					  
-					}
-					
+						}
+
+					})
+
 
 				}
 

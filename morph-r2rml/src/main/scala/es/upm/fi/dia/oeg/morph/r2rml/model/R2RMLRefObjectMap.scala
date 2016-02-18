@@ -24,7 +24,7 @@ class R2RMLRefObjectMap(val parentTriplesMapResource:Resource
 //		return alias;
 //	}
 
-	def getJoinConditions() : java.util.Collection[R2RMLJoinCondition] = {
+	def getJoinConditions() : Set[R2RMLJoinCondition] = {
 		joinConditions;
 	}
 
