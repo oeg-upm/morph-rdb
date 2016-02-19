@@ -458,4 +458,19 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
+	@Test
+	public void sparql11PostgreSQL() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationFile = "query11postgresql2.r2rml.properties";
+		try {
+			String[] args = {configurationDirectory, configurationFile};
+			MorphRDBRunner.main(args);
+			System.out.println("Query process DONE------");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
 }

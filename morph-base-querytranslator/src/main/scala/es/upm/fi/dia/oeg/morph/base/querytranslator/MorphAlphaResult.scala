@@ -8,7 +8,7 @@ import es.upm.fi.dia.oeg.morph.base.sql.SQLLogicalTable
 import es.upm.fi.dia.oeg.morph.base.sql.SQLJoinTable
 
 class MorphAlphaResult(val alphaSubject:SQLLogicalTable
-    , var alphaPredicateObjects:List[(SQLJoinTable, String)]) {
+    , var alphaPredicateObjects:List[MorphAlphaResultPredicateObject]) {
 	//alpha result = SQLLogicalTable
 	//alpha alphaPredicateObjects = (parent table, predicate URI)
   
@@ -16,3 +16,7 @@ class MorphAlphaResult(val alphaSubject:SQLLogicalTable
 			(alphaSubject, alphaPredicateObjects).toString
 	}  
 }
+
+//class MorphAlphaResultSubject(val alphaSubject:SQLLogicalTable)
+
+class MorphAlphaResultPredicateObject(val parentTable:SQLJoinTable, val predicateURI:String)

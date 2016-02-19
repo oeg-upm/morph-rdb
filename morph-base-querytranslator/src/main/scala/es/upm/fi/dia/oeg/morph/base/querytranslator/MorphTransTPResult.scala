@@ -25,7 +25,7 @@ class MorphTransTPResult(val alphaResult:MorphAlphaResult
 		val alphaResult = this.alphaResult
 		val alphaSubject = alphaResult.alphaSubject;
 		val alphaPredicateObjects = alphaResult.alphaPredicateObjects.flatMap(
-		    x => { if(x._1 != null ) { Some(x._1)} else { None }  });
+		    x => { if(x.parentTable != null ) { Some(x.parentTable)} else { None }  });
 		val prSQLResult = this.prSQLResult;
 		val prSQL = prSQLResult.toList;
 		val condSQLResult = this.condSQLResult;

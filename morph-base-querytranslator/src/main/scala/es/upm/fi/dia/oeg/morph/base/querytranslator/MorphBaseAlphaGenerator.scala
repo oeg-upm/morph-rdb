@@ -31,27 +31,25 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 	: MorphAlphaResult;
 
 	def  calculateAlphaPredicateObject(tp:Triple, cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping  
-			, logicalTableAlias:String ) : (SQLJoinTable, String);
-	
-	def calculateAlphaSubject(subject:Node , cm:MorphBaseClassMapping ) : SQLLogicalTable;
+			, logicalTableAlias:String ) : Option[MorphAlphaResultPredicateObject];
 
-	def isProcessableTriplePattern(tp:Triple, triples:Iterable[Triple], mappedClassURIs:Iterable[String]) = {
-		val tpPredicate = tp.getPredicate();
-		val tpObject = tp.getObject();
-
-		if(tpPredicate.isURI() && tpObject.isURI()) {
-			val tpPredicateURI = tpPredicate.getURI();
-			val tpObjectURI = tpObject.getURI();
-
-			if(RDF.`type`.getURI().equals(tpPredicateURI) && mappedClassURIs.contains(tpObjectURI) && triples.size > 1) {
-				false;
-			} else {
-				true;
-			}
+	def  calculateAlphaPredicateObject(tp:Triple, cm:MorphBaseClassMapping , tpPredicateURI:String
+																		 , logicalTableAlias:String ) : Option[MorphAlphaResultPredicateObject] = {
+		val isRDFTypeStatement = RDF.`type`.getURI().equals(tpPredicateURI);
+		if(isRDFTypeStatement && tp.getObject.isURI) {
+			None
 		} else {
-			true;
+			val pms = cm.getPropertyMappings(tpPredicateURI);
+			if(pms != null && !pms.isEmpty) {
+				val pm = pms.iterator.next();
+				this.calculateAlphaPredicateObject(tp, cm, pm, logicalTableAlias);
+			} else {
+				None
+			}
 		}
 	}
+
+	def calculateAlphaSubject(subject:Node , cm:MorphBaseClassMapping ) : SQLLogicalTable;
 
 	def calculateAlphaSTG(stg:Iterable[Triple] , cm:MorphBaseClassMapping )
 	: Iterable[MorphAlphaResultUnion] = {
@@ -66,71 +64,61 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 		return alphaResultUnionList;
 	}
 	
-	def calculateAlphaPredicateObjectSTG(tp:Triple , cm:MorphBaseClassMapping , tpPredicateURI:String 
-	    , logicalTableAlias:String ) : List[(SQLJoinTable, String)];
+/*	def calculateAlphaPredicateObjectSTG(tp:Triple , cm:MorphBaseClassMapping , tpPredicateURI:String
+	    , logicalTableAlias:String ) : List[(SQLJoinTable, String)];*/
+
+	def isProcessableTriplePattern(tp:Triple, triples:Iterable[Triple], mappedClassURIs:Iterable[String]) = {
+		val tpPredicate = tp.getPredicate();
+		val tpObject = tp.getObject();
+
+		if(tpPredicate.isURI() && tpObject.isURI()) {
+			val tpPredicateURI = tpPredicate.getURI();
+			val tpObjectURI = tpObject.getURI();
+
+			if(RDF.`type`.getURI().equals(tpPredicateURI) && mappedClassURIs.contains(tpObjectURI) && triples.size > 1) {
+				false;
+			} else { true; }
+		} else {true;}
+	}
 
 	def calculateAlphaPredicateObjectSTG(stg:Iterable[Triple] , cm:MorphBaseClassMapping , alphaSubject:SQLLogicalTable
 																			 , logicalTableAlias:String ) : Iterable[MorphAlphaResultUnion] = {
-
 		val alphaPredicateObjectSTG = stg.map(tp => {
 			val tpPredicate = tp.getPredicate();
-			//val alphaPredicateObjects : List[(SQLJoinTable, String)] = Nil;
-			if(tpPredicate.isURI()) {
-				val tpPredicateURI = tpPredicate.getURI();
-				val mappedClassURIs = cm.getMappedClassURIs();
-				val processableTriplePattern = this.isProcessableTriplePattern(tp, stg, mappedClassURIs);
 
-				val alphaPredicateObject = if(processableTriplePattern) {
-					val alphaPredicateObjectAux = calculateAlphaPredicateObjectSTG(
-						tp, cm, tpPredicateURI,logicalTableAlias);
-
-					val alphaPredicateObjects = if(alphaPredicateObjectAux != null) {
-						alphaPredicateObjectAux.toList;
-					} else {
-						Nil;
-					}
-
-					val alphaResult = new MorphAlphaResult(alphaSubject
-						, alphaPredicateObjects);
-
-					val alphaTP = new MorphAlphaResultUnion(alphaResult);
-					Some(alphaTP);
-				} else {
-					None;
-				}
-				alphaPredicateObject;
-			} else if(tpPredicate.isVariable()){
-				val pms = cm.getPropertyMappings();
-				val alphaTP = new MorphAlphaResultUnion();
-				for(pm <- pms) {
-					val tpPredicateURI = pm.getMappedPredicateName(0);
-					val alphaPredicateObjectAux = calculateAlphaPredicateObjectSTG(
-						tp, cm, tpPredicateURI,logicalTableAlias);
-					val alphaPredicateObjects = if(alphaPredicateObjectAux != null) {
-						alphaPredicateObjectAux;
-					} else {
-						Nil
-					}
-					val alphaResult = new MorphAlphaResult(alphaSubject
-						, alphaPredicateObjects);
-
-					alphaTP.add(alphaResult);
-				}
-
-				val alphaPredicateObject = if(alphaTP != null) {
-					Some(alphaTP);
-				} else {
-					None;
-				}
-				alphaPredicateObject;
+			val pms = if (tpPredicate.isURI) {
+				cm.getPropertyMappings(tpPredicate.getURI);
+			} else if (tpPredicate.isVariable) {
+				cm.getPropertyMappings();
 			} else {
 				val errorMessage = "Predicate has to be either an URI or a variable";
 				logger.error(errorMessage);
-				None;
+				Nil;
+			}
+
+			val processableTriplePattern = if(tpPredicate.isURI()) {
+				val tpPredicateURI = tpPredicate.getURI();
+				val mappedClassURIs = cm.getMappedClassURIs();
+				this.isProcessableTriplePattern(tp, stg, mappedClassURIs);
+			} else {true}
+
+			if(!processableTriplePattern) { None }
+			else {
+				val alphaTP = new MorphAlphaResultUnion();
+				for(pm <- pms) {
+					val tpPredicateURI = pm.getMappedPredicateName(0);
+					val alphaPredicateObjectAux : Option[MorphAlphaResultPredicateObject] = calculateAlphaPredicateObject(
+						tp, cm, tpPredicateURI, logicalTableAlias);
+					val alphaPredicateObjects:List[MorphAlphaResultPredicateObject] = if(alphaPredicateObjectAux.isEmpty) { Nil }
+					else {alphaPredicateObjectAux.toList};
+
+					val alphaResult = new MorphAlphaResult(alphaSubject, alphaPredicateObjects);
+					alphaTP.add(alphaResult);
+				}
+				Some(alphaTP)
 			}
 		});
 		alphaPredicateObjectSTG.flatMap(x => x);
-
 	}
 
 //	def calculateAlphaPredicateObjectSTG2(tp:Triple , cm:MorphBaseClassMapping , tpPredicateURI:String 
