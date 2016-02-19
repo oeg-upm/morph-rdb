@@ -262,7 +262,7 @@ extends MorphBaseUnfolder(md,properties) with MorphR2RMLElementVisitor {
 						//parentLogicalTable.alias = parentLogicalTableAlias;
 
 						val parentAndChildHaveSameLogicalTable = logicalTableUnfolded.sameTableWith(sqlParentLogicalTable);
-						val noJoinConditionSpecified = joinConditions == null || joinConditions.isEmpty;
+						val noJoinConditionSpecified = (joinConditions == null || joinConditions.isEmpty);
 
 
 						val parentLogicalTableAlias = if(parentAndChildHaveSameLogicalTable && noJoinConditionSpecified) { logicalTableAlias }

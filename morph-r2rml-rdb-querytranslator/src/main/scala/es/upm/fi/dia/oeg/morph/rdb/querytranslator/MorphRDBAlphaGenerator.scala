@@ -59,6 +59,9 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 				if(refObjectMap != null) { 
 					val alphaPredicateObject = this.calculateAlphaPredicateObject(
 							tp, abstractConceptMapping, pm, logicalTableAlias);
+					val parentLogicalTable = alphaPredicateObject._1.joinSource;
+					val parentAndChildHaveSameLogicalTable = alphaSubject.sameTableWith(parentLogicalTable);
+
 					List(alphaPredicateObject);
 				} else {
 					Nil;
@@ -109,6 +112,9 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 				val joinQueryAlias = sqlParentLogicalTableAuxAlias;
 	
 				val joinConditions = refObjectMap.getJoinConditions();
+
+
+
 				val onExpression = MorphRDBUnfolder.unfoldJoinConditions(
 						joinConditions, logicalTableAlias, joinQueryAlias
 						, databaseType);
@@ -151,10 +157,9 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 	
 	override def calculateAlphaPredicateObjectSTG(tp:Triple ,cm:MorphBaseClassMapping 
 	    , tpPredicateURI:String , logicalTableAlias:String ) : List[(SQLJoinTable, String)] = {
-		
-		
+
 		val isRDFTypeStatement = RDF.`type`.getURI().equals(tpPredicateURI);
-		val  alphaPredicateObjects:List[(SQLJoinTable, String)] = {
+		val alphaPredicateObjects:List[(SQLJoinTable, String)] = {
 			if(isRDFTypeStatement) {
 				//do nothing
 			  Nil;
