@@ -14,7 +14,8 @@ extends ZFromItem(fullName) with SQLLogicalTable {
 	
 	override def generateAlias() :String ={
 		//return R2OConstants.VIEW_ALIAS + this.hashCode();
-		if(super.getAlias() == null) {
+		val alias = super.getAlias();
+		if(alias == null || alias.equals("")) {
       val generatedAlias = Constants.VIEW_ALIAS + new Random().nextInt(Constants.VIEW_ALIAS_RANDOM_LIMIT);
       val generatedAlias2 = "T" + SQLFromItem.inc;
       

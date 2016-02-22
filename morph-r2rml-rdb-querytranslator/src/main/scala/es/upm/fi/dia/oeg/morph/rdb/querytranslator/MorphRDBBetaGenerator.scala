@@ -34,16 +34,16 @@ extends MorphBaseBetaGenerator(md, unfolder) {
 	
 				objectMap.termMapType match {
 				  case Constants.MorphTermMapType.ConstantTermMap => {
-					val constantValue = objectMap.getConstantValue();
-					val zConstant = new ZConstant(constantValue, ZConstant.STRING);
-					val selectItem = MorphSQLSelectItem.apply(zConstant);
-					List(selectItem);				    
+						val constantValue = objectMap.getConstantValue();
+						val zConstant = new ZConstant(constantValue, ZConstant.STRING);
+						val selectItem = MorphSQLSelectItem.apply(zConstant);
+						List(selectItem);
 				  }
 				  case _ => {
-					val databaseColumnsString = objectMap.getReferencedColumns();
-					val betaObjectsAux = databaseColumnsString.map(databaseColumnString => 
-					  MorphSQLSelectItem.apply(databaseColumnString,logicalTableAlias, dbType, null));
-					betaObjectsAux.toList;				    
+						val databaseColumnsString = objectMap.getReferencedColumns();
+						val betaObjectsAux = databaseColumnsString.map(databaseColumnString =>
+							MorphSQLSelectItem.apply(databaseColumnString,logicalTableAlias, dbType, null));
+						betaObjectsAux.toList;
 				  }
 				}
 			} else {

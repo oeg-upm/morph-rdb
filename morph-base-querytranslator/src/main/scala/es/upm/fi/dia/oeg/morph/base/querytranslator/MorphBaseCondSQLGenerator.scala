@@ -190,31 +190,27 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 								  case betaObjectZConstant:ZConstant => {
 									val betaColumnConstant = MorphSQLConstant.apply(betaObjectZConstant);
 									val betaColumn = betaColumnConstant.column;
-	
-									val cmd = {
-										if(tableMetaData.isDefined ) {
-										  if(tableMetaData.get.getColumnMetaData(betaColumn).isDefined) {
-										    tableMetaData.get.getColumnMetaData(betaColumn).get
-										  } else {
-										    null
-										  }
+
+									if(tableMetaData.isDefined && betaColumn != null)	{
+										val cmd = if(tableMetaData.get.getColumnMetaData(betaColumn).isDefined) {
+											tableMetaData.get.getColumnMetaData(betaColumn).get
 										} else {
-										  null
+											null
+										}
+
+										val generateIsNotNullCondition = if(cmd == null) { true }
+										else {
+											if(cmd.isNullable && !cmd.isPrimaryKeyColumn) { true }
+											else { false }
+										}
+
+										if(generateIsNotNullCondition) {
+											val exp = this.generateIsNotNullExpression(betaObjectExpression);
+											if(exp != null) {
+												exps = exps ++ Set(exp);
+											}
 										}
 									}
-									
-									val generateIsNotNullCondition = if(cmd == null) { true } 
-									else {
-									  if(cmd.isNullable && !cmd.isPrimaryKeyColumn) { true }
-									  else { false }
-									}
-									
-									if(generateIsNotNullCondition) {
-										val exp = this.generateIsNotNullExpression(betaObjectExpression);
-										if(exp != null) {
-											exps = exps ++ Set(exp);
-										}							
-									}							    
 								  }
 								}
 							}

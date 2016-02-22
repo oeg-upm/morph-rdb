@@ -32,6 +32,11 @@
         rr:predicate <http://mappingpedia.linkeddata.es/vocabulary/location3>;
         rr:objectMap    [ rr:column "\"LOC\""; ]; 
     ];
+    
+    rr:predicateObjectMap [
+        rr:predicate <http://mappingpedia.linkeddata.es/vocabulary/location4>;
+        rr:objectMap    [ rr:constant <http://mappingpedia.linkeddata.es/resources/PlanetEarth>; ]; 
+    ];
 .
     
 <#SiteTriplesMap>

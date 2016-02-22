@@ -1,12 +1,14 @@
 <http://mappingpedia.linkeddata.es/resources/department/10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Department> .
+<http://mappingpedia.linkeddata.es/resources/department/10> <http://mappingpedia.linkeddata.es/vocabulary/location4> <http://mappingpedia.linkeddata.es/resources/PlanetEarth> .
 <http://mappingpedia.linkeddata.es/resources/department/10> <http://mappingpedia.linkeddata.es/vocabulary/location3> "NEW YORK" .
 <http://mappingpedia.linkeddata.es/resources/department/10> <http://mappingpedia.linkeddata.es/vocabulary/location2> "NEW YORK" .
-<http://mappingpedia.linkeddata.es/resources/department/10> <http://mappingpedia.linkeddata.es/vocabulary/location> <http://mappingpedia.linkeddata.es/resources/site/NEW YORK> .
+<http://mappingpedia.linkeddata.es/resources/department/10> <http://mappingpedia.linkeddata.es/vocabulary/location> <http://mappingpedia.linkeddata.es/resources/site/NEW%20YORK> .
 <http://mappingpedia.linkeddata.es/resources/department/20> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Department> .
+<http://mappingpedia.linkeddata.es/resources/department/20> <http://mappingpedia.linkeddata.es/vocabulary/location4> <http://mappingpedia.linkeddata.es/resources/PlanetEarth> .
 <http://mappingpedia.linkeddata.es/resources/department/20> <http://mappingpedia.linkeddata.es/vocabulary/location3> "CHICAGO" .
 <http://mappingpedia.linkeddata.es/resources/department/20> <http://mappingpedia.linkeddata.es/vocabulary/location2> "CHICAGO" .
 <http://mappingpedia.linkeddata.es/resources/department/20> <http://mappingpedia.linkeddata.es/vocabulary/location> <http://mappingpedia.linkeddata.es/resources/site/CHICAGO> .
-<http://mappingpedia.linkeddata.es/resources/site/NEW YORK> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Site> .
-<http://mappingpedia.linkeddata.es/resources/site/NEW YORK> <http://mappingpedia.linkeddata.es/vocabulary/siteName> "NEW YORK" .
+<http://mappingpedia.linkeddata.es/resources/site/NEW%20YORK> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Site> .
+<http://mappingpedia.linkeddata.es/resources/site/NEW%20YORK> <http://mappingpedia.linkeddata.es/vocabulary/siteName> "NEW YORK" .
 <http://mappingpedia.linkeddata.es/resources/site/CHICAGO> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/Site> .
 <http://mappingpedia.linkeddata.es/resources/site/CHICAGO> <http://mappingpedia.linkeddata.es/vocabulary/siteName> "CHICAGO" .
