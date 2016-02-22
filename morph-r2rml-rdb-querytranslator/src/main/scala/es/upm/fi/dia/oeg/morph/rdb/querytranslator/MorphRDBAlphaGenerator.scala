@@ -57,7 +57,7 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 				val refObjectMap = pm.getRefObjectMap(0);
 				if(refObjectMap != null) { 
 					val alphaPredicateObject = this.calculateAlphaPredicateObject(
-							tp, abstractConceptMapping, pm, logicalTableAlias);
+							tp, abstractConceptMapping, pm, alphaSubject);
 					if(alphaPredicateObject.isEmpty) { Nil }
 					else {
 						val parentLogicalTable = alphaPredicateObject.get.parentTable.joinSource;
@@ -87,8 +87,9 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 
 	override def calculateAlphaPredicateObject(triple:Triple
 	    , abstractConceptMapping:MorphBaseClassMapping 
-	    , abstractPropertyMapping:MorphBasePropertyMapping, logicalTableAlias:String ) 
+	    , abstractPropertyMapping:MorphBasePropertyMapping, alphaSubject:SQLLogicalTable )
 	: Option[MorphAlphaResultPredicateObject] = {
+		val alphaSubjectAlias = alphaSubject.getAlias();
 
 		val tpPredicate = triple.getPredicate;
 		val tpObject = triple.getObject;
@@ -109,29 +110,32 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 					if(parentLogicalTable == null) {
 						val errorMessage = "Parent logical table is not found for RefObjectMap : " + refObjectMap;
 						logger.error(errorMessage);
+						null;
+					} else {
+						//val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
+						val sqlParentLogicalTableAux = unfolder.visit(parentLogicalTable);
+						val sqlParentLogicalTable = new SQLJoinTable(sqlParentLogicalTableAux
+							, Constants.JOINS_TYPE_INNER, null);
+						val childTableIsSameWithParentTable = alphaSubject.sameTableWith(sqlParentLogicalTableAux);
+
+						val sqlParentLogicalTableAuxAlias = sqlParentLogicalTableAux.generateAlias();
+						this.owner.mapTripleAlias += (triple -> sqlParentLogicalTableAuxAlias);
+						val joinQueryAlias = sqlParentLogicalTableAuxAlias;
+
+						val joinConditions = refObjectMap.getJoinConditions();
+						if(childTableIsSameWithParentTable && (joinConditions == null || joinConditions.isEmpty)) {
+							null;
+						} else {
+							val onExpression = MorphRDBUnfolder.unfoldJoinConditions(
+								joinConditions, alphaSubjectAlias, joinQueryAlias
+								, databaseType);
+							if(onExpression != null) {
+								sqlParentLogicalTable.onExpression = onExpression;
+							}
+
+							sqlParentLogicalTable;
+						}
 					}
-
-					//val unfolder = this.owner.getUnfolder().asInstanceOf[R2RMLUnfolder];
-					val sqlParentLogicalTableAux = unfolder.visit(parentLogicalTable);
-					val sqlParentLogicalTable = new SQLJoinTable(sqlParentLogicalTableAux
-						, Constants.JOINS_TYPE_INNER, null);
-
-					val sqlParentLogicalTableAuxAlias = sqlParentLogicalTableAux.generateAlias();
-					this.owner.mapTripleAlias += (triple -> sqlParentLogicalTableAuxAlias);
-					val joinQueryAlias = sqlParentLogicalTableAuxAlias;
-
-					val joinConditions = refObjectMap.getJoinConditions();
-
-
-
-					val onExpression = MorphRDBUnfolder.unfoldJoinConditions(
-						joinConditions, logicalTableAlias, joinQueryAlias
-						, databaseType);
-					if(onExpression != null) {
-						sqlParentLogicalTable.onExpression = onExpression;
-					}
-
-					sqlParentLogicalTable;
 				} else {
 					null
 				}

@@ -31,10 +31,12 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 	: MorphAlphaResult;
 
 	def  calculateAlphaPredicateObject(tp:Triple, cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping  
-			, logicalTableAlias:String ) : Option[MorphAlphaResultPredicateObject];
+			, alphaSubject:SQLLogicalTable ) : Option[MorphAlphaResultPredicateObject];
 
 	def  calculateAlphaPredicateObject(tp:Triple, cm:MorphBaseClassMapping , tpPredicateURI:String
-																		 , logicalTableAlias:String ) : Option[MorphAlphaResultPredicateObject] = {
+																		 , alphaSubject:SQLLogicalTable ) : Option[MorphAlphaResultPredicateObject] = {
+		//val alphaSubjectAlias = alphaSubject.getAlias();
+
 		val isRDFTypeStatement = RDF.`type`.getURI().equals(tpPredicateURI);
 		if(isRDFTypeStatement && tp.getObject.isURI) {
 			None
@@ -42,7 +44,7 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 			val pms = cm.getPropertyMappings(tpPredicateURI);
 			if(pms != null && !pms.isEmpty) {
 				val pm = pms.iterator.next();
-				this.calculateAlphaPredicateObject(tp, cm, pm, logicalTableAlias);
+				this.calculateAlphaPredicateObject(tp, cm, pm, alphaSubject);
 			} else {
 				None
 			}
@@ -60,7 +62,7 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 		val alphaSubject = this.calculateAlphaSubject(tpSubject, cm);
 		val logicalTableAlias = alphaSubject.getAlias();
 
-		val alphaResultUnionList = this.calculateAlphaPredicateObjectSTG(stg, cm, alphaSubject, logicalTableAlias);
+		val alphaResultUnionList = this.calculateAlphaPredicateObjectSTG(stg, cm, alphaSubject);
 		return alphaResultUnionList;
 	}
 	
@@ -81,8 +83,10 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 		} else {true;}
 	}
 
-	def calculateAlphaPredicateObjectSTG(stg:Iterable[Triple] , cm:MorphBaseClassMapping , alphaSubject:SQLLogicalTable
-																			 , logicalTableAlias:String ) : Iterable[MorphAlphaResultUnion] = {
+	def calculateAlphaPredicateObjectSTG(stg:Iterable[Triple] , cm:MorphBaseClassMapping
+																			 , alphaSubject:SQLLogicalTable) : Iterable[MorphAlphaResultUnion] = {
+		//val alphaSubjectAlias = alphaSubject.getAlias();
+
 		val alphaPredicateObjectSTG = stg.map(tp => {
 			val tpPredicate = tp.getPredicate();
 
@@ -108,7 +112,7 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 				for(pm <- pms) {
 					val tpPredicateURI = pm.getMappedPredicateName(0);
 					val alphaPredicateObjectAux : Option[MorphAlphaResultPredicateObject] = calculateAlphaPredicateObject(
-						tp, cm, tpPredicateURI, logicalTableAlias);
+						tp, cm, tpPredicateURI, alphaSubject);
 					val alphaPredicateObjects:List[MorphAlphaResultPredicateObject] = if(alphaPredicateObjectAux.isEmpty) { Nil }
 					else {alphaPredicateObjectAux.toList};
 
