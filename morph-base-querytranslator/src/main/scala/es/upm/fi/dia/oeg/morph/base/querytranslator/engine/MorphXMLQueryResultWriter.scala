@@ -81,17 +81,20 @@ extends MorphBaseQueryResultWriter(queryTranslator, xmlOutputStream) {
 						if(termType != null) {
 							val termTypeElementName = { 
 							  if(termType.equalsIgnoreCase(Constants.R2RML_IRI_URI)) {
-								"uri";
+								Some("uri");
 							  } else if(termType.equalsIgnoreCase(Constants.R2RML_LITERAL_URI)) {
-								"literal";
+								Some("literal");
 							  } else {
 								  null
 							  }
 							}
-							
-							val termTypeElement = xmlDoc.createElement(termTypeElementName);
-							bindingElement.appendChild(termTypeElement);
-							termTypeElement.setTextContent(lexicalValue);
+
+							if(termTypeElementName.isDefined) {
+								val termTypeElement = xmlDoc.createElement(termTypeElementName.get);
+								bindingElement.appendChild(termTypeElement);
+								termTypeElement.setTextContent(lexicalValue);
+							}
+
 						} else {
 							bindingElement.setTextContent(lexicalValue);	
 						}				  
