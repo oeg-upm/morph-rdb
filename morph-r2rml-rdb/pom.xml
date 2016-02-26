@@ -133,7 +133,7 @@
 	</dependencies>
 
 	<repositories>
-		<repository>
+<!-- 		<repository>
 			<id>aldebaran-sstreams-external-libs</id>
 			<name>Aldebaran External Libraries</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-external-libs-local</url>
@@ -143,7 +143,7 @@
 			<id>aldebaran-morph-rdb-external-libs</id>
 			<name>Aldebaran Morph-RDB External Libraries</name>
 			<url>http://aldebaran.dia.fi.upm.es/artifactory/morph-rdb-external-libs-local</url>
-		</repository>
+		</repository> -->
 
 		<repository>
 			<id>morph-rdb-mvn-repo</id>
@@ -154,6 +154,12 @@
 			</snapshots>
 		</repository>
 
+		<repository>
+			<id>fpriyatna-external-libs</id>
+			<name>fpriyatna External Libraries</name>
+        	<url>https://raw.github.com/fpriyatna/external-libs/master/</url>
+        </repository>
+        
 	</repositories>
 
 	<distributionManagement>

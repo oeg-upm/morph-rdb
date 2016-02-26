@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>es.upm.fi.dia.oeg.morph</groupId>
 		<artifactId>morph-rdb</artifactId>
-		<version>3.5.15</version>
+		<version>3.5.16</version>
 	</parent>
 
 	<artifactId>morph-examples</artifactId>
@@ -68,6 +68,14 @@
 			</repository> <repository> <id>aldebaran-snapshots</id> <name>Aldebaran External 
 			Libraries</name> <url>http://aldebaran.dia.fi.upm.es/artifactory/sstreams-snapshots-local</url> 
 			</repository> -->
+
+		<repository>
+			<id>fpriyatna-external-libs</id>
+			<name>fpriyatna External Libraries</name>
+        	<url>https://raw.github.com/fpriyatna/external-libs/master/</url>
+        </repository>
+
+
 
 		<repository>
 			<id>morph-rdb-mvn-repo</id>
