@@ -1,0 +1,55 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex: <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rev: <http://purl.org/stuff/rev#> .
+@prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> .
+@prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> .
+@base <http://mappingpedia.org/rdb2rdf/r2rml/tc/> .
+
+  
+<#DeptTriplesMap>
+    rr:logicalTable [ rr:tableName "\"DEPT\"" ];
+    
+    rr:subjectMap [
+        rr:template "http://mappingpedia.linkeddata.es/resources/department/{\"DEPTNO\"}";
+        rr:class ex:Department;
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate <http://mappingpedia.linkeddata.es/vocabulary/location>;
+        rr:objectMap [ rr:parentTriplesMap <#SiteTriplesMap> ];
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate <http://mappingpedia.linkeddata.es/vocabulary/location2>;
+        rr:objectMap    [ rr:column "\"LOC\""; ]; 
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate <http://mappingpedia.linkeddata.es/vocabulary/location3>;
+        rr:objectMap    [ rr:column "\"LOC\""; ]; 
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate <http://mappingpedia.linkeddata.es/vocabulary/location4>;
+        rr:objectMap    [ rr:constant <http://mappingpedia.linkeddata.es/resources/PlanetEarth>; ]; 
+    ];
+.
+    
+<#SiteTriplesMap>
+    rr:logicalTable [ rr:tableName "\"DEPT\"" ];
+    
+    rr:subjectMap [
+        rr:template "http://mappingpedia.linkeddata.es/resources/site/{\"LOC\"}";
+        rr:class ex:Site;
+    ];
+    
+	rr:predicateObjectMap [ 
+      rr:predicate <http://mappingpedia.linkeddata.es/vocabulary/siteName>;
+      rr:objectMap    [ rr:column "\"LOC\""; ]; 
+    ];
+    
+.
