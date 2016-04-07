@@ -2,12 +2,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+<!--
 	<parent>
 		<groupId>es.upm.fi.dia.oeg.morph</groupId>
 		<artifactId>morph-rdb</artifactId>
-		<version>3.5.16</version>
+		<version>3.6.0</version>
 	</parent>
+-->
 
+		<groupId>es.upm.fi.dia.oeg.morph</groupId>
+		<version>3.6.0</version>
 	<artifactId>morph-examples</artifactId>
 	<packaging>jar</packaging>
 
@@ -48,7 +52,7 @@
 			<groupId>es.upm.fi.dia.oeg.morph</groupId>
 			<artifactId>morph-rdb-dist</artifactId>
 			<!--<type>pom</type>-->
-			<version>3.5.16</version>
+			<version>3.6.0</version>
 		</dependency>
 
 	</dependencies>
