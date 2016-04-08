@@ -49,21 +49,7 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
-	@Test
-	public void testBatchH2() {
-		String configurationDirectory = System.getProperty("user.dir") + "/examples";
-		String configurationFile = "batch-h2.r2rml.properties";
-		try {
-			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
-			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
-			runner.run();
-			System.out.println("Batch process DONE------\n\n");
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Batch process FAILED------\n\n");
-			assertTrue(e.getMessage(), false);
-		}
-	}
+
 
 	@Test
 	public void testBatchPostgreSQL() {
