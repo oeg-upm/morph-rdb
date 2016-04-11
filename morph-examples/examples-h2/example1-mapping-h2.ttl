@@ -23,7 +23,7 @@
 	
     rr:subjectMap [    
 		a rr:Subject;
-		rr:template "http://mappingpedia.linkeddata.es/resources/Person/{\"ID\"}";
+		rr:template "http://mappingpedia.linkeddata.es/resources/Person/{\"Id\"}";
 		rr:termType rr:IRI;
 		rr:class <http://mappingpedia.linkeddata.es/vocabulary/Person>;
 	];
@@ -57,7 +57,7 @@
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/hasSport> ]; 
       rr:objectMap    [ 
          rr:parentTriplesMap <TriplesMapSport>;
-         rr:joinCondition [ rr:child "\"Sport\"" ; rr:parent "\"ID\"" ; ]
+         rr:joinCondition [ rr:child "\"Sport\"" ; rr:parent "\"Id\"" ; ]
       ];
    ];    		
 .
@@ -69,14 +69,14 @@
 	rr:logicalTable [ rr:tableName  "\"Sport\"" ];
 	
     rr:subjectMap [ a rr:Subject;
-		rr:template "http://mappingpedia.linkeddata.es/resources/Sport/{\"ID\"}";
+		rr:template "http://mappingpedia.linkeddata.es/resources/Sport/{\"Id\"}";
 		rr:termType rr:IRI;
 		rr:class <http://mappingpedia.linkeddata.es/vocabulary/Sport>;
 	];
 
 	rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/id> ]; 
-      rr:objectMap    [ rr:termType rr:Literal; rr:column "\"ID\""; ]; 
+      rr:objectMap    [ rr:termType rr:Literal; rr:column "\"Id\""; ]; 
     ];
 
 	rr:predicateObjectMap [ 
