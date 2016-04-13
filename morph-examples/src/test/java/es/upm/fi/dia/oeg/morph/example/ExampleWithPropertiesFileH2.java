@@ -15,10 +15,12 @@ import static org.junit.Assert.assertTrue;
  * Created by fpriyatna on 2016-04-08.
  */
 public class ExampleWithPropertiesFileH2 {
-    private static Logger logger = Logger.getLogger(ExampleWithPropertiesFile.class);
+    private static Logger logger = Logger.getLogger(ExampleWithPropertiesFileMySQL.class);
     static { PropertyConfigurator.configure("log4j.properties"); }
     String configurationDirectory = System.getProperty("user.dir") + File.separator + "examples-h2";
 
+
+    
     @Test
     public void test1BatchH2() {
         String configurationFile = "example1-batch-h2.r2rml.properties";

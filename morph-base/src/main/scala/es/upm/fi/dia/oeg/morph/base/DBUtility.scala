@@ -175,6 +175,7 @@ object DBUtility {
 			Class.forName(driverString);
 			logger.debug("Opening database connection.");
 			val conn = DriverManager.getConnection(fullURL, prop);
+			//conn.setAutoCommit(true);
 			//conn.setAutoCommit(false);
 			conn;
 		} catch {

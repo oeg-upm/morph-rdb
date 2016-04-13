@@ -49,6 +49,9 @@ object Constants {
 	val DATABASE_SQLSERVER = "SQLServer";
 	val DATABASE_POSTGRESQL = "PostgreSQL";
 	val DATABASE_GFT = "GFT";
+	val DATABASE_CSV = "CSV";
+	 
+	
 
 	val DATABASE_POSTGRESQL_ENCLOSED_CHARACTER = "\"";
   val DATABASE_ORACLE_ENCLOSED_CHARACTER = "\"";
@@ -105,8 +108,8 @@ object Constants {
 	val DATABASE_TYPE_PROP_NAME = "database.type";
 	val DRIVER_PROP_NAME = "driver";
 	val DATABASE_TIMEOUT_PROP_NAME = "database.timeout";
-
-	
+   
+	val CSV_FILE_PATH = "csv.file.path";
 	val  MAPPINGDOCUMENT_FILE_PATH = "mappingdocument.file.path";
 	val  QUERYFILE_PROP_NAME = "query.file.path";
 	val  ONTOFILE_PROP_NAME = "onto.file.path";

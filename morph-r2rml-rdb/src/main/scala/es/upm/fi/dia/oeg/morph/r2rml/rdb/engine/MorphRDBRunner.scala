@@ -14,7 +14,6 @@ import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
 import java.io.OutputStream
 import java.io.Writer
 
-
 class MorphRDBRunner(mappingDocument:R2RMLMappingDocument
 //    , dataSourceReader:MorphBaseDataSourceReader
     , unfolder:MorphRDBUnfolder
@@ -34,6 +33,8 @@ class MorphRDBRunner(mappingDocument:R2RMLMappingDocument
         ) {
   
 	//override val logger = Logger.getLogger(this.getClass());
+
+  
 }
 
 object MorphRDBRunner {

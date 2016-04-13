@@ -28,11 +28,11 @@ abstract class MorphBaseRunnerFactory {
 	val logger = Logger.getLogger(this.getClass());
 	logger.info("running morph-rdb 3.6 ...");
   
+  
 	def createRunner(configurationDirectory:String , configurationFile:String) 
 	: MorphBaseRunner = {
     
-		val configurationProperties = MorphProperties.apply(
-		    configurationDirectory, configurationFile);
+		val configurationProperties = MorphProperties.apply(configurationDirectory, configurationFile);
 		this.createRunner(configurationProperties);
 	}
 	
@@ -40,15 +40,16 @@ abstract class MorphBaseRunnerFactory {
     val morphProperties = properties.asInstanceOf[MorphProperties];
     
     //BUILDING CONNECTION
-    val connection = this.createConnection(morphProperties);
-
-    this.createRunner(connection, properties);
+    val conn = this.createConnection(morphProperties);
+    
+    val runner = this.createRunner(conn, properties);
+    runner;
   }
   
   def createRunner(connection:Connection, properties:Properties):MorphBaseRunner = {
     val morphProperties = properties.asInstanceOf[MorphProperties];
     
-    //BUILDING CONNECTION AND DATA SOURCE READER
+    //BUILDING DATA SOURCE READER
     val dataSourceReaderClassName = morphProperties.queryEvaluatorClassName;
     val dataSourceReader = MorphBaseDataSourceReader(dataSourceReaderClassName
         , connection, morphProperties.databaseTimeout);
@@ -72,6 +73,7 @@ abstract class MorphBaseRunnerFactory {
     //BUILDING UNFOLDER
     val unfolder = this.createUnfolder(mappingDocument, morphProperties);
     
+    //BUILDING WRITER
     val outputStream:Writer = if(morphProperties.outputFilePath.isDefined) {
       val outputFileName = morphProperties.outputFilePath.get;
       //new FileWriter(outputFileName)
@@ -86,6 +88,7 @@ abstract class MorphBaseRunnerFactory {
       }
        
     }
+    
     //BUILDING MATERIALIZER
     val materializer = this.buildMaterializer(morphProperties, mappingDocument
         , outputStream);
@@ -154,6 +157,7 @@ abstract class MorphBaseRunnerFactory {
 //    val mapper = new R2RMLMapper();
 //    mapper.run(properties);
     
+    runner.connection = connection;
     runner;
   }
   

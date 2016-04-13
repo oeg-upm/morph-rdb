@@ -19,7 +19,7 @@
 		<module>morph-r2rml</module>
 
 		<module>morph-r2rml-rdb</module>
-
+		
 		<module>morph-r2rml-rdb-querytranslator</module>
 
 		<module>morph-rdb-dist</module>

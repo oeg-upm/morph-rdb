@@ -41,7 +41,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
   
   
 	val logger = Logger.getLogger(this.getClass());
-  
+  var connection:Connection = null;
   
 	var ontologyFilePath:Option[String]=None;
 	var sparqlQuery:Option[Query]=None;
