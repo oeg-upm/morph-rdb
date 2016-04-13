@@ -1,0 +1,5 @@
+"Id","Name","Sport","Status","Webpage","Phone","Email","Suffix","Birthdate"
+"B1","Paul","100","active",NULL,"777-3426",NULL,"Jr.","2000-12-31 00:00:00"
+"B2","John","200","active",NULL,NULL,"john@acd.edu","Sr.",NULL
+"B3","George","300","active","www.george.edu",NULL,NULL,"Sr. ","1990-06-18 00:00:00"
+"B4","Ringo",NULL,"active","www.starr.edu","888-4537","ringo@acd.edu","Jr. ",NULL

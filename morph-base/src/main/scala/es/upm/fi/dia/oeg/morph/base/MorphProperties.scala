@@ -15,9 +15,9 @@ class MorphProperties extends java.util.Properties {
 	var configurationDirectory:String=null
 
 			//	var conn:Connection=null;
-			var ontologyFilePath:Option[String]=None;
+	var ontologyFilePath:Option[String]=None;
 	var mappingDocumentFilePath:String=null ;
-	var csvFilePath:Option[String]=None;
+	var csvFiles:Option[List[String]]=None;
 	var outputFilePath:Option[String] = None;
 	var queryFilePath:Option[String] = None;
 	var rdfLanguage:String=null;
@@ -124,17 +124,20 @@ class MorphProperties extends java.util.Properties {
 
 			val csvFilePathPropertyValue = this.getProperty(Constants.CSV_FILE_PATH);
 			if(csvFilePathPropertyValue != null && !csvFilePathPropertyValue.equals("")) {
-				this.csvFilePath = Some(csvFilePathPropertyValue);
+			  val csvFilePathPropertyValueSplited:List[String] = csvFilePathPropertyValue.split(",").map(_.trim).toList;
+			  val listOfCSVFiles:List[String] = csvFilePathPropertyValueSplited.map(csvFile => {
+				  val isNetResourceMapping = GeneralUtility.isNetResource(csvFile);
+  				if(!isNetResourceMapping && configurationDirectory != null) {
+  					configurationDirectory + csvFile;
+  				} else {
+  				  csvFile
+  				}
+			  });
+			  
+			  this.csvFiles = Some(listOfCSVFiles);
 			}
 
-			this.csvFilePath = this.readString(Constants.CSV_FILE_PATH, None);
-			if(this.mappingDocumentFilePath != None) {
-				val isNetResourceMapping = GeneralUtility.isNetResource(this.csvFilePath.get);
-				if(!isNetResourceMapping && configurationDirectory != null) {
-					//this.csvFilePath = Some(configurationDirectory.replaceAll("\\\\", "/") + this.csvFilePath.get);
-					this.csvFilePath = Some(configurationDirectory + this.csvFilePath.get);
-				}
-			}
+
 
 			this.mappingDocumentFilePath = this.readString(Constants.MAPPINGDOCUMENT_FILE_PATH, null);
 			if(this.mappingDocumentFilePath != null) {
