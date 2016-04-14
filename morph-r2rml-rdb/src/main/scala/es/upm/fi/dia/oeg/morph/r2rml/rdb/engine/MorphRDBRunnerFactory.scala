@@ -27,7 +27,7 @@ class MorphRDBRunnerFactory extends MorphBaseRunnerFactory{
       , queryTranslator:Option[IQueryTranslator]
       , resultProcessor:Option[AbstractQueryResultTranslator]
       , outputStream:Writer
-			) : MorphRDBRunner = { 
+			) : MorphBaseRunner = { 
 					val morphRDBRunner = new MorphRDBRunner(mappingDocument.asInstanceOf[R2RMLMappingDocument]
 							, unfolder.asInstanceOf[MorphRDBUnfolder]
               , dataTranslator.asInstanceOf[Option[MorphRDBDataTranslator]]
@@ -38,19 +38,19 @@ class MorphRDBRunnerFactory extends MorphBaseRunnerFactory{
 							morphRDBRunner;
 	}
 
-	override def createRunner(properties:Properties):MorphBaseRunner = {
-			val runner = super.createRunner(properties);
-			val morphProperties = properties.asInstanceOf[MorphProperties];
-			if(morphProperties.csvFiles.isDefined) {
-			  morphProperties.csvFiles.get.map(csvFile => {
-			    MorphRDBUtility.loadCSVFile(runner.connection, csvFile);  
-			  });
-			  
-			  
-			  //runner.connection.commit();
-			}
-			runner;
-	}
+//	override def createRunner(properties:Properties):MorphBaseRunner = {
+//			val runner = super.createRunner(properties);
+////			val morphProperties = properties.asInstanceOf[MorphProperties];
+////			if(morphProperties.csvFiles.isDefined) {
+////			  morphProperties.csvFiles.get.map(csvFile => {
+////			    MorphRDBUtility.loadCSVFile(runner.connection, csvFile);  
+////			  });
+////			  
+////			  
+////			  //runner.connection.commit();
+////			}
+//			runner;
+//	}
 
 
 

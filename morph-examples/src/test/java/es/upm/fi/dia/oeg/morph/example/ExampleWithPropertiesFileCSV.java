@@ -9,9 +9,9 @@ import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
-
-import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
-import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner;
+import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunnerFactory;
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphCVSRunnerFactory;
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphCVSRunner;
 
 public class ExampleWithPropertiesFileCSV {
     private static Logger logger = Logger.getLogger(ExampleWithPropertiesFileCSV.class);
@@ -24,8 +24,8 @@ public class ExampleWithPropertiesFileCSV {
     public void testExample1BatchCSV() {
         String configurationFile = "example1-batch-csv.r2rml.properties";
         try {
-            MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
-            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+        	MorphBaseRunnerFactory runnerFactory = new MorphCVSRunnerFactory();
+        	MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
             runner.run();
             System.out.println("Batch process DONE------\n\n");
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class ExampleWithPropertiesFileCSV {
         String configurationFile = "example1-query01-csv.r2rml.properties";
         try {
             String[] args = {configurationDirectory, configurationFile};
-            MorphRDBRunner.main(args);
+            MorphCVSRunner.main(args);
             System.out.println("Query process DONE------\n\n");
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,7 +55,7 @@ public class ExampleWithPropertiesFileCSV {
         String configurationFile = "example1-query02-csv.r2rml.properties";
         try {
             String[] args = {configurationDirectory, configurationFile};
-            MorphRDBRunner.main(args);
+            MorphCVSRunner.main(args);
             System.out.println("Query process DONE------\n\n");
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,7 +70,7 @@ public class ExampleWithPropertiesFileCSV {
         String configurationFile = "example1-query03-csv.r2rml.properties";
         try {
             String[] args = {configurationDirectory, configurationFile};
-            MorphRDBRunner.main(args);
+            MorphCVSRunner.main(args);
             System.out.println("Query process DONE------\n\n");
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,7 +85,7 @@ public class ExampleWithPropertiesFileCSV {
         String configurationFile = "example1-query04-csv.r2rml.properties";
         try {
             String[] args = {configurationDirectory, configurationFile};
-            MorphRDBRunner.main(args);
+            MorphCVSRunner.main(args);
             System.out.println("Query process DONE------\n\n");
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,7 +100,7 @@ public class ExampleWithPropertiesFileCSV {
         String configurationFile = "example1-query05-csv.r2rml.properties";
         try {
             String[] args = {configurationDirectory, configurationFile};
-            MorphRDBRunner.main(args);
+            MorphCVSRunner.main(args);
             System.out.println("Query process DONE------\n\n");
         } catch (Exception e) {
             e.printStackTrace();
