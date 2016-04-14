@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="a"/>
+        <variable name="e"/>
+        <variable name="w"/>
+    </head>
+    <results>
+        <result>
+            <binding name="a">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B1</uri>
+            </binding>
+            <binding name="e">
+                <literal>NULL</literal>
+            </binding>
+            <binding name="w">
+                <literal>NULL</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="a">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B2</uri>
+            </binding>
+            <binding name="e">
+                <literal>john@acd.edu</literal>
+            </binding>
+            <binding name="w">
+                <literal>NULL</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="a">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B3</uri>
+            </binding>
+            <binding name="e">
+                <literal>NULL</literal>
+            </binding>
+            <binding name="w">
+                <literal>www.george.edu</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="a">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B4</uri>
+            </binding>
+            <binding name="e">
+                <literal>ringo@acd.edu</literal>
+            </binding>
+            <binding name="w">
+                <literal>www.starr.edu</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>
