@@ -16,3 +16,4 @@ If, on the other hand, you want to edit the project or at least work from an IDE
  - Now that it´s finally imported, you can run the file es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.scala (in other to pass the arguments in Eclipse, right click, Run As -> Run Configuration -> Arguments, and remember to imput both the path to the .properties file and it´s full name).
 * In case the program doesn´t find the file log4j.properties, move it from "morph-examples" to "morph-r2rml-rdb", thought this file isn´t essential.
 
+Acknowledgement: Since January 2016, the development of morph-RDB has been supported by the Mobile Age project (http://www.mobile-age.eu/).
