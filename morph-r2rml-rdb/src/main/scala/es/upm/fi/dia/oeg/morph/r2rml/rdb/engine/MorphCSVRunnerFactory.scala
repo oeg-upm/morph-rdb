@@ -2,7 +2,7 @@ package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
 import java.util.Properties
 
-import es.upm.fi.dia.oeg.morph.base.MorphProperties
+//import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
@@ -16,7 +16,7 @@ import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 /**
  * Created by freddy on 14/04/16.
  */
-class MorphCVSRunnerFactory extends MorphRDBRunnerFactory {
+class MorphCSVRunnerFactory extends MorphRDBRunnerFactory {
 
 	override def createRunner(mappingDocument:MorphBaseMappingDocument
     , unfolder:MorphBaseUnfolder
@@ -25,7 +25,7 @@ class MorphCVSRunnerFactory extends MorphRDBRunnerFactory {
     , resultProcessor:Option[AbstractQueryResultTranslator]
     , outputStream:Writer
   ) : MorphBaseRunner = { 
-    val morphCVSRunner = new MorphCVSRunner(
+    val morphCSVRunner = new MorphCSVRunner(
       mappingDocument.asInstanceOf[R2RMLMappingDocument]
       , unfolder.asInstanceOf[MorphRDBUnfolder]
       , dataTranslator.asInstanceOf[Option[MorphRDBDataTranslator]]
@@ -33,12 +33,19 @@ class MorphCVSRunnerFactory extends MorphRDBRunnerFactory {
       , resultProcessor
       , outputStream)
 
-    morphCVSRunner;
+    morphCSVRunner;
 	}
 
+  override def createRunner(configurationDirectory:String , configurationFile:String) 
+	: MorphBaseRunner = {
+    
+		val configurationProperties = MorphCSVProperties.apply(configurationDirectory, configurationFile);
+		this.createRunner(configurationProperties);
+	}
+		
   override def createRunner(properties:Properties):MorphBaseRunner = {
     val runner = super.createRunner(properties);
-    val morphProperties = properties.asInstanceOf[MorphProperties];
+    val morphProperties = properties.asInstanceOf[MorphCSVProperties];
     if(morphProperties.csvFiles.isDefined) {
       morphProperties.csvFiles.get.map(csvFile => {
         MorphRDBUtility.loadCSVFile(runner.connection, csvFile);
@@ -49,6 +56,6 @@ class MorphCVSRunnerFactory extends MorphRDBRunnerFactory {
 
 }
 
-object MorphCVSRunnerFactory {
+object MorphCSVRunnerFactory {
 
 }

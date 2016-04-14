@@ -2,15 +2,14 @@ package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
 import java.io.Writer
 import org.apache.log4j.Logger
-import es.upm.fi.dia.oeg.morph.base.MorphProperties
-
+import java.util.Properties;
 import es.upm.fi.dia.oeg.morph.base.engine.{AbstractQueryResultTranslator, IQueryTranslator, MorphBaseRunner}
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 
 /**
   * Created by freddy on 14/04/16.
   */
-class MorphCVSRunner (
+class MorphCSVRunner (
   mappingDocument:R2RMLMappingDocument
   , unfolder:MorphRDBUnfolder
   , dataTranslator:Option[MorphRDBDataTranslator]
@@ -28,19 +27,19 @@ class MorphCVSRunner (
 
 }
 
-object MorphCVSRunner {
+object MorphCSVRunner {
 	val logger = Logger.getLogger("MorphCVSRunner");
 	
-	def apply(properties:MorphProperties ) : MorphCVSRunner = {
-		val runnerFactory = new MorphCVSRunnerFactory();
+	def apply(properties:Properties) : MorphCSVRunner = {
+		val runnerFactory = new MorphCSVRunnerFactory();
 		val runner = runnerFactory.createRunner(properties);
-		runner.asInstanceOf[MorphCVSRunner];
+		runner.asInstanceOf[MorphCSVRunner];
 	}
 	
-	def apply(configurationDirectory:String , configurationFile:String ) : MorphCVSRunner = {
+	def apply(configurationDirectory:String , configurationFile:String ) : MorphCSVRunner = {
 		val configurationProperties = 
-				MorphProperties.apply(configurationDirectory, configurationFile);
-		val runner = MorphCVSRunner(configurationProperties)
+				MorphCSVProperties.apply(configurationDirectory, configurationFile);
+		val runner = MorphCSVRunner(configurationProperties)
 		runner
 	}
 	
@@ -58,7 +57,7 @@ object MorphCVSRunner {
 			val configurationFile = args(1);
 			logger.debug("propertiesFile = " + configurationFile);
 			
-			val runner = MorphCVSRunner(configurationDirectory, configurationFile);
+			val runner = MorphCSVRunner(configurationDirectory, configurationFile);
 			runner.run();
 		} catch {
 		  case e:Exception => {

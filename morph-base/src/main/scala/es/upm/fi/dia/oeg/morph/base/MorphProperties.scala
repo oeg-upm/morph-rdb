@@ -15,9 +15,9 @@ class MorphProperties extends java.util.Properties {
 	var configurationDirectory:String=null
 
 			//	var conn:Connection=null;
-	var ontologyFilePath:Option[String]=None;
+			var ontologyFilePath:Option[String]=None;
 	var mappingDocumentFilePath:String=null ;
-	var csvFiles:Option[List[String]]=None;
+
 	var outputFilePath:Option[String] = None;
 	var queryFilePath:Option[String] = None;
 	var rdfLanguage:String=null;
@@ -60,8 +60,37 @@ class MorphProperties extends java.util.Properties {
 	var mapURIEncodingChars:Map[String, String]=Map.empty;
 	var uriTransformationOperation:List[String]=Nil;
 
-	def readConfigurationFile() = {
+	def readConfigurationFile(pConfigurationDirectory:String , configurationFile:String) = {
+			var absoluteConfigurationFile = configurationFile;
+			var configurationDirectory = pConfigurationDirectory;
 
+			if(configurationDirectory != null) {
+				if(!configurationDirectory.endsWith(File.separator)) {
+					configurationDirectory = configurationDirectory + File.separator;
+				}
+				absoluteConfigurationFile = configurationDirectory + configurationFile; 
+			}
+			this.configurationFileURL = absoluteConfigurationFile; 
+			this.configurationDirectory = configurationDirectory;
+
+			logger.info("reading configuration file : " + absoluteConfigurationFile);
+			try {
+				this.load(new FileInputStream(absoluteConfigurationFile));
+			} catch {
+			case e:FileNotFoundException => {
+				val errorMessage = "Configuration file not found: " + absoluteConfigurationFile;
+				logger.error(errorMessage);
+				e.printStackTrace();
+				throw e;	    
+			}
+			case e:IOException => {
+				val errorMessage = "Error reading configuration file: " + absoluteConfigurationFile;
+				logger.error(errorMessage);
+				e.printStackTrace();
+				throw e;	    
+			}
+			}
+			
 			this.noOfDatabase = this.readInteger(Constants.NO_OF_DATABASE_NAME_PROP_NAME, 0);
 			if(this.getProperty(Constants.JDCB_DRIVER_PROP_NAME) != null) {
 				this.noOfDatabase = 1;
@@ -122,20 +151,6 @@ class MorphProperties extends java.util.Properties {
 
 			}
 
-			val csvFilePathPropertyValue = this.getProperty(Constants.CSV_FILE_PATH);
-			if(csvFilePathPropertyValue != null && !csvFilePathPropertyValue.equals("")) {
-			  val csvFilePathPropertyValueSplited:List[String] = csvFilePathPropertyValue.split(",").map(_.trim).toList;
-			  val listOfCSVFiles:List[String] = csvFilePathPropertyValueSplited.map(csvFile => {
-				  val isNetResourceMapping = GeneralUtility.isNetResource(csvFile);
-  				if(!isNetResourceMapping && configurationDirectory != null) {
-  					configurationDirectory + csvFile;
-  				} else {
-  				  csvFile
-  				}
-			  });
-			  
-			  this.csvFiles = Some(listOfCSVFiles);
-			}
 
 
 
@@ -370,38 +385,7 @@ object MorphProperties {
 
 	def apply(pConfigurationDirectory:String , configurationFile:String) : MorphProperties = {
 			val properties = new MorphProperties();
-
-			var absoluteConfigurationFile = configurationFile;
-			var configurationDirectory = pConfigurationDirectory;
-
-			if(configurationDirectory != null) {
-				if(!configurationDirectory.endsWith(File.separator)) {
-					configurationDirectory = configurationDirectory + File.separator;
-				}
-				absoluteConfigurationFile = configurationDirectory + configurationFile; 
-			}
-			properties.configurationFileURL = absoluteConfigurationFile; 
-			properties.configurationDirectory = configurationDirectory;
-
-			logger.info("reading configuration file : " + absoluteConfigurationFile);
-			try {
-				properties.load(new FileInputStream(absoluteConfigurationFile));
-			} catch {
-			case e:FileNotFoundException => {
-				val errorMessage = "Configuration file not found: " + absoluteConfigurationFile;
-				logger.error(errorMessage);
-				e.printStackTrace();
-				throw e;	    
-			}
-			case e:IOException => {
-				val errorMessage = "Error reading configuration file: " + absoluteConfigurationFile;
-				logger.error(errorMessage);
-				e.printStackTrace();
-				throw e;	    
-			}
-			}
-
-			properties.readConfigurationFile();
+			properties.readConfigurationFile(pConfigurationDirectory, configurationFile);
 			properties
 	}
 }
