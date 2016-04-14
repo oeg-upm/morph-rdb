@@ -19,7 +19,7 @@ import com.hp.hpl.jena.query.QueryFactory
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter
 import java.io.PrintWriter
-import java.util.Properties
+//import java.util.Properties
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.mappingsgenerator.main.R2RMLMapper
 import org.apache.log4j.PropertyConfigurator
 
@@ -36,7 +36,7 @@ abstract class MorphBaseRunnerFactory {
 		this.createRunner(configurationProperties);
 	}
 	
-  def createRunner(properties:Properties):MorphBaseRunner = {
+  def createRunner(properties:MorphProperties):MorphBaseRunner = {
     val morphProperties = properties.asInstanceOf[MorphProperties];
     
     //BUILDING CONNECTION
@@ -46,7 +46,7 @@ abstract class MorphBaseRunnerFactory {
     runner;
   }
   
-  def createRunner(connection:Connection, properties:Properties):MorphBaseRunner = {
+  def createRunner(connection:Connection, properties:MorphProperties):MorphBaseRunner = {
     val morphProperties = properties.asInstanceOf[MorphProperties];
     
     //BUILDING DATA SOURCE READER
@@ -203,6 +203,8 @@ abstract class MorphBaseRunnerFactory {
 	def buildQueryTranslator(queryTranslatorFactoryClassName:String
 	    , md:MorphBaseMappingDocument, connection:Connection
 	    , properties:MorphProperties) : IQueryTranslator = {
+	  val morphProperties = properties.asInstanceOf[MorphProperties];
+	  
 		val className = if(queryTranslatorFactoryClassName == null || queryTranslatorFactoryClassName.equals("")) {
 			Constants.QUERY_TRANSLATOR_FACTORY_CLASSNAME_DEFAULT;
 		} else {
@@ -211,28 +213,28 @@ abstract class MorphBaseRunnerFactory {
 
 		val queryTranslatorFactory = Class.forName(className).newInstance().asInstanceOf[IQueryTranslatorFactory]; 
 		val queryTranslator = queryTranslatorFactory.createQueryTranslator(
-		    md, connection, properties);
+		    md, connection, morphProperties);
 
 		//query translation optimizer
 		val queryTranslationOptimizer = this.buildQueryTranslationOptimizer();
-		val eliminateSelfJoin = properties.selfJoinElimination;
+		val eliminateSelfJoin = morphProperties.selfJoinElimination;
 		queryTranslationOptimizer.selfJoinElimination = eliminateSelfJoin;
-		val eliminateSubQuery = properties.subQueryElimination;
+		val eliminateSubQuery = morphProperties.subQueryElimination;
 		queryTranslationOptimizer.subQueryElimination = eliminateSubQuery;
-		val transJoinEliminateSubQuery = properties.transJoinSubQueryElimination;
+		val transJoinEliminateSubQuery = morphProperties.transJoinSubQueryElimination;
 		queryTranslationOptimizer.transJoinSubQueryElimination = transJoinEliminateSubQuery;
-		val transSTGEliminateSubQuery = properties.transSTGSubQueryElimination;
+		val transSTGEliminateSubQuery = morphProperties.transSTGSubQueryElimination;
 		queryTranslationOptimizer.transSTGSubQueryElimination = transSTGEliminateSubQuery;
-		val subQueryAsView = properties.subQueryAsView;
+		val subQueryAsView = morphProperties.subQueryAsView;
 		queryTranslationOptimizer.subQueryAsView = subQueryAsView;
 		queryTranslator.optimizer = queryTranslationOptimizer;
 		logger.debug("query translator = " + queryTranslator);
 		
 		//sparql query
-		val queryFilePath = properties.queryFilePath;
+		val queryFilePath = morphProperties.queryFilePath;
 //		queryTranslator.setSPARQLQueryByFile(queryFilePath);
 		
-		queryTranslator.properties = properties;
+		queryTranslator.properties = morphProperties;
 		queryTranslator
 	}
 	

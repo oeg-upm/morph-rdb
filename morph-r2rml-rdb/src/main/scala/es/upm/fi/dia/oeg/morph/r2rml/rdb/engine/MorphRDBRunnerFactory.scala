@@ -17,7 +17,7 @@ import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.QueryTranslationOptimizerFactory
 import java.io.OutputStream
 import java.io.Writer
-import java.util.Properties
+//import java.util.Properties
 
 class MorphRDBRunnerFactory extends MorphBaseRunnerFactory{
 
@@ -38,19 +38,12 @@ class MorphRDBRunnerFactory extends MorphBaseRunnerFactory{
 							morphRDBRunner;
 	}
 
-//	override def createRunner(properties:Properties):MorphBaseRunner = {
-//			val runner = super.createRunner(properties);
-////			val morphProperties = properties.asInstanceOf[MorphProperties];
-////			if(morphProperties.csvFiles.isDefined) {
-////			  morphProperties.csvFiles.get.map(csvFile => {
-////			    MorphRDBUtility.loadCSVFile(runner.connection, csvFile);  
-////			  });
-////			  
-////			  
-////			  //runner.connection.commit();
-////			}
-//			runner;
-//	}
+  override def createRunner(configurationDirectory:String , configurationFile:String) 
+	: MorphBaseRunner = {
+    
+		val configurationProperties = MorphRDBProperties.apply(configurationDirectory, configurationFile);
+		this.createRunner(configurationProperties);
+	}
 
 
 
@@ -63,9 +56,11 @@ class MorphRDBRunnerFactory extends MorphBaseRunnerFactory{
 	}
 
 	override def createUnfolder(md:MorphBaseMappingDocument, props:MorphProperties):MorphRDBUnfolder = {
-			val unfolder = new MorphRDBUnfolder(md.asInstanceOf[R2RMLMappingDocument], props);
-			//unfolder.dbType = props.databaseType;
-			unfolder;	  
+	  val morphRDBProperties = props.asInstanceOf[MorphRDBProperties];
+	  
+    val unfolder = new MorphRDBUnfolder(md.asInstanceOf[R2RMLMappingDocument], morphRDBProperties);
+    //unfolder.dbType = props.databaseType;
+    unfolder;	  
 	}
 
 	override def createDataTranslator(mappingDocument:MorphBaseMappingDocument
@@ -77,6 +72,23 @@ class MorphRDBRunnerFactory extends MorphBaseRunnerFactory{
 					, materializer , unfolder.asInstanceOf[MorphRDBUnfolder]
 							, dataSourceReader.asInstanceOf[MorphRDBDataSourceReader] , connection, properties);	  
 	}
+	
+//	def createConnection(morphProperties:MorphProperties) : Connection = {
+//		val connection = if(morphProperties.noOfDatabase > 0) {
+//			val databaseUser = morphProperties.databaseUser;
+//			val databaseName = morphProperties.databaseName;
+//			val databasePassword = morphProperties.databasePassword;
+//			val databaseDriver = morphProperties.databaseDriver;
+//			val databaseURL = morphProperties.databaseURL;
+//			DBUtility.getLocalConnection(databaseUser, databaseName, databasePassword, 
+//					databaseDriver, databaseURL, "Runner");
+//		} else {
+//		  null
+//		}
+//
+//		connection;
+//	}	
+	
 }
 
 object MorphRDBRunnerFactory {

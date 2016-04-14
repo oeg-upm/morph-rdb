@@ -1,7 +1,7 @@
 package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
 import org.apache.log4j.Logger
-import es.upm.fi.dia.oeg.morph.base.MorphProperties
+//import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner
@@ -13,6 +13,8 @@ import es.upm.fi.dia.oeg.morph.base.engine.AbstractQueryResultTranslator
 import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
 import java.io.OutputStream
 import java.io.Writer
+//import java.util.Properties
+
 
 class MorphRDBRunner(mappingDocument:R2RMLMappingDocument
 //    , dataSourceReader:MorphBaseDataSourceReader
@@ -40,7 +42,7 @@ class MorphRDBRunner(mappingDocument:R2RMLMappingDocument
 object MorphRDBRunner {
 	val logger = Logger.getLogger("R2RMLRunner");
 	
-	def apply(properties:MorphProperties ) : MorphRDBRunner = {
+	def apply(properties:MorphRDBProperties ) : MorphRDBRunner = {
 		val runnerFactory = new MorphRDBRunnerFactory();
 		//val runner = new R2RMLRunner();
 //		runner.loadConfigurationProperties(properties);
@@ -49,8 +51,7 @@ object MorphRDBRunner {
 	}
 	
 	def apply(configurationDirectory:String , configurationFile:String ) : MorphRDBRunner = {
-		val configurationProperties = 
-				MorphProperties.apply(configurationDirectory, configurationFile);
+		val configurationProperties = MorphRDBProperties.apply(configurationDirectory, configurationFile);
 		val runner = MorphRDBRunner(configurationProperties)
 		runner
 	}

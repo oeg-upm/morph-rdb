@@ -14,6 +14,7 @@ import es.upm.fi.dia.oeg.morph.base.DBUtility;
 import es.upm.fi.dia.oeg.morph.base.MorphProperties;
 import es.upm.fi.dia.oeg.morph.base.Constants;
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBProperties;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
 
 public class ExampleWithoutPropertiesFile {
@@ -38,7 +39,7 @@ public class ExampleWithoutPropertiesFile {
 		String mappingDocumentFile = System.getProperty("user.dir") 
 				+ File.separator + "examples" + File.separator + "example.ttl";
 		
-		MorphProperties properties = new MorphProperties();
+		MorphRDBProperties properties = new MorphRDBProperties();
 		properties.setNoOfDatabase(1);
 		properties.setDatabaseUser(dbUserName);
 		properties.setDatabasePassword(dbPassword);
@@ -69,7 +70,7 @@ public class ExampleWithoutPropertiesFile {
 		String mappingDocumentFile = System.getProperty("user.dir") 
 				+ File.separator + "examples" + File.separator + "example.ttl";
 		
-		MorphProperties properties = new MorphProperties();
+		MorphRDBProperties properties = new MorphRDBProperties();
 		properties.setNoOfDatabase(1);
 		properties.setDatabaseUser(dbUserName);
 		properties.setDatabasePassword(dbPassword);
@@ -105,7 +106,7 @@ public class ExampleWithoutPropertiesFile {
 		String mappingDocumentFile = System.getProperty("user.dir") 
 				+ File.separator + "examples" + File.separator + "example.ttl";
 		
-		MorphProperties properties = new MorphProperties();
+		MorphRDBProperties properties = new MorphRDBProperties();
 		properties.setNoOfDatabase(1);
 		properties.setDatabaseUser(dbUserName);
 		properties.setDatabasePassword(dbPassword);
@@ -137,7 +138,7 @@ public class ExampleWithoutPropertiesFile {
 		String mappingDocumentFile = System.getProperty("user.dir") 
 				+ File.separator + "examples" + File.separator + "example.ttl";
 		
-		MorphProperties properties = new MorphProperties();
+		MorphRDBProperties properties = new MorphRDBProperties();
 		properties.setNoOfDatabase(1);
 		properties.setDatabaseUser(dbUserName);
 		properties.setDatabasePassword(dbPassword);
@@ -188,7 +189,7 @@ public class ExampleWithoutPropertiesFile {
 		String configurationDirectory = "C:/Users/fpriyatna/Documents/dodga/iasoft/morph-files";
 		String mappingDocumentFile = configurationDirectory + File.separator + "pproc5.ttl";
 		String resultFile = configurationDirectory + File.separator + "pproc5-result.nt";
-		MorphProperties properties = new MorphProperties();
+		MorphRDBProperties properties = new MorphRDBProperties();
 		properties.setMappingDocumentFilePath(mappingDocumentFile);
 		properties.setOutputFilePath(resultFile);
 		properties.setDatabaseType(Constants.DATABASE_ORACLE());

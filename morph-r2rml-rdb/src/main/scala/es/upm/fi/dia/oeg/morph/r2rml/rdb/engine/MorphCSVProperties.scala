@@ -6,7 +6,7 @@ import es.upm.fi.dia.oeg.morph.base.{Constants, GeneralUtility, MorphProperties}
 /**
   * Created by freddy on 14/04/16.
   */
-class MorphCSVProperties extends MorphProperties {
+class MorphCSVProperties extends MorphRDBProperties {
   var csvFiles:Option[List[String]]=None;
 
   override def readConfigurationFile(pConfigurationDirectory:String , configurationFile:String) = {
@@ -33,7 +33,7 @@ class MorphCSVProperties extends MorphProperties {
 object MorphCSVProperties {
 	val logger = Logger.getLogger(this.getClass());
 
-	def apply(pConfigurationDirectory:String , configurationFile:String) : MorphProperties = {
+	def apply(pConfigurationDirectory:String , configurationFile:String) : MorphCSVProperties = {
 			val properties = new MorphCSVProperties();
 			properties.readConfigurationFile(pConfigurationDirectory, configurationFile);
 			properties

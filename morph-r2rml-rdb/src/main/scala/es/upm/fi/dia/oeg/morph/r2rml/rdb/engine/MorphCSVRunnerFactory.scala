@@ -1,8 +1,8 @@
 package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
-import java.util.Properties
+//import java.util.Properties
 
-//import es.upm.fi.dia.oeg.morph.base.MorphProperties
+import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
@@ -43,7 +43,7 @@ class MorphCSVRunnerFactory extends MorphRDBRunnerFactory {
 		this.createRunner(configurationProperties);
 	}
 		
-  override def createRunner(properties:Properties):MorphBaseRunner = {
+  override def createRunner(properties:MorphProperties):MorphBaseRunner = {
     val runner = super.createRunner(properties);
     val morphProperties = properties.asInstanceOf[MorphCSVProperties];
     if(morphProperties.csvFiles.isDefined) {

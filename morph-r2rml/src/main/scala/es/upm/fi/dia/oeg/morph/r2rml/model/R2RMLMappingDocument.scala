@@ -16,6 +16,7 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import com.hp.hpl.jena.rdf.model.Model
+import java.util.Properties
 
 class R2RMLMappingDocument(classMappings:Iterable[R2RMLTriplesMap]) 
 extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {
@@ -214,7 +215,7 @@ object R2RMLMappingDocument {
 	  R2RMLMappingDocument(mdPath, null, null);
 	}
 	
-	def apply(mdPath:String, props:MorphProperties
+	def apply(mdPath:String, props:Properties
 	    , connection:Connection)
 	: R2RMLMappingDocument = {
 	  if(mdPath == null) {
@@ -255,8 +256,10 @@ object R2RMLMappingDocument {
 	
 		if(connection != null) {
 		  //BUILDING METADATA
+		  
 		   try {
-			   md.buildMetaData(connection, props.databaseName, props.databaseType );
+		     val morphProperties = props.asInstanceOf[MorphProperties];
+			   md.buildMetaData(connection, morphProperties.databaseName, morphProperties.databaseType );
 		   } catch {
 		     case e:Exception => { logger.warn("Error while building metadata.") }
 		   }

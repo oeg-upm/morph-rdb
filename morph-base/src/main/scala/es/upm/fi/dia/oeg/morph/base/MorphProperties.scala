@@ -18,6 +18,15 @@ class MorphProperties extends java.util.Properties {
 			var ontologyFilePath:Option[String]=None;
 	var mappingDocumentFilePath:String=null ;
 
+	//database
+	var noOfDatabase=0;
+	var databaseDriver:String =null; 
+	var databaseURL:String =null;
+	var databaseName:String =null;
+	var databaseUser:String =null;
+	var databasePassword:String =null;
+	var databaseTimeout = 0;
+
 	var outputFilePath:Option[String] = None;
 	var queryFilePath:Option[String] = None;
 	var rdfLanguage:String=null;
@@ -46,14 +55,7 @@ class MorphProperties extends java.util.Properties {
 	var mapDataTranslationLimits:Map[String,String] = Map.empty;
 	var mapDataTranslationOffsets:Map[String,String] = Map.empty;
 
-	//database
-	var noOfDatabase=0;
-	var databaseDriver:String =null; 
-	var databaseURL:String =null;
-	var databaseName:String =null;
-	var databaseUser:String =null;
-	var databasePassword:String =null;
-	var databaseTimeout = 0;
+
 
 	//uri encoding
 	//var uriEncode:Option[String]=None;
@@ -90,66 +92,10 @@ class MorphProperties extends java.util.Properties {
 				throw e;	    
 			}
 			}
-			
-			this.noOfDatabase = this.readInteger(Constants.NO_OF_DATABASE_NAME_PROP_NAME, 0);
-			if(this.getProperty(Constants.JDCB_DRIVER_PROP_NAME) != null) {
-				this.noOfDatabase = 1;
-			}
-
-			if(this.noOfDatabase != 0 && this.noOfDatabase != 1) {
-				throw new Exception("Only zero or one database is supported.");
-			}
 
 
-			for(i <- 0 until noOfDatabase) {
-				val propertyDatabaseDriver = Constants.DATABASE_DRIVER_PROP_NAME + "[" + i + "]";
-				this.databaseDriver = this.getProperty(propertyDatabaseDriver);
-				if(this.databaseDriver == null) { 
-					this.databaseDriver = this.getProperty(Constants.JDCB_DRIVER_PROP_NAME); 
-				}
-
-				val propertyDatabaseURL = Constants.DATABASE_URL_PROP_NAME + "[" + i + "]";
-				this.databaseURL = this.getProperty(propertyDatabaseURL);
-				if(this.databaseURL == null) { 
-					this.databaseURL = this.getProperty(Constants.JDCB_URL_PROP_NAME); 
-				}
-
-				val propertyDatabaseName= Constants.DATABASE_NAME_PROP_NAME + "[" + i + "]";
-				this.databaseName = this.getProperty(propertyDatabaseName);
-				if(this.databaseName == null) { 
-					this.databaseName = this.getProperty(Constants.JDCB_DATABASE_PROP_NAME); 
-				}
-
-				val propertyDatabaseUser = Constants.DATABASE_USER_PROP_NAME + "[" + i + "]";
-				this.databaseUser = this.getProperty(propertyDatabaseUser);
-				if(this.databaseUser == null) { 
-					this.databaseUser = this.getProperty(Constants.JDCB_USERNAME_PROP_NAME); 
-				}
-
-				val propertyDatabasePassword = Constants.DATABASE_PWD_PROP_NAME  + "[" + i + "]";
-				this.databasePassword = this.getProperty(propertyDatabasePassword);
-				if(this.databasePassword == null) { 
-					this.databasePassword = this.getProperty(Constants.JDCB_PASSWORD_PROP_NAME); 
-				}
-
-				val propertyDatabaseType = Constants.DATABASE_TYPE_PROP_NAME  + "[" + i + "]";
-				this.databaseType = this.getProperty(propertyDatabaseType);
-				if(this.databaseType == null) { 
-					this.databaseType = this.getProperty(Constants.DRIVER_PROP_NAME); 
-				}
-
-				//			if(this.databaseType == null) {
-				//				this.databaseType = Constants.DATABASE_MYSQL;
-				//			}
-
-				val propertyDatabaseTimeout = Constants.DATABASE_TIMEOUT_PROP_NAME  + "[" + i + "]";
-				val timeoutPropertyString = this.getProperty(propertyDatabaseTimeout);
-				if(timeoutPropertyString != null && !timeoutPropertyString.equals("")) {
-					this.databaseTimeout = Integer.parseInt(timeoutPropertyString.trim());
-				}
 
 
-			}
 
 
 
@@ -348,14 +294,6 @@ class MorphProperties extends java.util.Properties {
 			result;
 	}
 
-	def setNoOfDatabase(x:Int) = {this.noOfDatabase=x}
-	def setDatabaseUser(dbUser:String) = {this.databaseUser=dbUser}
-	def setDatabaseURL(dbURL:String) = {this.databaseURL=dbURL}
-	def setDatabasePassword(dbPassword:String) = {this.databasePassword=dbPassword}
-	def setDatabaseName(dbName:String) = {this.databaseName=dbName}
-	def setDatabaseDriver(dbDriver:String) = {this.databaseDriver=dbDriver}
-	def setDatabaseType(dbType:String) = {this.databaseType=dbType}
-	def setMappingDocumentFilePath(mdPath:String) = {this.mappingDocumentFilePath=mdPath}
 
 	def setQueryFilePath(queryFilePath:String) = {
 			this.queryFilePath = if(queryFilePath == null || queryFilePath.equals("")) {
@@ -368,6 +306,10 @@ class MorphProperties extends java.util.Properties {
 				None
 			} else {Some(outputPath)}
 	}
+
+	//	def getDatabaseName = this.databaseName;
+	//	def getDatabaseType = this.databaseType;
+
 }
 
 object MorphProperties {
