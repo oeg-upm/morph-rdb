@@ -41,6 +41,7 @@ class MorphRDBQueryTranslatorFactory extends IQueryTranslatorFactory {
 			queryTranslator.connection = conn;
 		}
 		queryTranslator.mappingDocument = md;
+		queryTranslator.databaseType = morphRDBProperties.databaseType;
 		
 		queryTranslator;	  
 	}

@@ -665,7 +665,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				query1.addSelectItems(selectItemsB1);
 				query1.addSelectItems(selectItemsC1);
 				query1.addSelectItems(selectItemsMappingId1);
-				
+				query1.toString();
 	
 				val r3SelectItems = r3.getSelectItems().toList;
 				val selectItemsA2 = selectItemGenerator.generateSelectItems(termsA, r4Alias, r1SelectItems, false);
@@ -1130,7 +1130,10 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 	def transIRI(node:Node ) : List[ZExp];
 
 	def transJoin(opParent:Op , gp1:Op , pGP2:Op , joinType:String ) : IQuery  = {
-		logger.debug("entering transJoin");
+	  logger.debug("entering transJoin");
+	  val enclosedCharacter = Constants.getEnclosedCharacter(this.databaseType);
+	  
+		
 		val selectItemGenerator = new MorphSQLSelectItemGenerator(this.nameGenerator, this.databaseType);
 		val gp2 = opParent match {
 		  case opLefJoin:OpLeftJoin => {
@@ -1228,6 +1231,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 			val selectItems = selectItemsA ::: selectItemsB ::: selectItemsC;  
 			MorphSQLUtility.setDefaultAlias(selectItems);
 
+			
+			
 			//.... JOIN ... ON <joinOnExpression>
 			val joinOnExps = termsC.flatMap(termC => {
 				val isTermCInSubjectGP1 = SPARQLUtility.isNodeInSubjectGraph(termC, gp1);
@@ -1243,10 +1248,12 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 
 						val expsAux = for(termCColumn1 <- termCColumns1) yield {
 							val termCColumn2 = termCColumns2Iterator.next();
-							val gp1TermC = MorphSQLConstant.apply(transGP1Alias + "." + termCColumn1
-									, ZConstant.COLUMNNAME, this.databaseType, null);
-							val gp2TermC = MorphSQLConstant.apply(transGP2Alias + "." + termCColumn2
-									, ZConstant.COLUMNNAME, this.databaseType, null);
+							val gp1TermC = MorphSQLConstant.apply(
+							    enclosedCharacter + transGP1Alias + enclosedCharacter + "." + enclosedCharacter + termCColumn1 + enclosedCharacter
+							    , ZConstant.COLUMNNAME, this.databaseType, null);
+							val gp2TermC = MorphSQLConstant.apply(
+							    enclosedCharacter + transGP2Alias + enclosedCharacter + "." + enclosedCharacter + termCColumn2 + enclosedCharacter
+							    , ZConstant.COLUMNNAME, this.databaseType, null);
 							val exp1Aux = new ZExpression("=", gp1TermC, gp2TermC);
 							val exp2Aux = {
 								if(!isTermCInSubjectGP1 && !(gp1.isInstanceOf[OpBGP])) {

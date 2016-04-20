@@ -326,7 +326,11 @@ class SQLQuery extends ZQuery with IQuery {
 							fromSQL += separator + logicalTable.toString();
 						} 
 						case _:IQuery => {
-							fromSQL +=  separator + " ( "+ logicalTable.print(false) + " ) " + logicalTable.getAlias();	
+						 val enclosedCharacter = Constants.getEnclosedCharacter(this.databaseType);
+
+							//fromSQL +=  separator + " ( "+ logicalTable.print(false) + " ) " + logicalTable.getAlias();
+						 fromSQL +=  separator + " ( "+ logicalTable.print(false) + " ) " + enclosedCharacter + logicalTable.getAlias() + enclosedCharacter;
+						 
 						}
 						case _ => { }
 						}

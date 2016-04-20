@@ -823,3 +823,615 @@ LEFT OUTER JOIN (
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2016-04-20 14:25:52 jdbc[5]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-191]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at es.upm.fi.dia.oeg.morph.base.DBUtility$.getLocalConnection(DBUtility.scala:177)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunnerFactory.createConnection(MorphBaseRunnerFactory.scala:193)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunnerFactory.createRunner(MorphBaseRunnerFactory.scala:43)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.apply(MorphRDBRunner.scala:49)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.apply(MorphRDBRunner.scala:55)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.main(MorphRDBRunner.scala:73)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.main(MorphRDBRunner.scala)
+	at es.upm.fi.dia.oeg.morph.example.ExampleWithPropertiesFileH2.test1Sparql02H2(ExampleWithPropertiesFileH2.java:59)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: org.h2.jdbc.JdbcSQLException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 40 more
+2016-04-20 14:25:52 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLException: Columna "v_2734r1.var_e" no encontrada
+Column "v_2734r1.var_e" not found; SQL statement:
+CREATE FORCE VIEW PUBLIC._8 AS
+(SELECT
+    "v_2734r1"."var_e" AS "var_e",
+    "v_5968r2"."var_w" AS "var_w",
+    "v_2734r1"."var_a" AS "var_a",
+    "v_2734r1"."mappingid_e",
+    "v_5968r2"."mappingid_w",
+    "v_2734r1"."mappingid_a"
+FROM (
+    SELECT
+        T12."Id" AS "var_a",
+        1123236701 AS "mappingid_a",
+        T12."Email" AS "var_e",
+        1057468716 AS "mappingid_e"
+    FROM PUBLIC."Student" T12
+    WHERE T12."Email" IS NOT NULL
+) V_2734R1
+LEFT OUTER JOIN (
+    SELECT
+        T13."Id" AS "var_a",
+        1123236701 AS "mappingid_a",
+        T13."Webpage" AS "var_w",
+        1041547629 AS "mappingid_w"
+    FROM PUBLIC."Student" T13
+    WHERE T13."Webpage" IS NOT NULL
+) V_5968R2
+    ON 1 = 0)
+UNION
+(SELECT
+    "v_2893r4"."var_e" AS "var_e",
+    "v_9858r3"."var_w" AS "var_w",
+    "v_9858r3"."var_a" AS "var_a",
+    "v_2893r4"."mappingid_e",
+    "v_9858r3"."mappingid_w",
+    "v_9858r3"."mappingid_a"
+FROM (
+    SELECT
+        T14."Id" AS "var_a",
+        1123236701 AS "mappingid_a",
+        T14."Webpage" AS "var_w",
+        1041547629 AS "mappingid_w"
+    FROM PUBLIC."Student" T14
+    WHERE T14."Webpage" IS NOT NULL
+) V_9858R3
+LEFT OUTER JOIN (
+    SELECT
+        T15."Id" AS "var_a",
+        1123236701 AS "mappingid_a",
+        T15."Email" AS "var_e",
+        1057468716 AS "mappingid_e"
+    FROM PUBLIC."Student" T15
+    WHERE T15."Email" IS NOT NULL
+) V_2893R4
+    ON 1 = 0) [42122-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Alias.optimize(Alias.java:51)
+	at org.h2.command.dml.Select.prepare(Select.java:852)
+	at org.h2.command.dml.SelectUnion.prepare(SelectUnion.java:304)
+	at org.h2.command.Parser.prepare(Parser.java:237)
+	at org.h2.engine.Session.prepare(Session.java:525)
+	at org.h2.engine.Session.prepare(Session.java:512)
+	at org.h2.table.TableView.compileViewQuery(TableView.java:105)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:156)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:528)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1180)
+	at org.h2.command.Parser.readJoin(Parser.java:1537)
+	at org.h2.command.Parser.parseJoinTableFilter(Parser.java:1929)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1885)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2032)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1878)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1699)
+	at org.h2.command.Parser.parseSelect(Parser.java:1687)
+	at org.h2.command.Parser.parsePrepared(Parser.java:443)
+	at org.h2.command.Parser.parse(Parser.java:315)
+	at org.h2.command.Parser.parse(Parser.java:287)
+	at org.h2.command.Parser.prepareCommand(Parser.java:252)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at es.upm.fi.dia.oeg.morph.base.DBUtility$.execute(DBUtility.scala:73)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBDataSourceReader.execute(MorphRDBDataSourceReader.scala:19)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:25)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:21)
+	at scala.collection.immutable.Map$Map1.foreach(Map.scala:116)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator.translateResult(QueryResultTranslator.scala:21)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner.run(MorphBaseRunner.scala:171)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.main(MorphRDBRunner.scala:74)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.main(MorphRDBRunner.scala)
+	at es.upm.fi.dia.oeg.morph.example.ExampleWithPropertiesFileH2.test1Sparql04H2(ExampleWithPropertiesFileH2.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2016-04-20 14:26:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Columna "v_210r1.var_e" no encontrada
+Column "v_210r1.var_e" not found; SQL statement:
+CREATE FORCE VIEW PUBLIC._10 AS
+(SELECT
+    "v_210r1"."var_e" AS "var_e",
+    "v_3236r2"."var_w" AS "var_w",
+    "v_210r1"."var_a" AS "var_a",
+    "v_210r1"."mappingid_e",
+    "v_3236r2"."mappingid_w",
+    "v_210r1"."mappingid_a"
+FROM (
+    SELECT
+        T2."Id" AS "var_a",
+        393996856 AS "mappingid_a",
+        T2."Email" AS "var_e",
+        1668837760 AS "mappingid_e"
+    FROM PUBLIC."Student" T2
+    WHERE T2."Email" IS NOT NULL
+) V_210R1
+LEFT OUTER JOIN (
+    SELECT
+        T3."Id" AS "var_a",
+        393996856 AS "mappingid_a",
+        T3."Webpage" AS "var_w",
+        48361312 AS "mappingid_w"
+    FROM PUBLIC."Student" T3
+    WHERE T3."Webpage" IS NOT NULL
+) V_3236R2
+    ON 1 = 0)
+UNION
+(SELECT
+    "v_4337r4"."var_e" AS "var_e",
+    "v_5412r3"."var_w" AS "var_w",
+    "v_5412r3"."var_a" AS "var_a",
+    "v_4337r4"."mappingid_e",
+    "v_5412r3"."mappingid_w",
+    "v_5412r3"."mappingid_a"
+FROM (
+    SELECT
+        T4."Id" AS "var_a",
+        393996856 AS "mappingid_a",
+        T4."Webpage" AS "var_w",
+        48361312 AS "mappingid_w"
+    FROM PUBLIC."Student" T4
+    WHERE T4."Webpage" IS NOT NULL
+) V_5412R3
+LEFT OUTER JOIN (
+    SELECT
+        T5."Id" AS "var_a",
+        393996856 AS "mappingid_a",
+        T5."Email" AS "var_e",
+        1668837760 AS "mappingid_e"
+    FROM PUBLIC."Student" T5
+    WHERE T5."Email" IS NOT NULL
+) V_4337R4
+    ON 1 = 0) [42122-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Alias.optimize(Alias.java:51)
+	at org.h2.command.dml.Select.prepare(Select.java:852)
+	at org.h2.command.dml.SelectUnion.prepare(SelectUnion.java:304)
+	at org.h2.command.Parser.prepare(Parser.java:237)
+	at org.h2.engine.Session.prepare(Session.java:525)
+	at org.h2.engine.Session.prepare(Session.java:512)
+	at org.h2.table.TableView.compileViewQuery(TableView.java:105)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:156)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:528)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1180)
+	at org.h2.command.Parser.readJoin(Parser.java:1537)
+	at org.h2.command.Parser.parseJoinTableFilter(Parser.java:1929)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1885)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2032)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1878)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1699)
+	at org.h2.command.Parser.parseSelect(Parser.java:1687)
+	at org.h2.command.Parser.parsePrepared(Parser.java:443)
+	at org.h2.command.Parser.parse(Parser.java:315)
+	at org.h2.command.Parser.parse(Parser.java:287)
+	at org.h2.command.Parser.prepareCommand(Parser.java:252)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at es.upm.fi.dia.oeg.morph.base.DBUtility$.execute(DBUtility.scala:73)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBDataSourceReader.execute(MorphRDBDataSourceReader.scala:19)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:25)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:21)
+	at scala.collection.immutable.Map$Map1.foreach(Map.scala:116)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator.translateResult(QueryResultTranslator.scala:21)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner.run(MorphBaseRunner.scala:171)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.main(MorphRDBRunner.scala:74)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.main(MorphRDBRunner.scala)
+	at es.upm.fi.dia.oeg.morph.example.ExampleWithPropertiesFileH2.test1Sparql04H2(ExampleWithPropertiesFileH2.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2016-04-20 14:31:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Columna "v_6999r1.var_e" no encontrada
+Column "v_6999r1.var_e" not found; SQL statement:
+CREATE FORCE VIEW PUBLIC._10 AS
+(SELECT
+    "v_6999r1"."var_e" AS "var_e",
+    "v_2109r2"."var_w" AS "var_w",
+    "v_6999r1"."var_a" AS "var_a",
+    "v_6999r1"."mappingid_e",
+    "v_2109r2"."mappingid_w",
+    "v_6999r1"."mappingid_a"
+FROM (
+    SELECT
+        T2."Id" AS "var_a",
+        393996856 AS "mappingid_a",
+        T2."Email" AS "var_e",
+        1668837760 AS "mappingid_e"
+    FROM PUBLIC."Student" T2
+    WHERE T2."Email" IS NOT NULL
+) V_6999R1
+LEFT OUTER JOIN (
+    SELECT
+        T3."Id" AS "var_a",
+        393996856 AS "mappingid_a",
+        T3."Webpage" AS "var_w",
+        48361312 AS "mappingid_w"
+    FROM PUBLIC."Student" T3
+    WHERE T3."Webpage" IS NOT NULL
+) V_2109R2
+    ON 1 = 0)
+UNION
+(SELECT
+    "v_732r4"."var_e" AS "var_e",
+    "v_9945r3"."var_w" AS "var_w",
+    "v_9945r3"."var_a" AS "var_a",
+    "v_732r4"."mappingid_e",
+    "v_9945r3"."mappingid_w",
+    "v_9945r3"."mappingid_a"
+FROM (
+    SELECT
+        T4."Id" AS "var_a",
+        393996856 AS "mappingid_a",
+        T4."Webpage" AS "var_w",
+        48361312 AS "mappingid_w"
+    FROM PUBLIC."Student" T4
+    WHERE T4."Webpage" IS NOT NULL
+) V_9945R3
+LEFT OUTER JOIN (
+    SELECT
+        T5."Id" AS "var_a",
+        393996856 AS "mappingid_a",
+        T5."Email" AS "var_e",
+        1668837760 AS "mappingid_e"
+    FROM PUBLIC."Student" T5
+    WHERE T5."Email" IS NOT NULL
+) V_732R4
+    ON 1 = 0) [42122-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Alias.optimize(Alias.java:51)
+	at org.h2.command.dml.Select.prepare(Select.java:852)
+	at org.h2.command.dml.SelectUnion.prepare(SelectUnion.java:304)
+	at org.h2.command.Parser.prepare(Parser.java:237)
+	at org.h2.engine.Session.prepare(Session.java:525)
+	at org.h2.engine.Session.prepare(Session.java:512)
+	at org.h2.table.TableView.compileViewQuery(TableView.java:105)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:156)
+	at org.h2.table.TableView.init(TableView.java:98)
+	at org.h2.table.TableView.<init>(TableView.java:65)
+	at org.h2.table.TableView.createTempView(TableView.java:528)
+	at org.h2.command.Parser.readTableFilter(Parser.java:1180)
+	at org.h2.command.Parser.readJoin(Parser.java:1537)
+	at org.h2.command.Parser.parseJoinTableFilter(Parser.java:1929)
+	at org.h2.command.Parser.parseSelectSimpleFromPart(Parser.java:1885)
+	at org.h2.command.Parser.parseSelectSimple(Parser.java:2032)
+	at org.h2.command.Parser.parseSelectSub(Parser.java:1878)
+	at org.h2.command.Parser.parseSelectUnion(Parser.java:1699)
+	at org.h2.command.Parser.parseSelect(Parser.java:1687)
+	at org.h2.command.Parser.parsePrepared(Parser.java:443)
+	at org.h2.command.Parser.parse(Parser.java:315)
+	at org.h2.command.Parser.parse(Parser.java:287)
+	at org.h2.command.Parser.prepareCommand(Parser.java:252)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at es.upm.fi.dia.oeg.morph.base.DBUtility$.execute(DBUtility.scala:73)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBDataSourceReader.execute(MorphRDBDataSourceReader.scala:19)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:25)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:21)
+	at scala.collection.immutable.Map$Map1.foreach(Map.scala:116)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator.translateResult(QueryResultTranslator.scala:21)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner.run(MorphBaseRunner.scala:171)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.main(MorphRDBRunner.scala:74)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.main(MorphRDBRunner.scala)
+	at es.upm.fi.dia.oeg.morph.example.ExampleWithPropertiesFileH2.test1Sparql04H2(ExampleWithPropertiesFileH2.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2016-04-20 15:32:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Columna "V_2145.VAR_A" no encontrada
+Column "V_2145.VAR_A" not found; SQL statement:
+SELECT "v_2145"."var_a" AS "a","v_366"."var_w" AS "w","v_2145"."var_n" AS "n","v_2145"."mappingid_a" AS "mappingid_a","v_366"."mappingid_e" AS "mappingid_e","v_366"."mappingid_w" AS "mappingid_w","v_2145"."mappingid_n" AS "mappingid_n","v_366"."var_e" AS "e"
+FROM  ( SELECT "T1"."Id" AS "var_a",1286580650 AS "mappingid_a","T1"."Name" AS "var_n",10001825 AS "mappingid_n"
+FROM "Student" T1
+WHERE "T1"."Name" IS NOT NULL
+ ) "v_2145"
+ INNER JOIN  ( SELECT "v_2805r1"."var_e" AS "var_e","v_5324r2"."var_w" AS "var_w","v_2805r1"."var_a" AS "var_a","v_2805r1"."mappingid_e","v_5324r2"."mappingid_w","v_2805r1"."mappingid_a"
+FROM  ( SELECT "T2"."Id" AS "var_a",1286580650 AS "mappingid_a","T2"."Email" AS "var_e",801142660 AS "mappingid_e"
+FROM "Student" T2
+WHERE "T2"."Email" IS NOT NULL
+ ) "v_2805r1"
+ LEFT JOIN  ( SELECT "T3"."Id" AS "var_a",1286580650 AS "mappingid_a","T3"."Webpage" AS "var_w",1711641083 AS "mappingid_w"
+FROM "Student" T3
+WHERE "T3"."Webpage" IS NOT NULL
+ ) "v_5324r2" ON (1 = 0)
+
+UNION
+SELECT "v_4542r4"."var_e" AS "var_e","v_8630r3"."var_w" AS "var_w","v_8630r3"."var_a" AS "var_a","v_4542r4"."mappingid_e","v_8630r3"."mappingid_w","v_8630r3"."mappingid_a"
+FROM  ( SELECT "T4"."Id" AS "var_a",1286580650 AS "mappingid_a","T4"."Webpage" AS "var_w",1711641083 AS "mappingid_w"
+FROM "Student" T4
+WHERE "T4"."Webpage" IS NOT NULL
+ ) "v_8630r3"
+ LEFT JOIN  ( SELECT "T5"."Id" AS "var_a",1286580650 AS "mappingid_a","T5"."Email" AS "var_e",801142660 AS "mappingid_e"
+FROM "Student" T5
+WHERE "T5"."Email" IS NOT NULL
+ ) "v_4542r4" ON (1 = 0)
+
+ ) "v_366" ON (v_2145.var_a = v_366.var_a)
+ [42122-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:257)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at es.upm.fi.dia.oeg.morph.base.DBUtility$.execute(DBUtility.scala:73)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBDataSourceReader.execute(MorphRDBDataSourceReader.scala:19)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:25)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:21)
+	at scala.collection.immutable.Map$Map1.foreach(Map.scala:116)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator.translateResult(QueryResultTranslator.scala:21)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner.run(MorphBaseRunner.scala:171)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.main(MorphRDBRunner.scala:74)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.main(MorphRDBRunner.scala)
+	at es.upm.fi.dia.oeg.morph.example.ExampleWithPropertiesFileH2.test1Sparql04H2(ExampleWithPropertiesFileH2.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2016-04-20 15:37:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Columna "V_3366.VAR_A" no encontrada
+Column "V_3366.VAR_A" not found; SQL statement:
+SELECT "v_3366"."var_a" AS "a","v_4750"."var_w" AS "w","v_3366"."var_n" AS "n","v_3366"."mappingid_a" AS "mappingid_a","v_4750"."mappingid_e" AS "mappingid_e","v_4750"."mappingid_w" AS "mappingid_w","v_3366"."mappingid_n" AS "mappingid_n","v_4750"."var_e" AS "e"
+FROM  ( SELECT "T1"."Id" AS "var_a",1286580650 AS "mappingid_a","T1"."Name" AS "var_n",10001825 AS "mappingid_n"
+FROM "Student" T1
+WHERE "T1"."Name" IS NOT NULL
+ ) "v_3366"
+ INNER JOIN  ( SELECT "v_7247r1"."var_e" AS "var_e","v_7740r2"."var_w" AS "var_w","v_7247r1"."var_a" AS "var_a","v_7247r1"."mappingid_e","v_7740r2"."mappingid_w","v_7247r1"."mappingid_a"
+FROM  ( SELECT "T2"."Id" AS "var_a",1286580650 AS "mappingid_a","T2"."Email" AS "var_e",801142660 AS "mappingid_e"
+FROM "Student" T2
+WHERE "T2"."Email" IS NOT NULL
+ ) "v_7247r1"
+ LEFT JOIN  ( SELECT "T3"."Id" AS "var_a",1286580650 AS "mappingid_a","T3"."Webpage" AS "var_w",1711641083 AS "mappingid_w"
+FROM "Student" T3
+WHERE "T3"."Webpage" IS NOT NULL
+ ) "v_7740r2" ON (1 = 0)
+
+UNION
+SELECT "v_9413r4"."var_e" AS "var_e","v_3005r3"."var_w" AS "var_w","v_3005r3"."var_a" AS "var_a","v_9413r4"."mappingid_e","v_3005r3"."mappingid_w","v_3005r3"."mappingid_a"
+FROM  ( SELECT "T4"."Id" AS "var_a",1286580650 AS "mappingid_a","T4"."Webpage" AS "var_w",1711641083 AS "mappingid_w"
+FROM "Student" T4
+WHERE "T4"."Webpage" IS NOT NULL
+ ) "v_3005r3"
+ LEFT JOIN  ( SELECT "T5"."Id" AS "var_a",1286580650 AS "mappingid_a","T5"."Email" AS "var_e",801142660 AS "mappingid_e"
+FROM "Student" T5
+WHERE "T5"."Email" IS NOT NULL
+ ) "v_9413r4" ON (1 = 0)
+
+ ) "v_4750" ON (v_3366.var_a = v_4750.var_a)
+ [42122-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:855)
+	at org.h2.command.Parser.prepareCommand(Parser.java:257)
+	at org.h2.engine.Session.prepareLocal(Session.java:560)
+	at org.h2.engine.Session.prepareCommand(Session.java:501)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at es.upm.fi.dia.oeg.morph.base.DBUtility$.execute(DBUtility.scala:73)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBDataSourceReader.execute(MorphRDBDataSourceReader.scala:19)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:25)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:21)
+	at scala.collection.immutable.Map$Map1.foreach(Map.scala:116)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator.translateResult(QueryResultTranslator.scala:21)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner.run(MorphBaseRunner.scala:171)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.main(MorphRDBRunner.scala:74)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.main(MorphRDBRunner.scala)
+	at es.upm.fi.dia.oeg.morph.example.ExampleWithPropertiesFileH2.test1Sparql04H2(ExampleWithPropertiesFileH2.java:89)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2016-04-20 16:19:29 jdbc[5]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-191]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at es.upm.fi.dia.oeg.morph.base.DBUtility$.getLocalConnection(DBUtility.scala:177)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunnerFactory.createConnection(MorphBaseRunnerFactory.scala:193)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunnerFactory.createRunner(MorphBaseRunnerFactory.scala:43)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.apply(MorphRDBRunner.scala:49)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.apply(MorphRDBRunner.scala:55)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.main(MorphRDBRunner.scala:73)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.main(MorphRDBRunner.scala)
+	at es.upm.fi.dia.oeg.morph.example.ExampleWithPropertiesFileH2.test1Sparql02H2(ExampleWithPropertiesFileH2.java:59)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: org.h2.jdbc.JdbcSQLException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 40 more
