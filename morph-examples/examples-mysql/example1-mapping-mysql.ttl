@@ -35,7 +35,7 @@
 
     rr:predicateObjectMap [ 
       rr:predicateMap <PredicateMapWebpage>; 
-      rr:objectMap    [ rr:termType rr:Literal; rr:column "webpage"; ] ;
+      rr:objectMap    [ rr:termType rr:IRI; rr:column "webpage"; ] ;
     ];
 	
     rr:predicateObjectMap [ 
@@ -86,7 +86,7 @@
 
 	rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/code> ]; 
-      rr:objectMap    [ rr:termType rr:Literal; rr:column "code"; ]; 
+      rr:objectMap    [ rr:termType rr:IRI; rr:template "http://lo calhost/{code}"; ]; 
     ];
 
 	rr:predicateObjectMap [ 

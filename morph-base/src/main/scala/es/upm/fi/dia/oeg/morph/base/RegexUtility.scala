@@ -19,6 +19,7 @@ object RegexUtility {
 		
 		val template2 = RegexUtility.replaceTokens(template, replacements);
 		System.out.println("template2 = " + template2);	  
+		
 	}
 	
 	def getTemplateMatching(inputTemplateString: String, inputURIString : String) 

@@ -48,7 +48,8 @@ object GeneralUtility {
     if(mapURIEncodingChars != null) {
       mapURIEncodingChars.foreach{ case(key,value) => {
         try {
-          result = result.replaceAll(key, value);  
+          //result = result.replaceAll(key, value);  
+          result = result.replaceAllLiterally(key, value);
         } catch {
           case e:Exception => {
             logger.debug("Error encoding uri = " + originalURI + " because of " + e.getMessage());

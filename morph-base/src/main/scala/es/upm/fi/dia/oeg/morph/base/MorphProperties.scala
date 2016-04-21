@@ -7,6 +7,8 @@ import java.sql.Connection
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.IOException
+import java.io.StringReader
+import java.io.InputStreamReader
 
 class MorphProperties extends java.util.Properties {
 	val logger = Logger.getLogger(this.getClass());
@@ -77,7 +79,13 @@ class MorphProperties extends java.util.Properties {
 
 			logger.info("reading configuration file : " + absoluteConfigurationFile);
 			try {
-				this.load(new FileInputStream(absoluteConfigurationFile));
+			  val fis = new FileInputStream(absoluteConfigurationFile);
+			  val isr = new InputStreamReader(fis, "UTF-8");
+				this.load(isr);
+				
+				
+				
+			  //this.load(new StringReader(absoluteConfigurationFile));
 			} catch {
 			case e:FileNotFoundException => {
 				val errorMessage = "Configuration file not found: " + absoluteConfigurationFile;
@@ -209,7 +217,8 @@ class MorphProperties extends java.util.Properties {
 			//			this.mapURIEncodingChars = mapEncodingChars.toMap;
 			//			logger.info("this.mapURIEncodingChars = " + this.mapURIEncodingChars);
 			//		}
-			this.mapURIEncodingChars = this.readMapStringString(MorphProperties.URI_ENCODE_PROPERTY, Map.empty);
+			val uriEncodingPropertyValue = this.readMapStringString(MorphProperties.URI_ENCODE_PROPERTY, Map.empty);
+			this.mapURIEncodingChars = uriEncodingPropertyValue;
 
 			this.uriTransformationOperation = this.readListString(MorphProperties.URI_TRANSFORM_PROPERTY
 					, Nil, ",") 
