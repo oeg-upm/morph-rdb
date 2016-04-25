@@ -1,0 +1,61 @@
+<rdf:RDF
+    xmlns:rr="http://www.w3.org/ns/r2rml#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:bsbm-inst="http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/"
+    xmlns:rev="http://purl.org/stuff/rev#"
+    xmlns:ex="http://example.com/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:j.0="http://mappingpedia.linkeddata.es/vocabulary/"
+    xmlns:bsbm="http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#" > 
+  <rdf:Description rdf:about="http://mappingpedia.linkeddata.es/resources/Sport/300">
+    <j.0:id rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">300</j.0:id>
+    <j.0:name>Soccer</j.0:name>
+    <j.0:code>SCR</j.0:code>
+    <j.0:type>OUTDOOR</j.0:type>
+    <rdf:type rdf:resource="http://mappingpedia.linkeddata.es/vocabulary/Sport"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mappingpedia.linkeddata.es/resources/Person/B4">
+    <j.0:webpage>www.starr.edu</j.0:webpage>
+    <j.0:phone>888-4537</j.0:phone>
+    <j.0:email>ringo@acd.edu</j.0:email>
+    <j.0:name>Ringo</j.0:name>
+    <rdf:type rdf:resource="http://mappingpedia.linkeddata.es/vocabulary/Person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mappingpedia.linkeddata.es/resources/Sport/200">
+    <j.0:id rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</j.0:id>
+    <j.0:name>Chess</j.0:name>
+    <j.0:code>CHS</j.0:code>
+    <j.0:type>INDOOR</j.0:type>
+    <rdf:type rdf:resource="http://mappingpedia.linkeddata.es/vocabulary/Sport"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mappingpedia.linkeddata.es/resources/Sport/100">
+    <j.0:id rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">100</j.0:id>
+    <j.0:name>Tennis</j.0:name>
+    <j.0:code>TNS</j.0:code>
+    <j.0:type>BOTH</j.0:type>
+    <rdf:type rdf:resource="http://mappingpedia.linkeddata.es/vocabulary/Sport"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mappingpedia.linkeddata.es/resources/Person/B3">
+    <j.0:webpage>www.george.edu</j.0:webpage>
+    <j.0:hasSport rdf:resource="http://mappingpedia.linkeddata.es/resources/Sport/300"/>
+    <j.0:birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1990-06-18T00:00:00.0</j.0:birthdate>
+    <j.0:name>George</j.0:name>
+    <rdf:type rdf:resource="http://mappingpedia.linkeddata.es/vocabulary/Person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mappingpedia.linkeddata.es/resources/Person/B2">
+    <j.0:email>john@acd.edu</j.0:email>
+    <j.0:hasSport rdf:resource="http://mappingpedia.linkeddata.es/resources/Sport/200"/>
+    <j.0:name>John</j.0:name>
+    <rdf:type rdf:resource="http://mappingpedia.linkeddata.es/vocabulary/Person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mappingpedia.linkeddata.es/resources/Person/B1">
+    <j.0:phone>777-3426</j.0:phone>
+    <j.0:hasSport rdf:resource="http://mappingpedia.linkeddata.es/resources/Sport/100"/>
+    <j.0:birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2000-12-31T00:00:00.0</j.0:birthdate>
+    <j.0:name>Paul</j.0:name>
+    <rdf:type rdf:resource="http://mappingpedia.linkeddata.es/vocabulary/Person"/>
+  </rdf:Description>
+</rdf:RDF>

@@ -100,8 +100,8 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 		this.dataTranslator.get.materializer.materialize();
 
 		//POSTMATERIALIZE PROCESS
-//		this.postMaterialize();
-
+		this.dataTranslator.get.materializer.postMaterialize();
+		
 		val endGeneratingModel = System.currentTimeMillis();
 		val durationGeneratingModel = (endGeneratingModel-startGeneratingModel) / 1000;
 		logger.debug("Materializing Mapping Document time was "+(durationGeneratingModel)+" s.");

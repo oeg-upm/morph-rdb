@@ -11,6 +11,7 @@ import java.io.OutputStream
 import java.io.PrintWriter
 import java.io.BufferedOutputStream
 import java.io.BufferedWriter
+import com.hp.hpl.jena.rdf.model.Property
 
 class NTripleMaterializer(model:Model,ntOutputStream:Writer) 
 extends MorphBaseMaterializer(model,ntOutputStream) {
@@ -31,7 +32,7 @@ extends MorphBaseMaterializer(model,ntOutputStream) {
 //		this.outputStream.close();
 	}
 	
-	override def materializeQuad(subject:RDFNode , predicate:RDFNode ,
+	override def materializeQuad(subject:RDFNode , predicate:Property ,
 			obj:RDFNode , graph:RDFNode ) {
 		if(subject != null && predicate != null && obj!= null) {
 			try {

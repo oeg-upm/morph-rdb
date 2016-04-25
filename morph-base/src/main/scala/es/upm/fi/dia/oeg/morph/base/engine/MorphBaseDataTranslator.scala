@@ -7,6 +7,9 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
+import es.upm.fi.dia.oeg.morph.base.GeneralUtility
+import com.hp.hpl.jena.rdf.model.Property
+import com.hp.hpl.jena.rdf.model.Resource
 
 abstract class MorphBaseDataTranslator(val md:MorphBaseMappingDocument
     , val materializer:MorphBaseMaterializer, unfolder:MorphBaseUnfolder
@@ -31,6 +34,39 @@ abstract class MorphBaseDataTranslator(val md:MorphBaseMappingDocument
 	
 	def getDataSourceReader = this.dataSourceReader;
 	
+	def createResource(originalIRI:String) : Resource = {
+	  val resourceIRI = this.createIRI(originalIRI);
+	  this.materializer.model.createResource(resourceIRI);
+	}
+	
+	def createProperty(originalIRI:String) : Property = {
+	  val propertyIRI = this.createIRI(originalIRI);
+	  this.materializer.model.createProperty(propertyIRI);
+	}
+		
+	private def createIRI(originalIRI:String) : String = {
+	    var resultIRI = originalIRI;
+	    try {
+			resultIRI = GeneralUtility.encodeURI(resultIRI
+			    , properties.mapURIEncodingChars, properties.uriTransformationOperation);
+			if(this.properties != null) {
+				if(this.properties.encodeUnsafeChars) {
+				  resultIRI = GeneralUtility.encodeUnsafeChars(resultIRI);
+				}
+				
+				if(this.properties.encodeReservedChars) {
+					resultIRI = GeneralUtility.encodeReservedChars(resultIRI);
+				}
+			}
+			resultIRI;
+			//this.materializer.model.createResource(resultIRI);
+		} catch {
+			case e:Exception => {
+				logger.warn("Error translating object uri value : " + resultIRI);
+				throw e
+			}
+		}
+	}
 	
 //	def postTranslation() = {this.materializer.postMaterialize}
 }

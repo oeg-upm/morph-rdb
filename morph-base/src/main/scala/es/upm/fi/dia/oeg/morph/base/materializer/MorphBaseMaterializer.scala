@@ -10,6 +10,7 @@ import java.io.File
 import com.hp.hpl.jena.tdb.TDBFactory
 import java.io.OutputStream
 import java.io.Writer
+import com.hp.hpl.jena.rdf.model.Property
 
 abstract class MorphBaseMaterializer(val model:Model, var outputStream:Writer) {
 	val logger = Logger.getLogger(this.getClass().getName());
@@ -22,7 +23,7 @@ abstract class MorphBaseMaterializer(val model:Model, var outputStream:Writer) {
 //	def materializeObjectPropertyTriple(predicateName:String , rangeURI:String , isBlankNodeObject:Boolean , graph:String );
 //	def materializeRDFTypeTriple(subjectURI:String , conceptName:String , isBlankNodeSubject:boolean , graph:String );
 //	public abstract void materializeQuad(String subject, String predicate, String object, String graph);
-	def materializeQuad(subject:RDFNode , predicate:RDFNode , obj:RDFNode , graph:RDFNode );
+	def materializeQuad(subject:RDFNode , predicate:Property , obj:RDFNode , graph:RDFNode );
 	def materialize();
 	def postMaterialize() = this.outputStream.close()
 	
