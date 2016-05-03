@@ -16,7 +16,7 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 
 class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 	val logger = Logger.getLogger("MorphMappingInferrer");
-	var mapInferredTypes : Map[Node, Set[MorphBaseClassMapping]] = Map.empty
+	val mapInferredTypes : Map[Node, Set[MorphBaseClassMapping]] = Map.empty
 	//var query:Query  = null;
 
 	def addToInferredTypes(mapNodeTypes:Map[Node, Set[MorphBaseClassMapping]] 
@@ -85,18 +85,50 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 		genericInferBGP(bgpHelper _)(op)
 	}
 
+//	def infer(query:Query ) : Map[Node, Set[MorphBaseClassMapping]] = {
+//		if (this.mapInferredTypes.isEmpty) {
+//			val queryPattern = query.getQueryPattern();
+//			val opQueryPattern = Algebra.compile(queryPattern);
+//			this.mapInferredTypes = this.infer(opQueryPattern);			
+//		}
+//
+//		this.mapInferredTypes;
+//	}
+	
 	def infer(query:Query ) : Map[Node, Set[MorphBaseClassMapping]] = {
-		if (this.mapInferredTypes.isEmpty) {
 			val queryPattern = query.getQueryPattern();
 			val opQueryPattern = Algebra.compile(queryPattern);
-			this.mapInferredTypes = this.infer(opQueryPattern);			
-		}
-
-		this.mapInferredTypes;
+			this.infer(opQueryPattern);
 	}
 
-	def infer(opQueryPattern:Op ) : Map[Node, Set[MorphBaseClassMapping]] = {
-		if (this.mapInferredTypes.isEmpty) {
+//	def infer(opQueryPattern:Op ) : Map[Node, Set[MorphBaseClassMapping]] = {
+//		if (this.mapInferredTypes.isEmpty) {
+//			val mapSubjectTypesByRdfType = this.inferByRDFType(opQueryPattern);
+//			val mapSubjectTypesByPredicatesURIs = this.inferSubjectTypesByPredicatesURIs(opQueryPattern);
+//			val mapSubjectTypesBySubjectUri = this.inferSubjectTypesBySubjectURI(opQueryPattern);
+//			
+//			val listSubjectMapNodes = List(mapSubjectTypesByRdfType,
+//										   mapSubjectTypesByPredicatesURIs,
+//										   mapSubjectTypesBySubjectUri)
+//			val mapSubjectTypes = MorphQueryTranslatorUtility.mapsIntersection(listSubjectMapNodes);
+//
+//			val mapObjectTypesByObjectsURIs = this.inferObjectTypesByObjectURI(opQueryPattern)
+//			val mapObjectTypesWithConceptMappingsWithClassURI =
+//				mapObjectTypesByObjectsURIs.mapValues(_.filter(_.getMappedClassURIs.nonEmpty))
+//			val mapObjectTypesByPredicatesURIs = this.inferObjectTypesByPredicateURI(opQueryPattern, mapSubjectTypes)
+//
+//			val listMapNodes = List(mapSubjectTypesByRdfType,
+//									mapSubjectTypesBySubjectUri,
+//									mapSubjectTypesByPredicatesURIs,
+//									mapObjectTypesWithConceptMappingsWithClassURI,
+//									mapObjectTypesByPredicatesURIs)
+//			this.mapInferredTypes = MorphQueryTranslatorUtility.mapsIntersection(listMapNodes)
+//		}
+//
+//		this.mapInferredTypes;
+//	}
+	
+		def infer(opQueryPattern:Op ) : Map[Node, Set[MorphBaseClassMapping]] = {
 			val mapSubjectTypesByRdfType = this.inferByRDFType(opQueryPattern);
 			val mapSubjectTypesByPredicatesURIs = this.inferSubjectTypesByPredicatesURIs(opQueryPattern);
 			val mapSubjectTypesBySubjectUri = this.inferSubjectTypesBySubjectURI(opQueryPattern);
@@ -116,10 +148,8 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 									mapSubjectTypesByPredicatesURIs,
 									mapObjectTypesWithConceptMappingsWithClassURI,
 									mapObjectTypesByPredicatesURIs)
-			this.mapInferredTypes = MorphQueryTranslatorUtility.mapsIntersection(listMapNodes)
-		}
-
-		this.mapInferredTypes;
+			MorphQueryTranslatorUtility.mapsIntersection(listMapNodes)
+		
 	}
 
 	def inferByRDFType(op:Op) : Map[Node, Set[MorphBaseClassMapping]] = {
