@@ -13,6 +13,8 @@ import com.hp.hpl.jena.sparql.expr.ExprList
 import com.hp.hpl.jena.sparql.expr.Expr
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
+import com.hp.hpl.jena.sparql.algebra.op.OpExtend
+import com.hp.hpl.jena.sparql.algebra.op.OpGroup
 
 class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 	val logger = Logger.getLogger("MorphMappingInferrer");
@@ -69,6 +71,8 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 			case opDistinct:OpDistinct => this.genericInferBGP(bgpFunc)(opDistinct.getSubOp())
 			case opProject:OpProject => this.genericInferBGP(bgpFunc)(opProject.getSubOp())
 			case opSlice:OpSlice => this.genericInferBGP(bgpFunc)(opSlice.getSubOp())
+			case opExtend:OpExtend => this.genericInferBGP(bgpFunc)(opExtend.getSubOp())
+			case opGroup:OpGroup => this.genericInferBGP(bgpFunc)(opGroup.getSubOp())
 		}
 	}
 

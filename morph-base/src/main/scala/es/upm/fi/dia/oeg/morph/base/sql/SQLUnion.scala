@@ -8,7 +8,7 @@ import Zql.ZSelectItem
 import Zql.ZExp
 
 class SQLUnion(val unionQueries:Iterable[SQLQuery]) extends IQuery {
-	var alias:String = null;
+//	var alias:String = null;
 //	var databaseType:String = null;
 	var orderByConditions:List[ZOrderBy] = List.empty;
 	var joinType:String  = null;

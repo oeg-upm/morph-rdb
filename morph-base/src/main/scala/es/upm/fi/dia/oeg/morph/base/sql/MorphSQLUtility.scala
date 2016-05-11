@@ -361,11 +361,17 @@ object MorphSQLUtility {
 		val result : List[ZSelectItem]= {
 			val resultAux = selectItems.flatMap(selectItem => {
 				val selectItemAlias = selectItem.getAlias();
-				if(alias.equalsIgnoreCase(selectItemAlias)) {
-					Some(selectItem);
+				if(selectItemAlias != null) {
+  				val selectItemAliasClean = MorphSQLUtility.printWithoutEnclosedCharacters(selectItemAlias)
+  				if(alias.equalsIgnoreCase(selectItemAliasClean)) {
+  					Some(selectItem);
+  				} else {
+  				  None
+  				}				  
 				} else {
 				  None
-				}		  
+				}
+		  
 			})
 			resultAux.toList;
 		}

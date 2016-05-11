@@ -39,6 +39,9 @@ import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataSourceReader
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLSubjectMap
 import com.hp.hpl.jena.rdf.model.Property
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLPredicateMap
+import java.text.SimpleDateFormat;
+import java.text.DateFormat
+import java.util.Locale
 
 class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMaterializer
 		, unfolder:MorphRDBUnfolder, dataSourceReader:MorphRDBDataSourceReader
@@ -46,6 +49,9 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 extends MorphBaseDataTranslator(md, materializer , unfolder, dataSourceReader
 		, connection, properties) 
 with MorphR2RMLElementVisitor {
+  val dfInput = this.properties.inputDateFormat;
+  val dfOutput = this.properties.outputDateFormat;
+  
 	override val logger = Logger.getLogger(this.getClass().getName());
 
 	override def processCustomFunctionTransformationExpression(
@@ -535,6 +541,14 @@ with MorphR2RMLElementVisitor {
 			value.toString().trim().replaceAll(" ", "T");
 	}
 
+	def translateDate(value:String) = {
+			//val dfInput = new SimpleDateFormat("dd-MMM-yyy", Locale.ENGLISH);
+			val result = dfInput.parse(value);
+			//val dfOutput = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+			val result2 = dfOutput.format(result);
+      result2.toString();
+	}
+
 	def translateBoolean(value:String) = {
 			if(value.equalsIgnoreCase("T")  || value.equalsIgnoreCase("True") || value.equalsIgnoreCase("1")) {
 				"true";
@@ -561,6 +575,7 @@ with MorphR2RMLElementVisitor {
 							val xsdDateTimeURI = XSDDatatype.XSDdateTime.getURI().toString();
 							val xsdBooleanURI = XSDDatatype.XSDboolean.getURI().toString();
 							val xsdDurationURI = XSDDatatype.XSDduration.getURI().toString();
+							val xsdDateURI = XSDDatatype.XSDdate.getURI().toString();
 
 							//				datatypeGet match {
 							//					case xsdDateTimeURI => {
@@ -582,6 +597,9 @@ with MorphR2RMLElementVisitor {
 							}
 							else if(datatypeGet.equals(xsdDurationURI)) {
 								encodedValue;
+							}
+							else if(datatypeGet.equals(xsdDateURI)) {
+								this.translateDate(encodedValue)
 							}
 							else {
 								encodedValue
@@ -610,7 +628,7 @@ with MorphR2RMLElementVisitor {
 						result
 					} catch {
 					case e:Exception => {
-						logger.warn("Error translating object uri value : " + value);
+						logger.warn("Error translating value : " + value);
 						throw e
 					}
 					}

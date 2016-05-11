@@ -92,6 +92,7 @@ object Constants {
 	val OUTPUT_FORMAT_TURTLE = "TURTLE";
 	val OUTPUT_FORMAT_N3 = "N3";
 
+	val INPUT_DATE_PATTERN_PROP_NAME = "input.date.pattern"; 
 	
 	//database
 	val NO_OF_DATABASE_NAME_PROP_NAME = "no_of_database";
@@ -173,6 +174,7 @@ object Constants {
 	val  AGGREGATION_FUNCTION_MAX = "MAX";
 	val  AGGREGATION_FUNCTION_MIN = "MIN";
 	val  AGGREGATION_FUNCTION_COUNT = "COUNT";
+	val  AGGREGATION_FUNCTION_COUNT_VAR = "COUNT";
 	val  AGGREGATION_FUNCTION_SUM = "SUM";
 
 	val R2RML_NS = "http://www.w3.org/ns/r2rml#";

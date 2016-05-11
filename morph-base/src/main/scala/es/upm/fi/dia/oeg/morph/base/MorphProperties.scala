@@ -9,15 +9,18 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.StringReader
 import java.io.InputStreamReader
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class MorphProperties extends java.util.Properties {
 	val logger = Logger.getLogger(this.getClass());
 
 	var configurationFileURL:String =null;
-	var configurationDirectory:String=null
+	var configurationDirectory:String=null;
 
-			//	var conn:Connection=null;
-			var ontologyFilePath:Option[String]=None;
+	//	var conn:Connection=null;
+	var ontologyFilePath:Option[String]=None;
 	var mappingDocumentFilePath:String=null ;
 
 	//database
@@ -64,6 +67,10 @@ class MorphProperties extends java.util.Properties {
 	var mapURIEncodingChars:Map[String, String]=Map.empty;
 	var uriTransformationOperation:List[String]=Nil;
 
+	//var inputDatePattern:Option[String] = None;
+	var inputDateFormat:DateFormat = null;
+	var outputDateFormat:DateFormat = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+	
 	def readConfigurationFile(pConfigurationDirectory:String , configurationFile:String) = {
 			var absoluteConfigurationFile = configurationFile;
 			var configurationDirectory = pConfigurationDirectory;
@@ -79,13 +86,13 @@ class MorphProperties extends java.util.Properties {
 
 			logger.info("reading configuration file : " + absoluteConfigurationFile);
 			try {
-			  val fis = new FileInputStream(absoluteConfigurationFile);
-			  val isr = new InputStreamReader(fis, "UTF-8");
+				val fis = new FileInputStream(absoluteConfigurationFile);
+				val isr = new InputStreamReader(fis, "UTF-8");
 				this.load(isr);
-				
-				
-				
-			  //this.load(new StringReader(absoluteConfigurationFile));
+
+
+
+				//this.load(new StringReader(absoluteConfigurationFile));
 			} catch {
 			case e:FileNotFoundException => {
 				val errorMessage = "Configuration file not found: " + absoluteConfigurationFile;
@@ -221,11 +228,19 @@ class MorphProperties extends java.util.Properties {
 			this.mapURIEncodingChars = uriEncodingPropertyValue;
 
 			this.uriTransformationOperation = this.readListString(MorphProperties.URI_TRANSFORM_PROPERTY
-					, Nil, ",") 
+					, Nil, ",") ;
 
 					this.mapDataTranslationLimits = this.readMapStringString(MorphProperties.DATATRANSLATION_LIMIT, Map.empty);
 			this.mapDataTranslationOffsets = this.readMapStringString(MorphProperties.DATATRANSLATION_OFFSET, Map.empty);
-
+			
+			val inputDatePatternPropertyValue = this.getProperty(Constants.INPUT_DATE_PATTERN_PROP_NAME);
+			val inputDateFormatPattern = if(inputDatePatternPropertyValue != null && !inputDatePatternPropertyValue.equals("")) {
+			  inputDatePatternPropertyValue;
+			} else {
+			  "dd-MMM-yyy";
+			}
+			
+			this.inputDateFormat = new SimpleDateFormat(inputDateFormatPattern, Locale.ENGLISH);
 	}
 
 

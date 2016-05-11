@@ -1,9 +1,20 @@
 package es.upm.fi.dia.oeg.morph.base.sql
 
+import es.upm.fi.dia.oeg.morph.base.Constants
+import java.util.Random
+
+
 trait SQLLogicalTable {
-//	var alias:String=null;
+	var alias:String=null;
 	var databaseType:String=null;
 	
+//	def generateAlias() : String = {
+//			//return R2OConstants.VIEW_ALIAS + this.hashCode();
+//			if(this.alias == null) {
+//				this.alias = Constants.VIEW_ALIAS + new Random().nextInt(10000);
+//			}
+//			this.alias;
+//	}
 	def generateAlias():String;
 	def setAlias(alias:String);
 	def getAlias():String;

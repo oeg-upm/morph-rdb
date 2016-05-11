@@ -1,6 +1,7 @@
 package es.upm.fi.dia.oeg.morph.base
 import scala.collection.JavaConversions._
 import java.util.Collection
+import Zql.ZExp
 
 object CollectionUtility {
 	def mkString(theCollection : Collection[Any], sep:String, start:String, end:String) : String = {
@@ -17,6 +18,16 @@ object CollectionUtility {
 	  })
 	  
 	  result;
-	} 
+	}
+	
+	def scalaListToJavaVector(scalaList:List[ZExp]):java.util.Vector[ZExp] = {
+	  if(scalaList == null) {
+	    null;
+	  } else {
+	    var javaVector = new java.util.Vector[ZExp]();
+	    scalaList.foreach(x => javaVector.add(x));
+	    javaVector;
+	  }
+	}
 
 }

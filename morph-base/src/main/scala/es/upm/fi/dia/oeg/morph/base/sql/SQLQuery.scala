@@ -19,7 +19,7 @@ import Zql.ZGroupBy
 class SQLQuery extends ZQuery with IQuery {
 	val logger = Logger.getLogger(this.getClass().getName());
 
-	var alias:String =null;
+//	var alias:String =null;
 	var slice:Long = -1;
 	var offset:Long = -1;
 	//	var databaseType:String=null;
@@ -252,13 +252,7 @@ class SQLQuery extends ZQuery with IQuery {
 		//selectItems = new Vector<ZSelectItem>();
 	}
 
-	def generateAlias() : String = {
-			//return R2OConstants.VIEW_ALIAS + this.hashCode();
-			if(this.alias == null) {
-				this.alias = Constants.VIEW_ALIAS + new Random().nextInt(10000);
-			}
-			this.alias;
-	}
+
 
 	//	def getDatabaseType() : String  = {
 	//		databaseType;
@@ -288,6 +282,13 @@ class SQLQuery extends ZQuery with IQuery {
 			result.toList;
 	}
 
+		def generateAlias() : String = {
+			//return R2OConstants.VIEW_ALIAS + this.hashCode();
+			if(this.alias == null) {
+				this.alias = Constants.VIEW_ALIAS + new Random().nextInt(10000);
+			}
+			this.alias;
+	}
 
 	override def getFrom() : java.util.Vector[ZFromItem] = {
 			val fromItems = super.getFrom().asInstanceOf[java.util.Vector[ZFromItem]];
@@ -790,9 +791,11 @@ class SQLQuery extends ZQuery with IQuery {
 	def pushGroupByDown() = {
 		val oldGroupBy = this.getGroupBy();
 		if(oldGroupBy != null) {
-			val oldGroupByExps = oldGroupBy.getGroupBy().asInstanceOf[Iterable[ZExp]];
+			//val oldGroupByExps = oldGroupBy.getGroupBy().asInstanceOf[Iterable[ZExp]];
+		  val oldGroupByExps = oldGroupBy.getGroupBy().toList;
 			val newGroupByExpsAux = oldGroupByExps.map(oldGroupByExp => {
-				val newGroupByExp = this.pushExpDown(oldGroupByExp);
+			  val zExp = oldGroupByExp.asInstanceOf[ZExp];
+				val newGroupByExp = this.pushExpDown(zExp);
 				newGroupByExp;
 			});
 			val newGroupByExps = new java.util.Vector[ZExp](newGroupByExpsAux);
