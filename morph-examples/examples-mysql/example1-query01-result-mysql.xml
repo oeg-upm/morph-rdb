@@ -22,7 +22,7 @@
                 <literal>ringo@acd.edu</literal>
             </binding>
             <binding name="w">
-                <literal>www.starr.edu</literal>
+                <uri>www.stárr.edu</uri>
             </binding>
         </result>
     </results>

@@ -1435,3 +1435,512 @@ Caused by: org.h2.jdbc.JdbcSQLException: La conexión no fue cerrada por la apli
 The connection was not closed by the application and is garbage collected [90018-191]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
 	... 40 more
+2016-05-03 11:53:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Conversión de datos fallida, convirtiendo "www.george.edu"
+Data conversion error converting "www.george.edu"; SQL statement:
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/id' AS "p","T4"."Id" AS "o",1336777650 AS "mappingid_s",1361393151 AS "mappingid_p",1901238627 AS "mappingid_o","T4"."Id" AS "s"
+FROM "Sport" T4
+WHERE "T4"."Id" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/webpage' AS "p","T10"."Webpage" AS "o",443942537,774895395,843710487,"T10"."Id" AS "s"
+FROM "Student" T10
+WHERE "T10"."Webpage" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/name' AS "p","T3"."Name" AS "o",1336777650,1763260873,1327234595,"T3"."Id" AS "s"
+FROM "Sport" T3
+WHERE "T3"."Name" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/phone' AS "p","T7"."Phone" AS "o",443942537,575715826,2117173674,"T7"."Id" AS "s"
+FROM "Student" T7
+WHERE "T7"."Phone" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/email' AS "p","T11"."Email" AS "o",443942537,1963075870,397071633,"T11"."Id" AS "s"
+FROM "Student" T11
+WHERE "T11"."Email" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/hasSport' AS "p","T6"."Id" AS "o",443942537,1916904573,1895143699,"T5"."Id" AS "s"
+FROM "Student" T5 INNER JOIN "Sport" T6 ON (T5."Sport" = T6."Id")
+WHERE "T6"."Id" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/type' AS "p","T1"."Type" AS "o",1336777650,1367165453,126234454,"T1"."Id" AS "s"
+FROM "Sport" T1
+WHERE "T1"."Type" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/name' AS "p","T9"."Name" AS "o",443942537,1789110533,170052458,"T9"."Id" AS "s"
+FROM "Student" T9
+WHERE "T9"."Name" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/birthdate' AS "p","T8"."Birthdate" AS "o",443942537,857394605,1104422581,"T8"."Id" AS "s"
+FROM "Student" T8
+WHERE "T8"."Birthdate" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/code' AS "p","T2"."Code" AS "o",1336777650,739333799,872306601,"T2"."Id" AS "s"
+FROM "Sport" T2
+WHERE "T2"."Code" IS NOT NULL
+
+ [22018-191]
+2016-05-03 15:36:25 jdbc[5]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-191]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at es.upm.fi.dia.oeg.morph.base.DBUtility$.getLocalConnection(DBUtility.scala:177)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunnerFactory.createConnection(MorphBaseRunnerFactory.scala:193)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunnerFactory.createRunner(MorphBaseRunnerFactory.scala:43)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.apply(MorphRDBRunner.scala:49)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.apply(MorphRDBRunner.scala:55)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.main(MorphRDBRunner.scala:73)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.main(MorphRDBRunner.scala)
+	at es.upm.fi.dia.oeg.morph.example.ExampleWithPropertiesFileH2.test1Sparql02H2(ExampleWithPropertiesFileH2.java:59)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: org.h2.jdbc.JdbcSQLException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 40 more
+2016-05-03 15:36:25 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLException: Conversión de datos fallida, convirtiendo "B2"
+Data conversion error converting "B2"; SQL statement:
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/code' AS "p","T19"."Code" AS "o",1197498159 AS "mappingid_s",1628551735 AS "mappingid_p",2078641942 AS "mappingid_o","T19"."Id" AS "s"
+FROM "Sport" T19
+WHERE "T19"."Code" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/email' AS "p","T28"."Email" AS "o",1699578227,353023213,1011044643,"T28"."Id" AS "s"
+FROM "Student" T28
+WHERE "T28"."Email" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/phone' AS "p","T26"."Phone" AS "o",1699578227,505231702,1328323494,"T26"."Id" AS "s"
+FROM "Student" T26
+WHERE "T26"."Phone" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/birthdate' AS "p","T25"."Birthdate" AS "o",1699578227,1697281847,1535026957,"T25"."Id" AS "s"
+FROM "Student" T25
+WHERE "T25"."Birthdate" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/name' AS "p","T24"."Name" AS "o",1699578227,316335490,597364637,"T24"."Id" AS "s"
+FROM "Student" T24
+WHERE "T24"."Name" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/id' AS "p","T21"."Id" AS "o",1197498159,453398853,1171255580,"T21"."Id" AS "s"
+FROM "Sport" T21
+WHERE "T21"."Id" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/webpage' AS "p","T27"."Webpage" AS "o",1699578227,252615006,79919963,"T27"."Id" AS "s"
+FROM "Student" T27
+WHERE "T27"."Webpage" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/name' AS "p","T20"."Name" AS "o",1197498159,935160003,1626852381,"T20"."Id" AS "s"
+FROM "Sport" T20
+WHERE "T20"."Name" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/type' AS "p","T18"."Type" AS "o",1197498159,785271142,500230084,"T18"."Id" AS "s"
+FROM "Sport" T18
+WHERE "T18"."Type" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/hasSport' AS "p","T23"."Id" AS "o",1699578227,1456061400,1661777060,"T22"."Id" AS "s"
+FROM "Student" T22 INNER JOIN "Sport" T23 ON (T22."Sport" = T23."Id")
+WHERE "T23"."Id" IS NOT NULL
+
+ [22018-191]
+2016-05-03 16:55:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Imposible interpretar la constante "TIMESTAMP" "200"
+Cannot parse "TIMESTAMP" constant "200"; SQL statement:
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/hasSport' AS "p","T8"."Id" AS "o",709133385 AS "mappingid_s",1238080693 AS "mappingid_p",1429351083 AS "mappingid_o","T7"."Id" AS "s"
+FROM "Student" T7 INNER JOIN "Sport" T8 ON (T7."Sport" = T8."Id")
+WHERE "T8"."Id" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/birthdate' AS "p","T10"."Birthdate" AS "o",709133385,23880693,891461509,"T10"."Id" AS "s"
+FROM "Student" T10
+WHERE "T10"."Birthdate" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/phone' AS "p","T9"."Phone" AS "o",709133385,342198178,1594791957,"T9"."Id" AS "s"
+FROM "Student" T9
+WHERE "T9"."Phone" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/type' AS "p","T1"."Type" AS "o",337799666,857394605,1104422581,"T1"."Id" AS "s"
+FROM "Sport" T1
+WHERE "T1"."Type" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/name' AS "p","T6"."Name" AS "o",709133385,792782299,85415531,"T6"."Id" AS "s"
+FROM "Student" T6
+WHERE "T6"."Name" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/name' AS "p","T3"."Name" AS "o",337799666,1963075870,397071633,"T3"."Id" AS "s"
+FROM "Sport" T3
+WHERE "T3"."Name" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/code' AS "p","T2"."Code" AS "o",337799666,774895395,843710487,"T2"."Id" AS "s"
+FROM "Sport" T2
+WHERE "T2"."Code" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/id' AS "p","T4"."Id" AS "o",337799666,582666172,1668910247,"T4"."Id" AS "s"
+FROM "Sport" T4
+WHERE "T4"."Id" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/webpage' AS "p","T5"."Webpage" AS "o",709133385,854733477,1140338296,"T5"."Id" AS "s"
+FROM "Student" T5
+WHERE "T5"."Webpage" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/email' AS "p","T11"."Email" AS "o",709133385,1215946669,1196982797,"T11"."Id" AS "s"
+FROM "Student" T11
+WHERE "T11"."Email" IS NOT NULL
+
+ [22007-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:122)
+	at org.h2.value.Value.convertTo(Value.java:911)
+	at org.h2.command.dml.SelectUnion.convert(SelectUnion.java:132)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:216)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.Query.query(Query.java:36)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:110)
+	at org.h2.command.Command.executeQuery(Command.java:201)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:179)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at es.upm.fi.dia.oeg.morph.base.DBUtility$.execute(DBUtility.scala:73)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBDataSourceReader.execute(MorphRDBDataSourceReader.scala:19)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:25)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:21)
+	at scala.collection.immutable.Map$Map1.foreach(Map.scala:116)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator.translateResult(QueryResultTranslator.scala:21)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner.run(MorphBaseRunner.scala:171)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.main(MorphRDBRunner.scala:74)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.main(MorphRDBRunner.scala)
+	at es.upm.fi.dia.oeg.morph.example.ExampleWithPropertiesFileH2.test1Sparql06H2(ExampleWithPropertiesFileH2.java:119)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: java.lang.IllegalArgumentException: 200
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:305)
+	at org.h2.value.ValueTimestamp.parseTry(ValueTimestamp.java:140)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:120)
+	... 67 more
+2016-05-03 16:55:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Imposible interpretar la constante "TIMESTAMP" "200"
+Cannot parse "TIMESTAMP" constant "200"; SQL statement:
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/hasSport' AS "p","T8"."Id" AS "o",709133385 AS "mappingid_s",1238080693 AS "mappingid_p",1429351083 AS "mappingid_o","T7"."Id" AS "s"
+FROM "Student" T7 INNER JOIN "Sport" T8 ON (T7."Sport" = T8."Id")
+WHERE "T8"."Id" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/birthdate' AS "p","T10"."Birthdate" AS "o",709133385,23880693,891461509,"T10"."Id" AS "s"
+FROM "Student" T10
+WHERE "T10"."Birthdate" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/phone' AS "p","T9"."Phone" AS "o",709133385,342198178,1594791957,"T9"."Id" AS "s"
+FROM "Student" T9
+WHERE "T9"."Phone" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/type' AS "p","T1"."Type" AS "o",337799666,857394605,1104422581,"T1"."Id" AS "s"
+FROM "Sport" T1
+WHERE "T1"."Type" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/name' AS "p","T6"."Name" AS "o",709133385,792782299,85415531,"T6"."Id" AS "s"
+FROM "Student" T6
+WHERE "T6"."Name" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/name' AS "p","T3"."Name" AS "o",337799666,1963075870,397071633,"T3"."Id" AS "s"
+FROM "Sport" T3
+WHERE "T3"."Name" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/code' AS "p","T2"."Code" AS "o",337799666,774895395,843710487,"T2"."Id" AS "s"
+FROM "Sport" T2
+WHERE "T2"."Code" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/id' AS "p","T4"."Id" AS "o",337799666,582666172,1668910247,"T4"."Id" AS "s"
+FROM "Sport" T4
+WHERE "T4"."Id" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/webpage' AS "p","T5"."Webpage" AS "o",709133385,854733477,1140338296,"T5"."Id" AS "s"
+FROM "Student" T5
+WHERE "T5"."Webpage" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/email' AS "p","T11"."Email" AS "o",709133385,1215946669,1196982797,"T11"."Id" AS "s"
+FROM "Student" T11
+WHERE "T11"."Email" IS NOT NULL
+
+ [22007-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:122)
+	at org.h2.value.Value.convertTo(Value.java:911)
+	at org.h2.command.dml.SelectUnion.convert(SelectUnion.java:132)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:216)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.SelectUnion.queryWithoutCache(SelectUnion.java:208)
+	at org.h2.command.dml.SelectUnion.query(SelectUnion.java:440)
+	at org.h2.command.dml.Query.query(Query.java:309)
+	at org.h2.command.dml.Query.query(Query.java:36)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:110)
+	at org.h2.command.Command.executeQuery(Command.java:201)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:179)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at es.upm.fi.dia.oeg.morph.base.DBUtility$.execute(DBUtility.scala:73)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBDataSourceReader.execute(MorphRDBDataSourceReader.scala:19)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:25)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator$$anonfun$translateResult$1.apply(QueryResultTranslator.scala:21)
+	at scala.collection.immutable.Map$Map1.foreach(Map.scala:116)
+	at es.upm.fi.dia.oeg.morph.base.querytranslator.engine.QueryResultTranslator.translateResult(QueryResultTranslator.scala:21)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner.run(MorphBaseRunner.scala:171)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.main(MorphRDBRunner.scala:74)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.main(MorphRDBRunner.scala)
+	at es.upm.fi.dia.oeg.morph.example.ExampleWithPropertiesFileH2.test1Sparql06H2(ExampleWithPropertiesFileH2.java:119)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: java.lang.IllegalArgumentException: 200
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:305)
+	at org.h2.value.ValueTimestamp.parseTry(ValueTimestamp.java:140)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:120)
+	... 67 more
+2016-05-03 16:56:11 jdbc[5]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-191]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at es.upm.fi.dia.oeg.morph.base.DBUtility$.getLocalConnection(DBUtility.scala:177)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunnerFactory.createConnection(MorphBaseRunnerFactory.scala:193)
+	at es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunnerFactory.createRunner(MorphBaseRunnerFactory.scala:43)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.apply(MorphRDBRunner.scala:49)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.apply(MorphRDBRunner.scala:55)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner$.main(MorphRDBRunner.scala:73)
+	at es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.main(MorphRDBRunner.scala)
+	at es.upm.fi.dia.oeg.morph.example.ExampleWithPropertiesFileH2.test1Sparql02H2(ExampleWithPropertiesFileH2.java:59)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: org.h2.jdbc.JdbcSQLException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-191]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 40 more
+2016-05-03 16:56:12 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLException: Conversión de datos fallida, convirtiendo "B2"
+Data conversion error converting "B2"; SQL statement:
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/code' AS "p","T19"."Code" AS "o",1197498159 AS "mappingid_s",1628551735 AS "mappingid_p",2078641942 AS "mappingid_o","T19"."Id" AS "s"
+FROM "Sport" T19
+WHERE "T19"."Code" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/email' AS "p","T28"."Email" AS "o",1699578227,353023213,1011044643,"T28"."Id" AS "s"
+FROM "Student" T28
+WHERE "T28"."Email" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/phone' AS "p","T26"."Phone" AS "o",1699578227,505231702,1328323494,"T26"."Id" AS "s"
+FROM "Student" T26
+WHERE "T26"."Phone" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/birthdate' AS "p","T25"."Birthdate" AS "o",1699578227,1697281847,1535026957,"T25"."Id" AS "s"
+FROM "Student" T25
+WHERE "T25"."Birthdate" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/name' AS "p","T24"."Name" AS "o",1699578227,316335490,597364637,"T24"."Id" AS "s"
+FROM "Student" T24
+WHERE "T24"."Name" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/id' AS "p","T21"."Id" AS "o",1197498159,453398853,1171255580,"T21"."Id" AS "s"
+FROM "Sport" T21
+WHERE "T21"."Id" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/webpage' AS "p","T27"."Webpage" AS "o",1699578227,252615006,79919963,"T27"."Id" AS "s"
+FROM "Student" T27
+WHERE "T27"."Webpage" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/name' AS "p","T20"."Name" AS "o",1197498159,935160003,1626852381,"T20"."Id" AS "s"
+FROM "Sport" T20
+WHERE "T20"."Name" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/type' AS "p","T18"."Type" AS "o",1197498159,785271142,500230084,"T18"."Id" AS "s"
+FROM "Sport" T18
+WHERE "T18"."Type" IS NOT NULL
+
+UNION
+SELECT 'http://mappingpedia.linkeddata.es/vocabulary/hasSport' AS "p","T23"."Id" AS "o",1699578227,1456061400,1661777060,"T22"."Id" AS "s"
+FROM "Student" T22 INNER JOIN "Sport" T23 ON (T22."Sport" = T23."Id")
+WHERE "T23"."Id" IS NOT NULL
+
+ [22018-191]

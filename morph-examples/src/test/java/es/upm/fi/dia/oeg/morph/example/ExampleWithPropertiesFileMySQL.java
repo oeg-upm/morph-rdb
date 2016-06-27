@@ -123,5 +123,19 @@ public class ExampleWithPropertiesFileMySQL {
 		}
 	}
 
+	@Test
+	public void testExample1Sparql06MySQL() {
+		String configurationFile = "example1-query06-mysql.r2rml.properties";
+		try {
+			String[] args = {configurationDirectory, configurationFile};
+			MorphRDBRunner.main(args);
+			System.out.println("Query process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
 
 }
