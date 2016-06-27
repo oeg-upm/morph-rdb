@@ -304,10 +304,11 @@ extends IQueryTranslator {
 				val mapPrefixIdOldAlias = Constants.PREFIX_MAPPING_ID + exprVarName.replaceAll("\\.", "dot_"); 
 				val mapPrefixIdNewAlias = Constants.PREFIX_MAPPING_ID + varExpr.getName();
 				val mapPrefixIdSelectItems = MorphSQLUtility.getSelectItemsByAlias(subOpSelectItemsList, mapPrefixIdOldAlias);
-				val mapPrefixIdSelectItem = mapPrefixIdSelectItems.iterator().next();
-				mapPrefixIdSelectItem.setAlias(mapPrefixIdNewAlias);
-
-				expr.toString();
+				if(mapPrefixIdSelectItems.iterator.hasNext) {
+					val mapPrefixIdSelectItem = mapPrefixIdSelectItems.iterator().next();
+					mapPrefixIdSelectItem.setAlias(mapPrefixIdNewAlias);				  
+				}
+				//expr.toString();
 			}
 			return subOpSQL;
 	}
@@ -392,7 +393,8 @@ extends IQueryTranslator {
 			val subOpSQLAlias = subOpSQL.getAlias();
 			val oldSelectItems = subOpSQL.getSelectItems().toList;
 
-			var newSelectItems:List[ZSelectItem] = Nil;
+			//var newSelectItems:List[ZSelectItem] = Nil;
+			var listSelectItemsByVars:List[ZSelectItem] = Nil;
 			var mapPrefixSelectItems:List[ZSelectItem] = Nil;
 
 			val groupVars = opGroup.getGroupVars();
@@ -400,7 +402,7 @@ extends IQueryTranslator {
 			var groupByExps : List[ZExp ]= Nil;
 			for(groupVar <- vars) {
 				val selectItemsByVars = this.getSelectItemsByNode(groupVar, oldSelectItems).toList;
-				newSelectItems = newSelectItems ::: selectItemsByVars;
+				listSelectItemsByVars = listSelectItemsByVars ::: selectItemsByVars;
 
 				for(selectItemByVar <- selectItemsByVars) {
 					val selectItemValue = MorphSQLUtility.getValueWithoutAlias(selectItemByVar);
@@ -410,10 +412,13 @@ extends IQueryTranslator {
 
 				val mapPrefixSelectItemsAux = MorphSQLUtility.getSelectItemsMapPrefix(
 						oldSelectItems, groupVar, subOpSQLAlias, this.databaseType);
+				
 				mapPrefixSelectItems = mapPrefixSelectItems ::: mapPrefixSelectItemsAux.toList;
 			}
 
 			val aggregators = opGroup.getAggregators();
+
+			var listPushedAggregatedSelectItem:List[ZSelectItem] = Nil;
 			for(exprAggregator <- aggregators) {
 				val aggregator = exprAggregator.getAggregator();
 				val functionName = {
@@ -464,22 +469,22 @@ extends IQueryTranslator {
 				val pushedAggregatedSelectItem = pushedAggregatedSelectItems.iterator().next();
 				pushedAggregatedSelectItem.setAggregate(functionName);
 				pushedAggregatedSelectItem.setAlias(Constants.PREFIX_VAR + aggregatorAlias);
-				newSelectItems = newSelectItems ::: List(pushedAggregatedSelectItem);
+				listPushedAggregatedSelectItem = listPushedAggregatedSelectItem ::: List(pushedAggregatedSelectItem);
 				this.mapAggreatorAlias += (aggregatorVarName -> pushedAggregatedSelectItem);
 
-				val mapPrefixSelectItemsAux = MorphSQLUtility.getSelectItemsMapPrefix(oldSelectItems, varMentioned, subOpSQLAlias, this.databaseType);
-				val mapPrefixSelectItemAux = mapPrefixSelectItemsAux.iterator.next();
-				val mapPrefixSelectItemAuxAlias = Constants.PREFIX_MAPPING_ID + aggregatorAlias;
-				mapPrefixSelectItemAux.setAlias(mapPrefixSelectItemAuxAlias);;
-
-				mapPrefixSelectItems = mapPrefixSelectItems ::: mapPrefixSelectItemsAux.toList;
+				//				val mapPrefixSelectItemsAux = MorphSQLUtility.getSelectItemsMapPrefix(oldSelectItems, varMentioned, subOpSQLAlias, this.databaseType);
+				//				val mapPrefixSelectItemAux = mapPrefixSelectItemsAux.iterator.next();
+				//				val mapPrefixSelectItemAuxAlias = Constants.PREFIX_MAPPING_ID + aggregatorAlias;
+				//				mapPrefixSelectItemAux.setAlias(mapPrefixSelectItemAuxAlias);;
+				//
+				//				mapPrefixSelectItems = mapPrefixSelectItems ::: mapPrefixSelectItemsAux.toList;
 			}
 
 
 
 
 
-
+			val newSelectItems:List[ZSelectItem] = listSelectItemsByVars ::: listPushedAggregatedSelectItem;
 
 			val zexpGroupBy:java.util.Vector[ZExp] = CollectionUtility.scalaListToJavaVector(groupByExps);
 			val zGroupBy = new ZGroupBy(zexpGroupBy);
@@ -556,11 +561,10 @@ extends IQueryTranslator {
 				val selectItemsByVars = selectItemGenerator.generateSelectItem(
 						selectVar, subOpSQLAlias, oldSelectItems, true);
 
-				val mapPrefixSelectItemsAux = MorphSQLUtility.getSelectItemsMapPrefix(
-						oldSelectItems, selectVar, subOpSQLAlias, this.databaseType);
+				val mapPrefixSelectItemsAux = MorphSQLUtility.getSelectItemsMapPrefix(oldSelectItems, selectVar, subOpSQLAlias, this.databaseType);
 				(selectItemsByVars,mapPrefixSelectItemsAux.toList);
-			})
-					val newSelectItemsVar = newSelectItemsTuple.map(tuple => tuple._1);
+			});
+			val newSelectItemsVar = newSelectItemsTuple.map(tuple => tuple._1);
 			val newSelectItemsMappingId = newSelectItemsTuple.map(tuple => tuple._2);
 
 			if(this.optimizer != null && this.optimizer.subQueryAsView) {
@@ -591,7 +595,8 @@ extends IQueryTranslator {
 						opProjectSubOpSQL.pushOrderByDown(newSelectItems);
 
 						opProjectSubOpSQL;
-						//			transProjectSQL.addSelectItems(newSelectItemsMappingId);
+									
+						//opProjectSubOpSQL.addSelectItems(newSelectItemsMappingId);
 					} else {
 						val resultAux = new SQLQuery(opProjectSubOpSQL);
 						resultAux.setSelectItems(newSelectItems);
@@ -740,7 +745,7 @@ extends IQueryTranslator {
 			val tpPredicate = tp.getPredicate();
 			val tpObject = tp.getObject();
 			val skipRDFTypeStatement = false;
-			val result = {
+			val transTPSQL = {
 					if(tpPredicate.isURI() && RDF.`type`.getURI().equals(tpPredicate.getURI()) 
 							&& tpObject.isURI() && skipRDFTypeStatement) {
 						null;
@@ -785,11 +790,12 @@ extends IQueryTranslator {
 					}
 			}
 
-			result;
+			transTPSQL;
 	}
 
 	def transTP(tp:Triple , cm:MorphBaseClassMapping ) : IQuery = {
 			val tpPredicate = tp.getPredicate();
+			val tpObject = tp.getObject();
 
 			val result : IQuery = {
 					if(tpPredicate.isURI()) {
@@ -804,6 +810,8 @@ extends IQueryTranslator {
 						}
 						}
 					} else if(tpPredicate.isVariable()) {
+					  this.mapVarNotNull += (tpObject -> true);
+					  
 						val mappingDocumentURL = this.getMappingDocumentURL();
 						val triplesMapResource = cm.resource;
 						//val columnsMetaData = cm.getLogicalTable().getColumnsMetaData();

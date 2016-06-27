@@ -429,7 +429,9 @@ object MorphSQLUtility {
 								selectItem;
 							} else {
 								val selectItemColumnName = selectItem.getColumn();
-								MorphSQLSelectItem.apply(selectItemColumnName, prefix, dbType);
+								val newSelectItemAux = MorphSQLSelectItem.apply(selectItemColumnName, prefix, dbType);
+								newSelectItemAux.setAlias(selectItemColumnName);
+								newSelectItemAux
 							}					  
 						}
 						Some(newSelectItem);

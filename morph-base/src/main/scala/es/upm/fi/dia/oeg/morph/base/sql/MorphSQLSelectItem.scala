@@ -7,32 +7,32 @@ import es.upm.fi.dia.oeg.morph.base.Constants
 
 class MorphSQLSelectItem(val dbType:String, schema:String, table:String
 		, column:String, val columnType:String) 
-		extends ZSelectItem {
+extends ZSelectItem {
 
 	override def setExpression(arg0 : ZExp ) = {
-		super.setExpression(arg0);
-		//		this.schema = super.getSchema();
-		//		this.table = super.getTable();
-		//		this.column = super.getColumn();
+			super.setExpression(arg0);
+			//		this.schema = super.getSchema();
+			//		this.table = super.getTable();
+			//		this.column = super.getColumn();
 	}
 
 	override def hashCode() = {
-		super.toString().hashCode();
+			super.toString().hashCode();
 	}
 
 	override def getSchema() = {
-		this.schema
+			this.schema
 	}
 
 	override def getTable() = {
-		this.table
+			this.table
 	}
 
 
 	//POSTGRESQL: T1."name"
 	//ORACLE: "T1"."name"
 	override def toString() = {
-		var result:String = null;
+			var result:String = null;
 
 	val enclosedCharacter = Constants.getEnclosedCharacter(dbType);
 
@@ -54,9 +54,9 @@ class MorphSQLSelectItem(val dbType:String, schema:String, table:String
 
 
 		if(dbType != null && dbType.equalsIgnoreCase(Constants.DATABASE_POSTGRESQL)) {
-      val wrappedColumn = MorphSQLSelectItem.wrapColumnWithEnclosedChar(this.column, enclosedCharacter);
-      var resultList2 = List(this.schema, this.table, wrappedColumn).filter(x => x != null);
-      result = resultList2.mkString(".");
+			val wrappedColumn = MorphSQLSelectItem.wrapColumnWithEnclosedChar(this.column, enclosedCharacter);
+			var resultList2 = List(this.schema, this.table, wrappedColumn).filter(x => x != null);
+			result = resultList2.mkString(".");
 		} else {
 			var resultList2 = List(this.schema, this.table, this.column).filter(x => x != null);
 			result = resultList2.map(x => {MorphSQLSelectItem.wrapColumnWithEnclosedChar(x, enclosedCharacter) 
@@ -79,20 +79,20 @@ class MorphSQLSelectItem(val dbType:String, schema:String, table:String
 	}
 
 	def cast(value:String, dbType:String, columnType:String) : String = {
-		val result = {
-				if(columnType != null) {
-					if(Constants.DATABASE_POSTGRESQL.equalsIgnoreCase(dbType)) {
-						value + "::" + this.columnType; 
-					} else if(Constants.DATABASE_MONETDB.equalsIgnoreCase(dbType)) {
-						"CAST(" + value + " AS "  + this.columnType + ")"; 
+			val result = {
+					if(columnType != null) {
+						if(Constants.DATABASE_POSTGRESQL.equalsIgnoreCase(dbType)) {
+							value + "::" + this.columnType; 
+						} else if(Constants.DATABASE_MONETDB.equalsIgnoreCase(dbType)) {
+							"CAST(" + value + " AS "  + this.columnType + ")"; 
+						} else {
+							value
+						}
 					} else {
 						value
-					}
-				} else {
-					value
-				}		  
-		}
-		result;
+					}		  
+			}
+			result;
 	}
 
 	def printColumnWithoutEnclosedChar() : String = {
@@ -103,20 +103,20 @@ class MorphSQLSelectItem(val dbType:String, schema:String, table:String
 	}
 
 	override def getColumn() = {
-		val result : String = {
-		if(this.isExpression()) {
-			null
-		} else {
-			//NOT WORKING for 9A
-			//				if(this.column.startsWith("\"") && this.column.endsWith("\"")) {
-			//					this.column.substring(1, this.column.length()-1);
-			//				} else {
-			//					this.column;
-			//				}
+			val result : String = {
+					if(this.isExpression()) {
+						null
+					} else {
+						//NOT WORKING for 9A
+						//				if(this.column.startsWith("\"") && this.column.endsWith("\"")) {
+						//					this.column.substring(1, this.column.length()-1);
+						//				} else {
+						//					this.column;
+						//				}
 
-			val enclosedChar = Constants.getEnclosedCharacter(dbType);
-			this.column.replaceAll("\"", enclosedChar)
-		}
+						val enclosedChar = Constants.getEnclosedCharacter(dbType);
+						this.column.replaceAll("\"", enclosedChar)
+					}
 	}
 	result
 	}
@@ -145,7 +145,7 @@ class MorphSQLSelectItem(val dbType:String, schema:String, table:String
 
 
 	def getFullyQualifiedName(enclosedCharacter:String ) = {
-		var resultList:List[String] = Nil;
+			var resultList:List[String] = Nil;
 
 	if(this.schema != null) {
 		resultList = resultList ::: List(enclosedCharacter + this.schema + enclosedCharacter);
@@ -177,7 +177,7 @@ object MorphSQLSelectItem {
 
 	def apply(zExp : ZExp, pDatabaseType:String, pColumnType:String) : MorphSQLSelectItem = {
 			val result = new MorphSQLSelectItem(pDatabaseType, null, null, null, pColumnType)
-			result.setExpression(zExp);
+					result.setExpression(zExp);
 			result
 	}
 
@@ -273,16 +273,16 @@ object MorphSQLSelectItem {
 			zSelectItem.setAlias("");
 
 			val databaseType :String = {
-				if(pDatabaseType == null) {
-					zSelectItem match {
-					case selectItem:MorphSQLSelectItem => {
-						selectItem.dbType ;
+					if(pDatabaseType == null) {
+						zSelectItem match {
+						case selectItem:MorphSQLSelectItem => {
+							selectItem.dbType ;
+						}
+						case _ => { null }
+						}
+					} else {
+						pDatabaseType
 					}
-					case _ => { null }
-					}
-				} else {
-					pDatabaseType
-				}
 			} 
 
 			val columnType :String = {
@@ -381,18 +381,18 @@ object MorphSQLSelectItem {
 	}
 
 	def wrapColumnWithEnclosedChar(x:String, enclosedCharacter:String) : String = {
-		val xStartedWithEnclosedChar = if(x.startsWith(enclosedCharacter)) {
-			x
-		} else {
-			enclosedCharacter + x;
-		}
+			val xStartedWithEnclosedChar = if(x.startsWith(enclosedCharacter)) {
+				x
+			} else {
+				enclosedCharacter + x;
+			}
 
-		val xEndedWithEnclosedChar = if(xStartedWithEnclosedChar.endsWith(enclosedCharacter)) {
-			xStartedWithEnclosedChar
-		} else {
-			xStartedWithEnclosedChar + enclosedCharacter;
-		}
-		xEndedWithEnclosedChar   
+			val xEndedWithEnclosedChar = if(xStartedWithEnclosedChar.endsWith(enclosedCharacter)) {
+				xStartedWithEnclosedChar
+			} else {
+				xStartedWithEnclosedChar + enclosedCharacter;
+			}
+			xEndedWithEnclosedChar   
 	}
 
 }

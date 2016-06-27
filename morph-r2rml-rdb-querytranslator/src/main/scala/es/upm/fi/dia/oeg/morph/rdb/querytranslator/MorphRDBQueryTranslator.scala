@@ -102,7 +102,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
 				}
 			} catch {
 			  case e:Exception => {
-			    null
+			    None
 			  }
 			}				  
 		}
