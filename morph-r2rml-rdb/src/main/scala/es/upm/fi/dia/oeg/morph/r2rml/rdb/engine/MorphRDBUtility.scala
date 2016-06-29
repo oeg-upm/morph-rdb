@@ -196,8 +196,10 @@ object MorphRDBUtility {
 			}
 			val tableName = filename.substring(0, lastDotChar);
 
+			logger.info("Loading CSV file:" + csv_file);
 			val createTableString = if(fieldSeparator.isDefined) {
-			  "CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + csv_file + "', NULL, 'fieldSeparator=" + fieldSeparator +"');";  
+			  logger.info("Field separator = " + fieldSeparator.get);
+			  "CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + csv_file + "', NULL, 'fieldSeparator=" + fieldSeparator.get +"');";  
 			} else {
 			  "CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + csv_file + "');";
 			}
