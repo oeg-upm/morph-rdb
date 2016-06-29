@@ -8,7 +8,8 @@ import es.upm.fi.dia.oeg.morph.base.{Constants, GeneralUtility, MorphProperties}
   */
 class MorphCSVProperties extends MorphRDBProperties {
   var csvFiles:Option[List[String]]=None;
-
+  var fieldSeparator:Option[String] = None;
+  
   override def readConfigurationFile(pConfigurationDirectory:String , configurationFile:String) = {
     super.readConfigurationFile(pConfigurationDirectory, configurationFile);
 
@@ -26,6 +27,9 @@ class MorphCSVProperties extends MorphRDBProperties {
       });
 
       this.csvFiles = Some(listOfCSVFiles);
+      this.fieldSeparator = this.readString(Constants.CSV_FIELD_SEPARATOR, None);
+      
+      
     }
   }
 }

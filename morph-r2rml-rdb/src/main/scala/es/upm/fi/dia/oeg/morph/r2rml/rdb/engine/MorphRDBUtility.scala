@@ -177,7 +177,11 @@ object MorphRDBUtility {
 			sqlQuery;
 	}
 
-	def loadCSVFile(conn:Connection , csv_file:String) = {
+	def loadCSVFile(conn:Connection , csv_file:String) : Unit = {
+	  this.loadCSVFile(conn, csv_file, None);
+	}
+	
+	def loadCSVFile(conn:Connection , csv_file:String, fieldSeparator:Option[String]) : Unit = {
 			//String csv_file_extension = "";
 			if(csv_file == null) {
 				throw new Exception("CSV file has not been defined.");
@@ -192,7 +196,12 @@ object MorphRDBUtility {
 			}
 			val tableName = filename.substring(0, lastDotChar);
 
-			val createTableString = "CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + csv_file + "');";
+			val createTableString = if(fieldSeparator.isDefined) {
+			  "CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + csv_file + "', NULL, 'fieldSeparator=" + fieldSeparator +"');";  
+			} else {
+			  "CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + csv_file + "');";
+			}
+			
 			val stmt = conn.createStatement();
 
 			try {

@@ -48,7 +48,7 @@ class MorphCSVRunnerFactory extends MorphRDBRunnerFactory {
     val morphProperties = properties.asInstanceOf[MorphCSVProperties];
     if(morphProperties.csvFiles.isDefined) {
       morphProperties.csvFiles.get.map(csvFile => {
-        MorphRDBUtility.loadCSVFile(runner.connection, csvFile);
+        MorphRDBUtility.loadCSVFile(runner.connection, csvFile, morphProperties.fieldSeparator);
       });
     }
     runner;
