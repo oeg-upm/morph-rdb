@@ -404,14 +404,18 @@ with MorphR2RMLElementVisitor {
 
 								if(sgm.isEmpty && pogm.isEmpty) {
 									predicates.foreach(predicatesElement => {
+									  val quadSubject = subject._1;
 										val predicateRDFNode = predicatesElement._1;
 										val predicateProperty = predicateRDFNode.asInstanceOf[Property];
+										val quadGraph = null;
 										objects.foreach(objectsElement => {
-											this.materializer.materializeQuad(subject._1, predicateProperty, objectsElement._1, null)
+										  val quadObject = objectsElement._1;
+										  
+											this.materializer.materializeQuad(quadSubject, predicateProperty, quadObject, quadGraph)
 										});
 
 										refObjects.foreach(refObjectsElement => {
-											this.materializer.materializeQuad(subject._1, predicateProperty, refObjectsElement._1, null)
+											this.materializer.materializeQuad(quadSubject, predicateProperty, refObjectsElement._1, quadGraph)
 										});
 									});					  
 								} else {

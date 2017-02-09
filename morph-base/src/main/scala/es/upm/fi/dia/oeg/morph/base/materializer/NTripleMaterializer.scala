@@ -51,6 +51,23 @@ extends MorphBaseMaterializer(model,ntOutputStream) {
           //noOfErrors = noOfErrors + 1;
 			  }
 			}
+		} else {
+		  if(subject == null) {
+          val errorMessage = "unable to serialize triple, subject is null!";
+          logger.debug(errorMessage);
+		  } 
+		  
+		  if(predicate == null) {
+          val errorMessage = "unable to serialize triple, predicate is null!";
+          logger.debug(errorMessage);
+		  }
+
+		  if(obj == null) {
+          val errorMessage = "unable to serialize triple, object is null!";
+          logger.debug(errorMessage);
+		  }
+		  
+		  
 		}
 	}
 

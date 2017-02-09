@@ -120,63 +120,74 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 	}
 
 
-	def run() : String = {
-		val start = System.currentTimeMillis();
+  def run() : String = {
+    val start = System.currentTimeMillis();
 
-
-
-		var status:String  = null;
+		var status:String = null;
+		var errorCode:Integer = null;
 
 //		val sparqlQuery = if(this.queryTranslator.isDefined) {
 //		  this.queryTranslator.get.sparqlQuery
 //		} else { null }
-		
-		if(!this.sparqlQuery.isDefined) {
-			//set output file
-			this.materializeMappingDocuments(mappingDocument);
-		} else {
-			logger.debug("sparql query = " + this.sparqlQuery.get);
 
-			//LOADING ONTOLOGY FILE
-			//REWRITE THE SPARQL QUERY IF NECESSARY
-			val queries = if(!this.ontologyFilePath.isDefined) {
-				List(sparqlQuery.get);
-			} else {
-				//REWRITE THE QUERY BASED ON THE MAPPINGS AND ONTOLOGY
-				logger.info("Rewriting query...");
-				//				Collection <String> mappedOntologyElements = MappingsExtractor.getMappedPredcatesFromR2O(mappingDocumentFile);
-				val mappedOntologyElements = this.mappingDocument.getMappedClasses();
-				val mappedOntologyElements2 = this.mappingDocument.getMappedProperties();
-				mappedOntologyElements.addAll(mappedOntologyElements2);
-
-
-				//RewriterWrapper rewritterWapper = new RewriterWrapper(ontologyFilePath, rewritterWrapperMode, mappedOntologyElements);
-				//queries = rewritterWapper.rewrite(originalQuery);
-				val queriesAux = RewriterWrapper.rewrite(sparqlQuery.get, ontologyFilePath.get
-				    , RewriterWrapper.fullMode, mappedOntologyElements
-				    , RewriterWrapper.globalMatchMode);
-
-				logger.debug("No of rewriting query result = " + queriesAux.size());
-				logger.debug("queries = " + queriesAux);
-				queriesAux.toList
-			}			
-
-
-			//TRANSLATE SPARQL QUERIES INTO SQL QUERIES
-			this.mapSparqlSql= this.translateSPARQLQueriesIntoSQLQueries(queries);
-
-			//translate result
-			//if (this.conn != null) {
-			//GFT does not need a Connection instance
-			this.queryResultTranslator.get.translateResult(mapSparqlSql);	
-			//}
+		try {
+  		if(!this.sparqlQuery.isDefined) {
+  			//set output file
+  			this.materializeMappingDocuments(mappingDocument);
+  		} else {
+  			logger.debug("sparql query = " + this.sparqlQuery.get);
+  
+  			//LOADING ONTOLOGY FILE
+  			//REWRITE THE SPARQL QUERY IF NECESSARY
+  			val queries = if(!this.ontologyFilePath.isDefined) {
+  				List(sparqlQuery.get);
+  			} else {
+  				//REWRITE THE QUERY BASED ON THE MAPPINGS AND ONTOLOGY
+  				logger.info("Rewriting query...");
+  				//				Collection <String> mappedOntologyElements = MappingsExtractor.getMappedPredcatesFromR2O(mappingDocumentFile);
+  				val mappedOntologyElements = this.mappingDocument.getMappedClasses();
+  				val mappedOntologyElements2 = this.mappingDocument.getMappedProperties();
+  				mappedOntologyElements.addAll(mappedOntologyElements2);
+  
+  
+  				//RewriterWrapper rewritterWapper = new RewriterWrapper(ontologyFilePath, rewritterWrapperMode, mappedOntologyElements);
+  				//queries = rewritterWapper.rewrite(originalQuery);
+  				val queriesAux = RewriterWrapper.rewrite(sparqlQuery.get, ontologyFilePath.get
+  				    , RewriterWrapper.fullMode, mappedOntologyElements
+  				    , RewriterWrapper.globalMatchMode);
+  
+  				logger.debug("No of rewriting query result = " + queriesAux.size());
+  				logger.debug("queries = " + queriesAux);
+  				queriesAux.toList
+  			}			
+  
+  
+  			//TRANSLATE SPARQL QUERIES INTO SQL QUERIES
+  			this.mapSparqlSql= this.translateSPARQLQueriesIntoSQLQueries(queries);
+  
+  			//translate result
+  			//if (this.conn != null) {
+  			//GFT does not need a Connection instance
+  			this.queryResultTranslator.get.translateResult(mapSparqlSql);	
+  			//}
+  		}
+  		
+      status = "success";
+      errorCode = 0;
+    } catch {
+      case e:Exception => {
+        status = e.getMessage();
+        errorCode = -1;        
+      }
 		}
-
+    
 		val end = System.currentTimeMillis();
 		logger.info("Running time = "+ (end-start)+" ms.");
+		logger.info("errorCode = " + errorCode);
+		logger.info("status = " + status);
 		logger.info("**********************DONE****************************");
+		
 		return status;
-
 	}
 
 	def translateSPARQLQueriesIntoSQLQueries(sparqlQueries:Iterable[Query] )
