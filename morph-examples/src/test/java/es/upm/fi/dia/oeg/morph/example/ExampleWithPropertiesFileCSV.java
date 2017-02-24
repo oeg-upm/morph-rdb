@@ -22,7 +22,7 @@ public class ExampleWithPropertiesFileCSV {
     
     @Test
     public void testExample1BatchCSV() {
-        String configurationFile = "example1-batch-csv.r2rml.properties";
+        String configurationFile = "example1-batch-csv.morph.properties";
         try {
         	MorphBaseRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
         	MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
@@ -37,7 +37,7 @@ public class ExampleWithPropertiesFileCSV {
 
     @Test
     public void testExample1Sparql01CSV() {
-        String configurationFile = "example1-query01-csv.r2rml.properties";
+        String configurationFile = "example1-query01-csv.morph.properties";
         try {
             String[] args = {configurationDirectory, configurationFile};
             MorphCSVRunner.main(args);
@@ -52,7 +52,7 @@ public class ExampleWithPropertiesFileCSV {
 
     @Test
     public void testExample1Sparql02CSV() {
-        String configurationFile = "example1-query02-csv.r2rml.properties";
+        String configurationFile = "example1-query02-csv.morph.properties";
         try {
             String[] args = {configurationDirectory, configurationFile};
             MorphCSVRunner.main(args);
@@ -67,7 +67,7 @@ public class ExampleWithPropertiesFileCSV {
 
     @Test
     public void testExample1Sparql03CSV() {
-        String configurationFile = "example1-query03-csv.r2rml.properties";
+        String configurationFile = "example1-query03-csv.morph.properties";
         try {
             String[] args = {configurationDirectory, configurationFile};
             MorphCSVRunner.main(args);
@@ -82,7 +82,7 @@ public class ExampleWithPropertiesFileCSV {
 
     @Test
     public void testExample1Sparql04CSV() {
-        String configurationFile = "example1-query04-csv.r2rml.properties";
+        String configurationFile = "example1-query04-csv.morph.properties";
         try {
             String[] args = {configurationDirectory, configurationFile};
             MorphCSVRunner.main(args);
@@ -97,7 +97,7 @@ public class ExampleWithPropertiesFileCSV {
 
     @Test
     public void testExample1Sparql05CSV() {
-        String configurationFile = "example1-query05-csv.r2rml.properties";
+        String configurationFile = "example1-query05-csv.morph.properties";
         try {
             String[] args = {configurationDirectory, configurationFile};
             MorphCSVRunner.main(args);
@@ -110,19 +110,4 @@ public class ExampleWithPropertiesFileCSV {
         }
     }
     
-    @Test
-    public void testMobileAgeDatasets() {
-        String configurationFile = "mobileage-datasets.morph.properties";
-        try {
-        	MorphBaseRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
-        	MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
-            runner.run();
-            System.out.println("Batch process DONE------\n\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Batch process FAILED------\n\n");
-            assertTrue(e.getMessage(), false);
-        }
-    }
-
 }

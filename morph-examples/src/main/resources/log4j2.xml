@@ -11,6 +11,9 @@ status="WARN">
     <Logger name="log4j.test.Log4jTest" level="trace">
         <AppenderRef ref="Console"/>
     </Logger>
+    <Logger name="Jena" level="trace">
+        <AppenderRef ref="Console"/>
+    </Logger>
     <Root level="trace">
         <AppenderRef ref="Console"/>
     </Root>

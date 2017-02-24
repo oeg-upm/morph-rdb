@@ -365,6 +365,7 @@ with MorphR2RMLElementVisitor {
 								}
 							});
 
+							//translate predicate object map
 							poms.foreach(pom => {
 								val alias = if(pom.getAlias() == null) { logicalTableAlias; } 
 								else { pom.getAlias() }
@@ -731,7 +732,15 @@ with MorphR2RMLElementVisitor {
 						//				  }
 						//				  case _ => { dbValueAux }
 						//			  }
-						val dbValue = dbValueAux;
+						//val dbValue = dbValueAux;
+						val dbType = this.properties.databaseType;
+						val dbValue  = if(Constants.DATABASE_H2_NULL_VALUE.equals(dbValueAux) 
+						    && Constants.DATABASE_CSV.equals(dbType)) {
+						  null
+						} else {
+						  dbValueAux
+						}
+						
 						val datatype = if(termMap.datatype.isDefined) { termMap.datatype } 
 						else {
 							val columnNameAux = termMap.columnName.replaceAll("\"", "");

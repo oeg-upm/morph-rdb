@@ -25,7 +25,7 @@
 		a rr:Subject;
 		rr:template "http://mappingpedia.linkeddata.es/resources/Person/{id}";
 		rr:termType rr:IRI;
-		rr:class <http://mappingpedia.linkeddata.es/vocabulary/Person>;
+		rr:class <http://mappingpedia.linkeddata.es/vocabulary#Person>;
 	];
 
 	rr:predicateObjectMap [ 
@@ -71,7 +71,7 @@
     rr:subjectMap [ a rr:Subject;
 		rr:template "http://mappingpedia.linkeddata.es/resources/Sport/{id}";
 		rr:termType rr:IRI;
-		rr:class <http://mappingpedia.linkeddata.es/vocabulary/Sport>;
+		rr:class <http://mappingpedia.linkeddata.es/vocabulary#Sport>;
 	];
 
 	rr:predicateObjectMap [ 
