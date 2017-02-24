@@ -36,8 +36,8 @@
             <binding name="n">
                 <literal>John</literal>
             </binding>
-            <binding name="w">
-                <literal>NULL</literal>
+            <binding name="e">
+                <literal>john@acd.edu</literal>
             </binding>
         </result>
         <result>
@@ -47,8 +47,8 @@
             <binding name="n">
                 <literal>John</literal>
             </binding>
-            <binding name="e">
-                <literal>john@acd.edu</literal>
+            <binding name="w">
+                <literal>NULL</literal>
             </binding>
         </result>
         <result>
@@ -80,8 +80,8 @@
             <binding name="n">
                 <literal>Ringo</literal>
             </binding>
-            <binding name="w">
-                <literal>www.starr.edu</literal>
+            <binding name="e">
+                <literal>ringo@acd.edu</literal>
             </binding>
         </result>
         <result>
@@ -91,8 +91,8 @@
             <binding name="n">
                 <literal>Ringo</literal>
             </binding>
-            <binding name="e">
-                <literal>ringo@acd.edu</literal>
+            <binding name="w">
+                <literal>www.starr.edu</literal>
             </binding>
         </result>
     </results>

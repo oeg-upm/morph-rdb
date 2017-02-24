@@ -1,11 +1,12 @@
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX mpv: <http://mappingpedia.linkeddata.es/vocabulary#>
 
 SELECT ?a ?n ?s ?b
 WHERE {
-	?a <http://mappingpedia.linkeddata.es/vocabulary/name> ?n .
-	OPTIONAL {?a <http://mappingpedia.linkeddata.es/vocabulary/hasSport> ?s . FILTER (?s != "null").}
-	OPTIONAL {?a <http://mappingpedia.linkeddata.es/vocabulary/birthdate> ?b .}
+	?a mpv:name ?n .
+	OPTIONAL {?a mpv:hasSport ?s . FILTER (?s != "null").}
+	OPTIONAL {?a mpv:birthdate ?b .}
 	FILTER ( ?b >= xsd:dateTime('2000-01-01T00:00:00Z'))
 	}

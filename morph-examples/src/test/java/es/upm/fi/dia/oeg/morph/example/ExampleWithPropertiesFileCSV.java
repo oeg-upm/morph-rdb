@@ -110,4 +110,19 @@ public class ExampleWithPropertiesFileCSV {
         }
     }
     
+    @Test
+    public void testExample1Sparql06CSV() {
+        String configurationFile = "example1-query06-csv.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphCSVRunner.main(args);
+            System.out.println("Query process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+    
 }
