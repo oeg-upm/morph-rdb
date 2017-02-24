@@ -14,7 +14,7 @@
             <binding name="n">
                 <literal>Paul</literal>
             </binding>
-            <binding name="w">
+            <binding name="e">
                 <literal>NULL</literal>
             </binding>
         </result>
@@ -25,7 +25,7 @@
             <binding name="n">
                 <literal>Paul</literal>
             </binding>
-            <binding name="e">
+            <binding name="w">
                 <literal>NULL</literal>
             </binding>
         </result>
