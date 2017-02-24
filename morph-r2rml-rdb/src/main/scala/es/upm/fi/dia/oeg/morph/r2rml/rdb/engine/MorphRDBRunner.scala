@@ -1,6 +1,5 @@
 package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
-import org.apache.log4j.Logger
 //import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
@@ -13,6 +12,8 @@ import es.upm.fi.dia.oeg.morph.base.engine.AbstractQueryResultTranslator
 import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
 import java.io.OutputStream
 import java.io.Writer
+import org.apache.logging.log4j.LogManager
+
 //import java.util.Properties
 
 
@@ -40,7 +41,7 @@ class MorphRDBRunner(mappingDocument:R2RMLMappingDocument
 }
 
 object MorphRDBRunner {
-	val logger = Logger.getLogger("R2RMLRunner");
+	val logger = LogManager.getLogger(this.getClass());
 	
 	def apply(properties:MorphRDBProperties ) : MorphRDBRunner = {
 		val runnerFactory = new MorphRDBRunnerFactory();
@@ -57,6 +58,7 @@ object MorphRDBRunner {
 	}
 	
 	def main(args:Array[String]) {
+	  logger.info("running morph-rdb 3.8.0 ...");
 		try {
 			if(args == null || args.length == 0 || args.length != 2) {
 				logger.info("usage R2RMLRunner propertiesDirectory propertiesFile");

@@ -3,7 +3,6 @@ package es.upm.fi.dia.oeg.morph.base.querytranslator
 import scala.collection.JavaConversions._
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.sql.SQLQuery
-import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.sql.SQLFromItem
 import es.upm.fi.dia.oeg.morph.base.engine.QueryTranslationOptimizer
 import Zql.ZUpdate
@@ -15,11 +14,12 @@ import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
 import Zql.ZDelete
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
 import es.upm.fi.dia.oeg.morph.base.sql.SQLUnion
+import org.apache.logging.log4j.LogManager
 
 class MorphTransTPResult(val alphaResult:MorphAlphaResult
     , val condSQLResult:MorphCondSQLResult, val prSQLResult:MorphPRSQLResult) {
 
-	val logger = Logger.getLogger(this.getClass());
+	val logger = LogManager.getLogger(this.getClass);
   
 	def toQuery(optimizer:QueryTranslationOptimizer, databaseType:String) : IQuery = {
 		val alphaResult = this.alphaResult

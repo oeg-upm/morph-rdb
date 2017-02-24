@@ -1,8 +1,9 @@
 package es.upm.fi.dia.oeg.morph.base
 
-import Zql.ZExpression
-import Zql.ZConstant
-import com.hp.hpl.jena.rdf.model.ResourceFactory
+import Zql.ZExpression;
+import Zql.ZConstant;
+//import com.hp.hpl.jena.rdf.model.ResourceFactory
+import org.apache.jena.rdf.model.ResourceFactory;
 
 class Constants {
 

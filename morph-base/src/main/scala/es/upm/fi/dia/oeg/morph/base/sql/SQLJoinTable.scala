@@ -3,13 +3,13 @@ package es.upm.fi.dia.oeg.morph.base.sql
 import scala.collection.JavaConversions._
 import Zql.ZFromItem
 import Zql.ZExpression
-import org.apache.log4j.Logger
 import Zql.ZExp
 import es.upm.fi.dia.oeg.morph.base.Constants
+import org.apache.logging.log4j.LogManager
 
 class SQLJoinTable(val joinSource:SQLLogicalTable ,val joinType:String 
     , var onExpression:ZExpression ) extends ZFromItem {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass);
 	
 	def this(joinSource:SQLLogicalTable ) = {
 		this(joinSource, null, null);

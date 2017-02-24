@@ -1,19 +1,20 @@
 package es.upm.fi.dia.oeg.morph.base
 
-import org.apache.log4j.Logger
 import java.sql.Connection
 import java.sql.SQLException
 import java.sql.ResultSet
 import java.sql.Statement
 import java.util.Properties
 import java.sql.DriverManager
+import org.apache.logging.log4j.LogManager;
 
 class DBUtility {
 
 }
 
 object DBUtility {
-	def logger = Logger.getLogger(this.getClass());
+  def logger = LogManager.getLogger(this.getClass());
+	//def logger = Logger.getLogger(this.getClass());
 	
 
 	

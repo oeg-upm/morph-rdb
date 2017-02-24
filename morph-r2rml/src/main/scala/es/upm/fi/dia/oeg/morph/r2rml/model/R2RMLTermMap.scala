@@ -1,20 +1,20 @@
 package es.upm.fi.dia.oeg.morph.r2rml.model
 
-import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.Constants
-import com.hp.hpl.jena.rdf.model.Resource
+import org.apache.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.RegexUtility
 import scala.collection.JavaConversions._
-import com.hp.hpl.jena.datatypes.xsd.XSDDatatype
+import org.apache.jena.datatypes.xsd.XSDDatatype
 import java.sql.ResultSet
 import es.upm.fi.dia.oeg.morph.base.GeneralUtility
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
 import Zql.ZConstant
 import java.util.HashMap
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
-import com.hp.hpl.jena.rdf.model.RDFNode
+import org.apache.jena.rdf.model.RDFNode
 import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElement
 import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElementVisitor
+import org.apache.logging.log4j.LogManager
 
 abstract class R2RMLTermMap(val termMapType:Constants.MorphTermMapType.Value
     , termType:Option[String], val datatype:Option[String], val languageTag:Option[String])
@@ -24,6 +24,7 @@ extends MorphR2RMLElement with IConstantTermMap with IColumnTermMap with ITempla
 //	def this(termMapType:Constants.MorphTermMapType.Value, termType:Option[String]) = { 
 //	  this(termMapType, termType, None, None)
 //	}
+	val logger = LogManager.getLogger(this.getClass());
 	
   def this(rdfNode:RDFNode) = {
 	  this(R2RMLTermMap.extractTermMapType(rdfNode), R2RMLTermMap.extractTermType(rdfNode)
@@ -32,7 +33,7 @@ extends MorphR2RMLElement with IConstantTermMap with IColumnTermMap with ITempla
 	  this.parse(rdfNode);
 	}
 	
-	val logger = Logger.getLogger(this.getClass().getName());
+	
 	var rdfNode:RDFNode = null;
 	
 	def accept(visitor:MorphR2RMLElementVisitor) : Object  = {
@@ -196,7 +197,7 @@ extends MorphR2RMLElement with IConstantTermMap with IColumnTermMap with ITempla
 }
 
 object R2RMLTermMap {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass());
 	
 	def determineTermMapType(resource:Resource) = {
 	  

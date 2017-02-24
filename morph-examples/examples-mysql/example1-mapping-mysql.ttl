@@ -10,7 +10,7 @@
 @base <http://mappingpedia.org/rdb2rdf/r2rml/tc/> .
 
 
-<PredicateMapWebpage> rr:constant <http://mappingpedia.linkeddata.es/vocabulary/webpage>.
+<PredicateMapWebpage> rr:constant <http://mappingpedia.linkeddata.es/vocabulary#webpage>.
 <ObjectMapWebpage> rr:termType rr:Literal; rr:column "webpage".
 
 <TriplesMapPerson>
@@ -29,7 +29,7 @@
 	];
 
 	rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/name> ]; 
+      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#name> ]; 
       rr:objectMap    [ rr:termType rr:Literal; rr:column "name"; ]; 
     ];
 
@@ -39,22 +39,22 @@
     ];
 	
     rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/phone> ]; 
+      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#phone> ]; 
       rr:objectMap    [ rr:column "phone"; rr:termType rr:Literal; ];
     ];	
 	
     rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/email> ]; 
+      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#email> ]; 
       rr:objectMap    [ rr:column "email"; rr:termType rr:Literal; ];
     ];
 
    rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/birthdate> ]; 
+      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#birthdate> ]; 
       rr:objectMap    [ rr:column "birthdate"; rr:termType rr:Literal; rr:datatype xsd:dateTime;];
     ];
 
    rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/hasSport> ]; 
+      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#hasSport> ]; 
       rr:objectMap    [ 
          rr:parentTriplesMap <TriplesMapSport>;
          rr:joinCondition [ rr:child "sport" ; rr:parent "id" ; ]
@@ -75,22 +75,22 @@
 	];
 
 	rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/id> ]; 
+      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#id> ]; 
       rr:objectMap    [ rr:termType rr:Literal; rr:column "id"; ]; 
     ];
 
 	rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/name> ]; 
+      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#name> ]; 
       rr:objectMap    [ rr:termType rr:Literal; rr:column "name"; ]; 
     ];
 
 	rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/code> ]; 
+      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#code> ]; 
       rr:objectMap    [ rr:termType rr:IRI; rr:template "http://lo calhost/{code}"; ]; 
     ];
 
 	rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/type> ]; 
+      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#type> ]; 
       rr:objectMap    [ rr:termType rr:Literal; rr:column "type"; ]; 
     ];
 .

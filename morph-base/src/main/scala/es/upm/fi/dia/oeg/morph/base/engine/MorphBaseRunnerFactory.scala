@@ -4,7 +4,6 @@ import java.sql.Connection
 import es.upm.fi.dia.oeg.morph.base.DBUtility
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
-import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
 import es.upm.fi.dia.oeg.morph.base.materializer.MaterializerFactory
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
@@ -15,18 +14,18 @@ import java.io.OutputStream
 import java.io.Writer
 import java.io.FileWriter
 import java.io.StringWriter
-import com.hp.hpl.jena.query.QueryFactory
+import org.apache.jena.query.QueryFactory;
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter
 import java.io.PrintWriter
 //import java.util.Properties
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.mappingsgenerator.main.R2RMLMapper
-import org.apache.log4j.PropertyConfigurator
+import org.apache.logging.log4j.LogManager
 
 abstract class MorphBaseRunnerFactory {
-  PropertyConfigurator.configure("log4j.properties");
-	val logger = Logger.getLogger(this.getClass());
-	logger.info("running morph-rdb 3.7 ...");
+  //PropertyConfigurator.configure("log4j.properties");
+	val logger = LogManager.getLogger(this.getClass);
+	
   
   
 	def createRunner(configurationDirectory:String , configurationFile:String) 
@@ -151,7 +150,20 @@ abstract class MorphBaseRunnerFactory {
 
     runner.ontologyFilePath = morphProperties.ontologyFilePath;
     if(morphProperties.queryFilePath.isDefined) {
-      runner.sparqlQuery = Some(QueryFactory.read(morphProperties.queryFilePath.get))
+      logger.debug("reading query file: " + morphProperties.queryFilePath.get);
+      runner.sparqlQuery = try {
+        //val lowercaseQueryFilepath = morphProperties.queryFilePath.get.toLowerCase();
+        //logger.debug("lowercaseQueryFilepath = " + lowercaseQueryFilepath);
+        val query = QueryFactory.read(morphProperties.queryFilePath.get);
+        logger.debug("query = " + query);
+        Some(query);
+      } catch {
+        case e:Exception => {
+          e.printStackTrace();
+          logger.warn("error reading query file!");
+          throw e;
+        }
+      }
     }
     
 //    val mapper = new R2RMLMapper();

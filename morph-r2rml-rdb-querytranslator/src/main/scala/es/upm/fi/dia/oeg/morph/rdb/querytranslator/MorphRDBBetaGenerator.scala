@@ -1,7 +1,7 @@
 package es.upm.fi.dia.oeg.morph.rdb.querytranslator
 
 import scala.collection.JavaConversions._
-import com.hp.hpl.jena.graph.Triple
+import org.apache.jena.graph.Triple
 import Zql.ZConstant
 import Zql.ZSelectItem
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem

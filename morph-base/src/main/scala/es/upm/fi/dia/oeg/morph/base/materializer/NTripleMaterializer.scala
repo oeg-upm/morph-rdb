@@ -1,24 +1,28 @@
 package es.upm.fi.dia.oeg.morph.base.materializer
 
-import com.hp.hpl.jena.rdf.model.Model
-import org.apache.log4j.Logger
+//import com.hp.hpl.jena.rdf.model.Model
+import org.apache.jena.rdf.model.Model;
+//import org.apache.log4j.Logger
 import java.io.Writer
 import java.io.OutputStreamWriter
 import java.io.FileOutputStream
-import com.hp.hpl.jena.rdf.model.RDFNode
+//import com.hp.hpl.jena.rdf.model.RDFNode
+import org.apache.jena.rdf.model.RDFNode;
 import es.upm.fi.dia.oeg.morph.base.GeneralUtility
 import java.io.OutputStream
 import java.io.PrintWriter
 import java.io.BufferedOutputStream
 import java.io.BufferedWriter
-import com.hp.hpl.jena.rdf.model.Property
+//import com.hp.hpl.jena.rdf.model.Property
+import org.apache.jena.rdf.model.Property;
+import org.apache.logging.log4j.LogManager
 
 class NTripleMaterializer(model:Model,ntOutputStream:Writer) 
 extends MorphBaseMaterializer(model,ntOutputStream) {
 	//THIS IS IMPORTANT, SCALA PASSES PARAMETER BY VALUE!
 	this.outputStream = ntOutputStream;
 	
-	override val logger = Logger.getLogger(this.getClass().getName());
+	override val logger = LogManager.getLogger(this.getClass);
 
 	def write(triple:String ) = {
 		this.outputStream.write(triple)
@@ -64,7 +68,7 @@ extends MorphBaseMaterializer(model,ntOutputStream) {
 
 		  if(obj == null) {
           val errorMessage = "unable to serialize triple, object is null!";
-          logger.debug(errorMessage);
+          //logger.debug(errorMessage);
 		  }
 		  
 		  

@@ -1,6 +1,5 @@
 package es.upm.fi.dia.oeg.morph.base.engine
 
-import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
 import java.sql.Connection
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
@@ -8,15 +7,18 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import es.upm.fi.dia.oeg.morph.base.GeneralUtility
-import com.hp.hpl.jena.rdf.model.Property
-import com.hp.hpl.jena.rdf.model.Resource
+//import com.hp.hpl.jena.rdf.model.Property
+import org.apache.jena.rdf.model.Property;
+//import com.hp.hpl.jena.rdf.model.Resource
+import org.apache.jena.rdf.model.Resource;
+import org.apache.logging.log4j.LogManager
 
 abstract class MorphBaseDataTranslator(val md:MorphBaseMappingDocument
     , val materializer:MorphBaseMaterializer, unfolder:MorphBaseUnfolder
     , val dataSourceReader:MorphBaseDataSourceReader, connection:Connection
     , properties:MorphProperties ) {
   
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass);
 	//var properties:ConfigurationProperties=null;
 //	var connection:Connection = null;
 	

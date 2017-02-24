@@ -6,20 +6,18 @@ import java.io.File;
 import java.sql.Connection;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.logging.log4j.LogManager;
 import org.junit.Test;
 
-import es.upm.fi.dia.oeg.morph.base.DBUtility;
-import es.upm.fi.dia.oeg.morph.base.MorphProperties;
 import es.upm.fi.dia.oeg.morph.base.Constants;
+import es.upm.fi.dia.oeg.morph.base.DBUtility;
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBProperties;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
 
 public class ExampleWithoutPropertiesFile {
-	private static Logger logger = Logger.getLogger(ExampleWithoutPropertiesFile.class);
-	static { PropertyConfigurator.configure("log4j.properties"); }
+	private org.apache.logging.log4j.Logger logger = LogManager.getLogger(this.getClass());
+	//static { PropertyConfigurator.configure("log4j.properties"); }
 	
 	private String jdbc_url = "jdbc:mysql://127.0.0.1:3306/morph_example";
 	private String dbUserName = "root";

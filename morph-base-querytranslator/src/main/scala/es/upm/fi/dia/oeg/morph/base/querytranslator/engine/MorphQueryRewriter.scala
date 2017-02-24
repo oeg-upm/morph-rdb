@@ -1,32 +1,32 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator.engine
 
-import com.hp.hpl.jena.graph.query.Rewrite
-import org.apache.log4j.Logger
-import com.hp.hpl.jena.graph.Node
+import org.apache.jena.sparql.algebra.optimize.Rewrite
+import org.apache.jena.graph.Node;
 import scala.collection.JavaConversions._
-import com.hp.hpl.jena.sparql.algebra.Op
-import com.hp.hpl.jena.sparql.algebra.op.OpBGP
-import com.hp.hpl.jena.sparql.core.BasicPattern
-import com.hp.hpl.jena.graph.Triple
-import com.hp.hpl.jena.sparql.algebra.op.OpJoin
-import com.hp.hpl.jena.sparql.algebra.op.OpLeftJoin
-import com.hp.hpl.jena.sparql.algebra.op.OpUnion
-import com.hp.hpl.jena.sparql.algebra.op.OpFilter
-import com.hp.hpl.jena.sparql.algebra.optimize.TransformFilterConjunction
-import com.hp.hpl.jena.sparql.algebra.optimize.Optimize
-import com.hp.hpl.jena.sparql.algebra.op.OpProject
-import com.hp.hpl.jena.sparql.algebra.op.OpSlice
-import com.hp.hpl.jena.sparql.algebra.op.OpDistinct
-import com.hp.hpl.jena.sparql.algebra.op.OpOrder
-import com.hp.hpl.jena.vocabulary.RDFS
-import com.hp.hpl.jena.vocabulary.RDF
+import org.apache.jena.sparql.algebra.Op;
+import org.apache.jena.sparql.algebra.op.OpBGP
+import org.apache.jena.sparql.core.BasicPattern
+import org.apache.jena.graph.Triple
+import org.apache.jena.sparql.algebra.op.OpJoin
+import org.apache.jena.sparql.algebra.op.OpLeftJoin
+import org.apache.jena.sparql.algebra.op.OpUnion
+import org.apache.jena.sparql.algebra.op.OpFilter
+import org.apache.jena.sparql.algebra.optimize.TransformFilterConjunction
+import org.apache.jena.sparql.algebra.optimize.Optimize
+import org.apache.jena.sparql.algebra.op.OpProject
+import org.apache.jena.sparql.algebra.op.OpSlice
+import org.apache.jena.sparql.algebra.op.OpDistinct
+import org.apache.jena.sparql.algebra.op.OpOrder
+import org.apache.jena.vocabulary.RDFS
+import org.apache.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.MorphTriple
 import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
+import org.apache.logging.log4j.LogManager
 
 
 class MorphQueryRewriter(mapNodeLogicalTableSize:Map[Node, Long], reorderSTG:Boolean)
 extends Rewrite {
-	def logger = Logger.getLogger("MorphQueryRewriter");
+	val logger = LogManager.getLogger(this.getClass);
 	//private Map<Node, Set<AbstractConceptMapping>> mapInferredTypes;
 //	var reorderSTG = false;
 	

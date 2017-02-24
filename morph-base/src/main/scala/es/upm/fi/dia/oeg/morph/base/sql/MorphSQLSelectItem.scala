@@ -1,9 +1,9 @@
 package es.upm.fi.dia.oeg.morph.base.sql
 import Zql.ZSelectItem
 import scala.collection.JavaConversions._
-import org.apache.log4j.Logger
 import Zql.ZExp
 import es.upm.fi.dia.oeg.morph.base.Constants
+import org.apache.logging.log4j.LogManager
 
 class MorphSQLSelectItem(val dbType:String, schema:String, table:String
 		, column:String, val columnType:String) 
@@ -163,8 +163,7 @@ extends ZSelectItem {
 }
 
 object MorphSQLSelectItem {
-	val logger = Logger.getLogger("MorphSQLSelectItem");
-
+	val logger = LogManager.getLogger(this.getClass);
 	//	def apply() : SQLSelectItem = {
 	//		val selectItem = new SQLSelectItem(null, null, null, null, null);
 	//		selectItem;

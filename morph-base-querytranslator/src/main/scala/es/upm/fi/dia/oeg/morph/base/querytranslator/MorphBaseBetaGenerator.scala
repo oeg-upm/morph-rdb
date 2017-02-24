@@ -1,20 +1,20 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator
 
-import org.apache.log4j.Logger
 import scala.collection.JavaConversions._
 import Zql.ZConstant
 import Zql.ZSelectItem
-import com.hp.hpl.jena.graph.Triple
-import com.hp.hpl.jena.vocabulary.RDF
+import org.apache.jena.graph.Triple
+import org.apache.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
+import org.apache.logging.log4j.LogManager
 
 abstract class MorphBaseBetaGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
-	val logger = Logger.getLogger(this.getClass());
+	val logger = LogManager.getLogger(this.getClass);
 	
 	val dbType = if(md.dbMetaData.isDefined) { md.dbMetaData.get.dbType; } 
 	else { Constants.DATABASE_DEFAULT; }

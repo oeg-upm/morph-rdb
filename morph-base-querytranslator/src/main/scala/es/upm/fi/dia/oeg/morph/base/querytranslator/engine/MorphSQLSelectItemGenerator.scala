@@ -2,15 +2,15 @@ package es.upm.fi.dia.oeg.morph.base.querytranslator.engine
 
 import Zql.ZConstant
 import Zql.ZSelectItem
-import org.apache.log4j.Logger
-import com.hp.hpl.jena.graph.Node
+import org.apache.jena.graph.Node;
 import scala.collection.JavaConversions._
 import scala.collection.mutable.LinkedHashSet
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
 import es.upm.fi.dia.oeg.morph.base.querytranslator.NameGenerator
+import org.apache.logging.log4j.LogManager
 
 class MorphSQLSelectItemGenerator(nameGenerator:NameGenerator, dbType:String) {
-	val logger = Logger.getLogger("SelectItemGenerator");
+	val logger = LogManager.getLogger(this.getClass);
 	
 	def generateSelectItemsJava(nodes:java.util.Collection[Node], pPrefix:String
 	    , oldSelectItems:java.util.Collection[ZSelectItem]	, useAlias:Boolean) : java.util.Collection[ZSelectItem] = {

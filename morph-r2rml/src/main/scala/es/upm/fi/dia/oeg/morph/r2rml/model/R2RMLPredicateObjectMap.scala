@@ -1,18 +1,18 @@
 package es.upm.fi.dia.oeg.morph.r2rml.model
 
 import scala.collection.JavaConversions._
-import com.hp.hpl.jena.rdf.model.Resource
+import org.apache.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
-import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
 import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
+import org.apache.logging.log4j.LogManager
 
 class R2RMLPredicateObjectMap(val predicateMaps:List[R2RMLPredicateMap]
 		, val objectMaps:List[R2RMLObjectMap], val refObjectMaps:List[R2RMLRefObjectMap]
 		//, objectMapTypes:List[R2RMLPredicateObjectMap.ObjectMapType.Value]
 		, val graphMaps:Set[R2RMLGraphMap] ) extends MorphBasePropertyMapping 
 {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass());
 	var alias:String = null;
 
 //	def buildMetadata(dbMetadata:MorphDatabaseMetaData) = {

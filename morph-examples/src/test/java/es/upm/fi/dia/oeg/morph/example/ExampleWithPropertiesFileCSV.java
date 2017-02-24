@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
@@ -14,8 +14,8 @@ import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphCSVRunnerFactory;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphCSVRunner;
 
 public class ExampleWithPropertiesFileCSV {
-    private static Logger logger = Logger.getLogger(ExampleWithPropertiesFileCSV.class);
-    static { PropertyConfigurator.configure("log4j.properties"); }
+    private Logger logger = LogManager.getLogger(this.getClass());
+    //static { PropertyConfigurator.configure("log4j.properties"); }
     String configurationDirectory = System.getProperty("user.dir") + File.separator + "examples-csv";
 
 
@@ -109,4 +109,20 @@ public class ExampleWithPropertiesFileCSV {
             assertTrue(e.getMessage(), false);
         }
     }
+    
+    @Test
+    public void testMobileAgeDatasets() {
+        String configurationFile = "mobileage-datasets.morph.properties";
+        try {
+        	MorphBaseRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+        	MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
 }

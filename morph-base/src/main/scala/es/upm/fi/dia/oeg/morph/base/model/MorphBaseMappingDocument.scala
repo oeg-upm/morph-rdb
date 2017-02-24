@@ -4,10 +4,12 @@ import scala.collection.JavaConversions._
 import java.sql.Connection
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
-import org.apache.log4j.Logger
+import org.apache.logging.log4j.LogManager
+
+//import org.apache.log4j.Logger
 
 abstract class MorphBaseMappingDocument(val classMappings:Iterable[MorphBaseClassMapping]) {
-	val logger = Logger.getLogger(this.getClass());
+	val logger = LogManager.getLogger(this.getClass);
 	
 	var mappingDocumentPrefixMap:Map[String, String] = Map.empty ;
 	var id:String =null;

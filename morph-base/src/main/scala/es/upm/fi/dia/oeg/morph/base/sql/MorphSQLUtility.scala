@@ -5,19 +5,20 @@ import Zql.ZConstant
 import Zql.ZSelectItem
 import scala.collection.JavaConversions._
 import Zql.ZExp
-import com.hp.hpl.jena.graph.Node
-import org.apache.log4j.Logger
+//import com.hp.hpl.jena.graph.Node
+import org.apache.jena.graph.Node;
 import Zql.ZOrderBy
 import scala.collection.mutable.LinkedHashMap
 import es.upm.fi.dia.oeg.morph.base.Constants
 import scala.Option.option2Iterable
+import org.apache.logging.log4j.LogManager
 
 class MorphSQLUtility {
 	
 }
 
 object MorphSQLUtility {
-	val logger = Logger.getLogger("MorphSQLUtility");
+	val logger = LogManager.getLogger(this.getClass);
   
 	def createConstant(v:String, typ:Integer, dbType:String) : ZConstant = {
 	  val result = {

@@ -1,23 +1,23 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator.engine
 
 import scala.collection.JavaConversions._
-import org.apache.log4j.Logger
-import com.hp.hpl.jena.graph.Node
-import com.hp.hpl.jena.query.Query
-import com.hp.hpl.jena.sparql.algebra.Algebra
-import com.hp.hpl.jena.sparql.algebra.Op
-import com.hp.hpl.jena.vocabulary.RDF
-import com.hp.hpl.jena.sparql.algebra.op.{OpBGP, OpLeftJoin, OpUnion, OpJoin, OpFilter, OpSlice, OpProject, OpDistinct}
-import com.hp.hpl.jena.graph.Triple
-import com.hp.hpl.jena.sparql.expr.ExprList
-import com.hp.hpl.jena.sparql.expr.Expr
+import org.apache.jena.graph.Node;
+import org.apache.jena.query.Query
+import org.apache.jena.sparql.algebra.Algebra
+import org.apache.jena.sparql.algebra.Op;
+import org.apache.jena.vocabulary.RDF
+import org.apache.jena.sparql.algebra.op.{OpBGP, OpLeftJoin, OpUnion, OpJoin, OpFilter, OpSlice, OpProject, OpDistinct}
+import org.apache.jena.graph.Triple
+import org.apache.jena.sparql.expr.ExprList
+import org.apache.jena.sparql.expr.Expr
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
-import com.hp.hpl.jena.sparql.algebra.op.OpExtend
-import com.hp.hpl.jena.sparql.algebra.op.OpGroup
+import org.apache.jena.sparql.algebra.op.OpExtend
+import org.apache.jena.sparql.algebra.op.OpGroup
+import org.apache.logging.log4j.LogManager
 
 class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
-	val logger = Logger.getLogger("MorphMappingInferrer");
+	val logger = LogManager.getLogger(this.getClass);
 	val mapInferredTypes : Map[Node, Set[MorphBaseClassMapping]] = Map.empty
 	//var query:Query  = null;
 

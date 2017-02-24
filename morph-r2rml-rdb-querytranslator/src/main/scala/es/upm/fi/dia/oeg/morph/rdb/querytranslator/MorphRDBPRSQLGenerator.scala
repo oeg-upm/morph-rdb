@@ -2,12 +2,11 @@ package es.upm.fi.dia.oeg.morph.rdb.querytranslator
 
 import scala.collection.JavaConversions._
 import java.util.Collection
-import org.apache.log4j.Logger
 import Zql.ZConstant
 import Zql.ZSelectItem
-import com.hp.hpl.jena.graph.Node
-import com.hp.hpl.jena.graph.Triple
-import com.hp.hpl.jena.vocabulary.RDF
+import org.apache.jena.graph.Node
+import org.apache.jena.graph.Triple
+import org.apache.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
@@ -23,10 +22,11 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTermMap
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUnfolder
+import org.apache.logging.log4j.LogManager
 
 class MorphRDBPRSQLGenerator(md:R2RMLMappingDocument, unfolder:MorphRDBUnfolder)
 extends MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
-	override val logger = Logger.getLogger("MorphPRSQLGenerator");
+	override val logger = LogManager.getLogger(this.getClass());
 
 		
 	override def genPRSQLObject(tp:Triple ,alphaResult:MorphAlphaResult 

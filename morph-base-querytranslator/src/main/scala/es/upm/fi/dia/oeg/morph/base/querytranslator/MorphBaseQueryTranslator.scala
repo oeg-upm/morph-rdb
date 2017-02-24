@@ -2,7 +2,6 @@ package es.upm.fi.dia.oeg.morph.base.querytranslator
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.LinkedHashSet
-import org.apache.log4j.Logger
 import java.sql.Connection
 import Zql.ZConstant
 import Zql.ZExp
@@ -11,53 +10,53 @@ import Zql.ZGroupBy
 import Zql.ZOrderBy
 import Zql.ZSelectItem
 import Zql.ZUpdate
-import com.hp.hpl.jena.datatypes.xsd.XSDDatatype
-import com.hp.hpl.jena.graph.Node
-import com.hp.hpl.jena.graph.Triple
-import com.hp.hpl.jena.query.Query
-import com.hp.hpl.jena.query.QueryFactory
-import com.hp.hpl.jena.query.SortCondition
-import com.hp.hpl.jena.rdf.model.Resource
-import com.hp.hpl.jena.sparql.algebra.Algebra
-import com.hp.hpl.jena.sparql.algebra.Op
-import com.hp.hpl.jena.sparql.algebra.op.OpBGP
-import com.hp.hpl.jena.sparql.algebra.op.OpDistinct
-import com.hp.hpl.jena.sparql.algebra.op.OpExtend
-import com.hp.hpl.jena.sparql.algebra.op.OpFilter
-import com.hp.hpl.jena.sparql.algebra.op.OpGroup
-import com.hp.hpl.jena.sparql.algebra.op.OpJoin
-import com.hp.hpl.jena.sparql.algebra.op.OpLeftJoin
-import com.hp.hpl.jena.sparql.algebra.op.OpOrder
-import com.hp.hpl.jena.sparql.algebra.op.OpProject
-import com.hp.hpl.jena.sparql.algebra.op.OpSlice
-import com.hp.hpl.jena.sparql.algebra.op.OpUnion
-import com.hp.hpl.jena.sparql.algebra.optimize.Optimize
-import com.hp.hpl.jena.sparql.core.BasicPattern
-import com.hp.hpl.jena.sparql.core.Var
-import com.hp.hpl.jena.sparql.core.VarExprList
-import com.hp.hpl.jena.sparql.expr.E_Bound
-import com.hp.hpl.jena.sparql.expr.E_Function
-import com.hp.hpl.jena.sparql.expr.E_LogicalAnd
-import com.hp.hpl.jena.sparql.expr.E_LogicalNot
-import com.hp.hpl.jena.sparql.expr.E_LogicalOr
-import com.hp.hpl.jena.sparql.expr.E_NotEquals
-import com.hp.hpl.jena.sparql.expr.E_OneOf
-import com.hp.hpl.jena.sparql.expr.E_Regex
-import com.hp.hpl.jena.sparql.expr.Expr
-import com.hp.hpl.jena.sparql.expr.ExprAggregator
-import com.hp.hpl.jena.sparql.expr.ExprFunction
-import com.hp.hpl.jena.sparql.expr.ExprFunction1
-import com.hp.hpl.jena.sparql.expr.ExprFunction2
-import com.hp.hpl.jena.sparql.expr.ExprList
-import com.hp.hpl.jena.sparql.expr.NodeValue
-import com.hp.hpl.jena.sparql.expr.aggregate.AggAvg
-import com.hp.hpl.jena.sparql.expr.aggregate.AggCount
-import com.hp.hpl.jena.sparql.expr.aggregate.AggMax
-import com.hp.hpl.jena.sparql.expr.aggregate.AggMin
-import com.hp.hpl.jena.sparql.expr.aggregate.AggSum
-import com.hp.hpl.jena.sparql.expr.aggregate.Aggregator
-import com.hp.hpl.jena.vocabulary.RDF
-import com.hp.hpl.jena.vocabulary.XSD
+import org.apache.jena.datatypes.xsd.XSDDatatype
+import org.apache.jena.graph.Node;
+import org.apache.jena.graph.Triple
+import org.apache.jena.query.Query
+import org.apache.jena.query.QueryFactory
+import org.apache.jena.query.SortCondition
+import org.apache.jena.rdf.model.Resource
+import org.apache.jena.sparql.algebra.Algebra
+import org.apache.jena.sparql.algebra.Op;
+import org.apache.jena.sparql.algebra.op.OpBGP;
+import org.apache.jena.sparql.algebra.op.OpDistinct
+import org.apache.jena.sparql.algebra.op.OpExtend
+import org.apache.jena.sparql.algebra.op.OpFilter
+import org.apache.jena.sparql.algebra.op.OpGroup
+import org.apache.jena.sparql.algebra.op.OpJoin
+import org.apache.jena.sparql.algebra.op.OpLeftJoin
+import org.apache.jena.sparql.algebra.op.OpOrder
+import org.apache.jena.sparql.algebra.op.OpProject
+import org.apache.jena.sparql.algebra.op.OpSlice
+import org.apache.jena.sparql.algebra.op.OpUnion
+import org.apache.jena.sparql.algebra.optimize.Optimize
+import org.apache.jena.sparql.core.BasicPattern
+import org.apache.jena.sparql.core.Var
+import org.apache.jena.sparql.core.VarExprList
+import org.apache.jena.sparql.expr.E_Bound
+import org.apache.jena.sparql.expr.E_Function
+import org.apache.jena.sparql.expr.E_LogicalAnd
+import org.apache.jena.sparql.expr.E_LogicalNot
+import org.apache.jena.sparql.expr.E_LogicalOr
+import org.apache.jena.sparql.expr.E_NotEquals
+import org.apache.jena.sparql.expr.E_OneOf
+import org.apache.jena.sparql.expr.E_Regex
+import org.apache.jena.sparql.expr.Expr
+import org.apache.jena.sparql.expr.ExprAggregator
+import org.apache.jena.sparql.expr.ExprFunction
+import org.apache.jena.sparql.expr.ExprFunction1
+import org.apache.jena.sparql.expr.ExprFunction2
+import org.apache.jena.sparql.expr.ExprList
+import org.apache.jena.sparql.expr.NodeValue
+import org.apache.jena.sparql.expr.aggregate.AggAvg
+import org.apache.jena.sparql.expr.aggregate.AggCount
+import org.apache.jena.sparql.expr.aggregate.AggMax
+import org.apache.jena.sparql.expr.aggregate.AggMin
+import org.apache.jena.sparql.expr.aggregate.AggSum
+import org.apache.jena.sparql.expr.aggregate.Aggregator
+import org.apache.jena.vocabulary.RDF
+import org.apache.jena.vocabulary.XSD
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
 import es.upm.fi.dia.oeg.morph.base.TriplePatternPredicateBounder
@@ -83,14 +82,15 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphSQLSelectItemGen
 import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphMappingInferrer
 import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphQueryRewriter
 import Zql.ZInsert
-import com.hp.hpl.jena.sparql.expr.aggregate.AggCountVar
+import org.apache.jena.sparql.expr.aggregate.AggCountVar
 import es.upm.fi.dia.oeg.morph.base.CollectionUtility
+import org.apache.logging.log4j.LogManager
 
 abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		, alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
 		, condSQLGenerator:MorphBaseCondSQLGenerator, prSQLGenerator:MorphBasePRSQLGenerator) 
 extends IQueryTranslator {
-	val logger = Logger.getLogger(this.getClass());
+	val logger = LogManager.getLogger(this.getClass);
 
 	//query translator
 	var mapInferredTypes:Map[Node, Set[MorphBaseClassMapping]] = Map.empty ;
@@ -437,7 +437,7 @@ extends IQueryTranslator {
 						}
 				}
 
-				val varsMentioned = aggregator.getExpr().getVarsMentioned();
+				val varsMentioned = aggregator.getExprList().getVarsMentioned();
 				if(varsMentioned.size() > 1) {
 					val errorMessage = "Multiple variables in aggregation function is not supported: " + aggregator;
 					logger.error(errorMessage);
@@ -1403,7 +1403,8 @@ extends IQueryTranslator {
 
 
 
-	override def translate(op:Op) : IQuery  = {
+	//override def translate(op:Op) : IQuery  = {
+	def translate(op:Op) : IQuery  = {
 			logger.debug("opSparqlQuery = " + op);
 			val typeInferrer = new MorphMappingInferrer(this.mappingDocument);
 			this.mapInferredTypes = typeInferrer.infer(op);
@@ -1461,7 +1462,7 @@ extends IQueryTranslator {
 			}
 
 
-			logger.debug("sql = \n" + result + "\n");
+			//logger.debug("sql = \n" + result + "\n");
 			//this.currentTranslationResult = result;
 			result;
 	}
@@ -1662,7 +1663,7 @@ extends IQueryTranslator {
 					}		  
 			}
 
-			logger.debug("transSTG = " + transSTG);
+			//logger.debug("transSTG = " + transSTG);
 			transSTG;
 	}
 

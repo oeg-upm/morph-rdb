@@ -1,20 +1,24 @@
 package es.upm.fi.dia.oeg.morph.base.materializer
 
-import org.apache.log4j.Logger
-import com.hp.hpl.jena.rdf.model.Resource
+//import org.apache.log4j.Logger
+//import com.hp.hpl.jena.rdf.model.Resource
 import java.io.FileOutputStream
-import com.hp.hpl.jena.rdf.model.RDFNode
-import com.hp.hpl.jena.rdf.model.Model
+//import com.hp.hpl.jena.rdf.model.RDFNode
+import org.apache.jena.rdf.model.RDFNode;
+//import com.hp.hpl.jena.rdf.model.Model
+import org.apache.jena.rdf.model.Model;
 import java.io.OutputStream
 import java.io.Writer
-import com.hp.hpl.jena.rdf.model.Property
+//import com.hp.hpl.jena.rdf.model.Property
+import org.apache.jena.rdf.model.Property;
+import org.apache.logging.log4j.LogManager
 
 class RDFXMLMaterializer(model:Model, rdfxmlOutputStream:Writer) 
 extends MorphBaseMaterializer(model, rdfxmlOutputStream) {
 	//THIS IS IMPORTANT, SCALA PASSES PARAMETER BY VALUE!
 	this.outputStream = rdfxmlOutputStream;
 
-	override val logger = Logger.getLogger(this.getClass().getName());
+	override val logger = LogManager.getLogger(this.getClass);
 	//var outputFileName:String=null;
 
 	//

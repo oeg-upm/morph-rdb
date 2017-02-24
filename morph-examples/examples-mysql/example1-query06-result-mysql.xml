@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="s"/>
+        <variable name="cnt"/>
+    </head>
+    <results>
+        <result>
+            <binding name="s">
+                <uri>http://mappingpedia.linkeddata.es/resources/Sport/100</uri>
+            </binding>
+            <binding name="cnt">4</binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://mappingpedia.linkeddata.es/resources/Sport/200</uri>
+            </binding>
+            <binding name="cnt">4</binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://mappingpedia.linkeddata.es/resources/Sport/300</uri>
+            </binding>
+            <binding name="cnt">4</binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B1</uri>
+            </binding>
+            <binding name="cnt">4</binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B2</uri>
+            </binding>
+            <binding name="cnt">3</binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B3</uri>
+            </binding>
+            <binding name="cnt">4</binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://mappingpedia.linkeddata.es/resources/Person/B4</uri>
+            </binding>
+            <binding name="cnt">4</binding>
+        </result>
+    </results>
+</sparql>

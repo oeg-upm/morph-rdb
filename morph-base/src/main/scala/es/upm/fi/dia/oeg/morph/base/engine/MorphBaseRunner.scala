@@ -5,27 +5,37 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import java.sql.Connection
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
-import com.hp.hpl.jena.query.Query
+import org.apache.jena.query.Query;
 import es.upm.fi.dia.oeg.morph.base.DBUtility
 import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
-import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.materializer.MaterializerFactory
-import com.hp.hpl.jena.query.QueryFactory
-import es.upm.fi.dia.oeg.newrqr.RewriterWrapper
+import org.apache.jena.query.QueryFactory;
+//import es.upm.fi.dia.oeg.newrqr.RewriterWrapper
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import java.io.OutputStream
 import java.io.Writer
-import com.hp.hpl.jena.graph.NodeFactory
-import com.hp.hpl.jena.vocabulary.RDF
-import com.hp.hpl.jena.graph.Triple
-import com.hp.hpl.jena.sparql.core.BasicPattern
-import com.hp.hpl.jena.sparql.algebra.op.OpBGP
-import com.hp.hpl.jena.sparql.algebra.op.OpProject
-import com.hp.hpl.jena.sparql.algebra.OpAsQuery
-import com.hp.hpl.jena.sparql.core.Var
-import com.hp.hpl.jena.vocabulary.RDFS
-import com.hp.hpl.jena.rdf.model.Statement
-import com.hp.hpl.jena.rdf.model.Resource
+//import com.hp.hpl.jena.graph.NodeFactory
+//import com.hp.hpl.jena.vocabulary.RDF
+import org.apache.jena.vocabulary.RDF;
+//import com.hp.hpl.jena.graph.Triple
+import org.apache.jena.graph.Triple;
+//import com.hp.hpl.jena.sparql.core.BasicPattern
+import org.apache.jena.sparql.core.BasicPattern;
+//import com.hp.hpl.jena.sparql.algebra.op.OpBGP
+import org.apache.jena.sparql.algebra.op.OpBGP;
+//import com.hp.hpl.jena.sparql.algebra.op.OpProject
+import org.apache.jena.sparql.algebra.op.OpProject;
+//import com.hp.hpl.jena.sparql.algebra.OpAsQuery
+import org.apache.jena.sparql.algebra.OpAsQuery;
+//import com.hp.hpl.jena.sparql.core.Var
+import org.apache.jena.sparql.core.Var;
+//import com.hp.hpl.jena.vocabulary.RDFS
+import org.apache.jena.vocabulary.RDFS;
+//import com.hp.hpl.jena.rdf.model.Statement
+import org.apache.jena.rdf.model.Statement;
+//import com.hp.hpl.jena.rdf.model.Resource
+import org.apache.jena.rdf.model.Resource;
+import org.apache.logging.log4j.LogManager
 
 abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     //, conn:Connection
@@ -40,7 +50,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     ) {
   
   
-	val logger = Logger.getLogger(this.getClass());
+	val logger = LogManager.getLogger(this.getClass);
   var connection:Connection = null;
   
 	var ontologyFilePath:Option[String]=None;
@@ -135,7 +145,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
   			//set output file
   			this.materializeMappingDocuments(mappingDocument);
   		} else {
-  			logger.debug("sparql query = " + this.sparqlQuery.get);
+  			//logger.debug("sparql query = " + this.sparqlQuery.get);
   
   			//LOADING ONTOLOGY FILE
   			//REWRITE THE SPARQL QUERY IF NECESSARY
@@ -144,14 +154,12 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
   			} else {
   				//REWRITE THE QUERY BASED ON THE MAPPINGS AND ONTOLOGY
   				logger.info("Rewriting query...");
-  				//				Collection <String> mappedOntologyElements = MappingsExtractor.getMappedPredcatesFromR2O(mappingDocumentFile);
   				val mappedOntologyElements = this.mappingDocument.getMappedClasses();
   				val mappedOntologyElements2 = this.mappingDocument.getMappedProperties();
   				mappedOntologyElements.addAll(mappedOntologyElements2);
   
   
-  				//RewriterWrapper rewritterWapper = new RewriterWrapper(ontologyFilePath, rewritterWrapperMode, mappedOntologyElements);
-  				//queries = rewritterWapper.rewrite(originalQuery);
+  				/*
   				val queriesAux = RewriterWrapper.rewrite(sparqlQuery.get, ontologyFilePath.get
   				    , RewriterWrapper.fullMode, mappedOntologyElements
   				    , RewriterWrapper.globalMatchMode);
@@ -159,6 +167,8 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
   				logger.debug("No of rewriting query result = " + queriesAux.size());
   				logger.debug("queries = " + queriesAux);
   				queriesAux.toList
+  				*/
+  				List(sparqlQuery.get);
   			}			
   
   
@@ -176,6 +186,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
       errorCode = 0;
     } catch {
       case e:Exception => {
+        e.printStackTrace();
         status = e.getMessage();
         errorCode = -1;        
       }
@@ -193,9 +204,9 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 	def translateSPARQLQueriesIntoSQLQueries(sparqlQueries:Iterable[Query] )
 	:Map[Query, IQuery]={
 		val sqlQueries = sparqlQueries.map(sparqlQuery => {
-			logger.debug("SPARQL Query = \n" + sparqlQuery);
+			//logger.debug("SPARQL Query = \n" + sparqlQuery);
 			val sqlQuery = this.queryTranslator.get.translate(sparqlQuery);
-			logger.debug("SQL Query = \n" + sqlQuery);
+			//logger.debug("SQL Query = \n" + sqlQuery);
 			(sparqlQuery -> sqlQuery);
 		})
 

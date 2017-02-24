@@ -8,7 +8,6 @@ import Zql.ZConstant
 import Zql.ZQuery
 import java.io.ByteArrayInputStream
 import Zql.ZqlParser
-import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
 import es.upm.fi.dia.oeg.morph.base.sql.SQLDataType
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
@@ -18,13 +17,14 @@ import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTermMap
 import java.sql.Connection
 import org.apache.commons.io.FilenameUtils;
 import java.io.File;
+import org.apache.logging.log4j.LogManager
 
 class MorphRDBUtility {
 
 }
 
 object MorphRDBUtility {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass());
 
 	def generateCondForWellDefinedURI(termMap:R2RMLTermMap
 			, ownerTriplesMap:MorphBaseClassMapping, uri:String , alias:String 

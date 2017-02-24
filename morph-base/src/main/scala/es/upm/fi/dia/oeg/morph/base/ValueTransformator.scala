@@ -1,6 +1,7 @@
 package es.upm.fi.dia.oeg.morph.base
 
-import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
+//import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
+import org.apache.jena.datatypes.xsd.XSDDatatype;
 
 class ValueTransformator {
 

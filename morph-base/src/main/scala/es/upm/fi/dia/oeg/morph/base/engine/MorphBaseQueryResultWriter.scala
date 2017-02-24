@@ -2,7 +2,7 @@ package es.upm.fi.dia.oeg.morph.base.engine
 
 import java.io.OutputStream
 import java.io.Writer
-import com.hp.hpl.jena.query.Query
+import org.apache.jena.query.Query;
 
 abstract class MorphBaseQueryResultWriter(queryTranslator:IQueryTranslator
     , var outputStream:Writer) {

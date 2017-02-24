@@ -1,13 +1,13 @@
 package es.upm.fi.dia.oeg.morph.base.sql
 
-import org.apache.log4j.Logger
 import java.sql.Connection
 import java.sql.DatabaseMetaData
+import org.apache.logging.log4j.LogManager
 
 class MorphDatabaseMetaData(val conn:Connection, val dbName:String, val dbType:String
     , var tablesMetaData : List[MorphTableMetaData], jdbcDBMetaData:DatabaseMetaData) 
     {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass);
 	logger.debug("Database MetaData created: " + this.dbName);
 	
 	def this(conn:Connection, dbName:String, dbType:String) = {
@@ -30,7 +30,7 @@ class MorphDatabaseMetaData(val conn:Connection, val dbName:String, val dbType:S
 }
 
 object MorphDatabaseMetaData {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass);
 	
  	def apply(conn:Connection 
 // 	    , properties:ConfigurationProperties

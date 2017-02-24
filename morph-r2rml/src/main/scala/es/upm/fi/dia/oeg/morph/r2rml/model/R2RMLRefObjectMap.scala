@@ -1,10 +1,11 @@
 package es.upm.fi.dia.oeg.morph.r2rml.model
 
 import scala.collection.JavaConversions._
-import org.apache.log4j.Logger
-import com.hp.hpl.jena.rdf.model.RDFNode
-import com.hp.hpl.jena.rdf.model.Resource
+import org.apache.jena.rdf.model.RDFNode
+import org.apache.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
+import org.apache.logging.log4j.LogManager
+
 //import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLJoinCondition
 
 class R2RMLRefObjectMap(val parentTriplesMapResource:Resource
@@ -12,7 +13,7 @@ class R2RMLRefObjectMap(val parentTriplesMapResource:Resource
 //	var owner:AbstractMappingDocument=null ;
 //	var resource:Resource=null;
 	
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass());
 	var rdfNode:RDFNode = null;
 	//private String alias;
 	
@@ -71,7 +72,7 @@ class R2RMLRefObjectMap(val parentTriplesMapResource:Resource
 }
 
 object R2RMLRefObjectMap {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass());
 	
 	def apply(resource:Resource) : R2RMLRefObjectMap = {
 		val parentTriplesMapStatement = resource.getProperty(

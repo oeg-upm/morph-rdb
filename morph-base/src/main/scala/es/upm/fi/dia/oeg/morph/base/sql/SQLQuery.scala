@@ -2,7 +2,6 @@ package es.upm.fi.dia.oeg.morph.base.sql
 
 import scala.collection.JavaConversions._
 import Zql.ZQuery
-import org.apache.log4j.Logger
 import Zql.ZSelectItem
 import Zql.ZFromItem
 import Zql.ZExp
@@ -15,9 +14,10 @@ import Zql.ZUtils
 import java.util.Random
 import scala.collection.mutable.LinkedHashMap
 import Zql.ZGroupBy
+import org.apache.logging.log4j.LogManager
 
 class SQLQuery extends ZQuery with IQuery {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass);
 
 	ZUtils.addCustomFunction("concat", 2);
 	ZUtils.addCustomFunction("substring", 3);
@@ -821,7 +821,7 @@ class SQLQuery extends ZQuery with IQuery {
 }
 
 object SQLQuery {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass);
 
 	def areBaseTables(fromItems:Iterable[ZFromItem] ) : Boolean ={
 			var result = true;

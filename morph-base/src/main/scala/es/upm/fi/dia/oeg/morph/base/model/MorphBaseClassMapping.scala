@@ -2,7 +2,8 @@ package es.upm.fi.dia.oeg.morph.base.model
 
 import es.upm.fi.dia.oeg.morph.base.sql.MorphTableMetaData
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
-import com.hp.hpl.jena.rdf.model.Resource
+//import com.hp.hpl.jena.rdf.model.Resource
+import org.apache.jena.rdf.model.Resource;
 
 abstract class MorphBaseClassMapping(val propertyMappings:Iterable[MorphBasePropertyMapping]) {
   	var id:String =null;

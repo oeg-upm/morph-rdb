@@ -1,17 +1,18 @@
 package es.upm.fi.dia.oeg.morph.base.engine
 
-import org.apache.log4j.Logger
-import com.hp.hpl.jena.rdf.model.Model
+//import com.hp.hpl.jena.rdf.model.Model
+import org.apache.jena.rdf.model.Model;
 import java.io.FileOutputStream
+import org.apache.logging.log4j.LogManager
 
 class ModelWriter {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass);
 	
 
 }
 
 object ModelWriter {
-  	val logger = Logger.getLogger(this.getClass().getName());
+  	val logger = LogManager.getLogger(this.getClass);
 
 	def writeModelStream(model:Model , outputFilename:String , rdfLanguage:String ) {
 		try {

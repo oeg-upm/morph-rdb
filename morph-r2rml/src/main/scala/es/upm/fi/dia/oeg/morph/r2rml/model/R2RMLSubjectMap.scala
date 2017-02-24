@@ -1,17 +1,17 @@
 package es.upm.fi.dia.oeg.morph.r2rml.model
 
 import scala.collection.JavaConversions._
-import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.Constants
-import com.hp.hpl.jena.rdf.model.Resource
+import org.apache.jena.rdf.model.Resource
 import java.util.HashSet
-import com.hp.hpl.jena.rdf.model.RDFNode
+import org.apache.jena.rdf.model.RDFNode
+import org.apache.logging.log4j.LogManager
 
 class R2RMLSubjectMap(termMapType:Constants.MorphTermMapType.Value
     , termType:Option[String], datatype:Option[String], languageTag:Option[String]
     , val classURIs:Set[String], val graphMaps:Set[R2RMLGraphMap] ) 
 extends R2RMLTermMap(termMapType, termType, datatype, languageTag) {
-	override val logger = Logger.getLogger(this.getClass().getName());
+	override val logger = LogManager.getLogger(this.getClass());
 	
 	val inferredTermType = this.inferTermType;
 	if(inferredTermType != null && inferredTermType.equals(Constants.R2RML_LITERAL_URI)) {
@@ -21,7 +21,7 @@ extends R2RMLTermMap(termMapType, termType, datatype, languageTag) {
 }
 
 object R2RMLSubjectMap {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass());
 	
 	def apply(rdfNode:RDFNode) : R2RMLSubjectMap = {
 		val coreProperties = R2RMLTermMap.extractCoreProperties(rdfNode);

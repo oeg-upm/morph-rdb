@@ -1,10 +1,9 @@
 package es.upm.fi.dia.oeg.morph.r2rml.model
 
 import scala.collection.JavaConversions._
-import org.apache.log4j.Logger
-import com.hp.hpl.jena.rdf.model.ModelFactory
-import com.hp.hpl.jena.util.FileManager
-import com.hp.hpl.jena.vocabulary.RDF
+import org.apache.jena.rdf.model.ModelFactory
+import org.apache.jena.util.FileManager
+import org.apache.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.Constants
 import java.util.Collection
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
@@ -15,12 +14,13 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
-import com.hp.hpl.jena.rdf.model.Model
+import org.apache.jena.rdf.model.Model
 import java.util.Properties
+import org.apache.logging.log4j.LogManager
 
 class R2RMLMappingDocument(classMappings:Iterable[R2RMLTriplesMap]) 
 extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {
-	override val logger = Logger.getLogger(this.getClass());
+	override val logger = LogManager.getLogger(this.getClass());
    
 	def buildMetaData(conn:Connection, databaseName:String
        , databaseType:String) = {
@@ -208,7 +208,7 @@ extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {
 }
 
 object R2RMLMappingDocument {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass());
 	
 	def apply(mdPath:String)
 	: R2RMLMappingDocument = {

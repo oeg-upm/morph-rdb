@@ -1,11 +1,10 @@
 package es.upm.fi.dia.oeg.morph.rdb.querytranslator
 
 import scala.collection.JavaConversions._
-import org.apache.log4j.Logger
 import Zql.ZConstant
 import Zql.ZExpression
-import com.hp.hpl.jena.graph.Node
-import com.hp.hpl.jena.graph.Triple
+import org.apache.jena.graph.Node
+import org.apache.jena.graph.Triple
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTriplesMap
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLPredicateObjectMap
@@ -19,10 +18,11 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUnfolder
+import org.apache.logging.log4j.LogManager
 
 class MorphRDBCondSQLGenerator(md:R2RMLMappingDocument, unfolder:MorphRDBUnfolder) 
 extends MorphBaseCondSQLGenerator(md, unfolder:MorphBaseUnfolder) {
-	override val logger = Logger.getLogger("MorphCondSQLGenerator");
+	override val logger = LogManager.getLogger(this.getClass());
 
 	override def genCondSQLPredicateObject(tp:Triple, alphaResult:MorphAlphaResult 
 			, betaGenerator:MorphBaseBetaGenerator, cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping) 

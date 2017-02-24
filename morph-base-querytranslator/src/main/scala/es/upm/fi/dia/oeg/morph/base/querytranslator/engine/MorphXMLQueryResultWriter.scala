@@ -1,10 +1,9 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator.engine
 
 import scala.collection.JavaConversions._
-import org.apache.log4j.Logger
 import org.w3c.dom.Document
 import org.w3c.dom.Element
-import com.hp.hpl.jena.query.Query
+import org.apache.jena.query.Query
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.TermMapResult
 import es.upm.fi.dia.oeg.morph.base.ValueTransformator
@@ -13,13 +12,14 @@ import es.upm.fi.dia.oeg.morph.base.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseQueryResultWriter
 import java.io.OutputStream
 import java.io.Writer
+import org.apache.logging.log4j.LogManager
 
 
 class MorphXMLQueryResultWriter(queryTranslator:IQueryTranslator, xmlOutputStream:Writer) 
 extends MorphBaseQueryResultWriter(queryTranslator, xmlOutputStream) {
 	this.outputStream = xmlOutputStream;
 	
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass);
 	
 	if(queryTranslator == null) {
 		throw new Exception("Query Translator is not set yet!");
@@ -110,7 +110,7 @@ extends MorphBaseQueryResultWriter(queryTranslator, xmlOutputStream) {
 	}
 
 	def postProcess() = {
-		logger.info("Writing query result to " + outputStream);
+		//logger.info("Writing query result to " + outputStream);
 		XMLUtility.saveXMLDocument(xmlDoc, outputStream);
 	}
 

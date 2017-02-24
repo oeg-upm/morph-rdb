@@ -2,8 +2,8 @@ package es.upm.fi.dia.oeg.morph.example;
 
 import static org.junit.Assert.assertTrue;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 //import org.apache.log4j.Logger;
 //import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
@@ -14,8 +14,8 @@ import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
 
 
 public class ExampleWithPropertiesFilePostgreSQL {
-	private static Logger logger = Logger.getLogger(ExampleWithPropertiesFilePostgreSQL.class);
-	static { PropertyConfigurator.configure("log4j.properties"); }
+	private Logger logger = LogManager.getLogger(this.getClass());
+	//static { PropertyConfigurator.configure("log4j.properties"); }
 
 	@Test
 	public void testBatchPostgreSQL() {

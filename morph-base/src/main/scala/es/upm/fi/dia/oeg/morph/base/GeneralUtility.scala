@@ -2,18 +2,20 @@ package es.upm.fi.dia.oeg.morph.base
 
 import scala.collection.JavaConversions._
 
-import org.apache.log4j.Logger
 import java.net.URL
-import com.hp.hpl.jena.shared.CannotEncodeCharacterException
+//import com.hp.hpl.jena.shared.CannotEncodeCharacterException
+import org.apache.jena.shared.CannotEncodeCharacterException;
 import java.util.regex.Pattern
-import com.hp.hpl.jena.rdf.model.RDFNode
+//import com.hp.hpl.jena.rdf.model.RDFNode
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.logging.log4j.LogManager
 
 class GeneralUtility {
 
 }
 
 object GeneralUtility {
-	val logger = Logger.getLogger("GeneralUtility");
+	val logger = LogManager.getLogger(this.getClass);
 
 	def encodeLiteral(originalLiteral:String) : String = {
 		var result = originalLiteral;

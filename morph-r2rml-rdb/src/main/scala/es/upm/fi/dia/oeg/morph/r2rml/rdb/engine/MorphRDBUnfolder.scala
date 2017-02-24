@@ -3,7 +3,6 @@ package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 import scala.collection.JavaConversions._
 import java.util.Collection
 //import java.util.Properties
-import org.apache.log4j.Logger
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
 import es.upm.fi.dia.oeg.morph.base.Constants
 import java.util.HashSet
@@ -34,13 +33,16 @@ import es.upm.fi.dia.oeg.morph.base.sql.SQLQuery
 import es.upm.fi.dia.oeg.morph.base.sql.SQLJoinTable
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
+import org.apache.logging.log4j.LogManager
+
 //import es.upm.fi.dia.oeg.morph.base.MorphProperties
 
 class MorphRDBUnfolder(md:R2RMLMappingDocument, properties:MorphRDBProperties) 
 extends MorphBaseUnfolder(md, properties) with MorphR2RMLElementVisitor {
+  val logger = LogManager.getLogger(this.getClass());
   
 	var mapTermMapColumnsAliases:Map[Object, List[String]] = Map.empty;
-	val logger = Logger.getLogger(this.getClass().getName());
+	
 	var mapRefObjectMapAlias:Map[R2RMLRefObjectMap, String] = Map.empty;
 	val dbType = properties.databaseType;
 

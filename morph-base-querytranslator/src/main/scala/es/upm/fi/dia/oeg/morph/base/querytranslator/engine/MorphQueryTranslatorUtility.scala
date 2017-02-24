@@ -2,14 +2,14 @@ package es.upm.fi.dia.oeg.morph.base.querytranslator.engine
 
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
-import com.hp.hpl.jena.sparql.algebra.op.OpBGP
-import com.hp.hpl.jena.graph.Triple
-import com.hp.hpl.jena.sparql.algebra.Op
-import com.hp.hpl.jena.graph.Node
-import com.hp.hpl.jena.sparql.algebra.op.OpLeftJoin
-import com.hp.hpl.jena.sparql.algebra.op.OpJoin
-import com.hp.hpl.jena.sparql.algebra.op.OpFilter
-import com.hp.hpl.jena.sparql.algebra.op.OpUnion
+import org.apache.jena.sparql.algebra.op.OpBGP
+import org.apache.jena.graph.Triple
+import org.apache.jena.sparql.algebra.Op;
+import org.apache.jena.graph.Node;
+import org.apache.jena.sparql.algebra.op.OpLeftJoin
+import org.apache.jena.sparql.algebra.op.OpJoin
+import org.apache.jena.sparql.algebra.op.OpFilter
+import org.apache.jena.sparql.algebra.op.OpUnion
 import Zql.ZSelectItem
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility

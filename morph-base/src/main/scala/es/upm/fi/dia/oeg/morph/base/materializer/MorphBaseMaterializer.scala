@@ -1,19 +1,26 @@
 package es.upm.fi.dia.oeg.morph.base.materializer
 
 import scala.collection.JavaConversions._
-import org.apache.log4j.Logger
-import com.hp.hpl.jena.rdf.model.Model
-import com.hp.hpl.jena.rdf.model.RDFNode
+//import org.apache.log4j.Logger
+//import com.hp.hpl.jena.rdf.model.Model
+import org.apache.jena.rdf.model.Model;
+//import com.hp.hpl.jena.rdf.model.RDFNode
+import org.apache.jena.rdf.model.RDFNode;
 import es.upm.fi.dia.oeg.morph.base.Constants
-import com.hp.hpl.jena.rdf.model.ModelFactory
+//import com.hp.hpl.jena.rdf.model.ModelFactory
+import org.apache.jena.rdf.model.ModelFactory;
 import java.io.File
-import com.hp.hpl.jena.tdb.TDBFactory
+//import com.hp.hpl.jena.tdb.TDBFactory
+import org.apache.jena.tdb.TDBFactory 
 import java.io.OutputStream
 import java.io.Writer
-import com.hp.hpl.jena.rdf.model.Property
+//import com.hp.hpl.jena.rdf.model.Property
+import org.apache.jena.rdf.model.Property;
+import org.apache.logging.log4j.LogManager
 
 abstract class MorphBaseMaterializer(val model:Model, var outputStream:Writer) {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass);
+	
 //	var outputFileName:String = null;
 	var rdfLanguage:String =null;
 	//var noOfErrors:Long=0;
@@ -35,10 +42,7 @@ abstract class MorphBaseMaterializer(val model:Model, var outputStream:Writer) {
 }
 
 object MorphBaseMaterializer {
-  	val logger = Logger.getLogger(this.getClass().getName());
-
-  	
-
+  	val logger = LogManager.getLogger(this.getClass);
 	
 	def createJenaModel(jenaMode:String ) : Model  = {
 		val model = if(jenaMode == null) {
@@ -46,7 +50,10 @@ object MorphBaseMaterializer {
 		} else {
 			if(jenaMode.equalsIgnoreCase(Constants.JENA_MODE_TYPE_TDB)) {
 				//logger.debug("jena mode = tdb");
-				MorphBaseMaterializer.createJenaTDBModel();
+				//MorphBaseMaterializer.createJenaTDBModel();
+			  val errorMessage = "jena tdb not supported!";
+				logger.error(errorMessage);
+				throw new Exception(errorMessage);
 			} else if (jenaMode.equalsIgnoreCase(Constants.JENA_MODE_TYPE_MEMORY)){
 				//logger.debug("jena mode = memory");
 				MorphBaseMaterializer.createJenaMemoryModel();
@@ -61,6 +68,7 @@ object MorphBaseMaterializer {
 	
 	def createJenaMemoryModel() : Model  = { ModelFactory.createDefaultModel();	}
 	
+	/*
 	def createJenaTDBModel() : Model  = {
 		val jenaDatabaseName = System.currentTimeMillis() + ""; 
 		val tdbDatabaseFolder = "tdb-database";
@@ -74,5 +82,6 @@ object MorphBaseMaterializer {
 		return TDBFactory.createModel(tdbFileBase) ;
 
 	}	
-  
+  */
+	
 }

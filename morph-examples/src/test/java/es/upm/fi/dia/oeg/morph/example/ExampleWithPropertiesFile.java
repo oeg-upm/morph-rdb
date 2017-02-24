@@ -385,4 +385,52 @@ public class ExampleWithPropertiesFile {
 		}
 	}
 
+	@Test
+	public void testNandana() {
+		String configurationDirectory = System.getProperty("user.dir") + "/nandana";
+		String configurationFile = "config.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
+	public void testNandana2() {
+		String configurationDirectory = System.getProperty("user.dir") + "/nandana";
+		String configurationFile = "config.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
+	public void issue467() {
+		String configurationDirectory = System.getProperty("user.dir") + "/issue467";
+		String configurationFile = "config.properties.txt";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+
 }

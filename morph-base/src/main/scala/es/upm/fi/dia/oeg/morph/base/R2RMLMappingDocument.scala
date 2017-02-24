@@ -1,15 +1,20 @@
 package es.upm.fi.dia.oeg.morph.base
 
 import scala.collection.JavaConversions._
-import com.hp.hpl.jena.rdf.model.ResourceFactory
-import com.hp.hpl.jena.datatypes.xsd.XSDDatatype
-import com.hp.hpl.jena.rdf.model.ModelFactory
-import com.hp.hpl.jena.util.FileManager
-import com.hp.hpl.jena.rdf.model.Resource
-import org.apache.log4j.Logger
+//import com.hp.hpl.jena.rdf.model.ResourceFactory
+import org.apache.jena.rdf.model.ResourceFactory;
+//import com.hp.hpl.jena.datatypes.xsd.XSDDatatype
+import org.apache.jena.datatypes.xsd.XSDDatatype;
+//import com.hp.hpl.jena.rdf.model.ModelFactory
+import org.apache.jena.rdf.model.ModelFactory;
+//import com.hp.hpl.jena.util.FileManager
+import org.apache.jena.util.FileManager;
+//import com.hp.hpl.jena.rdf.model.Resource
+import org.apache.jena.rdf.model.Resource;
+import org.apache.logging.log4j.LogManager
 
 class R2RMLMappingDocument(mappingFile : String) {
-	val logger = Logger.getLogger("R2RMLMappingDocument");
+	val logger = LogManager.getLogger(this.getClass);
 	
 //	object MorphTermMapType extends Enumeration {
 //		type MorphTermMapType = Value

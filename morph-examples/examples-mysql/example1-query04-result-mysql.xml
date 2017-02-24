@@ -34,10 +34,10 @@
                 <uri>http://mappingpedia.linkeddata.es/resources/Person/B4</uri>
             </binding>
             <binding name="n">
-                <literal>Ringo´</literal>
+                <literal>Ringo</literal>
             </binding>
             <binding name="w">
-                <uri>www.stárr.edu</uri>
+                <uri>www.starr.edu</uri>
             </binding>
         </result>
         <result>
@@ -45,7 +45,7 @@
                 <uri>http://mappingpedia.linkeddata.es/resources/Person/B4</uri>
             </binding>
             <binding name="n">
-                <literal>Ringo´</literal>
+                <literal>Ringo</literal>
             </binding>
             <binding name="e">
                 <literal>ringo@acd.edu</literal>

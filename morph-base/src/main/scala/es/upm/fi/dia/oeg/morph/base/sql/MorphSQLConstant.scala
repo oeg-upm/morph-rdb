@@ -3,7 +3,7 @@ package es.upm.fi.dia.oeg.morph.base.sql
 import Zql.ZConstant
 import Zql.ZSelectItem
 import es.upm.fi.dia.oeg.morph.base.Constants
-import org.apache.log4j.Logger
+import org.apache.logging.log4j.LogManager
 
 class MorphSQLConstant(v: String, typ: Int, val dbType : String, val columnType : String
     , val schema:String, val table:String, val column:String) 
@@ -75,7 +75,7 @@ extends ZConstant(v, typ) {
 }
 
 object MorphSQLConstant {
-	val logger = Logger.getLogger("MorphSQLConstant");
+	val logger = LogManager.getLogger(this.getClass);
 
 //  def createMonetDBColumn(value: String, typ: Int) = {
 //	  val monetdbColumn = new MorphSQLConstant(value, typ);

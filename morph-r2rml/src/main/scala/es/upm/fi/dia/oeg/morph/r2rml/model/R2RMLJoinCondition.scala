@@ -1,11 +1,11 @@
 package es.upm.fi.dia.oeg.morph.r2rml.model
 
-import org.apache.log4j.Logger
-import com.hp.hpl.jena.rdf.model.Resource
+import org.apache.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
+import org.apache.logging.log4j.LogManager
 
 class R2RMLJoinCondition(val childColumnName:String , val parentColumnName:String ) {
-	def logger = Logger.getLogger(this.getClass().getName());
+	def logger = LogManager.getLogger(this.getClass());
 
 	override def toString() : String = {
 		return "JOIN(Parent:" + this.parentColumnName + ",CHILD:" + this.childColumnName + ")";
@@ -13,7 +13,8 @@ class R2RMLJoinCondition(val childColumnName:String , val parentColumnName:Strin
 }
 
 object R2RMLJoinCondition {
-	def logger = Logger.getLogger(this.getClass().getName());
+	def logger = LogManager.getLogger(this.getClass());
+	
 	def apply(resource:Resource ) : R2RMLJoinCondition = {
 		val childStatement = resource.getProperty(Constants.R2RML_CHILD_PROPERTY);
 		if(childStatement == null) {

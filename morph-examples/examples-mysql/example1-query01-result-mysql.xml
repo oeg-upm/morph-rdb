@@ -3,7 +3,6 @@
     <head>
         <variable name="a"/>
         <variable name="e"/>
-        <variable name="w"/>
     </head>
     <results>
         <result>
@@ -20,9 +19,6 @@
             </binding>
             <binding name="e">
                 <literal>ringo@acd.edu</literal>
-            </binding>
-            <binding name="w">
-                <uri>www.stárr.edu</uri>
             </binding>
         </result>
     </results>

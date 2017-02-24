@@ -1,13 +1,15 @@
 package es.upm.fi.dia.oeg.morph.base.engine
 
 import java.sql.Connection
-import com.hp.hpl.jena.query.Query
+import org.apache.jena.query.Query;
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.TermMapResult
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
-import com.hp.hpl.jena.sparql.algebra.Op
-import com.hp.hpl.jena.sparql.algebra.op.OpBGP
+//import com.hp.hpl.jena.sparql.algebra.Op
+import org.apache.jena.sparql.algebra.Op;
+//import com.hp.hpl.jena.sparql.algebra.op.OpBGP
+import org.apache.jena.sparql.algebra.op.OpBGP;
 import Zql.ZUpdate
 import Zql.ZInsert
 import Zql.ZDelete
@@ -49,7 +51,7 @@ trait IQueryTranslator {
 	
 	def setDatabaseType(dbType:String) = {this.databaseType = dbType}
 
-	def trans(op:Op ) : IQuery;
+	def trans(op:Op) : IQuery;
 	
 	def translateUpdate(stg:OpBGP) : ZUpdate;
 	

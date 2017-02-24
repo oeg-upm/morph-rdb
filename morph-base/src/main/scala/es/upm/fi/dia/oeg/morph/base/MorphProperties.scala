@@ -1,20 +1,20 @@
-package es.upm.fi.dia.oeg.morph.base
+package es.upm.fi.dia.oeg.morph.base;
 
-import java.util.Properties
-import java.io.File
-import org.apache.log4j.Logger
-import java.sql.Connection
-import java.io.FileInputStream
-import java.io.FileNotFoundException
-import java.io.IOException
-import java.io.StringReader
-import java.io.InputStreamReader
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.Properties;
+import java.io.File;
+import java.sql.Connection;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import org.apache.logging.log4j.LogManager;
 
 class MorphProperties extends java.util.Properties {
-	val logger = Logger.getLogger(this.getClass());
+	val logger = LogManager.getLogger(this.getClass);
 
 	var configurationFileURL:String =null;
 	var configurationDirectory:String=null;
@@ -70,7 +70,7 @@ class MorphProperties extends java.util.Properties {
 	//var inputDatePattern:Option[String] = None;
 	var inputDateFormat:DateFormat = null;
 	var outputDateFormat:DateFormat = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
-	
+
 	def readConfigurationFile(pConfigurationDirectory:String , configurationFile:String) = {
 			var absoluteConfigurationFile = configurationFile;
 			var configurationDirectory = pConfigurationDirectory;
@@ -230,16 +230,16 @@ class MorphProperties extends java.util.Properties {
 			this.uriTransformationOperation = this.readListString(MorphProperties.URI_TRANSFORM_PROPERTY
 					, Nil, ",") ;
 
-					this.mapDataTranslationLimits = this.readMapStringString(MorphProperties.DATATRANSLATION_LIMIT, Map.empty);
+			this.mapDataTranslationLimits = this.readMapStringString(MorphProperties.DATATRANSLATION_LIMIT, Map.empty);
 			this.mapDataTranslationOffsets = this.readMapStringString(MorphProperties.DATATRANSLATION_OFFSET, Map.empty);
-			
+
 			val inputDatePatternPropertyValue = this.getProperty(Constants.INPUT_DATE_PATTERN_PROP_NAME);
 			val inputDateFormatPattern = if(inputDatePatternPropertyValue != null && !inputDatePatternPropertyValue.equals("")) {
-			  inputDatePatternPropertyValue;
+				inputDatePatternPropertyValue;
 			} else {
-			  "dd-MMM-yyy";
+				"dd-MMM-yyy";
 			}
-			
+
 			this.inputDateFormat = new SimpleDateFormat(inputDateFormatPattern, Locale.ENGLISH);
 	}
 
@@ -337,7 +337,7 @@ class MorphProperties extends java.util.Properties {
 }
 
 object MorphProperties {
-	val logger = Logger.getLogger(this.getClass());
+	val logger = LogManager.getLogger(this.getClass);
 
 	val TRANSFORM_STRING_PROPERTY = "transform.string";
 

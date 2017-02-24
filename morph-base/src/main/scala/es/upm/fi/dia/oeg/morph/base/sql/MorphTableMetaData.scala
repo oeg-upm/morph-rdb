@@ -1,15 +1,15 @@
 package es.upm.fi.dia.oeg.morph.base.sql
 
-import org.apache.log4j.Logger
 import java.sql.Connection
 import scala.collection.JavaConversions._
 import es.upm.fi.dia.oeg.morph.base.Constants
+import org.apache.logging.log4j.LogManager
 
 
 class MorphTableMetaData(val tableName:String , val tableRows:Long
     , var columnsMetaData : List[MorphColumnMetaData], val dbType:String) {
-	val logger = Logger.getLogger(this.getClass().getName());
-	logger.debug("\tTable MetaData created: " + this.tableName);
+  val logger = LogManager.getLogger(this.getClass);
+  logger.debug("\tTable MetaData created: " + this.tableName);
 
 	
 	def putColumnMetaData(columnMetaData:MorphColumnMetaData) = {
@@ -35,7 +35,7 @@ class MorphTableMetaData(val tableName:String , val tableRows:Long
 }
 
 object MorphTableMetaData {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass);
 	
 	def buildTablesMetaData(conn:Connection, databaseName:String, databaseType:String) 
 	: List[MorphTableMetaData] = {

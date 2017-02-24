@@ -4,11 +4,10 @@ import scala.collection.JavaConversions._
 import java.sql.Connection
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-import org.apache.log4j.Logger
 import Zql.ZConstant
 import Zql.ZExp
-import com.hp.hpl.jena.graph.Node
-import com.hp.hpl.jena.graph.Triple
+import org.apache.jena.graph.Node
+import org.apache.jena.graph.Triple
 import es.upm.fi.dia.oeg.morph.base.CollectionUtility
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.RegexUtility
@@ -29,6 +28,7 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseResultSet
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
+import org.apache.logging.log4j.LogManager
 
 class MorphRDBQueryTranslator(nameGenerator:NameGenerator
     , alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
@@ -37,7 +37,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
     , alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
     , condSQLGenerator:MorphBaseCondSQLGenerator, prSQLGenerator:MorphBasePRSQLGenerator) {
 
-	override val logger = Logger.getLogger("MorphQueryTranslator");
+	override val logger = LogManager.getLogger(this.getClass());
 	this.alphaGenerator.owner = this;
 	this.betaGenerator.owner = this;
 	

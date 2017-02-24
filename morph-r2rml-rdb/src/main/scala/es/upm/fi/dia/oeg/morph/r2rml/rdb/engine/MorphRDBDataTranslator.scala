@@ -2,13 +2,12 @@ package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
 import scala.collection.JavaConversions._
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
-import org.apache.log4j.Logger
 import java.util.Collection
 import es.upm.fi.dia.oeg.morph.base.DBUtility
 import java.sql.ResultSet
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.GeneralUtility
-import com.hp.hpl.jena.datatypes.xsd.XSDDatatype
+import org.apache.jena.datatypes.xsd.XSDDatatype
 import java.sql.ResultSetMetaData
 import java.sql.Connection
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTriplesMap
@@ -25,10 +24,10 @@ import es.upm.fi.dia.oeg.morph.base.sql.DatatypeMapper
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLLogicalTable
-import com.hp.hpl.jena.rdf.model.RDFNode
-import com.hp.hpl.jena.rdf.model.AnonId
-import com.hp.hpl.jena.vocabulary.RDF
-import com.hp.hpl.jena.rdf.model.Literal
+import org.apache.jena.rdf.model.RDFNode
+import org.apache.jena.rdf.model.AnonId
+import org.apache.jena.vocabulary.RDF
+import org.apache.jena.rdf.model.Literal
 import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
@@ -37,11 +36,12 @@ import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataSourceReader
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLSubjectMap
-import com.hp.hpl.jena.rdf.model.Property
+import org.apache.jena.rdf.model.Property
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLPredicateMap
 import java.text.SimpleDateFormat;
 import java.text.DateFormat
 import java.util.Locale
+import org.apache.logging.log4j.LogManager
 
 class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMaterializer
 		, unfolder:MorphRDBUnfolder, dataSourceReader:MorphRDBDataSourceReader
@@ -52,7 +52,7 @@ with MorphR2RMLElementVisitor {
   val dfInput = this.properties.inputDateFormat;
   val dfOutput = this.properties.outputDateFormat;
   
-	override val logger = Logger.getLogger(this.getClass().getName());
+	override val logger = LogManager.getLogger(this.getClass());
 
 	override def processCustomFunctionTransformationExpression(
 			argument:Object ) : Object = {

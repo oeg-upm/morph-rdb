@@ -1,10 +1,9 @@
 package es.upm.fi.dia.oeg.morph.rdb.querytranslator
 
 import scala.collection.JavaConversions._
-import com.hp.hpl.jena.graph.Node
-import com.hp.hpl.jena.graph.Triple
-import com.hp.hpl.jena.vocabulary.RDF
-import org.apache.log4j.Logger
+import org.apache.jena.graph.Node
+import org.apache.jena.graph.Triple
+import org.apache.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUnfolder
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTriplesMap
@@ -19,6 +18,7 @@ import es.upm.fi.dia.oeg.morph.base.sql.SQLJoinTable
 import es.upm.fi.dia.oeg.morph.base.sql.SQLLogicalTable
 import es.upm.fi.dia.oeg.morph.base.sql.SQLFromItem
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
+import org.apache.logging.log4j.LogManager
 
 class MorphRDBAlphaGenerator(md:R2RMLMappingDocument,unfolder:MorphRDBUnfolder)
 extends MorphBaseAlphaGenerator(md,unfolder)
@@ -26,7 +26,7 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 	val databaseType = if(md.dbMetaData.isDefined) { md.dbMetaData.get.dbType; }
 	else { Constants.DATABASE_DEFAULT }
 	
-	override val logger = Logger.getLogger("MorphQueryTranslator");
+	override val logger = LogManager.getLogger(this.getClass());
 	
 	override def calculateAlpha(tp:Triple, abstractConceptMapping:MorphBaseClassMapping 
 	    , predicateURI:String ) : MorphAlphaResult = {

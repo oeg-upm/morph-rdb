@@ -1,15 +1,13 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator
 
 import scala.collection.JavaConversions._
-import org.apache.log4j.Logger
-import org.apache.log4j.Logger
 import Zql.ZConstant
 import Zql.ZExp
 import Zql.ZExpression
 import Zql.ZSelectItem
-import com.hp.hpl.jena.graph.Node
-import com.hp.hpl.jena.graph.Triple
-import com.hp.hpl.jena.vocabulary.RDF
+import org.apache.jena.graph.Node;
+import org.apache.jena.graph.Triple
+import org.apache.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.MorphTriple
 import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
@@ -19,9 +17,10 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
+import org.apache.logging.log4j.LogManager
 
 abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
-	val logger = Logger.getLogger(this.getClass().getName());
+	val logger = LogManager.getLogger(this.getClass);
 	//val dbType = md.configurationProperties.databaseType;
 		
 	def  genCondSQL(tp:Triple, alphaResult:MorphAlphaResult
