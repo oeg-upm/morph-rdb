@@ -3,10 +3,10 @@
   <groupId>es.upm.fi.dia.oeg.morph</groupId>
   <artifactId>morph-rdb-dist</artifactId>
   <versioning>
-    <release>3.8.2</release>
+    <release>3.9.0</release>
     <versions>
-      <version>3.8.2</version>
+      <version>3.9.0</version>
     </versions>
-    <lastUpdated>20170228150031</lastUpdated>
+    <lastUpdated>20170228162828</lastUpdated>
   </versioning>
 </metadata>
