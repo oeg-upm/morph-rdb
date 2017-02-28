@@ -18,6 +18,7 @@ import java.sql.Connection
 import org.apache.commons.io.FilenameUtils;
 import java.io.File;
 import org.apache.logging.log4j.LogManager
+import es.upm.fi.dia.oeg.morph.base.GitHubUtility
 
 class MorphRDBUtility {
 
@@ -177,17 +178,49 @@ object MorphRDBUtility {
 			sqlQuery;
 	}
 
+	def loadCSVFromURL(url:String) : File = {
+    val f = new File(url);
+    f;
+	}
+	
+	def loadCSVFromGitHubBlob(blobURL:String) : File = {
+	  logger.info("Loading CSV file from github:" + blobURL);
+	  val rawURL = GitHubUtility.getRawURLFromBlobURL(blobURL);
+	  this.loadCSVFromURL(rawURL);
+	}
+	
+	def loadCSVFromLocalFile(localPath:String) : File = {
+	  logger.info("Loading CSV file from local file:" + localPath);
+	  this.loadCSVFromURL(localPath);
+	}
+
+	def loadCSVFromLocation(location:String) : File = {
+	  if(location.contains("https://github.com") && location.contains("/blob/")) {
+	    this.loadCSVFromGitHubBlob(location); 
+	  } else {
+	    this.loadCSVFromLocalFile(location);
+	  }
+	}
+	
+
 	def loadCSVFile(conn:Connection , csv_file:String) : Unit = {
 	  this.loadCSVFile(conn, csv_file, None);
 	}
 	
-	def loadCSVFile(conn:Connection , csv_file:String, fieldSeparator:Option[String]) : Unit = {
+	def loadCSVFile(conn:Connection , pCSVFile:String, fieldSeparator:Option[String]) : Unit = {
 			//String csv_file_extension = "";
-			if(csv_file == null) {
+			if(pCSVFile == null) {
 				throw new Exception("CSV file has not been defined.");
 			}
 
-			val f = new File(csv_file);
+    val fileURL = if(pCSVFile.contains("https://github.com") && pCSVFile.contains("/blob/")) {
+      GitHubUtility.getRawURLFromBlobURL(pCSVFile); 
+    } else {
+      pCSVFile
+    }
+				  
+			//val f = new File(csv_file);
+			val f = this.loadCSVFromLocation(fileURL);
 			val filename = f.getName;
 
 			val lastDotChar = filename.lastIndexOf(".");
@@ -196,12 +229,12 @@ object MorphRDBUtility {
 			}
 			val tableName = filename.substring(0, lastDotChar);
 
-			logger.info("Loading CSV file:" + csv_file);
+			
 			val createTableString = if(fieldSeparator.isDefined) {
 			  logger.info("Field separator = " + fieldSeparator.get);
-			  "CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + csv_file + "', NULL, 'fieldSeparator=" + fieldSeparator.get +"');";  
+			  "CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + fileURL + "', NULL, 'fieldSeparator=" + fieldSeparator.get +"');";  
 			} else {
-			  "CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + csv_file + "');";
+			  "CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + fileURL + "');";
 			}
 			
 			val stmt = conn.createStatement();

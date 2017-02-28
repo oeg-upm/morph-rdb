@@ -17,7 +17,7 @@ import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import org.apache.jena.rdf.model.Model
 import java.util.Properties
 import org.apache.logging.log4j.LogManager
-import es.upm.fi.dia.oeg.mappingpedia.r2rml.GitHubUtility
+import es.upm.fi.dia.oeg.morph.base.GitHubUtility
 
 class R2RMLMappingDocument(classMappings:Iterable[R2RMLTriplesMap]) 
 extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {

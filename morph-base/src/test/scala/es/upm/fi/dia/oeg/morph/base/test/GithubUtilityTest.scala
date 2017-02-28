@@ -1,6 +1,7 @@
 package es.upm.fi.dia.oeg.morph.base.test
 
-import es.upm.fi.dia.oeg.mappingpedia.r2rml.GitHubUtility
+import es.upm.fi.dia.oeg.morph.base.GitHubUtility
+
 
 object GithubUtilityTest extends App {
   val blobURL = "https://github.com/oeg-upm/mappingpedia-contents/blob/master/mappingpedia-testuser/8945c880-8a2a-4763-a1f9-3cdb84ac9643/mapping.ttl"

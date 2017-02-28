@@ -1,4 +1,4 @@
-package es.upm.fi.dia.oeg.mappingpedia.r2rml
+package es.upm.fi.dia.oeg.morph.base
 
 import com.google.common.base.Charsets
 import com.google.common.io.BaseEncoding
