@@ -17,6 +17,7 @@ import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import org.apache.jena.rdf.model.Model
 import java.util.Properties
 import org.apache.logging.log4j.LogManager
+import es.upm.fi.dia.oeg.mappingpedia.r2rml.GitHubUtility
 
 class R2RMLMappingDocument(classMappings:Iterable[R2RMLTriplesMap]) 
 extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {
@@ -215,6 +216,38 @@ object R2RMLMappingDocument {
 	  R2RMLMappingDocument(mdPath, null, null);
 	}
 	
+	def readFromURL(url:String) : Model = {
+		val model = ModelFactory.createDefaultModel();
+		// use the FileManager to find the input file
+		val in = FileManager.get().open(url);
+		if (in == null) {
+			throw new IllegalArgumentException(
+					"Mapping File: " + url + " not found");
+		}
+
+		logger.info("Parsing mapping document " + url);
+		// read the Turtle file
+		model.read(in, null, "TURTLE");
+		model;
+	}
+	
+	def readFromGitHubBlob(blobURL:String) : Model = {
+	  val rawURL = GitHubUtility.getRawURLFromBlobURL(blobURL);
+	  this.readFromURL(rawURL);
+	}
+	
+	def readFromLocalFile(localPath:String) : Model = {
+	  this.readFromURL(localPath);
+	}
+	
+	def readFromLocation(location:String) : Model = {
+	  if(location.contains("https://github.com") && location.contains("/blob/")) {
+	    this.readFromGitHubBlob(location); 
+	  } else {
+	    this.readFromLocalFile(location);
+	  }
+	}
+	
 	def apply(mdPath:String, props:Properties
 	    , connection:Connection)
 	: R2RMLMappingDocument = {
@@ -223,18 +256,9 @@ object R2RMLMappingDocument {
 					"Mapping File is not defined!");
 	  }
 	
-		val model = ModelFactory.createDefaultModel();
-		// use the FileManager to find the input file
-		val in = FileManager.get().open( mdPath );
-		if (in == null) {
-			throw new IllegalArgumentException(
-					"Mapping File: " + mdPath + " not found");
-		}
-
-		logger.info("Parsing mapping document " + mdPath);
-		// read the Turtle file
-		model.read(in, null, "TURTLE");
-		
+	  
+	  val model = this.readFromLocation(mdPath);
+	  
 		//contribution from Frank Michel, inferring triples map
 		inferTriplesMaps(model);
 		 

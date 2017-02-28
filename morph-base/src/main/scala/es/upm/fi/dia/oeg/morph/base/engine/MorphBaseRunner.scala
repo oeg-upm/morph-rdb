@@ -131,6 +131,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 
 
   def run() : String = {
+    logger.info("running morph-rdb 3.8.2 ...");
     val start = System.currentTimeMillis();
 
 		var status:String = null;
