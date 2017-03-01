@@ -21,12 +21,13 @@ import java.io.PrintWriter
 //import java.util.Properties
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.mappingsgenerator.main.R2RMLMapper
 import org.apache.logging.log4j.LogManager
+import java.io.File
 
 abstract class MorphBaseRunnerFactory {
   //PropertyConfigurator.configure("log4j.properties");
 	val logger = LogManager.getLogger(this.getClass);
 	
-  
+  logger.info("running morph-rdb 3.9.2 ...");
   
 	def createRunner(configurationDirectory:String , configurationFile:String) 
 	: MorphBaseRunner = {
@@ -77,6 +78,12 @@ abstract class MorphBaseRunnerFactory {
       val outputFileName = morphProperties.outputFilePath.get;
       //new FileWriter(outputFileName)
       //new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), "UTF-8"));
+      val outputFile = new File(outputFileName);
+      val outputParentFile = outputFile.getParentFile();
+      if(outputParentFile != null) {
+        outputParentFile.mkdirs();  
+      }
+      
       new PrintWriter( outputFileName, "UTF-8")
     } 
     else {

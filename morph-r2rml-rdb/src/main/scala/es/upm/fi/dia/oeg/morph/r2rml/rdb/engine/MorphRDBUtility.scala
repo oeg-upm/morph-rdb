@@ -179,46 +179,46 @@ object MorphRDBUtility {
 	}
 
 	def loadCSVFromURL(url:String) : File = {
-    val f = new File(url);
-    f;
+			val f = new File(url);
+			f;
 	}
-	
+
 	def loadCSVFromGitHubBlob(blobURL:String) : File = {
-	  logger.info("Loading CSV file from github:" + blobURL);
-	  val rawURL = GitHubUtility.getRawURLFromBlobURL(blobURL);
-	  this.loadCSVFromURL(rawURL);
+			logger.info("Loading CSV file from github:" + blobURL);
+			val rawURL = GitHubUtility.getRawURLFromBlobURL(blobURL);
+			this.loadCSVFromURL(rawURL);
 	}
-	
+
 	def loadCSVFromLocalFile(localPath:String) : File = {
-	  logger.info("Loading CSV file from local file:" + localPath);
-	  this.loadCSVFromURL(localPath);
+			logger.info("Loading CSV file from local file:" + localPath);
+			this.loadCSVFromURL(localPath);
 	}
 
 	def loadCSVFromLocation(location:String) : File = {
-	  if(location.contains("https://github.com") && location.contains("/blob/")) {
-	    this.loadCSVFromGitHubBlob(location); 
-	  } else {
-	    this.loadCSVFromLocalFile(location);
-	  }
+			if(location.contains("https://github.com") && location.contains("/blob/")) {
+				this.loadCSVFromGitHubBlob(location); 
+			} else {
+				this.loadCSVFromLocalFile(location);
+			}
 	}
-	
+
 
 	def loadCSVFile(conn:Connection , csv_file:String) : Unit = {
-	  this.loadCSVFile(conn, csv_file, None);
+			this.loadCSVFile(conn, csv_file, None);
 	}
-	
+
 	def loadCSVFile(conn:Connection , pCSVFile:String, fieldSeparator:Option[String]) : Unit = {
 			//String csv_file_extension = "";
 			if(pCSVFile == null) {
 				throw new Exception("CSV file has not been defined.");
 			}
 
-    val fileURL = if(pCSVFile.contains("https://github.com") && pCSVFile.contains("/blob/")) {
-      GitHubUtility.getRawURLFromBlobURL(pCSVFile); 
-    } else {
-      pCSVFile
-    }
-				  
+			val fileURL = if(pCSVFile.contains("https://github.com") && pCSVFile.contains("/blob/")) {
+				GitHubUtility.getRawURLFromBlobURL(pCSVFile); 
+			} else {
+				pCSVFile
+			}
+
 			//val f = new File(csv_file);
 			val f = this.loadCSVFromLocation(fileURL);
 			val filename = f.getName;
@@ -229,25 +229,38 @@ object MorphRDBUtility {
 			}
 			val tableName = filename.substring(0, lastDotChar);
 
-			
+			val dropTableString = "DROP TABLE " + tableName;
+
 			val createTableString = if(fieldSeparator.isDefined) {
-			  logger.info("Field separator = " + fieldSeparator.get);
-			  "CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + fileURL + "', NULL, 'fieldSeparator=" + fieldSeparator.get +"');";  
+				logger.info("Field separator = " + fieldSeparator.get);
+				"CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + fileURL + "', NULL, 'fieldSeparator=" + fieldSeparator.get +"');";  
 			} else {
-			  "CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + fileURL + "');";
+				"CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + fileURL + "');";
 			}
-			
+
 			val stmt = conn.createStatement();
 
 			try {
-				stmt.execute(createTableString);
+				stmt.execute(dropTableString);
 				conn.commit();
+				logger.info("The table:" + tableName  + " was dropped successfully");
+			} catch {
+			case sqle:Exception => {
+				logger.error("Error while dropping the table: " + tableName  + " : " + sqle.getMessage);
+				//sqle.printStackTrace();            
+			}
+			}
+
+			try {
+				stmt.execute(createTableString);
 				logger.info("The table:" + tableName  + " was created successfully");
 			} catch {
 			case sqle:Exception => {
-				logger.error("Error while creating the table: " + tableName  + " ");
-				sqle.printStackTrace();            
+				logger.error("Error while creating the table: " + tableName  + " : " + sqle.getMessage);
+				//sqle.printStackTrace();            
 			}
 			}
+			
+			conn.commit();
 	}
 }

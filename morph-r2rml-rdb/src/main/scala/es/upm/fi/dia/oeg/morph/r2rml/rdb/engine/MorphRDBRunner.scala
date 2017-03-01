@@ -44,7 +44,7 @@ object MorphRDBRunner {
 	val logger = LogManager.getLogger(this.getClass());
 	
 	def apply(properties:MorphRDBProperties ) : MorphRDBRunner = {
-	  logger.info("running morph-rdb 3.8.1 ...");
+	  //logger.info("running morph-rdb 3.9.2 ...");
 	  
 		val runnerFactory = new MorphRDBRunnerFactory();
 		//val runner = new R2RMLRunner();

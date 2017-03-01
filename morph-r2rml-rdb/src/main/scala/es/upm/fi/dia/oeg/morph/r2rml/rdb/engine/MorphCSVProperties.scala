@@ -7,14 +7,29 @@ import org.apache.logging.log4j.LogManager
   * Created by freddy on 14/04/16.
   */
 class MorphCSVProperties extends MorphRDBProperties {
-  var csvFiles:Option[List[String]]=None;
+  var csvFiles:List[String]=Nil;
   var fieldSeparator:Option[String] = None;
-  
+
+	this.setNoOfDatabase(1);
+	this.setDatabaseUser("sa");
+	this.setDatabasePassword("");
+	this.setDatabaseName("morphcsv");
+	this.setDatabaseURL("jdbc:h2:mem:morphcsv");
+	this.setDatabaseDriver("org.h2.Driver");
+	this.setDatabaseType("CSV");
+
+		
   override def readConfigurationFile(pConfigurationDirectory:String , configurationFile:String) = {
     super.readConfigurationFile(pConfigurationDirectory, configurationFile);
 
     //READING cvs.file.path property
     val csvFilePathPropertyValue = this.getProperty(Constants.CSV_FILE_PATH);
+    this.setCSVFile(csvFilePathPropertyValue);
+
+    this.fieldSeparator = this.readString(Constants.CSV_FIELD_SEPARATOR, None);
+  }
+  
+  def setCSVFile(csvFilePathPropertyValue:String) : Unit = {
     if(csvFilePathPropertyValue != null && !csvFilePathPropertyValue.equals("")) {
       val csvFilePathPropertyValueSplited:List[String] = csvFilePathPropertyValue.split(",").map(_.trim).toList;
       val listOfCSVFiles:List[String] = csvFilePathPropertyValueSplited.map(csvFile => {
@@ -26,12 +41,17 @@ class MorphCSVProperties extends MorphRDBProperties {
         }
       });
 
-      this.csvFiles = Some(listOfCSVFiles);
-      this.fieldSeparator = this.readString(Constants.CSV_FIELD_SEPARATOR, None);
-      
-      
-    }
+      this.csvFiles = listOfCSVFiles;
+    }    
   }
+  
+  def addCSVFile(csvFile:String) : Unit = {
+    if(this.csvFiles == null) {
+      this.csvFiles = Nil;
+    }
+    this.csvFiles = csvFile :: this.csvFiles;
+  }
+  
 }
 
 object MorphCSVProperties {
