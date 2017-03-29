@@ -23,11 +23,6 @@ public class ExampleCSV {
 
 	@Test
 	public void testExample1BatchCSVWithoutPropertiesFile() {
-		/*
-		String resultFile = System.getProperty("user.dir") 
-				+ File.separator + "examples" + File.separator + "batch-result.nt";
-				*/
-		
 		MorphCSVProperties properties = new MorphCSVProperties();
 		properties.setMappingDocumentFilePath("https://github.com/oeg-upm/morph-rdb/blob/master/morph-examples/examples-csv/example1-mapping-csv.ttl");
 		properties.setOutputFilePath("example1-batch-result-csv.nt");
@@ -44,7 +39,29 @@ public class ExampleCSV {
 			assertTrue(errorMessage, false);
 		}
 	}
-    
+
+	@Test
+	public void testQuery1CSVWithoutPropertiesFile() {
+		MorphCSVProperties properties = new MorphCSVProperties();
+		properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mappingpedia-testuser/1839e06a-c0a4-4bd0-ab4e-bb7d805ebb42/example1-mapping-csv.ttl");
+		properties.setOutputFilePath("query1result.xml");
+		properties.addCSVFile("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mappingpedia-testuser/1839e06a-c0a4-4bd0-ab4e-bb7d805ebb42/Sport.csv");
+		properties.addCSVFile("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mappingpedia-testuser/1839e06a-c0a4-4bd0-ab4e-bb7d805ebb42/Student.csv");
+		//properties.setQueryFilePath("https://github.com/oeg-upm/mappingpedia-contents/blob/master/mappingpedia-testuser/1839e06a-c0a4-4bd0-ab4e-bb7d805ebb42/example1-query01.rq");
+		properties.setQueryFilePath("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mappingpedia-testuser/1839e06a-c0a4-4bd0-ab4e-bb7d805ebb42/example1-query01.rq");
+		
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
+			runner.run();
+			assertTrue("test query 1 done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			assertTrue(errorMessage, false);
+		}
+	}
+	
     @Test
     public void testExample1BatchCSVWithPropertiesFile() {
         String configurationFile = "example1-batch-csv.morph.properties";
