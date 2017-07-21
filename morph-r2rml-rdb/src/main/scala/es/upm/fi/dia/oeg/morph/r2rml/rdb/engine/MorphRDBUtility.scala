@@ -229,18 +229,19 @@ object MorphRDBUtility {
 			}
 			val tableName = filename.substring(0, lastDotChar);
 
-			val dropTableString = "DROP TABLE " + tableName;
+			val dropTableString = "DROP TABLE \"" + tableName + "\"";
 
 			val createTableString = if(fieldSeparator.isDefined) {
 				logger.info("Field separator = " + fieldSeparator.get);
-				"CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + fileURL + "', NULL, 'fieldSeparator=" + fieldSeparator.get +"');";  
+				"CREATE TABLE \"" + tableName + "\" AS SELECT * FROM CSVREAD('" + fileURL + "', NULL, 'fieldSeparator=" + fieldSeparator.get +"');";  
 			} else {
-				"CREATE TABLE " + tableName + " AS SELECT * FROM CSVREAD('" + fileURL + "');";
+				"CREATE TABLE \"" + tableName + "\" AS SELECT * FROM CSVREAD('" + fileURL + "');";
 			}
 
 			val stmt = conn.createStatement();
 
 			try {
+			  	//logger.debug("dropTableString = " + dropTableString);
 				stmt.execute(dropTableString);
 				conn.commit();
 				logger.info("The table:" + tableName  + " was dropped successfully");
@@ -252,6 +253,7 @@ object MorphRDBUtility {
 			}
 
 			try {
+			  logger.debug("createTableString = " + createTableString);
 				stmt.execute(createTableString);
 				logger.info("The table:" + tableName  + " was created successfully");
 			} catch {

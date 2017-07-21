@@ -13,6 +13,7 @@ import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunnerFactory;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphCSVRunnerFactory;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBProperties;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
+import scala.Option;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphCSVProperties;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphCSVRunner;
 
@@ -21,6 +22,70 @@ public class ExampleCSV {
     //static { PropertyConfigurator.configure("log4j.properties"); }
     String configurationDirectory = System.getProperty("user.dir") + File.separator + "examples-csv";
 
+	@Test
+	public void testEdificioHistorico() {
+		MorphCSVProperties properties = new MorphCSVProperties();
+		properties.setMappingDocumentFilePath(
+				"https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mobileage/0c8ff8c8-f55d-4e80-aeda-1dcd00879714/edificio-historico.r2rml.ttl"				
+		);
+		
+		properties.setOutputFilePath("edificio-historico-batch-result-csv.nt");
+		properties.addCSVFile("http://www.zaragoza.es/api/recurso/turismo/edificio-historico.csv");
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
+			runner.run();
+			assertTrue("testBatch done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			assertTrue(errorMessage, false);
+		}
+	}
+
+	@Test
+	public void testMonumento() {
+		MorphCSVProperties properties = new MorphCSVProperties();
+		properties.setMappingDocumentFilePath(
+				"https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mobileage/3e28ec0f-cc1b-4d59-b173-bff1fc31157d/monumento.r2rml.ttl"
+		);
+		
+		properties.setOutputFilePath("monumento-batch-result-csv.nt");
+		properties.addCSVFile("https://www.zaragoza.es/api/recurso/turismo/monumento.csv");
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
+			runner.run();
+			assertTrue("testBatch done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			assertTrue(errorMessage, false);
+		}
+	}
+	
+	@Test
+	public void testFarmacia() {
+		MorphCSVProperties properties = new MorphCSVProperties();
+		properties.setMappingDocumentFilePath(
+				"https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mobileage/baf61ea0-390f-4db6-8645-a58135574dd0/farmacia.r2rml.ttl"
+		);
+		
+		properties.setOutputFilePath("farmacia-batch-result-csv.nt");
+		properties.addCSVFile("https://www.zaragoza.es/sede/servicio/farmacia.csv");
+		properties.setFieldSeparator(";");
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
+			runner.run();
+			assertTrue("testBatch done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			assertTrue(errorMessage, false);
+		}
+	}
+	
 	@Test
 	public void testExample1BatchCSVWithoutPropertiesFile() {
 		MorphCSVProperties properties = new MorphCSVProperties();
@@ -39,7 +104,7 @@ public class ExampleCSV {
 			assertTrue(errorMessage, false);
 		}
 	}
-
+	
 	@Test
 	public void testQuery1CSVWithoutPropertiesFile() {
 		MorphCSVProperties properties = new MorphCSVProperties();

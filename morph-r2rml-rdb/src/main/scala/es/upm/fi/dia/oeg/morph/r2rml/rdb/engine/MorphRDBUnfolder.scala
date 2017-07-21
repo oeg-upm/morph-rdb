@@ -45,6 +45,7 @@ extends MorphBaseUnfolder(md, properties) with MorphR2RMLElementVisitor {
 	
 	var mapRefObjectMapAlias:Map[R2RMLRefObjectMap, String] = Map.empty;
 	val dbType = properties.databaseType;
+	val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
 
 	def getAliases(termMapOrRefObjectMap:Object ) : Collection[String] = {
 	  if(this.mapTermMapColumnsAliases.get(termMapOrRefObjectMap).isDefined) {
@@ -63,13 +64,16 @@ extends MorphBaseUnfolder(md, properties) with MorphR2RMLElementVisitor {
 //		val dbType = if(md.dbMetaData.isDefined) { md.dbMetaData.get.dbType; }
 //		else { Constants.DATABASE_DEFAULT }
 		  
-		val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
-			  
+
 		val logicalTableType = logicalTable.logicalTableType;
 		val result = logicalTableType match {
 		  case Constants.LogicalTableType.TABLE_NAME => {
 			  val logicalTableValue = logicalTable.getValue();
-			  val logicalTableValueWithEnclosedChar = logicalTableValue.replaceAll("\"", dbEnclosedCharacter);
+
+			  			  					
+			  val logicalTableValueWithEnclosedChar = logicalTableValue.replaceAllLiterally("\\\"", dbEnclosedCharacter);
+
+			  			  					
 			  val resultAux = new SQLFromItem(logicalTableValueWithEnclosedChar
 			      , Constants.LogicalTableType.TABLE_NAME);
 			  resultAux.databaseType = this.dbType;
@@ -79,7 +83,7 @@ extends MorphBaseUnfolder(md, properties) with MorphR2RMLElementVisitor {
         val logicalTableValue = logicalTable.getValue();
 				
         //this line is needed when using " in sql query.
-        val sqlString = logicalTableValue.replaceAll("\"", dbEnclosedCharacter);
+        val sqlString = logicalTableValue.replaceAllLiterally("\\\"", dbEnclosedCharacter);
         
         //val sqlString = logicalTableValue;
 				try {
@@ -138,21 +142,23 @@ extends MorphBaseUnfolder(md, properties) with MorphR2RMLElementVisitor {
 				} else { Nil }			    
 			  }
 			  case Constants.MorphTermMapType.ColumnTermMap => {
-			    val termColumnName = termMap.columnName;
-			    val selectItem = MorphSQLSelectItem.apply(termColumnName, logicalTableAlias, dbType);
+			    val termColumnNameWithoutEnclosedChar = termMap.columnName;
+			    	val termColumnNameWithEnclosedChar = termColumnNameWithoutEnclosedChar.replaceAllLiterally("\\\"", dbEnclosedCharacter);
+
+			    val selectItem = MorphSQLSelectItem.apply(termColumnNameWithEnclosedChar, logicalTableAlias, dbType);
 						
 			    if(selectItem != null) {
-			    	if(selectItem.getAlias() == null) {
-			    		val alias = selectItem.getTable() + "_" + selectItem.printColumnWithoutEnclosedChar();
-			    		selectItem.setAlias(alias);
-						if(this.mapTermMapColumnsAliases.containsKey(termMap)) {
-							val oldColumnAliases = this.mapTermMapColumnsAliases(termMap);
-							val newColumnAliases = oldColumnAliases ::: List(alias);
-							this.mapTermMapColumnsAliases += (termMap -> newColumnAliases);
-						} else {
-							this.mapTermMapColumnsAliases += (termMap -> List(alias));
-						}								
-			    	}
+    			    	if(selectItem.getAlias() == null) {
+    			    		val alias = selectItem.getTable() + "_" + selectItem.printColumnWithoutEnclosedChar();
+    			    		selectItem.setAlias(alias);
+    						if(this.mapTermMapColumnsAliases.containsKey(termMap)) {
+    							val oldColumnAliases = this.mapTermMapColumnsAliases(termMap);
+    							val newColumnAliases = oldColumnAliases ::: List(alias);
+    							this.mapTermMapColumnsAliases += (termMap -> newColumnAliases);
+    						} else {
+    							this.mapTermMapColumnsAliases += (termMap -> List(alias));
+    						}								
+    			    	}
 			    }
 			    List(selectItem)
 			  }
@@ -508,12 +514,12 @@ object MorphRDBUnfolder {
 		
 		val joinConditionExpressions = joinConditions.map(joinCondition => {
 			var childColumnName = joinCondition.childColumnName
-			childColumnName = childColumnName.replaceAll("\"", enclosedCharacter);
+			childColumnName = childColumnName.replaceAllLiterally("\\\"", enclosedCharacter);
 			childColumnName = childTableAlias + "." + childColumnName;
 			val childColumn = new ZConstant(childColumnName, ZConstant.COLUMNNAME);
 
 			var parentColumnName = joinCondition.parentColumnName;
-			parentColumnName = parentColumnName.replaceAll("\"", enclosedCharacter);
+			parentColumnName = parentColumnName.replaceAllLiterally("\\\"", enclosedCharacter);
 			parentColumnName = joinQueryAlias + "." + parentColumnName;
 			val parentColumn = new ZConstant(parentColumnName, ZConstant.COLUMNNAME);
 				

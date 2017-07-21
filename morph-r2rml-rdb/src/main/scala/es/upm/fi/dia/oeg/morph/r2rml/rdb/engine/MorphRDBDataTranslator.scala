@@ -707,8 +707,10 @@ with MorphR2RMLElementVisitor {
 					case Constants.MorphTermMapType.ColumnTermMap => {
 						val columnTermMapValue = if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
 							val termMapColumnValueSplit = termMap.columnName.split("\\.");
-							//val columnName = termMapColumnValueSplit(termMapColumnValueSplit.length - 1).replaceAll("\"", dbEnclosedCharacter);;
-							val columnName = termMapColumnValueSplit(termMapColumnValueSplit.length - 1).replaceAll(dbEnclosedCharacter, "");;
+							//val columnName = termMapColumnValueSplit(termMapColumnValueSplit.length - 1).replaceAll("\"", dbEnclosedCharacter);
+							//val columnName = termMapColumnValueSplit(termMapColumnValueSplit.length - 1).replaceAll(dbEnclosedCharacter, "");
+							val columnName = termMapColumnValueSplit(termMapColumnValueSplit.length - 1).replaceAllLiterally("\\\"", "");
+
 							logicalTableAlias + "_" + columnName;
 						} 
 						else { termMap.columnName }

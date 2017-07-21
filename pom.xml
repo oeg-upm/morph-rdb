@@ -8,7 +8,7 @@
 
 	<groupId>es.upm.fi.dia.oeg.morph</groupId>
 	<artifactId>morph-rdb</artifactId>
-	<version>3.9.2</version>
+	<version>3.9.3</version>
 
 	<modules>
 

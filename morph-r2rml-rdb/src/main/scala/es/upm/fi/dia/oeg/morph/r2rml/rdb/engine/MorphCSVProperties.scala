@@ -52,6 +52,10 @@ class MorphCSVProperties extends MorphRDBProperties {
     this.csvFiles = csvFile :: this.csvFiles;
   }
   
+  def setFieldSeparator(fieldSeparator:String) = {
+    this.fieldSeparator = Some(fieldSeparator);
+  }
+  
 }
 
 object MorphCSVProperties {
