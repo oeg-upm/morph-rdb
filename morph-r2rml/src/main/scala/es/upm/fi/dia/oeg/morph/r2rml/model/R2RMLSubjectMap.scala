@@ -5,13 +5,14 @@ import es.upm.fi.dia.oeg.morph.base.Constants
 import org.apache.jena.rdf.model.Resource
 import java.util.HashSet
 import org.apache.jena.rdf.model.RDFNode
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class R2RMLSubjectMap(termMapType:Constants.MorphTermMapType.Value
     , termType:Option[String], datatype:Option[String], languageTag:Option[String]
     , val classURIs:Set[String], val graphMaps:Set[R2RMLGraphMap] ) 
 extends R2RMLTermMap(termMapType, termType, datatype, languageTag) {
-	override val logger = LogManager.getLogger(this.getClass());
+	override   val logger = LoggerFactory.getLogger(this.getClass());
+
 	
 	val inferredTermType = this.inferTermType;
 	if(inferredTermType != null && inferredTermType.equals(Constants.R2RML_LITERAL_URI)) {
@@ -21,7 +22,7 @@ extends R2RMLTermMap(termMapType, termType, datatype, languageTag) {
 }
 
 object R2RMLSubjectMap {
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
 	def apply(rdfNode:RDFNode) : R2RMLSubjectMap = {
 		val coreProperties = R2RMLTermMap.extractCoreProperties(rdfNode);

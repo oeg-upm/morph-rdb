@@ -4,7 +4,7 @@ import scala.collection.JavaConversions._
 import org.apache.jena.rdf.model.RDFNode
 import org.apache.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 //import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLJoinCondition
 
@@ -13,7 +13,7 @@ class R2RMLRefObjectMap(val parentTriplesMapResource:Resource
 //	var owner:AbstractMappingDocument=null ;
 //	var resource:Resource=null;
 	
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 	var rdfNode:RDFNode = null;
 	//private String alias;
 	
@@ -72,7 +72,7 @@ class R2RMLRefObjectMap(val parentTriplesMapResource:Resource
 }
 
 object R2RMLRefObjectMap {
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
 	def apply(resource:Resource) : R2RMLRefObjectMap = {
 		val parentTriplesMapStatement = resource.getProperty(

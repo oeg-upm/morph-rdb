@@ -3,7 +3,7 @@ import Zql.ZSelectItem
 import scala.collection.JavaConversions._
 import Zql.ZExp
 import es.upm.fi.dia.oeg.morph.base.Constants
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class MorphSQLSelectItem(val dbType:String, schema:String, table:String
 		, column:String, val columnType:String) 
@@ -163,7 +163,9 @@ extends ZSelectItem {
 }
 
 object MorphSQLSelectItem {
-	val logger = LogManager.getLogger(this.getClass);
+	//val logger = LogManager.getLogger(this.getClass);
+	val logger = LoggerFactory.getLogger(this.getClass());
+	
 	//	def apply() : SQLSelectItem = {
 	//		val selectItem = new SQLSelectItem(null, null, null, null, null);
 	//		selectItem;

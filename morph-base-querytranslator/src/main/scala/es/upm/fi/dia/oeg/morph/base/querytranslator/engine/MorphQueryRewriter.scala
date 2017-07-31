@@ -21,12 +21,12 @@ import org.apache.jena.vocabulary.RDFS
 import org.apache.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.MorphTriple
 import es.upm.fi.dia.oeg.morph.base.SPARQLUtility
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 
 class MorphQueryRewriter(mapNodeLogicalTableSize:Map[Node, Long], reorderSTG:Boolean)
 extends Rewrite {
-	val logger = LogManager.getLogger(this.getClass);
+  val logger = LoggerFactory.getLogger(this.getClass());
 	//private Map<Node, Set<AbstractConceptMapping>> mapInferredTypes;
 //	var reorderSTG = false;
 	

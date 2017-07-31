@@ -14,7 +14,7 @@ import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
 import org.apache.jena.rdf.model.RDFNode
 import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElement
 import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElementVisitor
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 abstract class R2RMLTermMap(val termMapType:Constants.MorphTermMapType.Value
     , termType:Option[String], val datatype:Option[String], val languageTag:Option[String])
@@ -24,7 +24,7 @@ extends MorphR2RMLElement with IConstantTermMap with IColumnTermMap with ITempla
 //	def this(termMapType:Constants.MorphTermMapType.Value, termType:Option[String]) = { 
 //	  this(termMapType, termType, None, None)
 //	}
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
   def this(rdfNode:RDFNode) = {
 	  this(R2RMLTermMap.extractTermMapType(rdfNode), R2RMLTermMap.extractTermType(rdfNode)
@@ -197,7 +197,7 @@ extends MorphR2RMLElement with IConstantTermMap with IColumnTermMap with ITempla
 }
 
 object R2RMLTermMap {
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
 	def determineTermMapType(resource:Resource) = {
 	  

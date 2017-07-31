@@ -14,11 +14,11 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import org.apache.jena.sparql.algebra.op.OpExtend
 import org.apache.jena.sparql.algebra.op.OpGroup
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
-	val logger = LogManager.getLogger(this.getClass);
-	val mapInferredTypes : Map[Node, Set[MorphBaseClassMapping]] = Map.empty
+  val logger = LoggerFactory.getLogger(this.getClass());
+		val mapInferredTypes : Map[Node, Set[MorphBaseClassMapping]] = Map.empty
 	//var query:Query  = null;
 
 	def addToInferredTypes(mapNodeTypes:Map[Node, Set[MorphBaseClassMapping]] 

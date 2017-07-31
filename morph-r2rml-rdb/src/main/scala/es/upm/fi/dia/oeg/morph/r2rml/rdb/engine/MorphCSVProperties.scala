@@ -1,7 +1,7 @@
 package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
 import es.upm.fi.dia.oeg.morph.base.{Constants, GeneralUtility, MorphProperties}
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 /**
   * Created by freddy on 14/04/16.
@@ -59,7 +59,7 @@ class MorphCSVProperties extends MorphRDBProperties {
 }
 
 object MorphCSVProperties {
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 
 	def apply(pConfigurationDirectory:String , configurationFile:String) : MorphCSVProperties = {
 			val properties = new MorphCSVProperties();

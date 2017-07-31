@@ -11,10 +11,11 @@ import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.LoggerFactory
 
 class MorphProperties extends java.util.Properties {
-	val logger = LogManager.getLogger(this.getClass);
+	//val logger = LogManager.getLogger(this.getClass);
+	val logger = LoggerFactory.getLogger(this.getClass());
 
 	var configurationFileURL:String =null;
 	var configurationDirectory:String=null;
@@ -337,7 +338,8 @@ class MorphProperties extends java.util.Properties {
 }
 
 object MorphProperties {
-	val logger = LogManager.getLogger(this.getClass);
+	//val logger = LogManager.getLogger(this.getClass);
+	val logger = LoggerFactory.getLogger(this.getClass());
 
 	val TRANSFORM_STRING_PROPERTY = "transform.string";
 

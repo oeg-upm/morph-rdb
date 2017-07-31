@@ -6,12 +6,12 @@ import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseQueryResultWriter
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.engine.AbstractQueryResultTranslator
 import org.apache.jena.query.Query
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class QueryResultTranslator(dataSourceReader:MorphBaseDataSourceReader 
 			, queryResultWriter:MorphBaseQueryResultWriter ) 
 			extends AbstractQueryResultTranslator(dataSourceReader, queryResultWriter){
-	val logger = LogManager.getLogger(this.getClass);
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
 	def translateResult(mapSparqlSql:Map[Query, IQuery] ) {
 		val start = System.currentTimeMillis();

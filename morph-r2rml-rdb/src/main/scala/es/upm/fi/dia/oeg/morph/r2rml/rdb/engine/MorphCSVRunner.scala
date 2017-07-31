@@ -4,7 +4,7 @@ import java.io.Writer
 //import java.util.Properties;
 import es.upm.fi.dia.oeg.morph.base.engine.{AbstractQueryResultTranslator, IQueryTranslator, MorphBaseRunner}
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 /**
   * Created by freddy on 14/04/16.
@@ -28,7 +28,7 @@ class MorphCSVRunner (
 }
 
 object MorphCSVRunner {
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
 	def apply(properties:MorphCSVProperties) : MorphCSVRunner = {
 		val runnerFactory = new MorphCSVRunnerFactory();

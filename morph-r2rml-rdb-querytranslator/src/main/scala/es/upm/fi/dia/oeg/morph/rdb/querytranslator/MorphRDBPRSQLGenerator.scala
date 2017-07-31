@@ -22,11 +22,11 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTermMap
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUnfolder
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class MorphRDBPRSQLGenerator(md:R2RMLMappingDocument, unfolder:MorphRDBUnfolder)
 extends MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
-	override val logger = LogManager.getLogger(this.getClass());
+	override   val logger = LoggerFactory.getLogger(this.getClass());
 
 		
 	override def genPRSQLObject(tp:Triple ,alphaResult:MorphAlphaResult 

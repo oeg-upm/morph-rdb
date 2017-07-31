@@ -3,9 +3,9 @@ package es.upm.fi.dia.oeg.morph.base
 import com.google.common.base.Charsets
 import com.google.common.io.BaseEncoding
 import com.mashape.unirest.http.Unirest
-import org.apache.logging.log4j.{LogManager, Logger}
 import org.json.JSONObject
 import java.net.HttpURLConnection
+import org.slf4j.LoggerFactory
 
 /**
   * Created by fpriyatna on 21/02/2017.
@@ -15,7 +15,7 @@ class GitHubUtility {
 }
 
 object GitHubUtility {
-  val logger : Logger = LogManager.getLogger(this.getClass);
+val logger = LoggerFactory.getLogger(this.getClass());
   
   
   def getRawURLFromBlobURL(blobURL:String) : String = {

@@ -14,11 +14,11 @@ import Zql.ZUtils
 import java.util.Random
 import scala.collection.mutable.LinkedHashMap
 import Zql.ZGroupBy
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class SQLQuery extends ZQuery with IQuery {
-	val logger = LogManager.getLogger(this.getClass);
-
+val logger = LoggerFactory.getLogger(this.getClass());
+	
 	ZUtils.addCustomFunction("concat", 2);
 	ZUtils.addCustomFunction("substring", 3);
 	ZUtils.addCustomFunction("convert", 2);
@@ -821,8 +821,8 @@ class SQLQuery extends ZQuery with IQuery {
 }
 
 object SQLQuery {
-	val logger = LogManager.getLogger(this.getClass);
-
+val logger = LoggerFactory.getLogger(this.getClass());
+	
 	def areBaseTables(fromItems:Iterable[ZFromItem] ) : Boolean ={
 			var result = true;
 			for(fromItem <- fromItems) {

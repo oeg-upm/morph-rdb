@@ -17,15 +17,15 @@ import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTermMap
 import java.sql.Connection
 import org.apache.commons.io.FilenameUtils;
 import java.io.File;
-import org.apache.logging.log4j.LogManager
 import es.upm.fi.dia.oeg.morph.base.GitHubUtility
+import org.slf4j.LoggerFactory
 
 class MorphRDBUtility {
 
 }
 
 object MorphRDBUtility {
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 
 	def generateCondForWellDefinedURI(termMap:R2RMLTermMap
 			, ownerTriplesMap:MorphBaseClassMapping, uri:String , alias:String 

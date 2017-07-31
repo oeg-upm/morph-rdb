@@ -4,11 +4,11 @@ import java.sql.Types
 //import com.hp.hpl.jena.datatypes.xsd.XSDDatatype
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import java.sql.ResultSetMetaData
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 
 class DatatypeMapper {
-	val logger = LogManager.getLogger(this.getClass);
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
 	var mapXMLDatatype = Map[String, String]();
 	var mapDBDatatype = Map[String, Integer]();

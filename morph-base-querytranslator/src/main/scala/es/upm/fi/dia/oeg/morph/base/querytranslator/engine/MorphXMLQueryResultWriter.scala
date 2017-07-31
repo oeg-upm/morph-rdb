@@ -12,14 +12,14 @@ import es.upm.fi.dia.oeg.morph.base.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseQueryResultWriter
 import java.io.OutputStream
 import java.io.Writer
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 
 class MorphXMLQueryResultWriter(queryTranslator:IQueryTranslator, xmlOutputStream:Writer) 
 extends MorphBaseQueryResultWriter(queryTranslator, xmlOutputStream) {
 	this.outputStream = xmlOutputStream;
 	
-	val logger = LogManager.getLogger(this.getClass);
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
 	if(queryTranslator == null) {
 		throw new Exception("Query Translator is not set yet!");

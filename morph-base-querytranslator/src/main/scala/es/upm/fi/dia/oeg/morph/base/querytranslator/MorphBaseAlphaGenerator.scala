@@ -10,15 +10,15 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.sql.SQLJoinTable
 import es.upm.fi.dia.oeg.morph.base.sql.SQLLogicalTable
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:MorphBaseUnfolder)
 //(val owner:IQueryTranslator) 
 {
 	var owner:MorphBaseQueryTranslator = null;
 	
-  	val logger = LogManager.getLogger(this.getClass);
-  
+val logger = LoggerFactory.getLogger(this.getClass());
+	  
 //	val databaseType = {
 //		if(this.owner == null) {null}
 //		else {this.owner.getDatabaseType();}

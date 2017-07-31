@@ -8,14 +8,17 @@ import org.apache.jena.shared.CannotEncodeCharacterException;
 import java.util.regex.Pattern
 //import com.hp.hpl.jena.rdf.model.RDFNode
 import org.apache.jena.rdf.model.RDFNode;
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class GeneralUtility {
 
 }
 
 object GeneralUtility {
-	val logger = LogManager.getLogger(this.getClass);
+	//val logger = LogManager.getLogger(this.getClass);
+  val logger = LoggerFactory.getLogger(this.getClass());
+
+	  		
 
 	def encodeLiteral(originalLiteral:String) : String = {
 		var result = originalLiteral;

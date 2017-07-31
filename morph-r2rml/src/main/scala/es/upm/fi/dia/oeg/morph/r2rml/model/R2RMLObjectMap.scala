@@ -4,13 +4,14 @@ import scala.collection.JavaConversions._
 import org.apache.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
 import org.apache.jena.rdf.model.RDFNode
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class R2RMLObjectMap(termMapType:Constants.MorphTermMapType.Value
     , termType:Option[String], datatype:Option[String], languageTag:Option[String]) 
     extends R2RMLTermMap(termMapType, termType, datatype, languageTag) {
   
-	override val logger = LogManager.getLogger(this.getClass());
+	override   val logger = LoggerFactory.getLogger(this.getClass());
+
 
 }
 

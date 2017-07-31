@@ -18,11 +18,12 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUnfolder
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class MorphRDBCondSQLGenerator(md:R2RMLMappingDocument, unfolder:MorphRDBUnfolder) 
 extends MorphBaseCondSQLGenerator(md, unfolder:MorphBaseUnfolder) {
-	override val logger = LogManager.getLogger(this.getClass());
+	override   val logger = LoggerFactory.getLogger(this.getClass());
+
 
 	override def genCondSQLPredicateObject(tp:Triple, alphaResult:MorphAlphaResult 
 			, betaGenerator:MorphBaseBetaGenerator, cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping) 

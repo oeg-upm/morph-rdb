@@ -2,7 +2,7 @@ package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
 import es.upm.fi.dia.oeg.morph.base.MorphProperties;
 import es.upm.fi.dia.oeg.morph.base.Constants;
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class MorphRDBProperties extends MorphProperties {
 	def setNoOfDatabase(x:Int) = {this.noOfDatabase=x}
@@ -83,7 +83,7 @@ class MorphRDBProperties extends MorphProperties {
 }
 
 object MorphRDBProperties {
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 
 	def apply(pConfigurationDirectory:String , configurationFile:String) : MorphRDBProperties = {
 			val properties = new MorphRDBProperties();

@@ -12,7 +12,7 @@ import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElement
 import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElementVisitor
 import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 //import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLLogicalTable
 
@@ -21,7 +21,7 @@ class R2RMLTriplesMap(val logicalTable:R2RMLLogicalTable, val subjectMap:R2RMLSu
 extends MorphBaseClassMapping(predicateObjectMaps) with MorphR2RMLElement with IConceptMapping
 {
 	
-  	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 	//var triplesMapName:String = null;
 	
 	def buildMetaData(dbMetadata:Option[MorphDatabaseMetaData]) = {
@@ -120,7 +120,7 @@ extends MorphBaseClassMapping(predicateObjectMaps) with MorphR2RMLElement with I
 }
 
 object R2RMLTriplesMap {
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
 	def apply(tmResource:Resource) : R2RMLTriplesMap = {
 		

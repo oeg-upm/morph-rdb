@@ -17,11 +17,11 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
-	val logger = LogManager.getLogger(this.getClass);
-	//val dbType = md.configurationProperties.databaseType;
+val logger = LoggerFactory.getLogger(this.getClass());
+		//val dbType = md.configurationProperties.databaseType;
 		
 	def  genCondSQL(tp:Triple, alphaResult:MorphAlphaResult
 	    , betaGenerator:MorphBaseBetaGenerator, cm:MorphBaseClassMapping

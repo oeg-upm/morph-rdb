@@ -29,11 +29,11 @@ import scala.collection.mutable.LinkedHashMap
 //import com.hp.hpl.jena.sparql.core.BasicPattern
 import org.apache.jena.sparql.core.BasicPattern;
 import org.apache.jena.sparql.algebra.Op
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 
 object SPARQLUtility {
-	val logger = LogManager.getLogger(this.getClass);
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
 	def groupTriplesBySubject(triples:java.util.List[Triple]) : java.util.List[Triple] = {
 		//val triples = basicPattern.getList().toList;

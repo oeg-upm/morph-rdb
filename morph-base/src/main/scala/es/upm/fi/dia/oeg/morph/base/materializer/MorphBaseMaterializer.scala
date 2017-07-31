@@ -16,10 +16,11 @@ import java.io.OutputStream
 import java.io.Writer
 //import com.hp.hpl.jena.rdf.model.Property
 import org.apache.jena.rdf.model.Property;
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 abstract class MorphBaseMaterializer(val model:Model, var outputStream:Writer) {
-	val logger = LogManager.getLogger(this.getClass);
+	//val logger = LogManager.getLogger(this.getClass);
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
 //	var outputFileName:String = null;
 	var rdfLanguage:String =null;
@@ -42,7 +43,8 @@ abstract class MorphBaseMaterializer(val model:Model, var outputStream:Writer) {
 }
 
 object MorphBaseMaterializer {
-  	val logger = LogManager.getLogger(this.getClass);
+  	//val logger = LogManager.getLogger(this.getClass);
+  	val logger = LoggerFactory.getLogger(this.getClass());
 	
 	def createJenaModel(jenaMode:String ) : Model  = {
 		val model = if(jenaMode == null) {

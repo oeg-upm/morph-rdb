@@ -11,14 +11,17 @@ import es.upm.fi.dia.oeg.morph.base.GeneralUtility
 import org.apache.jena.rdf.model.Property;
 //import com.hp.hpl.jena.rdf.model.Resource
 import org.apache.jena.rdf.model.Resource;
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 abstract class MorphBaseDataTranslator(val md:MorphBaseMappingDocument
     , val materializer:MorphBaseMaterializer, unfolder:MorphBaseUnfolder
     , val dataSourceReader:MorphBaseDataSourceReader, connection:Connection
     , properties:MorphProperties ) {
   
-	val logger = LogManager.getLogger(this.getClass);
+	//val logger = LogManager.getLogger(this.getClass);
+	val logger = LoggerFactory.getLogger(this.getClass());
+
+	  		
 	//var properties:ConfigurationProperties=null;
 //	var connection:Connection = null;
 	

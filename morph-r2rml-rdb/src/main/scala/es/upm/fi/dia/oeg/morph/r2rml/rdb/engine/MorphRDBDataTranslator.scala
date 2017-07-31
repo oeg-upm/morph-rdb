@@ -41,7 +41,7 @@ import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLPredicateMap
 import java.text.SimpleDateFormat;
 import java.text.DateFormat
 import java.util.Locale
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMaterializer
 		, unfolder:MorphRDBUnfolder, dataSourceReader:MorphRDBDataSourceReader
@@ -52,7 +52,8 @@ with MorphR2RMLElementVisitor {
   val dfInput = this.properties.inputDateFormat;
   val dfOutput = this.properties.outputDateFormat;
   
-	override val logger = LogManager.getLogger(this.getClass());
+	override   val logger = LoggerFactory.getLogger(this.getClass());
+
 
 	override def processCustomFunctionTransformationExpression(
 			argument:Object ) : Object = {

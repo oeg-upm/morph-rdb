@@ -11,14 +11,15 @@ import java.io.OutputStream
 import java.io.Writer
 //import com.hp.hpl.jena.rdf.model.Property
 import org.apache.jena.rdf.model.Property;
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class RDFXMLMaterializer(model:Model, rdfxmlOutputStream:Writer) 
 extends MorphBaseMaterializer(model, rdfxmlOutputStream) {
 	//THIS IS IMPORTANT, SCALA PASSES PARAMETER BY VALUE!
 	this.outputStream = rdfxmlOutputStream;
 
-	override val logger = LogManager.getLogger(this.getClass);
+	override 	val logger = LoggerFactory.getLogger(this.getClass());
+
 	//var outputFileName:String=null;
 
 	//

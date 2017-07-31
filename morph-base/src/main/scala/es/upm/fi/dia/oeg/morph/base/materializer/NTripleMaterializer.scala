@@ -15,14 +15,15 @@ import java.io.BufferedOutputStream
 import java.io.BufferedWriter
 //import com.hp.hpl.jena.rdf.model.Property
 import org.apache.jena.rdf.model.Property;
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class NTripleMaterializer(model:Model,ntOutputStream:Writer) 
 extends MorphBaseMaterializer(model,ntOutputStream) {
 	//THIS IS IMPORTANT, SCALA PASSES PARAMETER BY VALUE!
 	this.outputStream = ntOutputStream;
 	
-	override val logger = LogManager.getLogger(this.getClass);
+	override 	val logger = LoggerFactory.getLogger(this.getClass());
+
 
 	def write(triple:String ) = {
 		this.outputStream.write(triple)

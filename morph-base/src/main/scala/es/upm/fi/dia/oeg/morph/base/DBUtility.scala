@@ -6,14 +6,16 @@ import java.sql.ResultSet
 import java.sql.Statement
 import java.util.Properties
 import java.sql.DriverManager
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.LoggerFactory
 
 class DBUtility {
 
 }
 
 object DBUtility {
-  def logger = LogManager.getLogger(this.getClass());
+ // def logger = LogManager.getLogger(this.getClass());
+  		val logger = LoggerFactory.getLogger(this.getClass());
+
 	//def logger = Logger.getLogger(this.getClass());
 	
 

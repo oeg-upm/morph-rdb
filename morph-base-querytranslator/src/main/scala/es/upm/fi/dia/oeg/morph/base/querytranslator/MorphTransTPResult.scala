@@ -14,13 +14,13 @@ import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
 import Zql.ZDelete
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLUtility
 import es.upm.fi.dia.oeg.morph.base.sql.SQLUnion
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class MorphTransTPResult(val alphaResult:MorphAlphaResult
     , val condSQLResult:MorphCondSQLResult, val prSQLResult:MorphPRSQLResult) {
 
-	val logger = LogManager.getLogger(this.getClass);
-  
+val logger = LoggerFactory.getLogger(this.getClass());
+	  
 	def toQuery(optimizer:QueryTranslationOptimizer, databaseType:String) : IQuery = {
 		val alphaResult = this.alphaResult
 		val alphaSubject = alphaResult.alphaSubject;

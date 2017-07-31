@@ -11,11 +11,11 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.util.FileManager;
 //import com.hp.hpl.jena.rdf.model.Resource
 import org.apache.jena.rdf.model.Resource;
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class R2RMLMappingDocument(mappingFile : String) {
-	val logger = LogManager.getLogger(this.getClass);
-	
+val logger = LoggerFactory.getLogger(this.getClass());
+		
 //	object MorphTermMapType extends Enumeration {
 //		type MorphTermMapType = Value
 //				val ConstantTermMap, ColumnTermMap, TemplateTermMap, InvalidTermMapType = Value

@@ -7,14 +7,14 @@ import org.apache.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElementVisitor
 import es.upm.fi.dia.oeg.morph.r2rml.MorphR2RMLElement
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 //import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLSQLQuery
 //import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTable
 
 abstract class R2RMLLogicalTable(val logicalTableType:Constants.LogicalTableType.Value) 
 extends MorphBaseLogicalTable with MorphR2RMLElement{
-	def logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 	var alias:String = null;
 
 	def buildMetaData(dbMetaData:Option[MorphDatabaseMetaData] ) = {
@@ -68,7 +68,7 @@ extends MorphBaseLogicalTable with MorphR2RMLElement{
 }
 
 object R2RMLLogicalTable {
-	def logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 
 	def parse(resource:Resource ) : R2RMLLogicalTable  = {
 		 

@@ -4,7 +4,7 @@ import java.sql.Connection
 import scala.collection.JavaConversions._
 import java.util.HashMap
 import es.upm.fi.dia.oeg.morph.base.Constants
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 object MorphColumnMetaDataFactory {
 //	val DATABASE_MONETDB = "MonetDB";
@@ -15,7 +15,9 @@ object MorphColumnMetaDataFactory {
 //	val DATABASE_POSTGRESQL = "PostgreSQL";
 //	val DATABASE_POSTGRESQL_ENCLOSED_CHARACTER = "\"";
 	
-	val logger = LogManager.getLogger(this.getClass);
+	//val logger = LogManager.getLogger(this.getClass);
+	val logger = LoggerFactory.getLogger(this.getClass());
+	
 		
 	def buildMapColumnsMetaData(conn : Connection, databaseName : String, databaseType : String) 
 		: Map[String, List[MorphColumnMetaData]] = {

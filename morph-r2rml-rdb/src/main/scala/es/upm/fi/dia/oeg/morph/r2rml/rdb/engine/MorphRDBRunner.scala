@@ -12,7 +12,7 @@ import es.upm.fi.dia.oeg.morph.base.engine.AbstractQueryResultTranslator
 import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
 import java.io.OutputStream
 import java.io.Writer
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 //import java.util.Properties
 
@@ -41,7 +41,7 @@ class MorphRDBRunner(mappingDocument:R2RMLMappingDocument
 }
 
 object MorphRDBRunner {
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
 	def apply(properties:MorphRDBProperties ) : MorphRDBRunner = {
 	  //logger.info("running morph-rdb 3.9.2 ...");

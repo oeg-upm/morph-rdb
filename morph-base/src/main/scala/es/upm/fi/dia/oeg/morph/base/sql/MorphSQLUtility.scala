@@ -11,14 +11,15 @@ import Zql.ZOrderBy
 import scala.collection.mutable.LinkedHashMap
 import es.upm.fi.dia.oeg.morph.base.Constants
 import scala.Option.option2Iterable
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class MorphSQLUtility {
 	
 }
 
 object MorphSQLUtility {
-	val logger = LogManager.getLogger(this.getClass);
+	//val logger = LogManager.getLogger(this.getClass);
+	val logger = LoggerFactory.getLogger(this.getClass());
   
 	def createConstant(v:String, typ:Integer, dbType:String) : ZConstant = {
 	  val result = {

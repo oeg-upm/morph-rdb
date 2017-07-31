@@ -10,11 +10,11 @@ import scala.collection.mutable.LinkedHashSet
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 abstract class MorphBasePRSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
-  val logger = LogManager.getLogger(this.getClass);
-//	val databaseType = {
+val logger = LoggerFactory.getLogger(this.getClass());
+	//	val databaseType = {
 //		if(this.owner == null) {null}
 //		else {this.owner.getDatabaseType();}
 //	}

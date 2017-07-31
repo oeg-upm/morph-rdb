@@ -5,14 +5,14 @@ import org.apache.jena.rdf.model.Resource
 import es.upm.fi.dia.oeg.morph.base.Constants
 import es.upm.fi.dia.oeg.morph.base.sql.MorphDatabaseMetaData
 import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class R2RMLPredicateObjectMap(val predicateMaps:List[R2RMLPredicateMap]
 		, val objectMaps:List[R2RMLObjectMap], val refObjectMaps:List[R2RMLRefObjectMap]
 		//, objectMapTypes:List[R2RMLPredicateObjectMap.ObjectMapType.Value]
 		, val graphMaps:Set[R2RMLGraphMap] ) extends MorphBasePropertyMapping 
 {
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 	var alias:String = null;
 
 //	def buildMetadata(dbMetadata:MorphDatabaseMetaData) = {

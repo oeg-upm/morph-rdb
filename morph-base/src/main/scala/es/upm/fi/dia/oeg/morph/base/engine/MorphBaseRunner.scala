@@ -35,7 +35,7 @@ import org.apache.jena.vocabulary.RDFS;
 import org.apache.jena.rdf.model.Statement;
 //import com.hp.hpl.jena.rdf.model.Resource
 import org.apache.jena.rdf.model.Resource;
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     //, conn:Connection
@@ -50,7 +50,9 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     ) {
   
   
-	val logger = LogManager.getLogger(this.getClass);
+	//val logger = LogManager.getLogger(this.getClass);
+  		val logger = LoggerFactory.getLogger(this.getClass());
+
   var connection:Connection = null;
   
 	var ontologyFilePath:Option[String]=None;

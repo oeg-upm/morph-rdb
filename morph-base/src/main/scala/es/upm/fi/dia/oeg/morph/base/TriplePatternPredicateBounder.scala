@@ -15,15 +15,15 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import java.text.SimpleDateFormat
 import es.upm.fi.dia.oeg.morph.base.sql.MorphTableMetaData
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class TriplePatternPredicateBounder(mappingFile : String
     //, mapColumnsMetaData : java.util.Map[String, ColumnMetaData]
     , tableMetaData:Option[MorphTableMetaData]
 ) {
   
-	val logger = LogManager.getLogger(this.getClass);
-	
+val logger = LoggerFactory.getLogger(this.getClass());
+		
 	val mappingDocument = new R2RMLMappingDocument(mappingFile);
 	val constants = new Constants();
 	

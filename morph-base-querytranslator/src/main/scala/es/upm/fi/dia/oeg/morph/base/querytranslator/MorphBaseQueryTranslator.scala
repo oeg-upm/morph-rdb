@@ -84,13 +84,13 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphQueryRewriter
 import Zql.ZInsert
 import org.apache.jena.sparql.expr.aggregate.AggCountVar
 import es.upm.fi.dia.oeg.morph.base.CollectionUtility
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		, alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
 		, condSQLGenerator:MorphBaseCondSQLGenerator, prSQLGenerator:MorphBasePRSQLGenerator) 
 extends IQueryTranslator {
-	val logger = LogManager.getLogger(this.getClass);
+	val logger = LoggerFactory.getLogger(this.getClass());
 
 	//query translator
 	var mapInferredTypes:Map[Node, Set[MorphBaseClassMapping]] = Map.empty ;
@@ -412,7 +412,7 @@ extends IQueryTranslator {
 
 				val mapPrefixSelectItemsAux = MorphSQLUtility.getSelectItemsMapPrefix(
 						oldSelectItems, groupVar, subOpSQLAlias, this.databaseType);
-				
+
 				mapPrefixSelectItems = mapPrefixSelectItems ::: mapPrefixSelectItemsAux.toList;
 			}
 
@@ -595,7 +595,7 @@ extends IQueryTranslator {
 						opProjectSubOpSQL.pushOrderByDown(newSelectItems);
 
 						opProjectSubOpSQL;
-									
+
 						//opProjectSubOpSQL.addSelectItems(newSelectItemsMappingId);
 					} else {
 						val resultAux = new SQLQuery(opProjectSubOpSQL);
@@ -810,8 +810,8 @@ extends IQueryTranslator {
 						}
 						}
 					} else if(tpPredicate.isVariable()) {
-					  this.mapVarNotNull += (tpObject -> true);
-					  
+						this.mapVarNotNull += (tpObject -> true);
+
 						val mappingDocumentURL = this.getMappingDocumentURL();
 						val triplesMapResource = cm.resource;
 						//val columnsMetaData = cm.getLogicalTable().getColumnsMetaData();
@@ -839,13 +839,13 @@ extends IQueryTranslator {
 									case e:Exception => {
 										logger.warn("-- Insatifiable sql while translating : " + predicateURI + " in " + cm.getConceptName());
 										logger.warn(e.getMessage());
-										logger.warn(boundedTriplePatternErrorMessages);
+										//logger.warn(boundedTriplePatternErrorMessages);
 										None
 									}
 									}
 								} else {
 									logger.warn("-- Insatifiable sql while translating : " + predicateURI + " in " + cm.getConceptName());
-									logger.warn(boundedTriplePatternErrorMessages);
+									//logger.warn(boundedTriplePatternErrorMessages);
 									None
 								}					  
 							})

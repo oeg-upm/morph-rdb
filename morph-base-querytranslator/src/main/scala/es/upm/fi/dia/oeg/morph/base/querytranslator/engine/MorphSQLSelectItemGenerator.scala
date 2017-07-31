@@ -7,11 +7,11 @@ import scala.collection.JavaConversions._
 import scala.collection.mutable.LinkedHashSet
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLSelectItem
 import es.upm.fi.dia.oeg.morph.base.querytranslator.NameGenerator
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class MorphSQLSelectItemGenerator(nameGenerator:NameGenerator, dbType:String) {
-	val logger = LogManager.getLogger(this.getClass);
-	
+val logger = LoggerFactory.getLogger(this.getClass());
+		
 	def generateSelectItemsJava(nodes:java.util.Collection[Node], pPrefix:String
 	    , oldSelectItems:java.util.Collection[ZSelectItem]	, useAlias:Boolean) : java.util.Collection[ZSelectItem] = {
 	  val result = this.generateSelectItems(nodes.toSet, pPrefix, oldSelectItems.toList, useAlias)

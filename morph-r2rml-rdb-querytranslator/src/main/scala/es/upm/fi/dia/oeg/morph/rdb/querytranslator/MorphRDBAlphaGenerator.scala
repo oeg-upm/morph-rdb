@@ -18,7 +18,7 @@ import es.upm.fi.dia.oeg.morph.base.sql.SQLJoinTable
 import es.upm.fi.dia.oeg.morph.base.sql.SQLLogicalTable
 import es.upm.fi.dia.oeg.morph.base.sql.SQLFromItem
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
-import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 
 class MorphRDBAlphaGenerator(md:R2RMLMappingDocument,unfolder:MorphRDBUnfolder)
 extends MorphBaseAlphaGenerator(md,unfolder)
@@ -26,7 +26,8 @@ extends MorphBaseAlphaGenerator(md,unfolder)
 	val databaseType = if(md.dbMetaData.isDefined) { md.dbMetaData.get.dbType; }
 	else { Constants.DATABASE_DEFAULT }
 	
-	override val logger = LogManager.getLogger(this.getClass());
+	override   val logger = LoggerFactory.getLogger(this.getClass());
+
 	
 	override def calculateAlpha(tp:Triple, abstractConceptMapping:MorphBaseClassMapping 
 	    , predicateURI:String ) : MorphAlphaResult = {

@@ -16,12 +16,13 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import org.apache.jena.rdf.model.Model
 import java.util.Properties
-import org.apache.logging.log4j.LogManager
 import es.upm.fi.dia.oeg.morph.base.GitHubUtility
+import org.slf4j.LoggerFactory
 
 class R2RMLMappingDocument(classMappings:Iterable[R2RMLTriplesMap]) 
 extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {
-	override val logger = LogManager.getLogger(this.getClass());
+	override   val logger = LoggerFactory.getLogger(this.getClass());
+
    
 	def buildMetaData(conn:Connection, databaseName:String
        , databaseType:String) = {
@@ -209,7 +210,7 @@ extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {
 }
 
 object R2RMLMappingDocument {
-	val logger = LogManager.getLogger(this.getClass());
+  val logger = LoggerFactory.getLogger(this.getClass());
 	
 	def apply(mdPath:String)
 	: R2RMLMappingDocument = {
