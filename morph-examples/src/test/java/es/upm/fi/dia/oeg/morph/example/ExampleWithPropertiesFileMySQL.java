@@ -48,6 +48,21 @@ public class ExampleWithPropertiesFileMySQL {
 		}
 	}
 
+	@Test
+	public void testHistoricalBuildingsBatchMySQL() {
+		String configurationFile = "edificiohistoricos-batch-mysql.morph.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			logger.info("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
 	public void testExample1Sparql01MySQL() {
 		//2 instances
 		String configurationFile = "example1-query01-mysql.morph.properties";
