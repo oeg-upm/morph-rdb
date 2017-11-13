@@ -49,9 +49,9 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 extends MorphBaseDataTranslator(md, materializer , unfolder, dataSourceReader
 		, connection, properties) 
 with MorphR2RMLElementVisitor {
-  val dfInput = this.properties.inputDateFormat;
-  val dfOutput = this.properties.outputDateFormat;
-  
+	val dfInput = this.properties.inputDateFormat;
+	val dfOutput = this.properties.outputDateFormat;
+
 	override   val logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -95,142 +95,6 @@ with MorphR2RMLElementVisitor {
 					}
 	}
 
-	//	def translateObjectMap(objectMap:R2RMLTermMap, rs:ResultSet
-	//	    , mapColumnType:Map[String, String] , subjectGraphName:String
-	//	    , predicateobjectGraphName:String, predicateMapUnfoldedValue:String
-	//	    ,  pObjectMapUnfoldedValue:String) = {
-	//
-	//		var objectMapUnfoldedValue = pObjectMapUnfoldedValue;
-	//		
-	//		if(objectMap != null && pObjectMapUnfoldedValue != null) {
-	//			val objectMapTermType = objectMap.termType;
-	//
-	//			if(Constants.R2RML_IRI_URI.equalsIgnoreCase(objectMapTermType)) {
-	//				try {
-	//					objectMapUnfoldedValue = GeneralUtility.encodeURI(objectMapUnfoldedValue);
-	//				} catch {
-	//				  case e:Exception => {
-	//				    logger.warn("Error encoding object value : " + objectMapUnfoldedValue);
-	//				  }
-	//				}					
-	//			}
-	//
-	//			objectMapTermType match {
-	//			  case Constants.R2RML_LITERAL_URI => {
-	//					val datatypeFromMapping = objectMap.datatype;
-	//					val language = objectMap.languageTag;
-	//					
-	//					val datatype = if(objectMap.termMapType == Constants.MorphTermMapType.ColumnTermMap) {
-	//						if(datatypeFromMapping == null) {
-	//							val columnName = objectMap.getColumnName();
-	//							//datatype = mapColumnType.get(columnName);
-	//							val dbType = this.properties.databaseType;
-	//							MorphSQLUtility.getXMLDatatype(columnName, mapColumnType, dbType);
-	//						} else {
-	//						  datatypeFromMapping
-	//						}
-	//					} else {
-	//					  datatypeFromMapping
-	//					}
-	//					
-	//					if(datatype != null) {
-	//					  val xsdDataTimeURI = XSDDatatype.XSDdateTime.getURI().toString();
-	//					  val xsdBooleanURI = XSDDatatype.XSDboolean.getURI().toString();
-	//					  
-	//					  datatype match {
-	//					    case xsdDataTimeURI => {
-	//							objectMapUnfoldedValue = objectMapUnfoldedValue.trim().replaceAll(" ", "T");
-	//						} 
-	//					    case xsdBooleanURI => {
-	//							if(objectMapUnfoldedValue.equalsIgnoreCase("T") 
-	//									|| objectMapUnfoldedValue.equalsIgnoreCase("True")
-	//									|| objectMapUnfoldedValue.equalsIgnoreCase("1")) {
-	//								objectMapUnfoldedValue = "true";
-	//							} else if(objectMapUnfoldedValue.equalsIgnoreCase("F") 
-	//									|| objectMapUnfoldedValue.equalsIgnoreCase("False")
-	//									|| objectMapUnfoldedValue.equalsIgnoreCase("0")) {
-	//								objectMapUnfoldedValue = "false";
-	//							} else {
-	//								objectMapUnfoldedValue = "false";
-	//							}
-	//						}						    
-	//					  }
-	//					}
-	//					
-	//					objectMapUnfoldedValue = GeneralUtility.encodeLiteral(objectMapUnfoldedValue);
-	//					if(this.properties != null) {
-	//						if(this.properties.literalRemoveStrangeChars) {
-	//							objectMapUnfoldedValue = GeneralUtility.removeStrangeChars(objectMapUnfoldedValue);
-	//						}
-	//					}
-	//					
-	//					if(subjectGraphName == null && predicateobjectGraphName == null) {
-	//						this.materializer.materializeDataPropertyTriple(predicateMapUnfoldedValue
-	//								, objectMapUnfoldedValue, datatype, language, null );
-	//					} else {
-	//						if(subjectGraphName != null) {
-	//							this.materializer.materializeDataPropertyTriple(
-	//									predicateMapUnfoldedValue, objectMapUnfoldedValue
-	//									, datatype, language, subjectGraphName );
-	//						}
-	//						
-	//						if(predicateobjectGraphName != null) {
-	//							if(subjectGraphName == null || 
-	//									!predicateobjectGraphName.equals(subjectGraphName)) {
-	//								this.materializer.materializeDataPropertyTriple(
-	//										predicateMapUnfoldedValue, objectMapUnfoldedValue
-	//										, datatype, language, predicateobjectGraphName);							
-	//							}
-	//						}
-	//					}
-	//				} 
-	//			  case Constants.R2RML_IRI_URI => {
-	//					try {
-	//						objectMapUnfoldedValue = GeneralUtility.encodeURI(objectMapUnfoldedValue);
-	//						if(subjectGraphName == null && predicateobjectGraphName == null) {
-	//							this.materializer.materializeObjectPropertyTriple(predicateMapUnfoldedValue, objectMapUnfoldedValue, false, null );
-	//						} else {
-	//							if(subjectGraphName != null) {
-	//								this.materializer.materializeObjectPropertyTriple(predicateMapUnfoldedValue, objectMapUnfoldedValue, false, subjectGraphName );
-	//							}
-	//							if(predicateobjectGraphName != null) {
-	//								if(subjectGraphName == null || 
-	//										!predicateobjectGraphName.equals(subjectGraphName)) {
-	//									this.materializer.materializeObjectPropertyTriple(predicateMapUnfoldedValue, objectMapUnfoldedValue, false, predicateobjectGraphName );
-	//								}
-	//							}
-	//						}					
-	//					} catch {
-	//					  case e:Exception => {}
-	//						
-	//					}
-	//					
-	//	
-	//				} 
-	//			  case Constants.R2RML_BLANKNODE_URI => {
-	//					if(subjectGraphName == null && predicateobjectGraphName == null) {
-	//						this.materializer.materializeObjectPropertyTriple(predicateMapUnfoldedValue, objectMapUnfoldedValue, true, null );
-	//					} else {
-	//						if(subjectGraphName != null) {
-	//							this.materializer.materializeObjectPropertyTriple(predicateMapUnfoldedValue, objectMapUnfoldedValue, true, subjectGraphName );
-	//						}
-	//						if(predicateobjectGraphName != null) {
-	//							if(subjectGraphName == null || 
-	//									!predicateobjectGraphName.equals(subjectGraphName)) {
-	//								this.materializer.materializeObjectPropertyTriple(predicateMapUnfoldedValue, objectMapUnfoldedValue, true, predicateobjectGraphName );
-	//							}
-	//							
-	//						}
-	//					}					
-	//				} 
-	//			  case _ => {
-	//					logger.warn("Undefined term type for object map : " + objectMap);
-	//				}			  
-	//			}
-	//
-	//
-	//		}
-	//	}
 
 	def visit( logicalTable:R2RMLLogicalTable) : Object = {
 			// TODO Auto-generated method stub
@@ -406,13 +270,13 @@ with MorphR2RMLElementVisitor {
 
 								if(sgm.isEmpty && pogm.isEmpty) {
 									predicates.foreach(predicatesElement => {
-									  val quadSubject = subject._1;
+										val quadSubject = subject._1;
 										val predicateRDFNode = predicatesElement._1;
 										val predicateProperty = predicateRDFNode.asInstanceOf[Property];
 										val quadGraph = null;
 										objects.foreach(objectsElement => {
-										  val quadObject = objectsElement._1;
-										  
+											val quadObject = objectsElement._1;
+
 											this.materializer.materializeQuad(quadSubject, predicateProperty, quadObject, quadGraph)
 										});
 
@@ -465,58 +329,6 @@ with MorphR2RMLElementVisitor {
 
 	}
 
-	//	def translateObjectMaps(subjectGraphName:String, predicateobjectGraphName:String
-	//	    , predicateMapUnfoldedValue:String, objectMaps:List[R2RMLObjectMap]
-	//	, rs:ResultSet, mapXMLDatatype : Map[String, String]
-	//	, logicalTableAlias:String, predicateObjectMap:R2RMLPredicateObjectMap) = {
-	//		if(objectMaps != null && !objectMaps.isEmpty()) {
-	//			for(objectMap <- objectMaps) {
-	//				//R2RMLObjectMap objectMap = predicateObjectMap.getObjectMap(0);
-	//				if(objectMap != null) {
-	//					//retrieve the alias from predicateObjectMap, not triplesMap!
-	//					val alias = if(predicateObjectMap.getAlias() == null) {
-	//						logicalTableAlias;
-	//					} else {
-	//					  predicateObjectMap.getAlias()
-	//					}
-	//					//String alias = triplesMap.getLogicalTable().getAlias();
-	//					
-	//					val objectMapUnfoldedValue = 
-	//							objectMap.getUnfoldedValue(rs, alias);
-	//					this.translateObjectMap(objectMap, rs, mapXMLDatatype
-	//							, subjectGraphName, predicateobjectGraphName
-	//							, predicateMapUnfoldedValue, objectMapUnfoldedValue
-	//							);
-	//				}												
-	//			}
-	//		}	  
-	//	}
-
-	//	def translateRefObjectMaps(subjectGraphName:String, predicateobjectGraphName:String
-	//	    , refObjectMaps:List[R2RMLRefObjectMap], rs:ResultSet
-	//	    , mapXMLDatatype : Map[String, String]) = {
-	//		if(refObjectMaps != null && !refObjectMaps.isEmpty()) {
-	//			for(refObjectMap <- refObjectMaps) {
-	//				if(refObjectMap != null) {
-	//					val r2rmlUnfolder = this.unfolder.asInstanceOf[R2RMLUnfolder];
-	//					val joinQueryAlias2 = if(r2rmlUnfolder.getMapRefObjectMapAlias().get(refObjectMap).isDefined) {
-	//					  r2rmlUnfolder.getMapRefObjectMapAlias().get(refObjectMap).get;
-	//					} else {
-	//					  null
-	//					}
-	//					
-	//					val parentTriplesMap = refObjectMap.getParentTriplesMap().asInstanceOf[R2RMLTriplesMap];
-	//					val parentSubjectMap =parentTriplesMap.subjectMap;
-	//					val parentSubjectValue = parentSubjectMap.getUnfoldedValue(rs, joinQueryAlias2);
-	//					if(parentSubjectValue != null) {
-	//						this.translateObjectMap(parentSubjectMap, rs, mapXMLDatatype, subjectGraphName
-	//								, predicateobjectGraphName, predicateMapUnfoldedValue, parentSubjectValue
-	//								);
-	//					}
-	//				}												
-	//			}
-	//		}	  
-	//	}
 
 	def visit(triplesMap:R2RMLTriplesMap) : Object = {
 			//		String sqlQuery = triplesMap.accept(
@@ -552,7 +364,7 @@ with MorphR2RMLElementVisitor {
 			val result = dfInput.parse(value);
 			//val dfOutput = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
 			val result2 = dfOutput.format(result);
-      result2.toString();
+			result2.toString();
 	}
 
 	def translateBoolean(value:String) = {
@@ -738,12 +550,12 @@ with MorphR2RMLElementVisitor {
 						//val dbValue = dbValueAux;
 						val dbType = this.properties.databaseType;
 						val dbValue  = if(Constants.DATABASE_H2_NULL_VALUE.equals(dbValueAux) 
-						    && Constants.DATABASE_CSV.equals(dbType)) {
-						  null
+								&& Constants.DATABASE_CSV.equals(dbType)) {
+							null
 						} else {
-						  dbValueAux
+							dbValueAux
 						}
-						
+
 						val datatype = if(termMap.datatype.isDefined) { termMap.datatype } 
 						else {
 							val columnNameAux = termMap.columnName.replaceAll("\"", "");

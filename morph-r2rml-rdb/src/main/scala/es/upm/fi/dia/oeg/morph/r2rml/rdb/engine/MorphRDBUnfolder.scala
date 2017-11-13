@@ -109,6 +109,7 @@ extends MorphBaseUnfolder(md, properties) with MorphR2RMLElementVisitor {
 			}
 		}
 
+		
 		result;
 	}
 
@@ -361,6 +362,7 @@ extends MorphBaseUnfolder(md, properties) with MorphR2RMLElementVisitor {
 		  }
 		}
 
+		System.out.println("unfoldTriplesMap = " + result);
 		
 		result;
 		

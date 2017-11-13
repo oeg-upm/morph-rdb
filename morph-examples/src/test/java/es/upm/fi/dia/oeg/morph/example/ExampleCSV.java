@@ -46,9 +46,9 @@ public class ExampleCSV {
 	@Test
 	public void testMonumento() {
 		MorphCSVProperties properties = new MorphCSVProperties();
-		properties.setMappingDocumentFilePath(
-				"https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mobileage/3e28ec0f-cc1b-4d59-b173-bff1fc31157d/monumento.r2rml.ttl"
-		);
+		//properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mobileage/3e28ec0f-cc1b-4d59-b173-bff1fc31157d/monumento.r2rml.ttl");
+		properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/zaragoza_test/308f028b-c6e6-4c29-b465-de5b72bf0714/monumento.r2rml.ttl");
+		
 		
 		properties.setOutputFilePath("monumento-batch-result-csv.nt");
 		properties.addCSVFile("https://www.zaragoza.es/api/recurso/turismo/monumento.csv");
@@ -56,6 +56,7 @@ public class ExampleCSV {
 			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(properties);
 			runner.run();
+			logger.info("bye");
 			assertTrue("testBatch done", true);
 		} catch(Exception e) {
 			e.printStackTrace();
