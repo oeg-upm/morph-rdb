@@ -26,7 +26,7 @@ public class ExampleCSV {
 	public void testEdificioHistoricoWeb() {
 		MorphCSVProperties properties = new MorphCSVProperties();
 		properties.setMappingDocumentFilePath(
-				"https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mobileage/0c8ff8c8-f55d-4e80-aeda-1dcd00879714/edificio-historico.r2rml.ttl"				
+				"https://raw.githubusercontent.com/oeg-upm/morph-rdb/master/morph-examples/examples-csv/edificio-historico.r2rml.ttl"				
 		);
 		properties.setOutputFilePath("edificio-historico-batch-result-csv-web.nt");
 		properties.addCSVFile("http://www.zaragoza.es/api/recurso/turismo/edificio-historico.csv");
@@ -63,7 +63,7 @@ public class ExampleCSV {
 	@Test
 	public void testMonumentsWeb() {
 		MorphCSVProperties properties = new MorphCSVProperties();
-		properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/examples/monumento.r2rml.ttl");
+		properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/oeg-upm/morph-rdb/master/morph-examples/examples-csv/monumento.r2rml.ttl");
 		properties.setOutputFilePath("monumento-batch-result-csv-web.nt");
 		properties.addCSVFile("https://www.zaragoza.es/api/recurso/turismo/monumento.csv");
 		try {
