@@ -10,17 +10,17 @@
 
 <TriplesMapMonumento>
 	rr:logicalTable [ 
-        rr:tableName  "monumento"
+        rr:tableName  "\"edificio-historico\"" # http://www.zaragoza.es/api/recurso/turismo/edificio-historico.csv
     ];
 	
     rr:subjectMap [    
-		a rr:Subject; rr:termType rr:IRI; rr:class schema:TouristAttraction;
-		rr:column "ID";
+		a rr:Subject; rr:termType rr:IRI; rr:class schema:LandmarksOrHistoricalBuildings;
+		rr:column "\"ID\"";
 	];
 
 	rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant schema:name ]; 
-      rr:objectMap    [ rr:termType rr:Literal; rr:column "TITLE"; ]; 
+      rr:objectMap    [ rr:termType rr:Literal; rr:column "\"TITLE\""; ]; 
     ];
 
 .

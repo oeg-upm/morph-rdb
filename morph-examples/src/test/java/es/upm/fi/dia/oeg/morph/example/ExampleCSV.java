@@ -23,13 +23,12 @@ public class ExampleCSV {
     String configurationDirectory = System.getProperty("user.dir") + File.separator + "examples-csv";
 
 	@Test
-	public void testEdificioHistorico() {
+	public void testEdificioHistoricoWeb() {
 		MorphCSVProperties properties = new MorphCSVProperties();
 		properties.setMappingDocumentFilePath(
 				"https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mobileage/0c8ff8c8-f55d-4e80-aeda-1dcd00879714/edificio-historico.r2rml.ttl"				
 		);
-		
-		properties.setOutputFilePath("edificio-historico-batch-result-csv.nt");
+		properties.setOutputFilePath("edificio-historico-batch-result-csv-web.nt");
 		properties.addCSVFile("http://www.zaragoza.es/api/recurso/turismo/edificio-historico.csv");
 		try {
 			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
@@ -44,14 +43,48 @@ public class ExampleCSV {
 	}
 
 	@Test
-	public void testMonumento() {
+	public void testEdificioHistoricoLocal() {
 		MorphCSVProperties properties = new MorphCSVProperties();
-		//properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mobileage/3e28ec0f-cc1b-4d59-b173-bff1fc31157d/monumento.r2rml.ttl");
-		properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/zaragoza_test/308f028b-c6e6-4c29-b465-de5b72bf0714/monumento.r2rml.ttl");
-		
-		
-		properties.setOutputFilePath("monumento-batch-result-csv.nt");
+		properties.setMappingDocumentFilePath(configurationDirectory + File.separator + "edificio-historico.r2rml.ttl");
+		properties.setOutputFilePath("edificio-historico-batch-result-csv-local.nt");
+		properties.addCSVFile(configurationDirectory + File.separator + "edificio-historico.csv");
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
+			runner.run();
+			assertTrue("testBatch done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			assertTrue(errorMessage, false);
+		}
+	}
+	
+	@Test
+	public void testMonumentsWeb() {
+		MorphCSVProperties properties = new MorphCSVProperties();
+		properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/examples/monumento.r2rml.ttl");
+		properties.setOutputFilePath("monumento-batch-result-csv-web.nt");
 		properties.addCSVFile("https://www.zaragoza.es/api/recurso/turismo/monumento.csv");
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
+			runner.run();
+			logger.info("bye");
+			assertTrue("testBatch done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			assertTrue(errorMessage, false);
+		}
+	}
+	
+	@Test
+	public void testMonumentsLocal() {
+		MorphCSVProperties properties = new MorphCSVProperties();
+		properties.setMappingDocumentFilePath(configurationDirectory + File.separator + "monumento.r2rml.ttl");
+		properties.setOutputFilePath("monumento-batch-result-csv-local.nt");
+		properties.addCSVFile(configurationDirectory + File.separator + "monumento.csv");
 		try {
 			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(properties);
@@ -143,6 +176,36 @@ public class ExampleCSV {
         }
     }
 
+    @Test
+    public void testHistoricalBuildingsWithPropertiesFile() {
+        String configurationFile = "edificio-historico-batch-csv.morph.properties";
+        try {
+        	MorphBaseRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+        	MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testMonumentsWithPropertiesFile() {
+        String configurationFile = "monumento-batch-csv.morph.properties";
+        try {
+        	MorphBaseRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+        	MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+    
     @Test
     public void testExample1Sparql01CSV() {
         String configurationFile = "example1-query01-csv.morph.properties";
