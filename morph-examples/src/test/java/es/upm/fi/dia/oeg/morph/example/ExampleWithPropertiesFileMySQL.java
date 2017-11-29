@@ -4,17 +4,17 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner;
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunnerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class ExampleWithPropertiesFileMySQL {
-	private Logger logger = LogManager.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	//static { PropertyConfigurator.configure("log4j.properties"); }
 	String configurationDirectory = System.getProperty("user.dir") + File.separator + "examples-mysql";
 

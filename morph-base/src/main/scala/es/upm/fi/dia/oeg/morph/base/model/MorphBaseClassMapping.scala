@@ -18,7 +18,7 @@ abstract class MorphBaseClassMapping(val propertyMappings:Iterable[MorphBaseProp
 	def getLogicalTableSize():Long ;
 	def getTableMetaData():Option[MorphTableMetaData] ;
 	def getMappedClassURIs():Iterable[String] ;
-	def getSubjectReferencedColumns():List[String] ;
+	//def getSubjectReferencedColumns():List[String] ;
 	def buildMetaData(dbMetaData:Option[MorphDatabaseMetaData] );
 	
 	def setId(id:String) = { this.id = id }

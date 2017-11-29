@@ -28,7 +28,7 @@ abstract class MorphBaseRunnerFactory {
 	//val logger = LogManager.getLogger(this.getClass);
 		val logger = LoggerFactory.getLogger(this.getClass());
 
-  logger.info("running morph-rdb 3.9.4 ...");
+  logger.info("running morph-rdb 3.9.5 ...");
   
 	def createRunner(configurationDirectory:String , configurationFile:String) 
 	: MorphBaseRunner = {

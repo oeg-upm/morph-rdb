@@ -113,9 +113,11 @@ extends MorphBaseClassMapping(predicateObjectMaps) with MorphR2RMLElement with I
 	  this.logicalTable;      
 	}
 
+	/*
 	override def getSubjectReferencedColumns() : List[String] = {
 	  this.subjectMap.getReferencedColumns();
 	}
+	*/
 
 }
 

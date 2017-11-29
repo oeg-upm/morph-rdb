@@ -34,6 +34,7 @@ import es.upm.fi.dia.oeg.morph.base.sql.SQLJoinTable
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import org.slf4j.LoggerFactory
+import es.upm.fi.dia.oeg.morph.base.RegexUtility
 
 //import es.upm.fi.dia.oeg.morph.base.MorphProperties
 
@@ -119,7 +120,10 @@ extends MorphBaseUnfolder(md, properties) with MorphR2RMLElementVisitor {
 		val result = if(termMap != null) {
 			termMap.termMapType match {
 			  case Constants.MorphTermMapType.TemplateTermMap => {
-				val termMapReferencedColumns = termMap.getReferencedColumns();
+			    val termMapTemplateString = termMap.templateString.replaceAllLiterally("\\\"", dbEnclosedCharacter);
+			    val termMapReferencedColumns = RegexUtility.getTemplateColumns(termMapTemplateString, true).toList;
+			    
+				//val termMapReferencedColumns = termMap.getReferencedColumns();
 				if(termMapReferencedColumns != null) {
 					termMapReferencedColumns.map(termMapReferencedColumn => {
 						val selectItem = MorphSQLSelectItem.apply(
@@ -291,7 +295,8 @@ extends MorphBaseUnfolder(md, properties) with MorphR2RMLElementVisitor {
 
 						//val refObjectMapColumnsString = refObjectMap.getParentDatabaseColumnsString();
 						val parentSubjectMap = parentTriplesMap.subjectMap;
-						val refObjectMapColumnsString = parentSubjectMap.getReferencedColumns;
+						//val refObjectMapColumnsString = parentSubjectMap.getReferencedColumns;
+						val refObjectMapColumnsString = MorphRDBUnfolder.getReferencedColumns(parentSubjectMap, this.dbType)
 
 						if(refObjectMapColumnsString != null ) {
 							for(refObjectMapColumnString <- refObjectMapColumnsString) {
@@ -362,7 +367,7 @@ extends MorphBaseUnfolder(md, properties) with MorphR2RMLElementVisitor {
 		  }
 		}
 
-		System.out.println("unfoldTriplesMap = " + result);
+		//System.out.println("unfoldTriplesMap = " + result);
 		
 		result;
 		
@@ -535,5 +540,22 @@ object MorphRDBUnfolder {
 		}
 		 
 		result;
-	}  
+	}
+	
+	def getReferencedColumns(termMap:R2RMLTermMap, dbType:String) : List[String] = {
+	  val enclosedCharacter = Constants.getEnclosedCharacter(dbType);
+	  
+		val result : List[String] = if(termMap.termMapType == Constants.MorphTermMapType.ColumnTermMap) {
+			//List(this.getOriginalValue());
+		  List(termMap.columnName.replaceAllLiterally("\\\"", enclosedCharacter));
+		} else if(termMap.termMapType == Constants.MorphTermMapType.TemplateTermMap) {
+			val template = termMap.getOriginalValue().replaceAllLiterally("\\\"", enclosedCharacter)
+			RegexUtility.getTemplateColumns(template, true).toList;
+		} else {
+		  Nil
+		}
+
+		result;
+	}
+	
 }

@@ -40,7 +40,7 @@ extends MorphBaseBetaGenerator(md, unfolder) {
 						List(selectItem);
 				  }
 				  case _ => {
-						val databaseColumnsString = objectMap.getReferencedColumns();
+				    val databaseColumnsString = MorphRDBUnfolder.getReferencedColumns(objectMap, this.dbType)
 						val betaObjectsAux = databaseColumnsString.map(databaseColumnString =>
 							MorphSQLSelectItem.apply(databaseColumnString,logicalTableAlias, dbType, null));
 						betaObjectsAux.toList;
@@ -50,7 +50,7 @@ extends MorphBaseBetaGenerator(md, unfolder) {
 				val parentTriplesMap = md.getParentTriplesMap(refObjectMap);
 				val parentLogicalTable = parentTriplesMap.logicalTable;
 				val parentSubjectMap = parentTriplesMap.subjectMap;
-				val parentColumns = parentSubjectMap.getReferencedColumns;
+				val parentColumns = MorphRDBUnfolder.getReferencedColumns(parentSubjectMap, this.dbType)
 				
 				val refObjectMapAliasAux = this.owner.mapTripleAlias.get(tp);
 				val refObjectMapAlias = if(refObjectMapAliasAux.isDefined) { refObjectMapAliasAux.get}
@@ -76,8 +76,7 @@ extends MorphBaseBetaGenerator(md, unfolder) {
 		val triplesMap = cm.asInstanceOf[R2RMLTriplesMap];
 		val subjectMap = triplesMap.subjectMap;
 		val logicalTableAlias = alphaResult.alphaSubject.getAlias();
-		
-		val databaseColumnsString = subjectMap.getReferencedColumns();
+		val databaseColumnsString = MorphRDBUnfolder.getReferencedColumns(subjectMap, this.dbType)
 		
 		val result:List[ZSelectItem] = {
 			if(databaseColumnsString != null) {

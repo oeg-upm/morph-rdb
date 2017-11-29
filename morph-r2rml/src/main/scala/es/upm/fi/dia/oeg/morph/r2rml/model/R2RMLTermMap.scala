@@ -141,12 +141,13 @@ extends MorphR2RMLElement with IConstantTermMap with IColumnTermMap with ITempla
 		result;
 	}
 
+	/*
 	def  getReferencedColumns() : List[String] = {
 		val result : List[String] = if(this.termMapType == Constants.MorphTermMapType.ColumnTermMap) {
 			//List(this.getOriginalValue());
 		  List(this.columnName);
 		} else if(this.termMapType == Constants.MorphTermMapType.TemplateTermMap) {
-			val template = this.getOriginalValue();
+			val template = this.getOriginalValue()
 			RegexUtility.getTemplateColumns(template, true).toList;
 		} else {
 		  Nil
@@ -154,6 +155,7 @@ extends MorphR2RMLElement with IConstantTermMap with IColumnTermMap with ITempla
 
 		result;
 	}
+	*/
 
 
 	def getOriginalValue() : String = {

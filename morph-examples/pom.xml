@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- <parent> <groupId>es.upm.fi.dia.oeg.morph</groupId> <artifactId>morph-rdb</artifactId> 
 		<version>3.6.0</version> </parent> -->
 
 	<groupId>es.upm.fi.dia.oeg.morph</groupId>
-	<version>3.9.2</version>
+	<version>3.9.5</version>
 	<artifactId>morph-examples</artifactId>
 	<packaging>jar</packaging>
 
@@ -20,7 +20,7 @@
 		<jena.version>3.1.0</jena.version>
 		<log4j.version>2.8</log4j.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -35,18 +35,28 @@
 			<version>${scala.version}</version>
 		</dependency>
 
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-api</artifactId>
-        <version>${log4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
-        <version>${log4j.version}</version>
-      </dependency>
+		<!--      <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+              </dependency>
+              <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+              </dependency>-->
 
 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.5</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -55,14 +65,12 @@
 
 		</dependency>
 
-		<!--
-   		<dependency>
+		<dependency>
 			<groupId>es.upm.fi.dia.oeg.morph</groupId> 
 			<artifactId>morph-rdb-dist</artifactId> 
 			<type>pom</type> 
-			<version>3.8.2</version> 
+			<version>3.9.5</version>
 		</dependency>
-		-->
 
 	</dependencies>
 

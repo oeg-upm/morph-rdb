@@ -312,7 +312,7 @@ with MorphR2RMLElementVisitor {
 						} catch {
 						case e:Exception => {
 							noOfErrors = noOfErrors + 1;
-							e.printStackTrace();
+							//e.printStackTrace();
 							logger.error("error while translating data: " + e.getMessage());
 						}
 						}
@@ -581,8 +581,9 @@ with MorphR2RMLElementVisitor {
 					case Constants.MorphTermMapType.TemplateTermMap => {
 						val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }		    
 						var rawDBValues:List[Object] = Nil;
+						val termMapTemplateString = termMap.templateString.replaceAllLiterally("\\\"", dbEnclosedCharacter);
 
-						val attributes = RegexUtility.getTemplateColumns(termMap.templateString, true);
+						val attributes = RegexUtility.getTemplateColumns(termMapTemplateString, true);
 						val replacements:Map[String, String] = attributes.flatMap(attribute => {
 							val databaseColumn = if(logicalTableAlias != null) {
 								val attributeSplit = attribute.split("\\.");
@@ -640,7 +641,7 @@ with MorphR2RMLElementVisitor {
 								if(replacements.isEmpty) {
 									null
 								} else {
-									val templateWithDBValue = RegexUtility.replaceTokens(termMap.templateString, replacements);
+									val templateWithDBValue = RegexUtility.replaceTokens(termMapTemplateString, replacements);
 									if(templateWithDBValue != null) {
 										(this.translateData(termMap, templateWithDBValue, datatype), rawDBValues);  
 									} else { null }				  
