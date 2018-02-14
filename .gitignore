@@ -10,4 +10,4 @@ log/
 morph.log
 *.*~
 morph-examples/examples/batch-result.nt
-
+.metadata

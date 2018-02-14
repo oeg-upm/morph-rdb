@@ -142,10 +142,13 @@ public class ExampleCSV {
 	@Test
 	public void testExample1BatchCSVWithoutPropertiesFile() {
 		MorphCSVProperties properties = new MorphCSVProperties();
-		properties.setMappingDocumentFilePath("https://github.com/oeg-upm/morph-rdb/blob/master/morph-examples/examples-csv/example1-mapping-csv.ttl");
+		//properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/oeg-upm/morph-rdb/master/morph-examples/examples-csv/example1-mapping-csv.ttl");
+		properties.setMappingDocumentFilePath(configurationDirectory + File.separator + "example1-mapping-csv.ttl");
+		 
+		
 		properties.setOutputFilePath(configurationDirectory + File.separator + "example1-batch-result-csv.nt");
-		properties.addCSVFile("https://github.com/oeg-upm/mappingpedia-contents/blob/master/mappingpedia-testuser/1839e06a-c0a4-4bd0-ab4e-bb7d805ebb42/Sport.csv");
-		properties.addCSVFile("https://github.com/oeg-upm/mappingpedia-contents/blob/master/mappingpedia-testuser/1839e06a-c0a4-4bd0-ab4e-bb7d805ebb42/Student.csv");
+		properties.addCSVFile("https://raw.githubusercontent.com/oeg-upm/morph-rdb/master/morph-examples/examples-csv/Sport.csv");
+		properties.addCSVFile("https://raw.githubusercontent.com/oeg-upm/morph-rdb/master/morph-examples/examples-csv/Student.csv");
 		try {
 			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(properties);
@@ -161,10 +164,10 @@ public class ExampleCSV {
 	@Test
 	public void testQuery1CSVWithoutPropertiesFile() {
 		MorphCSVProperties properties = new MorphCSVProperties();
-		properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mappingpedia-testuser/1839e06a-c0a4-4bd0-ab4e-bb7d805ebb42/example1-mapping-csv.ttl");
+		properties.setMappingDocumentFilePath("https://github.com/oeg-upm/morph-rdb/blob/master/morph-examples/examples-csv/example1-mapping-csv.ttl");
 		properties.setOutputFilePath(configurationDirectory + File.separator + "query1result.xml");
-		properties.addCSVFile("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mappingpedia-testuser/1839e06a-c0a4-4bd0-ab4e-bb7d805ebb42/Sport.csv");
-		properties.addCSVFile("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mappingpedia-testuser/1839e06a-c0a4-4bd0-ab4e-bb7d805ebb42/Student.csv");
+		properties.addCSVFile("https://raw.githubusercontent.com/oeg-upm/morph-rdb/master/morph-examples/examples-csv/Sport.csv");
+		properties.addCSVFile("https://raw.githubusercontent.com/oeg-upm/morph-rdb/master/morph-examples/examples-csv/Student.csv");
 		//properties.setQueryFilePath("https://github.com/oeg-upm/mappingpedia-contents/blob/master/mappingpedia-testuser/1839e06a-c0a4-4bd0-ab4e-bb7d805ebb42/example1-query01.rq");
 		properties.setQueryFilePath("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/mappingpedia-testuser/1839e06a-c0a4-4bd0-ab4e-bb7d805ebb42/example1-query01.rq");
 		
