@@ -24,7 +24,7 @@ class TriplePatternPredicateBounder(mappingFile : String
   
 val logger = LoggerFactory.getLogger(this.getClass());
 		
-	val mappingDocument = new R2RMLMappingDocument(mappingFile);
+	val mappingDocument = new R2RMLMappingDocumentSimple(mappingFile);
 	val constants = new Constants();
 	
 	def this(mappingFile : String) {

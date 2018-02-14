@@ -13,7 +13,7 @@ import org.apache.jena.util.FileManager;
 import org.apache.jena.rdf.model.Resource;
 import org.slf4j.LoggerFactory
 
-class R2RMLMappingDocument(mappingFile : String) {
+class R2RMLMappingDocumentSimple(mappingFile : String) {
 val logger = LoggerFactory.getLogger(this.getClass());
 		
 //	object MorphTermMapType extends Enumeration {

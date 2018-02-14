@@ -286,7 +286,7 @@ object R2RMLMappingDocument {
 		     val morphProperties = props.asInstanceOf[MorphProperties];
 			   md.buildMetaData(connection, morphProperties.databaseName, morphProperties.databaseType );
 		   } catch {
-		     case e:Exception => { logger.warn("Error while building metadata.") }
+		     case e:Exception => { logger.warn("Error occured while building metadata.") }
 		   }
 		}
    
