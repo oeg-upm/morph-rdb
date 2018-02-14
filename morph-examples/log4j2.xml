@@ -7,13 +7,13 @@ status="WARN">
     </Console>
 </Appenders>
 <Loggers>
-    <Logger name="log4j.test.Log4jTest" level="trace">
+    <Logger name="log4j.test.Log4jTest" level="info">
         <AppenderRef ref="Console"/>
     </Logger>
-    <Logger name="Jena" level="trace">
+    <Logger name="Jena" level="info">
         <AppenderRef ref="Console"/>
     </Logger>
-    <Root level="trace">
+    <Root level="info">
         <AppenderRef ref="Console"/>
     </Root>
 </Loggers>
