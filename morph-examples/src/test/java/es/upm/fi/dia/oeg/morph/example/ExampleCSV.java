@@ -44,6 +44,42 @@ public class ExampleCSV {
 	}
 
 	@Test
+	public void testLinkedFiestasWithPropertiesFile() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
+		String configurationFile = "linkedfiestas-batch-csv.morph.properties";
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
+	public void testLinkedFiestasWithoutPropertiesFile() {
+		MorphCSVProperties properties = new MorphCSVProperties();
+		properties.setMappingDocumentFilePath(
+				"https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/test-mobileage-upm/766351de-9aed-4c20-b8b9-f2c06452de81/linkedfiestas1b.r2rml.ttl"				
+		);
+		properties.setOutputFilePath(configurationDirectory + File.separator + "linkedfiestas1b.nt");
+		properties.addCSVFile("https://raw.githubusercontent.com/fpriyatna/linked-fiestas/master/datasets/fiestas/linkedfiestas1.csv");
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
+			runner.run();
+			assertTrue("testBatch done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			assertTrue(errorMessage, false);
+		}
+	}
+	
+	@Test
 	public void testEdificioHistoricoLocal() {
 		MorphCSVProperties properties = new MorphCSVProperties();
 		properties.setMappingDocumentFilePath(configurationDirectory + File.separator + "edificio-historico.r2rml.ttl");

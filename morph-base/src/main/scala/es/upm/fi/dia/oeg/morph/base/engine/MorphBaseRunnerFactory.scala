@@ -28,7 +28,7 @@ abstract class MorphBaseRunnerFactory {
 	//val logger = LogManager.getLogger(this.getClass);
 		val logger = LoggerFactory.getLogger(this.getClass());
 
-  logger.info("running morph-rdb 3.9.6 ...");
+  logger.info("running morph-rdb 3.9.8 ...");
 
 	def createRunner(configurationDirectory:String , configurationFile:String)
 	: MorphBaseRunner = {
@@ -85,12 +85,17 @@ abstract class MorphBaseRunnerFactory {
         outputParentFile.mkdirs();
       }
 
+      logger.info(s"Setting output to ${outputFileName}");
       new PrintWriter( outputFileName, "UTF-8")
     }
     else {
-      if(!automaticMappingsGeneration) { new StringWriter }
+      if(!automaticMappingsGeneration) {
+        logger.info(s"Writing output to StringWriter");
+        new StringWriter 
+        }
       else {
         val outputFileName = morphProperties.databaseName + "-result.nt";
+        logger.info(s"Writing output to ${outputFileName}");
         new PrintWriter( outputFileName, "UTF-8");
       }
 

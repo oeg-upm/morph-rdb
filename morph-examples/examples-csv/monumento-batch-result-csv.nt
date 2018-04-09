@@ -1,0 +1,100 @@
+<http://www.zaragoza.es/api/recurso/turismo/monumento/2>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/2>	<http://schema.org/name>	"Museo del Foro de Caesaraugusta" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/94>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/94>	<http://schema.org/name>	"Centro de Historias de Zaragoza. Antiguo Convento de San Agustín" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/26>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/26>	<http://schema.org/name>	"Casa de los Morlanes" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/892>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/892>	<http://schema.org/name>	"Azud del Río Ebro" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/10>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/10>	<http://schema.org/name>	"Arco y casa del Deán" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/11>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/11>	<http://schema.org/name>	"Monasterio de la Resurrección de canonesas del Santo Sepulcro" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/78>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/78>	<http://schema.org/name>	"Auditorio - Palacio de Congresos" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/80>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/80>	<http://schema.org/name>	"Casa Solans" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/82>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/82>	<http://schema.org/name>	"Plaza de Toros de la Misericordia" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/72>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/72>	<http://schema.org/name>	"Edificio de Correos y Telégrafos" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/3>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/3>	<http://schema.org/name>	"Museo del Puerto Fluvial de Caesaraugusta" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/12>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/12>	<http://schema.org/name>	"Iglesia Parroquial de Santa Maria Magdalena" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/13>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/13>	<http://schema.org/name>	"Baños Judíos" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/0>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/0>	<http://schema.org/name>	"Catedral de San Salvador o la Seo" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/166>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/166>	<http://schema.org/name>	"Barrio de la Cartuja. Antiguas Escuelas" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/92>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/92>	<http://schema.org/name>	"Estatua del Emperador Augusto" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/93>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/93>	<http://schema.org/name>	"Fuente de Neptuno o Fuente de la Princesa" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/96>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/96>	<http://schema.org/name>	"Canal Imperial de Aragón" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/74>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/74>	<http://schema.org/name>	"Antiguo Matadero Municipal" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/87>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/87>	<http://schema.org/name>	"Monumento a la Constitución Española de 1978" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/170>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/170>	<http://schema.org/name>	"Barrio de la Cartuja. Iglesia de la Cartuja Inmaculada Concepción" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/132>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/132>	<http://schema.org/name>	"Barrio de Movera. Torre Santa Engracia" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/15>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/15>	<http://schema.org/name>	"Iglesia Parroquial de San Gil Abad" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/1>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/1>	<http://schema.org/name>	"Murallas Romanas" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/98>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/98>	<http://schema.org/name>	"Arboleda de Macanaz" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/99>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/99>	<http://schema.org/name>	"Soto de Cantalobos" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/100>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/100>	<http://schema.org/name>	"Antigua Joyería Aladrén  ahora Gran Café de Zaragoza" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/102>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/102>	<http://schema.org/name>	"Barrio de Garrapinillos. Iglesia de San Lorenzo" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/107>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/107>	<http://schema.org/name>	"Barrio de Monzalbarba. Torre de la Antigua Iglesia" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/108>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/108>	<http://schema.org/name>	"Barrio de Juslibol. Iglesia de Nuestra Señora de la Asunción" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/16>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/16>	<http://schema.org/name>	"Torreón de la Zuda" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/181>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/181>	<http://schema.org/name>	"Barrio de Alfocea. Iglesia Inmaculada Concepción" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/79>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/79>	<http://schema.org/name>	"Ayuntamiento o Casa Consistorial de Zaragoza" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/187>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/187>	<http://schema.org/name>	"Mercado Central" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/4>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/4>	<http://schema.org/name>	"Museo de las Termas Públicas de Caesaraugusta" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/83>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/83>	<http://schema.org/name>	"Puente de Hierro  o Puente del Pilar" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/89>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/89>	<http://schema.org/name>	"Monumento al Rey Alfonso I El Batallador" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/90>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/90>	<http://schema.org/name>	"Monumento al Justiciazgo" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/91>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/91>	<http://schema.org/name>	"Monumento a Goya" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/165>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/165>	<http://schema.org/name>	"Barrio de San Gregorio. Hospital de Enfermos del tórax" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/188>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/188>	<http://schema.org/name>	"Fuente de la Samaritana" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/97>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/97>	<http://schema.org/name>	"Galacho de Juslibol" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/186>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/186>	<http://schema.org/name>	"Monumento a Don Ramón Pignatelli" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/189>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/189>	<http://schema.org/name>	"Fuente de la Hispanidad" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/38>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/38>	<http://schema.org/name>	"Real Seminario de San Carlos Borromeo." .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/48>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/48>	<http://schema.org/name>	"Palacio Arzobispal" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/47>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/47>	<http://schema.org/name>	"Palacio de los Condes de Sobradiel o de Gabarda" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/59>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/59>	<http://schema.org/name>	"Casa Juncosa" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/60>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/60>	<http://schema.org/name>	"Casa Retuerta" .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/61>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/TouristAttraction> .
+<http://www.zaragoza.es/api/recurso/turismo/monumento/61>	<http://schema.org/name>	"Quiosco de la Música" .

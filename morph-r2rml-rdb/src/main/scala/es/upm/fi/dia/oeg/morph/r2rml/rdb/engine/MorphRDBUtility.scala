@@ -190,11 +190,13 @@ object MorphRDBUtility {
 	}
 
 	def loadCSVFromLocalFile(localPath:String) : File = {
-			logger.info("Loading CSV file from local file:" + localPath);
+			logger.info("Loading CSV file:" + localPath);
 			this.loadCSVFromURL(localPath);
 	}
 
 	def loadCSVFromLocation(location:String) : File = {
+	  logger.info("Loading CSV file ...");
+	  
 			if(location.contains("https://github.com") && location.contains("/blob/")) {
 				this.loadCSVFromGitHubBlob(location); 
 			} else {
@@ -237,6 +239,7 @@ object MorphRDBUtility {
 			} else {
 				"CREATE TABLE \"" + tableName + "\" AS SELECT * FROM CSVREAD('" + fileURL + "');";
 			}
+			logger.info(s"createTableString = {$fieldSeparator.get}");
 
 			val stmt = conn.createStatement();
 

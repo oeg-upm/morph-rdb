@@ -1,0 +1,354 @@
+<http://fr.dbpedia.org/resource/Square_Ozanam>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Ozanam>	<http://schema.org/address>	"RUE STANISLAS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_des_Champs_Elysées,_Jardin_de_la_Vallée_Suisse>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_des_Champs_Elysées,_Jardin_de_la_Vallée_Suisse>	<http://schema.org/address>	"AVENUE DES CHAMPS ELYSEES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Boucicaut>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Boucicaut>	<http://schema.org/address>	"RUE DE BABYLONE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Pierre_de_GAULLE>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Pierre_de_GAULLE>	<http://schema.org/address>	"PLACE DU PRESIDENT MITHOUARD"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_des_Jardiniers>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_des_Jardiniers>	<http://schema.org/address>	"PASSAGE DUMAS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_ALBERT_TOURNAIRE>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_ALBERT_TOURNAIRE>	<http://schema.org/address>	"PLACE MAZAS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Robert_Bajac>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Robert_Bajac>	<http://schema.org/address>	"BOULEVARD KELLERMANN"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_des_Deux_Moulins>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_des_Deux_Moulins>	<http://schema.org/address>	"AVENUE EDISON"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Marie_Curie>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Marie_Curie>	<http://schema.org/address>	"BOULEVARD DE L HOPITAL"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Rosny_Ainé>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Rosny_Ainé>	<http://schema.org/address>	"RUE PAUL BOURGET"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_Place_de_la_Nation>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_Place_de_la_Nation>	<http://schema.org/address>	"PLACE DE LA NATION"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_Gare_de_Reuilly>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_Gare_de_Reuilly>	<http://schema.org/address>	"RUE PAUL DUKAS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_des_rues_de_Picpus_et_de_Reuilly>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_des_rues_de_Picpus_et_de_Reuilly>	<http://schema.org/address>	"RUE DE PICPUS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/SQUARE_DE_L'ASPIRANT_DUNAND>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/SQUARE_DE_L'ASPIRANT_DUNAND>	<http://schema.org/address>	"RUE SAILLARD"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_du_Ranelagh>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_du_Ranelagh>	<http://schema.org/address>	"CHAUSSEE DE LA MUETTE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardins_de_l'avenue_Foch>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardins_de_l'avenue_Foch>	<http://schema.org/address>	"AVENUE FOCH"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_du_Grand_Pavois>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_du_Grand_Pavois>	<http://schema.org/address>	"RUE DE LOURMEL"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Duranton>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Duranton>	<http://schema.org/address>	"RUE DURANTON"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_du_Saut_de_Mouton_Ermont-Invalides>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_du_Saut_de_Mouton_Ermont-Invalides>	<http://schema.org/address>	"QUAI DE GRENELLE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_du_62_au_68_rue_d'Alleray>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_du_62_au_68_rue_d'Alleray>	<http://schema.org/address>	"RUE D ALLERAY"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Jan_Doornik>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Jan_Doornik>	<http://schema.org/address>	"BOULEVARD FLANDRIN"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_des_Poètes>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_des_Poètes>	<http://schema.org/address>	"AVENUE DE LA PORTE D'AUTEUIL"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_Promenade_Péreire_-_Bayen_/_Lebon>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_Promenade_Péreire_-_Bayen_/_Lebon>	<http://schema.org/address>	"AVENUE DES TERNES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_place_de_la_Porte_de_Saint_Cloud>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_place_de_la_Porte_de_Saint_Cloud>	<http://schema.org/address>	"PLACE DE LA PORTE DE SAINT CLOUD"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Claire_MOTTE>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Claire_MOTTE>	<http://schema.org/address>	"PLACE PAUL TORTELIER"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/JARDIN_DE_LA_ZAC_D'ALESIA>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/JARDIN_DE_LA_ZAC_D'ALESIA>	<http://schema.org/address>	"AVENUE DE LA SIBELLE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_place_du_Maréchal_de_Lattre_de_Tassigny>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_place_du_Maréchal_de_Lattre_de_Tassigny>	<http://schema.org/address>	"PLACE DU MARECHAL DE LATTRE DE TASSIGNY"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Paul_DIDIER>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Paul_DIDIER>	<http://schema.org/address>	"RUE DU COLONEL MANHES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Paul_ROBIN>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Paul_ROBIN>	<http://schema.org/address>	"PLACE HEBERT"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_rue_de_PALI-KAO>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_rue_de_PALI-KAO>	<http://schema.org/address>	"RUE DE PALI KAO"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_des_Grès>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_des_Grès>	<http://schema.org/address>	"RUE VITRUVE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_rue_PAGANINI>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_rue_PAGANINI>	<http://schema.org/address>	"BOULEVARD DAVOUT"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_Salamandre>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_Salamandre>	<http://schema.org/address>	"SQUARE DE LA SALAMANDRE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_place_Souham>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_place_Souham>	<http://schema.org/address>	"PLACE SOUHAM"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_des_grands_explorateurs>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_des_grands_explorateurs>	<http://schema.org/address>	"AVENUE DE L OBSERVATOIRE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Esplanade_Gaston_Monnerville>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Esplanade_Gaston_Monnerville>	<http://schema.org/address>	"PLACE ANDRE HONNORAT"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_l'avenue_JEAN_AICARD>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_l'avenue_JEAN_AICARD>	<http://schema.org/address>	"AVENUE JEAN AICARD"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Abbé_Esquerre>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Abbé_Esquerre>	<http://schema.org/address>	"PLACE DU PRESIDENT MITHOUARD"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/SQUARE_LEOPOLD_ACHILLE>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/SQUARE_LEOPOLD_ACHILLE>	<http://schema.org/address>	"RUE DU PARC ROYAL"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Louis_XIII>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Louis_XIII>	<http://schema.org/address>	"PLACE DES VOSGES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Esplanade_Habib_Bourguiba>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Esplanade_Habib_Bourguiba>	<http://schema.org/address>	"ESPLANADE HABIB BOURGUIBA"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_l'INTENDANT>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_l'INTENDANT>	<http://schema.org/address>	"AVENUE DE TOURVILLE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_tour_Saint-Jacques>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_tour_Saint-Jacques>	<http://schema.org/address>	"RUE SAINT MARTIN"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_d'ESTIENNE_d'ORVES>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_d'ESTIENNE_d'ORVES>	<http://schema.org/address>	"PLACE D ESTIENNE D ORVES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Villemin>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Villemin>	<http://schema.org/address>	"RUE DES RECOLLETS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Florence_Blumenthal>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Florence_Blumenthal>	<http://schema.org/address>	"RUE DU CHATEAU DES RENTIERS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_LOUIS_MAJORELLE>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_LOUIS_MAJORELLE>	<http://schema.org/address>	"RUE DE LA FORGE ROYALE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_YITZHAK_RABIN>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_YITZHAK_RABIN>	<http://schema.org/address>	"RUE JOSEPH KESSEL"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_James_Joyce>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_James_Joyce>	<http://schema.org/address>	"RUE GEORGE BALANCHINE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_du_Champ_de_Mars_et_pelouse_Ecole_Militaire>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_du_Champ_de_Mars_et_pelouse_Ecole_Militaire>	<http://schema.org/address>	"AVENUE ANATOLE FRANCE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_d'Ajaccio>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_d'Ajaccio>	<http://schema.org/address>	"RUE DE GRENELLE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/SQUARE_DE_LA_PLACE_DAUPHINE>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/SQUARE_DE_LA_PLACE_DAUPHINE>	<http://schema.org/address>	"PLACE DAUPHINE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/JARDIN_ANNE_FRANK_(HOTEL_SAINT-AIGNAN)>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/JARDIN_ANNE_FRANK_(HOTEL_SAINT-AIGNAN)>	<http://schema.org/address>	"IMPASSE BERTHAUD"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_VAN_VOLLENHOVEN>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_VAN_VOLLENHOVEN>	<http://schema.org/address>	"RUE MARCEL DUBOIS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_EMILE_COHL>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_EMILE_COHL>	<http://schema.org/address>	"RUE JULES LEMAITRE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_d'immeubles_du_Bd_Carnot>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_d'immeubles_du_Bd_Carnot>	<http://schema.org/address>	"BOULEVARD CARNOT"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_ILAN_HALIMI>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_ILAN_HALIMI>	<http://schema.org/address>	"RUE DE FECAMP"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Alexandre_et_René_PARODI>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Alexandre_et_René_PARODI>	<http://schema.org/address>	"PLACE DE LA PORTE MAILLOT"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/MAIL_MAURICE_NOGUES>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/MAIL_MAURICE_NOGUES>	<http://schema.org/address>	"RUE MAURICE NOGUES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_du_Cours_Albert_1er>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_du_Cours_Albert_1er>	<http://schema.org/address>	"COURS ALBERT 1ER"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/SQUARE_DU_TEMPLE>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/SQUARE_DU_TEMPLE>	<http://schema.org/address>	"RUE DE BRETAGNE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_de_l'avenue_de_Breteuil>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_de_l'avenue_de_Breteuil>	<http://schema.org/address>	"ESPLANADE DU SOUVENIR FRANCAIS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Jean_XXIII>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Jean_XXIII>	<http://schema.org/address>	"QUAI DE L ARCHEVECHE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Barye>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Barye>	<http://schema.org/address>	"BOULEVARD HENRI IV"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Louis_XVI>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Louis_XVI>	<http://schema.org/address>	"RUE PASQUIER"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_d'ANVERS>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_d'ANVERS>	<http://schema.org/address>	"PLACE D ANVERS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Catherine_Labouré>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Catherine_Labouré>	<http://schema.org/address>	"RUE DE BABYLONE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Samuel_ROUSSEAU>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Samuel_ROUSSEAU>	<http://schema.org/address>	"RUE LAS CASES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_DU_PORT_DE_L'HOTEL_DE_VILLE>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_DU_PORT_DE_L'HOTEL_DE_VILLE>	<http://schema.org/address>	"PORT DE L HOTEL DE VILLE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Henri_Galli>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Henri_Galli>	<http://schema.org/address>	"BOULEVARD HENRI IV"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_Reuilly>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_Reuilly>	<http://schema.org/address>	"RUE ALBINONI"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Parc_Monceau>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Parc_Monceau>	<http://schema.org/address>	"PLACE DE LA REPUBLIQUE DOMINICAINE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Alban_Satragne>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Alban_Satragne>	<http://schema.org/address>	"SQUARE ALBAN SATRAGNE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Eugène_Varlin,_rive_droite>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Eugène_Varlin,_rive_droite>	<http://schema.org/address>	"QUAI DE JEMMAPES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Frédéric_Lemaitre>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Frédéric_Lemaitre>	<http://schema.org/address>	"RUE DU FAUBOURG DU TEMPLE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_René_le_Gall>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_René_le_Gall>	<http://schema.org/address>	"RUE EMILE DESLANDRES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_Porte_de_la_Plaine>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_Porte_de_la_Plaine>	<http://schema.org/address>	"PLACE DES INSURGES DE VARSOVIE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_des_Périchaux>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_des_Périchaux>	<http://schema.org/address>	"BOULEVARD LEFEBVRE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_des_Cévennes>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_des_Cévennes>	<http://schema.org/address>	"RUE CAUCHY"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Brancion>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Brancion>	<http://schema.org/address>	"AVENUE DE LA PORTE BRANCION"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_du_quai_de_Grenelle>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_du_quai_de_Grenelle>	<http://schema.org/address>	"QUAI DE GRENELLE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Henri_Collet>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Henri_Collet>	<http://schema.org/address>	"RUE GROS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_Bernard_LAFAY_-_A4>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_Bernard_LAFAY_-_A4>	<http://schema.org/address>	"BOULEVARD DE REIMS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Thomas_JEFFERSON>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Thomas_JEFFERSON>	<http://schema.org/address>	"PLACE DES ETATS UNIS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Raymond_QUENEAU>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Raymond_QUENEAU>	<http://schema.org/address>	"RUE RAYMOND QUENEAU"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_CARPEAUX>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_CARPEAUX>	<http://schema.org/address>	"RUE CARPEAUX"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Antoine_BLONDIN>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Antoine_BLONDIN>	<http://schema.org/address>	"RUE DE BAGNOLET"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_place_de_Bitche>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_place_de_Bitche>	<http://schema.org/address>	"PLACE DE BITCHE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Casque_d'Or>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Casque_d'Or>	<http://schema.org/address>	"RUE MICHEL DE BOURGES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_gare_de_Charonne>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_gare_de_Charonne>	<http://schema.org/address>	"BOULEVARD DAVOUT"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/SQUARE_JEAN_MOULIN>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/SQUARE_JEAN_MOULIN>	<http://schema.org/address>	"AVENUE ERNEST REYER"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_dalle_d'Ivry_1>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_dalle_d'Ivry_1>	<http://schema.org/address>	"AVENUE DE CHOISY"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Aristide_Cavaillé-Coll>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Aristide_Cavaillé-Coll>	<http://schema.org/address>	"PLACE FRANZ LISZT"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Décoration_place_du_Trocadéro_et_du_11_Novembre>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Décoration_place_du_Trocadéro_et_du_11_Novembre>	<http://schema.org/address>	"PLACE DU TROCADERO ET DU ONZE NOVEMBRE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/JARDIN_DES_SUISSES>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/JARDIN_DES_SUISSES>	<http://schema.org/address>	"RUE DES SUISSES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/SQUARE_DES_JONQUILLES>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/SQUARE_DES_JONQUILLES>	<http://schema.org/address>	"RUE VERCINGETORIX"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/SQUARE_JULIA_BARTET>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/SQUARE_JULIA_BARTET>	<http://schema.org/address>	"RUE JULIA BARTET"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_Choisy>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_Choisy>	<http://schema.org/address>	"RUE GEORGE EASTMAN"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square__Ecrivains_combattants_morts_pour_la_France>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square__Ecrivains_combattants_morts_pour_la_France>	<http://schema.org/address>	"AVENUE DU MARECHAL MAUNOURY"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_Bernard_LAFAY_-_A4>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_Bernard_LAFAY_-_A4>	<http://schema.org/address>	"BOULEVARD DE REIMS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Robert_SCHUMANN>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Robert_SCHUMANN>	<http://schema.org/address>	"BOULEVARD LANNES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Maria_VERONE>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Maria_VERONE>	<http://schema.org/address>	"RUE MOSKOVA"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_Porte_de_la_Villette>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_Porte_de_la_Villette>	<http://schema.org/address>	"RUE DU CHEMIN DE FER"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_Bernard_LAFAY_-_A4>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_Bernard_LAFAY_-_A4>	<http://schema.org/address>	"BOULEVARD DE REIMS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Parc_des_Buttes_Chaumont>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Parc_des_Buttes_Chaumont>	<http://schema.org/address>	"RUE BOTZARIS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_Promenade_Péreire_-_Bayen_/_Lebon>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_Promenade_Péreire_-_Bayen_/_Lebon>	<http://schema.org/address>	"AVENUE DES TERNES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Alexis_Clérel_de_Tocqueville>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Alexis_Clérel_de_Tocqueville>	<http://schema.org/address>	"RUE DE TOCQUEVILLE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Marcel_SEMBAT>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Marcel_SEMBAT>	<http://schema.org/address>	"RUE FREDERIC SCHNEIDER"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_rue_Henri_HUCHARD>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_rue_Henri_HUCHARD>	<http://schema.org/address>	"RUE LOUIS PASTEUR VALLERY RADOT"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Pierre_SEGHERS>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Pierre_SEGHERS>	<http://schema.org/address>	"RUE HELENE JAKUBOWICZ"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_du_Docteur_Jacques-Joseph_GRANCHER>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_du_Docteur_Jacques-Joseph_GRANCHER>	<http://schema.org/address>	"RUE SORBIER"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_des_rues_Belleville/Télégraphe>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_des_rues_Belleville/Télégraphe>	<http://schema.org/address>	"RUE DE BELLEVILLE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_SORBIER-BIDASSOA>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_SORBIER-BIDASSOA>	<http://schema.org/address>	"RUE SORBIER"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Sarah_Bernhardt>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Sarah_Bernhardt>	<http://schema.org/address>	"RUE DE BUZENVAL"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Naturel,_114_rue_de_la_Réunion>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Naturel,_114_rue_de_la_Réunion>	<http://schema.org/address>	"RUE DE LA REUNION"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Léon_SERPOLLET>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Léon_SERPOLLET>	<http://schema.org/address>	"RUE MARCADET"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Tino_Rossi>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Tino_Rossi>	<http://schema.org/address>	"QUAI SAINT BERNARD"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Curial_-_cité_Michelet>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Curial_-_cité_Michelet>	<http://schema.org/address>	"RUE CURIAL"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_d'immeubles_Pte_Vincennes_Nord>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_d'immeubles_Pte_Vincennes_Nord>	<http://schema.org/address>	"RUE CRISTINO GARCIA"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Parc_Marcel_BLEUSTEIN-BLANCHET>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Parc_Marcel_BLEUSTEIN-BLANCHET>	<http://schema.org/address>	"RUE DE LA BONNE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_RACHMANINOV>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_RACHMANINOV>	<http://schema.org/address>	"RUE TRISTAN TZARA"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_Roquette>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_Roquette>	<http://schema.org/address>	"RUE DE LA ROQUETTE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_DAMIA>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_DAMIA>	<http://schema.org/address>	"RUE ROBERT ET SONIA DELAUNAY"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_JEAN_MORIN>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_JEAN_MORIN>	<http://schema.org/address>	"RUE DE CHARENTON"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_ARMAND_TROUSSEAU>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_ARMAND_TROUSSEAU>	<http://schema.org/address>	"RUE ANTOINE VOLLON"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_de_la_rue_du_Sahel>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_de_la_rue_du_Sahel>	<http://schema.org/address>	"RUE DU SAHEL"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/SQUARE_DU_SERMENT_DE_KOUFRA>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/SQUARE_DU_SERMENT_DE_KOUFRA>	<http://schema.org/address>	"AVENUE ERNEST REYER"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_Poterne_des_Peupliers>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_Poterne_des_Peupliers>	<http://schema.org/address>	"RUE DAMESME"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Parc_Kellermann>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Parc_Kellermann>	<http://schema.org/address>	"RUE DE LA POTERNE DES PEUPLIERS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_Mongolfière>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_Mongolfière>	<http://schema.org/address>	"RUE DU MOULINET"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Henri_Cadiou>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Henri_Cadiou>	<http://schema.org/address>	"BOULEVARD ARAGO"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/SQUARE_DU_MOULIN_DE_LA_VIERGE>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/SQUARE_DU_MOULIN_DE_LA_VIERGE>	<http://schema.org/address>	"RUE VERCINGETORIX"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_de_l'avenue_de_Breteuil>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_de_l'avenue_de_Breteuil>	<http://schema.org/address>	"AVENUE DE BRETEUIL"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Bela_BARTOK>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Bela_BARTOK>	<http://schema.org/address>	"PLACE DE BRAZZAVILLE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_du_quai_André_Citröen>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_du_quai_André_Citröen>	<http://schema.org/address>	"QUAI ANDRE CITROEN"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_d'Australie>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_d'Australie>	<http://schema.org/address>	"QUAI BRANLY"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_fondation_d'Auteuil>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_fondation_d'Auteuil>	<http://schema.org/address>	"RUE JEAN DE LA FONTAINE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Parc_de_Passy>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Parc_de_Passy>	<http://schema.org/address>	"AVENUE MARCEL PROUST"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Alfred_CAPUS>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Alfred_CAPUS>	<http://schema.org/address>	"BOULEVARD SUCHET"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_des_Epinettes>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_des_Epinettes>	<http://schema.org/address>	"RUE MARIA DERAISMES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Rodin>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Rodin>	<http://schema.org/address>	"AVENUE ADRIEN HEBRARD"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_l'hôpital_Sainte_Périne>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_l'hôpital_Sainte_Périne>	<http://schema.org/address>	"RUE MIRABEAU"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_des_Batignolles>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_des_Batignolles>	<http://schema.org/address>	"RUE CARDINET"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_rue_Compans>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_rue_Compans>	<http://schema.org/address>	"RUE COMPANS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Squ._des_Arènes_de_Lutèce>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Squ._des_Arènes_de_Lutèce>	<http://schema.org/address>	"PLACE EMILE MALE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_Paix>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_Paix>	<http://schema.org/address>	"RUE DE LAGNY"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Alexandre_LUQUET>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Alexandre_LUQUET>	<http://schema.org/address>	"RUE DU TRANSVAAL"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_place_Dupleix>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_place_Dupleix>	<http://schema.org/address>	"PLACE DUPLEIX"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_Raffinerie_Say>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_Raffinerie_Say>	<http://schema.org/address>	"BOULEVARD VINCENT AURIOL"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Henri_Karcher>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Henri_Karcher>	<http://schema.org/address>	"RUE DES PYRENEES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_du_Monument_aux_Mères_Françaises>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_du_Monument_aux_Mères_Françaises>	<http://schema.org/address>	"BOULEVARD KELLERMANN"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_médiéval_du_musée_de_Cluny>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_médiéval_du_musée_de_Cluny>	<http://schema.org/address>	"BOULEVARD SAINT GERMAIN"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_l'Ecole_Polytechnique>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_l'Ecole_Polytechnique>	<http://schema.org/address>	"RUE DESCARTES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Colbert>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Colbert>	<http://schema.org/address>	"RUE DE CHARONNE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Marcel_Pagnol>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Marcel_Pagnol>	<http://schema.org/address>	"RUE DE LABORDE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_R._LENOIR_dit_"Bréguet_/_St_Sabin">	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_R._LENOIR_dit_"Bréguet_/_St_Sabin">	<http://schema.org/address>	"BOULEVARD RICHARD LENOIR"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_du_Cours_la_Reine>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_du_Cours_la_Reine>	<http://schema.org/address>	"COURS LA REINE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/JARDIN_NELSON_MANDELA>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/JARDIN_NELSON_MANDELA>	<http://schema.org/address>	"RUE BERGER"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/SQUARE_DE_LA_RUE_DE_CHATILLON>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/SQUARE_DE_LA_RUE_DE_CHATILLON>	<http://schema.org/address>	"RUE DE CHATILLON"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Juan_Miro>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Juan_Miro>	<http://schema.org/address>	"RUE GANDON"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/PARC_MONTSOURIS>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/PARC_MONTSOURIS>	<http://schema.org/address>	"BOULEVARD JOURDAN"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/SQUARE_DE_L'ABBE_MIGNE>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/SQUARE_DE_L'ABBE_MIGNE>	<http://schema.org/address>	"PLACE DENFERT ROCHEREAU"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/SQUARE_DU_CHANOINE_VIOLLET>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/SQUARE_DU_CHANOINE_VIOLLET>	<http://schema.org/address>	"RUE DU MOULIN VERT"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_place_du_Commerce>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_place_du_Commerce>	<http://schema.org/address>	"PLACE DU COMMERCE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_du_Docteur_CALMETTE>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_du_Docteur_CALMETTE>	<http://schema.org/address>	"RUE JEAN SICARD"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_de_la_Villa_Sainte-Croix>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_de_la_Villa_Sainte-Croix>	<http://schema.org/address>	"VILLA SAINTE CROIX"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardins_de_la_Porte_de_Saint_Cloud>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardins_de_la_Porte_de_Saint_Cloud>	<http://schema.org/address>	"AVENUE FERDINAND BUISSON"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_et_aire_sportive_de_l'allée_des_Cygnes>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_et_aire_sportive_de_l'allée_des_Cygnes>	<http://schema.org/address>	"ALLEE DES CYGNES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Parc_André_Citroën>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Parc_André_Citroën>	<http://schema.org/address>	"RUE DE LA MONTAGNE DE LA FAGE"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_Promenade_Péreire_-_Bayen_/_Lebon>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_Promenade_Péreire_-_Bayen_/_Lebon>	<http://schema.org/address>	"AVENUE DES TERNES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Promenade_Bernard_LAFAY_-_A4>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Promenade_Bernard_LAFAY_-_A4>	<http://schema.org/address>	"BOULEVARD DE REIMS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardinet_Auguste_BALAGNY>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardinet_Auguste_BALAGNY>	<http://schema.org/address>	"RUE JEAN OESTREICHER"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Square_Suzanne_BUISSON>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Square_Suzanne_BUISSON>	<http://schema.org/address>	"RUE GIRARDON"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_Samuel_de_Champlain>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_Samuel_de_Champlain>	<http://schema.org/address>	"AVENUE GAMBETTA"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_rue_des_COURONNES>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_de_la_rue_des_COURONNES>	<http://schema.org/address>	"RUE DES COURONNES"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_des_cendriers>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_des_cendriers>	<http://schema.org/address>	"RUE DURIS"^^<http://www.w3.org/2001/XMLSchema#string> .
+<http://fr.dbpedia.org/resource/Jardin_13/15_rue_Rébeval>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Park> .
+<http://fr.dbpedia.org/resource/Jardin_13/15_rue_Rébeval>	<http://schema.org/address>	"RUE REBEVAL"^^<http://www.w3.org/2001/XMLSchema#string> .

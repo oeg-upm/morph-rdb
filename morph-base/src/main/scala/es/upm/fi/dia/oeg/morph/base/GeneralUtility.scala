@@ -83,12 +83,12 @@ object GeneralUtility {
 	//Creates a quad
 	def createQuad(subject:String , predicate:String , obj:String , graph:String ) = {
 		val graphString = if(graph != null) {
-			" " + graph;
+			"\t" + graph;
 		} else {
 		  ""
 		}
 		
-		val result = subject + " " + predicate + " " + obj + graphString + " .\n";    
+		val result = subject + "\t" + predicate + "\t" + obj + graphString + " .\n";    
 		result;
 	}
 	
