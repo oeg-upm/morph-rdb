@@ -98,6 +98,24 @@ public class ExampleCSV {
 	}
 	
 	@Test
+	public void testInternationalInterestFestivals() {
+		MorphCSVProperties properties = new MorphCSVProperties();
+		properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/fpriyatna/linked-fiestas/master/datasets/wikipedia/spain-international1.r2rml.ttl");
+		properties.setOutputFilePath(configurationDirectory + File.separator + "spain-international1.nt");
+		properties.addCSVFile("https://raw.githubusercontent.com/fpriyatna/linked-fiestas/master/datasets/wikipedia/spain-international1.csv");
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
+			runner.run();
+			assertTrue("testBatch done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			assertTrue(errorMessage, false);
+		}
+	}
+	
+	@Test
 	public void testEdificioHistoricoLocal() {
 		MorphCSVProperties properties = new MorphCSVProperties();
 		properties.setMappingDocumentFilePath(configurationDirectory + File.separator + "edificio-historico.r2rml.ttl");
