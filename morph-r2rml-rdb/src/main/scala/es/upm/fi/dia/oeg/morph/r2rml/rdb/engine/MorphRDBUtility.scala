@@ -190,7 +190,7 @@ object MorphRDBUtility {
 	}
 
 	def loadCSVFromLocalFile(localPath:String) : File = {
-			logger.info("Loading CSV file:" + localPath);
+			logger.info("Loading CSV file: " + localPath);
 			this.loadCSVFromURL(localPath);
 	}
 
@@ -229,7 +229,7 @@ object MorphRDBUtility {
 			if(lastDotChar == -1) {
 				throw new Exception("CSV file does not have any extension.");
 			}
-			val tableName = filename.substring(0, lastDotChar);
+			val tableName = filename.substring(0, lastDotChar).toUpperCase();
 
 			val dropTableString = "DROP TABLE \"" + tableName + "\"";
 
@@ -239,7 +239,7 @@ object MorphRDBUtility {
 			} else {
 				"CREATE TABLE \"" + tableName + "\" AS SELECT * FROM CSVREAD('" + fileURL + "');";
 			}
-			logger.info(s"createTableString = {$fieldSeparator.get}");
+			logger.info(s"createTableString = ${createTableString}");
 
 			val stmt = conn.createStatement();
 
@@ -258,7 +258,7 @@ object MorphRDBUtility {
 			try {
 			  logger.debug("createTableString = " + createTableString);
 				stmt.execute(createTableString);
-				logger.info("The table:" + tableName  + " was created successfully");
+				logger.info("Table " + tableName  + " was created successfully");
 			} catch {
 			case sqle:Exception => {
 				logger.error("Error while creating the table: " + tableName  + " : " + sqle.getMessage);
