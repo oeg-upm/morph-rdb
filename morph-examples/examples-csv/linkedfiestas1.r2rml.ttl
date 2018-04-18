@@ -8,6 +8,7 @@
     @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
     @prefix schema: <http://schema.org/> .
 	@prefix prov: <http://www.w3.org/ns/prov#> .
+	@prefix dbo: <http://dbpedia.org/ontology/> .
 	
     @base <http://mappingpedia.linkeddata.es/resource/> .
 	
@@ -18,7 +19,7 @@
 
         rr:subjectMap [
             a rr:Subject; rr:termType rr:IRI; rr:class schema:Festival;
-            rr:template "http://fiestas.linkeddata.es/festival/es/{\"TOWN\"}/{\"FESTIVAL\"}";
+            rr:template "https://w3id.org/linked-fiestas/resource/fn-{\"ID\"}";
         ];
         
         rr:predicateObjectMap [
@@ -26,12 +27,21 @@
           rr:objectMap    [ rr:termType rr:Literal; rr:column "\"FESTIVAL\""; ];
         ];
     
-
         rr:predicateObjectMap [
-          rr:predicateMap [ rr:constant schema:location ];
+          rr:predicateMap [ rr:constant schema:location];
+          rr:objectMap    [ rr:termType rr:Literal; rr:template "{\"TOWN\"}, {\"PROVINCE\"}"; ];
+        ];
+        
+        rr:predicateObjectMap [
+          rr:predicateMap [ rr:constant dbo:city ];
           rr:objectMap    [ rr:termType rr:Literal; rr:column "\"TOWN\""; ];
         ];
     
+        rr:predicateObjectMap [
+          rr:predicateMap [ rr:constant dbo:province ];
+          rr:objectMap    [ rr:termType rr:Literal; rr:column "\"PROVINCE\""; ];
+        ];
+        
         rr:predicateObjectMap [
           rr:predicateMap [ rr:constant prov:wasDerivedFrom ];
           rr:objectMap    [ rr:termType rr:IRI; rr:constant "https://fiestas.net/"; ];
@@ -40,6 +50,11 @@
         rr:predicateObjectMap [
           rr:predicateMap [ rr:constant prov:wasAttributedTo ];
           rr:objectMap    [ rr:termType rr:IRI; rr:constant "https://fiestas.net/"; ];
+        ];
+
+        rr:predicateObjectMap [
+          rr:predicateMap [ rr:constant dct:subject ];
+          rr:objectMap    [ rr:termType rr:IRI; ; rr:constant "http://dbpedia.org/resource/Category:Festivals_in_Spain"; ];
         ];
 		
     .

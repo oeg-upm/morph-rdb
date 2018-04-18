@@ -1,0 +1,620 @@
+<https://w3id.org/linked-fiestas/resource/wd-Q2939698>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2939698>	<http://dbpedia.org/ontology/longitute>	"6°17′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2939698>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2939698>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2939698>	<http://schema.org/name>	"Carnaval de Cádiz"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2939698>	<http://schema.org/location>	"Cádiz"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2939698>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2939698>	<http://dbpedia.org/ontology/city>	"Cádiz"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2939698>	<http://dbpedia.org/ontology/latitude>	"36°31′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2939698>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q815872>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q815872>	<http://dbpedia.org/ontology/longitute>	"16°15′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q815872>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q815872>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q815872>	<http://schema.org/name>	"Carnaval de Santa Cruz de Tenerife"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q815872>	<http://schema.org/location>	"Santa Cruz de Tenerife"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q815872>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q815872>	<http://dbpedia.org/ontology/city>	"Santa Cruz de Tenerife"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q815872>	<http://dbpedia.org/ontology/latitude>	"28°28′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q815872>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5752929>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5752929>	<http://dbpedia.org/ontology/longitute>	"1°34′55″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5752929>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5752929>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5752929>	<http://schema.org/name>	"Carnaval de Águilas"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5752929>	<http://schema.org/location>	"Águilas (Murcia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5752929>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5752929>	<http://dbpedia.org/ontology/city>	"Águilas (Murcia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5752929>	<http://dbpedia.org/ontology/latitude>	"37°24′15″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5752929>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5962041>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5962041>	<http://dbpedia.org/ontology/longitute>	"8°51′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5962041>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5962041>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5962041>	<http://schema.org/name>	"La Arribada"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5962041>	<http://schema.org/location>	"Bayona (Pontevedra)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5962041>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5962041>	<http://dbpedia.org/ontology/city>	"Bayona (Pontevedra)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5962041>	<http://dbpedia.org/ontology/latitude>	"42°07′12″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5962041>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1143768>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1143768>	<http://dbpedia.org/ontology/longitute>	"0°22′30″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1143768>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1143768>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1143768>	<http://schema.org/name>	"Fallas"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1143768>	<http://schema.org/location>	"Valencia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1143768>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1143768>	<http://dbpedia.org/ontology/city>	"Valencia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1143768>	<http://dbpedia.org/ontology/latitude>	"39°28′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1143768>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8961628>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8961628>	<http://dbpedia.org/ontology/longitute>	"0°03′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8961628>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8961628>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8961628>	<http://schema.org/name>	"Fiestas de la Magdalena (Castellón de la Plana)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8961628>	<http://schema.org/location>	"Castellón de la Plana"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8961628>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8961628>	<http://dbpedia.org/ontology/city>	"Castellón de la Plana"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8961628>	<http://dbpedia.org/ontology/latitude>	"39°58′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8961628>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3444111>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3444111>	<http://dbpedia.org/ontology/longitute>	"0°30′34″O; 0°07′59″O; 0°22′53″O; 0°26′41″O; 0°13′54″O; 0°26′44″O; 0°23′17″O; 0°28′13″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3444111>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3444111>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3444111>	<http://schema.org/name>	"Ruta del Tambor y el Bombo"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3444111>	<http://schema.org/location>	"·Albalate del Arzobispo ·Alcañiz ·Alcorisa ·Andorra ·Calanda ·Híjar ·La Puebla de Híjar ·Samper de Calanda ·Urrea de Gaén"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3444111>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3444111>	<http://dbpedia.org/ontology/city>	"·Albalate del Arzobispo ·Alcañiz ·Alcorisa ·Andorra ·Calanda ·Híjar ·La Puebla de Híjar ·Samper de Calanda ·Urrea de Gaén"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3444111>	<http://dbpedia.org/ontology/latitude>	"41°07′22″N; 41°03′01″N; 40°53′32″N; 40°58′38″N; 40°56′22″N; 41°12′48″N; 41°11′21″N; 41°09′36″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3444111>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124513>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124513>	<http://dbpedia.org/ontology/longitute>	"2°08′06″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124513>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124513>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124513>	<http://schema.org/name>	"Semana Santa en Cuenca"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124513>	<http://schema.org/location>	"Cuenca"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124513>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124513>	<http://dbpedia.org/ontology/city>	"Cuenca"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124513>	<http://dbpedia.org/ontology/latitude>	"40°04′18″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124513>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075883>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075883>	<http://dbpedia.org/ontology/longitute>	"4°25′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075883>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075883>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075883>	<http://schema.org/name>	"Semana Santa de Málaga"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075883>	<http://schema.org/location>	"Málaga"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075883>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075883>	<http://dbpedia.org/ontology/city>	"Málaga"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075883>	<http://dbpedia.org/ontology/latitude>	"36°43′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075883>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1469338>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1469338>	<http://dbpedia.org/ontology/longitute>	"5°59′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1469338>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1469338>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1469338>	<http://schema.org/name>	"Semana Santa en Sevilla"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1469338>	<http://schema.org/location>	"Sevilla"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1469338>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1469338>	<http://dbpedia.org/ontology/city>	"Sevilla"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1469338>	<http://dbpedia.org/ontology/latitude>	"37°23′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1469338>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075887>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075887>	<http://dbpedia.org/ontology/longitute>	"4°43′43″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075887>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075887>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075887>	<http://schema.org/name>	"Semana Santa en Valladolid"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075887>	<http://schema.org/location>	"Valladolid"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075887>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075887>	<http://dbpedia.org/ontology/city>	"Valladolid"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075887>	<http://dbpedia.org/ontology/latitude>	"41°39′07″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075887>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5886937>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5886937>	<http://dbpedia.org/ontology/longitute>	"5°45′20″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5886937>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5886937>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5886937>	<http://schema.org/name>	"Semana Santa en Zamora"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5886937>	<http://schema.org/location>	"Zamora"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5886937>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5886937>	<http://dbpedia.org/ontology/city>	"Zamora"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5886937>	<http://dbpedia.org/ontology/latitude>	"41°29′56″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5886937>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075874>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075874>	<http://dbpedia.org/ontology/longitute>	"5°34′01″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075874>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075874>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075874>	<http://schema.org/name>	"Semana Santa en León"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075874>	<http://schema.org/location>	"León"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075874>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075874>	<http://dbpedia.org/ontology/city>	"León"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075874>	<http://dbpedia.org/ontology/latitude>	"42°35′56″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075874>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075880>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075880>	<http://dbpedia.org/ontology/longitute>	"5°39′50″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075880>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075880>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075880>	<http://schema.org/name>	"Semana Santa en Salamanca"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075880>	<http://schema.org/location>	"Salamanca"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075880>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075880>	<http://dbpedia.org/ontology/city>	"Salamanca"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075880>	<http://dbpedia.org/ontology/latitude>	"40°57′54″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075880>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q7884112>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q7884112>	<http://dbpedia.org/ontology/longitute>	"0°58′55″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q7884112>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q7884112>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q7884112>	<http://schema.org/name>	"Semana Santa en Cartagena"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q7884112>	<http://schema.org/location>	"Cartagena (Murcia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q7884112>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q7884112>	<http://dbpedia.org/ontology/city>	"Cartagena (Murcia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q7884112>	<http://dbpedia.org/ontology/latitude>	"37°36′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q7884112>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124527>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124527>	<http://dbpedia.org/ontology/longitute>	"1°42′12″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124527>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124527>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124527>	<http://schema.org/name>	"Semana Santa en Hellín"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124527>	<http://schema.org/location>	"Hellín (Albacete)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124527>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124527>	<http://dbpedia.org/ontology/city>	"Hellín (Albacete)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124527>	<http://dbpedia.org/ontology/latitude>	"38°30′44″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124527>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075878>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075878>	<http://dbpedia.org/ontology/longitute>	"1°42′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075878>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075878>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075878>	<http://schema.org/name>	"Semana Santa en Lorca"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075878>	<http://schema.org/location>	"Lorca (Murcia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075878>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075878>	<http://dbpedia.org/ontology/city>	"Lorca (Murcia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075878>	<http://dbpedia.org/ontology/latitude>	"37°41′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075878>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075873>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075873>	<http://dbpedia.org/ontology/longitute>	"3°36′03″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075873>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075873>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075873>	<http://schema.org/name>	"Semana Santa en Granada"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075873>	<http://schema.org/location>	"Granada"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075873>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075873>	<http://dbpedia.org/ontology/city>	"Granada"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075873>	<http://dbpedia.org/ontology/latitude>	"37°10′41″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075873>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124557>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124557>	<http://dbpedia.org/ontology/longitute>	"5°02′34″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124557>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124557>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124557>	<http://schema.org/name>	"Semana Santa en Medina de Rioseco"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124557>	<http://schema.org/location>	"Medina de Rioseco (Valladolid)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124557>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124557>	<http://dbpedia.org/ontology/city>	"Medina de Rioseco (Valladolid)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124557>	<http://dbpedia.org/ontology/latitude>	"41°52′59″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124557>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124571>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124571>	<http://dbpedia.org/ontology/longitute>	"0°56′49″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124571>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124571>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124571>	<http://schema.org/name>	"Semana Santa en Orihuela"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124571>	<http://schema.org/location>	"Orihuela (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124571>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124571>	<http://dbpedia.org/ontology/city>	"Orihuela (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124571>	<http://dbpedia.org/ontology/latitude>	"38°05′08″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124571>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124517>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124517>	<http://dbpedia.org/ontology/longitute>	"6°22′16″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124517>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124517>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124517>	<http://schema.org/name>	"Semana Santa en Cáceres"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124517>	<http://schema.org/location>	"Cáceres"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124517>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124517>	<http://dbpedia.org/ontology/city>	"Cáceres"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124517>	<http://dbpedia.org/ontology/latitude>	"39°28′23″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124517>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23046683>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23046683>	<http://dbpedia.org/ontology/longitute>	"0°48′32″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23046683>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23046683>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23046683>	<http://schema.org/name>	"Semana Santa en Crevillente"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23046683>	<http://schema.org/location>	"Crevillente (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23046683>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23046683>	<http://dbpedia.org/ontology/city>	"Crevillente (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23046683>	<http://dbpedia.org/ontology/latitude>	"38°14′55″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23046683>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124559>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124559>	<http://dbpedia.org/ontology/longitute>	"4°54′54″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124559>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124559>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124559>	<http://schema.org/name>	"Semana Santa en Medina del Campo"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124559>	<http://schema.org/location>	"Medina del Campo (Valladolid)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124559>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124559>	<http://dbpedia.org/ontology/city>	"Medina del Campo (Valladolid)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124559>	<http://dbpedia.org/ontology/latitude>	"41°18′31″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124559>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5685566>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5685566>	<http://dbpedia.org/ontology/longitute>	"1°07′49″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5685566>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5685566>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5685566>	<http://schema.org/name>	"Semana Santa en Murcia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5685566>	<http://schema.org/location>	"Murcia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5685566>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5685566>	<http://dbpedia.org/ontology/city>	"Murcia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5685566>	<http://dbpedia.org/ontology/latitude>	"37°59′10″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5685566>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3478355>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3478355>	<http://dbpedia.org/ontology/longitute>	"4°32′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3478355>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3478355>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3478355>	<http://schema.org/name>	"Semana Santa en Palencia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3478355>	<http://schema.org/location>	"Palencia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3478355>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3478355>	<http://dbpedia.org/ontology/city>	"Palencia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3478355>	<http://dbpedia.org/ontology/latitude>	"42°01′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3478355>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3065313>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3065313>	<http://dbpedia.org/ontology/longitute>	"7°35′24″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3065313>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3065313>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3065313>	<http://schema.org/name>	"Semana Santa en Vivero"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3065313>	<http://schema.org/location>	"Vivero (Lugo)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3065313>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3065313>	<http://dbpedia.org/ontology/city>	"Vivero (Lugo)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3065313>	<http://dbpedia.org/ontology/latitude>	"43°38′53″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3065313>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124609>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124609>	<http://dbpedia.org/ontology/longitute>	"4°41′46″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124609>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124609>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124609>	<http://schema.org/name>	"Semana Santa en Ávila"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124609>	<http://schema.org/location>	"Ávila"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124609>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124609>	<http://dbpedia.org/ontology/city>	"Ávila"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124609>	<http://dbpedia.org/ontology/latitude>	"40°39′16″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6124609>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075872>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075872>	<http://dbpedia.org/ontology/longitute>	"8°15′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075872>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075872>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075872>	<http://schema.org/name>	"Semana Santa en Ferrol"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075872>	<http://schema.org/location>	"Ferrol (La Coruña)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075872>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075872>	<http://dbpedia.org/ontology/city>	"Ferrol (La Coruña)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075872>	<http://dbpedia.org/ontology/latitude>	"43°28′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075872>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199311>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199311>	<http://dbpedia.org/ontology/longitute>	"4°02′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199311>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199311>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199311>	<http://schema.org/name>	"Semana Santa en Toledo"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199311>	<http://schema.org/location>	"Toledo"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199311>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199311>	<http://dbpedia.org/ontology/city>	"Toledo"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199311>	<http://dbpedia.org/ontology/latitude>	"39°52′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199311>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075892>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075892>	<http://dbpedia.org/ontology/longitute>	"0°53′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075892>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075892>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075892>	<http://schema.org/name>	"Semana Santa en Zaragoza"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075892>	<http://schema.org/location>	"Zaragoza"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075892>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075892>	<http://dbpedia.org/ontology/city>	"Zaragoza"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075892>	<http://dbpedia.org/ontology/latitude>	"41°39′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q9075892>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3327994>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3327994>	<http://dbpedia.org/ontology/longitute>	"0°41′54″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3327994>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3327994>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3327994>	<http://schema.org/name>	"Procesión del Domingo de Ramos de Elche"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3327994>	<http://schema.org/location>	"Elche (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3327994>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3327994>	<http://dbpedia.org/ontology/city>	"Elche (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3327994>	<http://dbpedia.org/ontology/latitude>	"38°16′01″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3327994>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5719012>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5719012>	<http://dbpedia.org/ontology/longitute>	"1°07′49″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5719012>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5719012>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5719012>	<http://schema.org/name>	"Bando de la Huerta"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5719012>	<http://schema.org/location>	"Murcia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5719012>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5719012>	<http://dbpedia.org/ontology/city>	"Murcia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5719012>	<http://dbpedia.org/ontology/latitude>	"37°59′10″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5719012>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2886090>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2886090>	<http://dbpedia.org/ontology/longitute>	"1°07′49″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2886090>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2886090>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2886090>	<http://schema.org/name>	"Entierro de la Sardina en Murcia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2886090>	<http://schema.org/location>	"Murcia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2886090>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2886090>	<http://dbpedia.org/ontology/city>	"Murcia"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2886090>	<http://dbpedia.org/ontology/latitude>	"37°59′10″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2886090>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2918983>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2918983>	<http://dbpedia.org/ontology/longitute>	"5°59′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2918983>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2918983>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2918983>	<http://schema.org/name>	"Feria de Abril"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2918983>	<http://schema.org/location>	"Sevilla"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2918983>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2918983>	<http://dbpedia.org/ontology/city>	"Sevilla"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2918983>	<http://dbpedia.org/ontology/latitude>	"37°23′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2918983>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q129226>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q129226>	<http://dbpedia.org/ontology/longitute>	"6°07′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q129226>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q129226>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q129226>	<http://schema.org/name>	"Feria del Caballo"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q129226>	<http://schema.org/location>	"Jerez de la Frontera (Cádiz)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q129226>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q129226>	<http://dbpedia.org/ontology/city>	"Jerez de la Frontera (Cádiz)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q129226>	<http://dbpedia.org/ontology/latitude>	"36°42′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q129226>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5650710>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5650710>	<http://dbpedia.org/ontology/longitute>	"0°28′25″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5650710>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5650710>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5650710>	<http://schema.org/name>	"Moros y Cristianos de Alcoy"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5650710>	<http://schema.org/location>	"Alcoy (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5650710>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5650710>	<http://dbpedia.org/ontology/city>	"Alcoy (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5650710>	<http://dbpedia.org/ontology/latitude>	"38°41′54″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5650710>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861795>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861795>	<http://dbpedia.org/ontology/longitute>	"1°51′36″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861795>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861795>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861795>	<http://schema.org/name>	"Fiestas de la Santísima y Vera Cruz"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861795>	<http://schema.org/location>	"Caravaca de la Cruz (Murcia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861795>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861795>	<http://dbpedia.org/ontology/city>	"Caravaca de la Cruz (Murcia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861795>	<http://dbpedia.org/ontology/latitude>	"38°06′27″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861795>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1324590>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1324590>	<http://dbpedia.org/ontology/longitute>	"6°31′03″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1324590>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1324590>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1324590>	<http://schema.org/name>	"Romería de El Rocío"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1324590>	<http://schema.org/location>	"Almonte (Huelva)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1324590>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1324590>	<http://dbpedia.org/ontology/city>	"Almonte (Huelva)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1324590>	<http://dbpedia.org/ontology/latitude>	"37°15′40″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1324590>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199321>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199321>	<http://dbpedia.org/ontology/longitute>	"8°30′18″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199321>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199321>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199321>	<http://schema.org/name>	"Corpus Christi en Puenteareas"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199321>	<http://schema.org/location>	"Puenteareas (Pontevedra)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199321>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199321>	<http://dbpedia.org/ontology/city>	"Puenteareas (Pontevedra)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199321>	<http://dbpedia.org/ontology/latitude>	"42°10′31″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199321>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6087155>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6087155>	<http://dbpedia.org/ontology/longitute>	"4°02′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6087155>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6087155>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6087155>	<http://schema.org/name>	"Procesión del Corpus Christi de Toledo"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6087155>	<http://schema.org/location>	"Toledo"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6087155>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6087155>	<http://dbpedia.org/ontology/city>	"Toledo"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6087155>	<http://dbpedia.org/ontology/latitude>	"39°52′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q6087155>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1236370>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1236370>	<http://dbpedia.org/ontology/longitute>	"0°28′59″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1236370>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1236370>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1236370>	<http://schema.org/name>	"Hogueras de Alicante"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1236370>	<http://schema.org/location>	"Alicante"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1236370>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1236370>	<http://dbpedia.org/ontology/city>	"Alicante"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1236370>	<http://dbpedia.org/ontology/latitude>	"38°20′43″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q1236370>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199332>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199332>	<http://dbpedia.org/ontology/longitute>	"8°23′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199332>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199332>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199332>	<http://schema.org/name>	"Hogueras de San Juan de La Coruña"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199332>	<http://schema.org/location>	"La Coruña"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199332>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199332>	<http://dbpedia.org/ontology/city>	"La Coruña"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199332>	<http://dbpedia.org/ontology/latitude>	"43°22′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199332>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2356144>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2356144>	<http://dbpedia.org/ontology/longitute>	"8°24′52″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2356144>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2356144>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2356144>	<http://schema.org/name>	"Rapa das bestas"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2356144>	<http://schema.org/location>	"Sabucedo (Pontevedra)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2356144>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2356144>	<http://dbpedia.org/ontology/city>	"Sabucedo (Pontevedra)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2356144>	<http://dbpedia.org/ontology/latitude>	"42°35′15″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2356144>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q829919>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q829919>	<http://dbpedia.org/ontology/longitute>	"1°39′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q829919>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q829919>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q829919>	<http://schema.org/name>	"Sanfermines"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q829919>	<http://schema.org/location>	"Pamplona (Navarra)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q829919>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q829919>	<http://dbpedia.org/ontology/city>	"Pamplona (Navarra)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q829919>	<http://dbpedia.org/ontology/latitude>	"42°49′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q829919>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3328419>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3328419>	<http://dbpedia.org/ontology/longitute>	"7°51′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3328419>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3328419>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3328419>	<http://schema.org/name>	"Festival de Ortigueira"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3328419>	<http://schema.org/location>	"Ortigueira (La Coruña)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3328419>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3328419>	<http://dbpedia.org/ontology/city>	"Ortigueira (La Coruña)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3328419>	<http://dbpedia.org/ontology/latitude>	"43°40′59″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3328419>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5763483>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5763483>	<http://dbpedia.org/ontology/longitute>	"0°41′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5763483>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5763483>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5763483>	<http://schema.org/name>	"Certamen Internacional de Habaneras y Polifonía de Torrevieja"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5763483>	<http://schema.org/location>	"Torrevieja (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5763483>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5763483>	<http://dbpedia.org/ontology/city>	"Torrevieja (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5763483>	<http://dbpedia.org/ontology/latitude>	"37°58′40″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5763483>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q16609048>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q16609048>	<http://dbpedia.org/ontology/longitute>	"0°13′58″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q16609048>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q16609048>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q16609048>	<http://schema.org/name>	"Moros y Cristianos de Villajoyosa"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q16609048>	<http://schema.org/location>	"Villajoyosa (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q16609048>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q16609048>	<http://dbpedia.org/ontology/city>	"Villajoyosa (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q16609048>	<http://dbpedia.org/ontology/latitude>	"38°30′19″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q16609048>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q12388488>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q12388488>	<http://dbpedia.org/ontology/longitute>	"8°32′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q12388488>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q12388488>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q12388488>	<http://schema.org/name>	"Fiesta de Santiago Apóstol"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q12388488>	<http://schema.org/location>	"Santiago de Compostela (La Coruña)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q12388488>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q12388488>	<http://dbpedia.org/ontology/city>	"Santiago de Compostela (La Coruña)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q12388488>	<http://dbpedia.org/ontology/latitude>	"42°53′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q12388488>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3001481>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3001481>	<http://dbpedia.org/ontology/longitute>	"6°21′14″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3001481>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3001481>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3001481>	<http://schema.org/name>	"Carreras de caballos de Sanlúcar"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3001481>	<http://schema.org/location>	"Sanlúcar de Barrameda (Cádiz)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3001481>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3001481>	<http://dbpedia.org/ontology/city>	"Sanlúcar de Barrameda (Cádiz)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3001481>	<http://dbpedia.org/ontology/latitude>	"36°46′44″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3001481>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861338>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861338>	<http://dbpedia.org/ontology/longitute>	"0°52′32″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861338>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861338>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861338>	<http://schema.org/name>	"Festival Internacional del Cante de las Minas"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861338>	<http://schema.org/location>	"La Unión (Murcia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861338>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861338>	<http://dbpedia.org/ontology/city>	"La Unión (Murcia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861338>	<http://dbpedia.org/ontology/latitude>	"37°37′09″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861338>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8355038>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8355038>	<http://dbpedia.org/ontology/longitute>	"5°11′27″O; 5°05′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8355038>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8355038>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8355038>	<http://schema.org/name>	"Descenso Internacional del Sella"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8355038>	<http://schema.org/location>	"Arriondas y Ribadesella (Asturias)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8355038>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8355038>	<http://dbpedia.org/ontology/city>	"Arriondas y Ribadesella (Asturias)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8355038>	<http://dbpedia.org/ontology/latitude>	"43°23′09″N; 43°26′45″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q8355038>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23047569>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23047569>	<http://dbpedia.org/ontology/longitute>	"8°42′54″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23047569>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23047569>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23047569>	<http://schema.org/name>	"Romería Vikinga de Catoira"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23047569>	<http://schema.org/location>	"Catoira (Pontevedra)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23047569>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23047569>	<http://dbpedia.org/ontology/city>	"Catoira (Pontevedra)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23047569>	<http://dbpedia.org/ontology/latitude>	"42°39′40″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23047569>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2115110>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2115110>	<http://dbpedia.org/ontology/longitute>	"0°41′54″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2115110>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2115110>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2115110>	<http://schema.org/name>	"Misterio de Elche"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2115110>	<http://schema.org/location>	"Elche (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2115110>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2115110>	<http://dbpedia.org/ontology/city>	"Elche (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2115110>	<http://dbpedia.org/ontology/latitude>	"38°16′01″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q2115110>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q827695>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q827695>	<http://dbpedia.org/ontology/longitute>	"0°47′26″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q827695>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q827695>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q827695>	<http://schema.org/name>	"Tomatina"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q827695>	<http://schema.org/location>	"Buñol (Valencia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q827695>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q827695>	<http://dbpedia.org/ontology/city>	"Buñol (Valencia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q827695>	<http://dbpedia.org/ontology/latitude>	"39°25′10″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q827695>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5832389>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5832389>	<http://dbpedia.org/ontology/longitute>	"4°18′49″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5832389>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5832389>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5832389>	<http://schema.org/name>	"Encierros de Cuéllar"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5832389>	<http://schema.org/location>	"Cuéllar (Segovia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5832389>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5832389>	<http://dbpedia.org/ontology/city>	"Cuéllar (Segovia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5832389>	<http://dbpedia.org/ontology/latitude>	"41°24′03″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5832389>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199370>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199370>	<http://dbpedia.org/ontology/longitute>	"3°37′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199370>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199370>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199370>	<http://schema.org/name>	"Motín de Aranjuez"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199370>	<http://schema.org/location>	"Aranjuez (Madrid)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199370>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199370>	<http://dbpedia.org/ontology/city>	"Aranjuez (Madrid)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199370>	<http://dbpedia.org/ontology/latitude>	"40°02′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23199370>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5048232>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5048232>	<http://dbpedia.org/ontology/longitute>	"2°46′16″O; 3°08′14″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5048232>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5048232>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5048232>	<http://schema.org/name>	"Cascamorras"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5048232>	<http://schema.org/location>	"Baza y Guadix (Granada)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5048232>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5048232>	<http://dbpedia.org/ontology/city>	"Baza y Guadix (Granada)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5048232>	<http://dbpedia.org/ontology/latitude>	"37°29′20″N; 37°17′58″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5048232>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5429969>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5429969>	<http://dbpedia.org/ontology/longitute>	"1°52′13″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5429969>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5429969>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5429969>	<http://schema.org/name>	"Feria de Albacete"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5429969>	<http://schema.org/location>	"Albacete"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5429969>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5429969>	<http://dbpedia.org/ontology/city>	"Albacete"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5429969>	<http://dbpedia.org/ontology/latitude>	"38°59′50″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5429969>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3092923>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3092923>	<http://dbpedia.org/ontology/longitute>	"0°58′55″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3092923>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3092923>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3092923>	<http://schema.org/name>	"Carthagineses y Romanos"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3092923>	<http://schema.org/location>	"Cartagena (Murcia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3092923>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3092923>	<http://dbpedia.org/ontology/city>	"Cartagena (Murcia)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3092923>	<http://dbpedia.org/ontology/latitude>	"37°36′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3092923>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3397662>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3397662>	<http://dbpedia.org/ontology/longitute>	"0°29′22″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3397662>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3397662>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3397662>	<http://schema.org/name>	"Entrada de toros y caballos"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3397662>	<http://schema.org/location>	"Segorbe (Castellón)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3397662>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3397662>	<http://dbpedia.org/ontology/city>	"Segorbe (Castellón)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3397662>	<http://dbpedia.org/ontology/latitude>	"39°51′07″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q3397662>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861717>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861717>	<http://dbpedia.org/ontology/longitute>	"6°07′00″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861717>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861717>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861717>	<http://schema.org/name>	"Fiesta de la Vendimia (Jerez de la Frontera)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861717>	<http://schema.org/location>	"Jerez de la Frontera (Cádiz)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861717>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861717>	<http://dbpedia.org/ontology/city>	"Jerez de la Frontera (Cádiz)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861717>	<http://dbpedia.org/ontology/latitude>	"36°42′00″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q5861717>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23650280>	<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>	<http://schema.org/Festival> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23650280>	<http://dbpedia.org/ontology/longitute>	"0°48′32″O"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23650280>	<http://purl.org/dc/terms/subject>	<http://es.dbpedia.org/resource/Categor%C3%ADa:Fiestas_de_inter%C3%A9s_tur%C3%ADstico_internacional_(Espa%C3%B1a)> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23650280>	<http://purl.org/dc/terms/subject>	<http://dbpedia.org/resource/Category:Festivals_in_Spain> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23650280>	<http://schema.org/name>	"Moros y Cristianos de Crevillente"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23650280>	<http://schema.org/location>	"Crevillente (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23650280>	<http://www.w3.org/ns/prov#wasDerivedFrom>	<https://www.wikipedia.org/> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23650280>	<http://dbpedia.org/ontology/city>	"Crevillente (Alicante)"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23650280>	<http://dbpedia.org/ontology/latitude>	"38°14′55″N"^^<http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/linked-fiestas/resource/wd-Q23650280>	<http://www.w3.org/ns/prov#wasAttributedTo>	<https://www.wikipedia.org/> .

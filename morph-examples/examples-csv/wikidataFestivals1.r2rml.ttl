@@ -1,0 +1,46 @@
+
+    @prefix rr: <http://www.w3.org/ns/r2rml#> .
+    @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+    @prefix dcat: <http://www.w3.org/ns/dcat#> .
+    @prefix dct: <http://purl.org/dc/terms/> .
+    @prefix mpv: <http://mappingpedia.linkeddata.es/vocab/> .
+    @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+    @prefix schema: <http://schema.org/> .
+	@prefix dbo: <http://dbpedia.org/ontology/> .
+	
+    @base <http://mappingpedia.linkeddata.es/resource/> .
+	
+    <T3G53K644P>
+        rr:logicalTable [
+            rr:tableName  "\"wikidataFestivals1\""
+        ];
+
+        rr:subjectMap [
+            a rr:Subject; rr:termType rr:IRI; rr:class schema:Festival;
+			rr:template "https://w3id.org/linked-fiestas/resource/wd-{\"WIKIDATAID\"}";
+        ];
+        
+        rr:predicateObjectMap [
+          rr:predicateMap [ rr:constant schema:name ];
+          rr:objectMap    [ rr:termType rr:Literal; rr:column "\"FIESTALABEL\""; ];
+        ];
+    
+
+        rr:predicateObjectMap [
+          rr:predicateMap [ rr:constant schema:location ];
+          rr:objectMap    [ rr:termType rr:Literal; rr:column "\"LOCATION\""; ];
+        ];
+    
+        rr:predicateObjectMap [
+          rr:predicateMap [ rr:constant dbo:city ];
+          rr:objectMap    [ rr:termType rr:Literal; rr:column "\"LOCATION\""; ];
+        ];
+        
+        rr:predicateObjectMap [
+          rr:predicateMap [ rr:constant dct:subject ];
+          rr:objectMap    [ rr:termType rr:IRI; ; rr:constant "http://dbpedia.org/resource/Category:Festivals_in_Spain"; ];
+        ];
+        
+    .
+    
