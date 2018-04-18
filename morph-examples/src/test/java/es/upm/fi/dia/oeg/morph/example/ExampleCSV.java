@@ -43,6 +43,22 @@ public class ExampleCSV {
 		}
 	}
 
+    @Test
+    public void testBarcelonaGTFSWithPropertiesFile() {
+        String configurationDirectory = System.getProperty("user.dir") + "/examples-gtfs-bcn";
+        String configurationFile = "barnaTram-batch-csv.morph.properties";
+        try {
+            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+    
 	@Test
 	public void testLinkedFiestasWithPropertiesFile() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
@@ -80,7 +96,7 @@ public class ExampleCSV {
 	}
 
 	@Test
-	public void testNationalInterestFestivals() {
+	public void testSpainNationalWithoutPropertiesFile() {
 		MorphCSVProperties properties = new MorphCSVProperties();
 		properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/fpriyatna/linked-fiestas/master/datasets/wikipedia/spain-national1.r2rml.ttl");
 		properties.setOutputFilePath(configurationDirectory + File.separator + "spain-national1.nt");
@@ -98,7 +114,24 @@ public class ExampleCSV {
 	}
 	
 	@Test
-	public void testInternationalInterestFestivals() {
+	public void testSpainNationalWithPropertiesFile() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
+		String configurationFile = "spain-national-batch-csv.morph.properties";
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	
+	@Test
+	public void testSpainInternationalWithoutPropertiesFile() {
 		MorphCSVProperties properties = new MorphCSVProperties();
 		properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/fpriyatna/linked-fiestas/master/datasets/wikipedia/spain-international1.r2rml.ttl");
 		properties.setOutputFilePath(configurationDirectory + File.separator + "spain-international1.nt");
@@ -112,6 +145,72 @@ public class ExampleCSV {
 			e.printStackTrace();
 			String errorMessage = "Error occured: " + e.getMessage();
 			assertTrue(errorMessage, false);
+		}
+	}
+	
+	@Test
+	public void testSpainInternationalWithPropertiesFile() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
+		String configurationFile = "spain-international-batch-csv.morph.properties";
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
+	public void testMadridFestivalsWithoutPropertieSFile() {
+		MorphCSVProperties properties = new MorphCSVProperties();
+		properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/fpriyatna/linked-fiestas/master/datasets/wikipedia/madrid1.r2rml.ttl");
+		properties.setOutputFilePath(configurationDirectory + File.separator + "madrid1.nt");
+		properties.addCSVFile("https://raw.githubusercontent.com/fpriyatna/linked-fiestas/master/datasets/wikipedia/madrid1.csv");
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
+			runner.run();
+			assertTrue("testBatch done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			assertTrue(errorMessage, false);
+		}
+	}
+	
+	@Test
+	public void testMadridFestivalsWithPropertiesFile() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
+		String configurationFile = "madrid-batch-csv.morph.properties";
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
+	public void testWikidataFestivalsWithPropertiesFile() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
+		String configurationFile = "wikidata-batch-csv.morph.properties";
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
 		}
 	}
 	

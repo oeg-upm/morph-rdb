@@ -1,0 +1,28 @@
+﻿stop_id,stop_name,stop_desc,stop_lat,stop_lon,stop_url
+20,Ciutadella | Vila Olímpica,Correspondència amb Metro L4,41.387614,2.191922,http://www.tram.cat/linies-i-horaris/linea-t4/
+21,Wellington,,41.390167,2.188483,http://www.tram.cat/linies-i-horaris/linea-t4/
+22,Marina,Correspondència amb Metro L1,41.394061,2.186917,http://www.tram.cat/linies-i-horaris/linea-t4/
+2,Auditori | Teatre Nacional,,41.397536,2.186892,http://www.tram.cat/linies-i-horaris/linea-t4/
+3,Glòries,Correspondència amb TRAM T4-T5-T6 i Metro L1,41.401681,2.186897,http://www.tram.cat/linies-i-horaris/linea-t4/
+4,Ca l'Aranyó,,41.404450,2.191500,http://www.tram.cat/linies-i-horaris/linea-t4/
+5,Pere IV,,41.406144,2.198247,http://www.tram.cat/linies-i-horaris/linea-t4/
+6,Fluvià,,41.407822,2.204908,http://www.tram.cat/linies-i-horaris/linea-t4/
+7,Selva de Mar,Correspondència amb Metro L4,41.409194,2.210447,http://www.tram.cat/linies-i-horaris/linea-t4/
+8,El Maresme,Correspondència amb Metro L4,41.410489,2.215631,http://www.tram.cat/linies-i-horaris/linea-t4/
+9,Fòrum,,41.411828,2.219850,http://www.tram.cat/linies-i-horaris/linea-t4/
+10,Campus Diagonal-Besòs,,41.415247,2.222928,http://www.tram.cat/linies-i-horaris/linea-t4/
+29,Port Fòrum,Correspondència amb TRAM T4-T6,41.418872,2.226161,http://www.tram.cat/linies-i-horaris/linea-t4/
+30,Estació de Sant Adrià,Correspondència amb TRAM T4-T6 i Rodalies,41.423953,2.230550,http://www.tram.cat/linies-i-horaris/linea-t4/
+3bis,La Farinera,Correspondència amb TRAM T5-T6,41.404200,2.188581,http://www.tram.cat/linies-i-horaris/linea-t5/
+23,Can Jaumandreu,Correspondència amb TRAM T5-T6,41.408108,2.193597,http://www.tram.cat/linies-i-horaris/linea-t5/
+24,Espronceda,Correspondència amb TRAM T5-T6,41.411361,2.197942,http://www.tram.cat/linies-i-horaris/linea-t5/
+25,Sant Martí de Provençals,Correspondència amb TRAM T5-T6,41.416464,2.204744,http://www.tram.cat/linies-i-horaris/linea-t5/
+26,Besòs,Correspondència amb TRAM T5-T6 i Metro L4,41.420067,2.209556,http://www.tram.cat/linies-i-horaris/linea-t5/
+27,Alfons el Magnànim,Correspondència amb TRAM T5-T6,41.417194,2.213569,http://www.tram.cat/linies-i-horaris/linea-t5/
+28,Parc del Besòs,Correspondència amb TRAM T5-T6,41.419431,2.217633,http://www.tram.cat/linies-i-horaris/linea-t5/
+13,La Catalana,,41.422650,2.221953,http://www.tram.cat/linies-i-horaris/linea-t5/
+14,Sant Joan Baptista,,41.427386,2.225403,http://www.tram.cat/linies-i-horaris/linea-t5/
+16,Encants de Sant Adrià,Correspondència amb Metro L2,41.430244,2.222606,http://www.tram.cat/linies-i-horaris/linea-t5/
+17,Sant Roc,Correspondència amb Metro L2,41.434944,2.227597,http://www.tram.cat/linies-i-horaris/linea-t5/
+19,Gorg,Correspondència amb Metro L2 i 10,41.439967,2.233219,http://www.tram.cat/linies-i-horaris/linea-t5/
+11,La Mina,,41.418386,2.221000,http://www.tram.cat/linies-i-horaris/linea-t6/

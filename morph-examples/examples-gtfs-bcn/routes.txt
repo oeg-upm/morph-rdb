@@ -1,0 +1,4 @@
+route_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+4,T4,Estació de Sant Adrià-Ciutadella|Vila Olímpica,Estació de Sant Adrià-Ciutadella|Vila Olímpica,0,http://www.tram.cat/linies-i-horaris/linea-t4/,008272,FFFFFF
+5,T5,Glòries-Gorg,Glòries-Gorg,0,http://www.tram.cat/linies-i-horaris/linea-t5/,008272,FFFFFF
+6,T6,Estació de Sant Adrià-Glòries,Estació de Sant Adrià-Glòries per Gran Via,0,http://www.tram.cat/linies-i-horaris/linea-t6/,008272,FFFFFF

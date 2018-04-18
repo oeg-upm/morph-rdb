@@ -1,0 +1,500 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex: <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rev: <http://purl.org/stuff/rev#> .
+@prefix gtfs: <http://vocab.gtfs.org/terms#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <http://schema.org/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+
+
+<TriplesMapStopTimes>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "STOP_TIMES"
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://linkedgtfs.com/CITY/stoptimes/{TRIP_ID}-{STOP_ID}-{ARRIVAL_TIME}";
+    rr:termType rr:IRI;
+    rr:class gtfs:StopTime;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:trip;
+    rr:objectMap [
+      rr:parentTriplesMap <TriplesMapTrip>;
+      rr:joinCondition [
+        rr:child "TRIP_ID";
+        rr:parent "TRIP_ID";
+      ]
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:stop;
+    rr:objectMap [
+      rr:parentTriplesMap <TriplesMapStop>;
+      rr:joinCondition [
+        rr:child "STOP_ID";
+        rr:parent "STOP_ID";
+      ]
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:arrivalTime;
+    rr:objectMap [
+      rr:datatype xsd:duration;
+      rr:column "ARRIVAL_TIME";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:departureTime;
+    rr:objectMap [
+      rr:datatype xsd:duration;
+      rr:column "DEPARTURE_TIME";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:stopSequence;
+    rr:objectMap [
+      rr:datatype xsd:nonNegativeInteger;
+      rr:column "STOP_SEQUENCE";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:pickupType;
+    rr:objectMap [
+      rr:template "http://vocab.gtfs.org/terms#PickupType={PICKUP_TYPE}";
+    ];
+  ];
+.  
+
+
+<TriplesMapTrip>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "TRIPS"
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://linkedgtfs.com/CITY/trips/{TRIP_ID}";
+    rr:termType rr:IRI;
+    rr:class gtfs:Trip;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:route;
+    rr:objectMap [
+      rr:parentTriplesMap <TriplesMapRoute>;
+      rr:joinCondition [
+        rr:child "ROUTE_ID";
+        rr:parent "ROUTE_ID";
+      ]
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:service;
+    rr:objectMap [
+      rr:parentTriplesMap <TriplesMapService>;
+      rr:joinCondition [
+        rr:child "SERVICE_ID";
+        rr:parent "SERVICE_ID";
+      ]
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:shape;
+    rr:objectMap [
+      rr:parentTriplesMap <TriplesMapShape>;
+      rr:joinCondition [
+        rr:child "SHAPE_ID";
+        rr:parent "SHAPE_ID";
+      ]
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:headsign;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "TRIP_HEADSIGN"
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:direction;
+    rr:objectMap [
+      rr:datatype xsd:boolean;
+      rr:column "DIRECTION_ID"
+    ]
+  ];
+
+.
+
+<TriplesMapRoute>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "ROUTES"
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://linkedgtfs.com/CITY/routes/{ROUTE_ID}";
+    rr:termType rr:IRI;
+    rr:class gtfs:Route;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:shortName;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "ROUTE_SHORT_NAME";
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:longName;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "ROUTE_LONG_NAME";
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate dct:description;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "ROUTE_DESC";
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:routeType;
+    rr:objectMap [
+      rr:template "http://vocab.gtfs.org/terms#RouteType={ROUTE_TYPE}";
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:routeUrl;
+    rr:objectMap [
+      rr:datatype foaf:Document;
+      rr:column "ROUTE_URL";
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:color;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "ROUTE_COLOR";
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:textColor;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "ROUTE_TEXT_COLOR";
+    ]
+  ];
+.
+
+
+<TriplesMapAgency>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "AGENCY"
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://linkedgtfs.com/CITY/agency/{AGENCY_ID}";
+    rr:termType rr:IRI;
+    rr:class gtfs:Agency;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate foaf:page;
+    rr:objectMap [
+      rr:datatype foaf:Document;
+      rr:column "AGENCY_URL";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate foaf:name;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "AGENCY_NAME";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:timeZone;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "AGENCY_TIMEZONE";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate dct:language;
+    rr:objectMap [
+      rr:datatype dct:LiguisticSystem;
+      rr:column "AGENCY_LANG";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate foaf:phone;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "AGENCY_PHONE";
+    ];
+  ];
+
+.
+
+<TriplesMapStop>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "STOPS"
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://linkedgtfs.com/CITY/stops/{STOP_ID}";
+    rr:termType rr:IRI;
+    rr:class gtfs:Stop;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate foaf:name;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "STOP_NAME";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate dct:description;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "STOP_DESC";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate geo:lat;
+    rr:objectMap [
+      rr:datatype xsd:decimal;
+      rr:column "STOP_LAT";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate geo:long;
+    rr:objectMap [
+      rr:datatype xsd:decimal;
+      rr:column "STOP_LON";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate foaf:page;
+    rr:objectMap [
+      rr:datatype foaf:Document;
+      rr:column "STOP_URL";
+    ];
+  ];
+.
+
+
+<TriplesMapServiceDates>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "CALENDAR_DATES"
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://linkedgtfs.com/CITY/servicedates/{SERVICE_ID}-{DATE}";
+    rr:termType rr:IRI;
+    rr:class gtfs:ServiceDates;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:service;
+    rr:objectMap [
+      rr:parentTriplesMap <TriplesMapService>;
+      rr:joinCondition [
+        rr:child "SERVICE_ID";
+        rr:parent "SERVICE_ID";
+      ]
+    ]
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate dct:date;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "DATE";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:dateAddition;
+    rr:objectMap [
+      rr:datatype xsd:boolean;
+      rr:column "EXCEPTION_TYPE";
+    ];
+  ];
+. 
+
+
+<TriplesMapService>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "CALENDAR"
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://linkedgtfs.com/CITY/service/{SERVICE_ID}";
+    rr:termType rr:IRI;
+    rr:class gtfs:Service;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:monday;
+    rr:objectMap [
+      rr:datatype xsd:boolean;
+      rr:column "MONDAY";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:tuesday;
+    rr:objectMap [
+      rr:datatype xsd:boolean;
+      rr:column "TUESDAY";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:wednesday;
+    rr:objectMap [
+      rr:datatype xsd:boolean;
+      rr:column "WEDNESDAY";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:thursday;
+    rr:objectMap [
+      rr:datatype xsd:boolean;
+      rr:column "THURSDAY";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:friday;
+    rr:objectMap [
+      rr:datatype xsd:boolean;
+      rr:column "FRIDAY";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:saturday;
+    rr:objectMap [
+      rr:datatype xsd:boolean;
+      rr:column "SATURDAY";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:sunday;
+    rr:objectMap [
+      rr:datatype xsd:boolean;
+      rr:column "SUNDAY";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate schema:startDate;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "START_DATE";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate schema:endDate;
+    rr:objectMap [
+      rr:datatype xsd:string;
+      rr:column "END_DATE";
+    ];
+  ];
+.  
+
+
+<TriplesMapShape>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "SHAPES"
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://linkedgtfs.com/CITY/shape/{SHAPE_ID}";
+    rr:termType rr:IRI;
+    rr:class gtfs:Shape;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate geo:lat;
+    rr:objectMap [
+      rr:datatype xsd:decimal;
+      rr:column "SHAPE_PT_LAT";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate geo:long;
+    rr:objectMap [
+      rr:datatype xsd:decimal;
+      rr:column "SHAPE_PT_LON";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate gtfs:pointSequence;
+    rr:objectMap [
+      rr:datatype xsd:nonNegativeInteger;
+      rr:column "SHAPE_PT_SEQUENCE";
+    ];
+  ];
+.
