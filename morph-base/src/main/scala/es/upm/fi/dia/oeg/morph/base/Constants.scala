@@ -157,6 +157,8 @@ object Constants {
 	val TRANSFORMATION_STRING_TOLOWERCASE = "toLowerCase";
 	val TRANSFORMATION_STRING_TOUPPERCASE = "toUpperCase";
 	
+	val MATERIALIZATION_DISTINCT = "materialization.distinct";
+	
 	val URI_ENCODE= "uri.encode";
 	
 	//aliases

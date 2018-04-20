@@ -60,6 +60,7 @@ class MorphProperties extends java.util.Properties {
 	var transformString:Option[String] = None;
 	var mapDataTranslationLimits:Map[String,String] = Map.empty;
 	var mapDataTranslationOffsets:Map[String,String] = Map.empty;
+	var materializationDistinct:Boolean = false;
 
 
 
@@ -242,6 +243,11 @@ class MorphProperties extends java.util.Properties {
 			}
 
 			this.inputDateFormat = new SimpleDateFormat(inputDateFormatPattern, Locale.ENGLISH);
+			
+			this.materializationDistinct = this.readBoolean(Constants.MATERIALIZATION_DISTINCT, false);
+			logger.debug("Use DISTINCT in materialization process = " + this.materializationDistinct);
+
+			
 	}
 
 

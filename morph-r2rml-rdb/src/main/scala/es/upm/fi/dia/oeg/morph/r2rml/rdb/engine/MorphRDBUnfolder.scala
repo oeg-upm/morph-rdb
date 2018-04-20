@@ -205,6 +205,8 @@ extends MorphBaseUnfolder(md, properties) with MorphR2RMLElementVisitor {
 		val result = new SQLQuery();
 		result.setDatabaseType(this.dbType);
 		
+		result.setDistinct(properties.materializationDistinct)
+		
 		//UNFOLD LOGICAL TABLE
 		val logicalTableUnfolded :SQLFromItem = logicalTable match {
 		  case _:R2RMLTable => {
