@@ -10,7 +10,7 @@
 
 <TriplesMapMonumento>
 	rr:logicalTable [ 
-        rr:tableName  "\"edificio-historico\"" # http://www.zaragoza.es/api/recurso/turismo/edificio-historico.csv
+        rr:tableName  "\"EDIFICIO-HISTORICO\"" # http://www.zaragoza.es/api/recurso/turismo/edificio-historico.csv
     ];
 	
     rr:subjectMap [    
