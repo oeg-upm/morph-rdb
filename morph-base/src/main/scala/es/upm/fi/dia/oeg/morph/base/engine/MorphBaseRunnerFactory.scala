@@ -28,7 +28,7 @@ abstract class MorphBaseRunnerFactory {
 	//val logger = LogManager.getLogger(this.getClass);
 		val logger = LoggerFactory.getLogger(this.getClass());
 
-  logger.info("running morph-rdb 3.9.8 ...");
+  logger.info("running morph-rdb 3.9.10 ...");
 
 	def createRunner(configurationDirectory:String , configurationFile:String)
 	: MorphBaseRunner = {
@@ -169,11 +169,16 @@ abstract class MorphBaseRunnerFactory {
 
     runner.ontologyFilePath = morphProperties.ontologyFilePath;
     if(morphProperties.queryFilePath.isDefined) {
-      logger.debug("reading query file: " + morphProperties.queryFilePath.get);
       runner.sparqlQuery = try {
+        val queryFile = morphProperties.queryFilePath.get 
+        logger.info("reading query file: " + queryFile);
+        val query = QueryFactory.read(queryFile);
+        
         //val lowercaseQueryFilepath = morphProperties.queryFilePath.get.toLowerCase();
         //logger.debug("lowercaseQueryFilepath = " + lowercaseQueryFilepath);
-        val query = QueryFactory.read(morphProperties.queryFilePath.get);
+        //logger.info("reading query file: " + lowercaseQueryFilepath);
+        //val query = QueryFactory.read(lowercaseQueryFilepath);
+        
         logger.debug("query = " + query);
         Some(query);
       } catch {

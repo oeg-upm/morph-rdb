@@ -1,0 +1,698 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex: <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rev: <http://purl.org/stuff/rev#> .
+@prefix gtfs: <http://vocab.gtfs.org/terms#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <http://schema.org/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix interval: <http://reference.data.gov.uk/def/intervals/> . 
+@prefix sltsv: <http://w3id.org/sri-lanka/tourism/cube-vocab/> .
+@prefix sltsds: <http://w3id.org/sri-lanka/tourism/cube-data-structure/> . 
+@prefix sltsd: <http://w3id.org/sri-lanka/tourism/dataset/> . 
+
+<TriplesMap201301>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"2013-P21\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201301-From-{COUNTRYOFRESIDENCE}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/January";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "JAN";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMap201302>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"2013-P21\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201302-From-{COUNTRYOFRESIDENCE}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/February";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "FEB";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+  
+<TriplesMap201303>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"2013-P21\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201303-From-{COUNTRYOFRESIDENCE}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/March";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "MAR";
+		rr:datatype xsd:integer;
+    ];
+  ];
+  
+.
+
+<TriplesMap201304>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"2013-P21\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201304-From-{COUNTRYOFRESIDENCE}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/April";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "APR";
+		rr:datatype xsd:integer;
+    ];
+  ];
+  
+.
+
+<TriplesMap201305>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"2013-P21\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201305-From-{COUNTRYOFRESIDENCE}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/May";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "MAY";
+		rr:datatype xsd:integer;
+    ];
+  ];
+  
+.
+
+<TriplesMap201306>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"2013-P21\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201306-From-{COUNTRYOFRESIDENCE}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/June";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "JUN";
+		rr:datatype xsd:integer;
+    ];
+  ];
+  
+.
+
+<TriplesMap201307>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"2013-P21\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201307-From-{COUNTRYOFRESIDENCE}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/July";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "JUL";
+		rr:datatype xsd:integer;
+    ];
+  ];
+  
+.
+
+<TriplesMap201308>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"2013-P21\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201308-From-{COUNTRYOFRESIDENCE}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/August";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "AUG";
+		rr:datatype xsd:integer;
+    ];
+  ];
+  
+.
+
+<TriplesMap201309>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"2013-P21\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201309-From-{COUNTRYOFRESIDENCE}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/September";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "SEP";
+		rr:datatype xsd:integer;
+    ];
+  ];
+  
+.
+
+<TriplesMap201310>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"2013-P21\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201310-From-{COUNTRYOFRESIDENCE}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/October";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "OCT";
+		rr:datatype xsd:integer;
+    ];
+  ];
+  
+.
+
+<TriplesMap201311>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"2013-P21\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201311-From-{COUNTRYOFRESIDENCE}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/November";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "NOV";
+		rr:datatype xsd:integer;
+    ];
+  ];
+  
+.
+
+<TriplesMap201312>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"2013-P21\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201312-From-{COUNTRYOFRESIDENCE}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/December";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "DEC";
+		rr:datatype xsd:integer;
+    ];
+  ];
+  
+.

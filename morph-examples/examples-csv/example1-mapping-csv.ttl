@@ -17,7 +17,7 @@
 	# a rr:TriplesMap;
         
 	rr:logicalTable [ 
-        rr:tableName  "\"Student\"" 
+        rr:tableName  "STUDENT" 
     ];
 	
     rr:subjectMap [    
@@ -65,7 +65,7 @@
 <TriplesMapSport>
 	a rr:TriplesMap;
         
-	rr:logicalTable [ rr:tableName  "\"Sport\"" ];
+	rr:logicalTable [ rr:tableName  "SPORT" ];
 	
     rr:subjectMap [ a rr:Subject;
 		rr:template "http://mappingpedia.linkeddata.es/resources/Sport/{ID}";

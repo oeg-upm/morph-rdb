@@ -52,7 +52,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
   
 	//val logger = LogManager.getLogger(this.getClass);
   val logger = LoggerFactory.getLogger(this.getClass());
-  logger.info("running morph-rdb 3.9.8 ...");
+  logger.debug("running morph-rdb 3.9.10 ...");
   
 
   var connection:Connection = null;

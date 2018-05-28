@@ -1,0 +1,15 @@
+# query1 : Triple Block
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX qblk: <http://w3id.org/sri-lanka/tourism/cube-vocab/>
+PREFIX dpr: <http://dbpedia.org/resource/>
+
+SELECT *
+WHERE { 
+	?obs a qb:Observation .
+	?obs qblk:countryOfResidence	dpr:Spain .
+	?obs qblk:month	?month .
+	?obs qblk:numberOfArrivals	?noOfArrivals .
+
+}
