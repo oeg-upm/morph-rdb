@@ -59,6 +59,22 @@ public class ExampleSrilankaTourism {
     }
     
     @Test
+    public void testSrilankaTourism2016Query03() {
+        String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
+        String configurationFile = "2016-P21-query3.morph.properties";
+        try {
+            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+    
+    @Test
     public void testSrilankaTourism2015PropertiesFile() {
         String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
         String configurationFile = "2015-P23-batch-csv.morph.properties";
