@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="obs"/>
+        <variable name="country"/>
+        <variable name="noOfArrivals"/>
+    </head>
+    <results>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Poland</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Poland</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1289</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Thailand</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Thailand</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>919</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Spain</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Spain</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1587</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Australia</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Australia</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>6158</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Philippines</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Philippines</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1175</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Maldives</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Maldives</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>9006</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Bangladesh</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Bangladesh</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1060</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Isreal</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Isreal</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>459</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Kuwait</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Kuwait</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>410</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-China</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/China</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>19645</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-India</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/India</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>30170</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Belgium</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Belgium</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1639</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Pakistan</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Pakistan</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2716</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Russia</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Russia</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>5916</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Sweden</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Sweden</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2339</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Saudi Arabia</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Saudi Arabia</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>3636</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Denmark</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Denmark</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2216</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Czech Republic</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Czech Republic</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2443</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Netherlands</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Netherlands</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2442</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Italy</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Italy</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2683</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Switzerland</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Switzerland</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2122</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Indonesia</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Indonesia</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2010</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-USA</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/USA</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>5265</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-South Korea</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/South Korea</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1194</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Japan</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Japan</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>4074</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Oman</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Oman</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>613</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Malaysia</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Malaysia</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2071</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-UAE</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/UAE</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>641</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-UK</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/UK</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>21430</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-South Africa</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/South Africa</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>562</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-France</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/France</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>11175</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Austria</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Austria</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1949</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-New Zealand</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/New Zealand</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>673</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Germany</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Germany</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>16264</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Ukraine</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Ukraine</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2979</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Norway</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Norway</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1318</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Canada</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Canada</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>3900</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAR-From-Singapore</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Singapore</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1752</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>
