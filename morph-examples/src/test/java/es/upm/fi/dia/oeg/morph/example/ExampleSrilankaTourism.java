@@ -11,9 +11,105 @@ public class ExampleSrilankaTourism {
 
     
     @Test
-    public void testSrilankaTourism2016Batch() {
+    public void testSrilankaTourism2016NaiveBatch() {
         String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
-        String configurationFile = "2016-P21-batch.morph.properties";
+        String configurationFile = "2016-P21-naive-batch.morph.properties";
+        try {
+            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testSrilankaTourism2016ColumnsBatch() {
+        String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
+        String configurationFile = "2016-P21-columns-batch.morph.properties";
+        try {
+            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testSrilankaTourism2016CRangeBatch() {
+        String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
+        String configurationFile = "2016-P21-range-batch.morph.properties";
+        try {
+            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testSrilankaTourism2016NaiveQuery1() {
+        String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
+        String configurationFile = "2016-P21-naive-query1.morph.properties";
+        try {
+            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testSrilankaTourism2016ColumnsQuery01() {
+        String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
+        String configurationFile = "2016-P21-columns-q1.morph.properties";
+        try {
+            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testSrilankaTourism2016ColumnsQuery02() {
+        String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
+        String configurationFile = "2016-P21-columns-q2.morph.properties";
+        try {
+            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testSrilankaTourism2016NaiveQuery2() {
+        String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
+        String configurationFile = "2016-P21-naive-query2.morph.properties";
         try {
             MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
             MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
@@ -27,41 +123,9 @@ public class ExampleSrilankaTourism {
     }
     
     @Test
-    public void testSrilankaTourism2016Query01() {
+    public void testSrilankaTourism2016NaiveQuery3() {
         String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
-        String configurationFile = "2016-P21-query1.morph.properties";
-        try {
-            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
-            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
-            runner.run();
-            System.out.println("Batch process DONE------\n\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Batch process FAILED------\n\n");
-            assertTrue(e.getMessage(), false);
-        }
-    }
-    
-    @Test
-    public void testSrilankaTourism2016Query02() {
-        String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
-        String configurationFile = "2016-P21-query2.morph.properties";
-        try {
-            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
-            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
-            runner.run();
-            System.out.println("Batch process DONE------\n\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Batch process FAILED------\n\n");
-            assertTrue(e.getMessage(), false);
-        }
-    }
-    
-    @Test
-    public void testSrilankaTourism2016Query03() {
-        String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
-        String configurationFile = "2016-P21-query3.morph.properties";
+        String configurationFile = "2016-P21-naive-query3.morph.properties";
         try {
             MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
             MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
@@ -137,5 +201,6 @@ public class ExampleSrilankaTourism {
             assertTrue(e.getMessage(), false);
         }
     }
+
 
 }

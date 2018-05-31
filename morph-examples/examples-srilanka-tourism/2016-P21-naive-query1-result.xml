@@ -8,24 +8,13 @@
     <results>
         <result>
             <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201601-From-Spain</uri>
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201606-From-Spain</uri>
             </binding>
             <binding name="month">
-                <uri>http://reference.data.gov.uk/def/intervals/January</uri>
+                <uri>http://reference.data.gov.uk/def/intervals/June</uri>
             </binding>
             <binding name="noOfArrivals">
-                <literal>984</literal>
-            </binding>
-        </result>
-        <result>
-            <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201603-From-Spain</uri>
-            </binding>
-            <binding name="month">
-                <uri>http://reference.data.gov.uk/def/intervals/March</uri>
-            </binding>
-            <binding name="noOfArrivals">
-                <literal>1587</literal>
+                <literal>735</literal>
             </binding>
         </result>
         <result>
@@ -41,24 +30,13 @@
         </result>
         <result>
             <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201607-From-Spain</uri>
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201611-From-Spain</uri>
             </binding>
             <binding name="month">
-                <uri>http://reference.data.gov.uk/def/intervals/July</uri>
+                <uri>http://reference.data.gov.uk/def/intervals/November</uri>
             </binding>
             <binding name="noOfArrivals">
-                <literal>2371</literal>
-            </binding>
-        </result>
-        <result>
-            <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201612-From-Spain</uri>
-            </binding>
-            <binding name="month">
-                <uri>http://reference.data.gov.uk/def/intervals/December</uri>
-            </binding>
-            <binding name="noOfArrivals">
-                <literal>1936</literal>
+                <literal>1691</literal>
             </binding>
         </result>
         <result>
@@ -85,6 +63,50 @@
         </result>
         <result>
             <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201612-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://reference.data.gov.uk/def/intervals/December</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1936</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201607-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://reference.data.gov.uk/def/intervals/July</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2371</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201603-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://reference.data.gov.uk/def/intervals/March</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1587</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201601-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://reference.data.gov.uk/def/intervals/January</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>984</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
                 <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201602-From-Spain</uri>
             </binding>
             <binding name="month">
@@ -103,28 +125,6 @@
             </binding>
             <binding name="noOfArrivals">
                 <literal>719</literal>
-            </binding>
-        </result>
-        <result>
-            <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201606-From-Spain</uri>
-            </binding>
-            <binding name="month">
-                <uri>http://reference.data.gov.uk/def/intervals/June</uri>
-            </binding>
-            <binding name="noOfArrivals">
-                <literal>735</literal>
-            </binding>
-        </result>
-        <result>
-            <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201611-From-Spain</uri>
-            </binding>
-            <binding name="month">
-                <uri>http://reference.data.gov.uk/def/intervals/November</uri>
-            </binding>
-            <binding name="noOfArrivals">
-                <literal>1691</literal>
             </binding>
         </result>
         <result>

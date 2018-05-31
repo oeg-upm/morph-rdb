@@ -8,28 +8,6 @@
     <results>
         <result>
             <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201603-From-Russia</uri>
-            </binding>
-            <binding name="country">
-                <uri>http://dbpedia.org/resource/Russia</uri>
-            </binding>
-            <binding name="noOfArrivals">
-                <literal>5916</literal>
-            </binding>
-        </result>
-        <result>
-            <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201603-From-Sweden</uri>
-            </binding>
-            <binding name="country">
-                <uri>http://dbpedia.org/resource/Sweden</uri>
-            </binding>
-            <binding name="noOfArrivals">
-                <literal>2339</literal>
-            </binding>
-        </result>
-        <result>
-            <binding name="obs">
                 <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201603-From-Saudi Arabia</uri>
             </binding>
             <binding name="country">
@@ -239,17 +217,6 @@
         </result>
         <result>
             <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201603-From-Norway</uri>
-            </binding>
-            <binding name="country">
-                <uri>http://dbpedia.org/resource/Norway</uri>
-            </binding>
-            <binding name="noOfArrivals">
-                <literal>1318</literal>
-            </binding>
-        </result>
-        <result>
-            <binding name="obs">
                 <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201603-From-Ukraine</uri>
             </binding>
             <binding name="country">
@@ -257,6 +224,17 @@
             </binding>
             <binding name="noOfArrivals">
                 <literal>2979</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201603-From-Norway</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Norway</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1318</literal>
             </binding>
         </result>
         <result>
@@ -422,6 +400,28 @@
             </binding>
             <binding name="noOfArrivals">
                 <literal>2716</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201603-From-Russia</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Russia</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>5916</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201603-From-Sweden</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Sweden</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2339</literal>
             </binding>
         </result>
     </results>
