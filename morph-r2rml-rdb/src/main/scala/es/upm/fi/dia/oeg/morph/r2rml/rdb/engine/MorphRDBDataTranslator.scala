@@ -644,13 +644,14 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 				}).toMap
 
 				val resultAux = if(replacements.isEmpty) {
-					null
+					(this.translateData(termMap, termMapTemplateString, datatype), rawDBValues);
 				} else {
 					val templateWithDBValue = RegexUtility.replaceTokens(termMapTemplateString, replacements);
 					if(templateWithDBValue != null) {
 						(this.translateData(termMap, templateWithDBValue, datatype), rawDBValues);
 					} else { null }
 				}
+
 
 				if(resultAux.toString().contains("es//")) {
 					logger.info(s"resultAux = ${resultAux}")
