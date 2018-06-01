@@ -27,6 +27,22 @@ public class ExampleSrilankaTourism {
     }
 
     @Test
+    public void testSrilankaTourism2016TransposedNaiveBatch() {
+        String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
+        String configurationFile = "2016-P21-naive-transposed-batch.morph.properties";
+        try {
+            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
     public void testSrilankaTourism2016ColumnsBatch() {
         String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
         String configurationFile = "2016-P21-columns-batch.morph.properties";
