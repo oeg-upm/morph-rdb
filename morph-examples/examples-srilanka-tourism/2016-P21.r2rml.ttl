@@ -24,7 +24,7 @@
 
   rr:subjectMap [
     a rr:Subject;
-    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201601-From-{COUNTRYOFRESIDENCE}";
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016JAN-From-{COUNTRYOFRESIDENCE}";
     rr:termType rr:IRI;
     rr:class qb:Observation;
   ];
@@ -80,7 +80,7 @@
 
   rr:subjectMap [
     a rr:Subject;
-    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201602-From-{COUNTRYOFRESIDENCE}";
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016FEB-From-{COUNTRYOFRESIDENCE}";
     rr:termType rr:IRI;
     rr:class qb:Observation;
   ];
@@ -136,7 +136,7 @@
 
   rr:subjectMap [
     a rr:Subject;
-    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201603-From-{COUNTRYOFRESIDENCE}";
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MARCH-From-{COUNTRYOFRESIDENCE}";
     rr:termType rr:IRI;
     rr:class qb:Observation;
   ];
@@ -193,7 +193,7 @@
 
   rr:subjectMap [
     a rr:Subject;
-    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201604-From-{COUNTRYOFRESIDENCE}";
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016APR-From-{COUNTRYOFRESIDENCE}";
     rr:termType rr:IRI;
     rr:class qb:Observation;
   ];
@@ -250,7 +250,7 @@
 
   rr:subjectMap [
     a rr:Subject;
-    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201605-From-{COUNTRYOFRESIDENCE}";
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-{COUNTRYOFRESIDENCE}";
     rr:termType rr:IRI;
     rr:class qb:Observation;
   ];
@@ -307,7 +307,7 @@
 
   rr:subjectMap [
     a rr:Subject;
-    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201606-From-{COUNTRYOFRESIDENCE}";
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016JUN-From-{COUNTRYOFRESIDENCE}";
     rr:termType rr:IRI;
     rr:class qb:Observation;
   ];
@@ -364,7 +364,7 @@
 
   rr:subjectMap [
     a rr:Subject;
-    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201607-From-{COUNTRYOFRESIDENCE}";
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016JUL-From-{COUNTRYOFRESIDENCE}";
     rr:termType rr:IRI;
     rr:class qb:Observation;
   ];
@@ -421,7 +421,7 @@
 
   rr:subjectMap [
     a rr:Subject;
-    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201608-From-{COUNTRYOFRESIDENCE}";
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016AUG-From-{COUNTRYOFRESIDENCE}";
     rr:termType rr:IRI;
     rr:class qb:Observation;
   ];
@@ -478,7 +478,7 @@
 
   rr:subjectMap [
     a rr:Subject;
-    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201609-From-{COUNTRYOFRESIDENCE}";
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016SEP-From-{COUNTRYOFRESIDENCE}";
     rr:termType rr:IRI;
     rr:class qb:Observation;
   ];
@@ -535,7 +535,7 @@
 
   rr:subjectMap [
     a rr:Subject;
-    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201610-From-{COUNTRYOFRESIDENCE}";
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016OCT-From-{COUNTRYOFRESIDENCE}";
     rr:termType rr:IRI;
     rr:class qb:Observation;
   ];
@@ -592,7 +592,7 @@
 
   rr:subjectMap [
     a rr:Subject;
-    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201611-From-{COUNTRYOFRESIDENCE}";
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016NOV-From-{COUNTRYOFRESIDENCE}";
     rr:termType rr:IRI;
     rr:class qb:Observation;
   ];
@@ -649,7 +649,7 @@
 
   rr:subjectMap [
     a rr:Subject;
-    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/201612-From-{COUNTRYOFRESIDENCE}";
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016FEB-From-{COUNTRYOFRESIDENCE}";
     rr:termType rr:IRI;
     rr:class qb:Observation;
   ];
