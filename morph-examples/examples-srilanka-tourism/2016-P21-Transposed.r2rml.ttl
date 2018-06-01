@@ -1,0 +1,75 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex: <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rev: <http://purl.org/stuff/rev#> .
+@prefix gtfs: <http://vocab.gtfs.org/terms#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <http://schema.org/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix interval: <http://reference.data.gov.uk/def/intervals/> . 
+@prefix sltsv: <http://w3id.org/sri-lanka/tourism/cube-vocab/> .
+@prefix sltsds: <http://w3id.org/sri-lanka/tourism/cube-data-structure/> . 
+@prefix sltsd: <http://w3id.org/sri-lanka/tourism/dataset/> . 
+
+<TriplesMapCanada>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      #rr:tableName "\"2016-P21-TRANSPOSED\""
+	  rr:sqlQuery """ 
+		SELECT * FROM "2016-P21-TRANSPOSED" WHERE "COUNTRYOFRESIDENCE" != 'TOTAL'
+	  """
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016{COUNTRYOFRESIDENCE}-From-Canada";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "sltsd:arrivals-month-by-residence";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate sltsv:countryOfResidence;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/Canada";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2016";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:month;
+	rr:objectMap [
+		rr:termType rr:IRI;
+		rr:constant "http://reference.data.gov.uk/def/intervals/{COUNTRYOFRESIDENCE}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfArrivals;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "CANADA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
