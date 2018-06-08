@@ -1,0 +1,84 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex: <http://example.com/> .
+@prefix eg: <http://example.com/> .
+@prefix ex-geo: <http://example.com/geo> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rev: <http://purl.org/stuff/rev#> .
+@prefix gtfs: <http://vocab.gtfs.org/terms#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <http://schema.org/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix interval: <http://reference.data.gov.uk/def/intervals/> . 
+@prefix sltsv: <http://w3id.org/sri-lanka/tourism/cube-vocab/> .
+@prefix sltsds: <http://w3id.org/sri-lanka/tourism/cube-data-structure/> . 
+@prefix sltsd: <http://w3id.org/sri-lanka/tourism/dataset/> . 
+@prefix sdmx: <http://purl.org/linked-data/sdmx#> . 
+@prefix sdmx-code: <http://purl.org/linked-data/sdmx-code#> . 
+
+
+<TriplesMapO1>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"STATWALES\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://example.com/o1";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "http://example.com/dataset-le1";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:refArea;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://example.com/geo/{REGION}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+    rr:predicate ex:refPeriod;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://reference.data.gov.uk/id/gregorian-interval/2004-01-01T00:00:00/P3Y";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+    rr:predicate sdmx-dimension:sex;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://purl.org/linked-data/sdmx-code#sex-M";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+    rr:predicate sdmx-attribute:unitMeasure;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/Year";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate eg:lifeExpectancy;
+    rr:objectMap [
+    rr:termType rr:Literal;
+      rr:column "2004-2006_MALE";
+    ];
+  ];
+  
+.

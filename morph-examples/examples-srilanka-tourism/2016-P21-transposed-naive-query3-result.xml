@@ -7,10 +7,10 @@
     <results>
         <result>
             <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Spain</uri>
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016Mar-From-Spain</uri>
             </binding>
             <binding name="noOfArrivals">
-                <literal>719</literal>
+                <literal>1587</literal>
             </binding>
         </result>
     </results>
