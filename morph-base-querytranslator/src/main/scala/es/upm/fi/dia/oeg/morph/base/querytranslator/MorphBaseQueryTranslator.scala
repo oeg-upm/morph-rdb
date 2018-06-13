@@ -1410,7 +1410,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 		this.mapInferredTypes = typeInferrer.infer(op);
 		this.initializeMapVarIsNullable(op);
 
-		logger.info("Inferred Types : \n" + typeInferrer.printInferredTypes());
+		//logger.info("Inferred Types : \n" + typeInferrer.printInferredTypes());
+		logger.info(s"this.mapInferredTypes = ${this.mapInferredTypes}");
 
 		//		this.buildAlphaGenerator();
 		//		this.buildBetaGenerator();
