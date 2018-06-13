@@ -27,7 +27,7 @@ public class ExampleSrilankaTourism {
     }
 
     @Test
-    public void testSrilankaTourism2016TransposedNaiveBatch() {
+    public void testSrilankaTourism2016TransposedBatch() {
         String configurationDirectory = System.getProperty("user.dir") + "/examples-srilanka-tourism";
         String configurationFile = "2016-P21-naive-transposed-batch.morph.properties";
         try {
