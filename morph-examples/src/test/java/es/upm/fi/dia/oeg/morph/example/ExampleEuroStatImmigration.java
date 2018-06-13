@@ -6,13 +6,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class ExampleEuroStat {
+public class ExampleEuroStatImmigration {
 
     
     @Test
     public void testNaiveBatch() {
         String configurationDirectory = System.getProperty("user.dir") + "/examples-eurostat";
-        String configurationFile = "eurostatpopulation-naive-batch.morph.properties";
+        String configurationFile = "eurostatimmigration-naive-batch.morph.properties";
         try {
             MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
             MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
@@ -28,7 +28,7 @@ public class ExampleEuroStat {
     @Test
     public void testColumnsBatch() {
         String configurationDirectory = System.getProperty("user.dir") + "/examples-eurostat";
-        String configurationFile = "eurostatpopulation-columns-batch.morph.properties";
+        String configurationFile = "eurostatimmigration-columns-batch.morph.properties";
         try {
             MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
             MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
@@ -44,7 +44,7 @@ public class ExampleEuroStat {
     @Test
     public void testRangeBatch() {
         String configurationDirectory = System.getProperty("user.dir") + "/examples-eurostat";
-        String configurationFile = "eurostatpopulation-range-batch.morph.properties";
+        String configurationFile = "eurostatimmigration-range-batch.morph.properties";
         try {
             MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
             MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
