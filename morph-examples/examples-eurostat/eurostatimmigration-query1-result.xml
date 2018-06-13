@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="obs"/>
+        <variable name="year"/>
+        <variable name="noOfImmigrants"/>
+    </head>
+    <results>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2013</uri>
+            </binding>
+            <binding name="year">
+                <literal>2013</literal>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>280772</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2009</uri>
+            </binding>
+            <binding name="year">
+                <literal>2009</literal>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>392962</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2015</uri>
+            </binding>
+            <binding name="year">
+                <literal>2015</literal>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>342114</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2005</uri>
+            </binding>
+            <binding name="year">
+                <literal>2005</literal>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>719284</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2008</uri>
+            </binding>
+            <binding name="year">
+                <literal>2008</literal>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>599075</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2012</uri>
+            </binding>
+            <binding name="year">
+                <literal>2012</literal>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>304053</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2007</uri>
+            </binding>
+            <binding name="year">
+                <literal>2007</literal>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>958266</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2011</uri>
+            </binding>
+            <binding name="year">
+                <literal>2011</literal>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>371331</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2016</uri>
+            </binding>
+            <binding name="year">
+                <literal>2016</literal>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>414746</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2014</uri>
+            </binding>
+            <binding name="year">
+                <literal>2014</literal>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>305454</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2006</uri>
+            </binding>
+            <binding name="year">
+                <literal>2006</literal>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>840844</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2010</uri>
+            </binding>
+            <binding name="year">
+                <literal>2010</literal>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>360705</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>

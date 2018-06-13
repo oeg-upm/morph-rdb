@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="obs"/>
+        <variable name="noOfImmigrants"/>
+    </head>
+    <results>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2015</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>342114</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>
