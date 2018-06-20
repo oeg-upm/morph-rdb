@@ -272,7 +272,7 @@ class MorphRDBUnfolder(md:R2RMLMappingDocument, properties:MorphRDBProperties)
           //val objectMap = pom.getObjectMap(0);
           for (om <- pom.objectMaps) {
             val objectMapSelectItems = this.unfoldTermMap(om, logicalTableAlias);
-            logger.info(s"objectMapSelectItems = ${objectMapSelectItems}")
+            //logger.info(s"objectMapSelectItems = ${objectMapSelectItems}")
             result.addSelectItems(objectMapSelectItems);
           }
         }
