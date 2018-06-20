@@ -145,11 +145,11 @@ public class ExampleSrilankaTourism {
         try {
             MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
             MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
-            runner.run();
-            System.out.println("Batch process DONE------\n\n");
+            String status = runner.run();
+            System.out.println("Batch process DONE with status = " + status);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Batch process FAILED------\n\n");
+            System.out.println("Batch process FAILED with status = " + e.getMessage());
             assertTrue(e.getMessage(), false);
         }
     }

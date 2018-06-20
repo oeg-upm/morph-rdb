@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="obs"/>
+        <variable name="noOfArrivals"/>
+    </head>
+    <results>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016May-From-Spain</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>719</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>
