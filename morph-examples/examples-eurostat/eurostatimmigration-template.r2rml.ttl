@@ -57,7 +57,7 @@
 	rr:predicate ex:numberOfImmigrants;
 	rr:objectMap [
 		rr:termType rr:Literal;
-		rr:column "BELGIUM";
+		rr:column "Belgium";
 		rr:datatype xsd:integer;
     ];
   ];
@@ -110,52 +110,3 @@
     ];
   ];
 .
-
-<TriplesMapBosnia_and_Herzegovina>
-  # a rr:TriplesMap;
-
-  rr:logicalTable [
-      rr:tableName "\"EUROSTATIMMIGRATION\"";
-  ];
-
-  rr:subjectMap [
-    a rr:Subject;
-    rr:template "http://ex.com/values/immigrants-to-Bosnia_and_Herzegovina-in-{YEAR}";
-    rr:termType rr:IRI;
-    rr:class qb:Observation;
-  ];
-
-  rr:predicateObjectMap[
-    rr:predicate qb:dataSet;
-    rr:objectMap [
-      rr:constant "ex:immigration";
-    ];
-  ];
-
-  rr:predicateObjectMap[
-    rr:predicate ex:destinationCountry;
-    rr:objectMap [
-    rr:termType rr:IRI;
-      rr:constant "http://dbpedia.org/resource/Bosnia_and_Herzegovina";
-    ];
-  ];
-  
-  rr:predicateObjectMap[
-	rr:predicate ex:year;
-	rr:objectMap [
-		rr:termType rr:Literal;
-		rr:column "YEAR";
-		rr:datatype xsd:gYear;
-    ];
-  ];
-  
-  rr:predicateObjectMap[
-	rr:predicate ex:numberOfImmigrants;
-	rr:objectMap [
-		rr:termType rr:Literal;
-		rr:column "Bosnia and Herzegovina";
-		rr:datatype xsd:integer;
-    ];
-  ];
-.
-

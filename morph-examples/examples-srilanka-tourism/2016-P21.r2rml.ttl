@@ -65,7 +65,7 @@
 	rr:predicate sltsv:numberOfArrivals;
 	rr:objectMap [
 		rr:termType rr:Literal;
-		rr:column "JANUARY";
+		rr:column "JAN";
 		rr:datatype xsd:integer;
     ];
   ];
@@ -121,7 +121,7 @@
 	rr:predicate sltsv:numberOfArrivals;
 	rr:objectMap [
 		rr:termType rr:Literal;
-		rr:column "FEBRUARY";
+		rr:column "FEB";
 		rr:datatype xsd:integer;
     ];
   ];
@@ -177,7 +177,7 @@
 	rr:predicate sltsv:numberOfArrivals;
 	rr:objectMap [
 		rr:termType rr:Literal;
-		rr:column "MARCH";
+		rr:column "MAR";
 		rr:datatype xsd:integer;
     ];
   ];
@@ -234,7 +234,7 @@
 	rr:predicate sltsv:numberOfArrivals;
 	rr:objectMap [
 		rr:termType rr:Literal;
-		rr:column "APRIL";
+		rr:column "APR";
 		rr:datatype xsd:integer;
     ];
   ];
@@ -348,7 +348,7 @@
 	rr:predicate sltsv:numberOfArrivals;
 	rr:objectMap [
 		rr:termType rr:Literal;
-		rr:column "JUNE";
+		rr:column "JUN";
 		rr:datatype xsd:integer;
     ];
   ];
@@ -405,7 +405,7 @@
 	rr:predicate sltsv:numberOfArrivals;
 	rr:objectMap [
 		rr:termType rr:Literal;
-		rr:column "JULY";
+		rr:column "JUL";
 		rr:datatype xsd:integer;
     ];
   ];
@@ -462,7 +462,7 @@
 	rr:predicate sltsv:numberOfArrivals;
 	rr:objectMap [
 		rr:termType rr:Literal;
-		rr:column "AUGUST";
+		rr:column "AUG";
 		rr:datatype xsd:integer;
     ];
   ];
@@ -519,7 +519,7 @@
 	rr:predicate sltsv:numberOfArrivals;
 	rr:objectMap [
 		rr:termType rr:Literal;
-		rr:column "SEPTEMBER";
+		rr:column "SEP";
 		rr:datatype xsd:integer;
     ];
   ];
@@ -576,7 +576,7 @@
 	rr:predicate sltsv:numberOfArrivals;
 	rr:objectMap [
 		rr:termType rr:Literal;
-		rr:column "OCTOBER";
+		rr:column "OCT";
 		rr:datatype xsd:integer;
     ];
   ];
@@ -633,7 +633,7 @@
 	rr:predicate sltsv:numberOfArrivals;
 	rr:objectMap [
 		rr:termType rr:Literal;
-		rr:column "NOVEMBER";
+		rr:column "NOV";
 		rr:datatype xsd:integer;
     ];
   ];
@@ -690,7 +690,7 @@
 	rr:predicate sltsv:numberOfArrivals;
 	rr:objectMap [
 		rr:termType rr:Literal;
-		rr:column "DECEMBER";
+		rr:column "DEC";
 		rr:datatype xsd:integer;
     ];
   ];
