@@ -27,10 +27,10 @@ public class ExampleCSV {
 	public void testEdificioHistoricoWeb() {
 		MorphCSVProperties properties = new MorphCSVProperties();
 		properties.setMappingDocumentFilePath(
-				"https://raw.githubusercontent.com/oeg-upm/morph-rdb/master/morph-examples/examples-csv/edificio-historico.r2rml.ttl"				
+				"https://raw.githubusercontent.com/oeg-upm/mappingpedia-engine/master/examples/edificio-historico.r2rml.ttl"
 		);
 		properties.setOutputFilePath(configurationDirectory + File.separator + "edificio-historico-batch-result-csv-web.nt");
-		properties.addCSVFile("http://www.zaragoza.es/api/recurso/turismo/edificio-historico.csv");
+		properties.addCSVFile("https://raw.githubusercontent.com/oeg-upm/mappingpedia-engine/master/examples/edificio-historico.csv");
 		try {
 			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(properties);

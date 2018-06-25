@@ -6,7 +6,7 @@
 		<version>3.6.0</version> </parent> -->
 
 	<groupId>es.upm.fi.dia.oeg.morph</groupId>
-	<version>3.9.11</version>
+	<version>3.9.12</version>
 	<artifactId>morph-examples</artifactId>
 	<packaging>jar</packaging>
 
@@ -65,12 +65,12 @@
 
 		</dependency>
 
-<!--  		<dependency>
+  		<dependency>
 			<groupId>es.upm.fi.dia.oeg.morph</groupId> 
 			<artifactId>morph-rdb-dist</artifactId> 
 			<type>pom</type> 
-			<version>3.9.11</version>
-		</dependency> -->
+			<version>3.9.12</version>
+		</dependency>
 
 		<dependency>
 			<groupId>zql</groupId>

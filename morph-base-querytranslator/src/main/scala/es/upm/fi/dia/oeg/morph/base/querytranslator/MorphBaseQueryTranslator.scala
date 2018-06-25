@@ -100,7 +100,15 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 	var mapTripleAlias:Map[Triple, String] = Map.empty;
 	var mapVarNotNull:Map[Node, Boolean] = Map.empty;
 
-	Optimize.setFactory(new MorphQueryRewritterFactory());
+	try {
+		Optimize.setFactory(new MorphQueryRewritterFactory());
+	} catch {
+		case e:Exception => {
+      logger.warn("Error initializing query optimizer!")
+			e.printStackTrace()
+		}
+	}
+
 
 	val functionsMap:Map[String, String] = Map(
 		"E_Bound" -> "IS NOT NULL"

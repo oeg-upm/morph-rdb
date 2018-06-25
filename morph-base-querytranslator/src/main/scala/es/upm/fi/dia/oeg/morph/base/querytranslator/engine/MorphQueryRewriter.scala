@@ -54,7 +54,8 @@ extends Rewrite {
 				val subOp = opFilter.getSubOp();
 				
 				val tfc = new TransformFilterConjunction();
-				Optimize.apply("test", tfc , opFilter);
+				//Optimize.apply("test", tfc , opFilter);
+				Optimize.apply(tfc , opFilter);
 				
 				
 	//			Op op2 = null;
