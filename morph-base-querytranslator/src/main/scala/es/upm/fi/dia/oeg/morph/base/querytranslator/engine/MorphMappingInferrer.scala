@@ -1,19 +1,17 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator.engine
 
 import scala.collection.JavaConversions._
-import org.apache.jena.graph.Node;
+import org.apache.jena.graph.Node
 import org.apache.jena.query.Query
 import org.apache.jena.sparql.algebra.Algebra
-import org.apache.jena.sparql.algebra.Op;
+import org.apache.jena.sparql.algebra.Op
 import org.apache.jena.vocabulary.RDF
-import org.apache.jena.sparql.algebra.op.{OpBGP, OpLeftJoin, OpUnion, OpJoin, OpFilter, OpSlice, OpProject, OpDistinct}
+import org.apache.jena.sparql.algebra.op._
 import org.apache.jena.graph.Triple
 import org.apache.jena.sparql.expr.ExprList
 import org.apache.jena.sparql.expr.Expr
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
-import org.apache.jena.sparql.algebra.op.OpExtend
-import org.apache.jena.sparql.algebra.op.OpGroup
 import org.slf4j.LoggerFactory
 
 class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
@@ -73,6 +71,7 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 			case opSlice:OpSlice => this.genericInferBGP(bgpFunc)(opSlice.getSubOp())
 			case opExtend:OpExtend => this.genericInferBGP(bgpFunc)(opExtend.getSubOp())
 			case opGroup:OpGroup => this.genericInferBGP(bgpFunc)(opGroup.getSubOp())
+			case opOrder:OpOrder => this.genericInferBGP(bgpFunc)(opOrder.getSubOp())
 		}
 	}
 
