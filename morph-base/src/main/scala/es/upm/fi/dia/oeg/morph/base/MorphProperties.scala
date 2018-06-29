@@ -239,7 +239,7 @@ class MorphProperties extends java.util.Properties {
 			val inputDateFormatPattern = if(inputDatePatternPropertyValue != null && !inputDatePatternPropertyValue.equals("")) {
 				inputDatePatternPropertyValue;
 			} else {
-				"dd-MMM-yyy";
+				"yyyy-MM-dd";
 			}
 
 			this.inputDateFormat = new SimpleDateFormat(inputDateFormatPattern, Locale.ENGLISH);
