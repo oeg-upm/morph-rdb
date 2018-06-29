@@ -62,15 +62,20 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.4.191</version>
-
 		</dependency>
 
-  		<dependency>
-			<groupId>es.upm.fi.dia.oeg.morph</groupId> 
-			<artifactId>morph-rdb-dist</artifactId> 
-			<type>pom</type> 
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.11</version>
+		</dependency>
+
+<!--  		<dependency>
+			<groupId>es.upm.fi.dia.oeg.morph</groupId>
+			<artifactId>morph-rdb-dist</artifactId>
+			<type>pom</type>
 			<version>3.9.12</version>
-		</dependency>
+		</dependency>-->
 
 		<dependency>
 			<groupId>zql</groupId>
