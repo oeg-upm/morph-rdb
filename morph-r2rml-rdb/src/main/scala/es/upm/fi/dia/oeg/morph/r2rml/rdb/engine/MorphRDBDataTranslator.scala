@@ -51,8 +51,12 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 		with MorphR2RMLElementVisitor {
 	val dfInput = this.properties.inputDateFormat;
 	val dfOutput = this.properties.outputDateFormat;
+	val xsdDateTimeURI = XSDDatatype.XSDdateTime.getURI().toString();
+	val xsdBooleanURI = XSDDatatype.XSDboolean.getURI().toString();
+	val xsdDurationURI = XSDDatatype.XSDduration.getURI().toString();
+	val xsdDateURI = XSDDatatype.XSDdate.getURI().toString();
 
-	override   val logger = LoggerFactory.getLogger(this.getClass());
+	override val logger = LoggerFactory.getLogger(this.getClass());
 
 
 	override def processCustomFunctionTransformationExpression(
@@ -390,10 +394,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 
 			val valueWithDataType = if(datatype.isDefined && datatype.get != null) {
 				val datatypeGet = datatype.get;
-				val xsdDateTimeURI = XSDDatatype.XSDdateTime.getURI().toString();
-				val xsdBooleanURI = XSDDatatype.XSDboolean.getURI().toString();
-				val xsdDurationURI = XSDDatatype.XSDduration.getURI().toString();
-				val xsdDateURI = XSDDatatype.XSDdate.getURI().toString();
+
 
 				//				datatypeGet match {
 				//					case xsdDateTimeURI => {
