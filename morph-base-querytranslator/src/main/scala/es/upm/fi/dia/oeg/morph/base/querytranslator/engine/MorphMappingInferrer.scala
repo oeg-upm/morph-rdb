@@ -253,7 +253,7 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 
 	def  inferObjectTypesByPredicateURI(op:Op , mapSubjectTypes:Map[Node, Set[MorphBaseClassMapping]] ) 
 	: Map[Node, Set[MorphBaseClassMapping]] = {
-		def helper(mapSubjectTypes: Map[Node, Set[MorphBaseClassMapping]])(tp: Triple) :
+		def createHelper(mapSubjectTypes: Map[Node, Set[MorphBaseClassMapping]])(tp: Triple) :
 			Option[Pair[Node, Set[MorphBaseClassMapping]]] = {
 			val tpPredicate = tp.getPredicate()
 
@@ -263,18 +263,21 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 					val tpSubject = tp.getSubject()
 					val subjectTypes = mapSubjectTypes.get(tpSubject)
 					val arbitraryCm = subjectTypes.flatMap(_.headOption)
-					val nodeTypes = arbitraryCm match {
+					val objectNodeTypes = arbitraryCm match {
 						case Some(cm) => this.mappingDocument.getPossibleRange(predicateURI, cm)
 						case None => this.mappingDocument.getPossibleRange(predicateURI)
 					}
-					if (nodeTypes.nonEmpty) {
+					if (objectNodeTypes.nonEmpty) {
 						val tpObject = tp.getObject()
-						Some(tpObject -> nodeTypes.toSet)
+						Some(tpObject -> objectNodeTypes.toSet)
 					} else None
 				} else None
 			} else None
 		}
-		genericInfer(helper(mapSubjectTypes) _)(op)
+
+    val helper = createHelper(mapSubjectTypes) _;
+		val result = genericInfer(helper)(op)
+    result;
 	}
 
 	def inferSubjectTypesByPredicatesURIs(op:Op ) : Map[Node, Set[MorphBaseClassMapping]] = {

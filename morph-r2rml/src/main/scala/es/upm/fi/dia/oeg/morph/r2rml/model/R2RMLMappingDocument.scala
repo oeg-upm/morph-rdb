@@ -124,65 +124,91 @@ extends MorphBaseMappingDocument(classMappings) with MorphR2RMLElement {
 	}
 
 
-	override def  getPossibleRange(pm:MorphBasePropertyMapping) 
+	def getObjectMappingPossibleRange(om:R2RMLObjectMap, cms:Iterable[R2RMLTriplesMap])
+  : Iterable[MorphBaseClassMapping] = {
+    val inferredTermType = om.inferTermType;
+    if(Constants.R2RML_IRI_URI.equals(inferredTermType)) {
+      if(cms != null) {
+        Nil
+      } else {
+        cms.toList.flatMap(cm => {
+          val tm = cm.asInstanceOf[R2RMLTriplesMap];
+          if(Constants.MorphTermMapType.TemplateTermMap == om.termMapType) {
+            val objectTemplateString = om.getTemplateString();
+            if(tm.isPossibleInstance(objectTemplateString)) {
+              Some(cm);
+            } else {
+              None
+            }
+          } else {
+            None
+          }
+        })
+      }
+    } else {
+      Nil
+    }
+	}
+
+  def getRefObjectMappingPossibleRange(rom:R2RMLRefObjectMap, cms:Iterable[R2RMLTriplesMap])
+  : Iterable[MorphBaseClassMapping] = {
+    //val parentTriplesMap = rom.getParentTriplesMap().asInstanceOf[R2RMLTriplesMap];
+    val parentTriplesMap = this.getParentTriplesMap(rom);
+
+    val parentSubjectMap = parentTriplesMap.subjectMap;
+    
+    val result = if(parentSubjectMap.termMapType == Constants.MorphTermMapType.TemplateTermMap) {
+      val templateString = parentSubjectMap.getTemplateString();
+      val templateStringWithoutColumns = templateString.replaceAll("\\{.*?}", "");
+      
+      if(cms == null) {
+        Nil
+      } else {
+        cms.flatMap(cm => {
+          if(cm.isPossibleInstance(templateString)) {
+            val possibleTM = cm.asInstanceOf[R2RMLTriplesMap];
+            val possibleSM = possibleTM.subjectMap;
+            val possibleSMTemplateString = possibleSM.templateString;
+            val possibleSMTemplateStringWithoutColumns = possibleSMTemplateString.replaceAll("\\{.*?}", "");
+            
+            val classURIs = possibleSM.classURIs;
+            if(classURIs != null && !classURIs.isEmpty) {
+              if(templateString != null && possibleSMTemplateString != null) {
+                if(templateStringWithoutColumns.equals(possibleSMTemplateStringWithoutColumns)) {
+                  Some(cm);  
+                } else {
+                  None
+                }
+              } else {
+                Some(cm);
+              }
+            } else {
+              None
+            }
+          } else {
+            None
+          }
+        })
+      }
+    } else {
+      List(parentTriplesMap);
+    }
+    
+    //val result = List(parentTriplesMap);
+    result;
+  }
+	override def getPossibleRange(pm:MorphBasePropertyMapping)
 	: Iterable[MorphBaseClassMapping] = {
 		
 		val pom = pm.asInstanceOf[R2RMLPredicateObjectMap];
-		val om = pom.getObjectMap(0);
-		val rom = pom.getRefObjectMap(0);
-		val cms = this.classMappings
-		
-		
+		val om:R2RMLObjectMap = pom.getObjectMap(0);
+		val rom:R2RMLRefObjectMap = pom.getRefObjectMap(0);
+		val cms:Iterable[R2RMLTriplesMap] = this.classMappings
+
 		val result:Iterable[MorphBaseClassMapping] = if(om != null && rom == null) {
-			val inferredTermType = om.inferTermType;
-			if(Constants.R2RML_IRI_URI.equals(inferredTermType)) {
-				if(cms != null) {
-				  Nil
-				} else {
-					cms.toList.flatMap(cm => {
-						val tm = cm.asInstanceOf[R2RMLTriplesMap];
-						if(Constants.MorphTermMapType.TemplateTermMap == om.termMapType) {
-							val objectTemplateString = om.getTemplateString();
-							if(tm.isPossibleInstance(objectTemplateString)) {
-								Some(cm);
-							} else {
-							  None
-							}
-						} else {
-						  None
-						}
-					})
-				}
-			} else {
-			  Nil
-			}
+      this.getObjectMappingPossibleRange(om, cms);
 		} else if(rom != null && om == null) {
-			//val parentTriplesMap = rom.getParentTriplesMap().asInstanceOf[R2RMLTriplesMap];
-			val parentTriplesMap = this.getParentTriplesMap(rom);
-			
-			val parentSubjectMap = parentTriplesMap.subjectMap;
-			if(parentSubjectMap.termMapType == Constants.MorphTermMapType.TemplateTermMap) {
-				val templateString = parentSubjectMap.getTemplateString();
-				if(cms == null) {
-				  Nil
-				} else {
-					cms.flatMap(cm => {
-						if(cm.isPossibleInstance(templateString)) {
-							val tm2 = cm.asInstanceOf[R2RMLTriplesMap];
-							val classURIs = tm2.subjectMap.classURIs;
-							if(classURIs != null && !classURIs.isEmpty()) {
-								Some(cm);	
-							} else {
-							  None
-							}
-						} else {
-						  None
-						}
-					})
-				}
-			} else {
-				List(parentTriplesMap);	
-			}
+      this.getRefObjectMappingPossibleRange(rom, cms);
 		} else {
 		  Nil
 		}

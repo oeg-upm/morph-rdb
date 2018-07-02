@@ -162,11 +162,13 @@ object DBUtility {
       
 			val prop = new Properties();
 			prop.put("ResultSetMetaDataOptions", "1");
+			
       if(username != null && !username.equals("")) {
         prop.put("user", username);  
       }
 
-      if(password != null && !password.equals("")) {
+      //if(password != null && !password.equals("")) {
+      if(password != null) {
         prop.put("password", password);  
       }
             
@@ -189,6 +191,7 @@ object DBUtility {
 			null
 		  }
 		  case e:Exception => {
+				e.printStackTrace()
 		    logger.error("Error opening database connection : " + e.getMessage());
 		    null
 		  }

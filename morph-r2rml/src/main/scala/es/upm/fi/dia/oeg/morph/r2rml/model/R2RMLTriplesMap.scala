@@ -40,13 +40,13 @@ extends MorphBaseClassMapping(predicateObjectMaps) with MorphR2RMLElement with I
 		var result : String = null;
 		
 		val classURIs = this.subjectMap.classURIs;
-		if(classURIs == null || classURIs.size() == 0) {
+		if(classURIs == null || classURIs.size == 0) {
 			logger.warn("No class URI defined for TriplesMap: " + this);
 		} else {
-			if(classURIs.size() > 1) {
+			if(classURIs.size > 1) {
 				logger.warn("Multiple classURIs defined, only one is returned!");
 			}
-			result = classURIs.iterator().next();
+			result = classURIs.iterator.next();
 		}
 
 		return result;
@@ -80,9 +80,9 @@ extends MorphBaseClassMapping(predicateObjectMaps) with MorphR2RMLElement with I
 		val subjectMapTermMapType = this.subjectMap.termMapType;
 		if(subjectMapTermMapType == Constants.MorphTermMapType.TemplateTermMap) {
 			val templateValues = this.subjectMap.getTemplateValues(uri);
-			if(templateValues != null && templateValues.size() > 0) {
+			if(templateValues != null && templateValues.size > 0) {
 				result = true;
-				for(value <- templateValues.values()) {
+				for(value <- templateValues.values) {
 					if(value.contains("/")) {
 						result = false;
 					}
