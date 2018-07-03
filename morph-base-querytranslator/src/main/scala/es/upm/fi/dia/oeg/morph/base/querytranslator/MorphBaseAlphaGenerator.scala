@@ -16,22 +16,22 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 //(val owner:IQueryTranslator) 
 {
 	var owner:MorphBaseQueryTranslator = null;
-	
-val logger = LoggerFactory.getLogger(this.getClass());
-	  
-//	val databaseType = {
-//		if(this.owner == null) {null}
-//		else {this.owner.getDatabaseType();}
-//	}
+
+	val logger = LoggerFactory.getLogger(this.getClass());
+
+	//	val databaseType = {
+	//		if(this.owner == null) {null}
+	//		else {this.owner.getDatabaseType();}
+	//	}
 	//val databaseType = md.configurationProperties.databaseType;
-	
+
 	def calculateAlpha(tp:Triple, cm:MorphBaseClassMapping, predicateURI:String) : MorphAlphaResult;
 
-	def calculateAlpha(tp:Triple, cm:MorphBaseClassMapping , predicateURI:String , pm:MorphBasePropertyMapping ) 
+	def calculateAlpha(tp:Triple, cm:MorphBaseClassMapping , predicateURI:String , pm:MorphBasePropertyMapping )
 	: MorphAlphaResult;
 
-	def  calculateAlphaPredicateObject(tp:Triple, cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping  
-			, alphaSubject:SQLLogicalTable ) : Option[MorphAlphaResultPredicateObject];
+	def  calculateAlphaPredicateObject(tp:Triple, cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping
+																		 , alphaSubject:SQLLogicalTable ) : Option[MorphAlphaResultPredicateObject];
 
 	def  calculateAlphaPredicateObject(tp:Triple, cm:MorphBaseClassMapping , tpPredicateURI:String
 																		 , alphaSubject:SQLLogicalTable ) : Option[MorphAlphaResultPredicateObject] = {
@@ -56,7 +56,7 @@ val logger = LoggerFactory.getLogger(this.getClass());
 	def calculateAlphaSTG(stg:Iterable[Triple] , cm:MorphBaseClassMapping )
 	: Iterable[MorphAlphaResultUnion] = {
 		//var alphaResultUnionList : List[MorphAlphaResultUnion]  = Nil;
-		
+
 		val firstTriple = stg.iterator.next();
 		val tpSubject = firstTriple.getSubject();
 		val alphaSubject = this.calculateAlphaSubject(tpSubject, cm);
@@ -65,9 +65,9 @@ val logger = LoggerFactory.getLogger(this.getClass());
 		val alphaResultUnionList = this.calculateAlphaPredicateObjectSTG(stg, cm, alphaSubject);
 		return alphaResultUnionList;
 	}
-	
-/*	def calculateAlphaPredicateObjectSTG(tp:Triple , cm:MorphBaseClassMapping , tpPredicateURI:String
-	    , logicalTableAlias:String ) : List[(SQLJoinTable, String)];*/
+
+	/*	def calculateAlphaPredicateObjectSTG(tp:Triple , cm:MorphBaseClassMapping , tpPredicateURI:String
+        , logicalTableAlias:String ) : List[(SQLJoinTable, String)];*/
 
 	def isProcessableTriplePattern(tp:Triple, triples:Iterable[Triple], mappedClassURIs:Iterable[String]) = {
 		val tpPredicate = tp.getPredicate();
@@ -125,12 +125,12 @@ val logger = LoggerFactory.getLogger(this.getClass());
 		alphaPredicateObjectSTG.flatMap(x => x);
 	}
 
-//	def calculateAlphaPredicateObjectSTG2(tp:Triple , cm:MorphBaseClassMapping , tpPredicateURI:String 
-//	    ,  logicalTableAlias:String) : List[SQLLogicalTable] ;
-//
-//
-//	def  calculateAlphaPredicateObject2(triple:Triple , cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping
-//	    , logicalTableAlias:String ) : SQLLogicalTable;
+	//	def calculateAlphaPredicateObjectSTG2(tp:Triple , cm:MorphBaseClassMapping , tpPredicateURI:String
+	//	    ,  logicalTableAlias:String) : List[SQLLogicalTable] ;
+	//
+	//
+	//	def  calculateAlphaPredicateObject2(triple:Triple , cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping
+	//	    , logicalTableAlias:String ) : SQLLogicalTable;
 
 
 
