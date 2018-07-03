@@ -196,22 +196,23 @@ rr:predicateObjectMap [
   rr:predicate dc:date;
   rr:objectMap [ rr:column "publishDate"; ];
 ];
+
+rr:predicateObjectMap [
+  rr:predicate bsbm:productType;
+  rr:objectMap [
+    rr:parentTriplesMap <#ProductTypeProduct>;
+    rr:joinCondition [
+      rr:child "nr";
+      rr:parent "product";
+    ];
+  ];
+];
 .
 
 <#ProductTypeProduct> a rr:TriplesMap;
 rr:logicalTable [ rr:tableName "producttypeproduct" ];
 rr:subjectMap [
-  rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/Product{product}";
-];
-rr:predicateObjectMap [
-  rr:predicate rdf:type;
-  rr:objectMap [
-    rr:parentTriplesMap <#ProductType>;
-    rr:joinCondition [
-      rr:child "productType";
-      rr:parent "nr";
-    ];
-  ];
+  rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductType{productType}";
 ];
 .
 

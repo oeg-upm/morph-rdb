@@ -32,6 +32,19 @@ public class ExampleBSBMMySQL {
 		}
 	}
 
-
+	@Test
+	public void testQ1() {
+		String configurationFile = "q1.morph.properties";
+		try {
+			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			logger.info("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
 
 }
