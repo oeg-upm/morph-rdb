@@ -10,7 +10,7 @@ SELECT *
 WHERE { 
 	?obs a qb:Observation .
 	?obs qblk:countryOfResidence	dpr:Spain .
-	?obs qblk:month	intervals:May .
+	?obs qblk:month	dpr:May .
 	?obs qblk:numberOfArrivals	?noOfArrivals .
 
 }

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="obs"/>
+        <variable name="month"/>
+        <variable name="noOfArrivals"/>
+    </head>
+    <results>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016June-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://dbpedia.org/resource/June</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>735</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016November-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://dbpedia.org/resource/November</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1691</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016August-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://dbpedia.org/resource/August</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>3888</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016September-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://dbpedia.org/resource/September</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1846</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016January-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://dbpedia.org/resource/January</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>984</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016March-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://dbpedia.org/resource/March</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1587</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016May-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://dbpedia.org/resource/May</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>719</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016April-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://dbpedia.org/resource/April</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>856</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016July-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://dbpedia.org/resource/July</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2371</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016October-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://dbpedia.org/resource/October</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1758</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016February-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://dbpedia.org/resource/February</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1054</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016December-From-Spain</uri>
+            </binding>
+            <binding name="month">
+                <uri>http://dbpedia.org/resource/December</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1936</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>

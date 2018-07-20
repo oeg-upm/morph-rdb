@@ -58,7 +58,7 @@
 	rr:predicate sltsv:month;
 	rr:objectMap [
     rr:termType rr:IRI;
-    rr:constant "http://reference.data.gov.uk/def/intervals/January";
+    rr:constant "http://dbpedia.org/resource/January";
     ];
   ];
   
@@ -114,7 +114,7 @@
 	rr:predicate sltsv:month;
 	rr:objectMap [
     rr:termType rr:IRI;
-    rr:constant "http://reference.data.gov.uk/def/intervals/February";
+    rr:constant "http://dbpedia.org/resource/February";
     ];
   ];
   
@@ -170,7 +170,7 @@
 	rr:predicate sltsv:month;
 	rr:objectMap [
     rr:termType rr:IRI;
-    rr:constant "http://reference.data.gov.uk/def/intervals/March";
+    rr:constant "http://dbpedia.org/resource/March";
     ];
   ];
   
@@ -226,7 +226,7 @@
 	rr:predicate sltsv:month;
 	rr:objectMap [
     rr:termType rr:IRI;
-    rr:constant "http://reference.data.gov.uk/def/intervals/April";
+    rr:constant "http://dbpedia.org/resource/April";
     ];
   ];
   
@@ -282,7 +282,7 @@
 	rr:predicate sltsv:month;
 	rr:objectMap [
     rr:termType rr:IRI;
-    rr:constant "http://reference.data.gov.uk/def/intervals/May";
+    rr:constant "http://dbpedia.org/resource/May";
     ];
   ];
   
@@ -338,7 +338,7 @@
 	rr:predicate sltsv:month;
 	rr:objectMap [
     rr:termType rr:IRI;
-    rr:constant "http://reference.data.gov.uk/def/intervals/June";
+    rr:constant "http://dbpedia.org/resource/June";
     ];
   ];
   
@@ -394,7 +394,7 @@
 	rr:predicate sltsv:month;
 	rr:objectMap [
     rr:termType rr:IRI;
-    rr:constant "http://reference.data.gov.uk/def/intervals/July";
+    rr:constant "http://dbpedia.org/resource/July";
     ];
   ];
   
@@ -450,7 +450,7 @@
 	rr:predicate sltsv:month;
 	rr:objectMap [
     rr:termType rr:IRI;
-    rr:constant "http://reference.data.gov.uk/def/intervals/August";
+    rr:constant "http://dbpedia.org/resource/August";
     ];
   ];
   
@@ -506,7 +506,7 @@
 	rr:predicate sltsv:month;
 	rr:objectMap [
     rr:termType rr:IRI;
-    rr:constant "http://reference.data.gov.uk/def/intervals/September";
+    rr:constant "http://dbpedia.org/resource/September";
     ];
   ];
   
@@ -562,7 +562,7 @@
 	rr:predicate sltsv:month;
 	rr:objectMap [
     rr:termType rr:IRI;
-    rr:constant "http://reference.data.gov.uk/def/intervals/October";
+    rr:constant "http://dbpedia.org/resource/October";
     ];
   ];
   
@@ -618,7 +618,7 @@
 	rr:predicate sltsv:month;
 	rr:objectMap [
     rr:termType rr:IRI;
-    rr:constant "http://reference.data.gov.uk/def/intervals/November";
+    rr:constant "http://dbpedia.org/resource/November";
     ];
   ];
   
@@ -674,7 +674,7 @@
 	rr:predicate sltsv:month;
 	rr:objectMap [
     rr:termType rr:IRI;
-    rr:constant "http://reference.data.gov.uk/def/intervals/December";
+    rr:constant "http://dbpedia.org/resource/December";
     ];
   ];
   
