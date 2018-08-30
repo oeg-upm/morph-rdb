@@ -1,19 +1,17 @@
 package es.upm.fi.dia.oeg.morph.base.querytranslator.engine
 
 import scala.collection.JavaConversions._
-import org.apache.jena.graph.Node;
+import org.apache.jena.graph.Node
 import org.apache.jena.query.Query
 import org.apache.jena.sparql.algebra.Algebra
-import org.apache.jena.sparql.algebra.Op;
+import org.apache.jena.sparql.algebra.Op
 import org.apache.jena.vocabulary.RDF
-import org.apache.jena.sparql.algebra.op.{OpBGP, OpLeftJoin, OpUnion, OpJoin, OpFilter, OpSlice, OpProject, OpDistinct}
+import org.apache.jena.sparql.algebra.op._
 import org.apache.jena.graph.Triple
 import org.apache.jena.sparql.expr.ExprList
 import org.apache.jena.sparql.expr.Expr
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
-import org.apache.jena.sparql.algebra.op.OpExtend
-import org.apache.jena.sparql.algebra.op.OpGroup
 import org.slf4j.LoggerFactory
 
 class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
@@ -73,6 +71,7 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 			case opSlice:OpSlice => this.genericInferBGP(bgpFunc)(opSlice.getSubOp())
 			case opExtend:OpExtend => this.genericInferBGP(bgpFunc)(opExtend.getSubOp())
 			case opGroup:OpGroup => this.genericInferBGP(bgpFunc)(opGroup.getSubOp())
+			case opOrder:OpOrder => this.genericInferBGP(bgpFunc)(opOrder.getSubOp())
 		}
 	}
 
@@ -254,7 +253,7 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 
 	def  inferObjectTypesByPredicateURI(op:Op , mapSubjectTypes:Map[Node, Set[MorphBaseClassMapping]] ) 
 	: Map[Node, Set[MorphBaseClassMapping]] = {
-		def helper(mapSubjectTypes: Map[Node, Set[MorphBaseClassMapping]])(tp: Triple) :
+		def createHelper(mapSubjectTypes: Map[Node, Set[MorphBaseClassMapping]])(tp: Triple) :
 			Option[Pair[Node, Set[MorphBaseClassMapping]]] = {
 			val tpPredicate = tp.getPredicate()
 
@@ -264,18 +263,21 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 					val tpSubject = tp.getSubject()
 					val subjectTypes = mapSubjectTypes.get(tpSubject)
 					val arbitraryCm = subjectTypes.flatMap(_.headOption)
-					val nodeTypes = arbitraryCm match {
+					val objectNodeTypes = arbitraryCm match {
 						case Some(cm) => this.mappingDocument.getPossibleRange(predicateURI, cm)
 						case None => this.mappingDocument.getPossibleRange(predicateURI)
 					}
-					if (nodeTypes.nonEmpty) {
+					if (objectNodeTypes.nonEmpty) {
 						val tpObject = tp.getObject()
-						Some(tpObject -> nodeTypes.toSet)
+						Some(tpObject -> objectNodeTypes.toSet)
 					} else None
 				} else None
 			} else None
 		}
-		genericInfer(helper(mapSubjectTypes) _)(op)
+
+    val helper = createHelper(mapSubjectTypes) _;
+		val result = genericInfer(helper)(op)
+    result;
 	}
 
 	def inferSubjectTypesByPredicatesURIs(op:Op ) : Map[Node, Set[MorphBaseClassMapping]] = {

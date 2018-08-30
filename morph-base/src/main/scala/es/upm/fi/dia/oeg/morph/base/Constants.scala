@@ -26,23 +26,23 @@ object Constants {
 		val TABLE_NAME, QUERY_STRING = Value
 	}
 
-	
+
 	val JOINS_TYPE_INNER = "INNER";
 	val JOINS_TYPE_LEFT = "LEFT";
-	
+
 	val SQL_LOGICAL_OPERATOR_AND = "AND";
 	val SQL_LOGICAL_OPERATOR_OR = "OR";
 	val SQL_KEYWORD_UNION = "UNION";
 	val SQL_KEYWORD_ORDER_BY = "ORDER BY";
-	
+
 	val SQL_EXPRESSION_TRUE = new ZExpression(
-			"=", new ZConstant("1", ZConstant.NUMBER), new ZConstant("1", ZConstant.NUMBER));
+		"=", new ZConstant("1", ZConstant.NUMBER), new ZConstant("1", ZConstant.NUMBER));
 	val SQL_EXPRESSION_FALSE = new ZExpression(
-			"=", new ZConstant("1", ZConstant.NUMBER), new ZConstant("0", ZConstant.NUMBER));
+		"=", new ZConstant("1", ZConstant.NUMBER), new ZConstant("0", ZConstant.NUMBER));
 
 	val MAP_ZSQL_CUSTOM_FUNCTIONS = Map("CONCAT" -> 2, "SUBSTRING" -> 3, "CONVERT" -> 2
-	    , "COALESCE" -> 2, "ABS" -> 1, "LOWER" -> 1, "UPPER" -> 1, "REPLACE" -> 3, "TRIM" -> 1);
-	
+		, "COALESCE" -> 2, "ABS" -> 1, "LOWER" -> 1, "UPPER" -> 1, "REPLACE" -> 3, "TRIM" -> 1);
+
 	val DATABASE_DEFAULT = "MySQL";
 	val DATABASE_MONETDB = "MonetDB";
 	val DATABASE_ORACLE = "Oracle";
@@ -50,35 +50,35 @@ object Constants {
 	val DATABASE_SQLSERVER = "SQLServer";
 	val DATABASE_POSTGRESQL = "PostgreSQL";
 	val DATABASE_GFT = "GFT";
-  val DATABASE_CSV = "CSV";
-	 
-	
-  val DATABASE_H2_NULL_VALUE = "NULL";
+	val DATABASE_CSV = "CSV";
 
-  
+
+	val DATABASE_H2_NULL_VALUE = "NULL";
+
+
 	val DATABASE_POSTGRESQL_ENCLOSED_CHARACTER = "\"";
-  val DATABASE_ORACLE_ENCLOSED_CHARACTER = "\"";
+	val DATABASE_ORACLE_ENCLOSED_CHARACTER = "\"";
 	val DATABASE_MONETDB_ENCLOSED_CHARACTER = "\"";
 	val DATABASE_MYSQL_ENCLOSED_CHARACTER = "`";
 	val DATABASE_GFT_ENCLOSED_CHARACTER = "'";
 	val DATABASE_H2_ENCLOSED_CHARACTER = "\"";
 	val DATABASE_ENCLOSED_CHARACTERS = List(
-	    DATABASE_POSTGRESQL_ENCLOSED_CHARACTER, DATABASE_MONETDB_ENCLOSED_CHARACTER
-	    , DATABASE_MYSQL_ENCLOSED_CHARACTER, DATABASE_GFT_ENCLOSED_CHARACTER
-      , DATABASE_ORACLE_ENCLOSED_CHARACTER, DATABASE_H2_ENCLOSED_CHARACTER);
-	
-      
+		DATABASE_POSTGRESQL_ENCLOSED_CHARACTER, DATABASE_MONETDB_ENCLOSED_CHARACTER
+		, DATABASE_MYSQL_ENCLOSED_CHARACTER, DATABASE_GFT_ENCLOSED_CHARACTER
+		, DATABASE_ORACLE_ENCLOSED_CHARACTER, DATABASE_H2_ENCLOSED_CHARACTER);
+
+
 	val POSTGRESQL_COLUMN_TYPE_TEXT = "text";
 	val POSTGRESQL_COLUMN_TYPE_INTEGER = "integer";
 	val MONETDB_COLUMN_TYPE_TEXT = "clob";
 	val MONETDB_COLUMN_TYPE_INTEGER = "integer";
-	
+
 	val MAP_DATABASE_COLUMN_TYPE_TEXT = Map(
-	    DATABASE_POSTGRESQL -> POSTGRESQL_COLUMN_TYPE_TEXT, DATABASE_MONETDB -> MONETDB_COLUMN_TYPE_TEXT);
-	
-//	MAP_DATABASE_COLUMN_TYPE_TEXT += (DATABASE_POSTGRESQL -> POSTGRESQL_COLUMN_TYPE_TEXT);
-//	MAP_DATABASE_COLUMN_TYPE_TEXT += (DATABASE_MONETDB -> MONETDB_COLUMN_TYPE_TEXT);
-	
+		DATABASE_POSTGRESQL -> POSTGRESQL_COLUMN_TYPE_TEXT, DATABASE_MONETDB -> MONETDB_COLUMN_TYPE_TEXT);
+
+	//	MAP_DATABASE_COLUMN_TYPE_TEXT += (DATABASE_POSTGRESQL -> POSTGRESQL_COLUMN_TYPE_TEXT);
+	//	MAP_DATABASE_COLUMN_TYPE_TEXT += (DATABASE_MONETDB -> MONETDB_COLUMN_TYPE_TEXT);
+
 	//jena specific properties
 	val JENA_MODE_TYPE = "jena.mode.type";
 	val JENA_MODE_TYPE_MEMORY = "memory";
@@ -95,8 +95,8 @@ object Constants {
 	val OUTPUT_FORMAT_TURTLE = "TURTLE";
 	val OUTPUT_FORMAT_N3 = "N3";
 
-	val INPUT_DATE_PATTERN_PROP_NAME = "input.date.pattern"; 
-	
+	val INPUT_DATE_PATTERN_PROP_NAME = "input.date.pattern";
+
 	//database
 	val NO_OF_DATABASE_NAME_PROP_NAME = "no_of_database";
 	val DATABASE_NAME_PROP_NAME = "database.name";
@@ -112,10 +112,10 @@ object Constants {
 	val DATABASE_TYPE_PROP_NAME = "database.type";
 	val DRIVER_PROP_NAME = "driver";
 	val DATABASE_TIMEOUT_PROP_NAME = "database.timeout";
-   
+
 	val CSV_FILE_PATH = "csv.file.path";
 	val CSV_FIELD_SEPARATOR = "csv.field.separator";
-	
+
 	val  MAPPINGDOCUMENT_FILE_PATH = "mappingdocument.file.path";
 	val  QUERYFILE_PROP_NAME = "query.file.path";
 	val  ONTOFILE_PROP_NAME = "onto.file.path";
@@ -123,44 +123,44 @@ object Constants {
 	val  OUTPUTFILE_PROP_NAME = "output.file.path";
 	val  OUTPUTFILE_RDF_LANGUAGE = "output.rdflanguage";
 	val  SPLIT_OUTPUT_PER_CONCEPT = "split_output_per_concept";
-	
+
 	val  OPTIMIZE_TB = "querytranslator.selfjoinelimination";
 	val  REORDER_STG = "querytranslator.reorderstg";
 	val  SUBQUERY_ELIMINATION = "querytranslator.subqueryelimination";
 	val  TRANSJOIN_SUBQUERY_ELIMINATION = "querytranslator.transjoin.subqueryelimination";
 	val  TRANSSTG_SUBQUERY_ELIMINATION = "querytranslator.transstg.subqueryelimination";
 	val  SUBQUERY_AS_VIEW = "querytranslator.subqueryasview";
-//	val  QUERY_TRANSLATOR_CLASSNAME = "querytranslator.class.name";
-//	val  QUERY_TRANSLATOR_CLASSNAME_DEFAULT = 
-//			"es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.querytranslator.R2RMLQueryTranslator";
-//	val  QUERY_TRANSLATOR_CLASSNAME_DEFAULT = 
-//			"es.upm.fi.dia.oeg.morph.rdb.querytranslator.MorphRDBQueryTranslator";
+	//	val  QUERY_TRANSLATOR_CLASSNAME = "querytranslator.class.name";
+	//	val  QUERY_TRANSLATOR_CLASSNAME_DEFAULT =
+	//			"es.upm.fi.dia.oeg.obdi.wrapper.r2rml.rdb.querytranslator.R2RMLQueryTranslator";
+	//	val  QUERY_TRANSLATOR_CLASSNAME_DEFAULT =
+	//			"es.upm.fi.dia.oeg.morph.rdb.querytranslator.MorphRDBQueryTranslator";
 	val  QUERY_TRANSLATOR_FACTORY_CLASSNAME = "querytranslatorfactory.class.name";
-	val  QUERY_TRANSLATOR_FACTORY_CLASSNAME_DEFAULT = 
-			"es.upm.fi.dia.oeg.morph.rdb.querytranslator.MorphRDBQueryTranslatorFactory";
+	val  QUERY_TRANSLATOR_FACTORY_CLASSNAME_DEFAULT =
+		"es.upm.fi.dia.oeg.morph.rdb.querytranslator.MorphRDBQueryTranslatorFactory";
 	val QUERY_RESULT_TRANSLATOR_CLASSNAME = "queryresulttranslator.class.name";
 	val QUERY_RESULT_TRANSLATOR_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.morph.base.querytranslator.engine.DefaultQueryResultTranslatorFactory";
-	
+
 	val DATASOURCE_READER_CLASSNAME = "datasourcereader.class.name";
 	val DATASOURCE_READER_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBDataSourceReader";
 	val QUERY_RESULT_WRITER_FACTORY_CLASSNAME = "queryresultwriterfactory.class.name";
 	//val QUERY_RESULT_WRITER_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.obdi.core.engine.XMLQueryResultWriter";
 	val QUERY_RESULT_WRITER_FACTORY_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.morph.base.querytranslator.engine.XMLQueryResultWriterFactory";
-	
+
 	val QUERY_RESULT_XMLWRITER_OUTPUT_DEFAULT = "output.rdf.xml";
 	val QUERY_OPTIMIZER_CLASSNAME_DEFAULT = "es.upm.fi.dia.oeg.obdi.core.engine.QueryTranslationOptimizer";
 
 	val  REMOVE_STRANGE_CHARS_FROM_LITERAL = "literal.removestrangechars";
 	val  ENCODE_UNSAFE_CHARS_IN_URI_COLUMN = "uricolumn.encodeunsafecharacters";
 	val  ENCODE_RESERVED_CHARS_IN_URI_COLUMN = "uricolumn.encodereserveccharacters";
-	
+
 	val TRANSFORMATION_STRING_TOLOWERCASE = "toLowerCase";
 	val TRANSFORMATION_STRING_TOUPPERCASE = "toUpperCase";
-	
+
 	val MATERIALIZATION_DISTINCT = "materialization.distinct";
-	
+
 	val URI_ENCODE= "uri.encode";
-	
+
 	//aliases
 	val  URI_AS_ALIAS="uri_";
 	val  RANGE_TABLE_ALIAS="rt_";
@@ -175,7 +175,7 @@ object Constants {
 	val  KEY_SUFFIX = "_key";
 	val  PREFIX_SUBJECT_MAPPING = "sm_";
 	val  PREFIX_MAPPING_ID = "mappingid_";
-	
+
 	//aggregation function
 	val  AGGREGATION_FUNCTION_AVG = "AVG";
 	val  AGGREGATION_FUNCTION_MAX = "MAX";
@@ -185,10 +185,10 @@ object Constants {
 	val  AGGREGATION_FUNCTION_SUM = "SUM";
 
 	val R2RML_NS = "http://www.w3.org/ns/r2rml#";
-	
+
 	//TermMap
 	val R2RML_SUBJECTMAP_URI = R2RML_NS + "subjectMap";
-  	val R2RML_SUBJECTMAP_PROPERTY = ResourceFactory.createProperty(R2RML_SUBJECTMAP_URI);
+	val R2RML_SUBJECTMAP_PROPERTY = ResourceFactory.createProperty(R2RML_SUBJECTMAP_URI);
 	val R2RML_CLASS_URI = R2RML_NS + "class";
 	val R2RML_CLASS_PROPERTY = ResourceFactory.createProperty(R2RML_CLASS_URI);
 	val R2RML_PREDICATEOBJECTMAP_URI = R2RML_NS + "predicateObjectMap";
@@ -223,9 +223,9 @@ object Constants {
 	val R2RML_COLUMN_PROPERTY = ResourceFactory.createProperty(R2RML_COLUMN_URI);
 	val R2RML_TEMPLATE_URI = R2RML_NS + "template";
 	val R2RML_TEMPLATE_PROPERTY = ResourceFactory.createProperty(R2RML_TEMPLATE_URI);
-	
+
 	val R2RML_TEMPLATE_PATTERN = "\\{\"*\\w+(\\s\\w+)*\\\"*}";
-	
+
 	//TriplesMap
 	val R2RML_LOGICALTABLE_URI = R2RML_NS + "logicalTable";
 	val R2RML_LOGICALTABLE_PROPERTY = ResourceFactory.createProperty(R2RML_LOGICALTABLE_URI);
@@ -263,52 +263,52 @@ object Constants {
 	val R2RML_CHILD_PROPERTY = ResourceFactory.createProperty(R2RML_CHILD_URI);
 	val R2RML_PARENT_URI = R2RML_NS + "parent";
 	val R2RML_PARENT_PROPERTY = ResourceFactory.createProperty(R2RML_PARENT_URI);
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	//graph
 	val R2RML_DEFAULT_GRAPH_URI = R2RML_NS + "defaultGraph";
 	val R2RML_DEFAULT_GRAPH_CLASS = ResourceFactory.createResource(R2RML_DEFAULT_GRAPH_URI);
 
- 
-  def getEnclosedCharacter(dbType:String) : String = {
-      if (Constants.DATABASE_GFT.equalsIgnoreCase(dbType)) {
-        Constants.DATABASE_GFT_ENCLOSED_CHARACTER;
-      } else if (Constants.DATABASE_MONETDB.equalsIgnoreCase(dbType) ) {
-        Constants.DATABASE_MONETDB_ENCLOSED_CHARACTER;
-      } else if(Constants.DATABASE_MYSQL.equalsIgnoreCase(dbType)) {
-        Constants.DATABASE_MYSQL_ENCLOSED_CHARACTER;
-      } else if (Constants.DATABASE_POSTGRESQL.equalsIgnoreCase(dbType)) {
-        Constants.DATABASE_POSTGRESQL_ENCLOSED_CHARACTER;
-      } else if (Constants.DATABASE_ORACLE.equalsIgnoreCase(dbType)) {
-        Constants.DATABASE_ORACLE_ENCLOSED_CHARACTER;
-      } else {
-				Constants.DATABASE_POSTGRESQL_ENCLOSED_CHARACTER
-      }     
-  }
-    def getColumnCharacter(dbType:String) : String = {
-      if (Constants.DATABASE_GFT.equalsIgnoreCase(dbType)) {
-        Constants.DATABASE_GFT_ENCLOSED_CHARACTER;
-      } else if (Constants.DATABASE_MONETDB.equalsIgnoreCase(dbType) ) {
-        Constants.DATABASE_MONETDB_ENCLOSED_CHARACTER;
-      } else if(Constants.DATABASE_MYSQL.equalsIgnoreCase(dbType)) {
-        Constants.DATABASE_MYSQL_ENCLOSED_CHARACTER;
-      } else if (Constants.DATABASE_POSTGRESQL.equalsIgnoreCase(dbType)) {
-        Constants.DATABASE_POSTGRESQL_ENCLOSED_CHARACTER;
-      } else if (Constants.DATABASE_ORACLE.equalsIgnoreCase(dbType)) {
-        Constants.DATABASE_ORACLE_ENCLOSED_CHARACTER;
-      } else {      
-        ""
-      }     
-  }
-    
+
+	def getEnclosedCharacter(dbType:String) : String = {
+		if (Constants.DATABASE_GFT.equalsIgnoreCase(dbType)) {
+			Constants.DATABASE_GFT_ENCLOSED_CHARACTER;
+		} else if (Constants.DATABASE_MONETDB.equalsIgnoreCase(dbType) ) {
+			Constants.DATABASE_MONETDB_ENCLOSED_CHARACTER;
+		} else if(Constants.DATABASE_MYSQL.equalsIgnoreCase(dbType)) {
+			Constants.DATABASE_MYSQL_ENCLOSED_CHARACTER;
+		} else if (Constants.DATABASE_POSTGRESQL.equalsIgnoreCase(dbType)) {
+			Constants.DATABASE_POSTGRESQL_ENCLOSED_CHARACTER;
+		} else if (Constants.DATABASE_ORACLE.equalsIgnoreCase(dbType)) {
+			Constants.DATABASE_ORACLE_ENCLOSED_CHARACTER;
+		} else {
+			Constants.DATABASE_POSTGRESQL_ENCLOSED_CHARACTER
+		}
+	}
+	def getColumnCharacter(dbType:String) : String = {
+		if (Constants.DATABASE_GFT.equalsIgnoreCase(dbType)) {
+			Constants.DATABASE_GFT_ENCLOSED_CHARACTER;
+		} else if (Constants.DATABASE_MONETDB.equalsIgnoreCase(dbType) ) {
+			Constants.DATABASE_MONETDB_ENCLOSED_CHARACTER;
+		} else if(Constants.DATABASE_MYSQL.equalsIgnoreCase(dbType)) {
+			Constants.DATABASE_MYSQL_ENCLOSED_CHARACTER;
+		} else if (Constants.DATABASE_POSTGRESQL.equalsIgnoreCase(dbType)) {
+			Constants.DATABASE_POSTGRESQL_ENCLOSED_CHARACTER;
+		} else if (Constants.DATABASE_ORACLE.equalsIgnoreCase(dbType)) {
+			Constants.DATABASE_ORACLE_ENCLOSED_CHARACTER;
+		} else {
+			""
+		}
+	}
+
 	val MAP_DEFAULT_URI_ENCODING_CHARS = Map(" " -> "%20", "," -> "%2C", "\\(" -> "%28", "\\)" -> "%29");
-	
+
 	val URI_TRANSFORM_TOLOWERCASE="toLowercase";
 	val URI_TRANSFORM_TOUPPERCASE="toUppercase";
 	val URI_TRANSFORM_REMOVEACCENT="removeAccent";
-	
+
 }

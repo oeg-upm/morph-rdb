@@ -1,0 +1,2080 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex: <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rev: <http://purl.org/stuff/rev#> .
+@prefix gtfs: <http://vocab.gtfs.org/terms#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <http://schema.org/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix interval: <http://reference.data.gov.uk/def/intervals/> . 
+@prefix sltsv: <http://w3id.org/sri-lanka/tourism/cube-vocab/> .
+@prefix sltsds: <http://w3id.org/sri-lanka/tourism/cube-data-structure/> . 
+@prefix sltsd: <http://w3id.org/sri-lanka/tourism/dataset/> . 
+
+<TriplesMapBELGIUM>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-BELGIUM-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Belgium";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "BELGIUM";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapBULGARIA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-BULGARIA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Bulgaria";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "BULGARIA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapCzech_Republic>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-Czech_Republic-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Czech Republic";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "Czech Republic";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapDENMARK>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-DENMARK-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Denmark";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "DENMARK";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapGERMANY>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-GERMANY-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Germany";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "GERMANY";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapESTONIA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-ESTONIA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Estonia";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "ESTONIA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapIRELAND>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-IRELAND-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Ireland";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "IRELAND";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapGREECE>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-GREECE-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Greece";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "GREECE";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapSPAIN>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-SPAIN-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Spain";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "SPAIN";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapFRANCE>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-FRANCE-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/France";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "FRANCE";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapCROATIA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-CROATIA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Croatia";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "CROATIA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapITALY>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-ITALY-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Italy";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "ITALY";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapCYPRUS>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-CYPRUS-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Cyprus";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "CYPRUS";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapLATVIA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-LATVIA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Latvia";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "LATVIA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapLITHUANIA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-LITHUANIA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Lithuania";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "LITHUANIA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapLUXEMBOURG>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-LUXEMBOURG-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Luxembourg";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "LUXEMBOURG";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapHUNGARY>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-HUNGARY-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Hungary";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "HUNGARY";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapMALTA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-MALTA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Malta";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "MALTA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapNETHERLANDS>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-NETHERLANDS-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Netherlands";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "NETHERLANDS";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapAUSTRIA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-AUSTRIA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Austria";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "AUSTRIA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapPOLAND>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-POLAND-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Poland";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "POLAND";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapPORTUGAL>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-PORTUGAL-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Portugal";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "PORTUGAL";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapROMANIA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-ROMANIA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Romania";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "ROMANIA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapSLOVENIA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-SLOVENIA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Slovenia";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "SLOVENIA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapSLOVAKIA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-SLOVAKIA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Slovakia";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "SLOVAKIA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapFINLAND>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-FINLAND-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Finland";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "FINLAND";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapSWEDEN>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-SWEDEN-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Sweden";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "SWEDEN";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapUnited_Kingdom>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-United_Kingdom-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/United Kingdom";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "United Kingdom";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapICELAND>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-ICELAND-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Iceland";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "ICELAND";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapLIECHTENSTEIN>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-LIECHTENSTEIN-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Liechtenstein";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "LIECHTENSTEIN";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapNORWAY>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-NORWAY-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Norway";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "NORWAY";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapSWITZERLAND>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-SWITZERLAND-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Switzerland";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "SWITZERLAND";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapFormer_Yugoslav_Republic_of_Macedonia>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-Former_Yugoslav_Republic_of_Macedonia-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Former Yugoslav Republic of Macedonia";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "Former Yugoslav Republic of Macedonia";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapBELARUS>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-BELARUS-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Belarus";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "BELARUS";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapBosnia_and_Herzegovina>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-Bosnia_and_Herzegovina-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Bosnia and Herzegovina";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "Bosnia and Herzegovina";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapMOLDOVA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-MOLDOVA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Moldova";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "MOLDOVA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapRUSSIA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-RUSSIA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Russia";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "RUSSIA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapSan_Marino>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-San_Marino-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/San Marino";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "San Marino";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapKYRGYZSTAN>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-KYRGYZSTAN-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Kyrgyzstan";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "KYRGYZSTAN";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapTAJIKISTAN>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-TAJIKISTAN-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Tajikistan";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "TAJIKISTAN";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapUZBEKISTAN>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-UZBEKISTAN-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Uzbekistan";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "UZBEKISTAN";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapARMENIA>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-ARMENIA-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Armenia";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "ARMENIA";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapAZERBAIJAN>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\"";
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-AZERBAIJAN-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Azerbaijan";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "AZERBAIJAN";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.

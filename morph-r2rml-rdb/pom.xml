@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>es.upm.fi.dia.oeg.morph</groupId>
 		<artifactId>morph-rdb</artifactId>
-		<version>3.9.11</version>
+		<version>3.9.14</version>
 	</parent>
 	<packaging>jar</packaging>
 
@@ -113,11 +113,21 @@
 			<version>9.1-901-1.jdbc4</version>
 		</dependency>
 
+		<!--
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.26</version>
 		</dependency>
+		-->
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.11</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>com.oracle</groupId>

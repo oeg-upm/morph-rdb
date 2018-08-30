@@ -27,6 +27,7 @@ class MorphCSVProperties extends MorphRDBProperties {
     this.setCSVFile(csvFilePathPropertyValue);
 
     this.fieldSeparator = this.readString(Constants.CSV_FIELD_SEPARATOR, None);
+    logger.info(s"CSV field separator = ${this.fieldSeparator}")
   }
   
   def setCSVFile(csvFilePathPropertyValue:String) : Unit = {

@@ -1,0 +1,400 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex: <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rev: <http://purl.org/stuff/rev#> .
+@prefix gtfs: <http://vocab.gtfs.org/terms#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <http://schema.org/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix interval: <http://reference.data.gov.uk/def/intervals/> . 
+@prefix sltsv: <http://w3id.org/sri-lanka/tourism/cube-vocab/> .
+@prefix sltsds: <http://w3id.org/sri-lanka/tourism/cube-data-structure/> . 
+@prefix sltsd: <http://w3id.org/sri-lanka/tourism/dataset/> . 
+
+<TriplesMap2006>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATPOPULATION\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/population-of-{COUNTRY}-in-2006";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:population";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:country;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRY}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2006";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfPopulation;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "2006";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMap2007>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATPOPULATION\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/population-of-{COUNTRY}-in-2007";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:population";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:country;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRY}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2007";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfPopulation;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "2007";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMap2008>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATPOPULATION\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/population-of-{COUNTRY}-in-2008";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:population";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:country;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRY}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2008";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfPopulation;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "2008";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMap2009>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATPOPULATION\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/population-of-{COUNTRY}-in-2009";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:population";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:country;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRY}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2009";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfPopulation;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "2009";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMap2010>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATPOPULATION\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/population-of-{COUNTRY}-in-2010";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:population";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:country;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRY}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2010";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfPopulation;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "2010";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMap2011>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATPOPULATION\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/population-of-{COUNTRY}-in-2011";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:population";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:country;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRY}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2011";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfPopulation;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "2011";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMap2012>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATPOPULATION\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/population-of-{COUNTRY}-in-2012";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:population";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:country;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRY}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2012";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfPopulation;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "2012";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMap2013>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATPOPULATION\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/population-of-{COUNTRY}-in-2013";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:population";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:country;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:template "http://dbpedia.org/resource/{COUNTRY}";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:constant "2013";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate sltsv:numberOfPopulation;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "2013";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.

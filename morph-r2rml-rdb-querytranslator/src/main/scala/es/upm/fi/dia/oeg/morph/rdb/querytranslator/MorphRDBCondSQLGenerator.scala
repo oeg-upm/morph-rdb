@@ -19,297 +19,306 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUnfolder
 import org.slf4j.LoggerFactory
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLObjectMap
+import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLRefObjectMap
+import org.apache.jena.graph.impl.LiteralLabel
 
-class MorphRDBCondSQLGenerator(md:R2RMLMappingDocument, unfolder:MorphRDBUnfolder) 
-extends MorphBaseCondSQLGenerator(md, unfolder:MorphBaseUnfolder) {
-	override   val logger = LoggerFactory.getLogger(this.getClass());
+class MorphRDBCondSQLGenerator(md:R2RMLMappingDocument, unfolder:MorphRDBUnfolder)
+  extends MorphBaseCondSQLGenerator(md, unfolder:MorphBaseUnfolder) {
+  override val logger = LoggerFactory.getLogger(this.getClass());
 
+  def genCondSQLPredicateObjectLiteral(tpObjectLiteral:LiteralLabel
+                                       , objectMap:R2RMLObjectMap
+                                       , refObjectMap:R2RMLRefObjectMap
+                                       , logicalTableAlias:String
+                                      ) : ZExpression = {
+    if(refObjectMap == null && objectMap == null) {
+      val errorMessage = "triple.object is a literal, but RefObjectMap is specified instead of ObjectMap";
+      logger.error(errorMessage);
+    }
 
-	override def genCondSQLPredicateObject(tp:Triple, alphaResult:MorphAlphaResult 
-			, betaGenerator:MorphBaseBetaGenerator, cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping) 
-	: ZExpression = {
-	  logger.debug(s"Generating genCondSQLPredicateObject for tp: ${tp}");
-	  
-			val tpObject = tp.getObject();
-			val logicalTableAlias = alphaResult.alphaSubject.getAlias();
+    val objectLiteralValue = tpObjectLiteral.getValue();
 
-			val poMap = pm.asInstanceOf[R2RMLPredicateObjectMap];
+    val result = if(objectMap != null) {
+      val termMapType = objectMap.termMapType;
+      objectMap.termMapType match {
+        case Constants.MorphTermMapType.ColumnTermMap => {
+          val columnName = objectMap.getColumnName();
+          if(columnName != null) {
+            val columnNameWithAlias = {
+              if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
+                logicalTableAlias + "." + columnName;
+              } else {
+                columnName
+              }
+            }
 
-			//		val logicalTable = cm.getLogicalTable();
-			//		val logicalTableMetaData = logicalTable.getTableMetaData();
-			//		val conn = this.owner.getConnection();
-			//		val tableMetaData = {
-			//			if(logicalTableMetaData == null && conn != null) {
-			//				try {
-			//					logicalTable.buildMetaData(conn);
-			//					logicalTable.getTableMetaData();
-			//				} catch {
-			//				  case e:Exception => {
-			//				    logger.error(e.getMessage());
-			//				    throw new QueryTranslationException(e.getMessage());
-			//				  }
-			//				}
-			//			} else {
-			//			  logicalTableMetaData
-			//			}		  
-			//		}
-
-			val refObjectMap = poMap.getRefObjectMap(0);
-			val objectMap = poMap.getObjectMap(0);
-			if(refObjectMap == null && objectMap == null) {
-				val errorMessage = "no mappings is specified.";
-				logger.error(errorMessage);
-				null
-			} else if (refObjectMap != null && objectMap != null) {
-				val errorMessage = "Wrong mapping, ObjectMap and RefObjectMap shouldn't be specified at the same time.";
-				logger.error(errorMessage);			  
-			}
-
-			val  result2:ZExpression = {
-					if(tpObject.isLiteral()) {
-						if(refObjectMap == null && objectMap == null) {
-							val errorMessage = "triple.object is a literal, but RefObjectMap is specified instead of ObjectMap";
-							logger.error(errorMessage);
-						} 
-
-						val objectLiteralValue = tpObject.getLiteral().getValue();
-
-						if(objectMap != null) {
-							val termMapType = objectMap.termMapType;
-							objectMap.termMapType match {
-							case Constants.MorphTermMapType.ColumnTermMap => {
-								val columnName = objectMap.getColumnName();
-								if(columnName != null) {
-									val columnNameWithAlias = {
-											if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
-												logicalTableAlias + "." + columnName;
-											} else {
-												columnName
-											}					  
-									}
-
-									val columnConstant = new ZConstant(columnNameWithAlias,  ZConstant.COLUMNNAME);
-									val objectLiteral = new ZConstant(objectLiteralValue.toString(), ZConstant.STRING);
-									new ZExpression("=", columnConstant, objectLiteral);
-								} else {
-									null
-								}                
-							} 
-							case Constants.MorphTermMapType.ConstantTermMap => {
-							  logger.info("Generating CondSQL for ConstantTermMap");
-							  val objectLiteral = new ZConstant(objectLiteralValue.toString(), ZConstant.STRING);
-							  val objectMapConstant = new ZConstant(objectMap.getConstantValue(), ZConstant.STRING);
-                new ZExpression("=", objectMapConstant, objectLiteral);
-							} 
-							case _ => {
-								null
-							}						    
-							}
+            val columnConstant = new ZConstant(columnNameWithAlias,  ZConstant.COLUMNNAME);
+            val objectLiteral = new ZConstant(objectLiteralValue.toString(), ZConstant.STRING);
+            new ZExpression("=", columnConstant, objectLiteral);
+          } else {
+            null
+          }
+        }
+        case Constants.MorphTermMapType.ConstantTermMap => {
+          logger.info("Generating CondSQL for ConstantTermMap");
+          val objectLiteral = new ZConstant(objectLiteralValue.toString(), ZConstant.STRING);
+          val objectMapConstant = new ZConstant(objectMap.getConstantValue(), ZConstant.STRING);
+          new ZExpression("=", objectMapConstant, objectLiteral);
+        }
+        case _ => {
+          null
+        }
+      }
 
 
-						} else {
-							null
-						}
-					} else if(tpObject.isURI()) {
-					  val tpObjectURI = tpObject.getURI();
-					  val zConstantObjectURI = new ZConstant(tpObjectURI.toString(), ZConstant.STRING);
-					  
-						if(refObjectMap == null && objectMap == null) {
-							null
-						} else if (refObjectMap != null && objectMap != null) {
-							null			  
-						} else if(objectMap != null && refObjectMap == null) {
-							
-							val termMapType = objectMap.termMapType;
-							objectMap.termMapType match {
-							case Constants.MorphTermMapType.TemplateTermMap => {
-								//								this.generateCondForWellDefinedURI(objectMap
-								//										, uri, logicalTableAlias);
-								MorphRDBUtility.generateCondForWellDefinedURI(
-										objectMap, cm, tpObjectURI, logicalTableAlias)
-							} 
-							case Constants.MorphTermMapType.ColumnTermMap => {
-								val columnName = objectMap.getColumnName();
-								val columnNameWithAlias = {
-										if(logicalTableAlias != null) {
-											logicalTableAlias + "." + columnName;
-										} else {
-											columnName
-										}					  
-								}
+    } else {
+      null
+    }
 
-								val zConstantObjectColumn = new ZConstant(columnNameWithAlias,  ZConstant.COLUMNNAME);
-								new ZExpression("=", zConstantObjectColumn, zConstantObjectURI);
-							} 
-							case Constants.MorphTermMapType.ConstantTermMap => {
-							  logger.debug("Generating CondSQL for ConstantTermMap");
-							  
-							  val zConstantObjectConstant = new ZConstant(objectMap.getConstantValue(), ZConstant.STRING);
-                new ZExpression("=", zConstantObjectConstant, zConstantObjectURI);
-							} 
-							case _ => {
-								null
-							}							  
-							}
-						} else if(refObjectMap != null && objectMap == null) {
-							//val refObjectMapAlias = this.owner.getTripleAlias(tp);
-							val parentTriplesMap = md.getParentTriplesMap(refObjectMap);
-							val parentSubjectMap = parentTriplesMap.subjectMap;
-							val parentLogicalTable = parentTriplesMap.logicalTable;
-							val refObjectMapAlias = parentLogicalTable.alias;							
+    result;
+  }
 
-							//Collection<R2RMLJoinCondition> joinConditions = refObjectMap.getJoinConditions();
-							//ZExp onExpression = R2RMLUtility.generateJoinCondition(joinConditions, logicalTableAlias, refObjectMapAlias);
-							// onExpression done in alpha generator
+  def genCondSQLPredicateObjectURI(tpObjectURI:String
+                                   , objectMap:R2RMLObjectMap
+                                   , refObjectMap:R2RMLRefObjectMap
+                                   , logicalTableAlias:String
+                                   , refObjectMapAlias:String
+                                   , cm:MorphBaseClassMapping
+                                  ) : ZExpression = {
+    val zConstantObjectURI = new ZConstant(tpObjectURI.toString(), ZConstant.STRING);
 
-							//							val parentTriplesMap = 
-							//									refObjectMap.getParentTriplesMap().asInstanceOf[R2RMLTriplesMap];
-							//val md = this.owner.getMappingDocument().asInstanceOf[R2RMLMappingDocument];
+    val result = if(refObjectMap == null && objectMap == null) {
+      null
+    } else if (refObjectMap != null && objectMap != null) {
+      null
+    } else if(objectMap != null && refObjectMap == null) {
 
-							val uriCondition = MorphRDBUtility.generateCondForWellDefinedURI(
-									parentTriplesMap.subjectMap, parentTriplesMap, tpObject.getURI(),
-									refObjectMapAlias);
+      val termMapType = objectMap.termMapType;
+      objectMap.termMapType match {
+        case Constants.MorphTermMapType.TemplateTermMap => {
+          //								this.generateCondForWellDefinedURI(objectMap
+          //										, uri, logicalTableAlias);
+          MorphRDBUtility.generateCondForWellDefinedURI(
+            objectMap, cm, tpObjectURI, logicalTableAlias)
+        }
+        case Constants.MorphTermMapType.ColumnTermMap => {
+          val columnName = objectMap.getColumnName();
+          val columnNameWithAlias = {
+            if(logicalTableAlias != null) {
+              logicalTableAlias + "." + columnName;
+            } else {
+              columnName
+            }
+          }
 
-							val expressionsList = List(uriCondition);
-							MorphSQLUtility.combineExpresions(expressionsList, Constants.SQL_LOGICAL_OPERATOR_AND);				
-						} else {
-							null
-						}
-					} else if(tpObject.isVariable()) {
-						null
-					} else {
-						null
-					}
-			}
+          val zConstantObjectColumn = new ZConstant(columnNameWithAlias,  ZConstant.COLUMNNAME);
+          new ZExpression("=", zConstantObjectColumn, zConstantObjectURI);
+        }
+        case Constants.MorphTermMapType.ConstantTermMap => {
+          logger.debug("Generating CondSQL for ConstantTermMap");
 
-			result2;
-	}
+          val zConstantObjectConstant = new ZConstant(objectMap.getConstantValue(), ZConstant.STRING);
+          new ZExpression("=", zConstantObjectConstant, zConstantObjectURI);
+        }
+        case _ => {
+          null
+        }
+      }
+    } else if(refObjectMap != null && objectMap == null) {
+      //val refObjectMapAlias = this.owner.getTripleAlias(tp);
+      val parentTriplesMap = md.getParentTriplesMap(refObjectMap);
+      val parentSubjectMap = parentTriplesMap.subjectMap;
+      val parentLogicalTable = parentTriplesMap.logicalTable;
+      //val refObjectMapAlias = parentLogicalTable.alias;
 
-	//	def generateCondForWellDefinedURI(termMap:R2RMLTermMap, uri:String , alias:String 
-	//			//, columnsMetaData:Map[String, ColumnMetaData] 
-	//			//, tableMetaData:TableMetaData
-	//			) : ZExpression = {
-	//			val logicalTable = termMap.getOwner().getLogicalTable();
-	//			val logicalTableMetaData = logicalTable.getTableMetaData();
-	//			val conn = logicalTable.getOwner().getOwner().getConn();
-	//
-	//			val tableMetaData = {
-	//					if(logicalTableMetaData == null && conn != null) {
-	//						try {
-	//							logicalTable.buildMetaData(conn);
-	//							logicalTable.getTableMetaData();
-	//						} catch {
-	//						case e:Exception => {
-	//							logger.error(e.getMessage());
-	//							throw new QueryTranslationException(e.getMessage());
-	//						}
-	//						}
-	//					} else {
-	//						logicalTableMetaData
-	//					}		  
-	//			}		
-	//
-	//			val result:ZExpression = {
-	//					if(termMap.getTermMapType() == TermMapType.TEMPLATE) {
-	//						val matchedColValues = termMap.getTemplateValues(uri);
-	//						if(matchedColValues == null || matchedColValues.size() == 0) {
-	//							val errorMessage = "uri " + uri + " doesn't match the template : " + termMap.getTemplateString();
-	//							logger.debug(errorMessage);
-	//							null
-	//						} else {
-	//							val exprs:List[ZExpression] = {
-	//								val exprsAux = matchedColValues.keySet().map(pkColumnString => {
-	//									val value = matchedColValues.get(pkColumnString);
-	//
-	//									val termMapColumnTypeName = termMap.getColumnTypeName();
-	//									val columnTypeName = {
-	//											if(termMapColumnTypeName != null) {
-	//												termMapColumnTypeName
-	//											} else {
-	//												if(tableMetaData != null && tableMetaData.getColumnMetaData(pkColumnString).isDefined) {
-	//													val columnTypeNameAux = tableMetaData.getColumnMetaData(pkColumnString).get.dataType;
-	//													termMap.setColumnTypeName(columnTypeNameAux);
-	//													columnTypeNameAux
-	//												} else {
-	//													null
-	//												}
-	//											}
-	//									}
-	//
-	//									val pkColumnConstant = MorphSQLConstant.apply(
-	//											alias + "." + pkColumnString, ZConstant.COLUMNNAME, databaseType);
-	//
-	//									val pkValueConstant = {
-	//											if(columnTypeName != null) {
-	//												if(SQLDataType.isDatatypeNumber(columnTypeName)) {
-	//													new ZConstant(value, ZConstant.NUMBER);
-	//												} else if(SQLDataType.isDatatypeString(columnTypeName)) {
-	//													new ZConstant(value, ZConstant.STRING);
-	//												} else {
-	//													new ZConstant(value, ZConstant.STRING);
-	//												}					
-	//											} else {
-	//												new ZConstant(value, ZConstant.STRING);
-	//											}					  
-	//									}
-	//
-	//									val expr = new ZExpression("=", pkColumnConstant, pkValueConstant);
-	//									expr;				  
-	//								})
-	//								exprsAux.toList;
-	//						}
-	//
-	//						MorphSQLUtility.combineExpresions(
-	//								exprs, Constants.SQL_LOGICAL_OPERATOR_AND);				
-	//						}
-	//					} else {
-	//						null
-	//					}
-	//			}
-	//
-	//			logger.debug("generateCondForWellDefinedURI = " + result);
-	//			result;
-	//	}
 
-	override def genCondSQLSubjectURI(tpSubject:Node , alphaResult:MorphAlphaResult 
-			, cm:MorphBaseClassMapping ) : ZExpression = {
-					val subjectURI = tpSubject.getURI();
-					val tm = cm.asInstanceOf[R2RMLTriplesMap];
-					val subjectURIConstant = new ZConstant(subjectURI, ZConstant.STRING);
-					val logicalTableAlias = alphaResult.alphaSubject.getAlias();
-					val subjectTermMapType = tm.subjectMap.termMapType;
+      //Collection<R2RMLJoinCondition> joinConditions = refObjectMap.getJoinConditions();
+      //ZExp onExpression = R2RMLUtility.generateJoinCondition(joinConditions, logicalTableAlias, refObjectMapAlias);
+      // onExpression done in alpha generator
 
-					val result2:ZExpression = {
-							subjectTermMapType match {
-							case Constants.MorphTermMapType.TemplateTermMap => {
-								try {
-									MorphRDBUtility.generateCondForWellDefinedURI(tm.subjectMap, tm 
-											, tpSubject.getURI(), logicalTableAlias);					
-								} catch {
-								case e:Exception => {
-									logger.error(e.getMessage());
-									throw new Exception(e);
-								}
-								}
-							} 
-							case Constants.MorphTermMapType.ColumnTermMap => {
-								val subjectMapColumn = new ZConstant(tm.subjectMap.getColumnName(), ZConstant.COLUMNNAME);
-								new ZExpression("=", subjectMapColumn, subjectURIConstant);
-							}
-							case Constants.MorphTermMapType.ConstantTermMap => {
-								val subjectMapColumn = new ZConstant(tm.subjectMap.getConstantValue(), ZConstant.COLUMNNAME);
-								new ZExpression("=", subjectMapColumn, subjectURIConstant);			      
-							}
-							case _ => {
-								val errorMessage = "Invalid term map type"; 
-								logger.error(errorMessage);
-								throw new Exception(errorMessage);
-							}			    
-							}
+      //							val parentTriplesMap =
+      //									refObjectMap.getParentTriplesMap().asInstanceOf[R2RMLTriplesMap];
+      //val md = this.owner.getMappingDocument().asInstanceOf[R2RMLMappingDocument];
 
-					}
+      val uriCondition = MorphRDBUtility.generateCondForWellDefinedURI(
+        parentTriplesMap.subjectMap, parentTriplesMap, tpObjectURI,
+        refObjectMapAlias);
 
-					result2;
-	}
+      val expressionsList = List(uriCondition);
+      MorphSQLUtility.combineExpresions(expressionsList, Constants.SQL_LOGICAL_OPERATOR_AND);
+    } else {
+      null
+    }
+
+    result;
+  }
+
+  override def genCondSQLPredicateObject(tp:Triple, alphaResult:MorphAlphaResult
+                                         , betaGenerator:MorphBaseBetaGenerator
+                                         , cm:MorphBaseClassMapping , pm:MorphBasePropertyMapping)
+  : ZExpression = {
+    logger.debug(s"Generating genCondSQLPredicateObject for tp: ${tp}");
+
+    val tpObject = tp.getObject();
+    val logicalTableAlias = alphaResult.alphaSubject.getAlias();
+
+    val poMap = pm.asInstanceOf[R2RMLPredicateObjectMap];
+    val refObjectMap = poMap.getRefObjectMap(0);
+    val objectMap = poMap.getObjectMap(0);
+    if(refObjectMap == null && objectMap == null) {
+      val errorMessage = "no mappings is specified.";
+      logger.error(errorMessage);
+      null
+    } else if (refObjectMap != null && objectMap != null) {
+      val errorMessage = "Wrong mapping, ObjectMap and RefObjectMap shouldn't be specified at the same time.";
+      logger.error(errorMessage);
+    }
+
+    val  result:ZExpression = {
+      if(tpObject.isLiteral()) {
+        val tpObjectLiteral = tpObject.getLiteral();
+        this.genCondSQLPredicateObjectLiteral(tpObjectLiteral, objectMap, refObjectMap, logicalTableAlias);
+      } else if(tpObject.isURI()) {
+        val tpObjectURI = tpObject.getURI();
+        val refObjectMapAlias = this.owner.mapTripleAlias(tp);
+        this.genCondSQLPredicateObjectURI(tpObjectURI, objectMap, refObjectMap, logicalTableAlias
+          , refObjectMapAlias, cm);
+      } else if(tpObject.isVariable()) {
+        null
+      } else {
+        null
+      }
+    }
+
+    result;
+  }
+
+  //	def generateCondForWellDefinedURI(termMap:R2RMLTermMap, uri:String , alias:String
+  //			//, columnsMetaData:Map[String, ColumnMetaData]
+  //			//, tableMetaData:TableMetaData
+  //			) : ZExpression = {
+  //			val logicalTable = termMap.getOwner().getLogicalTable();
+  //			val logicalTableMetaData = logicalTable.getTableMetaData();
+  //			val conn = logicalTable.getOwner().getOwner().getConn();
+  //
+  //			val tableMetaData = {
+  //					if(logicalTableMetaData == null && conn != null) {
+  //						try {
+  //							logicalTable.buildMetaData(conn);
+  //							logicalTable.getTableMetaData();
+  //						} catch {
+  //						case e:Exception => {
+  //							logger.error(e.getMessage());
+  //							throw new QueryTranslationException(e.getMessage());
+  //						}
+  //						}
+  //					} else {
+  //						logicalTableMetaData
+  //					}
+  //			}
+  //
+  //			val result:ZExpression = {
+  //					if(termMap.getTermMapType() == TermMapType.TEMPLATE) {
+  //						val matchedColValues = termMap.getTemplateValues(uri);
+  //						if(matchedColValues == null || matchedColValues.size() == 0) {
+  //							val errorMessage = "uri " + uri + " doesn't match the template : " + termMap.getTemplateString();
+  //							logger.debug(errorMessage);
+  //							null
+  //						} else {
+  //							val exprs:List[ZExpression] = {
+  //								val exprsAux = matchedColValues.keySet().map(pkColumnString => {
+  //									val value = matchedColValues.get(pkColumnString);
+  //
+  //									val termMapColumnTypeName = termMap.getColumnTypeName();
+  //									val columnTypeName = {
+  //											if(termMapColumnTypeName != null) {
+  //												termMapColumnTypeName
+  //											} else {
+  //												if(tableMetaData != null && tableMetaData.getColumnMetaData(pkColumnString).isDefined) {
+  //													val columnTypeNameAux = tableMetaData.getColumnMetaData(pkColumnString).get.dataType;
+  //													termMap.setColumnTypeName(columnTypeNameAux);
+  //													columnTypeNameAux
+  //												} else {
+  //													null
+  //												}
+  //											}
+  //									}
+  //
+  //									val pkColumnConstant = MorphSQLConstant.apply(
+  //											alias + "." + pkColumnString, ZConstant.COLUMNNAME, databaseType);
+  //
+  //									val pkValueConstant = {
+  //											if(columnTypeName != null) {
+  //												if(SQLDataType.isDatatypeNumber(columnTypeName)) {
+  //													new ZConstant(value, ZConstant.NUMBER);
+  //												} else if(SQLDataType.isDatatypeString(columnTypeName)) {
+  //													new ZConstant(value, ZConstant.STRING);
+  //												} else {
+  //													new ZConstant(value, ZConstant.STRING);
+  //												}
+  //											} else {
+  //												new ZConstant(value, ZConstant.STRING);
+  //											}
+  //									}
+  //
+  //									val expr = new ZExpression("=", pkColumnConstant, pkValueConstant);
+  //									expr;
+  //								})
+  //								exprsAux.toList;
+  //						}
+  //
+  //						MorphSQLUtility.combineExpresions(
+  //								exprs, Constants.SQL_LOGICAL_OPERATOR_AND);
+  //						}
+  //					} else {
+  //						null
+  //					}
+  //			}
+  //
+  //			logger.debug("generateCondForWellDefinedURI = " + result);
+  //			result;
+  //	}
+
+  override def genCondSQLSubjectURI(tpSubject:Node , alphaResult:MorphAlphaResult
+                                    , cm:MorphBaseClassMapping ) : ZExpression = {
+    val subjectURI = tpSubject.getURI();
+    val tm = cm.asInstanceOf[R2RMLTriplesMap];
+    val subjectURIConstant = new ZConstant(subjectURI, ZConstant.STRING);
+    val logicalTableAlias = alphaResult.alphaSubject.getAlias();
+    val subjectTermMapType = tm.subjectMap.termMapType;
+
+    val result2:ZExpression = {
+      subjectTermMapType match {
+        case Constants.MorphTermMapType.TemplateTermMap => {
+          try {
+            MorphRDBUtility.generateCondForWellDefinedURI(tm.subjectMap, tm
+              , tpSubject.getURI(), logicalTableAlias);
+          } catch {
+            case e:Exception => {
+              logger.error(e.getMessage());
+              throw new Exception(e);
+            }
+          }
+        }
+        case Constants.MorphTermMapType.ColumnTermMap => {
+          val subjectMapColumn = new ZConstant(tm.subjectMap.getColumnName(), ZConstant.COLUMNNAME);
+          new ZExpression("=", subjectMapColumn, subjectURIConstant);
+        }
+        case Constants.MorphTermMapType.ConstantTermMap => {
+          val subjectMapColumn = new ZConstant(tm.subjectMap.getConstantValue(), ZConstant.COLUMNNAME);
+          new ZExpression("=", subjectMapColumn, subjectURIConstant);
+        }
+        case _ => {
+          val errorMessage = "Invalid term map type";
+          logger.error(errorMessage);
+          throw new Exception(errorMessage);
+        }
+      }
+
+    }
+
+    result2;
+  }
 
 }

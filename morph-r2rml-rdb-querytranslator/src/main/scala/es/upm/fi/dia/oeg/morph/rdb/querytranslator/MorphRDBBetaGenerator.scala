@@ -18,74 +18,91 @@ import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBUnfolder
 
 
 class MorphRDBBetaGenerator(md:R2RMLMappingDocument, unfolder:MorphRDBUnfolder)
-extends MorphBaseBetaGenerator(md, unfolder) {
+	extends MorphBaseBetaGenerator(md, unfolder) {
 
-	override def calculateBetaObject(tp:Triple , cm:MorphBaseClassMapping , predicateURI:String 
-	    , alphaResult:MorphAlphaResult , pm:MorphBasePropertyMapping ) : List[ZSelectItem] = {
-	  
+	override def calculateBetaObject(tp:Triple , cm:MorphBaseClassMapping , predicateURI:String
+																	 , alphaResult:MorphAlphaResult , pm:MorphBasePropertyMapping ) : List[ZSelectItem] = {
+
 		val predicateObjectMap = pm.asInstanceOf[R2RMLPredicateObjectMap];
-		val refObjectMap = predicateObjectMap.getRefObjectMap(0); 
-		
+		val refObjectMap = predicateObjectMap.getRefObjectMap(0);
+
 		val logicalTableAlias = alphaResult.alphaSubject.getAlias();
 
 		val betaObjects : List[MorphSQLSelectItem] = {
 			if(refObjectMap == null) {
 				val objectMap = predicateObjectMap.getObjectMap(0);
-	
+
 				objectMap.termMapType match {
-				  case Constants.MorphTermMapType.ConstantTermMap => {
+					case Constants.MorphTermMapType.ConstantTermMap => {
 						val constantValue = objectMap.getConstantValue();
 						val zConstant = new ZConstant(constantValue, ZConstant.STRING);
 						val selectItem = MorphSQLSelectItem.apply(zConstant);
 						List(selectItem);
-				  }
-				  case _ => {
-				    val databaseColumnsString = MorphRDBUnfolder.getReferencedColumns(objectMap, this.dbType)
-						val betaObjectsAux = databaseColumnsString.map(databaseColumnString =>
-							MorphSQLSelectItem.apply(databaseColumnString,logicalTableAlias, dbType, null));
+					}
+					case _ => {
+						val databaseColumnsString = MorphRDBUnfolder.getReferencedColumns(objectMap, this.dbType)
+						val betaObjectsAux = databaseColumnsString.map(databaseColumnStringAux => {
+              val databaseColumnString = if(Constants.DATABASE_CSV.equalsIgnoreCase(dbType)
+                && !databaseColumnStringAux.contains(" ")) {
+                databaseColumnStringAux.toUpperCase()
+              } else {
+                databaseColumnStringAux
+              }
+              MorphSQLSelectItem.apply(databaseColumnString,logicalTableAlias, dbType, null)
+            });
+
 						betaObjectsAux.toList;
-				  }
+					}
 				}
 			} else {
 				val parentTriplesMap = md.getParentTriplesMap(refObjectMap);
 				val parentLogicalTable = parentTriplesMap.logicalTable;
 				val parentSubjectMap = parentTriplesMap.subjectMap;
 				val parentColumns = MorphRDBUnfolder.getReferencedColumns(parentSubjectMap, this.dbType)
-				
+
 				val refObjectMapAliasAux = this.owner.mapTripleAlias.get(tp);
 				val refObjectMapAlias = if(refObjectMapAliasAux.isDefined) { refObjectMapAliasAux.get}
 				else {null}
-				
+
 				if(parentColumns != null) {
 					val betaObjectsAux = parentColumns.map(parentColumn => {
 						MorphSQLSelectItem.apply(parentColumn, refObjectMapAlias, dbType, null);
 					})
 					betaObjectsAux.toList;
 				} else {
-				  Nil;
+					Nil;
 				}
 			}
 		}
-		
+
 		betaObjects;
 	}
 
-	override def calculateBetaSubject(tp:Triple , cm:MorphBaseClassMapping , alphaResult:MorphAlphaResult ) 
+	override def calculateBetaSubject(tp:Triple , cm:MorphBaseClassMapping , alphaResult:MorphAlphaResult )
 	: List[ZSelectItem] = {
-		
+
 		val triplesMap = cm.asInstanceOf[R2RMLTriplesMap];
 		val subjectMap = triplesMap.subjectMap;
 		val logicalTableAlias = alphaResult.alphaSubject.getAlias();
 		val databaseColumnsString = MorphRDBUnfolder.getReferencedColumns(subjectMap, this.dbType)
-		
+
 		val result:List[ZSelectItem] = {
 			if(databaseColumnsString != null) {
-				val resultAux = databaseColumnsString.map(databaseColumnString => 
-				  MorphSQLSelectItem.apply(databaseColumnString, logicalTableAlias, dbType, null));
+				val resultAux = databaseColumnsString.map(databaseColumnStringAux => {
+          val databaseColumnString = if(Constants.DATABASE_CSV.equalsIgnoreCase(dbType)
+            && !databaseColumnStringAux.contains(" ")) {
+            databaseColumnStringAux.toUpperCase()
+          } else {
+            databaseColumnStringAux
+          }
+          MorphSQLSelectItem.apply(databaseColumnString, logicalTableAlias, dbType, null)
+        }
+
+        );
 				resultAux.toList;
 			} else {
-			  Nil;
-			}		  
+				Nil;
+			}
 		}
 		result;
 	}

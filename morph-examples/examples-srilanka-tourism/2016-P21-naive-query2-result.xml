@@ -118,17 +118,6 @@
         </result>
         <result>
             <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Australia</uri>
-            </binding>
-            <binding name="country">
-                <uri>http://dbpedia.org/resource/Australia</uri>
-            </binding>
-            <binding name="noOfArrivals">
-                <literal>3446</literal>
-            </binding>
-        </result>
-        <result>
-            <binding name="obs">
                 <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Austria</uri>
             </binding>
             <binding name="country">
@@ -136,6 +125,17 @@
             </binding>
             <binding name="noOfArrivals">
                 <literal>596</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Netherlands</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Netherlands</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>1458</literal>
             </binding>
         </result>
         <result>
@@ -272,13 +272,13 @@
         </result>
         <result>
             <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Isreal</uri>
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Czech Republic</uri>
             </binding>
             <binding name="country">
-                <uri>http://dbpedia.org/resource/Isreal</uri>
+                <uri>http://dbpedia.org/resource/Czech Republic</uri>
             </binding>
             <binding name="noOfArrivals">
-                <literal>302</literal>
+                <literal>357</literal>
             </binding>
         </result>
         <result>
@@ -305,13 +305,13 @@
         </result>
         <result>
             <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Czech Republic</uri>
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Isreal</uri>
             </binding>
             <binding name="country">
-                <uri>http://dbpedia.org/resource/Czech Republic</uri>
+                <uri>http://dbpedia.org/resource/Isreal</uri>
             </binding>
             <binding name="noOfArrivals">
-                <literal>357</literal>
+                <literal>302</literal>
             </binding>
         </result>
         <result>
@@ -360,39 +360,6 @@
         </result>
         <result>
             <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Pakistan</uri>
-            </binding>
-            <binding name="country">
-                <uri>http://dbpedia.org/resource/Pakistan</uri>
-            </binding>
-            <binding name="noOfArrivals">
-                <literal>2504</literal>
-            </binding>
-        </result>
-        <result>
-            <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-USA</uri>
-            </binding>
-            <binding name="country">
-                <uri>http://dbpedia.org/resource/USA</uri>
-            </binding>
-            <binding name="noOfArrivals">
-                <literal>3538</literal>
-            </binding>
-        </result>
-        <result>
-            <binding name="obs">
-                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Netherlands</uri>
-            </binding>
-            <binding name="country">
-                <uri>http://dbpedia.org/resource/Netherlands</uri>
-            </binding>
-            <binding name="noOfArrivals">
-                <literal>1458</literal>
-            </binding>
-        </result>
-        <result>
-            <binding name="obs">
                 <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Russia</uri>
             </binding>
             <binding name="country">
@@ -400,6 +367,17 @@
             </binding>
             <binding name="noOfArrivals">
                 <literal>1756</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Pakistan</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Pakistan</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>2504</literal>
             </binding>
         </result>
         <result>
@@ -415,6 +393,17 @@
         </result>
         <result>
             <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-USA</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/USA</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>3538</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
                 <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Ukraine</uri>
             </binding>
             <binding name="country">
@@ -422,6 +411,17 @@
             </binding>
             <binding name="noOfArrivals">
                 <literal>1213</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://w3id.org/sri-lanka/tourism/values/arrivals-country-year-month/2016MAY-From-Australia</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Australia</uri>
+            </binding>
+            <binding name="noOfArrivals">
+                <literal>3446</literal>
             </binding>
         </result>
     </results>

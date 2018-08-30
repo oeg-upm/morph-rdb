@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="obs"/>
+        <variable name="country"/>
+        <variable name="noOfImmigrants"/>
+    </head>
+    <results>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SLOVENIA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Slovenia</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>15420</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-AUSTRIA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Austria</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>166323</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-CYPRUS-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Cyprus</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>15183</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-POLAND-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Poland</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>218147</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-Former_Yugoslav_Republic_of_Macedonia-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Former Yugoslav Republic of Macedonia</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>:</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-RUSSIA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Russia</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>:</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-ESTONIA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Estonia</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>15413</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-BELARUS-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Belarus</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>:</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-GERMANY-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Germany</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>1543848</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SWITZERLAND-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Switzerland</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>153627</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-GREECE-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Greece</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>64446</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-ROMANIA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Romania</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>132795</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-FINLAND-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Finland</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>28746</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-ITALY-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Italy</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>280078</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-United_Kingdom-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/United Kingdom</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>631452</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-AZERBAIJAN-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Azerbaijan</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>:</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-Czech_Republic-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Czech Republic</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>29602</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-DENMARK-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Denmark</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>78492</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-LUXEMBOURG-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Luxembourg</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>23803</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-San_Marino-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/San Marino</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>:</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SWEDEN-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Sweden</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>134240</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-KYRGYZSTAN-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Kyrgyzstan</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>:</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-FRANCE-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/France</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>364221</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-ICELAND-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Iceland</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>5635</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-BULGARIA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Bulgaria</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>25223</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-MOLDOVA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Moldova</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>:</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-NORWAY-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Norway</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>60816</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-CROATIA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Croatia</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>11706</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-TAJIKISTAN-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Tajikistan</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>:</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-Bosnia_and_Herzegovina-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Bosnia and Herzegovina</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>:</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-UZBEKISTAN-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Uzbekistan</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>:</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-BELGIUM-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Belgium</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>146626</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-PORTUGAL-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Portugal</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>29896</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-LATVIA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Latvia</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>9479</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-NETHERLANDS-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Netherlands</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>166872</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SPAIN-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Spain</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>342114</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-LIECHTENSTEIN-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Liechtenstein</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>657</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-LITHUANIA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Lithuania</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>22130</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-MALTA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Malta</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>16936</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-HUNGARY-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Hungary</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>58344</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-SLOVAKIA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Slovakia</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>6997</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-ARMENIA-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Armenia</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>:</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="obs">
+                <uri>http://ex.com/values/immigrants-to-IRELAND-in-2015</uri>
+            </binding>
+            <binding name="country">
+                <uri>http://dbpedia.org/resource/Ireland</uri>
+            </binding>
+            <binding name="noOfImmigrants">
+                <literal>80792</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>

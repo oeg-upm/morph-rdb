@@ -1,0 +1,112 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex: <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rev: <http://purl.org/stuff/rev#> .
+@prefix gtfs: <http://vocab.gtfs.org/terms#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <http://schema.org/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix interval: <http://reference.data.gov.uk/def/intervals/> . 
+@prefix sltsv: <http://w3id.org/sri-lanka/tourism/cube-vocab/> .
+@prefix sltsds: <http://w3id.org/sri-lanka/tourism/cube-data-structure/> . 
+@prefix sltsd: <http://w3id.org/sri-lanka/tourism/dataset/> . 
+
+<TriplesMapBelgium>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-Belgium-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Belgium";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "Belgium";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.
+
+<TriplesMapCzech_Republic>
+  # a rr:TriplesMap;
+
+  rr:logicalTable [
+      rr:tableName "\"EUROSTATIMMIGRATION\""
+  ];
+
+  rr:subjectMap [
+    a rr:Subject;
+    rr:template "http://ex.com/values/immigrants-to-Czech_Republic-in-{YEAR}";
+    rr:termType rr:IRI;
+    rr:class qb:Observation;
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate qb:dataSet;
+    rr:objectMap [
+      rr:constant "ex:immigration";
+    ];
+  ];
+
+  rr:predicateObjectMap[
+    rr:predicate ex:destinationCountry;
+    rr:objectMap [
+    rr:termType rr:IRI;
+      rr:constant "http://dbpedia.org/resource/Czech_Republic";
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:year;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "YEAR";
+		rr:datatype xsd:gYear;
+    ];
+  ];
+  
+  rr:predicateObjectMap[
+	rr:predicate ex:numberOfImmigrants;
+	rr:objectMap [
+		rr:termType rr:Literal;
+		rr:column "Czech Republic";
+		rr:datatype xsd:integer;
+    ];
+  ];
+.

@@ -28,7 +28,7 @@ abstract class MorphBaseRunnerFactory {
 	//val logger = LogManager.getLogger(this.getClass);
 		val logger = LoggerFactory.getLogger(this.getClass());
 
-  logger.info("running morph-rdb 3.9.10 ...");
+  logger.info("MorphBaseRunnerFactory running morph-rdb 3.9.14 ...");
 
 	def createRunner(configurationDirectory:String , configurationFile:String)
 	: MorphBaseRunner = {
@@ -126,6 +126,7 @@ abstract class MorphBaseRunnerFactory {
         Some(qtAux);
       } catch {
         case e:Exception => {
+          e.printStackTrace()
           logger.warn("Error building query translator!" + e.getMessage());
         }
         None
