@@ -234,6 +234,25 @@ public class ExampleCSV {
 	}
 	
 	@Test
+	public void testEdificioHistoricoLocalQ1() {
+		MorphCSVProperties properties = new MorphCSVProperties();
+		properties.setMappingDocumentFilePath(configurationDirectory + File.separator + "edificio-historico.r2rml.ttl");
+		properties.setOutputFilePath(configurationDirectory + File.separator + "edificio-historico-batch-result-csv-local-q1.xml");
+		properties.addCSVFile(configurationDirectory + File.separator + "edificio-historico.csv");
+		properties.setQueryFilePath(configurationDirectory + File.separator + "edificio-historico-q1.rq");
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
+			runner.run();
+			assertTrue("testBatch done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			assertTrue(errorMessage, false);
+		}
+	}
+	
+	@Test
 	public void testParisParks() {
 		MorphCSVProperties properties = new MorphCSVProperties();
 		properties.setMappingDocumentFilePath(configurationDirectory + File.separator + "paris-park.r2rml.ttl");

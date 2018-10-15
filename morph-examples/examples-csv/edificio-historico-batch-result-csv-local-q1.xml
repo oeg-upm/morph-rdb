@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="s"/>
+        <variable name="p"/>
+        <variable name="o"/>
+    </head>
+    <results>
+        <result>
+            <binding name="s">
+                <uri>http://www.zaragoza.es/api/recurso/turismo/edificio-historico/117</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal> Conde Aranda , 27</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://www.zaragoza.es/api/recurso/turismo/edificio-historico/118</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal> Mayor , 72</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://www.zaragoza.es/api/recurso/turismo/edificio-historico/119</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal> Mefisto , Fernando Soteras , 7</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://www.zaragoza.es/api/recurso/turismo/edificio-historico/122</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal> Méndez Núñez , 17</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://www.zaragoza.es/api/recurso/turismo/edificio-historico/123</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal> Méndez Núñez , 28</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://www.zaragoza.es/api/recurso/turismo/edificio-historico/124</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal> Méndez Núñez , 29</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://www.zaragoza.es/api/recurso/turismo/edificio-historico/127</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal> Manuel Lacruz , 18</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://www.zaragoza.es/api/recurso/turismo/edificio-historico/129</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal> Libertad , 4</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://www.zaragoza.es/api/recurso/turismo/edificio-historico/130</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal> Manuel Lacruz , 20</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>http://www.zaragoza.es/api/recurso/turismo/edificio-historico/131</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal> Francisco Loscos , 4</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>
