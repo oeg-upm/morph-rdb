@@ -508,5 +508,23 @@ public class ExampleCSV {
             assertTrue(e.getMessage(), false);
         }
     }
-    
+
+	@Test
+	public void testNutrition() {
+		MorphCSVProperties properties = new MorphCSVProperties();
+		properties.setMappingDocumentFilePath("https://raw.githubusercontent.com/oeg-upm/mappingpedia-contents/master/carrefour/565b0940-93ed-46d3-a651-ee01394b7767/openfoodfactsexample-NPi6.r2rml");
+		properties.setOutputFilePath(configurationDirectory + File.separator + "openfoodfactsexample-NPi6.xml");
+		properties.addCSVFile("https://raw.githubusercontent.com/oeg-upm/morph-rdb/master/morph-examples/examples-csv/openfoodfactsexample.csv");
+		properties.setQueryFilePath("https://raw.githubusercontent.com/oeg-upm/morph-rdb/master/morph-examples/examples-csv/preview.rq");
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(properties);
+			runner.run();
+			assertTrue("testBatch done", true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			String errorMessage = "Error occured: " + e.getMessage();
+			assertTrue(errorMessage, false);
+		}
+	}
 }
