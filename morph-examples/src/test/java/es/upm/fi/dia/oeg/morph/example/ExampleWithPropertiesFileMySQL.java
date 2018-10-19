@@ -33,7 +33,6 @@ public class ExampleWithPropertiesFileMySQL {
 		}
 	}
 
-	@Test
 	public void testMonumentsBatchMySQL() {
 		String configurationFile = "monuments-batch-mysql.morph.properties";
 		try {
@@ -48,7 +47,6 @@ public class ExampleWithPropertiesFileMySQL {
 		}
 	}
 
-	@Test
 	public void testHistoricalBuildingsBatchMySQL() {
 		String configurationFile = "edificiohistoricos-batch-mysql.morph.properties";
 		try {
@@ -62,7 +60,8 @@ public class ExampleWithPropertiesFileMySQL {
 			assertTrue(e.getMessage(), false);
 		}
 	}
-	
+
+	@Test
 	public void testExample1Sparql01MySQL() {
 		//2 instances
 		String configurationFile = "example1-query01-mysql.morph.properties";
@@ -79,7 +78,7 @@ public class ExampleWithPropertiesFileMySQL {
 	}
 
 
-
+	@Test
 	public void testExample1Sparql02MySQL() {
 		//4 instances
 		String configurationFile = "example1-query02-mysql.morph.properties";
@@ -95,6 +94,7 @@ public class ExampleWithPropertiesFileMySQL {
 		}
 	}
 
+	@Test
 	public void testExample1Sparql03MySQL() {
 		//4 instances
 		String configurationFile = "example1-query03-mysql.morph.properties";
@@ -108,11 +108,11 @@ public class ExampleWithPropertiesFileMySQL {
 			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
-	}	
+	}
 
 
 
-
+	@Test
 	public void testExample1Sparql04MySQL() {
 		//4 instances
 		String configurationFile = "example1-query04-mysql.morph.properties";
@@ -126,10 +126,10 @@ public class ExampleWithPropertiesFileMySQL {
 			System.out.println("Query process FAILED------\n\n");
 			assertTrue(e.getMessage(), false);
 		}
-	}	
+	}
 
 
-
+	@Test
 	public void testExample1Sparql05MySQL() {
 		//1 instance
 		String configurationFile = "example1-query05-mysql.morph.properties";
