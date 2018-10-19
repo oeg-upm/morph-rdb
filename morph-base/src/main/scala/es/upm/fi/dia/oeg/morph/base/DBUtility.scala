@@ -177,6 +177,10 @@ object DBUtility {
       }
 			
 			prop.put("autoReconnect", "true");
+
+			prop.put("useSSL", "false");
+			prop.put("serverTimezone", "UTC");
+
 			Class.forName(driverString);
 			logger.debug("Opening database connection.");
 			val conn = DriverManager.getConnection(fullURL, prop);
