@@ -11,5 +11,4 @@ WHERE {
 	?obs qblk:countryOfResidence	dpr:Spain .
 	?obs qblk:month	?month .
 	?obs qblk:numberOfArrivals	?noOfArrivals .
-
 }
