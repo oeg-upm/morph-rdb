@@ -175,13 +175,14 @@ class MorphRDBCondSQLGenerator(md:R2RMLMappingDocument, unfolder:MorphRDBUnfolde
       logger.error(errorMessage);
     }
 
-    val  result:ZExpression = {
+    val result:ZExpression = {
       if(tpObject.isLiteral()) {
         val tpObjectLiteral = tpObject.getLiteral();
         this.genCondSQLPredicateObjectLiteral(tpObjectLiteral, objectMap, refObjectMap, logicalTableAlias);
       } else if(tpObject.isURI()) {
         val tpObjectURI = tpObject.getURI();
-        val refObjectMapAlias = this.owner.mapTripleAlias(tp);
+        //val refObjectMapAlias = this.owner.mapTripleAlias(tp);
+        val refObjectMapAlias = this.owner.mapTripleAlias.getOrElse(tp, null);
         this.genCondSQLPredicateObjectURI(tpObjectURI, objectMap, refObjectMap, logicalTableAlias
           , refObjectMapAlias, cm);
       } else if(tpObject.isVariable()) {
