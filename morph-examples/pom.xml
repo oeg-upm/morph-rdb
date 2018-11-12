@@ -6,7 +6,7 @@
 		<version>3.6.0</version> </parent> -->
 
 	<groupId>es.upm.fi.dia.oeg.morph</groupId>
-	<version>3.9.14</version>
+	<version>3.9.15</version>
 	<artifactId>morph-examples</artifactId>
 	<packaging>jar</packaging>
 
@@ -74,7 +74,7 @@
 			<groupId>es.upm.fi.dia.oeg.morph</groupId>
 			<artifactId>morph-rdb-dist</artifactId>
 			<type>pom</type>
-			<version>3.9.14</version>
+			<version>3.9.15</version>
 		</dependency>
 
 		<dependency>
