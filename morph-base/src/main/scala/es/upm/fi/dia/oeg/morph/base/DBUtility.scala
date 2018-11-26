@@ -148,34 +148,53 @@ object DBUtility {
 	    , driverString:String, url:String, requester:String) : Connection = {
 
 		try {
+
+			if(driverString.equals("oracle.jdbc.driver.OracleDriver")){
+				Class.forName(driverString);
+				logger.info("Opening database connection.");
+
+					val fullUrl= {
+						if(databaseName == ""){
+							url
+						}else{
+							url.concat(":".concat(databaseName))
+					}
+					}
+				val conn = DriverManager.getConnection(fullUrl,username,password);
+				logger.info("Connected to Database: ".concat(url).concat(" with User: ".concat(username)));
+				conn;
+			}
+			else{
 			val urlSplit = url.split("/");
 			val fullURL = {
-        if(databaseName == null) {
-          url
-        } else {
-          if(databaseName.equals(urlSplit(urlSplit.length-1))) {
-            url
-          }
-          else { url + databaseName}          
-        }
+				if (databaseName == null) {
+					url
+				} else {
+					if (databaseName.equals(urlSplit(urlSplit.length - 1))) {
+						url
+					}
+					else {
+						url + databaseName
+					}
+				}
 			}
-      
+
 			val prop = new Properties();
 			prop.put("ResultSetMetaDataOptions", "1");
-			
-      if(username != null && !username.equals("")) {
-        prop.put("user", username);  
-      }
 
-      //if(password != null && !password.equals("")) {
-      if(password != null) {
-        prop.put("password", password);  
-      }
-            
-      if(databaseName != null && !databaseName.equals("")) {
-        prop.put("database", databaseName);  
-      }
-			
+			if (username != null && !username.equals("")) {
+				prop.put("user", username);
+			}
+
+			//if(password != null && !password.equals("")) {
+			if (password != null) {
+				prop.put("password", password);
+			}
+
+			if (databaseName != null && !databaseName.equals("")) {
+				prop.put("database", databaseName);
+			}
+
 			prop.put("autoReconnect", "true");
 
 			prop.put("useSSL", "false");
@@ -187,21 +206,22 @@ object DBUtility {
 			//conn.setAutoCommit(true);
 			//conn.setAutoCommit(false);
 			conn;
-		} catch {
-		  case e:ClassNotFoundException => {
-        e.printStackTrace();
-			val errorMessage = "Error opening database connection, class not found : " + e.getMessage();
-			logger.error(errorMessage);
-			null
-		  }
-		  case e:Exception => {
+		} }catch {
+			case e: ClassNotFoundException => {
+				e.printStackTrace();
+				val errorMessage = "Error opening database connection, class not found : " + e.getMessage();
+				logger.error(errorMessage);
+				null
+			}
+			case e: Exception => {
 				e.printStackTrace()
-		    logger.error("Error opening database connection : " + e.getMessage());
-		    null
-		  }
+				logger.error("Error opening database connection : " + e.getMessage());
+				null
+			}
+			}
 		}
-		
-	}
+
+
 	
 	
 }
