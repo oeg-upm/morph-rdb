@@ -205,7 +205,7 @@ object MorphSQLSelectItem {
 					if(pPrefix == null || pPrefix.equals("")) {
 						null
 					} else if(!pPrefix.endsWith(".")) {
-						pPrefix.replaceAllLiterally("\\\"","") + ".";
+						pPrefix + ".";
 					} else {
 						pPrefix
 					}
