@@ -59,7 +59,7 @@ extends ZSelectItem {
 			result = resultList2.mkString(".");
 		} else if(dbType != null && dbType.equalsIgnoreCase(Constants.DATABASE_ORACLE)) {
 			val wrappedColumn = MorphSQLSelectItem.wrapColumnWithEnclosedChar(this.column, enclosedCharacter);
-			var resultList2 = List(this.schema, this.table, wrappedColumn.toUpperCase).filter(x => x != null);
+			var resultList2 = List(this.schema, this.table, wrappedColumn).filter(x => x != null);
 			result = resultList2.mkString(".");
 		} else {
 			var resultList2 = List(this.schema, this.table, this.column).filter(x => x != null);
