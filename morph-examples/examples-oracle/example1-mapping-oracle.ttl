@@ -17,47 +17,47 @@
 	# a rr:TriplesMap;
         
 	rr:logicalTable [ 
-        rr:tableName  "student" 
+        rr:tableName  "STUDENT"
         # rr:sqlQuery  """SELECT student.id id, student.name name, student.webpage webpage, student.phone phone, student.email email, student.birthdate birthdate, student.sport sport FROM student, sport WHERE student.sport = sport.id""" 
     ];
 	
     rr:subjectMap [    
 		a rr:Subject;
-		rr:template "http://mappingpedia.linkeddata.es/resources/Person/{id}";
+		rr:template "http://mappingpedia.linkeddata.es/resources/Person/{ID}";
 		rr:termType rr:IRI;
 		rr:class <http://mappingpedia.linkeddata.es/vocabulary#Person>;
 	];
 
 	rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#name> ]; 
-      rr:objectMap    [ rr:termType rr:Literal; rr:column "name"; ]; 
+      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#name> ];
+      rr:objectMap    [ rr:termType rr:Literal; rr:column "NAME"; ];
     ];
 
     rr:predicateObjectMap [ 
       rr:predicateMap <PredicateMapWebpage>; 
-      rr:objectMap    [ rr:termType rr:IRI; rr:column "webpage"; ] ;
+      rr:objectMap    [ rr:termType rr:IRI; rr:column "WEBPAGE"; ] ;
     ];
 	
     rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#phone> ]; 
-      rr:objectMap    [ rr:column "phone"; rr:termType rr:Literal; ];
+      rr:objectMap    [ rr:column "PHONE"; rr:termType rr:Literal; ];
     ];	
 	
     rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#email> ]; 
-      rr:objectMap    [ rr:column "email"; rr:termType rr:Literal; ];
+      rr:objectMap    [ rr:column "EMAIL"; rr:termType rr:Literal; ];
     ];
 
    rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#birthdate> ]; 
-      rr:objectMap    [ rr:column "birthdate"; rr:termType rr:Literal; rr:datatype xsd:dateTime;];
+      rr:objectMap    [ rr:column "BIRTHDATE"; rr:termType rr:Literal; rr:datatype xsd:dateTime;];
     ];
 
    rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#hasSport> ]; 
       rr:objectMap    [ 
          rr:parentTriplesMap <TriplesMapSport>;
-         rr:joinCondition [ rr:child "sport" ; rr:parent "id" ; ]
+         rr:joinCondition [ rr:child "SPORT" ; rr:parent "ID" ; ]
       ];
    ];    		
 .
@@ -66,31 +66,31 @@
 <TriplesMapSport>
 	a rr:TriplesMap;
         
-	rr:logicalTable [ rr:tableName  "sport" ];
+	rr:logicalTable [ rr:tableName  "SPORT" ];
 	
     rr:subjectMap [ a rr:Subject;
-		rr:template "http://mappingpedia.linkeddata.es/resources/Sport/{id}";
+		rr:template "http://mappingpedia.linkeddata.es/resources/Sport/{ID}";
 		rr:termType rr:IRI;
 		rr:class <http://mappingpedia.linkeddata.es/vocabulary#Sport>;
 	];
 
 	rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#id> ]; 
-      rr:objectMap    [ rr:termType rr:Literal; rr:column "id"; ]; 
+      rr:objectMap    [ rr:termType rr:Literal; rr:column "ID"; ];
     ];
 
 	rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#name> ]; 
-      rr:objectMap    [ rr:termType rr:Literal; rr:column "name"; ]; 
+      rr:objectMap    [ rr:termType rr:Literal; rr:column "NAME"; ];
     ];
 
 	rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#code> ]; 
-      rr:objectMap    [ rr:termType rr:IRI; rr:template "http://lo calhost/{code}"; ]; 
+      rr:objectMap    [ rr:termType rr:IRI; rr:template "http://localhost/{CODE}"; ];
     ];
 
 	rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#type> ]; 
-      rr:objectMap    [ rr:termType rr:Literal; rr:column "type"; ]; 
+      rr:objectMap    [ rr:termType rr:Literal; rr:column "TYPE"; ];
     ];
 .
