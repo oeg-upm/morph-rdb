@@ -11,3 +11,6 @@ morph.log
 *.*~
 morph-examples/examples/batch-result.nt
 .metadata
+
+# Ignore VS Code settings
+.vs/
