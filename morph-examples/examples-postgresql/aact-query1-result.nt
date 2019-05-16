@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="study"/>
+        <variable name="label_study"/>
+        <variable name="sponsor"/>
+    </head>
+    <results>
+        <result>
+            <binding name="study">
+                <uri>http://bio2rdf.org/clinicaltrials:NCT00000102</uri>
+            </binding>
+            <binding name="label_study">
+                <literal>Congenital Adrenal Hyperplasia: Calcium Channels as Therapeutic Targets [clinicaltrials:NCT00000102]</literal>
+            </binding>
+            <binding name="sponsor">
+                <uri>http://bio2rdf.org/clinicaltrials_resource:4119110-sponsor</uri>
+            </binding>
+        </result>
+        <result>
+            <binding name="study">
+                <uri>http://bio2rdf.org/clinicaltrials:NCT00000104</uri>
+            </binding>
+            <binding name="label_study">
+                <literal>Does Lead Burden Alter Neuropsychological Development? [clinicaltrials:NCT00000104]</literal>
+            </binding>
+            <binding name="sponsor">
+                <uri>http://bio2rdf.org/clinicaltrials_resource:4119108-sponsor</uri>
+            </binding>
+        </result>
+        <result>
+            <binding name="study">
+                <uri>http://bio2rdf.org/clinicaltrials:NCT00000104</uri>
+            </binding>
+            <binding name="label_study">
+                <literal>Does Lead Burden Alter Neuropsychological Development? [clinicaltrials:NCT00000104]</literal>
+            </binding>
+            <binding name="sponsor">
+                <uri>http://bio2rdf.org/clinicaltrials_resource:4119109-sponsor</uri>
+            </binding>
+        </result>
+        <result>
+            <binding name="study">
+                <uri>http://bio2rdf.org/clinicaltrials:NCT00000105</uri>
+            </binding>
+            <binding name="label_study">
+                <literal>Vaccination With Tetanus and KLH to Assess Immune Responses. [clinicaltrials:NCT00000105]</literal>
+            </binding>
+            <binding name="sponsor">
+                <uri>http://bio2rdf.org/clinicaltrials_resource:4119107-sponsor</uri>
+            </binding>
+        </result>
+        <result>
+            <binding name="study">
+                <uri>http://bio2rdf.org/clinicaltrials:NCT00000106</uri>
+            </binding>
+            <binding name="label_study">
+                <literal>41.8 Degree Centigrade Whole Body Hyperthermia for the Treatment of Rheumatoid Diseases [clinicaltrials:NCT00000106]</literal>
+            </binding>
+            <binding name="sponsor">
+                <uri>http://bio2rdf.org/clinicaltrials_resource:4118594-sponsor</uri>
+            </binding>
+        </result>
+    </results>
+</sparql>

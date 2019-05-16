@@ -1,0 +1,15 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX ctv: <http://bio2rdf.org/clinicaltrials_vocabulary:>
+PREFIX bv: <http://bio2rdf.org/bio2rdf_vocabulary:>
+
+SELECT *
+WHERE { 
+	?study rdf:type ctv:Resource .
+    ?study rdfs:label ?label_study .
+    ?study ctv:sponsor ?sponsor .
+    #?sponsor rdf:type ctv:Organization .
+    #?sponsor rdfs:label ?label_sponsor
+}
+LIMIT 5
