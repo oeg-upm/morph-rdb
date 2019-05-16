@@ -1944,3 +1944,6 @@ FROM "Student" T22 INNER JOIN "Sport" T23 ON (T22."Sport" = T23."Id")
 WHERE "T23"."Id" IS NOT NULL
 
  [22018-191]
+2019-02-26 09:42:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT COUNT(*) FROM[*] \""Sport\"" T"; SQL statement:
+SELECT COUNT(*) FROM \"Sport\" T [42000-191]
