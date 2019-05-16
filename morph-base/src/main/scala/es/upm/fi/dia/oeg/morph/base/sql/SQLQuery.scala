@@ -17,8 +17,8 @@ import Zql.ZGroupBy
 import org.slf4j.LoggerFactory
 
 class SQLQuery extends ZQuery with IQuery {
-val logger = LoggerFactory.getLogger(this.getClass());
-	
+	val logger = LoggerFactory.getLogger(this.getClass());
+
 	ZUtils.addCustomFunction("concat", 2);
 	ZUtils.addCustomFunction("substring", 3);
 	ZUtils.addCustomFunction("convert", 2);
@@ -38,40 +38,40 @@ val logger = LoggerFactory.getLogger(this.getClass());
 	this.addFrom(new java.util.Vector[ZFromItem]());
 
 	def this(logicalTable:SQLLogicalTable ) = {
-			this();
-			this.addLogicalTable(logicalTable);
+		this();
+		this.addLogicalTable(logicalTable);
 	}
 
 	def this(logicalTable:IQuery ) =  {
-			this();
-			val joinQuery = new SQLJoinTable(logicalTable);
-			this.addFromItem(joinQuery);
+		this();
+		val joinQuery = new SQLJoinTable(logicalTable);
+		this.addFromItem(joinQuery);
 	}
 
 
 	def this(logicalTable:ZFromItem ) = {
-			this()
-			this.addFromItem(logicalTable);
+		this()
+		this.addFromItem(logicalTable);
 	}
 
 
 	def this(zQuery:ZQuery ) = {
-			this();
+		this();
 
 
-			if(zQuery.getSelect() != null) {
-				val zQuerySelect = zQuery.getSelect();
-				this.addSelect(zQuerySelect);
-			}
-			if(zQuery.getFrom() != null) { 
-				this.addFrom(zQuery.getFrom());
-			}
-			if(zQuery.getWhere() != null) { 
-				this.addWhere(zQuery.getWhere());
-			}
-			if(zQuery.getGroupBy() != null) {
-				this.addGroupBy(zQuery.getGroupBy());
-			}
+		if(zQuery.getSelect() != null) {
+			val zQuerySelect = zQuery.getSelect();
+			this.addSelect(zQuerySelect);
+		}
+		if(zQuery.getFrom() != null) {
+			this.addFrom(zQuery.getFrom());
+		}
+		if(zQuery.getWhere() != null) {
+			this.addWhere(zQuery.getWhere());
+		}
+		if(zQuery.getGroupBy() != null) {
+			this.addGroupBy(zQuery.getGroupBy());
+		}
 
 	}
 
@@ -79,40 +79,40 @@ val logger = LoggerFactory.getLogger(this.getClass());
 
 
 	def addLogicalTables(logicalTables:Iterable[SQLLogicalTable] ) =  {
-			logicalTables.foreach(logicalTable => this.addLogicalTable(logicalTable));
+		logicalTables.foreach(logicalTable => this.addLogicalTable(logicalTable));
 	}
 
 	def addLogicalTable(logicalTable:SQLLogicalTable ) =  {
-			val result = logicalTable match {
+		val result = logicalTable match {
 			case zFromItem:ZFromItem => { this.addFromItem(zFromItem);}
 			case iQuery:IQuery => {
 				val joinQuery = new SQLJoinTable(logicalTable);
-				this.addFromItem(joinQuery);		    
+				this.addFromItem(joinQuery);
 			}
 			case _ => {
 				logger.warn("unknown type of logicalTable!");
 			}
-			}
-			result;
+		}
+		result;
 	}
 
 
 	def addFromItem(fromItem:ZFromItem ) = {
-			if(this.getFrom() == null) {
-				this.addFrom(new java.util.Vector[ZFromItem]());
-			}
+		if(this.getFrom() == null) {
+			this.addFrom(new java.util.Vector[ZFromItem]());
+		}
 
-			val oldFromItems = this.getFrom();
-			oldFromItems.add(fromItem);
+		val oldFromItems = this.getFrom();
+		oldFromItems.add(fromItem);
 	}
 
 	def addFromItems(fromItems:Iterable[ZFromItem] ) = {
-			if(this.getFrom() == null) {
-				this.addFrom(new java.util.Vector[ZFromItem]());
-			}
+		if(this.getFrom() == null) {
+			this.addFrom(new java.util.Vector[ZFromItem]());
+		}
 
-			val oldFromItems = this.getFrom();
-			oldFromItems.addAll(fromItems);
+		val oldFromItems = this.getFrom();
+		oldFromItems.addAll(fromItems);
 	}
 
 	def addSelectItems(newSelectItems:List[ZSelectItem] ) {
@@ -121,137 +121,137 @@ val logger = LoggerFactory.getLogger(this.getClass());
 
 
 	def addSelects(selectItems:java.util.Collection[ZSelectItem] ) : Unit = {
-			selectItems.foreach(selectItem => {this.addSelectItem(selectItem); } )
+		selectItems.foreach(selectItem => {this.addSelectItem(selectItem); } )
 	}
 
 	def addSelectItem(newSelectItem:ZSelectItem ) : Unit = {
-			val oldSelects= this.getSelect();
-			val selectItems : Iterable[ZSelectItem]= if(oldSelects == null) {
-				this.setSelectItems(Nil);
-				Nil;
-			} else {
-				this.getSelectItems();
-			}
+		val oldSelects= this.getSelect();
+		val selectItems : Iterable[ZSelectItem]= if(oldSelects == null) {
+			this.setSelectItems(Nil);
+			Nil;
+		} else {
+			this.getSelectItems();
+		}
 
-			val newSelectItemAlias = newSelectItem.getAlias();
-			newSelectItem.setAlias("");
+		val newSelectItemAlias = newSelectItem.getAlias();
+		newSelectItem.setAlias("");
 
-			var alreadySelected = false;
-			for(selectItem <- selectItems) {
-				val selectItemAlias = selectItem.getAlias();
-				selectItem.setAlias("");
-				if(selectItemAlias != null && !selectItemAlias.equals("")) {
-					if(selectItemAlias.equalsIgnoreCase(newSelectItemAlias)) {
-						alreadySelected = true;
-						logger.debug(selectItemAlias + " already selected");
-					}
-					selectItem.setAlias(selectItemAlias);
-				}			
+		var alreadySelected = false;
+		for(selectItem <- selectItems) {
+			val selectItemAlias = selectItem.getAlias();
+			selectItem.setAlias("");
+			if(selectItemAlias != null && !selectItemAlias.equals("")) {
+				if(selectItemAlias.equalsIgnoreCase(newSelectItemAlias)) {
+					alreadySelected = true;
+					logger.debug(selectItemAlias + " already selected");
+				}
+				selectItem.setAlias(selectItemAlias);
 			}
+		}
 
-			if(newSelectItemAlias != null && !newSelectItemAlias.equals("")) {
-				newSelectItem.setAlias(newSelectItemAlias);
-			}
+		if(newSelectItemAlias != null && !newSelectItemAlias.equals("")) {
+			newSelectItem.setAlias(newSelectItemAlias);
+		}
 
-			if(!alreadySelected) {
-				oldSelects.asInstanceOf[java.util.Vector[ZSelectItem]].add(newSelectItem);
-			}
+		if(!alreadySelected) {
+			oldSelects.asInstanceOf[java.util.Vector[ZSelectItem]].add(newSelectItem);
+		}
 
 	}
 
 
 	def addWhere(newWheres:java.util.Collection[ZExp] ) : Unit = {
-			newWheres.foreach(newWhere => { this.addWhere(newWhere); })
+		newWheres.foreach(newWhere => { this.addWhere(newWhere); })
 	}
 
 	override def addWhere(newWhere:ZExp ) = {
-			val oldWhere = this.getWhere();
-			if(newWhere != null) {
-				if(oldWhere == null) {
-					super.addWhere(newWhere);
-				} else {
-					val combinedWhere = new ZExpression("AND", oldWhere, newWhere);
-					super.addWhere(combinedWhere);
-				}
+		val oldWhere = this.getWhere();
+		if(newWhere != null) {
+			if(oldWhere == null) {
+				super.addWhere(newWhere);
+			} else {
+				val combinedWhere = new ZExpression("AND", oldWhere, newWhere);
+				super.addWhere(combinedWhere);
 			}
+		}
 	}
 
 	def cleanupOrderBy() = {
-			val orderByConditions = this.getOrderBy();
+		val orderByConditions = this.getOrderBy();
 
-			if(orderByConditions != null) {
-				val orderByConditions2 = orderByConditions.map(orderByConditionAux => {
-					val orderByCondition = orderByConditionAux.asInstanceOf[ZOrderBy];
-					val orderByExp = orderByCondition.getExpression();
-					orderByExp match {
+		if(orderByConditions != null) {
+			val orderByConditions2 = orderByConditions.map(orderByConditionAux => {
+				val orderByCondition = orderByConditionAux.asInstanceOf[ZOrderBy];
+				val orderByExp = orderByCondition.getExpression();
+				orderByExp match {
 					case orderByConstant:ZConstant => {
 						val orderByValue = orderByConstant.getValue();
 						if(orderByValue.startsWith(Constants.PREFIX_VAR)) {
 							val orderByValue2 = orderByValue.substring(
-									Constants.PREFIX_VAR.length(), orderByValue.length());
+								Constants.PREFIX_VAR.length(), orderByValue.length());
 							val orderByConstant2 = MorphSQLConstant.apply(orderByValue2
-									, orderByConstant.getType(), this.databaseType, null);
+								, orderByConstant.getType(), this.databaseType, null);
 							val orderByCondition2 = new ZOrderBy(orderByConstant2);
 							orderByCondition2.setAscOrder(orderByCondition.getAscOrder());
-							orderByCondition2;				
+							orderByCondition2;
 						} else {
 							orderByCondition;
-						}				    
+						}
 					}
 					case _ => {
 						orderByCondition;
 					}
-					}
-				}).toList;
+				}
+			}).toList;
 
-				this.setOrderBy(orderByConditions2);			
-			}
+			this.setOrderBy(orderByConditions2);
+		}
 
 	}
 
 	def cleanupSelectItems() = {
-			val selectItems = this.getSelectItems();
+		val selectItems = this.getSelectItems();
 
-			if(selectItems != null) {
-				val selectItems2 = selectItems.flatMap(selectItem => {
-					if(selectItem.isExpression()) {
-						Some(selectItem);
+		if(selectItems != null) {
+			val selectItems2 = selectItems.flatMap(selectItem => {
+				if(selectItem.isExpression()) {
+					Some(selectItem);
+				} else {
+					val alias = selectItem.getAlias();
+					val selectItemName = if(alias == null || alias.equals("")) {
+						selectItem.getColumn();
 					} else {
-						val alias = selectItem.getAlias();
-						val selectItemName = if(alias == null || alias.equals("")) {
-							selectItem.getColumn();
-						} else {
-							selectItem.getAlias();
-						}
-
-						if(selectItemName.startsWith(Constants.PREFIX_VAR)) {
-							val newSelectItemAlias = selectItemName.substring(
-									Constants.PREFIX_VAR.length, selectItemName.length());
-							selectItem.setAlias(newSelectItemAlias);
-							Some(selectItem);					
-						} else if(selectItemName.startsWith(Constants.PREFIX_LIT)) {
-							//do nothing
-							None
-						} else if(selectItemName.startsWith(Constants.PREFIX_URI)) {
-							//do nothing
-							None
-						} else {
-							Some(selectItem);
-						}					
+						selectItem.getAlias();
 					}
-				});
 
-				this.setSelectItems(selectItems2.toList);			
-			}
+					if(selectItemName.startsWith(Constants.PREFIX_VAR)) {
+						val newSelectItemAlias = selectItemName.substring(
+							Constants.PREFIX_VAR.length, selectItemName.length());
+						selectItem.setAlias(newSelectItemAlias);
+						Some(selectItem);
+					} else if(selectItemName.startsWith(Constants.PREFIX_LIT)) {
+						//do nothing
+						None
+					} else if(selectItemName.startsWith(Constants.PREFIX_URI)) {
+						//do nothing
+						None
+					} else {
+						Some(selectItem);
+					}
+				}
+			});
+
+			this.setSelectItems(selectItems2.toList);
+		}
 	}
 
 
 	def clearSelectItems() = {
-			val selectItems = this.getSelect();
-			if(selectItems != null) {
-				selectItems.clear();
-			}
-			//selectItems = new Vector<ZSelectItem>();
+		val selectItems = this.getSelect();
+		if(selectItems != null) {
+			selectItems.clear();
+		}
+		//selectItems = new Vector<ZSelectItem>();
 	}
 
 
@@ -261,56 +261,56 @@ val logger = LoggerFactory.getLogger(this.getClass());
 	//	}
 
 	override def getSelectItems() : List[ZSelectItem] = {
-			val selectItems = super.getSelect();
+		val selectItems = super.getSelect();
 
-			val result = if(selectItems != null) {
-				selectItems.map(selectItem => selectItem.asInstanceOf[ZSelectItem])
-			} else {
-				Nil
-			}
+		val result = if(selectItems != null) {
+			selectItems.map(selectItem => selectItem.asInstanceOf[ZSelectItem])
+		} else {
+			Nil
+		}
 
-			result.toList;
+		result.toList;
 	}
 
 	def getSelectItemAliases() : List[String] ={
-			val selectItems = this.getSelectItems();
+		val selectItems = this.getSelectItems();
 
-			val result = if(selectItems != null) {
-				selectItems.map(selectItem => { selectItem.getAlias() })
-			} else {
-				Nil
-			}
+		val result = if(selectItems != null) {
+			selectItems.map(selectItem => { selectItem.getAlias() })
+		} else {
+			Nil
+		}
 
-			result.toList;
+		result.toList;
 	}
 
 	def generateAlias() : String = {
-			//return R2OConstants.VIEW_ALIAS + this.hashCode();
-			if(this.alias == null) {
-				this.alias = Constants.VIEW_ALIAS + new Random().nextInt(10000);
-			}
-			this.alias;
+		//return R2OConstants.VIEW_ALIAS + this.hashCode();
+		if(this.alias == null) {
+			this.alias = Constants.VIEW_ALIAS + new Random().nextInt(10000);
+		}
+		this.alias;
 	}
 
 	override def getFrom() : java.util.Vector[ZFromItem] = {
-			val fromItems = super.getFrom().asInstanceOf[java.util.Vector[ZFromItem]];
-			fromItems
+		val fromItems = super.getFrom().asInstanceOf[java.util.Vector[ZFromItem]];
+		fromItems
 	}
 
 	def printFrom() : String  = {
-			var fromSQL = "";
-			val fromItems = this.getFrom();
-			if(fromItems != null && fromItems.size() != 0) {
-				var i = 0;
-				for(mainQueryFromItem <- fromItems) {
-					mainQueryFromItem match {
+		var fromSQL = "";
+		val fromItems = this.getFrom();
+		if(fromItems != null && fromItems.size() != 0) {
+			var i = 0;
+			for(mainQueryFromItem <- fromItems) {
+				mainQueryFromItem match {
 					case sqlFromItem:SQLFromItem => {
 						var separator = "";
 						if(i > 0) {
-							separator = ", ";	
+							separator = ", ";
 						}
 						fromSQL += separator + sqlFromItem.print(true);
-					} 
+					}
 					case joinQuery:SQLJoinTable => {
 						val logicalTable = joinQuery.joinSource;
 
@@ -320,22 +320,22 @@ val logger = LoggerFactory.getLogger(this.getClass());
 							separator = " " + logicalTableJoinType + " JOIN ";
 						} else {
 							if(i > 0) {
-								separator = ", ";	
+								separator = ", ";
 							}
 						}
 
 						logicalTable match {
-						case _:SQLFromItem => {
-							fromSQL += separator + logicalTable.toString();
-						} 
-						case _:IQuery => {
-							val enclosedCharacter = Constants.getEnclosedCharacter(this.databaseType);
+							case _:SQLFromItem => {
+								fromSQL += separator + logicalTable.toString();
+							}
+							case _:IQuery => {
+								val enclosedCharacter = Constants.getEnclosedCharacter(this.databaseType);
 
-							//fromSQL +=  separator + " ( "+ logicalTable.print(false) + " ) " + logicalTable.getAlias();
-							fromSQL +=  separator + " ( "+ logicalTable.print(false) + " ) " + enclosedCharacter + logicalTable.getAlias() + enclosedCharacter;
+								//fromSQL +=  separator + " ( "+ logicalTable.print(false) + " ) " + logicalTable.getAlias();
+								fromSQL +=  separator + " ( "+ logicalTable.print(false) + " ) " + enclosedCharacter + logicalTable.getAlias() + enclosedCharacter;
 
-						}
-						case _ => { }
+							}
+							case _ => { }
 						}
 
 						val joinExp = joinQuery.onExpression;
@@ -347,11 +347,11 @@ val logger = LoggerFactory.getLogger(this.getClass());
 							fromSQL += "\n";
 						}
 
-					} 
+					}
 					case _ => {
 						var separator = "";
 						if(i > 0) {
-							separator = ", ";	
+							separator = ", ";
 						}
 
 						var fromItemString = "";
@@ -372,44 +372,44 @@ val logger = LoggerFactory.getLogger(this.getClass());
 						}
 
 						fromSQL += separator + fromItemString;
-					}			    
 					}
-
-					i = i+1;
 				}
-			}
 
-			fromSQL;
+				i = i+1;
+			}
+		}
+
+		fromSQL;
 	}
 
 	def getOrderByConditions() : List[ZOrderBy] = {
-			val superOrderByList = super.getOrderBy();
+		val superOrderByList = super.getOrderBy();
 
-			val result : List[ZOrderBy]= if(superOrderByList != null) {
-				val thisOrderByList = superOrderByList.map(superOrderBy => {
-					superOrderBy.asInstanceOf[ZOrderBy]
-				}
-						).toList;
-				thisOrderByList
-			} else {
-				Nil
+		val result : List[ZOrderBy]= if(superOrderByList != null) {
+			val thisOrderByList = superOrderByList.map(superOrderBy => {
+				superOrderBy.asInstanceOf[ZOrderBy]
 			}
-			result;
+			).toList;
+			thisOrderByList
+		} else {
+			Nil
+		}
+		result;
 	}
 
 	def printOrderBy() : String = {
-			var orderBySQL = "";
-			for(orderBy <- this.getOrderByConditions()) {
-				val orderByExpression = orderBy.getExpression();
-				orderBySQL += orderByExpression;
-				if(! orderBy.getAscOrder()) {
-					orderBySQL += " DESC";
-				}
-				orderBySQL += ", ";
+		var orderBySQL = "";
+		for(orderBy <- this.getOrderByConditions()) {
+			val orderByExpression = orderBy.getExpression();
+			orderBySQL += orderByExpression;
+			if(! orderBy.getAscOrder()) {
+				orderBySQL += " DESC";
 			}
-			orderBySQL = orderBySQL.substring(0, orderBySQL.length() - 2);
-			orderBySQL = "ORDER BY " + orderBySQL ;
-			return orderBySQL; 
+			orderBySQL += ", ";
+		}
+		orderBySQL = orderBySQL.substring(0, orderBySQL.length() - 2);
+		orderBySQL = "ORDER BY " + orderBySQL ;
+		return orderBySQL;
 	}
 
 	def setComments(comments:String ) = { this.comments = comments;	}
@@ -423,12 +423,12 @@ val logger = LoggerFactory.getLogger(this.getClass());
 
 
 	def setOrderBy(orderByConditions:List[ZOrderBy] ) = {
-			if(this.getOrderBy() != null) {
-				this.getOrderBy().clear();	
-			}
+		if(this.getOrderBy() != null) {
+			this.getOrderBy().clear();
+		}
 
-			val newOrderBy = new java.util.Vector[ZOrderBy](orderByConditions);
-			this.addOrderBy(newOrderBy);
+		val newOrderBy = new java.util.Vector[ZOrderBy](orderByConditions);
+		this.addOrderBy(newOrderBy);
 	}
 
 
@@ -444,59 +444,59 @@ val logger = LoggerFactory.getLogger(this.getClass());
 	def setWhere(where:ZExp ) = { super.addWhere(where); }
 
 	override def toString() = {
-			var result = "";
+		var result = "";
 
-			if(comments != null) {
-				result += "--" + this.comments + "\n";
+		if(comments != null) {
+			result += "--" + this.comments + "\n";
+		}
+
+		//PRINT SELECT
+		val thisSelectItems = this.getSelectItems();
+		val selectSQL = MorphSQLUtility.printSelectItemsJava(thisSelectItems, this.getDistinct());
+		result += selectSQL + "\n";
+
+		//PRINT FROM
+		val fromSQL = this.printFrom();
+		result += "FROM " + fromSQL + "\n";
+
+		//PRINT WHERE
+		if(this.getWhere() != null) {
+			var whereSQL = this.getWhere().toString();
+			if(whereSQL.startsWith("(") && whereSQL.endsWith(")")) {
+				whereSQL = whereSQL.substring(1, whereSQL.length() - 1);
 			}
 
-			//PRINT SELECT
-			val thisSelectItems = this.getSelectItems();
-			val selectSQL = MorphSQLUtility.printSelectItemsJava(thisSelectItems, this.getDistinct());
-			result += selectSQL + "\n";
-
-			//PRINT FROM
-			val fromSQL = this.printFrom();
-			result += "FROM " + fromSQL + "\n";
-
-			//PRINT WHERE
-			if(this.getWhere() != null) {
-				var whereSQL = this.getWhere().toString();
-				if(whereSQL.startsWith("(") && whereSQL.endsWith(")")) {
-					whereSQL = whereSQL.substring(1, whereSQL.length() - 1);
-				}
-
-				if(whereSQL.startsWith("(") && whereSQL.endsWith(")")) {
-					whereSQL = whereSQL.substring(1, whereSQL.length() - 1);
-				}
-				whereSQL = whereSQL.replaceAll("\\) AND \\(", " AND ");
-				result += "WHERE " + whereSQL + "\n"; 
+			if(whereSQL.startsWith("(") && whereSQL.endsWith(")")) {
+				whereSQL = whereSQL.substring(1, whereSQL.length() - 1);
 			}
+			whereSQL = whereSQL.replaceAll("\\) AND \\(", " AND ");
+			result += "WHERE " + whereSQL + "\n";
+		}
 
-			//PRINT ORDER BY
-			val orderByConditions = this.getOrderBy(); 
-			if(orderByConditions != null && orderByConditions.size() > 0) {
-				result += this.printOrderBy() + "\n";
-			}
+		//PRINT ORDER BY
+		val orderByConditions = this.getOrderBy();
+		if(orderByConditions != null && orderByConditions.size() > 0) {
+			result += this.printOrderBy() + "\n";
+		}
 
-			//PRINT GROUP BY
-			val groupBy = this.getGroupBy();
-			if(groupBy != null) {
-				result += groupBy + "\n";
-			}
+		//PRINT GROUP BY
+		val groupBy = this.getGroupBy();
+		if(groupBy != null) {
+			result += groupBy + "\n";
+		}
 
-			//PRINT SLICE
-			if(this.slice != -1) {
-				result += "LIMIT " + this.slice + " ";
-			}
+		//PRINT SLICE
+		if(this.slice != -1) {
+			result += "LIMIT " + this.slice + " ";
+		}
 
-			//PRINT OFFSET
-			if(this.offset != -1) {
-				result += "OFFSET " + this.offset + " ";
-			}
+		//PRINT OFFSET
+		if(this.offset != -1) {
+			result += "OFFSET " + this.offset + " ";
+		}
 
-			result.trim();
-			result
+		result.trim();
+		result
 	}
 
 	def setAlias(alias:String ) = { this.alias = alias;	}
@@ -504,75 +504,75 @@ val logger = LoggerFactory.getLogger(this.getClass());
 	def getAlias() :String = { this.alias; }
 
 	def print(withAlias:Boolean ) : String = {
-			val result = if(withAlias) {
-				this.toString();
-			} else {
-				val alias = this.getAlias();
-				this.setAlias("");
-				val resultAux = this.toString();
-				if(alias != null) {
-					this.setAlias(alias);
-				}
-				resultAux
+		val result = if(withAlias) {
+			this.toString();
+		} else {
+			val alias = this.getAlias();
+			this.setAlias("");
+			val resultAux = this.toString();
+			if(alias != null) {
+				this.setAlias(alias);
 			}
-			result;
+			resultAux
+		}
+		result;
 	}
 
 	def buildMapOnExp() : Map[ZConstant, ZConstant] = {
-			val fromItems = this.getFrom();
-			var mapOnExp:Map[ZConstant, ZConstant]  = Map.empty;
+		val fromItems = this.getFrom();
+		var mapOnExp:Map[ZConstant, ZConstant]  = Map.empty;
 
-			for(fromItem <- fromItems) {
-				fromItem match {
+		for(fromItem <- fromItems) {
+			fromItem match {
 				case joinTable:SQLJoinTable => {
 					val joinSource = joinTable.joinSource;
 					joinSource match {
-					case joinSourceSQLQuery:SQLQuery => {
-						val joinSourceAlias = joinSourceSQLQuery.getAlias();
-						val innerSelectItems = joinSourceSQLQuery.getSelectItems();
-						for(innerSelectItem <- innerSelectItems) {
-							val innerItemAliasAux = innerSelectItem.getAlias();;
-							val innerItemAlias = 
+						case joinSourceSQLQuery:SQLQuery => {
+							val joinSourceAlias = joinSourceSQLQuery.getAlias();
+							val innerSelectItems = joinSourceSQLQuery.getSelectItems();
+							for(innerSelectItem <- innerSelectItems) {
+								val innerItemAliasAux = innerSelectItem.getAlias();;
+								val innerItemAlias =
 									if(innerItemAliasAux == null || innerItemAliasAux.equals("")) {
 										innerSelectItem.toString();
 									} else {
 										innerItemAliasAux;
 									}
 
-							val outerName = joinSourceAlias + "." + innerItemAlias;
-							val outerConstant = new ZConstant(outerName, ZConstant.COLUMNNAME);
-							val innerConstant = if(innerSelectItem.isExpression()) {
-								val innerSelectItemExpression = innerSelectItem.getExpression();
-								innerSelectItemExpression match {
-								case innerConstant:ZConstant => {
-									innerConstant
-								} 
-								case _ => {
-									null
+								val outerName = joinSourceAlias + "." + innerItemAlias;
+								val outerConstant = new ZConstant(outerName, ZConstant.COLUMNNAME);
+								val innerConstant = if(innerSelectItem.isExpression()) {
+									val innerSelectItemExpression = innerSelectItem.getExpression();
+									innerSelectItemExpression match {
+										case innerConstant:ZConstant => {
+											innerConstant
+										}
+										case _ => {
+											null
+										}
+									}
+								} else {
+									val innerTable = innerSelectItem.getTable();
+									val innerColumn = innerSelectItem.getColumn();
+									new ZConstant(innerTable + "." + innerColumn, ZConstant.COLUMNNAME);
 								}
+
+								if(innerConstant != null) {
+									mapOnExp.put(outerConstant, innerConstant);
 								}
-							} else {
-								val innerTable = innerSelectItem.getTable();
-								val innerColumn = innerSelectItem.getColumn();
-								new ZConstant(innerTable + "." + innerColumn, ZConstant.COLUMNNAME);							
-							}
 
-							if(innerConstant != null) {
-								mapOnExp.put(outerConstant, innerConstant);	
 							}
-
 						}
-					}
-					case _ => {
-						logger.debug("joinSource not SQLQuery!");
-					}				  
+						case _ => {
+							logger.debug("joinSource not SQLQuery!");
+						}
 
 					}
-				}
 				}
 			}
+		}
 
-			mapOnExp;
+		mapOnExp;
 
 	}
 
@@ -632,7 +632,7 @@ val logger = LoggerFactory.getLogger(this.getClass());
 	//	}
 
 	def setFromItems(fromItems:java.util.Collection[ZFromItem] ) = {
-			this.addFrom(new java.util.Vector[ZFromItem](fromItems));
+		this.addFrom(new java.util.Vector[ZFromItem](fromItems));
 	}
 
 	//	public boolean hasSubquery() {
@@ -659,14 +659,14 @@ val logger = LoggerFactory.getLogger(this.getClass());
 	//	}
 
 	def buildMapAliasSelectItem() : Map[String, ZSelectItem] ={
-			val thisSelectItems = this.getSelectItems();
-			SQLQuery.buildMapAliasSelectItemAux(this.alias, thisSelectItems);
+		val thisSelectItems = this.getSelectItems();
+		SQLQuery.buildMapAliasSelectItemAux(this.alias, thisSelectItems);
 	}
 
 
 
-	def pushProjectionsDown(pushedProjections:List[ZSelectItem] 
-			, mapInnerAliasSelectItem:Map[String, ZSelectItem] ) {
+	def pushProjectionsDown(pushedProjections:List[ZSelectItem]
+													, mapInnerAliasSelectItem:Map[String, ZSelectItem] ) {
 		val selectItemsReplacement = pushedProjections.map(outerSelectItem => {
 			val outerSelectItemTable = outerSelectItem.getTable();
 			if(outerSelectItemTable == null) {
@@ -677,15 +677,15 @@ val logger = LoggerFactory.getLogger(this.getClass());
 				val innerSelectItem = mapInnerAliasSelectItem.get(outerSelectItemString);
 
 				val replacementSelectItem = if(innerSelectItem.isDefined) {
-				  val innerSelectItemGet = innerSelectItem.get;
-				  
+					val innerSelectItemGet = innerSelectItem.get;
+
 					val replacementSelectItemAux = MorphSQLSelectItem.apply(
-							innerSelectItemGet, this.databaseType);
-					val innerSelectItemAggregrationFunction = innerSelectItemGet.getAggregate(); 
+						innerSelectItemGet, this.databaseType);
+					val innerSelectItemAggregrationFunction = innerSelectItemGet.getAggregate();
 					if(innerSelectItemAggregrationFunction != null) {
-					  replacementSelectItemAux.setAggregate(innerSelectItemAggregrationFunction);
+						replacementSelectItemAux.setAggregate(innerSelectItemAggregrationFunction);
 					}
-					
+
 					if(outerSelectItemAlias != null) {
 						replacementSelectItemAux.setAlias(outerSelectItemAlias);
 					}
@@ -702,36 +702,36 @@ val logger = LoggerFactory.getLogger(this.getClass());
 		this.setSelectItems(newSelectItems);
 	}
 
-	def pushExpDown(pushedExp:ZExp , mapInnerAliasSelectItem:Map[String, ZSelectItem] ) 
+	def pushExpDown(pushedExp:ZExp , mapInnerAliasSelectItem:Map[String, ZSelectItem] )
 	: ZExp = {
-			val result = if(pushedExp == null) {
-				pushedExp
-			} else {
-				val dbType = this.getDatabaseType();
+		val result = if(pushedExp == null) {
+			pushedExp
+		} else {
+			val dbType = this.getDatabaseType();
 
-				val whereReplacement= mapInnerAliasSelectItem.keys.map(alias => {
-					val aliasColumn = new ZConstant(alias, ZConstant.COLUMNNAME);
-					val selectItem = mapInnerAliasSelectItem(alias);
-					val zConstant = if(selectItem.isExpression()) {
-						val selectItemValue = selectItem.getExpression().toString();
-						new ZConstant(selectItemValue, ZConstant.UNKNOWN);
+			val whereReplacement= mapInnerAliasSelectItem.keys.map(alias => {
+				val aliasColumn = new ZConstant(alias, ZConstant.COLUMNNAME);
+				val selectItem = mapInnerAliasSelectItem(alias);
+				val zConstant = if(selectItem.isExpression()) {
+					val selectItemValue = selectItem.getExpression().toString();
+					new ZConstant(selectItemValue, ZConstant.UNKNOWN);
+				} else {
+					val selectItemTable = selectItem.getTable();
+					val selectItemColumn = selectItem.getColumn();
+					val selectItemValue = if(selectItemTable != null && !selectItemTable.equals("")) {
+						selectItemTable + "." + selectItemColumn;
 					} else {
-						val selectItemTable = selectItem.getTable();
-						val selectItemColumn = selectItem.getColumn();
-						val selectItemValue = if(selectItemTable != null && !selectItemTable.equals("")) {
-							selectItemTable + "." + selectItemColumn;  
-						} else {
-							selectItemColumn; 
-						}
-						MorphSQLUtility.createConstant(selectItemValue, ZConstant.COLUMNNAME, dbType);
+						selectItemColumn;
 					}
-					(aliasColumn -> zConstant);
-				}).toMap;
+					MorphSQLUtility.createConstant(selectItemValue, ZConstant.COLUMNNAME, dbType);
+				}
+				(aliasColumn -> zConstant);
+			}).toMap;
 
-				val newFilter = MorphSQLUtility.replaceExp(pushedExp, whereReplacement);
-				newFilter;		  
-			}
-			result
+			val newFilter = MorphSQLUtility.replaceExp(pushedExp, whereReplacement);
+			newFilter;
+		}
+		result
 	}
 
 	def getDistinct() : Boolean = { this.distinct; }
@@ -770,48 +770,48 @@ val logger = LoggerFactory.getLogger(this.getClass());
 
 
 	def pushProjectionsDown(pushedProjections:List[ZSelectItem] ) : Unit = {
-			val mapInnerAliasSelectItem = this.buildMapAliasSelectItem();
-			this.pushProjectionsDown(pushedProjections, mapInnerAliasSelectItem);
+		val mapInnerAliasSelectItem = this.buildMapAliasSelectItem();
+		this.pushProjectionsDown(pushedProjections, mapInnerAliasSelectItem);
 	}
 
 	def pushFilterDown(pushedFilter:ZExp ) : Unit = {
-			val newFilter = this.pushExpDown(pushedFilter);
-			this.addWhere(newFilter);
+		val newFilter = this.pushExpDown(pushedFilter);
+		this.addWhere(newFilter);
 	}
 
 
 	def pushExpDown(oldExp:ZExp ) :ZExp ={
-			val mapInnerAliasSelectItem = this.buildMapAliasSelectItem();
-			val newFilter = this.pushExpDown(oldExp, mapInnerAliasSelectItem);
-			newFilter;
+		val mapInnerAliasSelectItem = this.buildMapAliasSelectItem();
+		val newFilter = this.pushExpDown(oldExp, mapInnerAliasSelectItem);
+		newFilter;
 	}
 
 	def pushOrderByDown(pushedProjections:List[ZSelectItem] ) = {
-			val orderBy = this.getOrderByConditions();
-			if(orderBy != null) {
-				val mapInnerAliasSelectItem = this.buildMapAliasSelectItem();
-				val newOrderByCollection = MorphSQLUtility.pushOrderByDown(
-						orderBy, mapInnerAliasSelectItem);
-				this.setOrderBy(newOrderByCollection);			
-			}
+		val orderBy = this.getOrderByConditions();
+		if(orderBy != null) {
+			val mapInnerAliasSelectItem = this.buildMapAliasSelectItem();
+			val newOrderByCollection = MorphSQLUtility.pushOrderByDown(
+				orderBy, mapInnerAliasSelectItem);
+			this.setOrderBy(newOrderByCollection);
+		}
 	}
 
 
 
 	def pushGroupByDown() = {
-			val oldGroupBy = this.getGroupBy();
-			if(oldGroupBy != null) {
-				//val oldGroupByExps = oldGroupBy.getGroupBy().asInstanceOf[Iterable[ZExp]];
-				val oldGroupByExps = oldGroupBy.getGroupBy().toList;
-				val newGroupByExpsAux = oldGroupByExps.map(oldGroupByExp => {
-					val zExp = oldGroupByExp.asInstanceOf[ZExp];
-					val newGroupByExp = this.pushExpDown(zExp);
-					newGroupByExp;
-				});
-				val newGroupByExps = new java.util.Vector[ZExp](newGroupByExpsAux);
-				val newGroupBy = new ZGroupBy(newGroupByExps);
-				this.setGroupBy(newGroupBy);			
-			}
+		val oldGroupBy = this.getGroupBy();
+		if(oldGroupBy != null) {
+			//val oldGroupByExps = oldGroupBy.getGroupBy().asInstanceOf[Iterable[ZExp]];
+			val oldGroupByExps = oldGroupBy.getGroupBy().toList;
+			val newGroupByExpsAux = oldGroupByExps.map(oldGroupByExp => {
+				val zExp = oldGroupByExp.asInstanceOf[ZExp];
+				val newGroupByExp = this.pushExpDown(zExp);
+				newGroupByExp;
+			});
+			val newGroupByExps = new java.util.Vector[ZExp](newGroupByExpsAux);
+			val newGroupBy = new ZGroupBy(newGroupByExps);
+			this.setGroupBy(newGroupBy);
+		}
 
 	}
 
@@ -821,334 +821,339 @@ val logger = LoggerFactory.getLogger(this.getClass());
 }
 
 object SQLQuery {
-val logger = LoggerFactory.getLogger(this.getClass());
-	
+	val logger = LoggerFactory.getLogger(this.getClass());
+
 	def areBaseTables(fromItems:Iterable[ZFromItem] ) : Boolean ={
-			var result = true;
-			for(fromItem <- fromItems) {
-				if(! (fromItem.isInstanceOf[SQLFromItem])) {
-					result = false;
+		var result = true;
+		for(fromItem <- fromItems) {
+			if(! (fromItem.isInstanceOf[SQLFromItem])) {
+				result = false;
+			}
+		}
+		return result;
+	}
+
+	def buildMapAliasSelectItemAux(prefix:String , innerSelectItems:Iterable[ZSelectItem] )
+	: Map[String, ZSelectItem]  = {
+		val mapInnerAliasSelectItem = innerSelectItems.map(innerSelectItem => {
+			val innerSelectItemAlias = innerSelectItem.getAlias();
+			val newColumnNameAux = if(innerSelectItemAlias == null || innerSelectItemAlias.equals("")) {
+				innerSelectItem.getColumn();
+			} else {
+				innerSelectItemAlias;
+			}
+			val newColumnName = prefix + "." + newColumnNameAux;
+			(newColumnName.trim() -> innerSelectItem);
+		});
+
+		mapInnerAliasSelectItem.toMap;
+
+	}
+
+	def create(selectItems:List[ZSelectItem], leftTable:SQLLogicalTable
+						 , rightTable:SQLLogicalTable , joinType:String , oldJoinExpression:ZExpression
+						 , databasetype:String ) : SQLQuery  ={
+
+		var proceed = true;
+		if(Constants.JOINS_TYPE_LEFT.equals(joinType) && rightTable.isInstanceOf[SQLQuery]) {
+			rightTable match {
+				case rightTableSQLQuery:SQLQuery => {
+					val rightTableFromItems = rightTableSQLQuery.getFrom();
+					if(rightTableFromItems.size() != 1) {
+						val errorMessage = "Subquery elimination for left outer join can deal with 1 right table only!";
+						logger.debug(errorMessage);
+						proceed = false;
+					}
+				}
+				case _ => {}
+			}
+		}
+
+		if(proceed) {
+			val result = new SQLQuery();
+			result.setDatabaseType(databasetype);
+			var mapAliasSelectItems:Map[String, ZSelectItem]  = Map.empty;
+			var addedTableAlias:List[String] = Nil;
+
+			leftTable match {
+				case leftTableSQLQuery:SQLQuery => {
+					val leftTableFromItems = leftTableSQLQuery.getFrom();
+					addedTableAlias = leftTableFromItems.map(leftTableFromItem => {
+						val fromItemAlias = leftTableFromItem match {
+							case leftTableFromItemJoinTable:SQLJoinTable => {
+								leftTableFromItemJoinTable.joinSource.getAlias();
+							}
+							case _ => {
+								leftTableFromItem.getAlias();
+							}
+						}
+
+						if(fromItemAlias == null || fromItemAlias.equals("")) {
+							val logicalTableAlias = leftTable.getAlias();
+							if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
+								leftTableFromItem.setAlias(logicalTableAlias);
+							}
+						}
+
+						fromItemAlias;
+					}).toList;
+
+					leftTableFromItems.foreach(leftTableFromItem => {
+            logger.info(s"leftTableFromItem = ${leftTableFromItem}")
+						result.addFromItem(leftTableFromItem)
+          });
+
+					val leftTableWhere = leftTableSQLQuery.getWhere();
+					result.addWhere(leftTableWhere);
+					val leftTableSelectItems = leftTableSQLQuery.getSelectItems();
+					result.addSelects(leftTableSelectItems);
+					val mapAliasSelectItemsLeft = leftTableSQLQuery.buildMapAliasSelectItem();
+					mapAliasSelectItems = mapAliasSelectItems ++ mapAliasSelectItemsLeft;
+				}
+				case leftTableFromItem:SQLFromItem => {
+					result.addFromItem(leftTableFromItem);
+					val addedTableAlias = List(leftTableFromItem.getAlias());
 				}
 			}
-			return result;
-	}
 
-	def buildMapAliasSelectItemAux(prefix:String , innerSelectItems:Iterable[ZSelectItem] ) 
-	: Map[String, ZSelectItem]  = {
-			val mapInnerAliasSelectItem = innerSelectItems.map(innerSelectItem => {
-				val innerSelectItemAlias = innerSelectItem.getAlias();
-				val newColumnNameAux = if(innerSelectItemAlias == null || innerSelectItemAlias.equals("")) {
-					innerSelectItem.getColumn();
-				} else {
-					innerSelectItemAlias;
+			rightTable match {
+				case rightTableSQLQuery:SQLQuery => {
+					val rightTableSelectItems = rightTableSQLQuery.getSelectItems();
+					val rightTableWhere = rightTableSQLQuery.getWhere();
+
+					val mapAliasSelectItemsRight = rightTableSQLQuery.buildMapAliasSelectItem();
+					mapAliasSelectItems = mapAliasSelectItems ++ (mapAliasSelectItemsRight);
+					val newJoinExpression = result.pushExpDown(oldJoinExpression
+						, mapAliasSelectItems).asInstanceOf[ZExpression];
+					val newWhereExpression = result.pushExpDown(rightTableWhere
+						, mapAliasSelectItems).asInstanceOf[ZExpression];
+
+					val logicalTableAlias = rightTable.getAlias();
+					val rightTableFromItems = rightTableSQLQuery.getFrom();
+
+					val joinTables = SQLQuery.generateJoinTables(rightTableFromItems
+						, addedTableAlias, joinType, newJoinExpression, newWhereExpression
+						, logicalTableAlias);
+
+					for(joinTable <- joinTables) {
+						logger.info(s"rightTable joinTable = ${joinTable}")
+						result.addFromItem(joinTable);
+					}
+					result.addSelects(rightTableSelectItems);
+					result.pushProjectionsDown(selectItems, mapAliasSelectItems);
 				}
-				val newColumnName = prefix + "." + newColumnNameAux; 
-				(newColumnName.trim() -> innerSelectItem);
-			});
-
-			mapInnerAliasSelectItem.toMap;
-
+				case leftTableFromItem:SQLFromItem => {
+					result.addFromItem(leftTableFromItem);
+				}
+			}
+			result;
+		} else {
+			null
+		}
 	}
 
-	def create(selectItems:List[ZSelectItem], leftTable:SQLLogicalTable 
-			, rightTable:SQLLogicalTable , joinType:String , oldJoinExpression:ZExpression 
-			, databasetype:String ) : SQLQuery  ={
+	def create(selectItems:Iterable[ZSelectItem]
+						 , sqlLogicalTables:Iterable[_ <: SQLLogicalTable], whereExpression:ZExpression
+						 , databasetype:String ) : SQLQuery = {
+		var result = new SQLQuery();
+		result.setDatabaseType(databasetype);
 
-					var proceed = true;
-					if(Constants.JOINS_TYPE_LEFT.equals(joinType) && rightTable.isInstanceOf[SQLQuery]) {
-						rightTable match {
-						case rightTableSQLQuery:SQLQuery => {
-							val rightTableFromItems = rightTableSQLQuery.getFrom();
-							if(rightTableFromItems.size() != 1) {
-								val errorMessage = "Subquery elimination for left outer join can deal with 1 right table only!";
-								logger.debug(errorMessage);
-								proceed = false;
-							}		      
-						}
-						case _ => {}
-						}
-					}
+		var mapAliasSelectItems:Map[String, ZSelectItem] = Map.empty;
 
-					if(proceed) {
-						val result = new SQLQuery();
-						result.setDatabaseType(databasetype);
-						var mapAliasSelectItems:Map[String, ZSelectItem]  = Map.empty; 
-						var addedTableAlias:List[String] = Nil;
-
-						leftTable match {
-						case leftTableSQLQuery:SQLQuery => {
-							val leftTableFromItems = leftTableSQLQuery.getFrom();
-							addedTableAlias = leftTableFromItems.map(leftTableFromItem => {
-								val fromItemAlias = leftTableFromItem match {
-								case leftTableFromItemJoinTable:SQLJoinTable => {
-									leftTableFromItemJoinTable.joinSource.getAlias();
-								} 
-								case _ => {
-									leftTableFromItem.getAlias();	
-								}
-								} 
-
-								if(fromItemAlias == null || fromItemAlias.equals("")) {
-									val logicalTableAlias = leftTable.getAlias();
-									if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
-										leftTableFromItem.setAlias(logicalTableAlias);	
-									}
-								}
-
-								fromItemAlias;
-							}).toList;
-
-							leftTableFromItems.foreach(leftTableFromItem => 
-							result.addFromItem(leftTableFromItem));
-
-							val leftTableWhere = leftTableSQLQuery.getWhere();
-							result.addWhere(leftTableWhere);
-							val leftTableSelectItems = leftTableSQLQuery.getSelectItems();
-							result.addSelects(leftTableSelectItems);
-							val mapAliasSelectItemsLeft = leftTableSQLQuery.buildMapAliasSelectItem();
-							mapAliasSelectItems = mapAliasSelectItems ++ mapAliasSelectItemsLeft;
-						} 
-						case leftTableFromItem:SQLFromItem => {
-							result.addFromItem(leftTableFromItem);
-							val addedTableAlias = List(leftTableFromItem.getAlias());
-						}
-						}
-
-						rightTable match {
-						case rightTableSQLQuery:SQLQuery => {
-							val rightTableSelectItems = rightTableSQLQuery.getSelectItems();
-							val rightTableWhere = rightTableSQLQuery.getWhere();
-
-							val mapAliasSelectItemsRight = rightTableSQLQuery.buildMapAliasSelectItem();
-							mapAliasSelectItems = mapAliasSelectItems ++ (mapAliasSelectItemsRight);
-							val newJoinExpression = result.pushExpDown(oldJoinExpression
-									, mapAliasSelectItems).asInstanceOf[ZExpression];
-							val newWhereExpression = result.pushExpDown(rightTableWhere
-									, mapAliasSelectItems).asInstanceOf[ZExpression];
-
-							val logicalTableAlias = rightTable.getAlias();
-							val rightTableFromItems = rightTableSQLQuery.getFrom();
-
-							val joinTables = SQLQuery.generateJoinTables(rightTableFromItems
-									, addedTableAlias, joinType, newJoinExpression, newWhereExpression
-									, logicalTableAlias);
-
-							for(joinTable <- joinTables) {
-								result.addFromItem(joinTable);
+		for(sqlLogicalTable <- sqlLogicalTables) {
+			sqlLogicalTable match {
+				case logicalTableSQLQuery:SQLQuery => {
+					val logicalTableFromItems = logicalTableSQLQuery.getFrom();
+					val resultFromItems = logicalTableFromItems.map (fromItem => {
+						val fromItemAlias = fromItem.getAlias();
+						if(fromItemAlias == null || fromItemAlias.equals("")) {
+							val logicalTableAlias = sqlLogicalTable.getAlias();
+							if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
+								fromItem.setAlias(logicalTableAlias);
 							}
-							result.addSelects(rightTableSelectItems);
-							result.pushProjectionsDown(selectItems, mapAliasSelectItems);
-						} 
-						case leftTableFromItem:SQLFromItem => {
-							result.addFromItem(leftTableFromItem);
-						}			  
 						}
-						result;
-					} else {
-						null
-					}
-	}
+						fromItem;
+					})
+					result.addFromItems(resultFromItems)
 
-	def create(selectItems:Iterable[ZSelectItem] 
-			, sqlLogicalTables:Iterable[_ <: SQLLogicalTable], whereExpression:ZExpression 
-			, databasetype:String ) : SQLQuery = {
-					var result = new SQLQuery();
-					result.setDatabaseType(databasetype);
+					result.addWhere(logicalTableSQLQuery.getWhere());
 
-					var mapAliasSelectItems:Map[String, ZSelectItem] = Map.empty;
+					val selectItemsLeft = logicalTableSQLQuery.getSelectItems();
+					result.addSelects(selectItemsLeft);
 
-					for(sqlLogicalTable <- sqlLogicalTables) {
-						sqlLogicalTable match {
-						case logicalTableSQLQuery:SQLQuery => {
-							val logicalTableFromItems = logicalTableSQLQuery.getFrom();
-							val resultFromItems = logicalTableFromItems.map (fromItem => {
-								val fromItemAlias = fromItem.getAlias();
-								if(fromItemAlias == null || fromItemAlias.equals("")) {
-									val logicalTableAlias = sqlLogicalTable.getAlias();
-									if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
-										fromItem.setAlias(logicalTableAlias);	
-									}
-								}
-								fromItem;	
-							})
-									result.addFromItems(resultFromItems)
+					val mapAliasSelectItemsLeft = logicalTableSQLQuery.buildMapAliasSelectItem();
+					mapAliasSelectItems = mapAliasSelectItems ++ mapAliasSelectItemsLeft;
+				}
+				case leftTableFromItem:SQLFromItem => {
+					result.addFromItem(leftTableFromItem);
+				}
+				case _ => {}
+			}
+		}
 
-									result.addWhere(logicalTableSQLQuery.getWhere());
-
-							val selectItemsLeft = logicalTableSQLQuery.getSelectItems();
-							result.addSelects(selectItemsLeft);
-
-							val mapAliasSelectItemsLeft = logicalTableSQLQuery.buildMapAliasSelectItem();
-							mapAliasSelectItems = mapAliasSelectItems ++ mapAliasSelectItemsLeft;		      
-						}
-						case leftTableFromItem:SQLFromItem => {
-							result.addFromItem(leftTableFromItem);
-						}
-						case _ => {}
-						}
-					}
-
-					result.pushProjectionsDown(selectItems.toList, mapAliasSelectItems);
-					val newExpression = result.pushExpDown(whereExpression, mapAliasSelectItems);
-					result.addWhere(newExpression);
-					result;
+		result.pushProjectionsDown(selectItems.toList, mapAliasSelectItems);
+		val newExpression = result.pushExpDown(whereExpression, mapAliasSelectItems);
+		result.addWhere(newExpression);
+		result;
 
 	}
 
 	private def generateJoinTables(fromItems:Iterable[ZFromItem]
-			, addedTableAlias:List[String] , joinType:String , joinExpression:ZExpression 
-			, whereExpression:ZExpression, logicalTableAlias:String ) : Iterable[SQLJoinTable] = {
-					val result = SQLQuery.generateJoinTablesAux(fromItems, addedTableAlias, 
-							joinType, joinExpression, whereExpression, logicalTableAlias, Set.empty);
-					result;
+																 , addedTableAlias:List[String] , joinType:String , joinExpression:ZExpression
+																 , whereExpression:ZExpression, logicalTableAlias:String ) : Iterable[SQLJoinTable] = {
+		val result = SQLQuery.generateJoinTablesAux(fromItems, addedTableAlias,
+			joinType, joinExpression, whereExpression, logicalTableAlias, Set.empty);
+		result;
 	}
 
-	private def generateJoinTablesAux(fromItems:Iterable[ZFromItem] 
-			, pAddedTableAlias:List[String] , joinType:String , joinExpression:ZExpression 
-			, whereExpression:ZExpression , logicalTableAlias:String 
-			, pAddedExpressions:Set[ZExp] ) : Iterable[SQLJoinTable] = {
-					var addedExpression = pAddedExpressions;
-					var addedTableAlias = pAddedTableAlias;
+	private def generateJoinTablesAux(fromItems:Iterable[ZFromItem]
+																		, pAddedTableAlias:List[String] , joinType:String , joinExpression:ZExpression
+																		, whereExpression:ZExpression , logicalTableAlias:String
+																		, pAddedExpressions:Set[ZExp] ) : Iterable[SQLJoinTable] = {
+		var addedExpression = pAddedExpressions;
+		var addedTableAlias = pAddedTableAlias;
 
-					val joinTables = fromItems.flatMap(rightTableFromItem => {
-						val joinTable = rightTableFromItem match {
-						case sqlFromItem:SQLFromItem => {
-							val rightTableAlias = rightTableFromItem.getAlias();
-							val tableType = sqlFromItem.form;
-							val dbType = sqlFromItem.databaseType;
-							if(tableType == Constants.LogicalTableType.TABLE_NAME) {
-								val rightTableName = rightTableFromItem.getTable();
-								val rightTableLogicalTable = new SQLFromItem(
-										rightTableName, Constants.LogicalTableType.TABLE_NAME);
-								rightTableLogicalTable.databaseType = dbType;
+		val joinTables = fromItems.flatMap(rightTableFromItem => {
+			val joinTable = rightTableFromItem match {
+				case sqlFromItem:SQLFromItem => {
+					val rightTableAlias = rightTableFromItem.getAlias();
+					val tableType = sqlFromItem.form;
+					val dbType = sqlFromItem.databaseType;
+					if(tableType == Constants.LogicalTableType.TABLE_NAME) {
+						//val rightTableName = rightTableFromItem.getTable();
+            val rightTableName = rightTableFromItem.getSchema + "." + rightTableFromItem.getTable
+						val rightTableLogicalTable = new SQLFromItem(
+							rightTableName, Constants.LogicalTableType.TABLE_NAME);
+						rightTableLogicalTable.databaseType = dbType;
 
-								//be careful so that we don't return those join expressions that is not in rightTableAlias
-								val relevantJoinExpression1 = MorphSQLUtility.containedInPrefixes(
-										joinExpression, addedTableAlias, true).toSet;
-								addedTableAlias = addedTableAlias  ::: List(rightTableAlias);
 
-								val relevantJoinExpression2 = MorphSQLUtility.containedInPrefixes(
-										joinExpression, addedTableAlias, true).toSet;
-								val relevantJoinExpressions = relevantJoinExpression2.diff(relevantJoinExpression1);
+						//be careful so that we don't return those join expressions that is not in rightTableAlias
+						val relevantJoinExpression1 = MorphSQLUtility.containedInPrefixes(
+							joinExpression, addedTableAlias, true).toSet;
+						addedTableAlias = addedTableAlias  ::: List(rightTableAlias);
 
-								val relevantWhereExpression = MorphSQLUtility.containedInPrefix(
-										whereExpression, rightTableAlias);
+						val relevantJoinExpression2 = MorphSQLUtility.containedInPrefixes(
+							joinExpression, addedTableAlias, true).toSet;
+						val relevantJoinExpressions = relevantJoinExpression2.diff(relevantJoinExpression1);
 
-								val joinTableAux = if(relevantJoinExpressions.isEmpty() && relevantWhereExpression.isEmpty()) {
-									new SQLJoinTable(rightTableLogicalTable, joinType
-											, Constants.SQL_EXPRESSION_TRUE);
-								} else {
-									var combinedExpressionCollection:Set[ZExpression] = Set.empty
-											relevantJoinExpressions.foreach(relevantJoinExpression => {
-												if(!addedExpression.contains(relevantJoinExpression)) {
-													combinedExpressionCollection = combinedExpressionCollection ++ Set(relevantJoinExpression)
-													addedExpression = addedExpression ++ Set(relevantJoinExpression);
-												}
-											})
-											combinedExpressionCollection = combinedExpressionCollection ++ relevantWhereExpression; 
-								val combinedExpressions = MorphSQLUtility.combineExpresions(
-										combinedExpressionCollection, Constants.SQL_LOGICAL_OPERATOR_AND);
-								new SQLJoinTable(rightTableLogicalTable, joinType, combinedExpressions);	
+						val relevantWhereExpression = MorphSQLUtility.containedInPrefix(
+							whereExpression, rightTableAlias);
+
+						val joinTableAux = if(relevantJoinExpressions.isEmpty() && relevantWhereExpression.isEmpty()) {
+							new SQLJoinTable(rightTableLogicalTable, joinType
+								, Constants.SQL_EXPRESSION_TRUE);
+						} else {
+							var combinedExpressionCollection:Set[ZExpression] = Set.empty
+							relevantJoinExpressions.foreach(relevantJoinExpression => {
+								if(!addedExpression.contains(relevantJoinExpression)) {
+									combinedExpressionCollection = combinedExpressionCollection ++ Set(relevantJoinExpression)
+									addedExpression = addedExpression ++ Set(relevantJoinExpression);
 								}
-
-
-								val fromItemAlias = rightTableFromItem.getAlias();
-								if(fromItemAlias == null || fromItemAlias.equals("")) {
-									if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
-										rightTableLogicalTable.setAlias(logicalTableAlias);	
-									}
-								} else {
-									rightTableLogicalTable.setAlias(fromItemAlias);
-								}
-
-								Some(joinTableAux)
-							} else {
-								None
-							}
-						} 
-						case joinTableAux:SQLJoinTable => {
-							val rightTableAlias = joinTableAux.joinSource.getAlias();
-
-
-							val relevantJoinExpression1 = MorphSQLUtility.containedInPrefixes(
-									joinExpression, addedTableAlias, true).toSet;
-							addedTableAlias = addedTableAlias ::: List(rightTableAlias);
-
-							val relevantJoinExpression2 = MorphSQLUtility.containedInPrefixes(
-									joinExpression, addedTableAlias, true).toSet;
-							//so that we don't return those join expressions that is not in rightTableAlias
-
-							val relevantJoinExpression = relevantJoinExpression2.diff(relevantJoinExpression1)
-
-									val relevantWhereExpression = MorphSQLUtility.containedInPrefix(
-											whereExpression, rightTableAlias);
-							val combinedExpressionCollection = relevantJoinExpression ++ relevantWhereExpression; 
+							})
+							combinedExpressionCollection = combinedExpressionCollection ++ relevantWhereExpression;
 							val combinedExpressions = MorphSQLUtility.combineExpresions(
-									combinedExpressionCollection, Constants.SQL_LOGICAL_OPERATOR_AND);
-							joinTableAux.addOnExpression(combinedExpressions);
-							Some(joinTableAux)
+								combinedExpressionCollection, Constants.SQL_LOGICAL_OPERATOR_AND);
+							new SQLJoinTable(rightTableLogicalTable, joinType, combinedExpressions);
 						}
-						case _ => None
-						}
-						joinTable
-					});
 
-					return joinTables;
+
+						val fromItemAlias = rightTableFromItem.getAlias();
+						if(fromItemAlias == null || fromItemAlias.equals("")) {
+							if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
+								rightTableLogicalTable.setAlias(logicalTableAlias);
+							}
+						} else {
+							rightTableLogicalTable.setAlias(fromItemAlias);
+						}
+
+						Some(joinTableAux)
+					} else {
+						None
+					}
+				}
+				case joinTableAux:SQLJoinTable => {
+					val rightTableAlias = joinTableAux.joinSource.getAlias();
+
+
+					val relevantJoinExpression1 = MorphSQLUtility.containedInPrefixes(
+						joinExpression, addedTableAlias, true).toSet;
+					addedTableAlias = addedTableAlias ::: List(rightTableAlias);
+
+					val relevantJoinExpression2 = MorphSQLUtility.containedInPrefixes(
+						joinExpression, addedTableAlias, true).toSet;
+					//so that we don't return those join expressions that is not in rightTableAlias
+
+					val relevantJoinExpression = relevantJoinExpression2.diff(relevantJoinExpression1)
+
+					val relevantWhereExpression = MorphSQLUtility.containedInPrefix(
+						whereExpression, rightTableAlias);
+					val combinedExpressionCollection = relevantJoinExpression ++ relevantWhereExpression;
+					val combinedExpressions = MorphSQLUtility.combineExpresions(
+						combinedExpressionCollection, Constants.SQL_LOGICAL_OPERATOR_AND);
+					joinTableAux.addOnExpression(combinedExpressions);
+					Some(joinTableAux)
+				}
+				case _ => None
+			}
+			joinTable
+		});
+
+		return joinTables;
 	}
 
-	def createQuery(mainTable:SQLLogicalTable , joinTables:Iterable[SQLJoinTable] 
-			, selectItems:List[ZSelectItem], whereCondition:ZExpression , databaseType:String ) 
+	def createQuery(mainTable:SQLLogicalTable , joinTables:Iterable[SQLJoinTable]
+									, selectItems:List[ZSelectItem], whereCondition:ZExpression , databaseType:String )
 	: SQLQuery = {
-			val joinTablesLogicalTables = if(joinTables != null ) {
-				joinTables.map(alphaPredicateObject => { alphaPredicateObject.joinSource })
-			} else { Nil }
-			val joinTablesExpressions = if(joinTables != null) {
-				joinTables.map(alphaPredicateObject => { alphaPredicateObject.onExpression })
-			} else { Nil}
-			val expressionsList = List(whereCondition) ::: joinTablesExpressions.toList
+		val joinTablesLogicalTables = if(joinTables != null ) {
+			joinTables.map(alphaPredicateObject => { alphaPredicateObject.joinSource })
+		} else { Nil }
+		val joinTablesExpressions = if(joinTables != null) {
+			joinTables.map(alphaPredicateObject => { alphaPredicateObject.onExpression })
+		} else { Nil}
+		val expressionsList = List(whereCondition) ::: joinTablesExpressions.toList
 
-					val result = mainTable match {
-					case mainTableSQLQuery:SQLQuery => {
-						val resultAux = mainTableSQLQuery;
-						resultAux.addLogicalTables(joinTablesLogicalTables);
-						val joinExpressions = if(joinTables != null) {
-							joinTables.map(alphaPredicateObject => {alphaPredicateObject.onExpression;})
-						} else { Nil; }
+		val result = mainTable match {
+			case mainTableSQLQuery:SQLQuery => {
+				val resultAux = mainTableSQLQuery;
+				resultAux.addLogicalTables(joinTablesLogicalTables);
+				val joinExpressions = if(joinTables != null) {
+					joinTables.map(alphaPredicateObject => {alphaPredicateObject.onExpression;})
+				} else { Nil; }
 
 
-						//ZExpression pushedCondSQL = (ZExpression) resultAux.pushExpressionDown(condSQL);
+				//ZExpression pushedCondSQL = (ZExpression) resultAux.pushExpressionDown(condSQL);
 
-						val newWhere = MorphSQLUtility.combineExpresions(expressionsList
-								, Constants.SQL_LOGICAL_OPERATOR_AND);
-						val pushedNewWhere = resultAux.pushExpDown(newWhere);
-						resultAux.addWhere(pushedNewWhere);
-						resultAux.pushProjectionsDown(selectItems);
-						resultAux
-					} 
-					case alphaSubjectFromItem:ZFromItem => {
-						val resultAux = new SQLQuery();
-						resultAux.addSelectItems(selectItems);
-						resultAux.addFromItem(alphaSubjectFromItem);
-						if(joinTables != null) {
-							for(alphaPredicateObject <- joinTables) {
-								resultAux.addFromItem(alphaPredicateObject);
-							}				
-						}
-
-						resultAux.addWhere(whereCondition);
-						resultAux
-					} 
-					case _ =>{
-						logger.warn("undefined alphasubject type!");
-						val logicalTables = List(mainTable) ::: joinTablesLogicalTables.toList;
-						val newWhere = MorphSQLUtility.combineExpresionsJava(expressionsList
-								, Constants.SQL_LOGICAL_OPERATOR_AND);
-						val resultAux = SQLQuery.create(selectItems, logicalTables, newWhere, databaseType);
-						resultAux
-					}
+				val newWhere = MorphSQLUtility.combineExpresions(expressionsList
+					, Constants.SQL_LOGICAL_OPERATOR_AND);
+				val pushedNewWhere = resultAux.pushExpDown(newWhere);
+				resultAux.addWhere(pushedNewWhere);
+				resultAux.pushProjectionsDown(selectItems);
+				resultAux
 			}
+			case alphaSubjectFromItem:ZFromItem => {
+				val resultAux = new SQLQuery();
+				resultAux.addSelectItems(selectItems);
+				resultAux.addFromItem(alphaSubjectFromItem);
+				if(joinTables != null) {
+					for(alphaPredicateObject <- joinTables) {
+						resultAux.addFromItem(alphaPredicateObject);
+					}
+				}
 
-			result;
-	}		
+				resultAux.addWhere(whereCondition);
+				resultAux
+			}
+			case _ =>{
+				logger.warn("undefined alphasubject type!");
+				val logicalTables = List(mainTable) ::: joinTablesLogicalTables.toList;
+				val newWhere = MorphSQLUtility.combineExpresionsJava(expressionsList
+					, Constants.SQL_LOGICAL_OPERATOR_AND);
+				val resultAux = SQLQuery.create(selectItems, logicalTables, newWhere, databaseType);
+				resultAux
+			}
+		}
+
+		result;
+	}
 
 }
