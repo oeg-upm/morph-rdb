@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>es.upm.fi.dia.oeg.morph</groupId>
 		<artifactId>morph-rdb</artifactId>
-		<version>3.9.15</version>
+		<version>3.9.16</version>
 	</parent>
 
 	<artifactId>morph-rdb-dist</artifactId>
