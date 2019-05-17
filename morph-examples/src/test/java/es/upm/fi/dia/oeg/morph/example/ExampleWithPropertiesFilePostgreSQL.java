@@ -17,7 +17,7 @@ public class ExampleWithPropertiesFilePostgreSQL {
 
 	@Test
 	public void testBatchPostgreSQL() {
-		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
 		String configurationFile = "batch-postgresql.r2rml.properties";
 		try {
 			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
@@ -34,7 +34,7 @@ public class ExampleWithPropertiesFilePostgreSQL {
 
 	@Test
 	public void testSparql01PostgreSQL() {
-		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
 		String configurationFile = "query01postgresql.r2rml.properties";
 		try {
 			String[] args = {configurationDirectory, configurationFile};
@@ -51,7 +51,7 @@ public class ExampleWithPropertiesFilePostgreSQL {
 
 	@Test
 	public void testSparql02PostgreSQL() {
-		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
 		String configurationFile = "query02postgresql.r2rml.properties";
 		try {
 			String[] args = {configurationDirectory, configurationFile};
@@ -67,7 +67,7 @@ public class ExampleWithPropertiesFilePostgreSQL {
 	
 	@Test
 	public void testSparql03PostgreSQL() {
-		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
 		String configurationFile = "query03postgresql.r2rml.properties";
 		try {
 			String[] args = {configurationDirectory, configurationFile};
@@ -83,7 +83,7 @@ public class ExampleWithPropertiesFilePostgreSQL {
 
 	@Test
 	public void testSparql04PostgreSQL() {
-		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
 		String configurationFile = "query04postgresql.r2rml.properties";
 		try {
 			String[] args = {configurationDirectory, configurationFile};
@@ -99,7 +99,7 @@ public class ExampleWithPropertiesFilePostgreSQL {
 	
 	@Test
 	public void testSparql05PostgreSQL() {
-		String configurationDirectory = System.getProperty("user.dir") + "/examples";
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
 		String configurationFile = "query05postgresql.r2rml.properties";
 		try {
 			String[] args = {configurationDirectory, configurationFile};
