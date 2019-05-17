@@ -8,17 +8,11 @@
     </head>
     <results>
         <result>
-            <binding name="a">
-                <uri>http://mappingpedia.linkeddata.es/resources/Person/B1</uri>
-            </binding>
             <binding name="n">
                 <literal>Paul</literal>
             </binding>
         </result>
         <result>
-            <binding name="a">
-                <uri>http://mappingpedia.linkeddata.es/resources/Person/B2</uri>
-            </binding>
             <binding name="n">
                 <literal>John</literal>
             </binding>
@@ -27,17 +21,11 @@
             </binding>
         </result>
         <result>
-            <binding name="a">
-                <uri>http://mappingpedia.linkeddata.es/resources/Person/B3</uri>
-            </binding>
             <binding name="n">
                 <literal>George</literal>
             </binding>
         </result>
         <result>
-            <binding name="a">
-                <uri>http://mappingpedia.linkeddata.es/resources/Person/B4</uri>
-            </binding>
             <binding name="n">
                 <literal>Ringo</literal>
             </binding>
