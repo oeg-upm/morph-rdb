@@ -1021,7 +1021,13 @@ object SQLQuery {
 					val dbType = sqlFromItem.databaseType;
 					if(tableType == Constants.LogicalTableType.TABLE_NAME) {
 						//val rightTableName = rightTableFromItem.getTable();
-            val rightTableName = rightTableFromItem.getSchema + "." + rightTableFromItem.getTable
+            val rightTableName = if(rightTableFromItem.getSchema == null) {
+              rightTableFromItem.getTable
+            }  else {
+              rightTableFromItem.getSchema + "." + rightTableFromItem.getTable
+            }
+
+
 						val rightTableLogicalTable = new SQLFromItem(
 							rightTableName, Constants.LogicalTableType.TABLE_NAME);
 						rightTableLogicalTable.databaseType = dbType;
