@@ -210,6 +210,11 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
                         exps = exps ++ Set(exp);
                       }
                     }
+                  } else {
+                    val exp = this.generateIsNotNullExpression(betaObjectExpression);
+                    if(exp != null) {
+                      exps = exps ++ Set(exp);
+                    }
                   }
                 }
               }
