@@ -21,8 +21,9 @@ class QueryResultTranslator(dataSourceReader:MorphBaseDataSourceReader
 		mapSparqlSql.foreach(mapElement => {
 			val sparqlQuery = mapElement._1
 			val iQuery = mapElement._2
-			
-			val abstractResultSet = this.dataSourceReader.execute(iQuery.toString());
+
+			val iQueryString = iQuery.toString();
+			val abstractResultSet = this.dataSourceReader.execute(iQueryString);
 			val columnNames = iQuery.getSelectItemAliases();
 			abstractResultSet.setColumnNames(columnNames);
 
