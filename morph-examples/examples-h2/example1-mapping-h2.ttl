@@ -7,10 +7,11 @@
 @prefix rev: <http://purl.org/stuff/rev#> .
 @prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> .
 @prefix bsbm-inst: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/> .
+@prefix mpv: <http://mappingpedia.linkeddata.es/vocabulary#> .
 @base <http://mappingpedia.org/rdb2rdf/r2rml/tc/> .
 
 
-<PredicateMapWebpage> rr:constant <http://mappingpedia.linkeddata.es/vocabulary/webpage>.
+<PredicateMapWebpage> rr:constant mpv:webpage.
 <ObjectMapWebpage> rr:termType rr:Literal; rr:column "webpage".
 
 <TriplesMapPerson>
@@ -25,11 +26,11 @@
 		a rr:Subject;
 		rr:template "http://mappingpedia.linkeddata.es/resources/Person/{\"Id\"}";
 		rr:termType rr:IRI;
-		rr:class <http://mappingpedia.linkeddata.es/vocabulary/Person>;
+		rr:class mpv:Person;
 	];
 
 	rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/name> ]; 
+      rr:predicateMap [ rr:constant mpv:name ]; 
       rr:objectMap    [ rr:termType rr:Literal; rr:column "\"Name\""; ]; 
     ];
 
@@ -39,22 +40,22 @@
     ];
 	
     rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/phone> ]; 
+      rr:predicateMap [ rr:constant mpv:phone ]; 
       rr:objectMap    [ rr:column "\"Phone\""; rr:termType rr:Literal; ];
     ];	
 	
     rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/email> ]; 
+      rr:predicateMap [ rr:constant mpv:email ]; 
       rr:objectMap    [ rr:column "\"Email\""; rr:termType rr:Literal; ];
     ];
 
    rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/birthdate> ]; 
+      rr:predicateMap [ rr:constant mpv:birthdate ]; 
       rr:objectMap    [ rr:column "\"Birthdate\""; rr:termType rr:Literal; rr:datatype xsd:dateTime;];
     ];
 
    rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/hasSport> ]; 
+      rr:predicateMap [ rr:constant mpv:hasSport ]; 
       rr:objectMap    [ 
          rr:parentTriplesMap <TriplesMapSport>;
          rr:joinCondition [ rr:child "\"Sport\"" ; rr:parent "\"Id\"" ; ]
@@ -71,26 +72,26 @@
     rr:subjectMap [ a rr:Subject;
 		rr:template "http://mappingpedia.linkeddata.es/resources/Sport/{\"Id\"}";
 		rr:termType rr:IRI;
-		rr:class <http://mappingpedia.linkeddata.es/vocabulary/Sport>;
+		rr:class mpv:Sport;
 	];
 
 	rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/id> ]; 
+      rr:predicateMap [ rr:constant mpv:id ]; 
       rr:objectMap    [ rr:termType rr:Literal; rr:column "\"Id\""; ]; 
     ];
 
 	rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/name> ]; 
+      rr:predicateMap [ rr:constant mpv:name ]; 
       rr:objectMap    [ rr:termType rr:Literal; rr:column "\"Name\""; ]; 
     ];
 
 	rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/code> ]; 
+      rr:predicateMap [ rr:constant mpv:code ]; 
       rr:objectMap    [ rr:termType rr:Literal; rr:column "\"Code\""; ]; 
     ];
 
 	rr:predicateObjectMap [ 
-      rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary/type> ]; 
+      rr:predicateMap [ rr:constant mpv:type ]; 
       rr:objectMap    [ rr:termType rr:Literal; rr:column "\"Type\""; ]; 
     ];
 .
