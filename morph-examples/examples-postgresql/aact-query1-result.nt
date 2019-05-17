@@ -4,6 +4,7 @@
         <variable name="study"/>
         <variable name="label_study"/>
         <variable name="sponsor"/>
+        <variable name="label_sponsor"/>
     </head>
     <results>
         <result>
@@ -16,6 +17,9 @@
             <binding name="sponsor">
                 <uri>http://bio2rdf.org/clinicaltrials_resource:4119110-sponsor</uri>
             </binding>
+            <binding name="label_sponsor">
+                <literal>National Center for Research Resources (NCRR) [clinicaltrials_resource:4119110-sponsor]</literal>
+            </binding>
         </result>
         <result>
             <binding name="study">
@@ -26,6 +30,9 @@
             </binding>
             <binding name="sponsor">
                 <uri>http://bio2rdf.org/clinicaltrials_resource:4119108-sponsor</uri>
+            </binding>
+            <binding name="label_sponsor">
+                <literal>National Center for Research Resources (NCRR) [clinicaltrials_resource:4119108-sponsor]</literal>
             </binding>
         </result>
         <result>
@@ -38,6 +45,9 @@
             <binding name="sponsor">
                 <uri>http://bio2rdf.org/clinicaltrials_resource:4119109-sponsor</uri>
             </binding>
+            <binding name="label_sponsor">
+                <literal>HRSA/Maternal and Child Health Bureau [clinicaltrials_resource:4119109-sponsor]</literal>
+            </binding>
         </result>
         <result>
             <binding name="study">
@@ -49,6 +59,9 @@
             <binding name="sponsor">
                 <uri>http://bio2rdf.org/clinicaltrials_resource:4119107-sponsor</uri>
             </binding>
+            <binding name="label_sponsor">
+                <literal>Masonic Cancer Center, University of Minnesota [clinicaltrials_resource:4119107-sponsor]</literal>
+            </binding>
         </result>
         <result>
             <binding name="study">
@@ -59,6 +72,9 @@
             </binding>
             <binding name="sponsor">
                 <uri>http://bio2rdf.org/clinicaltrials_resource:4118594-sponsor</uri>
+            </binding>
+            <binding name="label_sponsor">
+                <literal>National Center for Research Resources (NCRR) [clinicaltrials_resource:4118594-sponsor]</literal>
             </binding>
         </result>
     </results>

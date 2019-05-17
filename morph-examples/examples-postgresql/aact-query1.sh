@@ -1,4 +1,4 @@
 cd ..
-java -cp .:morph-rdb-dist-3.8.1.jar:dependency/* es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphCSVRunner ClinicalTrials aact-query1.r2rml.properties
-cd ClinicalTrials
+java -cp .:morph-rdb-dist-3.9.16:dependency/* es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner examples-postgresql aact-query1.r2rml.properties.txt
+cd examples-postgresql
 

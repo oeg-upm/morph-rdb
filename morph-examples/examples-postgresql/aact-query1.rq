@@ -9,7 +9,7 @@ WHERE {
 	?study rdf:type ctv:Resource .
     ?study rdfs:label ?label_study .
     ?study ctv:sponsor ?sponsor .
-    #?sponsor rdf:type ctv:Organization .
-    #?sponsor rdfs:label ?label_sponsor
+    ?sponsor rdf:type ctv:Organization .
+    ?sponsor rdfs:label ?label_sponsor
 }
 LIMIT 5
