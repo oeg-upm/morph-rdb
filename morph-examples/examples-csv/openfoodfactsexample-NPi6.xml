@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="s"/>
+        <variable name="p"/>
+        <variable name="o"/>
+    </head>
+    <results>
+        <result>
+            <binding name="s">
+                <uri>1311</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal>Salade de fruits exotiques</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>970</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/transFatContent</uri>
+            </binding>
+            <binding name="o">
+                <literal>540</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>1281</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/transFatContent</uri>
+            </binding>
+            <binding name="o">
+                <literal>en:pies</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>123</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal>Sauce Sweety chili 0%</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>1281</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/sugarContent</uri>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>1199</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/name</uri>
+            </binding>
+            <binding name="o">
+                <literal>Solène céréales poulet</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>1311</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/transFatContent</uri>
+            </binding>
+            <binding name="o">
+                <literal>418</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>970</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/sugarContent</uri>
+            </binding>
+            <binding name="o">
+                <literal>3.1</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>31</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/sugarContent</uri>
+            </binding>
+        </result>
+        <result>
+            <binding name="s">
+                <uri>291</uri>
+            </binding>
+            <binding name="p">
+                <uri>http://schema.org/transFatContent</uri>
+            </binding>
+        </result>
+    </results>
+</sparql>

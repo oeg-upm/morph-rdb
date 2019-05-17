@@ -9,8 +9,8 @@ no_of_database=1
 database.name[0]=aact
 database.driver[0]=org.postgresql.Driver
 database.url[0]=jdbc:postgresql://localhost:5432/aact
-database.user[0]=
-database.pwd[0]=
+database.user[0]=postgres
+database.pwd[0]=password
 database.type[0]=postgresql
 
 uri.encode=(" "->"%20"),,(","->""),,("á"->"a"),,("é"->"e"),,("í"->"i"),,("ó"->"o"),,("ú"->"u"),,("ü"->"u"),,("ñ"->"n")
