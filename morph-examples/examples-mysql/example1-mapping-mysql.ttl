@@ -86,7 +86,7 @@
 
 	rr:predicateObjectMap [ 
       rr:predicateMap [ rr:constant <http://mappingpedia.linkeddata.es/vocabulary#code> ]; 
-      rr:objectMap    [ rr:termType rr:IRI; rr:template "http://lo calhost/{code}"; ]; 
+      rr:objectMap    [ rr:termType rr:IRI; rr:template "http://localhost/{code}"; ]; 
     ];
 
 	rr:predicateObjectMap [ 

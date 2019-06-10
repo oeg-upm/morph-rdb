@@ -36,8 +36,8 @@
             <binding name="n">
                 <literal>Ringo</literal>
             </binding>
-            <binding name="w">
-                <uri>www.starr.edu</uri>
+            <binding name="e">
+                <literal>ringo@acd.edu</literal>
             </binding>
         </result>
         <result>
@@ -47,8 +47,8 @@
             <binding name="n">
                 <literal>Ringo</literal>
             </binding>
-            <binding name="e">
-                <literal>ringo@acd.edu</literal>
+            <binding name="w">
+                <uri>www.starr.edu</uri>
             </binding>
         </result>
     </results>
