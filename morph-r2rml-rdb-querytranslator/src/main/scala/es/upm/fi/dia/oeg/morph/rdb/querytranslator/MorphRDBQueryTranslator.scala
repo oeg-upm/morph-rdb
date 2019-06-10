@@ -46,6 +46,8 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
   var mapTemplateMatcher:Map[String, Matcher] = Map.empty;
   var mapTemplateAttributes:Map[String, java.util.List[String]] = Map.empty;
 
+  val enclosedCharacter = Constants.getEnclosedCharacter(this.databaseType);
+
   override def transIRI(node:Node) : List[ZExp] = {
     val cms = mapInferredTypes(node);
     val cm = cms.iterator().next().asInstanceOf[R2RMLTriplesMap];
@@ -150,7 +152,9 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
                 val termMapType = termMap.termMapType;
                 termMap.termMapType match {
                   case Constants.MorphTermMapType.TemplateTermMap => {
-                    val templateString = termMap.getTemplateString();
+                    //val templateString = termMap.getTemplateString();
+                    val templateString = termMap.getOriginalValue().replaceAllLiterally("\\\"", enclosedCharacter)
+
                     if(this.mapTemplateMatcher.contains(templateString)) {
                       val matcher = this.mapTemplateMatcher.get(templateString);
                     } else {
