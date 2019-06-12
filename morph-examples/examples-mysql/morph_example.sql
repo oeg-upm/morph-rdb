@@ -88,3 +88,19 @@ ALTER TABLE `student`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+CREATE OR REPLACE VIEW v_in AS
+SELECT id, code AS i FROM sport WHERE type = "INDOOR";
+
+CREATE OR REPLACE VIEW v_out AS
+SELECT id, code AS o FROM sport WHERE type = "OUTDOOR";
+
+CREATE OR REPLACE VIEW v_both AS
+SELECT id, code AS b FROM sport WHERE type = "BOTH";
+
+CREATE OR REPLACE VIEW v_all AS
+SELECT sport.id, sport.name, sport.code, sport.type, v_in.i, v_out.o, v_both.b
+FROM sport
+LEFT JOIN v_in ON sport.id = v_in.id
+LEFT JOIN v_out ON sport.id = v_out.id
+LEFT JOIN v_both ON sport.id = v_both.id
