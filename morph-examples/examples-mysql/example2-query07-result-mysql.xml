@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="s"/>
+        <variable name="o"/>
+    </head>
+    <results>
+        <result>
+            <binding name="s">
+                <uri>http://mappingpedia.linkeddata.es/resources/Sport/200</uri>
+            </binding>
+            <binding name="o">
+                <literal>CHS</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>
