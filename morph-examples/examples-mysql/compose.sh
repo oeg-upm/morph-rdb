@@ -8,4 +8,3 @@ docker stop mysql-morph
 docker rm mysql-morph
 docker rmi mysql-morph
 docker-compose up -d
-
