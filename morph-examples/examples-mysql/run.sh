@@ -4,10 +4,11 @@ FILES=*.sh
 for f in $FILES
 do 
 
-	#echo "file : $f"
-	if [ $f != $0 ]; 
+
+	if [ $f != $0 ] || [$f != "compose.sh" ]; 
 	then
-             sh $f
+        echo "executing file : $f ...\n"
+        sh $f
 	fi
 done
 
