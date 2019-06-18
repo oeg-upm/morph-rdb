@@ -1,0 +1,26 @@
+version: '2'
+ 
+services:
+  mysql:
+    image: mysql
+    container_name: mysql-morph
+    hostname: mysql-morph-server
+    volumes:
+      - ./sql-scripts:/docker-entrypoint-initdb.d/
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "morph_example"
+    restart: always
+    ports:
+      - "3307:3306"
+  morph:
+    image: morph-example-mysql
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+       - mysql
+    container_name: morph-example-mysql
+    restart: always
+    volumes:
+      - ./:/app/examples-mysql/
