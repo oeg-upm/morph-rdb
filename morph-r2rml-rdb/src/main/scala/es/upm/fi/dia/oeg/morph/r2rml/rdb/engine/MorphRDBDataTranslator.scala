@@ -259,6 +259,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 						val parentSubjectMap = parentTriplesMap.subjectMap;
 						val parentTableAlias = this.unfolder.mapRefObjectMapAlias.getOrElse(refObjectMap, null);
 						val parentSubjects = this.translateData(parentSubjectMap, rows, parentTableAlias, mapXMLDatatype)
+						logger.info(s"parentSubjects = ${parentSubjects}")
 						if(parentSubjects == null) { None }
 						else { Some(parentSubjects) }
 					})
@@ -596,9 +597,13 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 					} else { attribute; }
 
 					val dbValueAux = this.getResultSetValue(termMap.datatype, rs, databaseColumn);
+					//logger.info(s"dbValueAux = ${dbValueAux}")
 
 
-					rawDBValues = rawDBValues ::: List(dbValueAux);
+					if(dbValueAux != null) {
+					  rawDBValues = rawDBValues ::: List(dbValueAux);  
+					}
+					
 
 					val dbValue = dbValueAux match {
 						case dbValueAuxString:String => {
@@ -618,6 +623,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 						}
 						case _ => { dbValueAux }
 					}
+					//logger.info(s"dbValue = ${dbValue}")
 
 
 					if(dbValue != null) {
@@ -639,26 +645,26 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 
 						Some(attribute -> databaseValueString);
 					} else {
-						//None
-						Some(attribute -> "null");
+						None
+						//Some(attribute -> "null");
 					}
 				}).toMap
 
+				//logger.info(s"replacements = ${replacements}")
+				//logger.info(s"termMapTemplateString = ${termMapTemplateString}")
 				val resultAux = if(replacements.isEmpty) {
-					(this.translateData(termMap, termMapTemplateString, datatype), rawDBValues);
+					//(this.translateData(termMap, termMapTemplateString, datatype), rawDBValues);
+				  (null, rawDBValues);
 				} else {
 					val templateWithDBValue = RegexUtility.replaceTokens(termMapTemplateString, replacements);
 					if(templateWithDBValue != null) {
 						(this.translateData(termMap, templateWithDBValue, datatype), rawDBValues);
 					} else { null }
 				}
+				
+        //logger.info(s"resultAux = ${resultAux}")
 
 
-				if(resultAux.toString().contains("es//")) {
-					logger.info(s"resultAux = ${resultAux}")
-					logger.info(s"termMapTemplateString = ${termMapTemplateString}")
-					logger.info(s"replacements = ${replacements}")
-				}
 
 				resultAux
 			}
