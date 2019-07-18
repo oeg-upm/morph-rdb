@@ -259,7 +259,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 						val parentSubjectMap = parentTriplesMap.subjectMap;
 						val parentTableAlias = this.unfolder.mapRefObjectMapAlias.getOrElse(refObjectMap, null);
 						val parentSubjects = this.translateData(parentSubjectMap, rows, parentTableAlias, mapXMLDatatype)
-						logger.info(s"parentSubjects = ${parentSubjects}")
+						//logger.info(s"parentSubjects = ${parentSubjects}")
 						if(parentSubjects == null) { None }
 						else { Some(parentSubjects) }
 					})
