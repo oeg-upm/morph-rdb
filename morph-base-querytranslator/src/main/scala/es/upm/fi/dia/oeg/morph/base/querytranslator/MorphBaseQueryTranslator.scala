@@ -609,7 +609,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 				val resultAux = new SQLQuery(opProjectSubOpSQL);
 				resultAux.setSelectItems(newSelectItems);
 				val orderByConditions = opProjectSubOpSQL.getOrderByConditions;
-				if(orderByConditions != null) {
+				if(orderByConditions != null && !orderByConditions.isEmpty) {
 					resultAux.pushOrderByDown(newSelectItems);
 					opProjectSubOpSQL.setOrderBy(null);
 				}
