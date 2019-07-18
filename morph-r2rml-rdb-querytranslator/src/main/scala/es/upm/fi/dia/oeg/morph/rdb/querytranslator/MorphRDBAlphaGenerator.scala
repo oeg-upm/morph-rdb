@@ -23,8 +23,12 @@ import org.slf4j.LoggerFactory
 class MorphRDBAlphaGenerator(md:R2RMLMappingDocument,unfolder:MorphRDBUnfolder)
   extends MorphBaseAlphaGenerator(md,unfolder)
 {
-  val databaseType = if(md.dbMetaData.isDefined) { md.dbMetaData.get.dbType; }
-  else { Constants.DATABASE_DEFAULT }
+  val databaseType = if(md.dbMetaData.isDefined) {
+    md.dbMetaData.get.dbType;
+  } else {
+    Constants.DATABASE_DEFAULT
+  }
+  val enclosedCharacter = Constants.getEnclosedCharacter(this.databaseType);
 
   override val logger = LoggerFactory.getLogger(this.getClass());
 
@@ -163,6 +167,7 @@ class MorphRDBAlphaGenerator(md:R2RMLMappingDocument,unfolder:MorphRDBUnfolder)
     val logicalTableAlias = {
       if(cmLogicalTableAlias == null || cmLogicalTableAlias.equals("")) {
         sqlLogicalTable.generateAlias();
+        //enclosedCharacter + sqlLogicalTable.generateAlias() + enclosedCharacter
       } else {
         cmLogicalTableAlias
       }
