@@ -13,5 +13,5 @@ SELECT * WHERE {
 	<http://linkedgtfs.com/CITY/stops/par_4_2> dct:description ?stopDescription . 
 	<http://linkedgtfs.com/CITY/stops/par_4_2> geo:lat ?stopLat . 
 	<http://linkedgtfs.com/CITY/stops/par_4_2> geo:long ?stopLong . 
-	OPTIONAL { <http://linkedgtfs.com/CITY/stops/par_4_2> gtfs:wheelchairAccessible ?stopWhelchairAccessible .  }
+	OPTIONAL { <http://linkedgtfs.com/CITY/stops/par_4_2> gtfs:wheelchairBoarding ?stopWheelchairBoarding .  }
 }
