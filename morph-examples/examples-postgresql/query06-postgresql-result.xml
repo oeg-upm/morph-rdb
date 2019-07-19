@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="na"/>
+    </head>
+    <results>
+        <result>
+            <binding name="na">1</binding>
+        </result>
+    </results>
+</sparql>
