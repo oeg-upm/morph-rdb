@@ -221,4 +221,116 @@ public class ExampleWithPropertiesFileMySQL {
             assertTrue(e.getMessage(), false);
         }
     }
+
+	@Test
+	public void testGTFS_q2a_mysql() {
+		//2 instances
+		String configurationFile = "gtfs-q2a-mysql.morph.properties";
+		try {
+			String[] args = {configurationDirectory, configurationFile};
+			MorphRDBRunner.main(args);
+			System.out.println("Query process DONE------");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+
+    @Test
+    public void testGTFS_q2b_mysql() {
+        //2 instances
+        String configurationFile = "gtfs-q2b-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testGTFS_q2c_mysql() {
+        //2 instances
+        String configurationFile = "gtfs-q2c-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testGTFS_q3a_mysql() {
+        //2 instances
+        String configurationFile = "gtfs-q3a-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testGTFS_q3b_mysql() {
+        //2 instances
+        String configurationFile = "gtfs-q3b-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testGTFS_q3c_mysql() {
+        //2 instances
+        String configurationFile = "gtfs-q3c-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testGTFS_q3d_mysql() {
+        //2 instances
+        String configurationFile = "gtfs-q3d-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
 }
