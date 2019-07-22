@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class ExampleGTFSMySQL {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	//static { PropertyConfigurator.configure("log4j.properties"); }
-	String configurationDirectory = System.getProperty("user.dir") + File.separator + "examples-mysql";
+	String configurationDirectory = System.getProperty("user.dir") + File.separator + "examples-gtfs-mysql";
 
 	@Test
 	public void testGTFS_batch_mysql() {
