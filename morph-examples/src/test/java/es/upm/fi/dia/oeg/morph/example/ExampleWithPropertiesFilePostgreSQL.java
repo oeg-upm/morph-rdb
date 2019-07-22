@@ -18,7 +18,7 @@ public class ExampleWithPropertiesFilePostgreSQL {
 	@Test
 	public void testBatchPostgreSQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
-		String configurationFile = "batch-postgresql.r2rml.properties";
+		String configurationFile = "batch-postgresql.morph.properties";
 		try {
 			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
@@ -35,7 +35,7 @@ public class ExampleWithPropertiesFilePostgreSQL {
 	@Test
 	public void testSparql01PostgreSQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
-		String configurationFile = "query01postgresql.r2rml.properties";
+		String configurationFile = "query01postgresql.morph.properties";
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
@@ -52,7 +52,7 @@ public class ExampleWithPropertiesFilePostgreSQL {
 	@Test
 	public void testSparql02PostgreSQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
-		String configurationFile = "query02postgresql.r2rml.properties";
+		String configurationFile = "query02postgresql.morph.properties";
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
@@ -68,7 +68,7 @@ public class ExampleWithPropertiesFilePostgreSQL {
 	@Test
 	public void testSparql03PostgreSQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
-		String configurationFile = "query03postgresql.r2rml.properties";
+		String configurationFile = "query03postgresql.morph.properties";
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
@@ -84,7 +84,23 @@ public class ExampleWithPropertiesFilePostgreSQL {
 	@Test
 	public void testSparql04PostgreSQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
-		String configurationFile = "query04postgresql.r2rml.properties";
+		String configurationFile = "query04postgresql.morph.properties";
+		try {
+			String[] args = {configurationDirectory, configurationFile};
+			MorphRDBRunner.main(args);
+			System.out.println("Query process DONE------\n\n");
+		} catch (Exception e) {
+			//e.printStackTrace();
+			System.out.println("Error : " + e.getMessage());
+			System.out.println("Query process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+	
+	@Test
+	public void testSparql05PostgreSQL() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
+		String configurationFile = "query05postgresql.morph.properties";
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
@@ -96,11 +112,11 @@ public class ExampleWithPropertiesFilePostgreSQL {
 			assertTrue(e.getMessage(), false);
 		}
 	}
-	
+
 	@Test
-	public void testSparql05PostgreSQL() {
+	public void testSparql06PostgreSQL() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples-postgresql";
-		String configurationFile = "query05postgresql.r2rml.properties";
+		String configurationFile = "query06postgresql.morph.properties";
 		try {
 			String[] args = {configurationDirectory, configurationFile};
 			MorphRDBRunner.main(args);
