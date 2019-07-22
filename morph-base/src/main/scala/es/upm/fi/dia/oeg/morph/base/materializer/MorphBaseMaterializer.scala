@@ -18,7 +18,7 @@ import java.io.Writer
 import org.apache.jena.rdf.model.Property;
 import org.slf4j.LoggerFactory
 
-abstract class MorphBaseMaterializer(val model:Model, var outputStream:Writer) {
+abstract class MorphBaseMaterializer(val model:Model, var writer:Writer, var outputStream: OutputStream) {
 	//val logger = LogManager.getLogger(this.getClass);
   val logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -33,7 +33,10 @@ abstract class MorphBaseMaterializer(val model:Model, var outputStream:Writer) {
 //	public abstract void materializeQuad(String subject, String predicate, String object, String graph);
 	def materializeQuad(subject:RDFNode , predicate:Property , obj:RDFNode , graph:RDFNode );
 	def materialize();
-	def postMaterialize() = this.outputStream.close()
+	def postMaterialize() = {
+    if(this.writer != null) { this.writer.close() }
+    if(this.outputStream != null) { this.outputStream.close() }
+  }
 	
 	
 	def setModelPrefixMap(prefixMap:Map[String, String] ) = {

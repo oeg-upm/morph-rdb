@@ -75,7 +75,7 @@ abstract class MorphBaseRunnerFactory {
     val unfolder = this.createUnfolder(mappingDocument, morphProperties);
 
     //BUILDING WRITER
-    val outputStream:Writer = if(morphProperties.outputFilePath.isDefined) {
+    val writer:Writer = if(morphProperties.outputFilePath.isDefined) {
       val outputFileName = morphProperties.outputFilePath.get;
       //new FileWriter(outputFileName)
       //new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), "UTF-8"));
@@ -98,12 +98,28 @@ abstract class MorphBaseRunnerFactory {
         logger.info(s"Writing output to ${outputFileName}");
         new PrintWriter( outputFileName, "UTF-8");
       }
+    }
 
+    //BUILDING OUTPUT STREAM
+    val outputStream:OutputStream = if(morphProperties.outputFilePath.isDefined) {
+      val outputFileName = morphProperties.outputFilePath.get;
+      new FileOutputStream(outputFileName)
+    }
+    else {
+      if(!automaticMappingsGeneration) {
+        logger.info(s"Writing output to StringOutputStream");
+        new ByteArrayOutputStream()
+      }
+      else {
+        val outputFileName = morphProperties.databaseName + "-result.nt";
+        logger.info(s"Writing output to ${outputFileName}");
+        new FileOutputStream( outputFileName);
+      }
     }
 
     //BUILDING MATERIALIZER
     val materializer = this.buildMaterializer(morphProperties, mappingDocument
-        , outputStream);
+        , writer, outputStream);
 
     //BUILDING DATA TRANSLATOR
     val dataTranslator = try {
@@ -142,7 +158,7 @@ abstract class MorphBaseRunnerFactory {
         //      } else { new ByteArrayOutputStream() }
 
         val qrwAux = this.buildQueryResultWriter(queryResultWriterFactoryClassName
-          , queryTranslator.get, outputStream);
+          , queryTranslator.get, writer);
         Some(qrwAux)
       } catch {
         case e:Exception => {
@@ -165,7 +181,7 @@ abstract class MorphBaseRunnerFactory {
 //        , materializer
         , queryTranslator
         ,  resultProcessor
-        , outputStream
+        , writer
     )
 
     runner.ontologyFilePath = morphProperties.ontologyFilePath;
@@ -309,12 +325,12 @@ abstract class MorphBaseRunnerFactory {
 	}
 
 	def buildMaterializer(configurationProperties:MorphProperties
-	    , mappingDocument:MorphBaseMappingDocument, outputStream:Writer)
+	    , mappingDocument:MorphBaseMappingDocument, writer:Writer, outputStream: OutputStream)
 	: MorphBaseMaterializer = {
 //		val outputFileName = configurationProperties.outputFilePath;
 		val rdfLanguage = configurationProperties.rdfLanguage;
 		val jenaMode = configurationProperties.jenaMode;
-		val materializer = MaterializerFactory.create(rdfLanguage, outputStream, jenaMode);
+		val materializer = MaterializerFactory.create(rdfLanguage, writer, jenaMode, outputStream);
 		val mappingDocumentPrefixMap = mappingDocument.mappingDocumentPrefixMap;
 		if(mappingDocumentPrefixMap != null) {
 			materializer.setModelPrefixMap(mappingDocumentPrefixMap);

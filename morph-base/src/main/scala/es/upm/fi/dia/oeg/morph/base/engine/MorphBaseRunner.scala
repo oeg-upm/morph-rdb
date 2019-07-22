@@ -45,7 +45,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     //, materializer : Option[MorphBaseMaterializer]
     , val queryTranslator:Option[IQueryTranslator]
     , val queryResultTranslator:Option[AbstractQueryResultTranslator]
-    , var outputStream:Writer
+    , var writer:Writer
     //, queryResultWriter :MorphBaseQueryResultWriter
     ) {
   
@@ -62,12 +62,12 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
 	var mapSparqlSql:Map[Query, IQuery] = Map.empty;
 	
 	def setOutputStream(outputStream:Writer) = { 
-		this.outputStream = outputStream
+		this.writer = outputStream
 		//	  if(this.materializer.isDefined) {
 		//		  this.materializer.get.outputStream = outputStream;
 		//	  }
 		if(this.dataTranslator.isDefined) {
-			this.dataTranslator.get.materializer.outputStream = outputStream; 
+			this.dataTranslator.get.materializer.writer = outputStream;
 		}
 		
 		if(this.queryResultTranslator.isDefined) {

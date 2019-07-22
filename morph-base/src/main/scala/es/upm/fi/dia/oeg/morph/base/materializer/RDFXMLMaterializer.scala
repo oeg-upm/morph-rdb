@@ -13,10 +13,11 @@ import java.io.Writer
 import org.apache.jena.rdf.model.Property;
 import org.slf4j.LoggerFactory
 
-class RDFXMLMaterializer(model:Model, rdfxmlOutputStream:Writer) 
-extends MorphBaseMaterializer(model, rdfxmlOutputStream) {
+class RDFXMLMaterializer(model:Model, rdfxmlWriter:Writer, rdfxmlOutputStream:OutputStream)
+extends MorphBaseMaterializer(model, rdfxmlWriter, rdfxmlOutputStream) {
 	//THIS IS IMPORTANT, SCALA PASSES PARAMETER BY VALUE!
-	this.outputStream = rdfxmlOutputStream;
+	this.writer = rdfxmlWriter;
+  this.outputStream = rdfxmlOutputStream
 
 	override 	val logger = LoggerFactory.getLogger(this.getClass());
 
@@ -93,8 +94,8 @@ extends MorphBaseMaterializer(model, rdfxmlOutputStream) {
 					//logger.info("Writing model to " + this.outputStream.  + " ......");
 					val startWritingModel = System.currentTimeMillis();
 					//val fos = new FileOutputStream(outputFileName);
-					model.write(this.outputStream, this.rdfLanguage);
-					this.outputStream.flush();
+					model.write(this.writer, this.rdfLanguage);
+					this.writer.flush();
 					//				this.outputStream.close();
 					val endWritingModel = System.currentTimeMillis();
 					val durationWritingModel = (endWritingModel-startWritingModel) / 1000;
