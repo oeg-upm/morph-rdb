@@ -1,27 +1,25 @@
 #Q3D: count services offered by a particular route in a particular interval
+#ROUTEID <http://linkedgtfs.com/CITY/routes/4__1___>
+#STARTDATE "2017-06-01"
+#ENDDATE "2017-06-30"
 
-
-PREFIX rr: <http://www.w3.org/ns/r2rml#>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX ex: <http://example.com/>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX rev: <http://purl.org/stuff/rev#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX gtfs: <http://vocab.gtfs.org/terms#>
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
-PREFIX schema: <http://schema.org/>
 PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 SELECT (count(distinct ?service) as ?count)  WHERE {
-	%ROUTEID a gtfs:Route .
-	%ROUTEID gtfs:shortName ?routeShortName .
-	%ROUTEID dct:description ?routeDescription .
+	<http://linkedgtfs.com/CITY/routes/4__1___> a gtfs:Route .
+	<http://linkedgtfs.com/CITY/routes/4__1___> gtfs:shortName ?routeShortName .
+	<http://linkedgtfs.com/CITY/routes/4__1___> dct:description ?routeDescription .
 
 	?trip a gtfs:Trip .
 	?trip gtfs:shortName ?tripShortName .
 	?trip gtfs:service ?service .
-	?trip gtfs:route %ROUTEID .
+	?trip gtfs:route <http://linkedgtfs.com/CITY/routes/4__1___> .
 
 	?service a gtfs:Service .
 
@@ -30,6 +28,6 @@ SELECT (count(distinct ?service) as ?count)  WHERE {
 	?stopTime gtfs:stop ?stop . 
 	?stopTime gtfs:departureTime ?departureTime . 
 
-	FILTER (?departureTime > %STARTDATE) .
-	FILTER (?departureTime < %ENDTIME ) .
+	FILTER (?departureTime > "2017-06-01") .
+	FILTER (?departureTime < "2017-06-30") .
 }

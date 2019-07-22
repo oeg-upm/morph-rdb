@@ -2,32 +2,28 @@
 #%HEADSIGN "OPERA"
 #%STOPID <http://linkedgtfs.com/CITY/stops/par_4_238>
 
-PREFIX rr: <http://www.w3.org/ns/r2rml#>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX ex: <http://example.com/>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX rev: <http://purl.org/stuff/rev#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX gtfs: <http://vocab.gtfs.org/terms#>
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
-PREFIX schema: <http://schema.org/>
 PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 SELECT * WHERE {
 
         ?stopTime a gtfs:StopTime .
         ?stopTime gtfs:trip ?trip .
-        ?stopTime gtfs:stop %STOPID .
+        ?stopTime gtfs:stop <http://linkedgtfs.com/CITY/stops/par_4_238> .
         ?stopTime gtfs:arrivalTime ?arrivalTime .
 
         ?trip a gtfs:Trip .
         ?trip gtfs:shortName ?tripShortName .
         ?trip gtfs:service ?service .
         ?trip gtfs:route ?route .
-        ?trip gtfs:headsign %HEADSIGN .
+        ?trip gtfs:headsign "OPERA" .
 
-        %STOPID a gtfs:Stop .
-        %STOPID dct:description ?stopDescription .
+        <http://linkedgtfs.com/CITY/stops/par_4_238> a gtfs:Stop .
+        <http://linkedgtfs.com/CITY/stops/par_4_238> dct:description ?stopDescription .
 
 }
