@@ -494,9 +494,13 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 
 		val newSelectItems:List[ZSelectItem] = listSelectItemsByVars ::: listPushedAggregatedSelectItem;
 
-		val zexpGroupBy:java.util.Vector[ZExp] = CollectionUtility.scalaListToJavaVector(groupByExps);
-		val zGroupBy = new ZGroupBy(zexpGroupBy);
-		transOpGroup.addGroupBy(zGroupBy);
+    if(!groupByExps.isEmpty) {
+      val zexpGroupBy:java.util.Vector[ZExp] = CollectionUtility.scalaListToJavaVector(groupByExps);
+      val zGroupBy = new ZGroupBy(zexpGroupBy);
+      transOpGroup.addGroupBy(zGroupBy);
+    }
+
+
 		transOpGroup.setSelectItems(newSelectItems);
 		transOpGroup.addSelectItems(mapPrefixSelectItems);
 
