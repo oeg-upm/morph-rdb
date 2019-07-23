@@ -1,5 +1,5 @@
 #Q1C: Find if a certain stop contains accessibility information
-#eg: %STOPID <http://linkedgtfs.com/CITY/stops/par_4_2>
+#eg: %STOPID acc_4_107_288
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -7,11 +7,12 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX gtfs: <http://vocab.gtfs.org/terms#>
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX gtfsstop: <http://linkedgtfs.com/CITY/stops/>
 
 SELECT * WHERE {
-	<http://linkedgtfs.com/CITY/stops/par_4_2> a gtfs:Stop . 
-	<http://linkedgtfs.com/CITY/stops/par_4_2> dct:description ?stopDescription . 
-	<http://linkedgtfs.com/CITY/stops/par_4_2> geo:lat ?stopLat . 
-	<http://linkedgtfs.com/CITY/stops/par_4_2> geo:long ?stopLong . 
-	OPTIONAL { <http://linkedgtfs.com/CITY/stops/par_4_2> gtfs:wheelchairBoarding ?stopWheelchairBoarding .  }
+	gtfsstop:acc_4_107_288 a gtfs:Stop . 
+	gtfsstop:acc_4_107_288 dct:description ?stopDescription . 
+	gtfsstop:acc_4_107_288 geo:lat ?stopLat . 
+	gtfsstop:acc_4_107_288 geo:long ?stopLong . 
+	OPTIONAL { gtfsstop:acc_4_107_288 gtfs:wheelchairBoarding ?stopWheelchairBoarding .  }
 }
