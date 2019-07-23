@@ -50,7 +50,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 		, connection, properties)
 		with MorphR2RMLElementVisitor {
 	val dfInput = this.properties.inputDateFormat;
-	val dfOutput = this.properties.outputDateFormat;
+	//val dfOutput = this.properties.outputDateFormat;
 	val xsdDateTimeURI = XSDDatatype.XSDdateTime.getURI().toString();
 	val xsdBooleanURI = XSDDatatype.XSDboolean.getURI().toString();
 	val xsdDurationURI = XSDDatatype.XSDduration.getURI().toString();
@@ -367,7 +367,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 	def translateDate(value:String) = {
 		//val dfInput = new SimpleDateFormat("dd-MMM-yyy", Locale.ENGLISH);
 		val result = dfInput.parse(value);
-		//val dfOutput = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+		val dfOutput = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 		val result2 = dfOutput.format(result);
 		result2.toString();
 	}
