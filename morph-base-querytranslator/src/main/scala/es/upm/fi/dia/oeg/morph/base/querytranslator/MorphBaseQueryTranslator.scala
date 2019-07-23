@@ -3,6 +3,7 @@ package es.upm.fi.dia.oeg.morph.base.querytranslator
 import scala.collection.JavaConversions._
 import scala.collection.mutable.LinkedHashSet
 import java.sql.Connection
+
 import Zql.ZConstant
 import Zql.ZExp
 import Zql.ZExpression
@@ -11,15 +12,15 @@ import Zql.ZOrderBy
 import Zql.ZSelectItem
 import Zql.ZUpdate
 import org.apache.jena.datatypes.xsd.XSDDatatype
-import org.apache.jena.graph.Node;
+import org.apache.jena.graph.Node
 import org.apache.jena.graph.Triple
 import org.apache.jena.query.Query
 import org.apache.jena.query.QueryFactory
 import org.apache.jena.query.SortCondition
 import org.apache.jena.rdf.model.Resource
 import org.apache.jena.sparql.algebra.Algebra
-import org.apache.jena.sparql.algebra.Op;
-import org.apache.jena.sparql.algebra.op.OpBGP;
+import org.apache.jena.sparql.algebra.Op
+import org.apache.jena.sparql.algebra.op.OpBGP
 import org.apache.jena.sparql.algebra.op.OpDistinct
 import org.apache.jena.sparql.algebra.op.OpExtend
 import org.apache.jena.sparql.algebra.op.OpFilter
@@ -49,12 +50,7 @@ import org.apache.jena.sparql.expr.ExprFunction1
 import org.apache.jena.sparql.expr.ExprFunction2
 import org.apache.jena.sparql.expr.ExprList
 import org.apache.jena.sparql.expr.NodeValue
-import org.apache.jena.sparql.expr.aggregate.AggAvg
-import org.apache.jena.sparql.expr.aggregate.AggCount
-import org.apache.jena.sparql.expr.aggregate.AggMax
-import org.apache.jena.sparql.expr.aggregate.AggMin
-import org.apache.jena.sparql.expr.aggregate.AggSum
-import org.apache.jena.sparql.expr.aggregate.Aggregator
+import org.apache.jena.sparql.expr.aggregate._
 import org.apache.jena.vocabulary.RDF
 import org.apache.jena.vocabulary.XSD
 import es.upm.fi.dia.oeg.morph.base.Constants
@@ -82,7 +78,6 @@ import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphSQLSelectItemGen
 import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphMappingInferrer
 import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphQueryRewriter
 import Zql.ZInsert
-import org.apache.jena.sparql.expr.aggregate.AggCountVar
 import es.upm.fi.dia.oeg.morph.base.CollectionUtility
 import org.slf4j.LoggerFactory
 
@@ -437,6 +432,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 					case _:AggCountVar => { Constants.AGGREGATION_FUNCTION_COUNT_VAR; }
 					case _:AggMax => { Constants.AGGREGATION_FUNCTION_MAX; }
 					case _:AggMin => { Constants.AGGREGATION_FUNCTION_MIN; }
+          case _:AggCountVarDistinct => { Constants.AGGREGATION_FUNCTION_COUNT_VAR_DISTINCT; }
+
 					case _ => {
 						val errorMessage = "Unsupported aggregation function " + aggregator;
 						logger.error(errorMessage);
@@ -476,7 +473,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
 			val pushedAggregatedSelectItems = transOpGroup.getSelectItems();
 			val pushedAggregatedSelectItem = pushedAggregatedSelectItems.iterator().next();
 			pushedAggregatedSelectItem.setAggregate(functionName);
-			pushedAggregatedSelectItem.setAlias(Constants.PREFIX_VAR + aggregatorAlias);
+      pushedAggregatedSelectItem.setAlias(Constants.PREFIX_VAR + aggregatorAlias);
 			listPushedAggregatedSelectItem = listPushedAggregatedSelectItem ::: List(pushedAggregatedSelectItem);
 			this.mapAggreatorAlias += (aggregatorVarName -> pushedAggregatedSelectItem);
 

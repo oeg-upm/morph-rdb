@@ -187,6 +187,7 @@ object Constants {
   val  AGGREGATION_FUNCTION_COUNT = "COUNT";
   val  AGGREGATION_FUNCTION_COUNT_VAR = "COUNT";
   val  AGGREGATION_FUNCTION_SUM = "SUM";
+  val  AGGREGATION_FUNCTION_COUNT_VAR_DISTINCT = "COUNT";
 
   val R2RML_NS = "http://www.w3.org/ns/r2rml#";
 

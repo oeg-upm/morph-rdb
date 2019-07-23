@@ -17,5 +17,3 @@ SELECT * WHERE {
 	?service a gtfs:Service .
 	?service schema:startDate ?startDate .
 }
-
-
