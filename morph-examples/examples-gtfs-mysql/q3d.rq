@@ -10,16 +10,17 @@ PREFIX gtfs: <http://vocab.gtfs.org/terms#>
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX gtfsroute: <http://linkedgtfs.com/CITY/routes/>
 
 SELECT (count(distinct ?service) as ?count)  WHERE {
-	<http://linkedgtfs.com/CITY/routes/4__1___> a gtfs:Route .
-	<http://linkedgtfs.com/CITY/routes/4__1___> gtfs:shortName ?routeShortName .
-	<http://linkedgtfs.com/CITY/routes/4__1___> dct:description ?routeDescription .
+	gtfsroute:4__1___ a gtfs:Route .
+	gtfsroute:4__1___ gtfs:shortName ?routeShortName .
+	gtfsroute:4__1___ dct:description ?routeDescription .
 
 	?trip a gtfs:Trip .
 	?trip gtfs:shortName ?tripShortName .
 	?trip gtfs:service ?service .
-	?trip gtfs:route <http://linkedgtfs.com/CITY/routes/4__1___> .
+	?trip gtfs:route gtfsroute:4__1___ .
 
 	?service a gtfs:Service .
 
