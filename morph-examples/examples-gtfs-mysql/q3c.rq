@@ -1,6 +1,6 @@
 #Q3C: Given a particular stop, get the list of arrival times of vehicles going a particular direction
 #%HEADSIGN "OPERA"
-#%STOPID <http://linkedgtfs.com/CITY/stops/par_4_238>
+#%STOPID acc_4_1_1
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -9,21 +9,22 @@ PREFIX gtfs: <http://vocab.gtfs.org/terms#>
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX gtfsstop: <http://linkedgtfs.com/CITY/stops/>
 
 SELECT * WHERE {
 
         ?stopTime a gtfs:StopTime .
         ?stopTime gtfs:trip ?trip .
-        ?stopTime gtfs:stop <http://linkedgtfs.com/CITY/stops/par_4_238> .
+        ?stopTime gtfs:stop gtfsstop:acc_4_1_1 .
         ?stopTime gtfs:arrivalTime ?arrivalTime .
 
         ?trip a gtfs:Trip .
         ?trip gtfs:shortName ?tripShortName .
         ?trip gtfs:service ?service .
         ?trip gtfs:route ?route .
-        ?trip gtfs:headsign "OPERA" .
+        #?trip gtfs:headsign "OPERA" .
 
-        <http://linkedgtfs.com/CITY/stops/par_4_238> a gtfs:Stop .
-        <http://linkedgtfs.com/CITY/stops/par_4_238> dct:description ?stopDescription .
+        gtfsstop:acc_4_1_1 a gtfs:Stop .
+        gtfsstop:acc_4_1_1 dct:description ?stopDescription .
 
 }
