@@ -472,9 +472,12 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
       transOpGroup.pushProjectionsDown(aggregatedSelectItems);
       val pushedAggregatedSelectItems = transOpGroup.getSelectItems();
       val pushedAggregatedSelectItem = pushedAggregatedSelectItems.iterator().next();
-      if(aggregator.isInstanceOf[AggCountVarDistinct]) {
-        pushedAggregatedSelectItem.addDistinct();
+      if(pushedAggregatedSelectItem.isInstanceOf[MorphSQLSelectItem]) {
+        if(aggregator.isInstanceOf[AggCountVarDistinct]) {
+          pushedAggregatedSelectItem.asInstanceOf[MorphSQLSelectItem].addDistinct();
+        }
       }
+
       pushedAggregatedSelectItem.setAggregate(functionName);
 
       pushedAggregatedSelectItem.setAlias(Constants.PREFIX_VAR + aggregatorAlias);

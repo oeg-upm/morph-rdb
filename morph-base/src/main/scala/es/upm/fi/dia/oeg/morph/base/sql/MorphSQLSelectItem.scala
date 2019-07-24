@@ -1,5 +1,5 @@
 package es.upm.fi.dia.oeg.morph.base.sql
-import Zql.{ZExp, ZExpression, ZSelectItem}
+import Zql.{ZConstant, ZExp, ZExpression, ZSelectItem}
 
 import scala.collection.JavaConversions._
 import es.upm.fi.dia.oeg.morph.base.Constants
@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory
 class MorphSQLSelectItem(val dbType:String, schema:String, table:String
                          , column:String, val columnType:String)
   extends ZSelectItem {
+  val enclosedChar = Constants.getEnclosedCharacter(dbType);
 
   override def setExpression(arg0 : ZExp ) = {
     super.setExpression(arg0);
@@ -152,13 +153,37 @@ class MorphSQLSelectItem(val dbType:String, schema:String, table:String
     var resultList:List[String] = Nil;
 
     if(this.schema != null) {
-      resultList = resultList ::: List(enclosedCharacter + this.schema + enclosedCharacter);
+      //resultList = resultList ::: List(enclosedCharacter + this.schema + enclosedCharacter);
+      var qualifiedSchema = this.schema;
+      if(!qualifiedSchema.startsWith(enclosedCharacter)) {
+        qualifiedSchema = enclosedCharacter + qualifiedSchema
+      }
+      if(!qualifiedSchema.endsWith(enclosedCharacter)) {
+        qualifiedSchema = qualifiedSchema + enclosedCharacter
+      }
+      resultList = resultList ::: List(qualifiedSchema);
     }
     if(this.table != null) {
-      resultList = resultList ::: List(enclosedCharacter + this.table + enclosedCharacter);
+      //resultList = resultList ::: List(enclosedCharacter + this.table + enclosedCharacter);
+      var qualifiedTable = this.table;
+      if(!qualifiedTable.startsWith(enclosedCharacter)) {
+        qualifiedTable = enclosedCharacter + qualifiedTable
+      }
+      if(!qualifiedTable.endsWith(enclosedCharacter)) {
+        qualifiedTable = qualifiedTable + enclosedCharacter
+      }
+      resultList = resultList ::: List(qualifiedTable);
     }
     if(this.column != null) {
-      resultList = resultList ::: List(enclosedCharacter + this.column + enclosedCharacter);
+      //resultList = resultList ::: List(enclosedCharacter + this.column + enclosedCharacter);
+      var qualifiedColumn = this.column;
+      if(!qualifiedColumn.startsWith(enclosedCharacter)) {
+        qualifiedColumn = enclosedCharacter + qualifiedColumn
+      }
+      if(!qualifiedColumn.endsWith(enclosedCharacter)) {
+        qualifiedColumn= qualifiedColumn+ enclosedCharacter
+      }
+      resultList = resultList ::: List(qualifiedColumn);
     }
 
     val result2 = resultList.mkString(".");
@@ -166,9 +191,18 @@ class MorphSQLSelectItem(val dbType:String, schema:String, table:String
   }
 
   def addDistinct() = {
-    val newExpression = new ZExpression("DISTINCT", this.getExpression);
+    val expression = this.getExpression
+
+    val table = this.getTable()
+
+    val fullyQualifiedName = this.getFullyQualifiedName(enclosedChar)
+    val newColumn = new ZConstant(fullyQualifiedName, ZConstant.COLUMNNAME)
+
+    val newExpression = new ZExpression("DISTINCT", newColumn);
     this.setExpression(newExpression)
   }
+
+
 
 }
 
