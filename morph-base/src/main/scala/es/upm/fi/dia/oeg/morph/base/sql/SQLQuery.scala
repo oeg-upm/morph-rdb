@@ -26,6 +26,7 @@ class SQLQuery extends ZQuery with IQuery {
 	ZUtils.addCustomFunction("abs", 1);
 	ZUtils.addCustomFunction("lower", 1);
 	ZUtils.addCustomFunction("count", 1);
+	ZUtils.addCustomFunction("distinct", 1);
 
 	//	var alias:String =null;
 	var slice:Long = -1;
@@ -260,11 +261,11 @@ class SQLQuery extends ZQuery with IQuery {
 	//		databaseType;
 	//	}
 
-	override def getSelectItems() : List[ZSelectItem] = {
+	override def getSelectItems() : List[MorphSQLSelectItem] = {
 		val selectItems = super.getSelect();
 
 		val result = if(selectItems != null) {
-			selectItems.map(selectItem => selectItem.asInstanceOf[ZSelectItem])
+			selectItems.map(selectItem => selectItem.asInstanceOf[MorphSQLSelectItem])
 		} else {
 			Nil
 		}
