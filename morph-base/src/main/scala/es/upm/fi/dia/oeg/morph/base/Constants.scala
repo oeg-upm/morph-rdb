@@ -56,6 +56,7 @@ object Constants {
   val DATABASE_H2_NULL_VALUE = "NULL";
 
 
+
   val DATABASE_POSTGRESQL_ENCLOSED_CHARACTER = "\"";
   val DATABASE_ORACLE_ENCLOSED_CHARACTER = "\"";
   val DATABASE_MONETDB_ENCLOSED_CHARACTER = "\"";
@@ -116,6 +117,8 @@ object Constants {
   val DATABASE_TYPE_PROP_NAME = "database.type";
   val DRIVER_PROP_NAME = "driver";
   val DATABASE_TIMEOUT_PROP_NAME = "database.timeout";
+  val DATABASE_BOOLEAN_TRUE = "database.boolean.true";
+  val DATABASE_BOOLEAN_FALSE = "database.boolean.false";
 
   val CSV_FILE_PATH = "csv.file.path";
   val CSV_FIELD_SEPARATOR = "csv.field.separator";

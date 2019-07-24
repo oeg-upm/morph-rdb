@@ -1522,6 +1522,13 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
       } else if(nodeValue.isDate() || nodeValue.isDateTime()) {
         val nodeValueDateTimeString = nodeValue.getDateTime().toString().replaceAll("T", " ");
         new ZConstant(nodeValueDateTimeString, ZConstant.STRING);
+      } else if(nodeValue.isBoolean()) {
+        val nodeValueBoolean = nodeValue.getBoolean
+        if(nodeValueBoolean) {
+          new ZConstant(properties.databaseBooleanTrue, ZConstant.STRING);
+        } else {
+          new ZConstant(properties.databaseBooleanFalse, ZConstant.STRING);
+        }
       } else if(nodeValue.isLiteral()) {
         val node = nodeValue.getNode();
         val literalLexicalForm = node.getLiteralLexicalForm();

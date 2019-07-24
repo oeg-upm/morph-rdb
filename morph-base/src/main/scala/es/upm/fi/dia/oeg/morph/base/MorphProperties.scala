@@ -32,6 +32,8 @@ class MorphProperties extends java.util.Properties {
   var databaseUser:String =null;
   var databasePassword:String =null;
   var databaseTimeout = 0;
+  var databaseBooleanTrue = "true";
+  var databaseBooleanFalse = "false";
 
   var outputFilePath:Option[String] = None;
   var queryFilePath:Option[String] = None;
@@ -263,7 +265,8 @@ class MorphProperties extends java.util.Properties {
     this.materializationDistinct = this.readBoolean(Constants.MATERIALIZATION_DISTINCT, false);
     logger.debug("Use DISTINCT in materialization process = " + this.materializationDistinct);
 
-
+    this.databaseBooleanTrue = this.readString(Constants.DATABASE_BOOLEAN_TRUE, "true");
+    this.databaseBooleanFalse = this.readString(Constants.DATABASE_BOOLEAN_FALSE, "false");
   }
 
 
