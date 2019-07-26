@@ -55,7 +55,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 	val xsdBooleanURI = XSDDatatype.XSDboolean.getURI().toString();
 	val xsdDurationURI = XSDDatatype.XSDduration.getURI().toString();
 	val xsdDateURI = XSDDatatype.XSDdate.getURI().toString();
-
+	val dbType = this.properties.databaseType;
 	override val logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -189,7 +189,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 		while(rows.next()) {
 			try {
 				//translate subject map
-				val subject = this.translateData(sm, rows, logicalTableAlias, mapXMLDatatype);
+				val subject = this.translateResultSet(rows, sm, logicalTableAlias, mapXMLDatatype);
 				if(subject == null) {
 					val errorMessage = "null value in the subject triple!";
 					logger.debug("null value in the subject triple!");
@@ -201,7 +201,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 				//				this.materializer.createSubject(sm.isBlankNode(), subjectString);
 
 				val subjectGraphs = sgm.flatMap(sgmElement=> {
-					val subjectGraphValue = this.translateData(sgmElement, rows, logicalTableAlias, mapXMLDatatype);
+					val subjectGraphValue = this.translateResultSet(rows, sgmElement, logicalTableAlias, mapXMLDatatype);
 					//					val subjectGraphValue = this.translateData(sgmElement, unfoldedSubjectGraph, mapXMLDatatype);
 					val graphMapTermType = sgmElement.inferTermType;
 					val subjectGraph = graphMapTermType match {
@@ -240,14 +240,14 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 					else { pom.getAlias() }
 
 					val predicates = pom.predicateMaps.flatMap(predicateMap => {
-						val predicateValue = this.translateData(predicateMap, rows, null, mapXMLDatatype);
+						val predicateValue = this.translateResultSet(rows, predicateMap, null, mapXMLDatatype);
 						//						val predicateValue = this.translateData(predicateMap, unfoldedPredicateMap, mapXMLDatatype);
 						if(predicateValue == null) { None }
 						else { Some(predicateValue); }
 					});
 
 					val objects = pom.objectMaps.flatMap(objectMap => {
-						val objectValue = this.translateData(objectMap, rows, alias, mapXMLDatatype);
+						val objectValue = this.translateResultSet(rows, objectMap, alias, mapXMLDatatype);
 						//						val objectValue = this.translateData(objectMap, unfoldedObjectMap, mapXMLDatatype);
 						if(objectValue == null) { None }
 						else { Some(objectValue); }
@@ -258,7 +258,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 						val parentTriplesMap = this.md.getParentTriplesMap(refObjectMap)
 						val parentSubjectMap = parentTriplesMap.subjectMap;
 						val parentTableAlias = this.unfolder.mapRefObjectMapAlias.getOrElse(refObjectMap, null);
-						val parentSubjects = this.translateData(parentSubjectMap, rows, parentTableAlias, mapXMLDatatype)
+						val parentSubjects = this.translateResultSet(rows, parentSubjectMap, parentTableAlias, mapXMLDatatype)
 						//logger.info(s"parentSubjects = ${parentSubjects}")
 						if(parentSubjects == null) { None }
 						else { Some(parentSubjects) }
@@ -266,7 +266,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 
 					val pogm = pom.graphMaps;
 					val predicateObjectGraphs = pogm.flatMap(pogmElement=> {
-						val poGraphValue = this.translateData(pogmElement, rows, null, mapXMLDatatype);
+						val poGraphValue = this.translateResultSet(rows, pogmElement, null, mapXMLDatatype);
 						//					  val poGraphValue = this.translateData(pogmElement, unfoldedPOGraphMap, mapXMLDatatype);
 						if(poGraphValue == null) { None }
 						else { Some(poGraphValue); }
@@ -478,9 +478,9 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 
 	}
 
-	def translateData(termMap:R2RMLTermMap, dbValue:Object, datatype:Option[String]
-										//    , mapXMLDatatype : Map[String, String]
-									 ) = {
+	def translateDBValue(dbValue:Object, termMap:R2RMLTermMap, datatype:Option[String]
+											 //    , mapXMLDatatype : Map[String, String]
+											) = {
 		termMap.inferTermType match {
 			case Constants.R2RML_IRI_URI => {
 				if(dbValue != null) {
@@ -511,10 +511,10 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 		}
 	}
 
-	def translateData(termMap:R2RMLTermMap, rs:ResultSet , logicalTableAlias:String
-										, mapXMLDatatype : Map[String, String]
-									 ) : (RDFNode, List[Object]) = {
-		val dbType = this.properties.databaseType;
+	def translateResultSet(rs:ResultSet, termMap:R2RMLTermMap, logicalTableAlias:String
+												 , mapXMLDatatype : Map[String, String]
+												) : (RDFNode, List[Object]) = {
+
 		val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
 		val inferedTermType = termMap.inferTermType();
 
@@ -550,7 +550,6 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 				//				  case _ => { dbValueAux }
 				//			  }
 				//val dbValue = dbValueAux;
-				val dbType = this.properties.databaseType;
 				val dbValue  = if(Constants.DATABASE_H2_NULL_VALUE.equals(dbValueAux)
 					&& Constants.DATABASE_CSV.equals(dbType)) {
 					null
@@ -573,12 +572,12 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 					datatypeAux
 				}
 
-				val result = (this.translateData(termMap, dbValue, datatype), List(dbValue));
+				val result = (this.translateDBValue(dbValue, termMap, datatype), List(dbValue));
 				result;
 			}
 			case Constants.MorphTermMapType.ConstantTermMap => {
 				val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }
-				(this.translateData(termMap, termMap.constantValue, datatype), List());
+				(this.translateDBValue(termMap.constantValue, termMap, datatype), List());
 			}
 			case Constants.MorphTermMapType.TemplateTermMap => {
 				val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }
@@ -601,9 +600,9 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 
 
 					if(dbValueAux != null) {
-					  rawDBValues = rawDBValues ::: List(dbValueAux);  
+						rawDBValues = rawDBValues ::: List(dbValueAux);
 					}
-					
+
 
 					val dbValue = dbValueAux match {
 						case dbValueAuxString:String => {
@@ -654,15 +653,15 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 				//logger.info(s"termMapTemplateString = ${termMapTemplateString}")
 				val resultAux = if(replacements.isEmpty) {
 					//(this.translateData(termMap, termMapTemplateString, datatype), rawDBValues);
-				  (null, rawDBValues);
+					(null, rawDBValues);
 				} else {
 					val templateWithDBValue = RegexUtility.replaceTokens(termMapTemplateString, replacements);
 					if(templateWithDBValue != null) {
-						(this.translateData(termMap, templateWithDBValue, datatype), rawDBValues);
+						(this.translateDBValue(templateWithDBValue, termMap, datatype), rawDBValues);
 					} else { null }
 				}
-				
-        //logger.info(s"resultAux = ${resultAux}")
+
+				//logger.info(s"resultAux = ${resultAux}")
 
 
 
