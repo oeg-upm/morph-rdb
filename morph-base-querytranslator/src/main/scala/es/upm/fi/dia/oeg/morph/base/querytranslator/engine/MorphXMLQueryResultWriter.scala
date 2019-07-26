@@ -5,7 +5,6 @@ import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.apache.jena.query.Query
 import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.morph.base.TermMapResult
 import es.upm.fi.dia.oeg.morph.base.ValueTransformator
 import es.upm.fi.dia.oeg.morph.base.XMLUtility
 import es.upm.fi.dia.oeg.morph.base.engine.IQueryTranslator

@@ -5,7 +5,6 @@ import java.sql.Connection
 import org.apache.jena.query.Query
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
-import es.upm.fi.dia.oeg.morph.base.TermMapResult
 import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import org.apache.jena.graph.Node
 //import com.hp.hpl.jena.sparql.algebra.Op
