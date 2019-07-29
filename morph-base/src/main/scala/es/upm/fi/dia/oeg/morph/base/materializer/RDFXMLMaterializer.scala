@@ -3,6 +3,8 @@ package es.upm.fi.dia.oeg.morph.base.materializer
 //import org.apache.log4j.Logger
 //import com.hp.hpl.jena.rdf.model.Resource
 import java.io.FileOutputStream
+
+import org.apache.jena.graph.Node
 //import com.hp.hpl.jena.rdf.model.RDFNode
 import org.apache.jena.rdf.model.RDFNode;
 //import com.hp.hpl.jena.rdf.model.Model
@@ -113,6 +115,7 @@ extends MorphBaseMaterializer(model, rdfxmlWriter, rdfxmlOutputStream) {
 
 	override def materializeQuad(subject:RDFNode , predicate:Property ,
 			obj:RDFNode , graph:RDFNode ) {
+
 		if(!subject.isResource()) {
 			logger.error("Subject: " + subject + " is not a resource!");
 		}

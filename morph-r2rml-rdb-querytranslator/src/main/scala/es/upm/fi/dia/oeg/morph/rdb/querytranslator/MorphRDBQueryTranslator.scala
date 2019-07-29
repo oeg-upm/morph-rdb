@@ -149,9 +149,11 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
               }
             }
 
-            val resultAux = this.translateResultSet(rs, termMap, varName);
+            val nodeValue = this.translateResultSet(rs, termMap, varName);
             val termMapType = termMap.inferTermType;
+            val datatype = termMap.datatype;
 
+            /*
             val termMapResult = {
               if(resultAux != null) {
                 if(termMapType != null) {
@@ -183,6 +185,9 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
               }
             }
             termMapResult
+            */
+            val node = this.generateNode(nodeValue, termMap, datatype)
+            node
           }
         } else {
           null
@@ -197,6 +202,43 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
     }
 
     result;
+  }
+
+  def generateNode(nodeValue:String
+                   , termMap:R2RMLTermMap
+                   , datatype:Option[String]
+                   //, termMapType:String
+                  ) = {
+
+    val node = {
+      if(nodeValue != null) {
+        //val termMapType = termMap.inferTermType;
+
+        termMap.inferTermType match {
+          case Constants.R2RML_IRI_URI => {
+            val uri = GeneralUtility.encodeURI(nodeValue, properties.mapURIEncodingChars
+              , properties.uriTransformationOperation);
+            NodeFactory.createURI(uri);
+          }
+          case Constants.R2RML_LITERAL_URI => {
+            val literalValue = GeneralUtility.encodeLiteral(nodeValue);
+            //val datatype = termMap.datatype;
+            if(datatype == null || datatype.isEmpty) {
+              NodeFactory.createLiteral(literalValue);
+            } else {
+              val rdfDataType = new XSDDatatype(datatype.get)
+              NodeFactory.createLiteral(literalValue, rdfDataType);
+            }
+          }
+          case _ => {
+            NodeFactory.createLiteral(nodeValue);
+          }
+        }
+      } else {
+        null
+      }
+    }
+    node
   }
 
   //	override def transTP(tp:Triple , cm:MorphBaseClassMapping ,predicateURI:String
