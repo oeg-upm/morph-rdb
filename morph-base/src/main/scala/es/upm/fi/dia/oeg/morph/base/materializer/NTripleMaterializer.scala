@@ -1,6 +1,7 @@
 package es.upm.fi.dia.oeg.morph.base.materializer
 
 //import com.hp.hpl.jena.rdf.model.Model
+import org.apache.jena.graph.Node
 import org.apache.jena.rdf.model.Model
 import org.apache.jena.riot.Lang
 import org.apache.jena.sparql.core.Quad;
@@ -26,19 +27,19 @@ import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 
 class NTripleMaterializer(model:Model,ntWriter:Writer, ntOutputStream: OutputStream)
-extends MorphBaseMaterializer(model,ntWriter, ntOutputStream) {
-	//THIS IS IMPORTANT, SCALA PASSES PARAMETER BY VALUE!
-	this.writer = ntWriter;
+  extends MorphBaseMaterializer(model,ntWriter, ntOutputStream) {
+  //THIS IS IMPORTANT, SCALA PASSES PARAMETER BY VALUE!
+  this.writer = ntWriter;
   this.outputStream = ntOutputStream
 
-	
-	override 	val logger = LoggerFactory.getLogger(this.getClass());
+
+  override 	val logger = LoggerFactory.getLogger(this.getClass());
 
 
-	def write(triple:String ) = {
-		this.writer.write(triple)
-		this.writer.flush();
-	}
+  def write(triple:String ) = {
+    this.writer.write(triple)
+    this.writer.flush();
+  }
 
   def streamQuad(quad:Quad) = {
     val graphNode = quad.getGraph;
@@ -59,20 +60,19 @@ extends MorphBaseMaterializer(model,ntWriter, ntOutputStream) {
 
   }
 
-	override def materialize() {
-		//nothing to do, the triples were added during the data translation process
+  override def materialize() {
+    //nothing to do, the triples were added during the data translation process
     if(this.writer != null) { this.writer.flush(); }
     if(this.outputStream != null) {
       this.outputStream.flush()
       this.outputStream.close()
     }
 
-	}
-	
-	override def materializeQuad(subject:RDFNode , predicate:Property ,
-			obj:RDFNode , graph:RDFNode ) {
-		if(subject != null && predicate != null && obj!= null) {
-			try {
+  }
+
+  override def materializeQuad(subject:RDFNode, predicate:Property, obj:RDFNode, graph:RDFNode) {
+    if(subject != null && predicate != null && obj!= null) {
+      try {
         /*
 				val subjectString = GeneralUtility.nodeToString(subject);
 				val predicateString = GeneralUtility.nodeToString(predicate);
@@ -89,38 +89,38 @@ extends MorphBaseMaterializer(model,ntWriter, ntOutputStream) {
         val quad = Quad.create(graphNode, subjectNode, predicateNode, objectNode)
         this.streamQuad(quad)
 
-			} catch {
-			  case e:Exception => {
-			    //e.printStackTrace();
+      } catch {
+        case e:Exception => {
+          //e.printStackTrace();
           val errorMessage = "unable to serialize triple, subjectURI=" + subject + ", error message = " + e.getMessage();
-			    logger.debug(errorMessage);
+          logger.debug(errorMessage);
           //noOfErrors = noOfErrors + 1;
-			  }
-			}
-		} else {
-		  if(subject == null) {
-          val errorMessage = "unable to serialize triple, subject is null!";
-          logger.debug(errorMessage);
-		  } 
-		  
-		  if(predicate == null) {
-          val errorMessage = "unable to serialize triple, predicate is null!";
-          logger.debug(errorMessage);
-		  }
+        }
+      }
+    } else {
+      if(subject == null) {
+        val errorMessage = "unable to serialize triple, subject is null!";
+        logger.debug(errorMessage);
+      }
 
-		  if(obj == null) {
-          val errorMessage = "unable to serialize triple, object is null!";
-          //logger.debug(errorMessage);
-		  }
-		  
-		  
-		}
-	}
+      if(predicate == null) {
+        val errorMessage = "unable to serialize triple, predicate is null!";
+        logger.debug(errorMessage);
+      }
 
-//	override def postMaterialize() = {
-////		if(this.writer != null) {
-////			this.writer.flush();
-////			this.writer.close();
-////		}
-//	}
+      if(obj == null) {
+        val errorMessage = "unable to serialize triple, object is null!";
+        //logger.debug(errorMessage);
+      }
+
+
+    }
+  }
+
+  //	override def postMaterialize() = {
+  ////		if(this.writer != null) {
+  ////			this.writer.flush();
+  ////			this.writer.close();
+  ////		}
+  //	}
 }
