@@ -34,7 +34,7 @@ abstract class MorphBaseMaterializer(val model:Model, var writer:Writer, var out
   //	def materializeRDFTypeTriple(subjectURI:String , conceptName:String , isBlankNodeSubject:boolean , graph:String );
   //	public abstract void materializeQuad(String subject, String predicate, String object, String graph);
   //def materializeQuad(subject:RDFNode , predicate:Property , obj:RDFNode , graph:RDFNode );
-  def materializeQuad(subject:RDFNode, predicate:Property, obj:RDFNode, graph:RDFNode);
+  def materializeQuad(subject:Node, predicate:Node, obj:Node, graph:Node);
 
   def materialize();
 

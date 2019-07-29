@@ -40,7 +40,7 @@ import java.text.SimpleDateFormat
 import java.text.DateFormat
 import java.util.Locale
 
-import org.apache.jena.graph.Node
+import org.apache.jena.graph.{Node, NodeFactory}
 import org.slf4j.LoggerFactory
 
 class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMaterializer
@@ -164,12 +164,16 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
       for (i <- 0 until columnCount) {
         val columnName = rsmd.getColumnName(i+1);
         val columnType= rsmd.getColumnType(i+1);
+        mapDBDatatype += (columnName -> new Integer(columnType));
         val mappedDatatype = datatypeMapper.getMappedType(columnType);
         //				if(mappedDatatype == null) {
         //					mappedDatatype = XSDDatatype.XSDstring.getURI();
         //				}
-        mapXMLDatatype += (columnName -> mappedDatatype);
-        mapDBDatatype += (columnName -> new Integer(columnType));
+        if(mappedDatatype != null) {
+          mapXMLDatatype += (columnName -> mappedDatatype);
+        }
+
+
       }
     } catch {
       case e:Exception => {
@@ -221,15 +225,16 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 
         //rdf:type
         classes.foreach(classURI => {
-          val statementObject = this.materializer.model.createResource(classURI);
+          //val statementObject = this.materializer.model.createResource(classURI);
+          val statementObject = NodeFactory.createURI(classURI);
           if(subjectGraphs == null || subjectGraphs.isEmpty) {
             //						this.materializer.materializeRDFTypeTriple(subjectString, classURI, sm.isBlankNode(), null);
-            this.materializer.materializeQuad(subject.rdfNode, RDF.`type`, statementObject, null);
+            this.materializer.materializeQuad(subject.node, RDF.`type`.asNode(), statementObject, null);
             this.materializer.writer.flush();
           } else {
             subjectGraphs.foreach(subjectGraph => {
               //							this.materializer.materializeRDFTypeTriple(subjectString, classURI, sm.isBlankNode(), subjectGraph);
-              this.materializer.materializeQuad(subject.rdfNode, RDF.`type`, statementObject, subjectGraph.rdfNode);
+              this.materializer.materializeQuad(subject.node, RDF.`type`.asNode(), statementObject, subjectGraph.node);
             });
           }
         });
@@ -275,37 +280,37 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 
           if(sgm.isEmpty && pogm.isEmpty) {
             predicates.foreach(predicatesElement => {
-              val quadSubject = subject.rdfNode;
-              val predicateRDFNode = predicatesElement.rdfNode;
-              val predicateProperty = predicateRDFNode.asInstanceOf[Property];
+              val quadSubject = subject.node;
+              val predicateNode = predicatesElement.node;
+
               val quadGraph = null;
               objects.foreach(objectsElement => {
-                val quadObject = objectsElement.rdfNode;
+                val quadObject = objectsElement.node;
 
-                this.materializer.materializeQuad(quadSubject, predicateProperty, quadObject, quadGraph)
+                this.materializer.materializeQuad(quadSubject, predicateNode, quadObject, quadGraph)
               });
 
               refObjects.foreach(refObjectsElement => {
-                this.materializer.materializeQuad(quadSubject, predicateProperty, refObjectsElement.rdfNode, quadGraph)
+                this.materializer.materializeQuad(quadSubject, predicateNode, refObjectsElement.node, quadGraph)
               });
             });
           } else {
             val unionGraphs = subjectGraphs ++ predicateObjectGraphs
             unionGraphs.foreach(unionGraph => {
               predicates.foreach(predicatesElement => {
-                val predicateProperty = predicatesElement.rdfNode.asInstanceOf[Property];
+                val predicateNode = predicatesElement.node;
                 objects.foreach(objectsElement => {
                   unionGraphs.foreach(unionGraph => {
-                    val tpS = subject.rdfNode;
+                    val tpS = subject.node;
                     //val tpP = predicatesElement._1;
-                    val tpO = objectsElement.rdfNode;
-                    val tpG = unionGraph.rdfNode;
-                    this.materializer.materializeQuad(tpS, predicateProperty, tpO, tpG);
+                    val tpO = objectsElement.node;
+                    val tpG = unionGraph.node;
+                    this.materializer.materializeQuad(tpS, predicateNode, tpO, tpG);
                   })
                 });
 
                 refObjects.foreach(refObjectsElement => {
-                  this.materializer.materializeQuad(subject.rdfNode, predicateProperty, refObjectsElement.rdfNode, unionGraph.rdfNode)
+                  this.materializer.materializeQuad(subject.node, predicateNode, refObjectsElement.node, unionGraph.node)
                 });
 
               });
@@ -317,8 +322,9 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
       } catch {
         case e:Exception => {
           noOfErrors = noOfErrors + 1;
-          //e.printStackTrace();
-          logger.error("error while translating data: " + e.getMessage());
+          val errorMessage = e.getMessage;
+          e.printStackTrace();
+          logger.error("error while translating data: " + errorMessage);
         }
       }
     }
@@ -478,15 +484,6 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 
   }
 
-  def generateNode(nodeValue:Object
-                   , termMap:R2RMLTermMap
-                   , datatype:Option[String]) = {
-    val rdfNode = this.generateRDFNode(nodeValue, termMap, datatype);
-    val node = if(rdfNode == null) { null }
-    else { rdfNode.asNode() }
-    node
-  }
-
   def generateRDFNode(nodeValue:Object
                    , termMap:R2RMLTermMap
                    , datatype:Option[String]
@@ -537,6 +534,72 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
     result
   }
 
+  def generateNode(nodeValue:String
+                      , termMap:R2RMLTermMap
+                      , datatype:Option[String]
+                      //                   , termMapType:String
+                      //                       , mapXMLDatatype : Map[String, String]
+                     ) = {
+    val result = if(nodeValue != null) {
+      //val termMapType = termMap.inferTermType;
+      termMap.inferTermType match {
+        case Constants.R2RML_IRI_URI => {
+          NodeFactory.createURI(nodeValue);
+        }
+        case Constants.R2RML_LITERAL_URI => {
+
+          /*
+          val datatype = if(termMap.datatype.isDefined) { termMap.datatype }
+          else {
+            val datatypeAux = {
+              val columnNameAux = termMap.columnName.replaceAll("\"", "");
+              if(mapXMLDatatype != null) {
+                val columnNameAuxDatatype = mapXMLDatatype.get(columnNameAux);
+                if(columnNameAuxDatatype != None) { columnNameAuxDatatype }
+                else { mapXMLDatatype.get(columnTermMapValue); }
+              } else {
+                None
+              }
+            }
+            datatypeAux
+          }
+          */
+
+          //this.createLiteral(nodeValue, datatype, termMap.languageTag);
+          if(termMap.languageTag == null || termMap.languageTag.isEmpty) {
+            if(datatype == null || datatype.isEmpty) {
+              NodeFactory.createLiteral(nodeValue)
+            } else {
+              val rdfDataType = GeneralUtility.getXSDDatatype(datatype.get)
+              NodeFactory.createLiteral(nodeValue, rdfDataType);
+            }
+          } else {
+            if(datatype == null || datatype.isEmpty) {
+              NodeFactory.createLiteral(nodeValue, termMap.languageTag.get)
+            } else {
+              val rdfDataType = GeneralUtility.getXSDDatatype(datatype.get)
+              NodeFactory.createLiteral(nodeValue, termMap.languageTag.get, rdfDataType);
+            }
+          }
+
+
+        }
+        case Constants.R2RML_BLANKNODE_URI => {
+          val anonId = new AnonId(nodeValue.toString());
+          //this.materializer.model.createResource(anonId)
+          NodeFactory.createBlankNode(anonId.getLabelString)
+        }
+        case _ => {
+          null
+        }
+      }
+    } else {
+      null
+    }
+    result
+  }
+
+
   def translateResultSet(rs:ResultSet, termMap:R2RMLTermMap, logicalTableAlias:String
                          , mapXMLDatatype : Map[String, String]
                          //) : (RDFNode, List[Object]) = {
@@ -546,7 +609,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
     val inferedTermType = termMap.inferTermType();
 
 
-    val result:(RDFNode, List[Object]) = termMap.termMapType match {
+    val result = termMap.termMapType match {
       case Constants.MorphTermMapType.ColumnTermMap => {
         val columnTermMapValue = if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
           val termMapColumnValueSplit = termMap.columnName.split("\\.");
@@ -595,13 +658,17 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
           }
           datatypeAux
         }
-
-        val result = (this.generateRDFNode(dbValue, termMap, datatype), List(dbValue));
-        result;
+        //val result = (this.generateNode(dbValue, termMap, datatype), List(dbValue));
+        if(dbValue != null) {
+          val nodeValue = dbValue.toString
+          new TranslatedValue(this.generateNode(nodeValue, termMap, datatype), List(dbValue));
+        } else {
+          new TranslatedValue(null, List(dbValue));
+        }
       }
       case Constants.MorphTermMapType.ConstantTermMap => {
         val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }
-        (this.generateRDFNode(termMap.constantValue, termMap, datatype), List());
+        new TranslatedValue(this.generateNode(termMap.constantValue, termMap, datatype), List());
       }
       case Constants.MorphTermMapType.TemplateTermMap => {
         val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }
@@ -675,28 +742,21 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 
         //logger.info(s"replacements = ${replacements}")
         //logger.info(s"termMapTemplateString = ${termMapTemplateString}")
-        val resultAux = if(replacements.isEmpty) {
+        if(replacements.isEmpty) {
           //(this.translateData(termMap, termMapTemplateString, datatype), rawDBValues);
-          (null, rawDBValues);
+          new TranslatedValue(null, rawDBValues);
         } else {
           val templateWithDBValue = RegexUtility.replaceTokens(termMapTemplateString, replacements);
           if(templateWithDBValue != null) {
-            (this.generateRDFNode(templateWithDBValue, termMap, datatype), rawDBValues);
-          } else { null }
+            new TranslatedValue(this.generateNode(templateWithDBValue, termMap, datatype), rawDBValues);
+          } else {
+            new TranslatedValue(null, rawDBValues)
+          }
         }
-
-        //logger.info(s"resultAux = ${resultAux}")
-
-
-
-        resultAux
       }
-
-
     }
 
-    val translatedValue = new TranslatedValue(result._1, result._2)
-    translatedValue
+    result
   }
 
   def getResultSetValue(termMapDatatype:Option[String], rs:ResultSet, pColumnName:String ) : Object = {

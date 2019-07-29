@@ -115,33 +115,44 @@ class RDFXMLMaterializer(model:Model, rdfxmlWriter:Writer, rdfxmlOutputStream:Ou
 
 
 
-  override def materializeQuad(subject:RDFNode, predicate:Property, obj:RDFNode, graph:RDFNode ) {
+  override def materializeQuad(subjectNode:Node, predicateNode:Node, objectNode:Node, graphNode:Node ) {
+    //val subjectRDFNode = this.model.asRDFNode(subjectNode);
+    //val resource = this.model.createResource(subjectNode.getURI)
+    val property = this.model.createProperty(predicateNode.getNameSpace, predicateNode.getLocalName)
+    val objectRDFNode = if(objectNode != null) {
+      this.model.asRDFNode(objectNode);
+    } else { null }
 
-    if(!subject.isResource()) {
-      logger.error("Subject: " + subject + " is not a resource!");
+    /*
+    if(!subjectRDFNode.isResource()) {
+      logger.error("Subject: " + subjectRDFNode + " is not a resource!");
     }
+    */
 
-    if(!predicate.isURIResource()) {
+    /*
+    if(!predicate.isProperty) {
       logger.error("Predicate: " + predicate + " is not a property!");
     }
+    */
 
 
-    if(subject.isResource() && predicate.isProperty()) {
-      //val subjectResource = subject.asResource();
-      val subjectResource = subject.asResource();
+    //val subjectResource = subject.asResource();
+    //val subjectResource = subjectRDFNode.asResource();
+    val subjectResource = this.model.createResource(subjectNode.getURI);
 
-      if(obj != null) {
-        try {
-          //subjectResource.addProperty(predicate, obj);
-          this.model.add(subjectResource, predicate, obj)
-        } catch {
-          case e:Exception => {
-            logger.error("Error adding property: " + predicate + ", error message = " + e.getMessage() );
-          }
+
+    if(objectRDFNode != null) {
+      try {
+        //subjectResource.addProperty(predicate, obj);
+
+        this.model.add(subjectResource, property, objectRDFNode)
+      } catch {
+        case e:Exception => {
+          logger.error("Error adding property: " + property + ", error message = " + e.getMessage() );
         }
       }
-
     }
+
 
 
 

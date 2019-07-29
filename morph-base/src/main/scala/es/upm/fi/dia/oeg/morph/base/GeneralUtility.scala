@@ -266,4 +266,17 @@ object GeneralUtility {
     val result = source.getLines.toList
     result;
   }
+
+  import org.apache.jena.datatypes.RDFDatatype
+  import org.apache.jena.datatypes.xsd.XSDDatatype
+
+  def getXSDDatatype(datatype: String): XSDDatatype = {
+    val xsdDataType = if (XSDDatatype.XSDdate.getURI.equals(datatype)) { XSDDatatype.XSDdate }
+    else if (XSDDatatype.XSDtime.getURI.equals(datatype)) { XSDDatatype.XSDtime }
+    else if (XSDDatatype.XSDdateTime.getURI.equals(datatype)) { XSDDatatype.XSDdateTime }
+    else if (XSDDatatype.XSDboolean.getURI.equals(datatype)) { XSDDatatype.XSDboolean }
+    else if (XSDDatatype.XSDinteger.getURI.equals(datatype)) { XSDDatatype.XSDinteger }
+    else { XSDDatatype.XSDstring }
+    xsdDataType
+  }
 }

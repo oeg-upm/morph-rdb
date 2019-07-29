@@ -3,6 +3,7 @@ package es.upm.fi.dia.oeg.morph.base.materializer
 //import com.hp.hpl.jena.rdf.model.Model
 import org.apache.jena.graph.Node
 import org.apache.jena.rdf.model.Model
+import org.apache.jena.rdf.model.impl.PropertyImpl
 import org.apache.jena.riot.Lang
 import org.apache.jena.sparql.core.Quad;
 //import org.apache.log4j.Logger
@@ -70,8 +71,8 @@ class NTripleMaterializer(model:Model,ntWriter:Writer, ntOutputStream: OutputStr
 
   }
 
-  override def materializeQuad(subject:RDFNode, predicate:Property, obj:RDFNode, graph:RDFNode) {
-    if(subject != null && predicate != null && obj!= null) {
+  override def materializeQuad(subjectNode:Node, predicateNode:Node, objectNode:Node, graphNode:Node) {
+    if(subjectNode != null && predicateNode != null && objectNode != null) {
       try {
         /*
 				val subjectString = GeneralUtility.nodeToString(subject);
@@ -82,33 +83,35 @@ class NTripleMaterializer(model:Model,ntWriter:Writer, ntOutputStream: OutputStr
 				this.write(tripleString);
 				*/
 
+        /*
         val graphNode = if(graph != null) { graph.asNode() } else { null }
         val subjectNode = if(subject != null) { subject.asNode() } else { null }
-        val predicateNode = if(predicate != null) { predicate.asNode() } else { null }
         val objectNode = if(obj != null) { obj.asNode() } else { null }
+        */
+        //val predicateNode = if(predicate != null) { predicate.asNode() } else { null }
         val quad = Quad.create(graphNode, subjectNode, predicateNode, objectNode)
         this.streamQuad(quad)
 
       } catch {
         case e:Exception => {
           //e.printStackTrace();
-          val errorMessage = "unable to serialize triple, subjectURI=" + subject + ", error message = " + e.getMessage();
+          val errorMessage = "unable to serialize triple, subjectURI=" + subjectNode + ", error message = " + e.getMessage();
           logger.debug(errorMessage);
           //noOfErrors = noOfErrors + 1;
         }
       }
     } else {
-      if(subject == null) {
+      if(subjectNode == null) {
         val errorMessage = "unable to serialize triple, subject is null!";
         logger.debug(errorMessage);
       }
 
-      if(predicate == null) {
+      if(predicateNode == null) {
         val errorMessage = "unable to serialize triple, predicate is null!";
         logger.debug(errorMessage);
       }
 
-      if(obj == null) {
+      if(objectNode == null) {
         val errorMessage = "unable to serialize triple, object is null!";
         //logger.debug(errorMessage);
       }
