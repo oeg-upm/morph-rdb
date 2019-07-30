@@ -1,11 +1,11 @@
 package es.upm.fi.dia.oeg.morph.base.engine
 
-import java.sql.Connection
+import java.sql.{Connection, ResultSet}
 
 import org.apache.jena.query.Query
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
-import es.upm.fi.dia.oeg.morph.base.MorphProperties
+import es.upm.fi.dia.oeg.morph.base.{MorphProperties, TranslatedValue}
 import org.apache.jena.graph.Node
 //import com.hp.hpl.jena.sparql.algebra.Op
 import org.apache.jena.sparql.algebra.Op;
@@ -48,7 +48,7 @@ trait IQueryTranslator {
 
 	//String translateResultSet(String columnLabel, String dbValue);
 
-	def translateResultSet(rs:MorphBaseResultSet, varName:String):Node;
+	def translateResultSet(rs:ResultSet, varName:String):TranslatedValue;
 
 	def setDatabaseType(dbType:String) = {this.databaseType = dbType}
 

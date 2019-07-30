@@ -4,18 +4,18 @@ import java.sql.ResultSet
 
 class RDBResultSet(rs:ResultSet ) extends MorphBaseResultSet{
 	def next() : Boolean = {
-		try { this.rs.next(); } 
+		try { this.rs.next(); }
 		catch  {
-		  case e:Exception => { false; }
+			case e:Exception => { false; }
 		}
 	}
 
 	def getObject(columnIndex:Int) : Object = {
-	  rs.getObject(columnIndex);
+		rs.getObject(columnIndex);
 	}
 
 	def getObject(columnLabel:String ) : Object = {
-	  rs.getObject(columnLabel);
+		rs.getObject(columnLabel);
 	}
 
 	def getString(columnIndex:Int ) : String  = {
@@ -26,11 +26,11 @@ class RDBResultSet(rs:ResultSet ) extends MorphBaseResultSet{
 		rs.getString(columnLabel);
 	}
 
-	def getInt(columnIndex:Int ) : Integer = {
+	def getInt(columnIndex:Int ) : Int = {
 		return rs.getInt(columnIndex);
 	}
 
-	def getInt(columnLabel:String ) : Integer  = {
+	def getInt(columnLabel:String ) : Int = {
 		rs.getInt(columnLabel);
 	}
 }

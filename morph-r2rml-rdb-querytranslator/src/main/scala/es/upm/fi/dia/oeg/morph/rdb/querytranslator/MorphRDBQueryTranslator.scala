@@ -8,10 +8,7 @@ import java.util.regex.Pattern
 import Zql.ZConstant
 import Zql.ZExp
 import org.apache.jena.graph.{Node, NodeFactory, Triple}
-import es.upm.fi.dia.oeg.morph.base.CollectionUtility
-import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.morph.base.RegexUtility
-import es.upm.fi.dia.oeg.morph.base.GeneralUtility
+import es.upm.fi.dia.oeg.morph.base._
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTriplesMap
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTermMap
@@ -27,9 +24,13 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseResultSet
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBResultSetTranslator
 import org.apache.jena.datatypes.RDFDatatype
 import org.apache.jena.datatypes.xsd.XSDDatatype
 import org.slf4j.LoggerFactory
+
+import scala.collection.mutable.ListBuffer
 
 class MorphRDBQueryTranslator(nameGenerator:NameGenerator
                               , alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
@@ -91,13 +92,13 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
   //		super.setPrSQLGenerator(prSQLGenerator);
   //	}
 
-  def getMappedMappingByVarName(varName:String, rs:MorphBaseResultSet) = {
+  def getMappedMappingByVarName(varName:String, rs:ResultSet) = {
     val mapValue = {
       try {
         val mappingHashCode = rs.getInt(Constants.PREFIX_MAPPING_ID + varName);
 
         //IN CASE OF UNION, A VARIABLE MAY MAPPED TO MULTIPLE MAPPINGS
-        if(mappingHashCode == null) {
+        if(mappingHashCode == 0) {
           val varNameHashCode = varName.hashCode();
           //super.getMappedMapping(varNameHashCode);
           this.prSQLGenerator.getMappedMapping(varNameHashCode)
@@ -115,21 +116,22 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
     mapValue;
   }
 
-  override def translateResultSet(rs:MorphBaseResultSet, varName:String) : Node  = {
-    val result:Node = {
+  override def translateResultSet(rs:ResultSet, varName:String) : TranslatedValue  = {
+    val result:TranslatedValue = {
       try {
         if(rs != null) {
-          val rsColumnNames = rs.getColumnNames();
-          val columnNames = CollectionUtility.getElementsStartWith(rsColumnNames, varName + "_");
+          //val rsColumnNames = rs.getColumnNames();
+          //val columnNames = CollectionUtility.getElementsStartWith(rsColumnNames, varName + "_");
           //val columnNames = CollectionUtility.getElementsStartWith(rsColumnNames, varName);
 
           val mapValue = this.getMappedMappingByVarName(varName, rs);
 
           if(!mapValue.isDefined) {
             val originalValue = rs.getString(varName);
-            val node = if(originalValue == null ) { null } else { NodeFactory.createLiteral(originalValue); }
+            val node = if(originalValue == null ) { null }
+            else { NodeFactory.createLiteral(originalValue); }
             //new TermMapResult(node, originalValue, null,None)
-            node
+            new TranslatedValue(node, List(originalValue))
           } else {
             val termMap : R2RMLTermMap = {
               mapValue.get match {
@@ -149,9 +151,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
               }
             }
 
-            val nodeValue = this.translateResultSet(rs, termMap, varName);
-            val termMapType = termMap.inferTermType;
-            val datatype = termMap.datatype;
+            this.translateResultSet(rs, termMap, varName);
 
             /*
             val termMapResult = {
@@ -186,8 +186,16 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
             }
             termMapResult
             */
-            val node = this.generateNode(nodeValue, termMap, datatype)
-            node
+
+            /*
+            if(dbValue != null) {
+              val nodeValue = dbValue.toString
+              val node = MorphRDBResultSetTranslator.generateNode(nodeValue, termMap, datatype);
+              node
+            } else {
+              null
+            }
+            */
           }
         } else {
           null
@@ -204,42 +212,6 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
     result;
   }
 
-  def generateNode(nodeValue:String
-                   , termMap:R2RMLTermMap
-                   , datatype:Option[String]
-                   //, termMapType:String
-                  ) = {
-
-    val node = {
-      if(nodeValue != null) {
-        //val termMapType = termMap.inferTermType;
-
-        termMap.inferTermType match {
-          case Constants.R2RML_IRI_URI => {
-            val uri = GeneralUtility.encodeURI(nodeValue, properties.mapURIEncodingChars
-              , properties.uriTransformationOperation);
-            NodeFactory.createURI(uri);
-          }
-          case Constants.R2RML_LITERAL_URI => {
-            val literalValue = GeneralUtility.encodeLiteral(nodeValue);
-            //val datatype = termMap.datatype;
-            if(datatype == null || datatype.isEmpty) {
-              NodeFactory.createLiteral(literalValue);
-            } else {
-              val rdfDataType = new XSDDatatype(datatype.get)
-              NodeFactory.createLiteral(literalValue, rdfDataType);
-            }
-          }
-          case _ => {
-            NodeFactory.createLiteral(nodeValue);
-          }
-        }
-      } else {
-        null
-      }
-    }
-    node
-  }
 
   //	override def transTP(tp:Triple , cm:MorphBaseClassMapping ,predicateURI:String
   //	    , pm:MorphBasePropertyMapping ) : IQuery = {
@@ -273,15 +245,41 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
 
   //def setUnfolder(x$1: es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder): Unit = ???
 
-  def translateResultSet(rs:MorphBaseResultSet, termMap:R2RMLTermMap, varName:String) = {
-    val rsColumnNames = rs.getColumnNames();
-    val columnNames = CollectionUtility.getElementsStartWith(rsColumnNames, varName + "_");
+  def translateResultSet(rs:ResultSet, termMap:R2RMLTermMap, varName:String):TranslatedValue = {
+    //val rsColumnNames = rs.getColumnNames();
+    val rsmd = rs.getMetaData
+    val columnNamesListBuffer = new ListBuffer[String]()
+    for(i <- 0 to rsmd.getColumnCount-1) {
+      columnNamesListBuffer += rsmd.getColumnLabel(i+1)
+    }
+    val rsColumnNames = columnNamesListBuffer.toList
+
+
+    val columnNames = CollectionUtility.getElementsStartWith(rsColumnNames, varName + "_").toList;
 
     val resultAux = {
       if(termMap != null) {
         val termMapType = termMap.termMapType;
         termMap.termMapType match {
+          case Constants.MorphTermMapType.ConstantTermMap => {
+            MorphRDBResultSetTranslator.generateNodeFromConstantMap(termMap);
+          }
+          case Constants.MorphTermMapType.ColumnTermMap => {
+            /*
+            val rsObjectVarName = rs.getObject(varName);
+            if(rsObjectVarName == null) { null } else { rsObjectVarName.toString(); }
+            */
+
+            //val dbValueAux = MorphRDBResultSetTranslator.getResultSetValue(rs, varName, this.databaseType);
+            //dbValueAux
+
+            MorphRDBResultSetTranslator.generateNodeFromColumnMap(termMap, rs
+              , this.databaseType, null, varName);
+          }
           case Constants.MorphTermMapType.TemplateTermMap => {
+            /*
+            val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }
+
             //val templateString = termMap.getTemplateString();
             val templateString = termMap.getOriginalValue().replaceAllLiterally("\\\"", enclosedCharacter)
 
@@ -304,7 +302,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
             }
 
             var i = 0;
-            val replaceMentAux = templateAttributes.map(templateAttribute => {
+            val replacements:Map[String, String] = templateAttributes.flatMap(templateAttribute => {
               val columnName = {
                 if(columnNames == null || columnNames.isEmpty()) {
                   varName;
@@ -315,31 +313,29 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
               i = i + 1;
 
               val dbValue = rs.getString(columnName);
-              templateAttribute -> dbValue;
-            })
-            val replacements = replaceMentAux.toMap;
+              Some(templateAttribute -> dbValue);
+            }).toMap
 
-            val templateResult = if(replacements.size() > 0) {
-              RegexUtility.replaceTokens(templateString, replacements);
-            } else {
-              logger.debug("no replacements found for the R2RML template!");
-              null;
-            }
-            templateResult;
-          }
-          case Constants.MorphTermMapType.ColumnTermMap => {
-            //String columnName = termMap.getColumnName();
-            val rsObjectVarName = rs.getObject(varName);
-            if(rsObjectVarName == null) {
+            val node = if(replacements.isEmpty) {
               null
             } else {
-              rsObjectVarName.toString();
+              val templateResult = RegexUtility.replaceTokens(templateString, replacements);
+              if(templateResult != null) {
+                MorphRDBResultSetTranslator.generateNode(templateResult, termMap, datatype);
+              } else {
+                null
+              }
             }
+            new TranslatedValue(node, null)
+            */
+
+            MorphRDBResultSetTranslator.generateNodeFromTemplateMap(termMap, rs, this.databaseType, this.properties
+              , null
+              , varName, columnNames);
 
           }
-          case Constants.MorphTermMapType.ConstantTermMap => {
-            termMap.getConstantValue();
-          }
+
+
           case _ => {
             logger.debug("Unsupported term map type!");
             null;

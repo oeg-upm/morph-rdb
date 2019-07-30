@@ -65,7 +65,10 @@ class MorphXMLQueryResultWriter(queryTranslator:IQueryTranslator, xmlOutputStrea
       resultsElement.appendChild(resultElement);
 
       for(varName <- varNames) {
-        val node = queryTranslator.translateResultSet(rs, varName);
+        val translatedValue = queryTranslator.translateResultSet(rs, varName);
+        val node = if(translatedValue == null) { null }
+        else {translatedValue.node}
+
         if(node != null) {
           //val translatedDBValue = translatedColumnValue.translatedValue;
           val translatedDBValue = if(node.isLiteral) {

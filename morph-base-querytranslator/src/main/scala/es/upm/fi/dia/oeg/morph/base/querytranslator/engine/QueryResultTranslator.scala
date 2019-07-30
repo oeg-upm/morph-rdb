@@ -8,11 +8,13 @@ import es.upm.fi.dia.oeg.morph.base.engine.AbstractQueryResultTranslator
 import org.apache.jena.query.Query
 import org.slf4j.LoggerFactory
 
-class QueryResultTranslator(dataSourceReader:MorphBaseDataSourceReader 
-			, queryResultWriter:MorphBaseQueryResultWriter ) 
-			extends AbstractQueryResultTranslator(dataSourceReader, queryResultWriter){
-  val logger = LoggerFactory.getLogger(this.getClass());
-	
+import scala.collection.mutable.ListBuffer
+
+class QueryResultTranslator(dataSourceReader:MorphBaseDataSourceReader
+														, queryResultWriter:MorphBaseQueryResultWriter )
+	extends AbstractQueryResultTranslator(dataSourceReader, queryResultWriter){
+	val logger = LoggerFactory.getLogger(this.getClass());
+
 	def translateResult(mapSparqlSql:Map[Query, IQuery] ) {
 		val start = System.currentTimeMillis();
 		this.queryResultWriter.initialize();
@@ -23,23 +25,31 @@ class QueryResultTranslator(dataSourceReader:MorphBaseDataSourceReader
 			val iQuery = mapElement._2
 
 			val iQueryString = iQuery.toString();
-			val abstractResultSet = this.dataSourceReader.execute(iQueryString);
+			val rs = this.dataSourceReader.execute(iQueryString);
 			val columnNames = iQuery.getSelectItemAliases();
-			abstractResultSet.setColumnNames(columnNames);
+			//abstractResultSet.setColumnNames(columnNames);
+			//val rsColumnNames = rs.getColumnNames();
+			val rsmd = rs.getMetaData
+			val columnNamesListBuffer = new ListBuffer[String]()
+			for(i <- 0 to rsmd.getColumnCount-1) {
+				//columnNamesListBuffer += rsmd.getColumnName(i+1)
+				columnNamesListBuffer += rsmd.getColumnLabel(i+1)
+			}
+			val rsColumnNames = columnNamesListBuffer.toList
 
 			this.queryResultWriter.sparqlQuery = sparqlQuery;
-			this.queryResultWriter.setResultSet(abstractResultSet);
+			this.queryResultWriter.setResultSet(rs);
 			if(i==0) {
-				this.queryResultWriter.preProcess();	
+				this.queryResultWriter.preProcess();
 			}
 			this.queryResultWriter.process();
-			i = i + 1;		  
+			i = i + 1;
 		})
 
 		if(i > 0) {
-			this.queryResultWriter.postProcess();	
+			this.queryResultWriter.postProcess();
 		}
-		
+
 		val end = System.currentTimeMillis();
 		logger.info("Result generation time = "+ (end-start)+" ms.");
 	}
