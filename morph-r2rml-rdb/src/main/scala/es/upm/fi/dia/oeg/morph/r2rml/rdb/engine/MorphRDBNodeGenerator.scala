@@ -141,13 +141,14 @@ class MorphRDBNodeGenerator(properties:MorphProperties) {
 
   def generateNodeFromConstantMap(termMap:R2RMLTermMap) = {
     val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }
+
     val node = this.generateNode(termMap.constantValue, termMap, datatype)
     //new TranslatedValue(node, List());
     node
   }
 
   def generateNodeFromColumnMap(termMap:R2RMLTermMap, rs:ResultSet
-                                , mapXMLDatatype : Map[String, String]
+                                , mapXSDDatatype : Map[String, String]
                                 , columnName:String
                                ) = {
     val dbType = this.properties.databaseType;
@@ -155,12 +156,12 @@ class MorphRDBNodeGenerator(properties:MorphProperties) {
     else {
       val columnNameAux = termMap.columnName.replaceAll("\"", "");
       val datatypeAux = {
-        if(mapXMLDatatype == null || mapXMLDatatype.isEmpty) {
+        if(mapXSDDatatype == null || mapXSDDatatype.isEmpty) {
           null
         } else {
-          val columnNameAuxDatatype = mapXMLDatatype.get(columnNameAux);
+          val columnNameAuxDatatype = mapXSDDatatype.get(columnNameAux);
           if(columnNameAuxDatatype.isDefined) { columnNameAuxDatatype }
-          else { mapXMLDatatype.get(columnName); }
+          else { mapXSDDatatype.get(columnName); }
         }
       }
       datatypeAux
