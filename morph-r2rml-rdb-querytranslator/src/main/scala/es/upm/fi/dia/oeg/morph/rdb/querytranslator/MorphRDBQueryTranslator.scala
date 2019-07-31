@@ -25,7 +25,7 @@ import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseResultSet
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
-import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBResultSetTranslator
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.{MorphRDBNodeGenerator}
 import org.apache.jena.datatypes.RDFDatatype
 import org.apache.jena.datatypes.xsd.XSDDatatype
 import org.slf4j.LoggerFactory
@@ -262,7 +262,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
         val termMapType = termMap.termMapType;
         termMap.termMapType match {
           case Constants.MorphTermMapType.ConstantTermMap => {
-            MorphRDBResultSetTranslator.generateNodeFromConstantMap(termMap);
+            MorphRDBNodeGenerator.generateNodeFromConstantMap(termMap);
           }
           case Constants.MorphTermMapType.ColumnTermMap => {
             /*
@@ -273,7 +273,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
             //val dbValueAux = MorphRDBResultSetTranslator.getResultSetValue(rs, varName, this.databaseType);
             //dbValueAux
 
-            MorphRDBResultSetTranslator.generateNodeFromColumnMap(termMap, rs
+            MorphRDBNodeGenerator.generateNodeFromColumnMap(termMap, rs
               , this.databaseType, null, varName);
           }
           case Constants.MorphTermMapType.TemplateTermMap => {
@@ -329,7 +329,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
             new TranslatedValue(node, null)
             */
 
-            MorphRDBResultSetTranslator.generateNodeFromTemplateMap(termMap, rs, this.databaseType, this.properties
+            MorphRDBNodeGenerator.generateNodeFromTemplateMap(termMap, rs, this.databaseType, this.properties
               , null
               , varName, columnNames);
 

@@ -13,14 +13,14 @@ import org.slf4j.LoggerFactory
 
 import scala.collection.JavaConversions._
 
-class MorphRDBResultSetTranslator {
+class MorphRDBNodeGenerator {
 
 }
 
-object MorphRDBResultSetTranslator {
+object MorphRDBNodeGenerator {
   val logger = LoggerFactory.getLogger(this.getClass)
 
-  def getResultSetValue(rs:ResultSet
+  def getNodeValue(rs:ResultSet
                         //, termMapDatatype:Option[String]
                         , pColumnName:String
                         , dbType:String
@@ -142,7 +142,7 @@ object MorphRDBResultSetTranslator {
 
   def generateNodeFromConstantMap(termMap:R2RMLTermMap) = {
     val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }
-    val node = MorphRDBResultSetTranslator.generateNode(termMap.constantValue, termMap, datatype)
+    val node = MorphRDBNodeGenerator.generateNode(termMap.constantValue, termMap, datatype)
     new TranslatedValue(node, List());
   }
 
@@ -168,7 +168,7 @@ object MorphRDBResultSetTranslator {
       datatypeAux
     }
 
-    val dbValueAux = this.getResultSetValue(rs, columnName, dbType);
+    val nodeValuAux = this.getNodeValue(rs, columnName, dbType);
     //			  val dbValue = dbValueAux match {
     //				  case dbValueAuxString:String => {
     //					  if(this.properties.transformString.isDefined) {
@@ -193,20 +193,20 @@ object MorphRDBResultSetTranslator {
 
     //val result = (this.generateNode(dbValue, termMap, datatype), List(dbValue));
 
-    val dbValue  = if(Constants.DATABASE_H2_NULL_VALUE.equals(dbValueAux)
+    val nodeValue  = if(Constants.DATABASE_H2_NULL_VALUE.equals(nodeValuAux)
       && Constants.DATABASE_CSV.equals(dbType)) {
       null
     } else {
-      dbValueAux
+      nodeValuAux
     }
 
-    val node = if(dbValue != null) {
-      MorphRDBResultSetTranslator.generateNode(dbValue.toString, termMap, datatype);
+    val node = if(nodeValue != null) {
+      MorphRDBNodeGenerator.generateNode(nodeValue, termMap, datatype);
     } else {
       null
     }
 
-    new TranslatedValue(node, List(dbValue));
+    new TranslatedValue(node, List(nodeValue));
   }
 
 
@@ -241,16 +241,16 @@ object MorphRDBResultSetTranslator {
         columnName
       } else { attribute; }
 
-      val dbValueAux = MorphRDBResultSetTranslator.getResultSetValue(rs, databaseColumn, dbType);
+      val nodeValueAux = MorphRDBNodeGenerator.getNodeValue(rs, databaseColumn, dbType);
       //logger.info(s"dbValueAux = ${dbValueAux}")
 
 
-      if(dbValueAux != null) {
-        rawDBValues = rawDBValues ::: List(dbValueAux);
+      if(nodeValueAux != null) {
+        rawDBValues = rawDBValues ::: List(nodeValueAux);
       }
 
 
-      val dbValue = dbValueAux match {
+      val dbValue = nodeValueAux match {
         case dbValueAuxString:String => {
           if(properties.transformString.isDefined) {
             properties.transformString.get match {
@@ -266,7 +266,7 @@ object MorphRDBResultSetTranslator {
           }
           else { dbValueAuxString }
         }
-        case _ => { dbValueAux }
+        case _ => { nodeValueAux }
       }
       //logger.info(s"dbValue = ${dbValue}")
 
@@ -303,7 +303,7 @@ object MorphRDBResultSetTranslator {
     } else {
       val templateWithDBValue = RegexUtility.replaceTokens(termMapTemplateString, replacements);
       if(templateWithDBValue != null) {
-        MorphRDBResultSetTranslator.generateNode(templateWithDBValue, termMap, datatype);
+        MorphRDBNodeGenerator.generateNode(templateWithDBValue, termMap, datatype);
       } else {
         null
       }

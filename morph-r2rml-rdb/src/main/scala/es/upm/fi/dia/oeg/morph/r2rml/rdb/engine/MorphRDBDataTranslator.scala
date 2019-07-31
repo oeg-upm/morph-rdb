@@ -547,7 +547,7 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
 
     val result = termMap.termMapType match {
       case Constants.MorphTermMapType.ConstantTermMap => {
-        MorphRDBResultSetTranslator.generateNodeFromConstantMap(termMap);
+        MorphRDBNodeGenerator.generateNodeFromConstantMap(termMap);
       }
       case Constants.MorphTermMapType.ColumnTermMap => {
         val columnTermMapValue = if(logicalTableAlias != null && !logicalTableAlias.equals("")) {
@@ -560,11 +560,11 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
         }
         else { termMap.columnName }
 
-        MorphRDBResultSetTranslator.generateNodeFromColumnMap(termMap, rs
+        MorphRDBNodeGenerator.generateNodeFromColumnMap(termMap, rs
           , this.dbType, mapXMLDatatype, columnTermMapValue);
       }
       case Constants.MorphTermMapType.TemplateTermMap => {
-        MorphRDBResultSetTranslator.generateNodeFromTemplateMap(termMap, rs, this.dbType, this.properties
+        MorphRDBNodeGenerator.generateNodeFromTemplateMap(termMap, rs, this.dbType, this.properties
           , logicalTableAlias
           , null, null);
       }
