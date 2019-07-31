@@ -49,6 +49,8 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
   var mapTemplateAttributes:Map[String, java.util.List[String]] = Map.empty;
 
   val enclosedCharacter = Constants.getEnclosedCharacter(this.databaseType);
+  //val nodeGenerator = new MorphRDBNodeGenerator(this.properties)
+
 
   override def transIRI(node:Node) : List[ZExp] = {
     val cms = mapInferredTypes(node);
@@ -116,8 +118,10 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
     mapValue;
   }
 
-  override def translateResultSet(rs:ResultSet, varName:String) : TranslatedValue  = {
-    val result:TranslatedValue = {
+  override def generateNode(rs:ResultSet, varName:String, mapXSDDatatype:Map[String, String]
+                            , varNameColumnLabels:List[String]
+                           ) : Node = {
+    val result:Node = {
       try {
         if(rs != null) {
           //val rsColumnNames = rs.getColumnNames();
@@ -131,7 +135,8 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
             val node = if(originalValue == null ) { null }
             else { NodeFactory.createLiteral(originalValue); }
             //new TermMapResult(node, originalValue, null,None)
-            new TranslatedValue(node, List(originalValue))
+            //new TranslatedValue(node, List(originalValue))
+            node
           } else {
             val termMap : R2RMLTermMap = {
               mapValue.get match {
@@ -151,7 +156,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
               }
             }
 
-            this.translateResultSet(rs, termMap, varName);
+            this.generateNode(rs, termMap, mapXSDDatatype, varName, varNameColumnLabels);
 
             /*
             val termMapResult = {
@@ -245,24 +250,16 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
 
   //def setUnfolder(x$1: es.upm.fi.dia.oeg.obdi.core.engine.AbstractUnfolder): Unit = ???
 
-  def translateResultSet(rs:ResultSet, termMap:R2RMLTermMap, varName:String):TranslatedValue = {
-    //val rsColumnNames = rs.getColumnNames();
-    val rsmd = rs.getMetaData
-    val columnNamesListBuffer = new ListBuffer[String]()
-    for(i <- 0 to rsmd.getColumnCount-1) {
-      columnNamesListBuffer += rsmd.getColumnLabel(i+1)
-    }
-    val rsColumnNames = columnNamesListBuffer.toList
+  def generateNode(rs:ResultSet, termMap:R2RMLTermMap, mapXSDDatatype:Map[String, String]
+                   , varName:String, varNameColumnLabels:List[String]
+                  ):Node= {
+    val nodeGenerator = new MorphRDBNodeGenerator(this.properties)
 
-
-    val columnNames = CollectionUtility.getElementsStartWith(rsColumnNames, varName + "_").toList;
-
-    val resultAux = {
+    val node = {
       if(termMap != null) {
-        val termMapType = termMap.termMapType;
         termMap.termMapType match {
           case Constants.MorphTermMapType.ConstantTermMap => {
-            MorphRDBNodeGenerator.generateNodeFromConstantMap(termMap);
+            nodeGenerator.generateNodeFromConstantMap(termMap);
           }
           case Constants.MorphTermMapType.ColumnTermMap => {
             /*
@@ -273,8 +270,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
             //val dbValueAux = MorphRDBResultSetTranslator.getResultSetValue(rs, varName, this.databaseType);
             //dbValueAux
 
-            MorphRDBNodeGenerator.generateNodeFromColumnMap(termMap, rs
-              , this.databaseType, null, varName);
+            nodeGenerator.generateNodeFromColumnMap(termMap, rs, mapXSDDatatype, varName);
           }
           case Constants.MorphTermMapType.TemplateTermMap => {
             /*
@@ -329,9 +325,9 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
             new TranslatedValue(node, null)
             */
 
-            MorphRDBNodeGenerator.generateNodeFromTemplateMap(termMap, rs, this.databaseType, this.properties
+            nodeGenerator.generateNodeFromTemplateMap(termMap, rs
               , null
-              , varName, columnNames);
+              , varName, varNameColumnLabels);
 
           }
 
@@ -345,7 +341,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
         null;
       }
     }
-    resultAux
+    node
 
 
   }

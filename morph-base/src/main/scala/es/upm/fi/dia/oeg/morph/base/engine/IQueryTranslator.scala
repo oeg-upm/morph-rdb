@@ -16,51 +16,52 @@ import Zql.ZInsert
 import Zql.ZDelete
 
 trait IQueryTranslator {
-	var connection:Connection = null;
+  var connection:Connection = null;
 
-	//	var sparqlQuery :Query = null;
+  //	var sparqlQuery :Query = null;
 
-	var optimizer:QueryTranslationOptimizer  = null;
+  var optimizer:QueryTranslationOptimizer  = null;
 
-	var properties:MorphProperties =null;
+  var properties:MorphProperties =null;
 
-	var databaseType:String =null;
+  var databaseType:String =null;
 
-	//val unfolder:MorphBaseUnfolder=null;
+  //val unfolder:MorphBaseUnfolder=null;
 
-	var mappingDocument:MorphBaseMappingDocument= null;
+  var mappingDocument:MorphBaseMappingDocument= null;
 
-	//	def setSPARQLQueryByString(queryString:String );
-	//
-	//	def setSPARQLQueryByFile(queryFilePath:String );
+  //	def setSPARQLQueryByString(queryString:String );
+  //
+  //	def setSPARQLQueryByFile(queryFilePath:String );
 
-	//def getTranslationResult():IQuery ;
+  //def getTranslationResult():IQuery ;
 
-	def translate(query:Query) :IQuery ;
+  def translate(query:Query) :IQuery ;
 
-	def translate(op:Op) :IQuery ;
+  def translate(op:Op) :IQuery ;
 
-	def translateFromQueryFile(queryFilePath:String ) : IQuery;
+  def translateFromQueryFile(queryFilePath:String ) : IQuery;
 
-	//IQueryTranslationOptimizer getOptimizer();
+  //IQueryTranslationOptimizer getOptimizer();
 
-	def translateFromString(queryString:String ) : IQuery;
+  def translateFromString(queryString:String ) : IQuery;
 
-	//String translateResultSet(String columnLabel, String dbValue);
+  //String translateResultSet(String columnLabel, String dbValue);
 
-	def translateResultSet(rs:ResultSet, varName:String):TranslatedValue;
+  def generateNode(rs:ResultSet, varName:String, mapXSDDatatype:Map[String, String]
+                   , varNameColumnLabels:List[String]):Node;
 
-	def setDatabaseType(dbType:String) = {this.databaseType = dbType}
+  def setDatabaseType(dbType:String) = {this.databaseType = dbType}
 
-	def trans(op:Op) : IQuery;
+  def trans(op:Op) : IQuery;
 
-	def translateUpdate(stg:OpBGP) : ZUpdate;
+  def translateUpdate(stg:OpBGP) : ZUpdate;
 
-	def translateInsert(stg:OpBGP) : ZInsert;
+  def translateInsert(stg:OpBGP) : ZInsert;
 
-	def translateDelete(stg:OpBGP) : ZDelete;
+  def translateDelete(stg:OpBGP) : ZDelete;
 
-	def setConnection(conn:Connection) = {this.connection = conn}
+  def setConnection(conn:Connection) = {this.connection = conn}
 
-	def setOptimizer(optimizer:QueryTranslationOptimizer) = { this.optimizer = optimizer }
+  def setOptimizer(optimizer:QueryTranslationOptimizer) = { this.optimizer = optimizer }
 }

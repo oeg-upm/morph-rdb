@@ -13,67 +13,9 @@ import org.slf4j.LoggerFactory
 
 import scala.collection.JavaConversions._
 
-class MorphRDBNodeGenerator {
-
-}
-
-object MorphRDBNodeGenerator {
+class MorphRDBNodeGenerator(properties:MorphProperties) {
   val logger = LoggerFactory.getLogger(this.getClass)
 
-  def getNodeValue(rs:ResultSet
-                        //, termMapDatatype:Option[String]
-                        , pColumnName:String
-                        , dbType:String
-                       ) : String = {
-    try {
-      val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
-
-      //val logicalTableMetaData = ownerTriplesMap.getLogicalTable();
-
-      //val dbType = this.configurationProperties.databaseType;
-      //val dbType = logicalTableMetaData.getTableMetaData.dbType;
-      //val zConstant = MorphSQLConstant(pColumnName, ZConstant.COLUMNNAME, dbType);
-      val zConstant = MorphSQLConstant(pColumnName, ZConstant.COLUMNNAME);
-      val tableName = zConstant.table;
-      //val columnNameAux = zConstant.column.replaceAll("\"", "")
-      val columnNameAux = zConstant.column.replaceAll(dbEnclosedCharacter, ""); //doesn't work for 9a
-      //val columnNameAux = zConstant.column
-
-
-      val columnName = {
-        if(tableName != null) {
-          tableName + "." + columnNameAux
-        } else {
-          columnNameAux
-        }
-      }
-
-
-      /*
-      val result = if(termMapDatatype == null) {
-        rs.getString(columnName);
-      } else if(!termMapDatatype.isDefined) {
-        rs.getString(columnName);
-      }
-      //			else if(termMapDatatype.get.equals(XSDDatatype.XSDdateTime.getURI())) {
-      //				val rsDateValue = rs.getDate(columnName);
-      //				if(rsDateValue == null) { null; } else { rsDateValue.toString(); }
-      //			}
-      else {
-        rs.getObject(columnName);
-      }
-      */
-
-      val result = rs.getString(columnName);
-      result
-    } catch {
-      case e:Exception => {
-        e.printStackTrace();
-        logger.error("error occured when translating result: " + e.getMessage());
-        null
-      }
-    }
-  }
 
   def generateNode(nodeValue:String
                    , termMap:R2RMLTermMap
@@ -140,19 +82,75 @@ object MorphRDBNodeGenerator {
     result
   }
 
+  def getNodeValue(rs:ResultSet
+                   //, termMapDatatype:Option[String]
+                   , pColumnName:String
+                   , dbType:String
+                  ) : String = {
+    try {
+      val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
+
+      //val logicalTableMetaData = ownerTriplesMap.getLogicalTable();
+
+      //val dbType = this.configurationProperties.databaseType;
+      //val dbType = logicalTableMetaData.getTableMetaData.dbType;
+      //val zConstant = MorphSQLConstant(pColumnName, ZConstant.COLUMNNAME, dbType);
+      val zConstant = MorphSQLConstant(pColumnName, ZConstant.COLUMNNAME);
+      val tableName = zConstant.table;
+      //val columnNameAux = zConstant.column.replaceAll("\"", "")
+      val columnNameAux = zConstant.column.replaceAll(dbEnclosedCharacter, ""); //doesn't work for 9a
+      //val columnNameAux = zConstant.column
+
+
+      val columnName = {
+        if(tableName != null) {
+          tableName + "." + columnNameAux
+        } else {
+          columnNameAux
+        }
+      }
+
+
+      /*
+      val result = if(termMapDatatype == null) {
+        rs.getString(columnName);
+      } else if(!termMapDatatype.isDefined) {
+        rs.getString(columnName);
+      }
+      //			else if(termMapDatatype.get.equals(XSDDatatype.XSDdateTime.getURI())) {
+      //				val rsDateValue = rs.getDate(columnName);
+      //				if(rsDateValue == null) { null; } else { rsDateValue.toString(); }
+      //			}
+      else {
+        rs.getObject(columnName);
+      }
+      */
+
+      val result = rs.getString(columnName);
+      result
+    } catch {
+      case e:Exception => {
+        e.printStackTrace();
+        logger.error("error occured when translating result: " + e.getMessage());
+        null
+      }
+    }
+  }
+
+
+
   def generateNodeFromConstantMap(termMap:R2RMLTermMap) = {
     val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }
-    val node = MorphRDBNodeGenerator.generateNode(termMap.constantValue, termMap, datatype)
-    new TranslatedValue(node, List());
+    val node = this.generateNode(termMap.constantValue, termMap, datatype)
+    //new TranslatedValue(node, List());
+    node
   }
 
   def generateNodeFromColumnMap(termMap:R2RMLTermMap, rs:ResultSet
-                                //, logicalTableAlias:String
-                                , dbType:String
                                 , mapXMLDatatype : Map[String, String]
                                 , columnName:String
                                ) = {
-
+    val dbType = this.properties.databaseType;
     val datatype = if(termMap.datatype.isDefined) { termMap.datatype }
     else {
       val columnNameAux = termMap.columnName.replaceAll("\"", "");
@@ -201,20 +199,22 @@ object MorphRDBNodeGenerator {
     }
 
     val node = if(nodeValue != null) {
-      MorphRDBNodeGenerator.generateNode(nodeValue, termMap, datatype);
+      this.generateNode(nodeValue, termMap, datatype);
     } else {
       null
     }
 
-    new TranslatedValue(node, List(nodeValue));
+    //new TranslatedValue(node, List(nodeValue));
+    node
   }
 
 
 
-  def generateNodeFromTemplateMap(termMap:R2RMLTermMap, rs:ResultSet, dbType:String
-                                  , properties:MorphProperties, logicalTableAlias:String
+  def generateNodeFromTemplateMap(termMap:R2RMLTermMap, rs:ResultSet
+                                  , logicalTableAlias:String
                                   , varName:String, varColumnNames:List[String]
                                  ) = {
+    val dbType = this.properties.databaseType;
     val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
 
     val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }
@@ -241,7 +241,7 @@ object MorphRDBNodeGenerator {
         columnName
       } else { attribute; }
 
-      val nodeValueAux = MorphRDBNodeGenerator.getNodeValue(rs, databaseColumn, dbType);
+      val nodeValueAux = this.getNodeValue(rs, databaseColumn, dbType);
       //logger.info(s"dbValueAux = ${dbValueAux}")
 
 
@@ -252,8 +252,8 @@ object MorphRDBNodeGenerator {
 
       val dbValue = nodeValueAux match {
         case dbValueAuxString:String => {
-          if(properties.transformString.isDefined) {
-            properties.transformString.get match {
+          if(this.properties.transformString.isDefined) {
+            this.properties.transformString.get match {
               case Constants.TRANSFORMATION_STRING_TOLOWERCASE => {
                 dbValueAuxString.toLowerCase();
               }
@@ -303,11 +303,12 @@ object MorphRDBNodeGenerator {
     } else {
       val templateWithDBValue = RegexUtility.replaceTokens(termMapTemplateString, replacements);
       if(templateWithDBValue != null) {
-        MorphRDBNodeGenerator.generateNode(templateWithDBValue, termMap, datatype);
+        this.generateNode(templateWithDBValue, termMap, datatype);
       } else {
         null
       }
     }
-    new TranslatedValue(node, rawDBValues);
+    //new TranslatedValue(node, rawDBValues);
+    node
   }
 }

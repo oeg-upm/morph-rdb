@@ -10,7 +10,7 @@ abstract class MorphBaseQueryResultWriter(queryTranslator:IQueryTranslator
 																					, var outputStream:Writer) {
 
 	var sparqlQuery:Query=null;
-	var resultSet:ResultSet=null
+	var rs:ResultSet=null
 
 
 	def initialize();
@@ -18,6 +18,6 @@ abstract class MorphBaseQueryResultWriter(queryTranslator:IQueryTranslator
 	def process();
 	def postProcess() ;
 	def getOutput():Object ;
-	def setResultSet(resultSet:ResultSet) = {this.resultSet = resultSet}
+	def setResultSet(rs:ResultSet) = {this.rs = rs}
 
 }

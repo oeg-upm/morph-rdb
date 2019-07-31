@@ -4,14 +4,16 @@ import scala.collection.JavaConversions._
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.apache.jena.query.Query
-import es.upm.fi.dia.oeg.morph.base.Constants
-import es.upm.fi.dia.oeg.morph.base.ValueTransformator
-import es.upm.fi.dia.oeg.morph.base.XMLUtility
+import es.upm.fi.dia.oeg.morph.base.{CollectionUtility, Constants, ValueTransformator, XMLUtility}
 import es.upm.fi.dia.oeg.morph.base.engine.IQueryTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseQueryResultWriter
 import java.io.OutputStream
 import java.io.Writer
+
+import es.upm.fi.dia.oeg.morph.base.sql.{DatatypeMapper, MorphSQLUtility}
 import org.slf4j.LoggerFactory
+
+import scala.collection.mutable.ListBuffer
 
 
 class MorphXMLQueryResultWriter(queryTranslator:IQueryTranslator, xmlOutputStream:Writer)
@@ -57,17 +59,21 @@ class MorphXMLQueryResultWriter(queryTranslator:IQueryTranslator, xmlOutputStrea
     val queryTranslator = this.queryTranslator;
     val sparqlQuery = this.sparqlQuery;
     val varNames = sparqlQuery.getResultVars();
+    val columnsLabel = MorphSQLUtility.getColumnsLabel(rs);
+    val mapColumnLabelXSDDatatype = MorphSQLUtility.getMapColumnLabelXSDType(rs)
+
 
     var i=0;
-    val rs = this.resultSet;
-    while(rs.next()) {
+    //val rs = this.resultSet;
+    while(this.rs.next()) {
       val resultElement = xmlDoc.createElement("result");
       resultsElement.appendChild(resultElement);
 
       for(varName <- varNames) {
-        val translatedValue = queryTranslator.translateResultSet(rs, varName);
+        val varNameColumnLabels = CollectionUtility.getElementsStartWith(columnsLabel, varName + "_").toList;
+        val translatedValue = queryTranslator.generateNode(this.rs, varName, mapColumnLabelXSDDatatype, varNameColumnLabels);
         val node = if(translatedValue == null) { null }
-        else {translatedValue.node}
+        else {translatedValue}
 
         if(node != null) {
           //val translatedDBValue = translatedColumnValue.translatedValue;
