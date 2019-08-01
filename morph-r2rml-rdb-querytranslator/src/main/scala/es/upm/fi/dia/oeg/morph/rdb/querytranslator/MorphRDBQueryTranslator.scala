@@ -325,10 +325,26 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
             new TranslatedValue(node, null)
             */
 
-            nodeGenerator.generateNodeFromTemplateMap(termMap, rs
-              , null
-              , varName, varNameColumnLabels);
+            val dbType = this.properties.databaseType;
+            val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
+            val termMapTemplateString = termMap.templateString.replaceAllLiterally("\\\"", dbEnclosedCharacter);
+            val attributes = RegexUtility.getTemplateColumns(termMapTemplateString, true);
+            var i = 0;
+            val mapTemplateColumns:Map[String, String] = attributes.map(attribute => {
+              val databaseColumn = if(varName != null ) {
+                val columnName = if(varNameColumnLabels == null || varNameColumnLabels.isEmpty()) {
+                  varName;
+                } else {
+                  varName + "_" + i;
+                }
+                i = i + 1;
+                columnName
+              } else { attribute; }
+              (attribute -> databaseColumn)
+            }).toMap
 
+            //nodeGenerator.generateNodeFromTemplateMap(termMap, rs, null, varName, varNameColumnLabels);
+            nodeGenerator.generateNodeFromTemplateMap(termMap, rs, mapTemplateColumns);
           }
 
 

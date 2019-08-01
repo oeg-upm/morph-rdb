@@ -211,7 +211,7 @@ class MorphRDBNodeGenerator(properties:MorphProperties) {
 
 
 
-  def generateNodeFromTemplateMap(termMap:R2RMLTermMap, rs:ResultSet
+/*  def generateNodeFromTemplateMap(termMap:R2RMLTermMap, rs:ResultSet
                                   , logicalTableAlias:String
                                   , varName:String, varColumnNames:List[String]
                                  ) = {
@@ -243,14 +243,75 @@ class MorphRDBNodeGenerator(properties:MorphProperties) {
       } else { attribute; }
 
       val nodeValueAux = this.getNodeValue(rs, databaseColumn, dbType);
-      //logger.info(s"dbValueAux = ${dbValueAux}")
-
-
       if(nodeValueAux != null) {
         rawDBValues = rawDBValues ::: List(nodeValueAux);
       }
+      val dbValue = nodeValueAux match {
+        case dbValueAuxString:String => {
+          if(this.properties.transformString.isDefined) {
+            this.properties.transformString.get match {
+              case Constants.TRANSFORMATION_STRING_TOLOWERCASE => {
+                dbValueAuxString.toLowerCase();
+              }
+              case Constants.TRANSFORMATION_STRING_TOUPPERCASE => {
+                dbValueAuxString.toUpperCase();
+              }
+              case _ => { dbValueAuxString }
+            }
 
+          }
+          else { dbValueAuxString }
+        }
+        case _ => { nodeValueAux }
+      }
+      if(dbValue != null) {
+        var databaseValueString = dbValue.toString();
+        if(termMap.inferTermType.equals(Constants.R2RML_IRI_URI)) {
+          val uriTransformationOperations = properties.uriTransformationOperation;
+          if(uriTransformationOperations != null) {
+            uriTransformationOperations.foreach{
+              case Constants.URI_TRANSFORM_TOLOWERCASE => {
+                databaseValueString = databaseValueString.toLowerCase();
+              }
+              case Constants.URI_TRANSFORM_TOUPPERCASE => {
+                databaseValueString = databaseValueString.toUpperCase();
+              }
+              case _ => { }
+            }
+          }
+        }
 
+        Some(attribute -> databaseValueString);
+      } else {
+        None
+      }
+    }).toMap
+
+    val node = if(replacements.isEmpty) {
+      null
+    } else {
+      val templateWithDBValue = RegexUtility.replaceTokens(termMapTemplateString, replacements);
+      if(templateWithDBValue != null) {
+        this.generateNode(templateWithDBValue, termMap, datatype);
+      } else {
+        null
+      }
+    }
+    node
+  }*/
+
+  def generateNodeFromTemplateMap(termMap:R2RMLTermMap, rs:ResultSet, mapTemplateColumns:Map[String, String]) = {
+    val dbType = this.properties.databaseType;
+    val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
+
+    val datatype = if(termMap.datatype.isDefined) { termMap.datatype } else { None }
+    val termMapTemplateString = termMap.templateString.replaceAllLiterally("\\\"", dbEnclosedCharacter);
+
+    val attributes = RegexUtility.getTemplateColumns(termMapTemplateString, true);
+    var i = 0;
+    val replacements:Map[String, String] = attributes.flatMap(attribute => {
+      val databaseColumn = mapTemplateColumns.get(attribute).get
+      val nodeValueAux = this.getNodeValue(rs, databaseColumn, dbType);
       val dbValue = nodeValueAux match {
         case dbValueAuxString:String => {
           if(this.properties.transformString.isDefined) {

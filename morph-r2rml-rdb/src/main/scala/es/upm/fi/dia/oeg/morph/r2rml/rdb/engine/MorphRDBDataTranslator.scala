@@ -508,9 +508,25 @@ class MorphRDBDataTranslator(md:R2RMLMappingDocument, materializer:MorphBaseMate
         this.nodeGenerator.generateNodeFromColumnMap(termMap, rs, mapXSDDatatype, columnTermMapValue);
       }
       case Constants.MorphTermMapType.TemplateTermMap => {
-        this.nodeGenerator.generateNodeFromTemplateMap(termMap, rs
-          , logicalTableAlias
-          , null, null);
+        //this.nodeGenerator.generateNodeFromTemplateMap(termMap, rs, logicalTableAlias, null, null);
+
+        val dbType = this.properties.databaseType;
+        val dbEnclosedCharacter = Constants.getEnclosedCharacter(dbType);
+        val termMapTemplateString = termMap.templateString.replaceAllLiterally("\\\"", dbEnclosedCharacter);
+        val attributes = RegexUtility.getTemplateColumns(termMapTemplateString, true);
+        val mapTemplateColumns:Map[String, String] = attributes.map(attribute => {
+          val databaseColumn = if(logicalTableAlias != null) {
+            val attributeSplit = attribute.split("\\.");
+            if(attributeSplit.length >= 1) {
+              val columnName = attributeSplit(attributeSplit.length - 1).replaceAll("\"", dbEnclosedCharacter);
+              logicalTableAlias + "_" + columnName;
+            }
+            else { logicalTableAlias + "_" + attribute; }
+          }  else { attribute; }
+          (attribute -> databaseColumn)
+        }).toMap;
+
+        this.nodeGenerator.generateNodeFromTemplateMap(termMap, rs, mapTemplateColumns);
       }
     }
 
