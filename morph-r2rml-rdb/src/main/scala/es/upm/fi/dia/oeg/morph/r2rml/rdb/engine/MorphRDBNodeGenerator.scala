@@ -7,6 +7,7 @@ import Zql.ZConstant
 import es.upm.fi.dia.oeg.morph.base.sql.MorphSQLConstant
 import es.upm.fi.dia.oeg.morph.base._
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLTermMap
+import org.apache.jena.datatypes.xsd.XSDDatatype
 import org.apache.jena.graph.NodeFactory
 import org.apache.jena.rdf.model.AnonId
 import org.slf4j.LoggerFactory
@@ -54,18 +55,32 @@ class MorphRDBNodeGenerator(properties:MorphProperties) {
               NodeFactory.createLiteral(nodeValue)
             } else {
               val rdfDataType = GeneralUtility.getXSDDatatype(datatype.get)
-              NodeFactory.createLiteral(nodeValue, rdfDataType);
+              if(rdfDataType.equals(XSDDatatype.XSDboolean)) {
+                if(nodeValue.equals(properties.databaseBooleanTrue)) {
+                  NodeFactory.createLiteral("true", rdfDataType);
+                } else {
+                  NodeFactory.createLiteral("false", rdfDataType);
+                }
+              } else {
+                NodeFactory.createLiteral(nodeValue, rdfDataType);
+              }
             }
           } else {
             if(datatype == null || datatype.isEmpty) {
               NodeFactory.createLiteral(nodeValue, termMap.languageTag.get)
             } else {
               val rdfDataType = GeneralUtility.getXSDDatatype(datatype.get)
-              NodeFactory.createLiteral(nodeValue, termMap.languageTag.get, rdfDataType);
+              if(rdfDataType.equals(XSDDatatype.XSDboolean)) {
+                if(nodeValue.equals(properties.databaseBooleanTrue)) {
+                  NodeFactory.createLiteral("true", termMap.languageTag.get, rdfDataType);
+                } else {
+                  NodeFactory.createLiteral("false", termMap.languageTag.get, rdfDataType);
+                }
+              } else {
+                NodeFactory.createLiteral(nodeValue, termMap.languageTag.get, rdfDataType);
+              }
             }
           }
-
-
         }
         case Constants.R2RML_BLANKNODE_URI => {
           val anonId = new AnonId(nodeValue.toString());
