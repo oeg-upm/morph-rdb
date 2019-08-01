@@ -54,7 +54,31 @@ class MorphRDBCondSQLGenerator(md:R2RMLMappingDocument, unfolder:MorphRDBUnfolde
             }
 
             val columnConstant = new ZConstant(columnNameWithAlias,  ZConstant.COLUMNNAME);
-            val objectLiteral = new ZConstant(objectLiteralValue.toString(), ZConstant.STRING);
+            val objectLiteral = objectLiteralValue match {
+              case literalBooleanValue:java.lang.Boolean => {
+                val properties = this.owner.properties
+                val objConstant = if(literalBooleanValue) {
+                  val dbTrueValue = properties.databaseBooleanTrue
+                  if(dbTrueValue != null) {
+                    new ZConstant(dbTrueValue.toString(), ZConstant.STRING);
+                  } else {
+                    new ZConstant(literalBooleanValue.toString(), ZConstant.STRING);
+                  }
+                } else {
+                  val dbFalseValue = properties.databaseBooleanFalse
+                  if(dbFalseValue != null) {
+                    new ZConstant(dbFalseValue.toString(), ZConstant.STRING);
+                  } else {
+                    new ZConstant(literalBooleanValue.toString(), ZConstant.STRING);
+                  }
+                }
+                objConstant
+              }
+              case _ => {
+                new ZConstant(objectLiteralValue.toString(), ZConstant.STRING);
+              }
+            }
+
             new ZExpression("=", columnConstant, objectLiteral);
           } else {
             null

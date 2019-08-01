@@ -5,7 +5,7 @@ import Zql.ZConstant
 import Zql.ZExp
 import Zql.ZExpression
 import Zql.ZSelectItem
-import org.apache.jena.graph.Node;
+import org.apache.jena.graph.Node
 import org.apache.jena.graph.Triple
 import org.apache.jena.vocabulary.RDF
 import es.upm.fi.dia.oeg.morph.base.Constants
@@ -17,6 +17,7 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseClassMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
+import org.apache.jena.graph.impl.LiteralLabel
 import org.slf4j.LoggerFactory
 
 abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:MorphBaseUnfolder) {
@@ -54,6 +55,53 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
     val exp = new ZExpression("IS NOT NULL");
     exp.addOperand(betaObjectExpression);
     return exp;
+  }
+
+  def genCondSQLPredicateObjectLiteral(literalValue:Object, betaObjectExpressions:List[ZExp]) : List[ZExpression] = {
+    literalValue match {
+      case literalValueString:String => {
+        val objConstant = new ZConstant(literalValue.toString(), ZConstant.STRING);
+        val expAux = betaObjectExpressions.map(betaObjectExpression => {
+          new ZExpression("=", betaObjectExpression, objConstant);
+        })
+        expAux
+      }
+      case literalValueString:java.lang.Double => {
+        val objConstant = new ZConstant(literalValue.toString(), ZConstant.NUMBER);
+        val expAux = betaObjectExpressions.map(betaObjectExpression => {
+          new ZExpression("=", betaObjectExpression, objConstant);
+        })
+        expAux
+      }
+      case literalBooleanValue:java.lang.Boolean => {
+        val properties = this.owner.properties
+        val objConstant = if(literalBooleanValue) {
+          val dbTrueValue = properties.databaseBooleanTrue
+          if(dbTrueValue != null) {
+            new ZConstant(dbTrueValue.toString(), ZConstant.STRING);
+          } else {
+            new ZConstant(literalBooleanValue.toString(), ZConstant.STRING);
+          }
+        } else {
+          val dbFalseValue = properties.databaseBooleanFalse
+          if(dbFalseValue != null) {
+            new ZConstant(dbFalseValue.toString(), ZConstant.STRING);
+          } else {
+            new ZConstant(literalBooleanValue.toString(), ZConstant.STRING);
+          }
+        }
+        val expAux = betaObjectExpressions.map(betaObjectExpression => {
+          new ZExpression("=", betaObjectExpression, objConstant);
+        })
+        expAux
+      }
+      case _ => {
+        betaObjectExpressions.map(betaObjectExpression => {
+          val objConstant = new ZConstant(literalValue.toString(), ZConstant.STRING);
+          new ZExpression("=", betaObjectExpression, objConstant);
+        })
+      }
+    }
   }
 
   def genCondSQLPredicateObject(tp:Triple, alphaResult:MorphAlphaResult
@@ -105,7 +153,7 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
 
       val betaObjectSelectItems =
         betaGenerator.calculateBetaObject(tp, cm, predicateURI, alphaResult);
-      val betaObjectExpressions= betaObjectSelectItems.map(betaObjectSelectItem => {
+      val betaObjectExpressions:List[ZExp]= betaObjectSelectItems.map(betaObjectSelectItem => {
         val betaObjectExp = {
           if(betaObjectSelectItem.isExpression()) {
             betaObjectSelectItem.getExpression();
@@ -136,33 +184,13 @@ abstract class MorphBaseCondSQLGenerator(md:MorphBaseMappingDocument, unfolder:M
             expAux
           } else if(tpObject.isLiteral()) {
             val literalValue = tpObject.getLiteralValue();
-            literalValue match {
-              case literalValueString:String => {
-                val objConstant = new ZConstant(literalValue.toString(), ZConstant.STRING);
-                val expAux = betaObjectExpressions.map(betaObjectExpression => {
-                  new ZExpression("=", betaObjectExpression, objConstant);
-                })
-                expAux
-              }
-              case literalValueString:java.lang.Double => {
-                val objConstant = new ZConstant(literalValue.toString(), ZConstant.NUMBER);
-                val expAux = betaObjectExpressions.map(betaObjectExpression => {
-                  new ZExpression("=", betaObjectExpression, objConstant);
-                })
-                expAux
-              }
-              case _ => {
-                betaObjectExpressions.map(betaObjectExpression => {
-                  val objConstant = new ZConstant(literalValue.toString(), ZConstant.STRING);
-                  new ZExpression("=", betaObjectExpression, objConstant);
-                })
-              }
-            }
+            this.genCondSQLPredicateObjectLiteral(literalValue, betaObjectExpressions);
           }
         }
 
         if(exp != null) {
           //result = new ZExpression("AND", result, exp);
+          exps = exps ++ Set(result1);
         }
 
       } else { //object.isVariable() // improvement by Freddy
