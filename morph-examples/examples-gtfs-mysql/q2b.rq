@@ -7,13 +7,14 @@ PREFIX gtfs: <http://vocab.gtfs.org/terms#>
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX schema: <http://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 SELECT * WHERE {
 	?serviceDates a gtfs:ServiceDates .
 	?serviceDates gtfs:service ?service .
 	?serviceDates dct:date "2017-12-25" .
-	?serviceDates gtfs:dateAddition "1" .
-
+	?serviceDates gtfs:dateAddition "true"^^xsd:boolean .
+	
 	?service a gtfs:Service .
 	?service schema:startDate ?startDate .
 }

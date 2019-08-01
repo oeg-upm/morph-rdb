@@ -17,8 +17,8 @@ public class ExampleGTFSMySQL {
 	//static { PropertyConfigurator.configure("log4j.properties"); }
 	String configurationDirectory = System.getProperty("user.dir") + File.separator + "examples-gtfs-mysql";
 
-	@Test
-	public void testGTFS_batch_mysql() {
+    @Test
+    public void testGTFS_batch_mysql() {
 		String configurationFile = "gtfs-batch-mysql.morph.properties";
 		try {
 			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
