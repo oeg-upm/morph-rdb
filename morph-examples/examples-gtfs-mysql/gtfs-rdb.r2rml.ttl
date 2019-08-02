@@ -372,21 +372,19 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#trip> ];
 		rr:objectMap [
-			rr:parentTriplesMap <trips>;
-			rr:joinCondition [
-				 rr:child "TRIP_ID";
-				 rr:parent "TRIP_ID";
-			];
+			#rr:parentTriplesMap <trips>;
+			#rr:joinCondition [ rr:child "TRIP_ID"; rr:parent "TRIP_ID"; ];
+			rr:template "http://linkedgtfs.com/CITY/trips/{TRIP_ID}";
+			rr:termType <http://www.w3.org/ns/r2rml#IRI>;			
 		];
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#stop> ];
 		rr:objectMap [
-			rr:parentTriplesMap <stops>;
-			rr:joinCondition [
-				 rr:child "STOP_ID";
-				 rr:parent "STOP_ID";
-			];
+			#rr:parentTriplesMap <stops>;
+			#rr:joinCondition [ rr:child "STOP_ID"; rr:parent "STOP_ID"; ];
+			rr:template "http://linkedgtfs.com/CITY/stops/{STOP_ID}";
+			rr:termType <http://www.w3.org/ns/r2rml#IRI>;			
 		];
 	];
 .
