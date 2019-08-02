@@ -284,11 +284,10 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#trip> ];
 		rr:objectMap [
-			rr:parentTriplesMap <trips>;
-			rr:joinCondition [
-				 rr:child "TRIP_ID";
-				 rr:parent "TRIP_ID";
-			];
+			# rr:parentTriplesMap <trips>;
+			# rr:joinCondition [ rr:child "TRIP_ID"; rr:parent "TRIP_ID"; ];
+			rr:template "http://linkedgtfs.com/CITY/trips/{TRIP_ID}";
+			rr:termType <http://www.w3.org/ns/r2rml#IRI>;			
 		];
 	];
 	rr:predicateObjectMap [
