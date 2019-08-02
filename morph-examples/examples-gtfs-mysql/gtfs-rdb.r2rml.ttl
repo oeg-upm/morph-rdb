@@ -265,11 +265,10 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#agency> ];
 		rr:objectMap [
-			rr:parentTriplesMap <agency>;
-			rr:joinCondition [
-				 rr:child "AGENCY_ID";
-				 rr:parent "AGENCY_ID";
-			];
+			#rr:parentTriplesMap <agency>;
+			#rr:joinCondition [ rr:child "AGENCY_ID"; rr:parent "AGENCY_ID"; ];
+			rr:template "http://linkedgtfs.com/CITY/agency/{AGENCY_ID}";
+			rr:termType <http://www.w3.org/ns/r2rml#IRI>;
 		];
 	];
 .
