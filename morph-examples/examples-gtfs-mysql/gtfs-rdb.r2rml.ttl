@@ -399,9 +399,52 @@
 		rr:class <http://vocab.gtfs.org/terms#Service>;
 	];
 	rr:predicateObjectMap [
+		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#monday> ];
+		rr:objectMap[
+			rr:column "MONDAY";
+			rr:datatype xsd:boolean;
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#tuesday> ];
+		rr:objectMap[
+			rr:column "TUESDAY";
+			rr:datatype xsd:boolean;
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#wednesday> ];
+		rr:objectMap[
+			rr:column "WEDNESDAY";
+			rr:datatype xsd:boolean;
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#thursday> ];
+		rr:objectMap[
+			rr:column "THURSDAY";
+			rr:datatype xsd:boolean;
+		];
+	];	
+	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#friday> ];
 		rr:objectMap[
 			rr:column "FRIDAY";
+			rr:datatype xsd:boolean;
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#saturday> ];
+		rr:objectMap[
+			rr:column "SATURDAY";
+			rr:datatype xsd:boolean;
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#sunday> ];
+		rr:objectMap[
+			rr:column "SUNDAY";
+			rr:datatype xsd:boolean;
 		];
 	];
 	rr:predicateObjectMap [
@@ -415,43 +458,7 @@
 		rr:objectMap[
 			rr:column "END_DATE";
 		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#saturday> ];
-		rr:objectMap[
-			rr:column "SATURDAY";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#tuesday> ];
-		rr:objectMap[
-			rr:column "TUESDAY";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#thursday> ];
-		rr:objectMap[
-			rr:column "THURSDAY";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#monday> ];
-		rr:objectMap[
-			rr:column "MONDAY";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#sunday> ];
-		rr:objectMap[
-			rr:column "SUNDAY";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#wednesday> ];
-		rr:objectMap[
-			rr:column "WEDNESDAY";
-		];
-	];
+	];	
 .
 
 <feed>
