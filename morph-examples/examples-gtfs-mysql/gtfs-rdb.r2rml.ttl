@@ -569,6 +569,7 @@
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#direction> ];
 		rr:objectMap[
 			rr:column "DIRECTION_ID";
+			rr:datatype xsd:boolean;
 		];
 	];
 .
