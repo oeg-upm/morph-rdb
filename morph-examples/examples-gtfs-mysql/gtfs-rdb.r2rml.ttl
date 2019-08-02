@@ -295,6 +295,7 @@
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#exactTimes> ];
 		rr:objectMap[
 			rr:column "EXACT_TIMES";
+			rr:datatype xsd:boolean;
 		];
 	];
 	rr:predicateObjectMap [
