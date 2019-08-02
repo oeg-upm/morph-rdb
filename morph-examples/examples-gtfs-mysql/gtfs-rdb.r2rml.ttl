@@ -302,6 +302,7 @@
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#endTime> ];
 		rr:objectMap[
 			rr:column "END_TIME";
+			rr:datatype xsd:time;
 		];
 	];
 	rr:predicateObjectMap [
@@ -314,6 +315,7 @@
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#startTime> ];
 		rr:objectMap[
 			rr:column "START_TIME";
+			rr:datatype xsd:time;
 		];
 	];
 .
@@ -355,6 +357,7 @@
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#arrivalTime> ];
 		rr:objectMap[
 			rr:column "ARRIVAL_TIME";
+			rr:datatype xsd:time;
 		];
 	];
 	rr:predicateObjectMap [
