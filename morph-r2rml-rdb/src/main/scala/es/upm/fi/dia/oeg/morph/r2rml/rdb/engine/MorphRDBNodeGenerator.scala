@@ -24,11 +24,14 @@ class MorphRDBNodeGenerator(properties:MorphProperties) {
                    //                   , termMapType:String
                    //                       , mapXMLDatatype : Map[String, String]
                   ) = {
+
     val result = if(nodeValue != null) {
       //val termMapType = termMap.inferTermType;
       termMap.inferTermType match {
         case Constants.R2RML_IRI_URI => {
-          NodeFactory.createURI(nodeValue);
+          //NodeFactory.createURI(nodeValue);
+          val nodeValueEncoded = GeneralUtility.encodeURI(nodeValue, this.properties.mapURIEncodingChars, null)
+          NodeFactory.createURI(nodeValueEncoded);
         }
         case Constants.R2RML_LITERAL_URI => {
 
