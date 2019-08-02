@@ -36,11 +36,10 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#service> ];
 		rr:objectMap [
-			rr:parentTriplesMap <services>;
-			rr:joinCondition [
-				 rr:child "SERVICE_ID";
-				 rr:parent "SERVICE_ID";
-			];
+			# rr:parentTriplesMap <services>;
+			# rr:joinCondition [ rr:child "SERVICE_ID"; rr:parent "SERVICE_ID"; ];
+			rr:template "http://linkedgtfs.com/CITY/service/{SERVICE_ID}";
+			rr:termType <http://www.w3.org/ns/r2rml#IRI>;			
 		];
 	];
 	rr:predicateObjectMap [
