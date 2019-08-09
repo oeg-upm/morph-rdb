@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="route"/>
+        <variable name="routeShortName"/>
+        <variable name="routeDescription"/>
+        <variable name="trip"/>
+        <variable name="tripShortName"/>
+        <variable name="service"/>
+        <variable name="stopTime"/>
+        <variable name="stopDescription"/>
+    </head>
+    <results>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001f</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001f</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/0000000000000000002q</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>0000000000000000002w</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/00000000000000000009</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/0000000000000000002q-00000000000000000005-000000000000000001n3</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>000000000000000001n0</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000s</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000s</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/00000000000000000068</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>0000000000000000002p</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/00000000000000000005</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/00000000000000000068-00000000000000000005-000000000000000000ly</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>000000000000000001n0</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000p</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000p</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/0000000000000000007a</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>0000000000000000001h</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/0000000000000000000n</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/0000000000000000007a-00000000000000000005-000000000000000000h6</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>000000000000000001n0</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000012</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000012</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/00000000000000000085</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>0000000000000000002p</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/00000000000000000009</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/00000000000000000085-00000000000000000005-000000000000000000xs</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>000000000000000001n0</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001d</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001d</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/000000000000000000br</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>00000000000000000033</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/0000000000000000000o</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/000000000000000000br-00000000000000000005-000000000000000000mh</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>000000000000000001n0</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000010</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000010</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/000000000000000000bz</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>00000000000000000033</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/0000000000000000000n</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/000000000000000000bz-00000000000000000005-000000000000000000dk</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>000000000000000001n0</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000n</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000n</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/000000000000000000e7</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>0000000000000000000m</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/0000000000000000000i</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/000000000000000000e7-00000000000000000005-0000000000000000006k</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>000000000000000001n0</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000017</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000017</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/000000000000000000fs</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>0000000000000000000k</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/0000000000000000000i</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/000000000000000000fs-00000000000000000005-0000000000000000012k</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>000000000000000001n0</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>

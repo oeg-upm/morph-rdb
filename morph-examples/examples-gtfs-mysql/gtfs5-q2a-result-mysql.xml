@@ -1,0 +1,1509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="route"/>
+        <variable name="routeShortName"/>
+        <variable name="routeDescription"/>
+        <variable name="agency"/>
+        <variable name="agencyPage"/>
+        <variable name="agencyName"/>
+        <variable name="agencyPhone"/>
+    </head>
+    <results>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000001</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000005</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000006</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000006</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000b</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000b</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000e</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000e</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000f</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000f</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000h</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000h</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000o</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000o</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000q</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000q</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000013</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000013</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001a</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001a</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001g</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001g</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001r</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001r</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000001</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000001</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000001</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000004</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000007</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000007</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000i</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000i</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000j</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000j</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000y</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000y</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000z</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000z</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000011</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000011</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000016</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000016</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000019</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000019</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001j</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001j</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001p</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001p</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001q</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001q</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001t</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001t</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000002</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000002</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000002</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000002</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000009</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000009</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000a</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000a</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000g</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000g</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000k</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000k</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000l</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000l</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000t</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000t</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000v</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000v</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000015</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000015</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000018</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000018</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001b</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001b</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001h</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001h</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001k</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001k</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000003</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000003</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000c</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000c</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000n</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000n</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000p</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000p</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000s</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000s</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000u</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000u</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000w</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000w</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000010</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000010</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000012</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000012</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000017</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000017</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001c</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001c</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001d</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001d</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001f</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001f</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001l</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001l</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000004</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000004</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000004</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000003</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000003</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000008</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000008</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000d</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000d</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000m</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000m</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000r</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000r</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000000x</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000000x</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/00000000000000000014</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>00000000000000000014</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001e</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001e</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001i</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001i</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001m</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001m</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001n</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001n</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001o</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001o</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/0000000000000000001s</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>0000000000000000001s</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/00000000000000000005</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>00000000000000000005</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal>00000000000000000005</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>

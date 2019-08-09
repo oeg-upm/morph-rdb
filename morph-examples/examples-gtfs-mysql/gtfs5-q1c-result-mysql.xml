@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="stopDescription"/>
+        <variable name="stopLat"/>
+        <variable name="stopLong"/>
+        <variable name="stopWheelchairBoarding"/>
+    </head>
+    <results>
+        <result>
+            <binding name="stopDescription">
+                <literal>000000000000000001n0</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>677.000000000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>999.999999999999999</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>
