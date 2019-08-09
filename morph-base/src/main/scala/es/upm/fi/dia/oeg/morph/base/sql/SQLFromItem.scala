@@ -17,9 +17,9 @@ extends ZFromItem(fullName) with SQLLogicalTable {
 		val alias = super.getAlias();
 		if(alias == null || alias.equals("")) {
       val generatedAlias = Constants.VIEW_ALIAS + new Random().nextInt(Constants.VIEW_ALIAS_RANDOM_LIMIT);
-      val generatedAlias2 = "T" + SQLFromItem.inc;
+      //val generatedAlias = "T" + SQLFromItem.inc;
       
-			super.setAlias(generatedAlias2);
+			super.setAlias(generatedAlias);
 		}
 		super.getAlias();
 	}
