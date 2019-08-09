@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="agency"/>
+        <variable name="agencyPage"/>
+        <variable name="agencyName"/>
+        <variable name="agencyPhone"/>
+    </head>
+    <results>
+        <result>
+            <binding name="agency">
+                <uri>http://linkedgtfs.com/CITY/agency/CRTM</uri>
+            </binding>
+            <binding name="agencyPage">
+                <literal>http://www.crtm.es</literal>
+            </binding>
+            <binding name="agencyName">
+                <literal>Consorcio Regional de Transportes de Madrid</literal>
+            </binding>
+            <binding name="agencyPhone">
+                <literal/>
+            </binding>
+        </result>
+    </results>
+</sparql>

@@ -1,0 +1,2001 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="stop"/>
+        <variable name="stopDescription"/>
+        <variable name="stopLat"/>
+        <variable name="stopLong"/>
+        <variable name="stopWheelchairBoarding"/>
+    </head>
+    <results>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_104_1029</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Cuart de Poblet 1 B</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.399180000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.744640000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_104_1030</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Cuart de Poblet 1 B</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.399150000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.744630000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_104_1031</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Cuart de Poblet 1 B</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.399130000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.744630000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_104_284</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de la Alhambra 56</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.399170000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.744540000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_104_285</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de la Alhambra 33</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.399030000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.744220000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_105_1033</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle  Vía Carpetana 141</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.392780000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.740970000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_105_1035</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle  Vía Carpetana 139</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.393320000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.740580000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_105_1036</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle  Vía Carpetana 139</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.393220000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.740690000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_105_286</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle  Vía Carpetana 306</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.392770000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.741340000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_107_287</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Portalegre 98</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.386350000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.723480000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_107_288</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Portalegre 73</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.385840000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.723370000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_123_328</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de Gregorio del Amo 8</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.446190000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720030000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_124_330</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Plaza de Ramón y Cajal 1</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.443590000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.726580000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_124_331</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Plaza de Ramón y Cajal 1</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.443560000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.726970000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_124_332</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Plaza de Ramón y Cajal 1</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.443630000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.726870000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_127_1052</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Paseo de la Florida 2</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.420860000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720370000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_127_334</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Paseo de la Florida 2</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.420930000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720450000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_127_613</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Gta de San Vicente 1</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.420810000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720120000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_127_614</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Paseo de la Florida 5</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421370000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.721040000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_128_339</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Plaza de Santa Cristina 2</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.414230000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.727280000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_128_340</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Caramuel 1</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.413680000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.727060000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_129_341</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Paseo de Extremadura 158</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.409920000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.739050000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_129_342</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Paseo de Extremadura 147</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.409700000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.738840000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_130_343</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Cebreros 41</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.404770000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.745620000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_130_344</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de las Higueras 49</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.404860000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.745050000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_130_345</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Cebreros 41</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.404770000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.745530000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_152_389</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Ramón Gómez de la Serna 37</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.484620000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.723290000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_152_390</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Riscos de Polanco 5</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.485170000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.722890000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_152_391</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Riscos de Polanco 3</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.484980000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.722880000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_154_392</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Gloria Fuertes 1</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.495190000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.725590000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_154_394</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de Gloria Fuertes 1</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.495000000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.725560000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_199_481</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Paseo de la Puerta del Ángel SN</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416520000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.734770000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_207_498</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de Abrantes 79</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.380520000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.728250000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_207_499</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de Abrantes 52</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.381040000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.728090000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_207_500</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de Abrantes 54</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.380670000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.728350000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_208_501</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de Abrantes 122</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.376030000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.734370000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_208_502</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de Abrantes 289</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.375870000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.734060000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_208_503</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de Abrantes 122</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.375870000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.734600000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_224_537</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de las Arcas del agua 9</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.293450000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.746210000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_224_538</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de las Arcas del agua 9</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.293360000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.745840000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_225_539</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle del Greco 2</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.300770000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.736280000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_225_540</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle del Greco 8</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.300880000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.736790000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_226_543</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle del Muelle 1</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.310000000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.734180000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_226_544</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle  Ferrocarril SN</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.309970000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.733860000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_226_545</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle  Ferrocarril SN</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.309890000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.733940000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_227_546</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de España 16</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.311650000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.722400000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_227_547</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de España 5</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.311790000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.722640000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_227_548</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de España 9</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.312090000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.722380000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_230_553</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda  Comandante José Manuel Ripollés 4</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.329460000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.729970000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_231_555</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda  Rey Juan Carlos I 108</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.336440000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.739990000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_231_556</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda  Rey Juan Carlos I 85</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.336860000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.740260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_231_557</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda  Rey Juan Carlos I SN</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.336560000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.740490000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_254_628</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de los Poblados 91</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.373850000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.740050000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_254_629</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de los Poblados 96</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.373460000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.739910000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_254_630</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Avda de los Poblados 96</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.373450000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.739990000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_95_259</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle del General Ricardos 104</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.392650000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.725330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_95_260</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle del General Ricardos 85</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.393650000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.723100000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_95_261</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle del Camino Viejo de Leganés 1</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.393300000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.723630000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_95_262</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle del General Ricardos 80</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.393530000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.723700000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_96_263</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Gta del Valle de Oro 13</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.388440000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.731270000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_96_264</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle del General Ricardos 164</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.388650000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.731710000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_96_265</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle del General Ricardos 148 A</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.389870000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.729850000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_96_266</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle del General Ricardos 143</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.389750000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.729730000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_97_267</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de la Oca 69</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.388690000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.739930000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_97_268</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Calle de la Oca 43</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.389290000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.737540000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/acc_4_98_269</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Gta del Ejército SN</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.387900000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.744850000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_104</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.399230000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.744290000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_105</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.392700000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.740990000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_107</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.386900000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.723130000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_124</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.443560000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.726780000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_128</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.413900000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.727240000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_129</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.409930000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.738940000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_130</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.405100000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.745340000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_152</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.485020000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.723050000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_154</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.495110000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.725890000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_199</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416410000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.735630000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_207</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.380830000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.727900000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_208</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.375870000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.734170000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_224</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.293240000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.745760000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_225</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.300810000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.736640000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_226</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.309930000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.734030000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_227</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.311800000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.722240000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_230</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.329070000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.729630000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_231</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.336640000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.740180000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_254</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.373600000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.739100000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_95</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.393350000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.723600000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_96</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.388460000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.731320000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_97</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.388850000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.739820000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_4_98</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.387830000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.744870000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/est_90_18</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal>Paseo de la Florida 2</literal>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421070000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720370000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_104</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.399230000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.744290000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_105</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.392700000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.740990000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_106</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.388470000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.731260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_107</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.386900000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.723130000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_124</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.443560000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.726780000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_127</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421070000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720320000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_128</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.413900000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.727240000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_129</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.409930000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.738940000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_130</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.405100000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.745340000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_152</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.485020000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.723050000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_154</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.495110000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.725890000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_198</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421030000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_199</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416410000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.735630000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_207</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.380830000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.727900000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_208</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.375870000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.734170000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_224</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.293240000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.745760000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_225</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.300810000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.736640000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_226</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.309930000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.734030000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_227</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.311800000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.722240000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_230</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.329070000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.729630000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_231</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.336640000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.740180000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_238</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.420990000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_254</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.373600000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.739100000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_95</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.393350000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.723600000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_96</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.388460000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.731320000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_97</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.388850000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.739820000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_98</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.387830000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.744870000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>false</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>

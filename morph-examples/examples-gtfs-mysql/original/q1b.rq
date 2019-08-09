@@ -1,0 +1,27 @@
+#Q1B: List all stops within certain distance from a particular position
+#original.q1b.INPUTLATMIN=40.20
+#original.q1b.INPUTLATMAX=40.80
+#original.q1b.INPUTLONGMIN=-3.75
+#original.q1b.INPUTLONGMAX=-3.72
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX gtfs: <http://vocab.gtfs.org/terms#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+SELECT * WHERE {
+	?stop a gtfs:Stop . 
+	?stop dct:description ?stopDescription . 
+	?stop geo:lat ?stopLat . 
+	?stop geo:long ?stopLong . 
+	?stop gtfs:wheelchairBoarding ?stopWheelchairBoarding . 
+
+	FILTER (?stopLat > 40.20) .
+	FILTER (?stopLat < 40.80) .
+
+	FILTER (?stopLong > -3.75) .
+	FILTER (?stopLong < -3.72) .
+
+}

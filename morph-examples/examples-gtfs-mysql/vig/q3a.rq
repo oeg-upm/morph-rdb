@@ -1,0 +1,33 @@
+#Q3A: List all wheelchair accessible stops along a particular route. Datasets: Routes, Trips, StopTimes, Stops
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX gtfs: <http://vocab.gtfs.org/terms#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT * WHERE {
+	?route a gtfs:Route .
+	?route gtfs:shortName ?routeShortName .
+	?route dct:description ?routeDescription .
+
+	?trip a gtfs:Trip .
+	?trip gtfs:shortName ?tripShortName .
+	?trip gtfs:service ?service .
+	?trip gtfs:route ?route .
+
+	?stopTime a gtfs:StopTime . 
+	?stopTime gtfs:trip ?trip . 
+	?stopTime gtfs:stop ?stop . 
+
+	?stop a gtfs:Stop . 
+	?stop dct:description ?stopDescription . 
+	?stop geo:lat ?stopLat . 
+	?stop geo:long ?stopLong . 
+	?stop gtfs:wheelchairBoarding ?stopWheelchairBoarding . 
+
+	FILTER (?stopWheelchairBoarding =  "true"^^xsd:boolean) .
+
+}

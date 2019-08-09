@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="route"/>
+        <variable name="routeShortName"/>
+        <variable name="routeDescription"/>
+        <variable name="trip"/>
+        <variable name="tripShortName"/>
+        <variable name="service"/>
+        <variable name="stopTime"/>
+        <variable name="stopDescription"/>
+    </head>
+    <results/>
+</sparql>

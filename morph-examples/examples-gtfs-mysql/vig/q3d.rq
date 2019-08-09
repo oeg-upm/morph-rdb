@@ -1,0 +1,34 @@
+#Q3D: count services offered by a particular route in a particular interval
+#vig.q3d.ROUTEID=00000000000000000008
+#vig.q3d.STARTDATE="2017-06-01"
+#vig.q3d.ENDDATE="2017-06-30"
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX gtfs: <http://vocab.gtfs.org/terms#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX gtfsroute: <http://linkedgtfs.com/CITY/routes/>
+
+SELECT (count(distinct ?service) as ?count)  WHERE {
+	gtfsroute:00000000000000000008 a gtfs:Route .
+	gtfsroute:00000000000000000008 gtfs:shortName ?routeShortName .
+	gtfsroute:00000000000000000008 dct:description ?routeDescription .
+
+	?trip a gtfs:Trip .
+	?trip gtfs:shortName ?tripShortName .
+	?trip gtfs:service ?service .
+	?trip gtfs:route gtfsroute:00000000000000000008 .
+
+	?service a gtfs:Service .
+
+	?stopTime a gtfs:StopTime . 
+	?stopTime gtfs:trip ?trip . 
+	?stopTime gtfs:stop ?stop . 
+	?stopTime gtfs:departureTime ?departureTime . 
+
+	FILTER (?departureTime > "2017-06-01") .
+	FILTER (?departureTime < "2017-06-30") .
+}

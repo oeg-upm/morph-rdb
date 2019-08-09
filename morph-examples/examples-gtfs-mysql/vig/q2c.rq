@@ -1,7 +1,5 @@
 #Q2C: Check the number of routes of a particular agency
-#d1 AGENCYID = CRTM
-#d5 AGENCYID = 00000000000000000002
-
+#vig.q2c.AGENCYID=00000000000000000002
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>

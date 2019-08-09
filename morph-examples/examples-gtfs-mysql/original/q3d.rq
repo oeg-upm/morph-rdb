@@ -1,10 +1,7 @@
 #Q3D: count services offered by a particular route in a particular interval
-# d1 %ROUTEID 4__1___
-# d1 %STARTDATE "2017-06-01"
-# d1 %ENDDATE "2017-06-30"
-# d5 %ROUTEID 00000000000000000008
-# d5 %STARTDATE "2017-06-01"
-# d5 %ENDDATE "2017-06-30"
+#original.q3d.ROUTEID=4__1___
+#original.q3d.STARTDATE="2017-06-01"
+#original.q3d.ENDDATE="2017-06-30"
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -16,14 +13,14 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX gtfsroute: <http://linkedgtfs.com/CITY/routes/>
 
 SELECT (count(distinct ?service) as ?count)  WHERE {
-	gtfsroute:00000000000000000008 a gtfs:Route .
-	gtfsroute:00000000000000000008 gtfs:shortName ?routeShortName .
-	gtfsroute:00000000000000000008 dct:description ?routeDescription .
+	gtfsroute:4__1___ a gtfs:Route .
+	gtfsroute:4__1___ gtfs:shortName ?routeShortName .
+	gtfsroute:4__1___ dct:description ?routeDescription .
 
 	?trip a gtfs:Trip .
 	?trip gtfs:shortName ?tripShortName .
 	?trip gtfs:service ?service .
-	?trip gtfs:route gtfsroute:00000000000000000008 .
+	?trip gtfs:route gtfsroute:4__1___ .
 
 	?service a gtfs:Service .
 

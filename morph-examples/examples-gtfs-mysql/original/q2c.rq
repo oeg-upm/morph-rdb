@@ -1,0 +1,22 @@
+#Q2C: Check the number of routes of a particular agency
+#original.q2c.AGENCYID=CRTM
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX gtfs: <http://vocab.gtfs.org/terms#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX gtfsagency: <http://linkedgtfs.com/CITY/agency/>
+
+SELECT (count(distinct ?route) as ?nRoutes) WHERE {
+	gtfsagency:CRTM a gtfs:Agency .
+	gtfsagency:CRTM foaf:page ?agencyPage .
+	gtfsagency:CRTM foaf:name ?agencyName .
+	gtfsagency:CRTM foaf:phone ?agencyPhone .
+
+	OPTIONAL {
+		?route a gtfs:Route .
+		?route gtfs:agency gtfsagency:CRTM .
+	}
+}

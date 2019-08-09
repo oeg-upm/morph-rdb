@@ -1,0 +1,1843 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql>
+    <head>
+        <variable name="route"/>
+        <variable name="routeShortName"/>
+        <variable name="routeDescription"/>
+        <variable name="trip"/>
+        <variable name="tripShortName"/>
+        <variable name="service"/>
+        <variable name="stopTime"/>
+        <variable name="stop"/>
+        <variable name="stopDescription"/>
+        <variable name="stopLat"/>
+        <variable name="stopLong"/>
+        <variable name="stopWheelchairBoarding"/>
+    </head>
+    <results>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__1___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>1</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I12-001_2016I12_1_1_4__1___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>PINAR DE CHAMARTIN-VALDECARROS</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I12</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I12-001_2016I12_1_1_4__1___-par_4_12-00:24:44</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_12</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416880000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__1___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>1</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I12-001_2016I12_2_1_4__1___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>VALDECARROS-PINAR DE CHAMARTIN</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I12</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I12-001_2016I12_2_1_4__1___-par_4_12-00:32:19</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_12</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416880000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__1___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>1</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I13-001_2016I13_1_1_4__1___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>PINAR DE CHAMARTIN-VALDECARROS</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I13</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I13-001_2016I13_1_1_4__1___-par_4_12-00:24:44</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_12</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416880000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__1___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>1</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I13-001_2016I13_2_1_4__1___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>VALDECARROS-PINAR DE CHAMARTIN</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I13</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I13-001_2016I13_2_1_4__1___-par_4_12-00:32:19</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_12</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416880000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__1___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>1</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I14-001_2016I14_1_1_4__1___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>PINAR DE CHAMARTIN-VALDECARROS</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I14</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I14-001_2016I14_1_1_4__1___-par_4_12-00:24:44</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_12</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416880000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__1___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>1</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I14-001_2016I14_2_1_4__1___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>VALDECARROS-PINAR DE CHAMARTIN</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I14</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I14-001_2016I14_2_1_4__1___-par_4_12-00:32:19</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_12</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416880000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__1___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>1</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I15-001_2016I15_1_1_4__1___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>PINAR DE CHAMARTIN-VALDECARROS</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I15</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I15-001_2016I15_1_1_4__1___-par_4_12-00:24:44</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_12</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416880000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__1___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>1</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I15-001_2016I15_2_1_4__1___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>VALDECARROS-PINAR DE CHAMARTIN</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I15</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I15-001_2016I15_2_1_4__1___-par_4_12-00:32:19</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_12</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416880000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__10___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>10</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I12-101_2016I12_1_1_4__10_A__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Hospital del Norte - Puerta del Sur</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I12</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I12-101_2016I12_1_1_4__10_A__-par_4_198-00:20:35</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_198</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421030000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__10___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>10</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I12-101_2016I12_2_1_4__10_A__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Puerta del Sur - Hospital del Norte</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I12</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I12-101_2016I12_2_1_4__10_A__-par_4_198-00:24:17</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_198</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421030000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__10___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>10</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I13-101_2016I13_1_1_4__10_A__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Hospital del Norte - Puerta del Sur</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I13</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I13-101_2016I13_1_1_4__10_A__-par_4_198-00:20:35</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_198</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421030000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__10___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>10</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I13-101_2016I13_2_1_4__10_A__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Puerta del Sur - Hospital del Norte</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I13</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I13-101_2016I13_2_1_4__10_A__-par_4_198-00:24:17</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_198</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421030000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__10___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>10</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I14-101_2016I14_1_1_4__10_A__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Hospital del Norte - Puerta del Sur</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I14</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I14-101_2016I14_1_1_4__10_A__-par_4_198-00:20:35</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_198</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421030000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__10___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>10</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I14-101_2016I14_2_1_4__10_A__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Puerta del Sur - Hospital del Norte</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I14</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I14-101_2016I14_2_1_4__10_A__-par_4_198-00:24:17</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_198</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421030000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__10___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>10</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I15-101_2016I15_1_1_4__10_A__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Hospital del Norte - Puerta del Sur</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I15</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I15-101_2016I15_1_1_4__10_A__-par_4_198-00:20:35</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_198</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421030000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__10___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>10</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I15-101_2016I15_2_1_4__10_A__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Puerta del Sur - Hospital del Norte</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I15</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I15-101_2016I15_2_1_4__10_A__-par_4_198-00:24:17</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_198</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421030000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__2___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>2</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I12-002_2016I12_1_1_4__2___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>LA ELIPA-CUATRO CAMINOS</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I12</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I12-002_2016I12_1_1_4__2___-par_4_35-01:23:56</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_35</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416850000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__2___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>2</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I12-002_2016I12_2_1_4__2___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>CUATRO CAMINOS-LA ELIPA</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I12</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I12-002_2016I12_2_1_4__2___-par_4_35-01:09:11</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_35</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416850000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__2___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>2</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I13-002_2016I13_1_1_4__2___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>LA ELIPA-CUATRO CAMINOS</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I13</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I13-002_2016I13_1_1_4__2___-par_4_35-00:23:56</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_35</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416850000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__2___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>2</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I13-002_2016I13_2_1_4__2___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>CUATRO CAMINOS-LA ELIPA</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I13</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I13-002_2016I13_2_1_4__2___-par_4_35-00:09:11</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_35</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416850000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__2___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>2</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I14-002_2016I14_1_1_4__2___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>LA ELIPA-CUATRO CAMINOS</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I14</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I14-002_2016I14_1_1_4__2___-par_4_35-00:23:56</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_35</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416850000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__2___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>2</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I14-002_2016I14_2_1_4__2___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>CUATRO CAMINOS-LA ELIPA</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I14</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I14-002_2016I14_2_1_4__2___-par_4_35-00:09:11</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_35</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416850000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__2___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>2</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I15-002_2016I15_1_1_4__2___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>LA ELIPA-CUATRO CAMINOS</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I15</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I15-002_2016I15_1_1_4__2___-par_4_35-01:23:56</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_35</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416850000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__2___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>2</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I15-002_2016I15_2_1_4__2___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>CUATRO CAMINOS-LA ELIPA</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I15</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I15-002_2016I15_2_1_4__2___-par_4_35-01:09:11</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_35</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416850000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__3___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>3</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I12-003_2016I12_1_1_4__3___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>VILLAVERDE ALTO-MONCLOA</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I12</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I12-003_2016I12_1_1_4__3___-par_4_48-00:26:37</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_48</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416820000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__3___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>3</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I12-003_2016I12_2_1_4__3___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>MONCLOA-VILLAVERDE ALTO</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I12</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I12-003_2016I12_2_1_4__3___-par_4_48-00:05:35</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_48</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416820000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__3___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>3</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I13-003_2016I13_1_1_4__3___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>VILLAVERDE ALTO-MONCLOA</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I13</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I13-003_2016I13_1_1_4__3___-par_4_48-00:26:37</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_48</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416820000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__3___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>3</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I13-003_2016I13_2_1_4__3___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>MONCLOA-VILLAVERDE ALTO</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I13</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I13-003_2016I13_2_1_4__3___-par_4_48-00:05:35</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_48</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416820000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__3___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>3</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I14-003_2016I14_1_1_4__3___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>VILLAVERDE ALTO-MONCLOA</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I14</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I14-003_2016I14_1_1_4__3___-par_4_48-00:26:37</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_48</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416820000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__3___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>3</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I14-003_2016I14_2_1_4__3___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>MONCLOA-VILLAVERDE ALTO</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I14</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I14-003_2016I14_2_1_4__3___-par_4_48-00:05:35</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_48</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416820000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__3___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>3</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I15-003_2016I15_1_1_4__3___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>VILLAVERDE ALTO-MONCLOA</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I15</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I15-003_2016I15_1_1_4__3___-par_4_48-00:26:37</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_48</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416820000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__3___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>3</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I15-003_2016I15_2_1_4__3___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>MONCLOA-VILLAVERDE ALTO</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I15</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I15-003_2016I15_2_1_4__3___-par_4_48-00:05:35</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_48</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.416820000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.703260000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__6___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>6</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I12-061_2016I12_1_1_4__6_1__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Línea Circular Sentido Anti-Horario</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I12</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I12-061_2016I12_1_1_4__6_1__-par_4_127-00:45:47</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_127</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421070000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720320000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__6___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>6</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I12-062_2016I12_1_1_4__6_2__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Línea Circular Sentido Anti-Horario</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I12</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I12-062_2016I12_1_1_4__6_2__-par_4_127-00:09:08</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_127</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421070000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720320000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__6___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>6</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I13-061_2016I13_1_1_4__6_1__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Línea Circular Sentido Anti-Horario</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I13</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I13-061_2016I13_1_1_4__6_1__-par_4_127-00:45:47</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_127</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421070000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720320000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__6___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>6</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I13-062_2016I13_1_1_4__6_2__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Línea Circular Sentido Anti-Horario</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I13</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I13-062_2016I13_1_1_4__6_2__-par_4_127-00:09:08</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_127</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421070000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720320000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__6___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>6</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I14-061_2016I14_1_1_4__6_1__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Línea Circular Sentido Anti-Horario</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I14</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I14-061_2016I14_1_1_4__6_1__-par_4_127-00:45:47</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_127</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421070000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720320000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__6___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>6</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I14-062_2016I14_1_1_4__6_2__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Línea Circular Sentido Anti-Horario</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I14</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I14-062_2016I14_1_1_4__6_2__-par_4_127-00:09:08</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_127</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421070000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720320000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__6___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>6</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I15-061_2016I15_1_1_4__6_1__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Línea Circular Sentido Anti-Horario</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I15</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I15-061_2016I15_1_1_4__6_1__-par_4_127-00:45:47</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_127</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421070000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720320000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__6___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>6</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I15-062_2016I15_1_1_4__6_2__</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>Línea Circular Sentido Anti-Horario</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I15</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I15-062_2016I15_1_1_4__6_2__-par_4_127-00:09:08</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_127</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.421070000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720320000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__R___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>R</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I12-ROP_2016I12_1_1_4__R___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>OPERA-PRINCIPE PIO</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I12</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I12-ROP_2016I12_1_1_4__R___-par_4_238-00:03:05</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_238</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.420990000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__R___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>R</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I12-ROP_2016I12_2_1_4__R___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>PRINCIPE PIO-OPERA</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I12</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I12-ROP_2016I12_2_1_4__R___-par_4_238-00:00:00</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_238</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.420990000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__R___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>R</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I13-ROP_2016I13_1_1_4__R___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>OPERA-PRINCIPE PIO</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I13</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I13-ROP_2016I13_1_1_4__R___-par_4_238-00:03:05</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_238</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.420990000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__R___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>R</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I13-ROP_2016I13_2_1_4__R___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>PRINCIPE PIO-OPERA</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I13</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I13-ROP_2016I13_2_1_4__R___-par_4_238-00:00:00</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_238</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.420990000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__R___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>R</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I14-ROP_2016I14_1_1_4__R___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>OPERA-PRINCIPE PIO</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I14</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I14-ROP_2016I14_1_1_4__R___-par_4_238-00:03:05</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_238</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.420990000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__R___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>R</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I14-ROP_2016I14_2_1_4__R___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>PRINCIPE PIO-OPERA</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I14</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I14-ROP_2016I14_2_1_4__R___-par_4_238-00:00:00</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_238</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.420990000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__R___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>R</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I15-ROP_2016I15_1_1_4__R___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>OPERA-PRINCIPE PIO</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I15</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I15-ROP_2016I15_1_1_4__R___-par_4_238-00:03:05</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_238</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.420990000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+        <result>
+            <binding name="route">
+                <uri>http://linkedgtfs.com/CITY/routes/4__R___</uri>
+            </binding>
+            <binding name="routeShortName">
+                <literal>R</literal>
+            </binding>
+            <binding name="routeDescription">
+                <literal/>
+            </binding>
+            <binding name="trip">
+                <uri>http://linkedgtfs.com/CITY/trips/4_I15-ROP_2016I15_2_1_4__R___</uri>
+            </binding>
+            <binding name="tripShortName">
+                <literal>PRINCIPE PIO-OPERA</literal>
+            </binding>
+            <binding name="service">
+                <uri>http://linkedgtfs.com/CITY/service/4_I15</uri>
+            </binding>
+            <binding name="stopTime">
+                <uri>http://linkedgtfs.com/CITY/stoptimes/4_I15-ROP_2016I15_2_1_4__R___-par_4_238-00:00:00</uri>
+            </binding>
+            <binding name="stop">
+                <uri>http://linkedgtfs.com/CITY/stops/par_4_238</uri>
+            </binding>
+            <binding name="stopDescription">
+                <literal/>
+            </binding>
+            <binding name="stopLat">
+                <literal>40.420990000000000</literal>
+            </binding>
+            <binding name="stopLong">
+                <literal>-3.720330000000000</literal>
+            </binding>
+            <binding name="stopWheelchairBoarding">
+                <literal>true</literal>
+            </binding>
+        </result>
+    </results>
+</sparql>
