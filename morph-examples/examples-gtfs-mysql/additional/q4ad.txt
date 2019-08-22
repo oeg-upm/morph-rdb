@@ -1,0 +1,32 @@
+#q4ad All the stops of a specific line in a specific direction in a certain schedule (service) from its initial station
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX gtfs: <http://vocab.gtfs.org/terms#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+Select * 
+FROM <http://gtfs1.linkeddata.es>
+WHERE
+{
+    ?stopTime a gtfs:StopTime .
+    ?stopTime gtfs:trip ?trip .
+    ?stopTime gtfs:stop ?stop .
+    ?stopTime gtfs:stopSequence ?sequence .
+
+    ?trip a gtfs:Trip .
+    ?trip gtfs:service <http://linkedgtfs.com/CITY/service/4_I14> .
+    ?trip gtfs:headsign 'CUATRO CAMINOS' .
+    ?trip gtfs:route ?route .
+    ?route gtfs:longName ?name .
+
+    ?stop foaf:name ?stopName 
+    
+      
+}
+    
+ORDER BY xsd:integer(?sequence)   
+
+

@@ -1,0 +1,41 @@
+#q7ad What is the duration of a route between a stop X and a stop Y (in its different schedules)
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX gtfs: <http://vocab.gtfs.org/terms#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+Select ?trip,  xsd:time(?arrivalTime1) - xsd:time(?arrivalTime2)
+
+FROM <http://gtfs1.linkeddata.es>
+WHERE
+{
+    ?stopTime1 a gtfs:StopTime .
+    ?stopTime1 gtfs:trip ?trip .
+    ?stopTime1 gtfs:stop ?stop1 .
+    ?stopTime1 gtfs:arrivalTime ?arrivalTime1 .
+
+    ?stopTime2 a gtfs:StopTime .
+    ?stopTime2 gtfs:trip ?trip .
+    ?stopTime2 gtfs:stop ?stop2.
+    ?stopTime2 gtfs:arrivalTime ?arrivalTime2 . 
+     
+    ?stop1 foaf:name 'PLAZA DE CASTILLA' .
+    ?stop2 foaf:name 'ATOCHA' .
+    
+    ?trip a gtfs:Trip .
+    ?trip gtfs:headsign ?headsign  .
+    ?trip gtfs:route ?route .
+
+    ?route gtfs:longName 'Pinar de Chamartín-Valdecarros' .
+
+       
+      
+}
+
+
+    
+
+

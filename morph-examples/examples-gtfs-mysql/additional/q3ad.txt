@@ -1,0 +1,20 @@
+#q3ad All the accesses of a specific station.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX gtfs: <http://vocab.gtfs.org/terms#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+SELECT  *
+WHERE {     
+      ?stop a gtfs:Stop .
+      ?stop gtfs:parentStation ?parStation .
+      ?stop foaf:name ?accName .
+      BIND(IRI(concat('http://linkedgtfs.com/CITY/stops/',?parStation)) AS ?station) .
+      ?station a gtfs:Stop .
+      ?station foaf:name 'Nuevos Ministerios'
+}
+  
+
