@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sparql>
-    <head>
-        <variable name="serviceDates"/>
-        <variable name="service"/>
-        <variable name="startDate"/>
-    </head>
-    <results/>
-</sparql>

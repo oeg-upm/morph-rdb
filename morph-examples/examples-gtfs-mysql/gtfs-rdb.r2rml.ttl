@@ -38,7 +38,7 @@
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#service> ];
 		rr:objectMap [
 			rr:parentTriplesMap <services>; rr:joinCondition [ rr:child "SERVICE_ID"; rr:parent "SERVICE_ID"; ];
-			# rr:template "http://linkedgtfs.com/CITY/service/{SERVICE_ID}"; rr:termType <http://www.w3.org/ns/r2rml#IRI>;			
+			# rr:template "http://linkedgtfs.com/CITY/service/{SERVICE_ID}"; rr:termType <http://www.w3.org/ns/r2rml#IRI>;
 		];
 	];
 	rr:predicateObjectMap [
@@ -133,7 +133,8 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#parentStation> ];
 		rr:objectMap[
-			rr:column "PARENT_STATION";
+			#rr:column "PARENT_STATION";
+			rr:parentTriplesMap <stops>; rr:joinCondition [ rr:child "PARENT_STATION"; rr:parent "STOP_ID"; ];
 		];
 	];
 	rr:predicateObjectMap [
@@ -282,7 +283,7 @@
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#trip> ];
 		rr:objectMap [
 			rr:parentTriplesMap <trips>; rr:joinCondition [ rr:child "TRIP_ID"; rr:parent "TRIP_ID"; ];
-			# rr:template "http://linkedgtfs.com/CITY/trips/{TRIP_ID}"; rr:termType <http://www.w3.org/ns/r2rml#IRI>;			
+			# rr:template "http://linkedgtfs.com/CITY/trips/{TRIP_ID}"; rr:termType <http://www.w3.org/ns/r2rml#IRI>;
 		];
 	];
 	rr:predicateObjectMap [
@@ -345,6 +346,7 @@
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#stopSequence> ];
 		rr:objectMap[
 			rr:column "STOP_SEQUENCE";
+			rr:datatype xsd:integer;
 		];
 	];
 	rr:predicateObjectMap [
@@ -371,14 +373,14 @@
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#trip> ];
 		rr:objectMap [
 			rr:parentTriplesMap <trips>; rr:joinCondition [ rr:child "TRIP_ID"; rr:parent "TRIP_ID"; ];
-			# rr:template "http://linkedgtfs.com/CITY/trips/{TRIP_ID}"; rr:termType <http://www.w3.org/ns/r2rml#IRI>;			
+			# rr:template "http://linkedgtfs.com/CITY/trips/{TRIP_ID}"; rr:termType <http://www.w3.org/ns/r2rml#IRI>;
 		];
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#stop> ];
 		rr:objectMap [
 			rr:parentTriplesMap <stops>; rr:joinCondition [ rr:child "STOP_ID"; rr:parent "STOP_ID"; ];
-			# rr:template "http://linkedgtfs.com/CITY/stops/{STOP_ID}"; rr:termType <http://www.w3.org/ns/r2rml#IRI>;			
+			# rr:template "http://linkedgtfs.com/CITY/stops/{STOP_ID}"; rr:termType <http://www.w3.org/ns/r2rml#IRI>;
 		];
 	];
 .
@@ -419,7 +421,7 @@
 			rr:column "THURSDAY";
 			rr:datatype xsd:boolean;
 		];
-	];	
+	];
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#friday> ];
 		rr:objectMap[
@@ -454,7 +456,7 @@
 			rr:column "END_DATE";
 			rr:datatype xsd:date;
 		];
-	];	
+	];
 .
 
 <feed>
@@ -524,7 +526,7 @@
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#service> ];
 		rr:objectMap [
 			rr:parentTriplesMap <services>; rr:joinCondition [ rr:child "SERVICE_ID"; rr:parent "SERVICE_ID"; ];
-			# rr:template "http://linkedgtfs.com/CITY/service/{SERVICE_ID}"; rr:termType <http://www.w3.org/ns/r2rml#IRI>;			
+			# rr:template "http://linkedgtfs.com/CITY/service/{SERVICE_ID}"; rr:termType <http://www.w3.org/ns/r2rml#IRI>;
 		];
 	];
 	rr:predicateObjectMap [
@@ -537,7 +539,7 @@
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#route> ];
 		rr:objectMap [
 			rr:parentTriplesMap <routes>; rr:joinCondition [ rr:child "ROUTE_ID"; rr:parent "ROUTE_ID"; ];
-			# rr:template "http://linkedgtfs.com/CITY/routes/{ROUTE_ID}"; rr:termType <http://www.w3.org/ns/r2rml#IRI>;			
+			# rr:template "http://linkedgtfs.com/CITY/routes/{ROUTE_ID}"; rr:termType <http://www.w3.org/ns/r2rml#IRI>;
 		];
 	];
 	rr:predicateObjectMap [
