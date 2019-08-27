@@ -112,7 +112,7 @@ public class ExampleGTFSMySQL {
 
     @Test
     public void testGTFS1_q13_mysql() {
-        //3180 instances
+        //24 instances
         String configurationFile = "gtfs1-q13-mysql.morph.properties";
         try {
             String[] args = {configurationDirectory, configurationFile};
@@ -321,7 +321,7 @@ public class ExampleGTFSMySQL {
 
 	@Test
 	public void testGTFS1_q04_mysql() {
-		//2 instances
+		//13 instances
 		String configurationFile = "gtfs1-q04-mysql.morph.properties";
 		try {
 			String[] args = {configurationDirectory, configurationFile};
