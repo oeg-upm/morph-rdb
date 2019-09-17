@@ -65,7 +65,11 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 				val mapNodeTypesRight = this.genericInferBGP(bgpFunc)(opJoin.getRight())
 				MorphQueryTranslatorUtility.mapsIntersection(mapNodeTypesLeft, mapNodeTypesRight)
 			}
-			case opFilter:OpFilter => this.genericInferBGP(bgpFunc)(opFilter.getSubOp())
+			case opFilter:OpFilter => {
+				val mapFilterSubOp = this.genericInferBGP(bgpFunc)(opFilter.getSubOp())
+        //val mapFilterExprs = this.inferExprs(bgpFunc)(opFilter.getExprs())
+        mapFilterSubOp
+			}
 			case opDistinct:OpDistinct => this.genericInferBGP(bgpFunc)(opDistinct.getSubOp())
 			case opProject:OpProject => this.genericInferBGP(bgpFunc)(opProject.getSubOp())
 			case opSlice:OpSlice => this.genericInferBGP(bgpFunc)(opSlice.getSubOp())
@@ -74,6 +78,19 @@ class MorphMappingInferrer(mappingDocument:MorphBaseMappingDocument ) {
 			case opOrder:OpOrder => this.genericInferBGP(bgpFunc)(opOrder.getSubOp())
 		}
 	}
+
+  /*
+  def inferExprs(exprList:ExprList) : Map[Node, Set[MorphBaseClassMapping]] = {
+    this.inferExprList(exprList.getList.toList)
+  }
+
+  def inferExprList(exprList:List[Expr]) : Map[Node, Set[MorphBaseClassMapping]] = {
+  }
+
+  def interExpr(expr:Expr) : Map[Node, Set[MorphBaseClassMapping]] = {
+
+  }
+  */
 
 	def genericInfer(tripleFunc: (Triple) => Option[Pair[Node, Set[MorphBaseClassMapping]]])(op:Op)
 	: Map[Node, Set[MorphBaseClassMapping]] = {

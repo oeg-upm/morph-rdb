@@ -321,7 +321,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
     val subOpSQL = this.trans(opFilterSubOp);
     val transGPSQLAlias = subOpSQL.generateAlias();
     val subOpSelectItems = subOpSQL.getSelectItems().toList;
-    val exprList = opFilter.getExprs();
+
 
     val resultFrom = {
       if(this.optimizer != null && this.optimizer.subQueryAsView) {
@@ -346,7 +346,13 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
     }
     resultFrom.setAlias(transGPSQLAlias);
 
-    val exprListSQL = this.transExprList(opFilterSubOp, exprList, subOpSelectItems, subOpSQL.getAlias());
+    val exprList = opFilter.getExprs();
+    val exprListSQL = this.transExprList(
+      //opFilterSubOp,
+      exprList,
+      subOpSelectItems,
+      subOpSQL.getAlias()
+    );
 
     val transFilterSQL = {
       if(this.optimizer != null && this.optimizer.subQueryElimination) {
@@ -519,6 +525,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
   }
 
   def transLeftJoin(opLeftJoin:OpLeftJoin ) : IQuery  = {
+    logger.info(s"opLeftJoin = ${opLeftJoin}")
     val opLeft = opLeftJoin.getLeft();
     val opRight = opLeftJoin.getRight();
     val transLeftJoinSQL = this.transJoin(opLeftJoin, opLeft, opRight, Constants.JOINS_TYPE_LEFT);
@@ -940,7 +947,12 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
     return result;
   }
 
-  def transExpr(op:Op , expr:Expr, subOpSelectItems:List[ZSelectItem] , prefix:String ) : List[ZExp] = {
+  def transExpr(
+                 //op:Op,
+                 expr:Expr,
+                 subOpSelectItems:List[ZSelectItem],
+                 prefix:String
+               ) : List[ZExp] = {
     val result : List[ZExp] = {
       if(expr.isVariable()) {
         logger.debug("expr is var");
@@ -953,7 +965,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
       } else if(expr.isFunction()) {
         logger.debug("expr is function");
         val exprFunction = expr.getFunction();
-        List(this.transFunction(op, exprFunction, subOpSelectItems, prefix));
+        //List(this.transFunction(op, exprFunction, subOpSelectItems, prefix));
+        List(this.transFunction(exprFunction, subOpSelectItems, prefix));
       } else {
         Nil
       }
@@ -962,10 +975,15 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
     result;
   }
 
-  def transExprList(op:Op , exprList:ExprList , subOpSelectItems:List[ZSelectItem], prefix:String ) : ZExpression  = {
+  def transExprList(
+                     //op:Op,
+                     exprList:ExprList,
+                     subOpSelectItems:List[ZSelectItem],
+                     prefix:String
+                   ) : ZExpression  = {
     val exprs = exprList.getList();
     val resultAux = exprs.flatMap(expr => {
-      val exprTranslated = this.transExpr(op, expr, subOpSelectItems, prefix);
+      val exprTranslated = this.transExpr(expr, subOpSelectItems, prefix);
       exprTranslated;
     })
 
@@ -973,7 +991,12 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
     result;
   }
 
-  def transFunction(op:Op , exprFunction:ExprFunction , subOpSelectItems:List[ZSelectItem], prefix:String) : ZExp  = {
+  def transFunction(
+                     //op2:Op,
+                     exprFunction:ExprFunction,
+                     subOpSelectItems:List[ZSelectItem],
+                     prefix:String
+                   ) : ZExp  = {
 
 
     val args = exprFunction.getArgs();
@@ -998,7 +1021,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
           }
 
 
-          val argTranslated = this.transExpr(op, arg, subOpSelectItems, prefix);
+          val argTranslated = this.transExpr(arg, subOpSelectItems, prefix);
           val resultAuxs = argTranslated.map(operand => {
             val resultAux = new ZExpression(functionSymbol);
             resultAux.addOperand(operand);
@@ -1010,8 +1033,8 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
         case _:ExprFunction2 => {
           val leftArg = args.get(0);
           val rightArg = args.get(1);
-          val leftExprTranslated = this.transExpr(op, leftArg, subOpSelectItems, prefix);
-          val rightExprTranslated = this.transExpr(op, rightArg, subOpSelectItems, prefix);
+          val leftExprTranslated = this.transExpr(leftArg, subOpSelectItems, prefix);
+          val rightExprTranslated = this.transExpr(rightArg, subOpSelectItems, prefix);
 
           exprFunction match {
             case _:E_NotEquals => {
@@ -1117,7 +1140,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
           val exprs = eFunction.getArgs();
           if(exprs != null && exprs.size() == 1) {
             val expr= exprs.get(0);
-            val resultAuxs = this.transExpr(op, expr, subOpSelectItems, prefix);
+            val resultAuxs = this.transExpr(expr, subOpSelectItems, prefix);
             val resultAux = resultAuxs.get(0).toString();
 
             if(functionIRI.equals(XSDDatatype.XSDinteger.getURI())) {
@@ -1142,7 +1165,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
         case _ => {
           val transArgs = for(i <- 0 until args.size()) yield {
             val arg = args.get(i);
-            val zExps = this.transExpr(op, arg, subOpSelectItems, prefix);
+            val zExps = this.transExpr(arg, subOpSelectItems, prefix);
             val transArg = zExps.map(zExp => {
               if(exprFunction.isInstanceOf[E_Regex] && i==1) {
                 val zExp2 = new ZConstant("%" + zExp.asInstanceOf[ZConstant].getValue() + "%", ZConstant.STRING);

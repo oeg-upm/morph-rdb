@@ -24,8 +24,9 @@ import es.upm.fi.dia.oeg.morph.base.model.MorphBasePropertyMapping
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseResultSet
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
+import es.upm.fi.dia.oeg.morph.base.querytranslator.engine.MorphMappingInferrer
 import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
-import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.{MorphRDBNodeGenerator}
+import es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBNodeGenerator
 import org.apache.jena.datatypes.RDFDatatype
 import org.apache.jena.datatypes.xsd.XSDDatatype
 import org.slf4j.LoggerFactory
@@ -38,6 +39,8 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
   extends MorphBaseQueryTranslator(nameGenerator:NameGenerator
     , alphaGenerator:MorphBaseAlphaGenerator, betaGenerator:MorphBaseBetaGenerator
     , condSQLGenerator:MorphBaseCondSQLGenerator, prSQLGenerator:MorphBasePRSQLGenerator) {
+
+
 
   override val logger = LoggerFactory.getLogger(this.getClass());
 
@@ -53,7 +56,14 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
 
 
   override def transIRI(node:Node) : List[ZExp] = {
-    val cms = mapInferredTypes(node);
+    val cms = if(mapInferredTypes.contains(node) ){
+      mapInferredTypes(node);
+    } else {
+      val mappingInferrer = new MorphMappingInferrer(this.mappingDocument);
+      mappingInferrer.inferByURI(node.toString())
+    }
+
+
     val cm = cms.iterator().next().asInstanceOf[R2RMLTriplesMap];
     val mapColumnsValues = cm.subjectMap.getTemplateValues(node.getURI());
     val result:List[ZExp] = {
@@ -63,7 +73,7 @@ class MorphRDBQueryTranslator(nameGenerator:NameGenerator
       } else {
         val resultAux = mapColumnsValues.keySet.map(column => {
           val value = mapColumnsValues(column);
-          val constant = new ZConstant(value, ZConstant.UNKNOWN);
+          val constant = new ZConstant(value, ZConstant.STRING);
           constant;
         })
         resultAux.toList;
