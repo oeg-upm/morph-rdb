@@ -109,16 +109,22 @@ abstract class MorphBaseAlphaGenerator(md:MorphBaseMappingDocument,unfolder:Morp
 			if(!processableTriplePattern) { None }
 			else {
 				val alphaTP = new MorphAlphaResultUnion();
-				for(pm <- pms) {
-					val tpPredicateURI = pm.getMappedPredicateName(0);
-					val alphaPredicateObjectAux : Option[MorphAlphaResultPredicateObject] = calculateAlphaPredicateObject(
-						tp, cm, tpPredicateURI, alphaSubject);
-					val alphaPredicateObjects:List[MorphAlphaResultPredicateObject] = if(alphaPredicateObjectAux.isEmpty) { Nil }
-					else {alphaPredicateObjectAux.toList};
-
-					val alphaResult = new MorphAlphaResult(alphaSubject, alphaPredicateObjects);
+				if(pms == null || pms.size == 0) {
+					val alphaResult = new MorphAlphaResult(alphaSubject, Nil);
 					alphaTP.add(alphaResult);
+				} else {
+					for(pm <- pms) {
+						val tpPredicateURI = pm.getMappedPredicateName(0);
+						val alphaPredicateObjectAux : Option[MorphAlphaResultPredicateObject] = calculateAlphaPredicateObject(
+							tp, cm, tpPredicateURI, alphaSubject);
+						val alphaPredicateObjects:List[MorphAlphaResultPredicateObject] = if(alphaPredicateObjectAux.isEmpty) { Nil }
+						else {alphaPredicateObjectAux.toList};
+
+						val alphaResult = new MorphAlphaResult(alphaSubject, alphaPredicateObjects);
+						alphaTP.add(alphaResult);
+					}
 				}
+
 				Some(alphaTP)
 			}
 		});
