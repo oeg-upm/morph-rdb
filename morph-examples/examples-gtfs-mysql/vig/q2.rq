@@ -1,4 +1,4 @@
-#Q1B: List all stops within certain distance from a particular position
+#Q2: List all stops between two locations
 #original.q1b.INPUTLATMIN=40.20
 #original.q1b.INPUTLATMAX=40.80
 #original.q1b.INPUTLONGMIN=-3.75
@@ -13,15 +13,12 @@ PREFIX dct: <http://purl.org/dc/terms/>
 
 SELECT * WHERE {
 	?stop a gtfs:Stop . 
-	?stop dct:description ?stopDescription . 
+	OPTIONAL { ?stop dct:description ?stopDescription . }
+	OPTIONAL { ?stop gtfs:wheelchairAccessible ?wheelchairAccesible }
 	?stop geo:lat ?stopLat . 
-	?stop geo:long ?stopLong . 
-	?stop gtfs:wheelchairBoarding ?stopWheelchairBoarding . 
-
-	FILTER (?stopLat > 40.20) .
+	?stop geo:long ?stopLong .
+	 FILTER (?stopLat > 40.20) .
 	FILTER (?stopLat < 40.80) .
-
 	FILTER (?stopLong > -3.75) .
-	FILTER (?stopLong < -3.72) .
-
+	FILTER (?stopLong < -3.72) .		
 }

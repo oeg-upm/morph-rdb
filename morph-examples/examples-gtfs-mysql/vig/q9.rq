@@ -1,0 +1,28 @@
+#Q9: Given a specific stop, get the time elapsed after departure from its origin in a particular direction
+
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX gtfs: <http://vocab.gtfs.org/terms#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX gtfsstop: <http://transport.linkeddata.es/madrid/metro/stops/>
+
+SELECT * WHERE {
+        ?stopTime a gtfs:StopTime .
+        ?stopTime gtfs:trip ?trip .
+        ?stopTime gtfs:stop ?stop .
+        OPTIONAL { ?stopTime gtfs:arrivalTime ?arrivalTime . } 
+
+        ?trip a gtfs:Trip .
+        OPTIONAL { ?trip gtfs:shortName ?tripShortName . }
+        ?trip gtfs:service ?service .
+        ?trip gtfs:route ?route .
+        ?trip gtfs:headsign "00000000000000000019" .
+
+        ?stop a gtfs:Stop .
+        OPTIONAL { ?stop dct:description ?stopDescription . } .
+        FILTER (?stop=gtfsstop:0000000000000000001b)
+}

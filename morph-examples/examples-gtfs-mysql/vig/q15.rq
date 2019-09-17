@@ -10,8 +10,9 @@ PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX dct: <http://purl.org/dc/terms/>
 
 SELECT * 
+#FROM <http://gtfs1.linkeddata.es>
 WHERE { 
 	?stop a gtfs:Stop .
 	?stop ?p ?str .
-	FILTER regex (?str, 'Doctor')
+	FILTER regex (?str, '000000000000000002ag')
 }

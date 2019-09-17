@@ -1,4 +1,5 @@
-#Q3A: List all wheelchair accessible stops along a particular route. Datasets: Routes, Trips, StopTimes, Stops
+#Q7: List all wheelchair accessible stops along a particular route. 
+#original.q7.ROUTEID=4__1___
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -7,14 +8,17 @@ PREFIX gtfs: <http://vocab.gtfs.org/terms#>
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX gtfsroute: <http://transport.linkeddata.es/madrid/metro/routes/>
+PREFIX gtfsaccessible: <http://transport.linkeddata.es/resource/WheelchairBoardingStatus/>
 
-SELECT * WHERE {
+# SELECT * WHERE {
+ SELECT DISTINCT ?routeShortName ?routeDescription ?tripShortName ?stopDescription ?stopLat ?stopLong   WHERE {
 	?route a gtfs:Route .
-	?route gtfs:shortName ?routeShortName .
+	OPTIONAL { ?route gtfs:shortName ?routeShortName . }
 	OPTIONAL { ?route dct:description ?routeDescription . }
 
 	?trip a gtfs:Trip .
-	?trip gtfs:shortName ?tripShortName .
+	OPTIONAL { ?trip gtfs:shortName ?tripShortName . }
 	?trip gtfs:service ?service .
 	?trip gtfs:route ?route .
 
@@ -24,10 +28,10 @@ SELECT * WHERE {
 
 	?stop a gtfs:Stop . 
 	OPTIONAL { ?stop dct:description ?stopDescription . }
-	?stop geo:lat ?stopLat . 
-	?stop geo:long ?stopLong . 
-	?stop gtfs:wheelchairBoarding ?stopWheelchairBoarding . 
-
-	FILTER (?stopWheelchairBoarding =  "true"^^xsd:boolean) .
-
+	OPTIONAL {
+		?stop geo:lat ?stopLat . 
+		?stop geo:long ?stopLong . 
+	}
+	?stop gtfs:wheelchairAccessible gtfsaccessible:1 .
+    FILTER (?route=gtfsroute:4__1___)
 }

@@ -1,4 +1,5 @@
-#Q2A: List all agencies and their routes. Datasets: Agency and Routes
+#Q6: Check the number of routes of a particular agency
+
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -6,14 +7,16 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX gtfs: <http://vocab.gtfs.org/terms#>
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX gtfsagency: <http://transport.linkeddata.es/madrid/agency/>
 
-SELECT * WHERE {
-	?route a gtfs:Route .
-	?route gtfs:shortName ?routeShortName .
-	OPTIONAL { ?route dct:description ?routeDescription . } 
-	?route gtfs:agency ?agency .
+# SELECT (count(distinct ?route) as ?nRoutes) WHERE {
+SELECT (count(?route) as ?nRoutes) WHERE {
 	?agency a gtfs:Agency .
 	?agency foaf:page ?agencyPage .
 	?agency foaf:name ?agencyName .
-	OPTIONAL { ?agency foaf:phone ?agencyPhone . }
+	# OPTIONAL {?agency foaf:phone ?agencyPhone . }
+
+	?route a gtfs:Route .
+	?route gtfs:agency ?agency .
+        FILTER (?agency=gtfsagency:00000000000000000005)
 }

@@ -1,0 +1,24 @@
+#Q5: Services that have been added on a specific day.
+# original.q5.INPUTDATE="2017-12-25"
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX gtfs: <http://vocab.gtfs.org/terms#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT * WHERE {
+        ?service a gtfs:Service .
+
+        ?service gtfs:serviceRule ?serviceRule .
+        
+        ?serviceRule a gtfs:CalendarDateRule .
+        #?serviceRule dct:date "2017-03-01"^^xsd:date .
+        ?serviceRule dct:date "2017-03-01 01:00:00.0"^^xsd:date .
+
+        #?serviceRule gtfs:dateAddition "1"^^xsd:boolean .	
+        ?serviceRule gtfs:dateAddition ?dateAddition .	
+}

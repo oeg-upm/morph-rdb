@@ -1,6 +1,4 @@
-#Q15: Everything that contains a specific string in the object placeholder (any property)
-#original.q15.STOPSTR='Doctor'
-#vig.q15.STOPSTR='000000000000000002ag'
+#Q1: List all agencies. 
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -9,9 +7,9 @@ PREFIX gtfs: <http://vocab.gtfs.org/terms#>
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX dct: <http://purl.org/dc/terms/>
 
-SELECT * 
-WHERE { 
-	?stop a gtfs:Stop .
-	?stop ?p ?str .
-	FILTER regex (?str, 'Doctor')
+SELECT * WHERE {
+	?agency a gtfs:Agency .
+	?agency foaf:page ?agencyPage .
+	?agency foaf:name ?agencyName .
+	OPTIONAL { ?agency foaf:phone ?agencyPhone . }
 }

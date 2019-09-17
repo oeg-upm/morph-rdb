@@ -1,6 +1,6 @@
 #Q13: All the accesses of a specific station.
 #original.q11.STOPNAME='Nuevos Ministerios'
-#vig.q11.STOPNAME=0000000000000000000a
+#vig.q11.STOPNAME='000000000000000000sm'
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -8,7 +8,7 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX gtfs: <http://vocab.gtfs.org/terms#>
 PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX dct: <http://purl.org/dc/terms/>
-PREFIX gtfslocation: <http://vocab.gtfs.org/resource/LocationType/>
+PREFIX gtfslocation: <http://transport.linkeddata.es/resource/LocationType/>
 
 
 SELECT  *
@@ -18,6 +18,5 @@ WHERE {
     OPTIONAL {?stop foaf:name ?accName} .
     ?stop gtfs:locationType gtfslocation:2 .
     ?parStation a gtfs:Stop .
-    ?parStation foaf:name 'Nuevos Ministerios'      
+    ?parStation foaf:name '000000000000000000sm'      
 }
-

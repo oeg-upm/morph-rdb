@@ -28,7 +28,7 @@ SELECT * WHERE {
         FILTER (?endDate > "2017-07-02"^^xsd:date) .
 
         ?trip gtfs:service ?service .
-        ?trip gtfs:route gtfsroute:4__6___  .
+        ?trip gtfs:route gtfsroute:0000000000000000000a  .
   
         # {?route gtfs:longName "Circular"} UNION
         # {?route gtfs:shortName "6"} .                                             

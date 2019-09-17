@@ -14,11 +14,13 @@ PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT * WHERE
+SELECT *
+#FROM <http://gtfs1.linkeddata.es>
+WHERE
 {
-    ?stop1 foaf:name 'PLAZA DE CASTILLA' .
-    ?stop2 foaf:name 'ATOCHA' .
-    
+    ?stop1 foaf:name "000000000000000000kz" .
+    ?stop2 foaf:name "0000000000000000028f" .
+
     ?stopTime1 a gtfs:StopTime .
     ?stopTime1 gtfs:trip ?trip .
     ?stopTime1 gtfs:stop ?stop1 .
@@ -28,13 +30,15 @@ SELECT * WHERE
     ?stopTime2 gtfs:trip ?trip .
     ?stopTime2 gtfs:stop ?stop2.
     ?stopTime2 gtfs:arrivalTime ?arrivalTime2 . 
-   
+
+    
     ?trip a gtfs:Trip .
     ?trip gtfs:headsign ?headsign  .
     ?trip gtfs:route ?route .
 
-    ?route gtfs:longName 'Pinar de Chamartín-Valdecarros' .
+    ?route gtfs:longName "00000000000000000001" .
 }
- 
+
+    
 
 
