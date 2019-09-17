@@ -76,14 +76,14 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#trip> ];
 		rr:objectMap [
-			rr:parentTriplesMap <trips>; 
+			rr:parentTriplesMap <trips>;
 			rr:joinCondition [ rr:child "TRIP_ID"; rr:parent "TRIP_ID"; ];
 		];
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#stop> ];
 		rr:objectMap [
-			rr:parentTriplesMap <stops>; 
+			rr:parentTriplesMap <stops>;
 			rr:joinCondition [ rr:child "STOP_ID"; rr:parent "STOP_ID"; ];
 		];
 	];
@@ -133,28 +133,28 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#service> ];
 		rr:objectMap [
-			rr:parentTriplesMap <services1>; 
+			rr:parentTriplesMap <services1>;
 			rr:joinCondition [ rr:child "SERVICE_ID"; rr:parent "SERVICE_ID"; ];
 		];
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#service> ];
 		rr:objectMap [
-			rr:parentTriplesMap <services2>; 
+			rr:parentTriplesMap <services2>;
 			rr:joinCondition [ rr:child "SERVICE_ID"; rr:parent "SERVICE_ID"; ];
 		];
-	];	
+	];
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#route> ];
 		rr:objectMap [
-			rr:parentTriplesMap <routes>; 
+			rr:parentTriplesMap <routes>;
 			rr:joinCondition [ rr:child "ROUTE_ID"; rr:parent "ROUTE_ID"; ];
 		];
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#shape> ];
 		rr:objectMap[
-			rr:parentTriplesMap <shapes>; 
+			rr:parentTriplesMap <shapes>;
 			rr:joinCondition [ rr:child "SHAPE_ID"; rr:parent "SHAPE_ID"; ];
 		];
 	];
@@ -165,7 +165,7 @@
 		rr:tableName "\"ROUTES\"";
 	];
 	rr:subjectMap [
-		rr:template "http://transport.linkeddata.es//madrid/metro/routes/{ROUTE_ID}";
+		rr:template "http://transport.linkeddata.es/madrid/metro/routes/{ROUTE_ID}";
 		rr:termType <http://www.w3.org/ns/r2rml#IRI>;
 		rr:class <http://vocab.gtfs.org/terms#Route>;
 	];
@@ -216,7 +216,7 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#agency> ];
 		rr:objectMap [
-			rr:parentTriplesMap <agency>; 
+			rr:parentTriplesMap <agency>;
 			rr:joinCondition [ rr:child "AGENCY_ID"; rr:parent "AGENCY_ID"; ];
 		];
 	];
@@ -352,7 +352,7 @@
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#parentStation> ];
 		rr:objectMap[
 			#rr:column "PARENT_STATION";
-			rr:parentTriplesMap <stops>; 
+			rr:parentTriplesMap <stops>;
 			rr:joinCondition [ rr:child "PARENT_STATION"; rr:parent "STOP_ID"; ];
 		];
 	];
@@ -370,7 +370,7 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#serviceRule> ];
 		rr:objectMap [
-			rr:parentTriplesMap <calendar_rules>; 
+			rr:parentTriplesMap <calendar_rules>;
 			rr:joinCondition [ rr:child "SERVICE_ID"; rr:parent "SERVICE_ID"; ];
 		];
 	];
@@ -388,7 +388,7 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#serviceRule> ];
 		rr:objectMap [
-			rr:parentTriplesMap <calendar_date_rules>; 
+			rr:parentTriplesMap <calendar_date_rules>;
 			rr:joinCondition [ rr:child "SERVICE_ID"; rr:parent "SERVICE_ID"; ];
 		];
 	];
@@ -618,18 +618,8 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#trip> ];
 		rr:objectMap [
-			rr:parentTriplesMap <trips>; 
+			rr:parentTriplesMap <trips>;
 			rr:joinCondition [ rr:child "TRIP_ID"; rr:parent "TRIP_ID"; ];
 		];
 	];
 .
-
-
-
-
-
-
-
-
-
-
