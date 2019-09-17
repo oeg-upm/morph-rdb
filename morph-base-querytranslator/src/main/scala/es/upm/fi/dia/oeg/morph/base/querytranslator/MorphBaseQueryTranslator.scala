@@ -828,7 +828,7 @@ abstract class MorphBaseQueryTranslator(nameGenerator:NameGenerator
           transTPResult.toQuery(optimizer, databaseType);
         } catch {
           case e:Exception => {
-            logger.debug("InsatisfiableSQLExpression for tp: " + tp);
+            logger.debug("Error translating tp: " + tp);
             null
           }
         }

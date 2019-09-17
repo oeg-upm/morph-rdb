@@ -10,6 +10,9 @@ class MorphCondSQLResult(val condSQLSubject:Iterable[ZExpression], val condSQLPr
 	}
 	
 	def toList() = {
-	  condSQLSubject.toList ::: condSQLPredicateObjects.toList
+    val condSQLSubjectAux = if(condSQLSubject == null ) { Nil } else { condSQLSubject }
+    val condSQLPredicateObjectsAux = if(condSQLPredicateObjects == null ) { Nil } else { condSQLPredicateObjects }
+
+    condSQLSubjectAux.toList ::: condSQLPredicateObjectsAux.toList
 	}
 }

@@ -900,7 +900,7 @@ object SQLQuery {
           }).toList;
 
           leftTableFromItems.foreach(leftTableFromItem => {
-            logger.info(s"leftTableFromItem = ${leftTableFromItem}")
+            //logger.info(s"leftTableFromItem = ${leftTableFromItem}")
             result.addFromItem(leftTableFromItem)
           });
 
@@ -937,7 +937,7 @@ object SQLQuery {
             , logicalTableAlias);
 
           for(joinTable <- joinTables) {
-            logger.info(s"rightTable joinTable = ${joinTable}")
+            //logger.info(s"rightTable joinTable = ${joinTable}")
             result.addFromItem(joinTable);
           }
           result.addSelects(rightTableSelectItems);

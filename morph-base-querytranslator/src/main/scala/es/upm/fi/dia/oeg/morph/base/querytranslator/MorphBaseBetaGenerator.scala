@@ -65,7 +65,9 @@ val logger = LoggerFactory.getLogger(this.getClass());
 			} else if (pms.size() > 1) {
 				val errorMessage = "Multiple property mappings defined, result may be wrong!";
 				logger.debug(errorMessage);
-				throw new Exception(errorMessage);			
+				//throw new Exception(errorMessage);
+				val pm = pms.iterator.next();
+				this.calculateBetaObject(triple, cm, predicateURI, alphaResult, pm).toList;
 			} else {//if(pms.size() == 1)
 				val pm = pms.iterator.next();
 				this.calculateBetaObject(triple, cm, predicateURI, alphaResult, pm).toList;
