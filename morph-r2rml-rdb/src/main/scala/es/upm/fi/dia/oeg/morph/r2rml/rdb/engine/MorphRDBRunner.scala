@@ -18,72 +18,72 @@ import org.slf4j.LoggerFactory
 
 
 class MorphRDBRunner(mappingDocument:R2RMLMappingDocument
-//    , dataSourceReader:MorphBaseDataSourceReader
-    , unfolder:MorphRDBUnfolder
-    , dataTranslator:Option[MorphRDBDataTranslator]
-//    , materializer:MorphBaseMaterializer
-    , queryTranslator:Option[IQueryTranslator]
-    , resultProcessor:Option[AbstractQueryResultTranslator]
-    , outputStream:Writer
-    ) extends MorphBaseRunner(mappingDocument
-//    , dataSourceReader
-    , unfolder
-    , dataTranslator
-//    , materializer
-    , queryTranslator
-    , resultProcessor
-    , outputStream
-        ) {
-  
+										 //    , dataSourceReader:MorphBaseDataSourceReader
+										 , unfolder:MorphRDBUnfolder
+										 , dataTranslator:Option[MorphRDBDataTranslator]
+										 //    , materializer:MorphBaseMaterializer
+										 , queryTranslator:Option[IQueryTranslator]
+										 , resultProcessor:Option[AbstractQueryResultTranslator]
+										 , outputStream:Writer
+										) extends MorphBaseRunner(mappingDocument
+	//    , dataSourceReader
+	, unfolder
+	, dataTranslator
+	//    , materializer
+	, queryTranslator
+	, resultProcessor
+	, outputStream
+) {
+
 	//override val logger = Logger.getLogger(this.getClass());
 
-  
+
 }
 
 object MorphRDBRunner {
-  val logger = LoggerFactory.getLogger(this.getClass());
-	
+	val logger = LoggerFactory.getLogger(this.getClass());
+
 	def apply(properties:MorphRDBProperties ) : MorphRDBRunner = {
-	  //logger.info("running morph-rdb 3.12.3 ...");
-	  
+		//logger.info("running morph-rdb 3.12.3 ...");
+
 		val runnerFactory = new MorphRDBRunnerFactory();
 		//val runner = new R2RMLRunner();
-//		runner.loadConfigurationProperties(properties);
+		//		runner.loadConfigurationProperties(properties);
 		val runner = runnerFactory.createRunner(properties);
 		runner.asInstanceOf[MorphRDBRunner];
 	}
-	
+
 	def apply(configurationDirectory:String , configurationFile:String ) : MorphRDBRunner = {
 		val configurationProperties = MorphRDBProperties.apply(configurationDirectory, configurationFile);
 		val runner = MorphRDBRunner(configurationProperties)
 		runner
 	}
-	
+
 	def main(args:Array[String]) {
-	  
+
 		try {
 			if(args == null || args.length == 0 || args.length != 2) {
 				logger.info("usage R2RMLRunner propertiesDirectory propertiesFile");
 				logger.info("Bye");
 				System.exit(-1);
 			}
-			
+
 			val configurationDirectory = args(0);
 			logger.debug("propertiesDirectory = " + configurationDirectory);
-			
+
 			val configurationFile = args(1);
 			logger.debug("propertiesFile = " + configurationFile);
-			
+
 			val runner = MorphRDBRunner(configurationDirectory, configurationFile);
 			runner.run();
 		} catch {
-		  case e:Exception => {
-			//e.printStackTrace();
-			logger.error("Exception occured: " + e.getMessage());
-			throw e;		    
-		  }
+			case e:Exception => {
+				//e.printStackTrace();
+				logger.error("Exception occured: " + e.getMessage());
+				throw e;
+			}
 
 		}
 	}
-  
+
 }

@@ -13,23 +13,23 @@ import static org.junit.Assert.assertTrue;
 
 
 public class ExampleMadridGTFS1MySQL {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	//static { PropertyConfigurator.configure("log4j.properties"); }
-	String configurationDirectory = System.getProperty("user.dir") + File.separator + "examples-gtfs-mysql";
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    //static { PropertyConfigurator.configure("log4j.properties"); }
+    String configurationDirectory = System.getProperty("user.dir") + File.separator + "examples-gtfs-mysql";
 
     public void testGTFS1_batch_mysql() {
-		String configurationFile = "gtfs1-batch-mysql.morph.properties";
-		try {
-			MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
-			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
-			runner.run();
-			logger.info("Batch process DONE------\n\n");
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.info("Batch process FAILED------\n\n");
-			assertTrue(e.getMessage(), false);
-		}
-	}
+        String configurationFile = "gtfs1-batch-mysql.morph.properties";
+        try {
+            MorphRDBRunnerFactory runnerFactory = new MorphRDBRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            logger.info("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
 
 
     @Test
@@ -86,21 +86,21 @@ public class ExampleMadridGTFS1MySQL {
     }
 
 
-	@Test
-	public void testGTFS1_q04_mysql() {
-		//13 instances
-		String configurationFile = "gtfs1-q04-mysql.morph.properties";
-		try {
-			String[] args = {configurationDirectory, configurationFile};
-			MorphRDBRunner.main(args);
-			System.out.println("Query process DONE------");
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error : " + e.getMessage());
-			System.out.println("Query process FAILED------");
-			assertTrue(e.getMessage(), false);
-		}
-	}
+    @Test
+    public void testGTFS1_q04_mysql() {
+        //13 instances
+        String configurationFile = "gtfs1-q04-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
 
 
 
