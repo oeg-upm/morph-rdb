@@ -193,7 +193,8 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
       case e:Exception => {
         e.printStackTrace();
         status = e.getMessage();
-        errorCode = -1;        
+        errorCode = -1;
+				throw e;
       }
 		}
     
