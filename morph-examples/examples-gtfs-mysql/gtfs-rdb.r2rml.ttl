@@ -401,7 +401,7 @@
 	rr:subjectMap [
 		rr:template "http://transport.linkeddata.es/madrid/metro/calendar_date_rule/{SERVICE_ID}";
 		rr:termType <http://www.w3.org/ns/r2rml#IRI>;
-		rr:class <http://vocab.gtfs.org/terms#ServiceDates>;
+		rr:class <http://vocab.gtfs.org/terms#CalendarDateRule>;
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://purl.org/dc/terms/date> ];
@@ -426,7 +426,7 @@
 	rr:subjectMap [
 		rr:template "http://transport.linkeddata.es/madrid/metro/calendar_rules/{SERVICE_ID}";
 		rr:termType <http://www.w3.org/ns/r2rml#IRI>;
-		rr:class <http://vocab.gtfs.org/terms#Service>;
+		rr:class <http://vocab.gtfs.org/terms#CalendarRule>;
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [ rr:constant <http://vocab.gtfs.org/terms#monday> ];
