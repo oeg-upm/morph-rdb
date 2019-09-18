@@ -15,19 +15,12 @@ PREFIX gtfsroute: <http://transport.linkeddata.es/madrid/metro/routes/>
 
 SELECT (count(distinct ?trip) as ?count)  WHERE {
 	?route a gtfs:Route .
-	OPTIONAL { ?route gtfs:shortName ?routeShortName . }
-	OPTIONAL { ?route dct:description ?routeDescription . } 
 
 	?trip a gtfs:Trip .
-	OPTIONAL { ?trip gtfs:shortName ?tripShortName . }
-	?trip gtfs:service ?service .
 	?trip gtfs:route ?route .
-
-	?service a gtfs:Service .
 
 	?stopTime a gtfs:StopTime . 
 	?stopTime gtfs:trip ?trip . 
-	?stopTime gtfs:stop ?stop . 
 	?stopTime gtfs:departureTime ?departureTime .
 
 	FILTER (?route=gtfsroute:00000000000000000005) .

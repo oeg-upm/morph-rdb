@@ -594,7 +594,7 @@ public class ExampleGTFSMySQL {
     @Test
     public void testGTFS5_q9_mysql() {
         //2 instances
-        String configurationFile = "gtfs5-q3c-mysql.morph.properties";
+        String configurationFile = "gtfs5-q9-mysql.morph.properties";
         try {
             String[] args = {configurationDirectory, configurationFile};
             MorphRDBRunner.main(args);
@@ -606,6 +606,7 @@ public class ExampleGTFSMySQL {
             assertTrue(e.getMessage(), false);
         }
     }
+
 
     @Test
     public void testGTFS10_q9_mysql() {
@@ -656,6 +657,136 @@ public class ExampleGTFSMySQL {
     }
 
     @Test
+    public void testGTFS5_q11_mysql() {
+        //2 instances
+        String configurationFile = "gtfs5-q11-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testGTFS5_q12_mysql() {
+        //2 instances
+        String configurationFile = "gtfs5-q12-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testGTFS5_q13_mysql() {
+        //2 instances
+        String configurationFile = "gtfs5-q13-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+
+    @Test
+    public void testGTFS5_q14_mysql() {
+        //2 instances
+        String configurationFile = "gtfs5-q14-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testGTFS5_q15_mysql() {
+        //2 instances
+        String configurationFile = "gtfs5-q15-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testGTFS5_q16_mysql() {
+        //2 instances
+        String configurationFile = "gtfs5-q16-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testGTFS5_q17_mysql() {
+        //2 instances
+        String configurationFile = "gtfs5-q17-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+
+    @Test
+    public void testGTFS5_q18_mysql() {
+        //2 instances
+        String configurationFile = "gtfs5-q18-mysql.morph.properties";
+        try {
+            String[] args = {configurationDirectory, configurationFile};
+            MorphRDBRunner.main(args);
+            System.out.println("Query process DONE------");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
+            System.out.println("Query process FAILED------");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
     public void testGTFS10_q10_mysql() {
         //2 instances
         String configurationFile = "gtfs10-q3d-mysql.morph.properties";
@@ -670,4 +801,6 @@ public class ExampleGTFSMySQL {
             assertTrue(e.getMessage(), false);
         }
     }
+
+
 }
