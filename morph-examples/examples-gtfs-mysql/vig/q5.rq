@@ -16,9 +16,7 @@ SELECT * WHERE {
         ?service gtfs:serviceRule ?serviceRule .
         
         ?serviceRule a gtfs:CalendarDateRule .
-        #?serviceRule dct:date "2017-03-01"^^xsd:date .
-        ?serviceRule dct:date "2017-03-01 01:00:00.0"^^xsd:date .
-
-        #?serviceRule gtfs:dateAddition "1"^^xsd:boolean .	
-        ?serviceRule gtfs:dateAddition ?dateAddition .	
+        ?serviceRule dct:date "2017-03-14"^^xsd:date .
+        
+        ?serviceRule gtfs:dateAddition "true"^^xsd:boolean .	
 }
