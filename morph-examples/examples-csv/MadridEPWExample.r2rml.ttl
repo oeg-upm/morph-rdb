@@ -1,0 +1,52 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fno: <http://w3id.org/function/ontology#> .
+@prefix sql: <http://dchaves.oeg-upm.net/resources/function/sql.ttl#> .
+@prefix bv: <http://bio2rdf.org/bio2rdf_vocabulary:> .
+@prefix homogv: <http://bio2rdf.org/homologene_vocabulary:> .
+@prefix epw: <http://epw.linkeddata.es/vocab#> .
+@prefix epwmadrid: <http://epw.linkeddata.es/resources/madrid/> .
+
+<TM1>
+
+	rr:logicalTable [
+		rr:tableName "MADRIDEPWEXAMPLE"
+	];
+
+	rr:subjectMap [
+		a rr:Subject;
+		rr:termType rr:IRI;
+		rr:class epw:EPW;
+		rr:template "http://epw.linkeddata.es/resources/madrid/{YEAR}-{MONTH}-{DAY}-{HOUR}-{MINUTE}";
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:year ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "YEAR"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:month ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "MONTH"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:day ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "DAY"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:hour ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "HOUR"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:minute ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "MINUTE"; rr:datatype xsd:string; ];
+	];
+
+.

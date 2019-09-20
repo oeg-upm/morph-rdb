@@ -527,4 +527,20 @@ public class ExampleCSV {
 			assertTrue(errorMessage, false);
 		}
 	}
+
+	@Test
+	public void testMadridEPW() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
+		String configurationFile = "MadridEPWExample.morph.properties";
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
 }
