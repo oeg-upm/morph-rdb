@@ -171,7 +171,7 @@ object Constants {
   //aliases
   val  URI_AS_ALIAS="uri_";
   val  RANGE_TABLE_ALIAS="rt_";
-  val  VIEW_ALIAS="v_";
+  val  VIEW_ALIAS="V_";
   val  TABLE_ALIAS_PREFIX="t_";
   val  VIEW_ALIAS_RANDOM_LIMIT=100000;
 
