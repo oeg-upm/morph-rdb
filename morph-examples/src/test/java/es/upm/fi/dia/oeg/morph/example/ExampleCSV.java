@@ -529,9 +529,9 @@ public class ExampleCSV {
 	}
 
 	@Test
-	public void testMadridEPW() {
+	public void testMadridEPW_Batch() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
-		String configurationFile = "MadridEPWExample.morph.properties";
+		String configurationFile = "MadridEPWExample-batch.morph.properties";
 		try {
 			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
 			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
@@ -543,4 +543,52 @@ public class ExampleCSV {
 			assertTrue(e.getMessage(), false);
 		}
 	}
+
+	@Test
+	public void testMadridEPW_Q01() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
+		String configurationFile = "MadridEPWExample-q01.morph.properties";
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+
+    @Test
+    public void testMadridEPW_Q02() {
+        String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
+        String configurationFile = "MadridEPWExample-q02.morph.properties";
+        try {
+            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    @Test
+    public void testMadridEPW_Q03() {
+        String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
+        String configurationFile = "MadridEPWExample-q03.morph.properties";
+        try {
+            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
 }
