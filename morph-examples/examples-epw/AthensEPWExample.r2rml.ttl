@@ -1,0 +1,207 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fno: <http://w3id.org/function/ontology#> .
+@prefix sql: <http://dchaves.oeg-upm.net/resources/function/sql.ttl#> .
+@prefix bv: <http://bio2rdf.org/bio2rdf_vocabulary:> .
+@prefix homogv: <http://bio2rdf.org/homologene_vocabulary:> .
+@prefix epw: <http://epw.linkeddata.es/vocab#> .
+@prefix epwmadrid: <http://epw.linkeddata.es/resources/madrid/> .
+
+<AthensEPWExample1>
+
+	rr:logicalTable [
+		rr:tableName "ATHENSEPWEXAMPLE"
+	];
+
+	rr:subjectMap [
+		a rr:Subject;
+		rr:termType rr:IRI;
+		rr:class epw:EPW;
+		rr:template "http://epw.linkeddata.es/resources/athens/{YEAR}-{MONTH}-{DAY}-{HOUR}-{MINUTE}";
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:city ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:constant "Athens"; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:year ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "YEAR"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:month ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "MONTH"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:day ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "DAY"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:hour ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "HOUR"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:minute ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "MINUTE"; rr:datatype xsd:integer; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:dataSourceAndUncertaintyFlags ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "DATASOURCEANDUNCERTAINTYFLAGS"; rr:datatype xsd:string; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:dryBulbTemperature ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "DRYBULBTEMPERATURE"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:dewPointTemperature ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "DEWPOINTTEMPERATURE"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:relativeHumidity ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "RELATIVEHUMIDITY"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:atmosphericStationPressure ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "ATMOSPHERICSTATIONPRESSURE"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:extraterrestrialHorizontalRadiation ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "EXTRATERRESTRIALHORIZONTALRADIATION"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:extraterrestrialDirectNormalRadiation ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "EXTRATERRESTRIALDIRECTNORMALRADIATION"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:horizontalInfraredRadiationIntensity ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "HORIZONTALINFRAREDRADIATIONINTENSITY"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:globalHorizontalRadiation ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "GLOBALHORIZONTALRADIATION"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:directNormalRadiation ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "DIRECTNORMALRADIATION"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:diffuseHorizontalRadiation ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "DIFFUSEHORIZONTALRADIATION"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:globalHorizontalIlluminance ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "GLOBALHORIZONTALILLUMINANCE"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:directNormalIlluminance ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "DIRECTNORMALILLUMINANCE"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:diffuseHorizontalIlluminance ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "DIFFUSEHORIZONTALILLUMINANCE"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:zenithLuminance ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "ZENITHLUMINANCE"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:windDirection ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "WINDDIRECTION"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:windSpeed ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "WINDSPEED"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:totalSkyCover ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "TOTALSKYCOVER"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:opaqueSkyCover ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "OPAQUESKYCOVER"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:visibility ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "VISIBILITY"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:ceilingHeight ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "CEILINGHEIGHT"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:presentWeatherObservation ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "PRESENTWEATHEROBSERVATION"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:presentWeatherCodes ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "PRESENTWEATHERCODES"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:precipitableWater ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "PRECIPITABLEWATER"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:aerosolOpticalDepth ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "AEROSOLOPTICALDEPTH"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:snowDepth ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "SNOWDEPTH"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:daysSinceLastSnowfall ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "DAYSSINCELASTSNOWFALL"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:albedo ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "ALBEDO"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:liquidPrecipitationDepth ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "LIQUIDPRECIPITATIONDEPTH"; rr:datatype xsd:decimal; ];
+	];
+
+	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:liquidPrecipitationQuantity ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:column "LIQUIDPRECIPITATIONQUANTITY"; rr:datatype xsd:decimal; ];
+	];
+
+.

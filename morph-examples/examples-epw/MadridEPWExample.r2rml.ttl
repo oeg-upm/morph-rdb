@@ -25,6 +25,11 @@
 	];
 
 	rr:predicateObjectMap [
+		rr:predicateMap	[ rr:constant epw:city ];
+		rr:objectMap	[ rr:termType rr:Literal; rr:constant "Madrid"; ];
+	];
+
+	rr:predicateObjectMap [
 		rr:predicateMap	[ rr:constant epw:year ];
 		rr:objectMap	[ rr:termType rr:Literal; rr:column "YEAR"; rr:datatype xsd:integer; ];
 	];
