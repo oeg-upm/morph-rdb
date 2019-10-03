@@ -59,6 +59,22 @@ public class ExampleCSV {
         }
     }
 
+    @Test
+    public void testMadridGTFSWithPropertiesFile() {
+        String configurationDirectory = System.getProperty("user.dir") + "/examples-gtfs";
+        String configurationFile = "gtfsmadrid-batch-csv.morph.properties";
+        try {
+            MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+            MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+            runner.run();
+            System.out.println("Batch process DONE------\n\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Batch process FAILED------\n\n");
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
     
 	@Test
 	public void testLinkedFiestasWithPropertiesFile() {
