@@ -39,12 +39,16 @@ class SQLFromItem(fullName:String , val form:Constants.LogicalTableType.Value)
   def getJoinType() : String = { joinType; }
 
   override def print(withAlias:Boolean ) : String  = {
+    val enclosedCharacter = Constants.getEnclosedCharacter(this.databaseType);
+
     val alias = this.getAlias();
     this.setAlias("");
 
     val result = if(alias != null && withAlias) {
       val resultAux = if(this.form == Constants.LogicalTableType.TABLE_NAME) {
-        val tableName = super.toString().trim();
+        //val tableName = super.toString().trim();
+        val tableName = enclosedCharacter + super.toString().trim() + enclosedCharacter;
+
         tableName + " " + alias;
         //tableName + " \"" + alias + "\"";
       } else {

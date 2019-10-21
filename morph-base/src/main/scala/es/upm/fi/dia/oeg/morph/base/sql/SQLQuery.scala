@@ -299,6 +299,8 @@ class SQLQuery extends ZQuery with IQuery {
   }
 
   def printFrom() : String  = {
+    val enclosedCharacter = Constants.getEnclosedCharacter(this.databaseType);
+
     var fromSQL = "";
     val fromItems = this.getFrom();
     if(fromItems != null && fromItems.size() != 0) {
@@ -310,7 +312,8 @@ class SQLQuery extends ZQuery with IQuery {
             if(i > 0) {
               separator = ", ";
             }
-            fromSQL += separator + sqlFromItem.print(true);
+            val fromItemString = sqlFromItem.print(true);
+            fromSQL += separator + fromItemString;
           }
           case joinQuery:SQLJoinTable => {
             val logicalTable = joinQuery.joinSource;
@@ -330,7 +333,7 @@ class SQLQuery extends ZQuery with IQuery {
                 fromSQL += separator + logicalTable.toString();
               }
               case _:IQuery => {
-                val enclosedCharacter = Constants.getEnclosedCharacter(this.databaseType);
+
 
                 //fromSQL +=  separator + " ( "+ logicalTable.print(false) + " ) " + logicalTable.getAlias();
                 fromSQL +=  separator + " ( "+ logicalTable.print(false) + " ) " + enclosedCharacter + logicalTable.getAlias() + enclosedCharacter;
