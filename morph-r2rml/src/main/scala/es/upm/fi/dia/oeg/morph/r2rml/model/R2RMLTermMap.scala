@@ -169,13 +169,14 @@ extends MorphR2RMLElement with IConstantTermMap with IColumnTermMap with ITempla
 	  result
 	}
 
-	def isBlankNode() : Boolean = {
-		if(Constants.R2RML_BLANKNODE_URI.equals(this.termType)) {
-			true;
-		} else {
-			false;
-		}
-	}
+	/*def isBlankNode() : Boolean = {
+		//if(Constants.R2RML_BLANKNODE_URI.equals(this.termType)) {
+		//	true;
+		//} else {
+		//	false;
+		//}
+		Constants.R2RML_BLANKNODE_URI.equals(this.termType.get)
+	}*/
 
 	override def toString() : String = {
 		var result = this.termMapType match {
