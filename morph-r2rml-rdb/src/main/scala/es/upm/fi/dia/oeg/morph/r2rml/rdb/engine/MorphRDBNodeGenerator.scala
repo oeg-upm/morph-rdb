@@ -144,7 +144,8 @@ class MorphRDBNodeGenerator(properties:MorphProperties) {
       }
       */
 
-      val result = rs.getString(columnName);
+      //val result = rs.getString(columnName);
+      val result = rs.getObject(columnName).toString();
       result
     } catch {
       case e:Exception => {
