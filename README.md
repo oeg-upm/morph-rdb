@@ -8,6 +8,9 @@ Morph-RDB has been tested with real queries from various Spanish/EU projects and
 
 ![Morph-RDB workflow](morph-examples/architecture.png?raw=true "Morph-RDB workflow")
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/oeg-upm/morph-rdb/master/morph-examples/architecture.png">
+</p>
 
 User guides:
 For those who want to use this project on an user level, you can find a little guide to on the main branch wiki : https://github.com/oeg-upm/morph-rdb/wiki
