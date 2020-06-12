@@ -6,7 +6,7 @@ Morph-RDB supports two operational modes: data upgrade (generating RDF instances
 
 Morph-RDB has been tested with real queries from various Spanish/EU projects and has proven to work faster than other state-of-the-art tools available. At the moment, Morph-RDB works with MySQL, PostgreSQL, H2, CSV files and MonetDB.
 
-![Morph-RDB workflow](examples/architecture.png?raw=true "Morph-RDB workflow")
+![Morph-RDB workflow](morph-examples/architecture.png?raw=true "Morph-RDB workflow")
 
 
 User guides:
