@@ -6,6 +6,8 @@ Morph-RDB supports two operational modes: data upgrade (generating RDF instances
 
 Morph-RDB has been tested with real queries from various Spanish/EU projects and has proven to work faster than other state-of-the-art tools available. At the moment, Morph-RDB works with MySQL, PostgreSQL, H2, CSV files and MonetDB.
 
+![Morph-RDB workflow](examples/architecture.png?raw=true "Morph-RDB workflow")
+
 
 User guides:
 For those who want to use this project on an user level, you can find a little guide to on the main branch wiki : https://github.com/oeg-upm/morph-rdb/wiki
@@ -16,4 +18,4 @@ If, on the other hand, you want to edit the project or at least work from an IDE
  - Now that it´s finally imported, you can run the file es.upm.fi.dia.oeg.morph.r2rml.rdb.engine.MorphRDBRunner.scala (in other to pass the arguments in Eclipse, right click, Run As -> Run Configuration -> Arguments, and remember to imput both the path to the .properties file and it´s full name).
 * In case the program doesn´t find the file log4j.properties, move it from "morph-examples" to "morph-r2rml-rdb", thought this file isn´t essential.
 
-Acknowledgement: Since January 2016, the development of morph-RDB has been supported by the Mobile Age project (http://www.mobile-age.eu/).
+Acknowledgement: From January 2016 to January 2018, the development of morph-RDB has been supported by the Mobile Age project (http://www.mobile-age.eu/).
