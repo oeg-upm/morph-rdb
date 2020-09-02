@@ -10,7 +10,7 @@
 
 <TriplesMapParks>
 	rr:logicalTable [ 
-        rr:tableName  "\"paris-park\""
+        rr:tableName  "PARIS-PARK"
     ];
 	
     rr:subjectMap [    

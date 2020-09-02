@@ -14,7 +14,7 @@
 	
     <UDONSJEI8M>
         rr:logicalTable [
-            rr:tableName  "\"spain-international1\""
+            rr:tableName  "SPAIN-INTERNATIONAL1"
         ];
 
         rr:subjectMap [

@@ -10,7 +10,7 @@
 
 <TriplesMapMonumento>
 	rr:logicalTable [ 
-        rr:tableName  "\"MONUMENTO\"" # https://www.zaragoza.es/api/recurso/turismo/monumento.csv
+        rr:tableName  "MONUMENTO" # https://www.zaragoza.es/api/recurso/turismo/monumento.csv
     ];
 	
     rr:subjectMap [    

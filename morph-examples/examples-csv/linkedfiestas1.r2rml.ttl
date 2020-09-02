@@ -14,7 +14,7 @@
 	
     <6JAAPDPLW6>
         rr:logicalTable [
-            rr:tableName  "\"LINKEDFIESTAS1\""
+            rr:tableName  "LINKEDFIESTAS1"
         ];
 
         rr:subjectMap [

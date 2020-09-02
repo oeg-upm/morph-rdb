@@ -13,7 +13,7 @@
 	
     <T3G53K644P>
         rr:logicalTable [
-            rr:tableName  "\"wikidataFestivals1\""
+            rr:tableName  "WIKIDATAFESTIVALS1"
         ];
 
         rr:subjectMap [

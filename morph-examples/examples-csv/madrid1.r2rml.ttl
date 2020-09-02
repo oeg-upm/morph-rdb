@@ -14,7 +14,7 @@
     
     <ZEERUI27KO>
         rr:logicalTable [
-            rr:tableName  "\"madrid1\""
+            rr:tableName  "MADRID1"
         ];
 
         rr:subjectMap [

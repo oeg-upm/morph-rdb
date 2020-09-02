@@ -14,7 +14,7 @@
     
     <2FOJ2PQCE4>
         rr:logicalTable [
-            rr:tableName  "\"spain-national1\""
+            rr:tableName  "SPAIN-NATIONAL1"
         ];
 
         rr:subjectMap [
