@@ -77,7 +77,7 @@ public class ExampleCSV {
 
     
 	@Test
-	public void testLinkedFiestasWithPropertiesFile() {
+	public void testLinkedFiestasBatchWithPropertiesFile() {
 		String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
 		String configurationFile = "linkedfiestas-batch-csv.morph.properties";
 		try {
@@ -91,7 +91,23 @@ public class ExampleCSV {
 			assertTrue(e.getMessage(), false);
 		}
 	}
-	
+
+	@Test
+	public void testLinkedFiestasQuery1() {
+		String configurationDirectory = System.getProperty("user.dir") + "/examples-csv";
+		String configurationFile = "linkedfiestas-q1.morph.properties";
+		try {
+			MorphCSVRunnerFactory runnerFactory = new MorphCSVRunnerFactory();
+			MorphBaseRunner runner = runnerFactory.createRunner(configurationDirectory, configurationFile);
+			runner.run();
+			System.out.println("Batch process DONE------\n\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Batch process FAILED------\n\n");
+			assertTrue(e.getMessage(), false);
+		}
+	}
+
 	@Test
 	public void testLinkedFiestasWithoutPropertiesFile() {
 		MorphCSVProperties properties = new MorphCSVProperties();
