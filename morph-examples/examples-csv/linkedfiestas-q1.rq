@@ -3,6 +3,7 @@ PREFIX schema: <http://schema.org/>
 
 
 SELECT * WHERE {
-  ?s dbo:city 'Barcelona' .
-  ?s schema:name ?n .
+  ?s dbo:province 'Barcelona' .
+  ?s schema:name ?name .
+  ?s schema:location ?location .
 }
