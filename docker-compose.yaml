@@ -1,0 +1,8 @@
+version: "2"
+services:
+  morphrdb:
+    container_name: morph-rdb
+    image: morph-rdb:latest
+    shm_size: '50gb'
+    volumes:
+      - ./configs:/configs
