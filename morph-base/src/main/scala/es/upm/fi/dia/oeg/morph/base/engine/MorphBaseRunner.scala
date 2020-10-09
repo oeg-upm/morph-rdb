@@ -3,10 +3,10 @@ package es.upm.fi.dia.oeg.morph.base.engine
 import scala.collection.JavaConversions._
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import java.sql.Connection
-import es.upm.fi.dia.oeg.morph.base.Constants
+
+import es.upm.fi.dia.oeg.morph.base.{Constants, DBUtility, MorphBenchmarking}
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
-import org.apache.jena.query.Query;
-import es.upm.fi.dia.oeg.morph.base.DBUtility
+import org.apache.jena.query.Query
 import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
 import es.upm.fi.dia.oeg.morph.base.materializer.MaterializerFactory
 import org.apache.jena.query.QueryFactory;
@@ -49,6 +49,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
                                //, queryResultWriter :MorphBaseQueryResultWriter
                               ) {
 
+  var benchmark:MorphBenchmarking = new MorphBenchmarking()
 
   //val logger = LogManager.getLogger(this.getClass);
   val logger = LoggerFactory.getLogger(this.getClass());
@@ -148,6 +149,7 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     try {
       if(!this.sparqlQuery.isDefined) {
         //set output file
+        this.benchmark.startRewritingPhase()
         this.materializeMappingDocuments(mappingDocument);
       } else {
         //logger.debug("sparql query = " + this.sparqlQuery.get);
@@ -176,15 +178,18 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
           List(sparqlQuery.get);
         }
 
-
+        this.benchmark.startRewritingPhase()
+        this.benchmark.startTranslationPhase()
         //TRANSLATE SPARQL QUERIES INTO SQL QUERIES
         this.mapSparqlSql= this.translateSPARQLQueriesIntoSQLQueries(queries);
 
+        this.benchmark.startExecutionPhase()
         //translate result
         //if (this.conn != null) {
         //GFT does not need a Connection instance
         this.queryResultTranslator.get.translateResult(mapSparqlSql);
         //}
+        this.benchmark.finishBenchmarking()
       }
 
       status = "success";

@@ -64,7 +64,8 @@ class MorphProperties extends java.util.Properties {
   var mapDataTranslationOffsets:Map[String,String] = Map.empty;
   var materializationDistinct:Boolean = false;
 
-
+  //benchmarking
+  var benchmarkExecution:Boolean = false;
 
   //uri encoding
   //var uriEncode:Option[String]=None;
@@ -219,6 +220,10 @@ class MorphProperties extends java.util.Properties {
 
     this.transformString = this.readString(MorphProperties.TRANSFORM_STRING_PROPERTY, None);
     logger.debug("String transformation = " + this.transformString);
+
+    this.benchmarkExecution = this.readBoolean(Constants.BENCHMARKING, false);
+    logger.debug("Benchmarking = " + this.benchmarkExecution);
+
 
     //		val uriEncodeString = this.readString(MorphProperties.URI_ENCODE_PROPERTY, None);
     //		if(uriEncodeString.isDefined) {
