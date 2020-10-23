@@ -101,8 +101,8 @@ object Constants {
   val OUTPUT_DATE_PATTERN_PROP_NAME = "output.date.pattern";
   val OUTPUT_DATE_LOCALE_PROP_NAME = "output.date.locale";
 
-  val BENCHMARKING = "benchmarking"
-
+  //benchmarking
+  val  BENCHMARKFILE_PROP_NAME = "benchmark.file.path";
 
   //database
   val NO_OF_DATABASE_NAME_PROP_NAME = "no_of_database";

@@ -12,6 +12,8 @@ import es.upm.fi.dia.oeg.morph.base.engine.AbstractQueryResultTranslator
 import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
 import java.io.OutputStream
 import java.io.Writer
+
+import es.upm.fi.dia.oeg.morph.base.MorphBenchmarking
 import org.slf4j.LoggerFactory
 
 //import java.util.Properties
@@ -25,6 +27,7 @@ class MorphRDBRunner(mappingDocument:R2RMLMappingDocument
 										 , queryTranslator:Option[IQueryTranslator]
 										 , resultProcessor:Option[AbstractQueryResultTranslator]
 										 , outputStream:Writer
+										 , benchmark: MorphBenchmarking
 										) extends MorphBaseRunner(mappingDocument
 	//    , dataSourceReader
 	, unfolder
@@ -33,6 +36,7 @@ class MorphRDBRunner(mappingDocument:R2RMLMappingDocument
 	, queryTranslator
 	, resultProcessor
 	, outputStream
+	, benchmark
 ) {
 
 	//override val logger = Logger.getLogger(this.getClass());

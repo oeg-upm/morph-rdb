@@ -46,10 +46,9 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
                                , val queryTranslator:Option[IQueryTranslator]
                                , val queryResultTranslator:Option[AbstractQueryResultTranslator]
                                , var writer:Writer
+                               , var benchmark: MorphBenchmarking
                                //, queryResultWriter :MorphBaseQueryResultWriter
                               ) {
-
-  var benchmark:MorphBenchmarking = new MorphBenchmarking()
 
   //val logger = LogManager.getLogger(this.getClass);
   val logger = LoggerFactory.getLogger(this.getClass());
@@ -147,10 +146,11 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     //		} else { null }
 
     try {
+      this.benchmark.finishStartingPhase()
       if(!this.sparqlQuery.isDefined) {
         //set output file
-        this.benchmark.startRewritingPhase()
         this.materializeMappingDocuments(mappingDocument);
+        this.benchmark.finishMaterializationPhase()
       } else {
         //logger.debug("sparql query = " + this.sparqlQuery.get);
 
@@ -165,7 +165,6 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
           val mappedOntologyElements2 = this.mappingDocument.getMappedProperties();
           mappedOntologyElements.addAll(mappedOntologyElements2);
 
-
           /*
           val queriesAux = RewriterWrapper.rewrite(sparqlQuery.get, ontologyFilePath.get
               , RewriterWrapper.fullMode, mappedOntologyElements
@@ -177,19 +176,19 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
           */
           List(sparqlQuery.get);
         }
+        this.benchmark.finishRewritingPhase()
 
-        this.benchmark.startRewritingPhase()
-        this.benchmark.startTranslationPhase()
         //TRANSLATE SPARQL QUERIES INTO SQL QUERIES
         this.mapSparqlSql= this.translateSPARQLQueriesIntoSQLQueries(queries);
+        this.benchmark.finishTranslationPhase()
 
-        this.benchmark.startExecutionPhase()
         //translate result
         //if (this.conn != null) {
         //GFT does not need a Connection instance
         this.queryResultTranslator.get.translateResult(mapSparqlSql);
         //}
-        this.benchmark.finishBenchmarking()
+
+        this.benchmark.finishExecutionPhase()
       }
 
       status = "success";

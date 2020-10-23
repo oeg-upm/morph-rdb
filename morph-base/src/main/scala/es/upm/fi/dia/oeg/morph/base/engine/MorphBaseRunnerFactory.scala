@@ -1,12 +1,11 @@
 package es.upm.fi.dia.oeg.morph.base.engine
 
 import java.sql.Connection
-import es.upm.fi.dia.oeg.morph.base.DBUtility
-import es.upm.fi.dia.oeg.morph.base.Constants
+
+import es.upm.fi.dia.oeg.morph.base.{Constants, DBUtility, MorphBenchmarking, MorphProperties}
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
 import es.upm.fi.dia.oeg.morph.base.materializer.MaterializerFactory
-import es.upm.fi.dia.oeg.morph.base.MorphProperties
 import java.io.FileOutputStream
 import java.io.ObjectOutputStream
 import java.io.ByteArrayOutputStream
@@ -14,7 +13,8 @@ import java.io.OutputStream
 import java.io.Writer
 import java.io.FileWriter
 import java.io.StringWriter
-import org.apache.jena.query.QueryFactory;
+
+import org.apache.jena.query.QueryFactory
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter
 import java.io.PrintWriter
@@ -175,6 +175,14 @@ abstract class MorphBaseRunnerFactory {
       Some(resultProcessorAux)
     } else { None }
 
+    //BUILDING BENCHMARK
+    val benchmark:MorphBenchmarking = if(morphProperties.benchmarkFilePath.isDefined) {
+      val benchmarkFileName = morphProperties.benchmarkFilePath.get;
+      new MorphBenchmarking(benchmarkFileName)
+    } else { new MorphBenchmarking(null) }
+
+
+
     val runner = this.createRunner(mappingDocument
       //        , dataSourceReader
       , unfolder
@@ -183,6 +191,7 @@ abstract class MorphBaseRunnerFactory {
       , queryTranslator
       ,  resultProcessor
       , writer
+      , benchmark
     )
 
     runner.ontologyFilePath = morphProperties.ontologyFilePath;
@@ -225,6 +234,7 @@ abstract class MorphBaseRunnerFactory {
                    , queryTranslator:Option[IQueryTranslator]
                    , resultProcessor:Option[AbstractQueryResultTranslator]
                    , outputStream:Writer
+                   , benchmark: MorphBenchmarking
                   ) : MorphBaseRunner;
 
   def readMappingDocumentFile(mappingDocumentFile:String
