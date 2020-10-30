@@ -3,6 +3,7 @@ package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 import java.io.Writer
 //import java.util.Properties;
 import es.upm.fi.dia.oeg.morph.base.engine.{AbstractQueryResultTranslator, IQueryTranslator, MorphBaseRunner}
+import es.upm.fi.dia.oeg.morph.base.MorphBenchmarking
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 import org.slf4j.LoggerFactory
 
@@ -16,6 +17,7 @@ class MorphCSVRunner (
   , queryTranslator:Option[IQueryTranslator]
   , resultProcessor:Option[AbstractQueryResultTranslator]
   , outputStream:Writer
+	, benchmark: MorphBenchmarking
 ) extends MorphRDBRunner(
   mappingDocument
   , unfolder
@@ -23,6 +25,7 @@ class MorphCSVRunner (
   , queryTranslator
   , resultProcessor
   , outputStream
+	, benchmark
 ) {
 
 }

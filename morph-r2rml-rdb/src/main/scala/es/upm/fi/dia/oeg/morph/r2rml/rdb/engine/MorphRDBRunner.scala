@@ -4,6 +4,7 @@ package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner
+import es.upm.fi.dia.oeg.morph.base.MorphBenchmarking
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataSourceReader
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataTranslator
@@ -13,7 +14,6 @@ import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
 import java.io.OutputStream
 import java.io.Writer
 
-import es.upm.fi.dia.oeg.morph.base.MorphBenchmarking
 import org.slf4j.LoggerFactory
 
 //import java.util.Properties

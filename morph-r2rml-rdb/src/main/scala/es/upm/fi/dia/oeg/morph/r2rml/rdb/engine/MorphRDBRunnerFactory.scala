@@ -28,7 +28,7 @@ class MorphRDBRunnerFactory extends MorphBaseRunnerFactory{
       , queryTranslator:Option[IQueryTranslator]
       , resultProcessor:Option[AbstractQueryResultTranslator]
       , outputStream:Writer
-														, benchmark: MorphBenchmarking
+			, benchmark: MorphBenchmarking
 			) : MorphBaseRunner = { 
 					val morphRDBRunner = new MorphRDBRunner(mappingDocument.asInstanceOf[R2RMLMappingDocument]
 							, unfolder.asInstanceOf[MorphRDBUnfolder]

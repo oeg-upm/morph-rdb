@@ -2,7 +2,7 @@ package es.upm.fi.dia.oeg.morph.r2rml.rdb.engine
 
 //import java.util.Properties
 
-import es.upm.fi.dia.oeg.morph.base.MorphProperties
+import es.upm.fi.dia.oeg.morph.base.{MorphBenchmarking, MorphProperties}
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseUnfolder
@@ -24,6 +24,7 @@ class MorphCSVRunnerFactory extends MorphRDBRunnerFactory {
     , queryTranslator:Option[IQueryTranslator]
     , resultProcessor:Option[AbstractQueryResultTranslator]
     , outputStream:Writer
+    , benchmark: MorphBenchmarking
   ) : MorphBaseRunner = { 
     val morphCSVRunner = new MorphCSVRunner(
       mappingDocument.asInstanceOf[R2RMLMappingDocument]
@@ -31,7 +32,8 @@ class MorphCSVRunnerFactory extends MorphRDBRunnerFactory {
       , dataTranslator.asInstanceOf[Option[MorphRDBDataTranslator]]
       , queryTranslator
       , resultProcessor
-      , outputStream)
+      , outputStream
+      , benchmark)
 
     morphCSVRunner;
 	}
