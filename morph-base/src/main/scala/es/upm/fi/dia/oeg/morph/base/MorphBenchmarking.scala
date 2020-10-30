@@ -57,7 +57,8 @@ class MorphBenchmarking (benchmark_file_path:String) {
 
     //add to the results those phases that have been benchmarked
     if (starting_time != -1) benchmark_result = benchmark_result + "Starting:" + starting_time.toString() + ","
-    if (rewriting_time != -1) benchmark_result = benchmark_result + "Rewriting:" + rewriting_time.toString() + ","
+    //do not include rewriting, as Morph does not include this phase
+    //if (rewriting_time != -1) benchmark_result = benchmark_result + "Rewriting:" + rewriting_time.toString() + ","
     if (translation_time != -1) benchmark_result = benchmark_result + "Translation:" + translation_time.toString() + ","
     if (execution_time != -1) benchmark_result = benchmark_result + "Execution:" + execution_time.toString() + ","
     if (materialization_time != -1) benchmark_result = benchmark_result + "Materialization:" + materialization_time.toString() + ","
