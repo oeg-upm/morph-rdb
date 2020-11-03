@@ -10,8 +10,9 @@ import es.upm.fi.dia.oeg.morph.base.engine.AbstractQueryResultTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseRunner
 import es.upm.fi.dia.oeg.morph.r2rml.model.R2RMLMappingDocument
 import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
-import es.upm.fi.dia.oeg.morph.base.MorphProperties
+import es.upm.fi.dia.oeg.morph.base.{MorphBenchmarking, MorphProperties}
 import java.sql.Connection
+
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.MorphBaseDataTranslator
 import es.upm.fi.dia.oeg.morph.base.engine.QueryTranslationOptimizerFactory
@@ -27,13 +28,15 @@ class MorphRDBRunnerFactory extends MorphBaseRunnerFactory{
       , queryTranslator:Option[IQueryTranslator]
       , resultProcessor:Option[AbstractQueryResultTranslator]
       , outputStream:Writer
+			, benchmark: MorphBenchmarking
 			) : MorphBaseRunner = { 
 					val morphRDBRunner = new MorphRDBRunner(mappingDocument.asInstanceOf[R2RMLMappingDocument]
 							, unfolder.asInstanceOf[MorphRDBUnfolder]
               , dataTranslator.asInstanceOf[Option[MorphRDBDataTranslator]]
               , queryTranslator
               , resultProcessor
-              , outputStream)
+              , outputStream
+					, benchmark)
 
 							morphRDBRunner;
 	}

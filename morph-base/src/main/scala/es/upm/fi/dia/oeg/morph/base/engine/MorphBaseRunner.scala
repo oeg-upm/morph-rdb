@@ -3,10 +3,10 @@ package es.upm.fi.dia.oeg.morph.base.engine
 import scala.collection.JavaConversions._
 import es.upm.fi.dia.oeg.morph.base.model.MorphBaseMappingDocument
 import java.sql.Connection
-import es.upm.fi.dia.oeg.morph.base.Constants
+
+import es.upm.fi.dia.oeg.morph.base.{Constants, DBUtility, MorphBenchmarking}
 import es.upm.fi.dia.oeg.morph.base.sql.IQuery
-import org.apache.jena.query.Query;
-import es.upm.fi.dia.oeg.morph.base.DBUtility
+import org.apache.jena.query.Query
 import es.upm.fi.dia.oeg.morph.base.materializer.MorphBaseMaterializer
 import es.upm.fi.dia.oeg.morph.base.materializer.MaterializerFactory
 import org.apache.jena.query.QueryFactory;
@@ -46,9 +46,9 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
                                , val queryTranslator:Option[IQueryTranslator]
                                , val queryResultTranslator:Option[AbstractQueryResultTranslator]
                                , var writer:Writer
+                               , var benchmark: MorphBenchmarking
                                //, queryResultWriter :MorphBaseQueryResultWriter
                               ) {
-
 
   //val logger = LogManager.getLogger(this.getClass);
   val logger = LoggerFactory.getLogger(this.getClass());
@@ -146,9 +146,11 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
     //		} else { null }
 
     try {
+      this.benchmark.finishStartingPhase()
       if(!this.sparqlQuery.isDefined) {
         //set output file
         this.materializeMappingDocuments(mappingDocument);
+        this.benchmark.finishMaterializationPhase()
       } else {
         //logger.debug("sparql query = " + this.sparqlQuery.get);
 
@@ -163,7 +165,6 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
           val mappedOntologyElements2 = this.mappingDocument.getMappedProperties();
           mappedOntologyElements.addAll(mappedOntologyElements2);
 
-
           /*
           val queriesAux = RewriterWrapper.rewrite(sparqlQuery.get, ontologyFilePath.get
               , RewriterWrapper.fullMode, mappedOntologyElements
@@ -175,16 +176,19 @@ abstract class MorphBaseRunner(mappingDocument:MorphBaseMappingDocument
           */
           List(sparqlQuery.get);
         }
-
+        this.benchmark.finishRewritingPhase()
 
         //TRANSLATE SPARQL QUERIES INTO SQL QUERIES
         this.mapSparqlSql= this.translateSPARQLQueriesIntoSQLQueries(queries);
+        this.benchmark.finishTranslationPhase()
 
         //translate result
         //if (this.conn != null) {
         //GFT does not need a Connection instance
         this.queryResultTranslator.get.translateResult(mapSparqlSql);
         //}
+
+        this.benchmark.finishExecutionPhase()
       }
 
       status = "success";

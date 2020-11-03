@@ -64,7 +64,8 @@ class MorphProperties extends java.util.Properties {
   var mapDataTranslationOffsets:Map[String,String] = Map.empty;
   var materializationDistinct:Boolean = false;
 
-
+  //benchmarking
+  var benchmarkFilePath:Option[String] = None;
 
   //uri encoding
   //var uriEncode:Option[String]=None;
@@ -145,10 +146,19 @@ class MorphProperties extends java.util.Properties {
       Some(outputFilePropertyValue)
     } else { None }
 
+    val benchmarkFilePropertyValue = this.getProperty(Constants.BENCHMARKFILE_PROP_NAME);
+    this.benchmarkFilePath = if(benchmarkFilePropertyValue != null
+      && !benchmarkFilePropertyValue.equals("")) {
+      Some(benchmarkFilePropertyValue)
+    } else { None }
 
     if(configurationDirectory != null) {
       if(this.outputFilePath.isDefined) {
         this.outputFilePath = Some(configurationDirectory + outputFilePath.get);
+      }
+
+      if(this.benchmarkFilePath.isDefined) {
+        this.benchmarkFilePath = Some(configurationDirectory + benchmarkFilePath.get);
       }
 
       if(this.ontologyFilePath.isDefined) {
@@ -219,6 +229,7 @@ class MorphProperties extends java.util.Properties {
 
     this.transformString = this.readString(MorphProperties.TRANSFORM_STRING_PROPERTY, None);
     logger.debug("String transformation = " + this.transformString);
+
 
     //		val uriEncodeString = this.readString(MorphProperties.URI_ENCODE_PROPERTY, None);
     //		if(uriEncodeString.isDefined) {

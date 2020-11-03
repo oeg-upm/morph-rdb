@@ -1,6 +1,11 @@
 bin
 target/
 log/
+mappings/
+properties/
+results/
+queries/
+
 .idea
 .settings/
 .cache*
