@@ -1,6 +1,7 @@
 bin
 target/
 log/
+
 mappings/
 properties/
 results/
@@ -16,6 +17,7 @@ morph.log
 *.*~
 morph-examples/examples/batch-result.nt
 .metadata
+morph-r2rml-rdb/src/main/resources
 
 # Ignore VS Code settings
 .vs/
