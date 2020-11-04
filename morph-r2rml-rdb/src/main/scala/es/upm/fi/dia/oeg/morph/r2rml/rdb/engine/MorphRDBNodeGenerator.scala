@@ -384,8 +384,11 @@ class MorphRDBNodeGenerator(properties:MorphProperties) {
 
     //logger.info(s"replacements = ${replacements}")
     //logger.info(s"termMapTemplateString = ${termMapTemplateString}")
-    val node = if(replacements.isEmpty) {
+
+    val node = if(replacements.size < attributes.size) {
       //(this.translateData(termMap, termMapTemplateString, datatype), rawDBValues);
+
+      // if some of the replacements is null, no triples should be generated
       null
     } else {
       val templateWithDBValue = RegexUtility.replaceTokens(termMapTemplateString, replacements);
