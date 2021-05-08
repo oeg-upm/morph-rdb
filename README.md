@@ -21,7 +21,7 @@ If, on the other hand, you want to edit the project or at least work from an IDE
 * In case the program doesn´t find the file log4j.properties, move it from "morph-examples" to "morph-r2rml-rdb", thought this file isn´t essential.
 
 ## Acknowledgement
-From January 2016 to January 2018, the development of morph-RDB has been supported by the Mobile Age project (http://www.mobile-age.eu/).
+From January 2016 to January 2018, the development of morph-RDB has been supported by the Mobile Age project (http://www.mobile-age.eu/). After that period, the development has been supported by the Datos 4.0 Spanish national proect.
 
 ## Authors
 - Freddy Priyatna
