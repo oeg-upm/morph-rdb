@@ -1,3 +1,5 @@
+**DISCLAIMER**: This software is no longer maintained, although still operational. If you are interested in a materialisation engine instead of a query rewriting engine, you can make use of [Morph-KGC](https://github.com/oeg-upm/morph-kgc)
+
 # Morph-RDB
 
 Morph-RDB (formerly called ODEMapster) is an RDB2RDF engine developed by the Ontology Engineering Group, that follows the R2RML specification (http://www.w3.org/TR/r2rml/). 
